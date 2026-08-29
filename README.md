@@ -1,2 +1,2 @@
 # shopingmela
-URL : https://yourdocuments/shopingmela.github.io/
+URL : https://yourdocuments.github.io/shopingmela
