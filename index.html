@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>কেনামেলা — সব ব্র্যান্ড, এক মেলায়</title>
+  <meta name="description" content="কেনামেলা — পছন্দের সব ব্র্যান্ড এক মেলায়। ব্র্যান্ড খুঁজুন, পছন্দ করুন এবং Shopping করুন।">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Noto Sans Bengali", Arial, sans-serif;
+      background: #f7f8fa;
+      color: #151515;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header */
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid #e8e8e8;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .navbar {
+      max-width: 1100px;
+      margin: auto;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    .logo span {
+      font-size: 13px;
+      display: block;
+      font-weight: 500;
+      color: #777;
+      margin-top: -3px;
+    }
+
+    .menu a {
+      font-size: 14px;
+      margin-left: 20px;
+      color: #555;
+    }
+
+    .menu a:hover {
+      color: #000;
+    }
+
+    /* Hero */
+    .hero {
+      max-width: 1100px;
+      margin: auto;
+      padding: 65px 20px 45px;
+      text-align: center;
+    }
+
+    .hero small {
+      display: inline-block;
+      background: #eeeeee;
+      padding: 7px 14px;
+      border-radius: 30px;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 7vw, 65px);
+      line-height: 1.15;
+      margin-bottom: 15px;
+    }
+
+    .hero h1 span {
+      text-decoration: underline;
+      text-decoration-thickness: 4px;
+      text-underline-offset: 8px;
+    }
+
+    .hero p {
+      max-width: 600px;
+      margin: auto;
+      color: #666;
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    /* Search */
+    .search-box {
+      max-width: 600px;
+      margin: 30px auto 0;
+      display: flex;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 50px;
+      padding: 6px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+    }
+
+    .search-box input {
+      flex: 1;
+      border: 0;
+      outline: 0;
+      padding: 13px 18px;
+      font-size: 15px;
+      background: transparent;
+    }
+
+    .search-box button {
+      border: 0;
+      background: #111;
+      color: #fff;
+      padding: 0 22px;
+      border-radius: 40px;
+      cursor: pointer;
+    }
+
+    /* Section */
+    .brands-section {
+      max-width: 1100px;
+      margin: auto;
+      padding: 20px;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .section-title h2 {
+      font-size: 24px;
+    }
+
+    .section-title p {
+      color: #777;
+      font-size: 14px;
+    }
+
+    /* Brand Grid */
+    .brand-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .brand-card {
+      background: #fff;
+      border: 1px solid #e9e9e9;
+      border-radius: 18px;
+      padding: 25px 20px;
+      transition: 0.25s ease;
+      cursor: pointer;
+    }
+
+    .brand-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+    }
+
+    .brand-logo {
+      width: 58px;
+      height: 58px;
+      border-radius: 15px;
+      background: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      margin-bottom: 18px;
+    }
+
+    .brand-card h3 {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .brand-card p {
+      color: #777;
+      font-size: 13px;
+      line-height: 1.6;
+      margin-bottom: 18px;
+    }
+
+    .visit {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    /* CTA */
+    .cta {
+      max-width: 1060px;
+      margin: 55px auto;
+      padding: 45px 25px;
+      background: #111;
+      color: #fff;
+      border-radius: 25px;
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .cta p {
+      color: #bbb;
+      margin-bottom: 22px;
+    }
+
+    .cta a {
+      display: inline-block;
+      background: #fff;
+      color: #111;
+      padding: 12px 22px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid #e5e5e5;
+      padding: 30px 20px;
+      text-align: center;
+      color: #777;
+      font-size: 13px;
+    }
+
+    /* Mobile */
+    @media (max-width: 800px) {
+      .brand-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .menu {
+        display: none;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .hero {
+        padding-top: 45px;
+      }
+
+      .brand-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        display: block;
+      }
+
+      .section-title p {
+        margin-top: 5px;
+      }
+
+      .search-box button {
+        padding: 0 17px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="navbar">
+      <a href="#" class="logo">
+        কেনামেলা
+        <span>সব ব্র্যান্ড, এক মেলায়।</span>
+      </a>
+
+      <nav class="menu">
+        <a href="#brands">ব্র্যান্ড</a>
+        <a href="#about">আমাদের সম্পর্কে</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- Hero -->
+  <section class="hero">
+
+    <small>🛍️ বাংলাদেশের ব্র্যান্ড মেলা</small>
+
+    <h1>
+      সব ব্র্যান্ড,<br>
+      <span>এক মেলায়।</span>
+    </h1>
+
+    <p>
+      আপনার পছন্দের ব্র্যান্ড খুঁজুন,
+      তাদের সম্পর্কে জানুন এবং এক ক্লিকেই
+      চলে যান সেই ব্র্যান্ডের নিজস্ব Shopping Website-এ।
+    </p>
+
+    <!-- Search -->
+    <div class="search-box">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="ব্র্যান্ড খুঁজুন..."
+        onkeyup="searchBrands()"
+      >
+      <button>খুঁজুন</button>
+    </div>
+
+  </section>
+
+
+  <!-- Brands -->
+  <section class="brands-section" id="brands">
+
+    <div class="section-title">
+      <h2>✨ ব্র্যান্ডগুলো</h2>
+      <p id="brandCount">4টি ব্র্যান্ড</p>
+    </div>
+
+    <div class="brand-grid" id="brandGrid">
+
+      <!-- Brand 1 -->
+      <a
+        class="brand-card"
+        href="https://example.com"
+        target="_blank"
+        data-name="SNK Design"
+      >
+        <div class="brand-logo">SNK</div
