@@ -1,2161 +1,1242 @@
 <!DOCTYPE html>
 <html lang="bn">
-
 <head>
 
 <meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Admin Dashboard — Shopping Mela</title>
 
-
-<!-- =====================================================
-     1.45 — ADMIN SESSION PROTECTION
-====================================================== -->
-
 <script>
-
 (function () {
 
-    const SESSION_KEY =
-        "shoppingMelaAdminLoggedIn";
+    const SESSION_KEY = "shoppingMelaAdminLoggedIn";
+    const LOGIN_TIME_KEY = "shoppingMelaAdminLoginTime";
+    const SESSION_DURATION = 24 * 60 * 60 * 1000;
 
-    const LOGIN_TIME_KEY =
-        "shoppingMelaAdminLoginTime";
-
-    const SESSION_DURATION =
-        24 * 60 * 60 * 1000;
-
-
-    const loggedIn =
-        sessionStorage.getItem(SESSION_KEY);
-
-    const loginTime =
-        Number(
-            sessionStorage.getItem(LOGIN_TIME_KEY) || 0
-        );
-
+    const loggedIn = sessionStorage.getItem(SESSION_KEY);
+    const loginTime = Number(
+        sessionStorage.getItem(LOGIN_TIME_KEY) || 0
+    );
 
     if (
         loggedIn !== "true" ||
-        !loginTime
+        !loginTime ||
+        Date.now() - loginTime >= SESSION_DURATION
     ) {
-
         sessionStorage.removeItem(SESSION_KEY);
         sessionStorage.removeItem(LOGIN_TIME_KEY);
-
-        window.location.replace(
-            "admin-login.html"
-        );
-
-        return;
-
-    }
-
-
-    if (
-        Date.now() - loginTime >=
-        SESSION_DURATION
-    ) {
-
-        sessionStorage.removeItem(SESSION_KEY);
-        sessionStorage.removeItem(LOGIN_TIME_KEY);
-
-        window.location.replace(
-            "admin-login.html"
-        );
-
-        return;
-
+        window.location.replace("admin-login.html");
     }
 
 })();
-
 </script>
-
 
 <style>
 
-* {
-    box-sizing: border-box;
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,"Noto Sans Bengali",sans-serif;
+    background:#f5f6f8;
+    color:#101828;
 }
 
+button,input,select{
+    font-family:inherit;
+}
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    width:235px;
+    background:#101828;
+    color:#fff;
+    padding:22px 14px;
+    z-index:1000;
+    overflow-y:auto;
+}
 
-body {
-
-    margin: 0;
-
-    font-family:
-        Arial,
-        "Noto Sans Bengali",
-        sans-serif;
-
-    background: #f5f6f8;
-
-    color: #101828;
-
+.admin-logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:0 8px 25px;
+    font-size:17px;
+    font-weight:800;
+    border-bottom:1px solid rgba(255,255,255,.08);
 }
-
+
+.admin-logo-icon{
+    width:36px;
+    height:36px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:9px;
+    background:#1877f2;
+    font-size:18px;
+}
 
-button,
-input,
-select {
-
-    font-family: inherit;
-
+.admin-nav{
+    margin-top:20px;
 }
-
-
-/* =====================================================
-   SIDEBAR
-===================================================== */
-
-.sidebar {
-
-    position: fixed;
-
-    left: 0;
-    top: 0;
-    bottom: 0;
 
-    width: 235px;
-
-    background: #101828;
-
-    color: #ffffff;
-
-    padding: 22px 14px;
-
-    z-index: 1000;
-
-    overflow-y: auto;
-
+.nav-title{
+    color:#98a2b3;
+    font-size:9px;
+    text-transform:uppercase;
+    letter-spacing:.8px;
+    padding:0 10px 8px;
+}
+
+.nav-item{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    border:0;
+    background:transparent;
+    color:#d0d5dd;
+    padding:11px 10px;
+    border-radius:8px;
+    cursor:pointer;
+    text-align:left;
+    font-size:11px;
+    margin-bottom:3px;
 }
-
-
-.admin-logo {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    padding: 0 8px 25px;
-
-    font-size: 17px;
-
-    font-weight: 800;
 
-    border-bottom:
-        1px solid
-        rgba(255,255,255,.08);
-
+.nav-item:hover{
+    background:rgba(255,255,255,.07);
+    color:#fff;
+}
+
+.nav-item.active{
+    background:#1877f2;
+    color:#fff;
+}
+
+.nav-icon{
+    width:20px;
+    text-align:center;
+    font-size:14px;
+}
+
+.nav-badge{
+    margin-left:auto;
+    min-width:20px;
+    padding:3px 5px;
+    border-radius:10px;
+    background:#f04438;
+    color:#fff;
+    font-size:8px;
+    text-align:center;
 }
-
-
-.admin-logo-icon {
-
-    width: 36px;
-    height: 36px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
 
-    border-radius: 9px;
-
-    background: #1877f2;
-
-    font-size: 18px;
-
+.main{
+    margin-left:235px;
+    min-height:100vh;
 }
 
-
-.admin-nav {
-
-    margin-top: 20px;
-
+.top-header{
+    height:65px;
+    background:#fff;
+    border-bottom:1px solid #eaecf0;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 25px;
+    position:sticky;
+    top:0;
+    z-index:500;
 }
-
 
-.nav-title {
-
-    color: #98a2b3;
-
-    font-size: 9px;
-
-    text-transform: uppercase;
-
-    letter-spacing: .8px;
-
-    padding: 0 10px 8px;
-
+.page-title{
+    font-size:17px;
+    font-weight:800;
 }
-
-
-.nav-item {
-
-    width: 100%;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    border: 0;
-
-    background: transparent;
 
-    color: #d0d5dd;
-
-    padding: 11px 10px;
-
-    border-radius: 8px;
-
-    cursor: pointer;
-
-    text-align: left;
-
-    font-size: 11px;
-
-    margin-bottom: 3px;
-
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:12px;
 }
 
-
-.nav-item:hover {
-
-    background:
-        rgba(255,255,255,.07);
-
-    color: #ffffff;
-
+.view-site{
+    text-decoration:none;
+    color:#344054;
+    border:1px solid #d0d5dd;
+    padding:8px 12px;
+    border-radius:7px;
+    font-size:10px;
+    font-weight:700;
 }
-
-
-.nav-item.active {
-
-    background: #1877f2;
 
-    color: #ffffff;
-
+.admin-user{
+    display:flex;
+    align-items:center;
+    gap:8px;
 }
-
-
-.nav-icon {
 
-    width: 20px;
-
-    text-align: center;
-
-    font-size: 14px;
-
+.admin-avatar{
+    width:34px;
+    height:34px;
+    border-radius:50%;
+    background:#1877f2;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:800;
+    font-size:12px;
 }
-
-
-.nav-badge {
-
-    margin-left: auto;
-
-    min-width: 20px;
-
-    padding: 3px 5px;
-
-    border-radius: 10px;
-
-    background: #f04438;
-
-    color: #ffffff;
 
-    font-size: 8px;
-
-    text-align: center;
-
+.admin-user-info{
+    min-width:105px;
 }
-
-
-/* =====================================================
-   MAIN
-===================================================== */
-
-.main {
-
-    margin-left: 235px;
-
-    min-height: 100vh;
 
+.admin-name{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    line-height:1.2;
 }
-
-
-/* =====================================================
-   HEADER
-===================================================== */
-
-.top-header {
-
-    height: 65px;
-
-    background: #ffffff;
-
-    border-bottom:
-        1px solid #eaecf0;
-
-    display: flex;
 
-    align-items: center;
-
-    justify-content: space-between;
-
-    padding: 0 25px;
-
-    position: sticky;
-
-    top: 0;
-
-    z-index: 500;
-
+.verified-badge{
+    width:15px;
+    height:15px;
+    border-radius:50%;
+    background:#1877f2;
+    color:#fff;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    font-size:9px;
+    font-weight:900;
 }
-
 
-.page-title {
-
-    font-size: 17px;
-
-    font-weight: 800;
-
+.admin-user-info small{
+    display:block;
+    color:#98a2b3;
+    font-size:8px;
+    margin-top:3px;
 }
-
-
-.header-right {
-
-    display: flex;
-
-    align-items: center;
 
-    gap: 12px;
-
+.content{
+    padding:25px;
 }
-
-
-.view-site {
-
-    text-decoration: none;
-
-    color: #344054;
-
-    border:
-        1px solid #d0d5dd;
-
-    padding: 8px 12px;
 
-    border-radius: 7px;
-
-    font-size: 10px;
-
-    font-weight: 700;
-
+.section{
+    display:none;
 }
-
-
-.admin-user {
-
-    display: flex;
-
-    align-items: center;
 
-    gap: 8px;
-
+.section.active{
+    display:block;
 }
-
-
-.admin-avatar {
-
-    width: 34px;
-    height: 34px;
-
-    border-radius: 50%;
-
-    background: #1877f2;
-
-    color: #ffffff;
 
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-weight: 800;
-
-    font-size: 12px;
-
+.welcome{
+    margin-bottom:22px;
 }
-
-
-.admin-user-info {
 
-    min-width: 105px;
-
+.welcome h1{
+    margin:0;
+    font-size:25px;
 }
-
-
-.admin-name {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 5px;
-
-    line-height: 1.2;
 
+.welcome p{
+    margin:6px 0 0;
+    color:#667085;
+    font-size:11px;
 }
-
-
-.verified-badge {
-
-    width: 15px;
-    height: 15px;
-
-    min-width: 15px;
-
-    border-radius: 50%;
-
-    background: #1877f2;
-
-    color: #ffffff;
 
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 9px;
-
-    font-weight: 900;
-
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:22px;
 }
-
-
-.admin-user-info small {
 
-    display: block;
-
-    color: #98a2b3;
-
-    font-size: 8px;
-
-    margin-top: 3px;
-
+.stat{
+    background:#fff;
+    border:1px solid #e7eaf0;
+    border-radius:13px;
+    padding:18px;
+    box-shadow:0 3px 12px rgba(16,24,40,.03);
 }
-
-
-/* =====================================================
-   CONTENT
-===================================================== */
-
-.content {
 
-    padding: 25px;
-
+.stat-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
-
-
-.section {
 
-    display: none;
-
+.stat-icon{
+    width:39px;
+    height:39px;
+    border-radius:9px;
+    background:#eef5ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:17px;
 }
-
-
-.section.active {
-
-    display: block;
 
+.stat-change{
+    color:#12b76a;
+    font-size:8px;
+    font-weight:800;
 }
 
-
-.welcome {
-
-    margin-bottom: 22px;
-
+.stat-label{
+    margin-top:13px;
+    color:#667085;
+    font-size:10px;
 }
-
-
-.welcome h1 {
-
-    margin: 0;
-
-    font-size: 25px;
 
+.stat-value{
+    margin-top:4px;
+    font-size:23px;
+    font-weight:800;
 }
 
-
-.welcome p {
-
-    margin: 6px 0 0;
-
-    color: #667085;
-
-    font-size: 11px;
-
+.dashboard-grid{
+    display:grid;
+    grid-template-columns:1.5fr 1fr;
+    gap:18px;
+    margin-bottom:18px;
 }
-
-
-/* =====================================================
-   STATS
-===================================================== */
 
-.stats {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 15px;
-
-    margin-bottom: 22px;
-
+.panel,
+.table-panel,
+.product-form,
+.user-card{
+    background:#fff;
+    border:1px solid #e7eaf0;
+    border-radius:13px;
+    overflow:hidden;
 }
-
-
-.stat {
 
-    background: #ffffff;
-
-    border:
-        1px solid #e7eaf0;
-
-    border-radius: 13px;
-
-    padding: 18px;
-
-    box-shadow:
-        0 3px 12px
-        rgba(16,24,40,.03);
-
+.panel-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 18px;
+    border-bottom:1px solid #eaecf0;
 }
-
-
-.stat-top {
 
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
+.panel-header h2{
+    margin:0;
+    font-size:13px;
 }
-
-
-.stat-icon {
-
-    width: 39px;
-    height: 39px;
-
-    border-radius: 9px;
 
-    background: #eef5ff;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 17px;
-
+.panel-header button{
+    border:0;
+    background:transparent;
+    color:#1877f2;
+    cursor:pointer;
+    font-size:9px;
+    font-weight:800;
 }
-
-
-.stat-change {
 
-    color: #12b76a;
-
-    font-size: 8px;
-
-    font-weight: 800;
-
+.order-row{
+    display:grid;
+    grid-template-columns:1.2fr 1fr .8fr .8fr;
+    gap:10px;
+    align-items:center;
+    padding:13px 18px;
+    border-bottom:1px solid #f2f4f7;
 }
-
-
-.stat-label {
-
-    margin-top: 13px;
-
-    color: #667085;
 
-    font-size: 10px;
-
+.order-row:last-child{
+    border-bottom:none;
 }
-
-
-.stat-value {
-
-    margin-top: 4px;
-
-    color: #101828;
-
-    font-size: 23px;
-
-    font-weight: 800;
 
+.order-id{
+    font-size:10px;
+    font-weight:800;
 }
-
-
-/* =====================================================
-   DASHBOARD GRID
-===================================================== */
-
-.dashboard-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        1.5fr 1fr;
-
-    gap: 18px;
-
-    margin-bottom: 18px;
 
+.order-customer{
+    color:#667085;
+    font-size:9px;
 }
 
-
-.panel {
-
-    background: #ffffff;
-
-    border:
-        1px solid #e7eaf0;
-
-    border-radius: 13px;
-
-    overflow: hidden;
-
+.order-price{
+    font-size:10px;
+    font-weight:800;
 }
-
 
-.panel-header {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    padding: 16px 18px;
-
-    border-bottom:
-        1px solid #eaecf0;
-
+.status{
+    display:inline-block;
+    padding:5px 7px;
+    border-radius:15px;
+    font-size:7px;
+    font-weight:800;
+    background:#eef5ff;
+    color:#1877f2;
 }
-
 
-.panel-header h2 {
-
-    margin: 0;
-
-    font-size: 13px;
-
+.status.processing{
+    background:#fffaeb;
+    color:#b54708;
 }
-
-
-.panel-header button {
-
-    border: 0;
-
-    background: transparent;
 
-    color: #1877f2;
-
-    cursor: pointer;
-
-    font-size: 9px;
-
-    font-weight: 800;
-
+.status.delivered{
+    background:#ecfdf3;
+    color:#12b76a;
 }
-
-
-/* =====================================================
-   ORDERS
-===================================================== */
-
-.order-row {
 
-    display: grid;
-
-    grid-template-columns:
-        1.2fr
-        1fr
-        .8fr
-        .8fr;
-
-    gap: 10px;
-
-    align-items: center;
-
-    padding: 13px 18px;
-
-    border-bottom:
-        1px solid #f2f4f7;
-
+.quick-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    padding:18px;
 }
-
 
-.order-row:last-child {
-
-    border-bottom: none;
-
+.quick-action{
+    border:1px solid #eaecf0;
+    background:#fff;
+    border-radius:9px;
+    padding:15px 10px;
+    cursor:pointer;
+    text-align:center;
 }
-
-
-.order-id {
-
-    color: #101828;
-
-    font-size: 10px;
-
-    font-weight: 800;
 
+.quick-action:hover{
+    border-color:#1877f2;
 }
 
-
-.order-customer {
-
-    color: #667085;
-
-    font-size: 9px;
-
+.quick-action-icon{
+    font-size:20px;
+    margin-bottom:7px;
 }
-
-
-.order-price {
-
-    color: #101828;
 
-    font-size: 10px;
-
-    font-weight: 800;
-
+.quick-action strong{
+    display:block;
+    font-size:10px;
 }
-
-
-.status {
-
-    display: inline-block;
-
-    padding: 5px 7px;
-
-    border-radius: 15px;
 
-    font-size: 7px;
-
-    font-weight: 800;
-
-    background: #eef5ff;
-
-    color: #1877f2;
-
+.quick-action span{
+    display:block;
+    margin-top:3px;
+    color:#98a2b3;
+    font-size:8px;
 }
-
-
-.status.delivered {
-
-    background: #ecfdf3;
 
-    color: #12b76a;
-
+.sales-panel{
+    padding:18px;
 }
-
-
-.status.processing {
 
-    background: #fffaeb;
-
-    color: #b54708;
-
+.sales-total span{
+    display:block;
+    color:#667085;
+    font-size:9px;
 }
-
-
-/* =====================================================
-   QUICK ACTIONS
-===================================================== */
 
-.quick-actions {
-
-    display: grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap: 10px;
-
-    padding: 18px;
-
+.sales-total strong{
+    display:block;
+    margin-top:4px;
+    font-size:25px;
 }
-
-
-.quick-action {
 
-    border:
-        1px solid #eaecf0;
-
-    background: #ffffff;
-
-    border-radius: 9px;
-
-    padding: 15px 10px;
-
-    cursor: pointer;
-
-    text-align: center;
-
+.sales-bars{
+    height:150px;
+    display:flex;
+    align-items:flex-end;
+    gap:9px;
+    border-bottom:1px solid #eaecf0;
+    padding:0 5px;
 }
-
 
-.quick-action:hover {
-
-    border-color: #1877f2;
-
+.bar-wrap{
+    flex:1;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    align-items:center;
+    gap:5px;
 }
-
 
-.quick-action-icon {
-
-    font-size: 20px;
-
-    margin-bottom: 7px;
-
+.bar{
+    width:100%;
+    max-width:32px;
+    min-height:4px;
+    background:#1877f2;
+    border-radius:5px 5px 0 0;
 }
-
 
-.quick-action strong {
-
-    display: block;
-
-    font-size: 10px;
-
-    color: #344054;
-
+.bar-label{
+    color:#98a2b3;
+    font-size:7px;
+    margin-bottom:-18px;
 }
-
-
-.quick-action span {
-
-    display: block;
 
-    margin-top: 3px;
+/* ORDER CONTROLS */
 
-    color: #98a2b3;
-
-    font-size: 8px;
-
+.order-tools{
+    padding:16px 18px;
+    background:#fff;
+    border-bottom:1px solid #eaecf0;
 }
-
 
-/* =====================================================
-   SALES
-===================================================== */
-
-.sales-panel {
-
-    padding: 18px;
-
+.order-tools-row{
+    display:grid;
+    grid-template-columns:1fr 180px;
+    gap:10px;
 }
-
 
-.sales-total {
-
-    margin-bottom: 15px;
-
+.order-search{
+    position:relative;
 }
-
-
-.sales-total span {
-
-    display: block;
-
-    color: #667085;
-
-    font-size: 9px;
 
+.order-search input{
+    width:100%;
+    padding:11px 12px 11px 35px;
+    border:1px solid #d0d5dd;
+    border-radius:8px;
+    outline:none;
+    font-size:10px;
 }
 
-
-.sales-total strong {
-
-    display: block;
-
-    margin-top: 4px;
-
-    font-size: 25px;
-
+.order-search input:focus{
+    border-color:#1877f2;
 }
-
-
-.sales-bars {
 
-    height: 150px;
-
-    display: flex;
-
-    align-items: flex-end;
-
-    gap: 9px;
-
-    border-bottom:
-        1px solid #eaecf0;
-
-    padding: 0 5px;
-
+.order-filter{
+    width:100%;
+    padding:10px 12px;
+    border:1px solid #d0d5dd;
+    border-radius:8px;
+    outline:none;
+    background:#fff;
+    font-size:10px;
 }
-
 
-.bar-wrap {
-
-    flex: 1;
-
-    height: 100%;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: flex-end;
-
-    align-items: center;
-
-    gap: 5px;
-
+.order-result-count{
+    margin-top:9px;
+    color:#98a2b3;
+    font-size:8px;
 }
-
-
-.bar {
-
-    width: 100%;
-
-    max-width: 32px;
-
-    min-height: 4px;
-
-    background: #1877f2;
 
-    border-radius:
-        5px 5px 0 0;
+/* TABLE */
 
+.table-wrap{
+    overflow-x:auto;
 }
 
-
-.bar-label {
-
-    color: #98a2b3;
-
-    font-size: 7px;
-
-    margin-bottom: -18px;
-
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:850px;
 }
-
-
-/* =====================================================
-   TABLE
-===================================================== */
 
-.table-panel {
-
-    background: #ffffff;
-
-    border:
-        1px solid #e7eaf0;
-
-    border-radius: 13px;
-
-    overflow: hidden;
-
+th{
+    background:#f9fafb;
+    color:#667085;
+    text-align:left;
+    font-size:9px;
+    padding:11px 14px;
+    border-bottom:1px solid #eaecf0;
 }
-
-
-.table-wrap {
 
-    overflow-x: auto;
-
+td{
+    padding:13px 14px;
+    border-bottom:1px solid #f2f4f7;
+    color:#344054;
+    font-size:9px;
 }
-
-
-table {
 
-    width: 100%;
-
-    border-collapse: collapse;
-
-    min-width: 700px;
-
+td strong{
+    color:#101828;
 }
-
-
-th {
-
-    background: #f9fafb;
-
-    color: #667085;
-
-    text-align: left;
-
-    font-size: 9px;
-
-    padding: 11px 14px;
-
-    border-bottom:
-        1px solid #eaecf0;
 
+.table-status{
+    border:0;
+    border-radius:15px;
+    padding:6px 8px;
+    font-size:8px;
+    font-weight:800;
+    background:#eef5ff;
+    color:#1877f2;
+    cursor:pointer;
 }
 
-
-td {
-
-    padding: 13px 14px;
-
-    border-bottom:
-        1px solid #f2f4f7;
-
-    color: #344054;
-
-    font-size: 9px;
-
+.action-btn{
+    border:0;
+    padding:6px 8px;
+    border-radius:7px;
+    cursor:pointer;
+    font-size:8px;
+    font-weight:800;
+    margin-right:4px;
 }
-
 
-td strong {
-
-    color: #101828;
-
+.view-order{
+    background:#eef5ff;
+    color:#1877f2;
 }
-
-
-.table-status {
-
-    border: 0;
-
-    border-radius: 15px;
-
-    padding: 6px 8px;
 
-    font-size: 8px;
-
-    font-weight: 800;
-
-    background: #eef5ff;
-
-    color: #1877f2;
-
-    cursor: pointer;
-
+.delete-order{
+    background:#fff1f0;
+    color:#f04438;
 }
-
-
-/* =====================================================
-   PRODUCT FORM
-===================================================== */
 
-.product-form {
+/* PRODUCT FORM */
 
-    background: #ffffff;
-
-    border:
-        1px solid #e7eaf0;
-
-    border-radius: 13px;
-
-    padding: 20px;
-
-    margin-bottom: 18px;
-
+.product-form{
+    padding:20px;
+    margin-bottom:18px;
 }
-
-
-.product-form h2 {
 
-    margin: 0 0 15px;
-
-    font-size: 14px;
-
+.product-form h2{
+    margin:0 0 15px;
+    font-size:14px;
 }
-
-
-.form-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 12px;
 
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
 }
 
-
-.form-group label {
-
-    display: block;
-
-    color: #667085;
-
-    font-size: 9px;
-
-    margin-bottom: 5px;
-
+.form-group label{
+    display:block;
+    color:#667085;
+    font-size:9px;
+    margin-bottom:5px;
 }
-
 
 .form-group input,
-.form-group select {
-
-    width: 100%;
-
-    border:
-        1px solid #d0d5dd;
-
-    border-radius: 7px;
-
-    padding: 10px;
-
-    outline: none;
-
-    font-size: 10px;
-
-    background: #ffffff;
-
+.form-group select{
+    width:100%;
+    border:1px solid #d0d5dd;
+    border-radius:7px;
+    padding:10px;
+    outline:none;
+    font-size:10px;
+    background:#fff;
 }
-
 
 .form-group input:focus,
-.form-group select:focus {
-
-    border-color: #1877f2;
-
-    box-shadow:
-        0 0 0 2px
-        rgba(24,119,242,.08);
-
+.form-group select:focus{
+    border-color:#1877f2;
 }
 
-
-/* =====================================================
-   IMAGE UPLOAD
-===================================================== */
-
-.image-upload-box {
-
-    border:
-        1px dashed #b8c0cc;
-
-    border-radius: 10px;
-
-    padding: 14px;
-
-    background: #f9fafb;
-
+.image-upload-box{
+    border:1px dashed #b8c0cc;
+    border-radius:10px;
+    padding:14px;
+    background:#f9fafb;
 }
 
-
-.image-upload-row {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    flex-wrap: wrap;
-
+.image-upload-row{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
 }
 
-
-.file-button {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 6px;
-
-    background: #1877f2;
-
-    color: #ffffff;
-
-    border-radius: 7px;
-
-    padding: 9px 12px;
-
-    cursor: pointer;
-
-    font-size: 9px;
-
-    font-weight: 800;
-
+.file-button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    background:#1877f2;
+    color:#fff;
+    border-radius:7px;
+    padding:9px 12px;
+    cursor:pointer;
+    font-size:9px;
+    font-weight:800;
 }
 
-
-#productImageFile {
-
-    display: none;
-
+#productImageFile{
+    display:none;
 }
 
-
-.image-file-name {
-
-    color: #667085;
-
-    font-size: 8px;
-
+.image-file-name{
+    color:#667085;
+    font-size:8px;
 }
 
-
-.image-preview {
-
-    display: none;
-
-    margin-top: 12px;
-
-    position: relative;
-
-    width: 120px;
-
-    height: 120px;
-
-    border-radius: 10px;
-
-    overflow: hidden;
-
-    border:
-        1px solid #eaecf0;
-
-    background: #ffffff;
-
+.image-preview{
+    display:none;
+    margin-top:12px;
+    position:relative;
+    width:120px;
+    height:120px;
+    border-radius:10px;
+    overflow:hidden;
+    border:1px solid #eaecf0;
+    background:#fff;
 }
 
-
-.image-preview.show {
-
-    display: block;
-
+.image-preview.show{
+    display:block;
 }
 
-
-.image-preview img {
-
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: cover;
-
+.image-preview img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
-
-.remove-image {
-
-    position: absolute;
-
-    top: 5px;
-
-    right: 5px;
-
-    width: 25px;
-
-    height: 25px;
-
-    border: 0;
-
-    border-radius: 50%;
-
-    background: #f04438;
-
-    color: #ffffff;
-
-    cursor: pointer;
-
-    font-size: 12px;
-
-    font-weight: 800;
-
+.remove-image{
+    position:absolute;
+    top:5px;
+    right:5px;
+    width:25px;
+    height:25px;
+    border:0;
+    border-radius:50%;
+    background:#f04438;
+    color:#fff;
+    cursor:pointer;
 }
 
-
-.image-url-help {
-
-    margin-top: 7px;
-
-    color: #98a2b3;
-
-    font-size: 8px;
-
-    line-height: 1.5;
-
+.image-url-help{
+    margin-top:7px;
+    color:#98a2b3;
+    font-size:8px;
+    line-height:1.5;
 }
 
-
-.form-submit {
-
-    margin-top: 14px;
-
-    border: 0;
-
-    background: #1877f2;
-
-    color: #ffffff;
-
-    padding: 10px 16px;
-
-    border-radius: 7px;
-
-    cursor: pointer;
-
-    font-size: 10px;
-
-    font-weight: 800;
-
+.form-submit{
+    margin-top:14px;
+    border:0;
+    background:#1877f2;
+    color:#fff;
+    padding:10px 16px;
+    border-radius:7px;
+    cursor:pointer;
+    font-size:10px;
+    font-weight:800;
 }
 
-
-.form-submit:hover {
-
-    background: #1265d1;
-
+.cancel-edit-btn{
+    margin-top:14px;
+    margin-left:7px;
+    border:1px solid #d0d5dd;
+    background:#fff;
+    color:#344054;
+    padding:9px 15px;
+    border-radius:7px;
+    cursor:pointer;
+    font-size:10px;
+    font-weight:800;
+    display:none;
 }
 
-
-.cancel-edit-btn {
-
-    margin-top: 14px;
-
-    margin-left: 7px;
-
-    border:
-        1px solid #d0d5dd;
-
-    background: #ffffff;
-
-    color: #344054;
-
-    padding: 9px 15px;
-
-    border-radius: 7px;
-
-    cursor: pointer;
-
-    font-size: 10px;
-
-    font-weight: 800;
-
-    display: none;
-
+.cancel-edit-btn.show{
+    display:inline-block;
 }
 
+/* PRODUCT SEARCH */
 
-.cancel-edit-btn.show {
-
-    display: inline-block;
-
+.product-tools{
+    padding:16px 18px;
+    background:#fff;
+    border-bottom:1px solid #eaecf0;
 }
 
-
-/* =====================================================
-   PRODUCT SEARCH + FILTER
-===================================================== */
-
-.product-tools {
-
-    padding: 16px 18px;
-
-    background: #ffffff;
-
-    border-bottom:
-        1px solid #eaecf0;
-
+.product-tools-row{
+    display:grid;
+    grid-template-columns:1fr 190px;
+    gap:10px;
 }
 
-
-.product-tools-row {
-
-    display: grid;
-
-    grid-template-columns:
-        1fr 190px;
-
-    gap: 10px;
-
+.product-search{
+    position:relative;
 }
 
-
-.product-search {
-
-    position: relative;
-
+.product-search input{
+    width:100%;
+    padding:11px 12px 11px 35px;
+    border:1px solid #d0d5dd;
+    border-radius:8px;
+    outline:none;
+    font-size:10px;
 }
 
-
-.product-search input {
-
-    width: 100%;
-
-    padding:
-        11px 12px 11px 35px;
-
-    border:
-        1px solid #d0d5dd;
-
-    border-radius: 8px;
-
-    outline: none;
-
-    font-size: 10px;
-
+.search-icon{
+    position:absolute;
+    left:11px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#98a2b3;
+    pointer-events:none;
 }
 
-
-.product-search input:focus {
-
-    border-color: #1877f2;
-
-    box-shadow:
-        0 0 0 2px
-        rgba(24,119,242,.08);
-
+.category-filter{
+    width:100%;
+    padding:10px 12px;
+    border:1px solid #d0d5dd;
+    border-radius:8px;
+    outline:none;
+    background:#fff;
+    font-size:10px;
 }
 
-
-.search-icon {
-
-    position: absolute;
-
-    left: 11px;
-
-    top: 50%;
-
-    transform:
-        translateY(-50%);
-
-    color: #98a2b3;
-
-    font-size: 13px;
-
-    pointer-events: none;
-
+.product-result-count{
+    margin-top:9px;
+    color:#98a2b3;
+    font-size:8px;
 }
 
-
-.category-filter {
-
-    width: 100%;
-
-    padding: 10px 12px;
-
-    border:
-        1px solid #d0d5dd;
-
-    border-radius: 8px;
-
-    outline: none;
-
-    background: #ffffff;
-
-    color: #344054;
-
-    font-size: 10px;
-
+.product-list{
+    padding:18px;
 }
 
-
-.category-filter:focus {
-
-    border-color: #1877f2;
-
+.product-item{
+    display:grid;
+    grid-template-columns:65px 1fr auto;
+    gap:13px;
+    align-items:center;
+    padding:12px 0;
+    border-bottom:1px solid #f2f4f7;
 }
 
-
-.product-result-count {
-
-    margin-top: 9px;
-
-    color: #98a2b3;
-
-    font-size: 8px;
-
+.product-item:last-child{
+    border-bottom:none;
 }
 
-
-/* =====================================================
-   PRODUCT LIST
-===================================================== */
-
-.product-list {
-
-    padding: 18px;
-
+.product-image{
+    width:65px;
+    height:65px;
+    border-radius:9px;
+    background:#f2f4f7;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
-
-.product-item {
-
-    display: grid;
-
-    grid-template-columns:
-        65px
-        1fr
-        auto;
-
-    gap: 13px;
-
-    align-items: center;
-
-    padding: 12px 0;
-
-    border-bottom:
-        1px solid #f2f4f7;
-
+.product-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
 }
 
-
-.product-item:last-child {
-
-    border-bottom: none;
-
+.product-name{
+    display:block;
+    font-size:11px;
+    font-weight:800;
 }
 
-
-.product-image {
-
-    width: 65px;
-
-    height: 65px;
-
-    border-radius: 9px;
-
-    background: #f2f4f7;
-
-    overflow: hidden;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    color: #98a2b3;
-
-    font-size: 18px;
-
+.product-category{
+    display:inline-block;
+    color:#1877f2;
+    background:#eef5ff;
+    border-radius:12px;
+    padding:3px 6px;
+    font-size:7px;
+    margin-top:4px;
 }
 
-
-.product-image img {
-
-    width: 100%;
-
-    height: 100%;
-
-    object-fit: cover;
-
+.product-price{
+    display:block;
+    font-size:11px;
+    font-weight:800;
+    margin-top:5px;
 }
 
-
-.product-name {
-
-    display: block;
-
-    color: #101828;
-
-    font-size: 11px;
-
-    font-weight: 800;
-
+.product-actions{
+    display:flex;
+    gap:6px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
 }
 
-
-.product-category {
-
-    display: inline-block;
-
-    color: #1877f2;
-
-    background: #eef5ff;
-
-    border-radius: 12px;
-
-    padding: 3px 6px;
-
-    font-size: 7px;
-
-    margin-top: 4px;
-
+.edit-product,
+.delete-product{
+    border:0;
+    padding:7px 9px;
+    border-radius:7px;
+    cursor:pointer;
+    font-size:8px;
+    font-weight:800;
 }
 
-
-.product-price {
-
-    display: block;
-
-    color: #101828;
-
-    font-size: 11px;
-
-    font-weight: 800;
-
-    margin-top: 5px;
-
+.edit-product{
+    background:#eef5ff;
+    color:#1877f2;
 }
 
-
-.product-actions {
-
-    display: flex;
-
-    gap: 6px;
-
-    flex-wrap: wrap;
-
-    justify-content: flex-end;
-
+.delete-product{
+    background:#fff1f0;
+    color:#f04438;
 }
 
+/* USERS */
 
-.edit-product {
-
-    border: 0;
-
-    background: #eef5ff;
-
-    color: #1877f2;
-
-    padding: 7px 9px;
-
-    border-radius: 7px;
-
-    cursor: pointer;
-
-    font-size: 8px;
-
-    font-weight: 800;
-
+.user-card{
+    padding:18px;
 }
 
-
-.edit-product:hover {
-
-    background: #dceaff;
-
+.user-empty{
+    padding:50px;
+    text-align:center;
+    color:#98a2b3;
+    font-size:11px;
 }
 
+/* MODAL */
 
-.delete-product {
-
-    border: 0;
-
-    background: #fff1f0;
-
-    color: #f04438;
-
-    padding: 7px 9px;
-
-    border-radius: 7px;
-
-    cursor: pointer;
-
-    font-size: 8px;
-
-    font-weight: 800;
-
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(16,24,40,.55);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:9998;
 }
 
-
-.delete-product:hover {
-
-    background: #ffe4e1;
-
+.modal.show{
+    display:flex;
 }
 
-
-/* =====================================================
-   USERS
-===================================================== */
-
-.user-card {
-
-    background: #ffffff;
-
-    border:
-        1px solid #e7eaf0;
-
-    border-radius: 13px;
-
-    padding: 18px;
-
+.modal-box{
+    width:100%;
+    max-width:620px;
+    max-height:90vh;
+    overflow-y:auto;
+    background:#fff;
+    border-radius:14px;
+    box-shadow:0 20px 60px rgba(0,0,0,.2);
 }
 
-
-.user-empty {
-
-    padding: 50px;
-
-    text-align: center;
-
-    color: #98a2b3;
-
-    font-size: 11px;
-
+.modal-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 18px;
+    border-bottom:1px solid #eaecf0;
 }
 
-
-/* =====================================================
-   TOAST
-===================================================== */
-
-.toast {
-
-    position: fixed;
-
-    left: 50%;
-
-    bottom: 25px;
-
-    transform:
-        translate(-50%, 20px);
-
-    opacity: 0;
-
-    pointer-events: none;
-
-    background: #101828;
-
-    color: #ffffff;
-
-    padding: 11px 15px;
-
-    border-radius: 8px;
-
-    font-size: 10px;
-
-    z-index: 9999;
-
-    transition: .25s;
-
+.modal-header h2{
+    margin:0;
+    font-size:14px;
 }
 
-
-.toast.show {
-
-    opacity: 1;
-
-    transform:
-        translate(-50%, 0);
-
+.modal-close{
+    width:30px;
+    height:30px;
+    border:0;
+    border-radius:50%;
+    background:#f2f4f7;
+    cursor:pointer;
+    font-size:17px;
 }
 
+.modal-body{
+    padding:18px;
+}
 
-/* =====================================================
-   MOBILE
-===================================================== */
+.detail-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
 
-@media (max-width: 950px) {
+.detail-box{
+    border:1px solid #eaecf0;
+    border-radius:9px;
+    padding:12px;
+}
 
-    .stats {
+.detail-box.full{
+    grid-column:1/-1;
+}
 
-        grid-template-columns:
-            repeat(2, 1fr);
+.detail-label{
+    display:block;
+    color:#98a2b3;
+    font-size:8px;
+    margin-bottom:5px;
+}
 
+.detail-value{
+    color:#101828;
+    font-size:10px;
+    font-weight:700;
+    line-height:1.5;
+}
+
+.item-list{
+    margin-top:14px;
+    border-top:1px solid #eaecf0;
+}
+
+.item-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:10px 0;
+    border-bottom:1px solid #f2f4f7;
+    font-size:9px;
+}
+
+.modal-footer{
+    padding:14px 18px;
+    border-top:1px solid #eaecf0;
+    display:flex;
+    justify-content:flex-end;
+}
+
+.modal-footer button{
+    border:0;
+    background:#101828;
+    color:#fff;
+    padding:9px 14px;
+    border-radius:7px;
+    cursor:pointer;
+    font-size:9px;
+    font-weight:800;
+}
+
+/* TOAST */
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:25px;
+    transform:translate(-50%,20px);
+    opacity:0;
+    pointer-events:none;
+    background:#101828;
+    color:#fff;
+    padding:11px 15px;
+    border-radius:8px;
+    font-size:10px;
+    z-index:9999;
+    transition:.25s;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translate(-50%,0);
+}
+
+/* MOBILE */
+
+@media(max-width:950px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
     }
 
-
-    .dashboard-grid {
-
-        grid-template-columns: 1fr;
-
+    .dashboard-grid{
+        grid-template-columns:1fr;
     }
 
-
-    .product-tools-row {
-
-        grid-template-columns: 1fr;
-
+    .product-tools-row,
+    .order-tools-row{
+        grid-template-columns:1fr;
     }
 
 }
 
+@media(max-width:700px){
 
-@media (max-width: 700px) {
-
-    .sidebar {
-
-        width: 68px;
-
-        padding: 15px 8px;
-
+    .sidebar{
+        width:68px;
+        padding:15px 8px;
     }
 
-
-    .admin-logo {
-
-        justify-content: center;
-
-        padding: 0 0 18px;
-
+    .admin-logo{
+        justify-content:center;
+        padding:0 0 18px;
     }
 
-
-    .admin-logo span {
-
-        display: none;
-
+    .admin-logo span{
+        display:none;
     }
-
 
     .nav-title,
     .nav-item span,
-    .nav-badge {
-
-        display: none;
-
+    .nav-badge{
+        display:none;
     }
 
-
-    .nav-item {
-
-        justify-content: center;
-
-        padding: 12px 5px;
-
+    .nav-item{
+        justify-content:center;
+        padding:12px 5px;
     }
 
-
-    .nav-icon {
-
-        width: auto;
-
-        font-size: 17px;
-
+    .nav-icon{
+        width:auto;
+        font-size:17px;
     }
 
-
-    .main {
-
-        margin-left: 68px;
-
+    .main{
+        margin-left:68px;
     }
 
-
-    .top-header {
-
-        padding: 0 12px;
-
+    .top-header{
+        padding:0 12px;
     }
 
-
-    .page-title {
-
-        font-size: 14px;
-
+    .page-title{
+        font-size:14px;
     }
-
 
     .admin-user-info,
-    .view-site {
-
-        display: none;
-
+    .view-site{
+        display:none;
     }
 
-
-    .content {
-
-        padding: 15px 12px;
-
+    .content{
+        padding:15px 12px;
     }
 
-
-    .welcome h1 {
-
-        font-size: 21px;
-
+    .welcome h1{
+        font-size:21px;
     }
 
-
-    .stats {
-
-        gap: 9px;
-
+    .form-grid{
+        grid-template-columns:1fr;
     }
 
-
-    .stat {
-
-        padding: 13px;
-
+    .product-item{
+        grid-template-columns:55px 1fr;
     }
 
-
-    .stat-value {
-
-        font-size: 19px;
-
+    .product-image{
+        width:55px;
+        height:55px;
     }
 
-
-    .form-grid {
-
-        grid-template-columns: 1fr;
-
+    .product-actions{
+        grid-column:2;
+        justify-content:flex-start;
     }
 
-
-    .product-item {
-
-        grid-template-columns:
-            55px 1fr;
-
+    .detail-grid{
+        grid-template-columns:1fr;
     }
 
-
-    .product-image {
-
-        width: 55px;
-
-        height: 55px;
-
-    }
-
-
-    .product-actions {
-
-        grid-column: 2;
-
-        justify-content: flex-start;
-
+    .detail-box.full{
+        grid-column:auto;
     }
 
 }
 
+@media(max-width:420px){
 
-@media (max-width: 420px) {
-
-    .stats {
-
-        grid-template-columns: 1fr;
-
+    .stats{
+        grid-template-columns:1fr;
     }
 
-
-    .product-form {
-
-        padding: 14px;
-
+    .product-form{
+        padding:14px;
     }
 
-
-    .product-list {
-
-        padding: 13px;
-
+    .product-list{
+        padding:13px;
     }
 
 }
 
 </style>
-
 </head>
 
-
 <body>
-
-
-<!-- =====================================================
-     SIDEBAR
-===================================================== -->
 
 <aside class="sidebar">
 
     <div class="admin-logo">
-
-        <div class="admin-logo-icon">
-            🛍️
-        </div>
-
-        <span>
-            Shopping Mela
-        </span>
-
+        <div class="admin-logo-icon">🛍️</div>
+        <span>Shopping Mela</span>
     </div>
-
 
     <nav class="admin-nav">
 
-        <div class="nav-title">
-            Dashboard
-        </div>
+        <div class="nav-title">Dashboard</div>
 
-
-        <button
-            class="nav-item active"
-            onclick="showSection('dashboard',this)"
-        >
-
+        <button class="nav-item active"
+            onclick="showSection('dashboard',this)">
             <span class="nav-icon">📊</span>
-
             <span>Dashboard</span>
-
         </button>
 
-
-        <button
-            class="nav-item"
-            onclick="showSection('orders',this)"
-        >
-
+        <button class="nav-item"
+            onclick="showSection('orders',this)">
             <span class="nav-icon">📦</span>
-
             <span>Orders</span>
-
-            <span
-                class="nav-badge"
-                id="sidebarOrderCount"
-            >
-                0
-            </span>
-
+            <span class="nav-badge" id="sidebarOrderCount">0</span>
         </button>
 
-
-        <button
-            class="nav-item"
-            onclick="showSection('products',this)"
-        >
-
+        <button class="nav-item"
+            onclick="showSection('products',this)">
             <span class="nav-icon">🛍️</span>
-
             <span>Products</span>
-
         </button>
 
-
-        <button
-            class="nav-item"
-            onclick="showSection('users',this)"
-        >
-
+        <button class="nav-item"
+            onclick="showSection('users',this)">
             <span class="nav-icon">👥</span>
-
             <span>Users</span>
-
         </button>
 
-
-        <div
-            class="nav-title"
-            style="margin-top:18px;"
-        >
+        <div class="nav-title" style="margin-top:18px;">
             Website
         </div>
 
-
-        <button
-            class="nav-item"
-            onclick="window.location.href='index.html'"
-        >
-
+        <button class="nav-item"
+            onclick="window.location.href='index.html'">
             <span class="nav-icon">🏠</span>
-
             <span>Visit Website</span>
-
         </button>
 
-
-        <button
-            class="nav-item"
+        <button class="nav-item"
             onclick="adminLogout()"
-            style="
-                margin-top:25px;
-                color:#ffb4ab;
-            "
-        >
-
+            style="margin-top:25px;color:#ffb4ab;">
             <span class="nav-icon">🚪</span>
-
             <span>Logout</span>
-
         </button>
 
     </nav>
-
 </aside>
 
 
-
-<!-- =====================================================
-     MAIN
-===================================================== -->
-
 <div class="main">
-
 
 <header class="top-header">
 
-    <div
-        class="page-title"
-        id="pageTitle"
-    >
+    <div class="page-title" id="pageTitle">
         Dashboard
     </div>
 
-
     <div class="header-right">
 
-        <a
-            href="index.html"
-            class="view-site"
-        >
+        <a href="index.html" class="view-site">
             View Website ↗
         </a>
 
-
         <div class="admin-user">
 
-            <div class="admin-avatar">
-                A
-            </div>
-
+            <div class="admin-avatar">A</div>
 
             <div class="admin-user-info">
 
                 <span class="admin-name">
-
                     Administrator
 
-                    <span
-                        class="verified-badge"
-                        title="Verified Admin"
-                    >
+                    <span class="verified-badge">
                         ✓
                     </span>
-
                 </span>
 
-                <small>
-                    Super Admin
-                </small>
+                <small>Super Admin</small>
 
             </div>
 
@@ -2166,758 +1247,669 @@ td strong {
 </header>
 
 
-
 <main class="content">
 
+<!-- DASHBOARD -->
 
-<!-- =====================================================
-     DASHBOARD
-===================================================== -->
+<section class="section active" id="dashboard">
 
-<section
-    class="section active"
-    id="dashboard"
->
+    <div class="welcome">
 
+        <h1>
+            Welcome back, Admin 👋
+        </h1>
 
-<div class="welcome">
+        <p>
+            Shopping Mela-এর আজকের overview এখানে দেখতে পারবেন।
+        </p>
 
-    <h1>
-        Welcome back, Admin 👋
-    </h1>
-
-    <p>
-        Shopping Mela-এর আজকের overview এখানে দেখতে পারবেন।
-    </p>
-
-</div>
+    </div>
 
 
-<div class="stats">
+    <div class="stats">
 
+        <div class="stat">
 
-<div class="stat">
+            <div class="stat-top">
+                <div class="stat-icon">📦</div>
+                <span class="stat-change">Live</span>
+            </div>
 
-    <div class="stat-top">
+            <div class="stat-label">
+                Total Orders
+            </div>
 
-        <div class="stat-icon">
-            📦
+            <div class="stat-value" id="dashOrders">
+                0
+            </div>
+
         </div>
 
-        <span class="stat-change">
-            Live
-        </span>
 
-    </div>
+        <div class="stat">
 
-    <div class="stat-label">
-        Total Orders
-    </div>
+            <div class="stat-top">
+                <div class="stat-icon">💰</div>
+                <span class="stat-change">Sales</span>
+            </div>
 
-    <div
-        class="stat-value"
-        id="dashOrders"
-    >
-        0
-    </div>
+            <div class="stat-label">
+                Total Sales
+            </div>
 
-</div>
+            <div class="stat-value" id="dashSales">
+                ৳0
+            </div>
 
-
-<div class="stat">
-
-    <div class="stat-top">
-
-        <div class="stat-icon">
-            💰
         </div>
 
-        <span class="stat-change">
-            Sales
-        </span>
 
-    </div>
+        <div class="stat">
 
-    <div class="stat-label">
-        Total Sales
-    </div>
+            <div class="stat-top">
+                <div class="stat-icon">🚚</div>
+                <span class="stat-change">Active</span>
+            </div>
 
-    <div
-        class="stat-value"
-        id="dashSales"
-    >
-        ৳0
-    </div>
+            <div class="stat-label">
+                Active Delivery
+            </div>
 
-</div>
+            <div class="stat-value" id="dashDelivery">
+                0
+            </div>
 
-
-<div class="stat">
-
-    <div class="stat-top">
-
-        <div class="stat-icon">
-            🚚
         </div>
 
-        <span class="stat-change">
-            Active
-        </span>
 
-    </div>
+        <div class="stat">
 
-    <div class="stat-label">
-        Active Delivery
-    </div>
+            <div class="stat-top">
+                <div class="stat-icon">👥</div>
+                <span class="stat-change">Users</span>
+            </div>
 
-    <div
-        class="stat-value"
-        id="dashDelivery"
-    >
-        0
-    </div>
+            <div class="stat-label">
+                Registered Users
+            </div>
 
-</div>
+            <div class="stat-value" id="dashUsers">
+                0
+            </div>
 
-
-<div class="stat">
-
-    <div class="stat-top">
-
-        <div class="stat-icon">
-            👥
         </div>
 
-        <span class="stat-change">
-            Users
-        </span>
+    </div>
+
+
+    <div class="dashboard-grid">
+
+        <div class="panel">
+
+            <div class="panel-header">
+
+                <h2>Recent Orders</h2>
+
+                <button onclick="showSectionById('orders')">
+                    View All
+                </button>
+
+            </div>
+
+            <div id="recentOrders"></div>
+
+        </div>
+
+
+        <div class="panel">
+
+            <div class="panel-header">
+
+                <h2>Quick Actions</h2>
+
+            </div>
+
+            <div class="quick-actions">
+
+                <button class="quick-action"
+                    onclick="showSectionById('orders')">
+                    <div class="quick-action-icon">📦</div>
+                    <strong>Manage Orders</strong>
+                    <span>Order manage করুন</span>
+                </button>
+
+                <button class="quick-action"
+                    onclick="showSectionById('products')">
+                    <div class="quick-action-icon">➕</div>
+                    <strong>Add Product</strong>
+                    <span>নতুন product যোগ করুন</span>
+                </button>
+
+                <button class="quick-action"
+                    onclick="showSectionById('users')">
+                    <div class="quick-action-icon">👥</div>
+                    <strong>Users</strong>
+                    <span>User overview</span>
+                </button>
+
+                <button class="quick-action"
+                    onclick="window.location.href='index.html'">
+                    <div class="quick-action-icon">🌐</div>
+                    <strong>Website</strong>
+                    <span>Live website</span>
+                </button>
+
+            </div>
+
+        </div>
 
     </div>
 
-    <div class="stat-label">
-        Registered Users
+
+    <div class="panel">
+
+        <div class="panel-header">
+
+            <h2>Sales Overview</h2>
+
+            <span style="color:#98a2b3;font-size:9px;">
+                Last 7 Orders
+            </span>
+
+        </div>
+
+        <div class="sales-panel">
+
+            <div class="sales-total">
+
+                <span>Total Order Value</span>
+
+                <strong id="salesOverviewTotal">
+                    ৳0
+                </strong>
+
+            </div>
+
+            <div class="sales-bars" id="salesBars"></div>
+
+        </div>
+
     </div>
 
-    <div
-        class="stat-value"
-        id="dashUsers"
-    >
-        0
+</section>
+
+
+<!-- ORDERS -->
+
+<section class="section" id="orders">
+
+    <div class="welcome">
+
+        <h1>Orders</h1>
+
+        <p>
+            সব customer orders এখান থেকে manage করুন।
+        </p>
+
     </div>
 
-</div>
+
+    <div class="table-panel">
+
+        <div class="panel-header">
+
+            <h2>All Orders</h2>
+
+            <button onclick="renderOrdersTable()">
+                Refresh
+            </button>
+
+        </div>
 
 
-</div>
+        <div class="order-tools">
+
+            <div class="order-tools-row">
+
+                <div class="order-search">
+
+                    <span class="search-icon">
+                        🔎
+                    </span>
+
+                    <input
+                        type="search"
+                        id="orderSearch"
+                        placeholder="Order ID, customer বা mobile search করুন..."
+                        autocomplete="off"
+                    >
+
+                </div>
 
 
+                <select
+                    id="orderStatusFilter"
+                    class="order-filter"
+                >
 
-<div class="dashboard-grid">
+                    <option value="all">
+                        All Status
+                    </option>
+
+                    <option value="0">
+                        Order Placed
+                    </option>
+
+                    <option value="1">
+                        Order Confirmed
+                    </option>
+
+                    <option value="2">
+                        Processing
+                    </option>
+
+                    <option value="3">
+                        Shipped
+                    </option>
+
+                    <option value="4">
+                        Out for Delivery
+                    </option>
+
+                    <option value="5">
+                        Delivered
+                    </option>
+
+                </select>
+
+            </div>
 
 
-<div class="panel">
+            <div
+                class="order-result-count"
+                id="orderResultCount"
+            >
+                0 orders
+            </div>
 
-    <div class="panel-header">
+        </div>
 
-        <h2>
-            Recent Orders
+
+        <div class="table-wrap">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Mobile</th>
+                        <th>Total</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="ordersTable"></tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PRODUCTS -->
+
+<section class="section" id="products">
+
+    <div class="welcome">
+
+        <h1>Products</h1>
+
+        <p>
+            Product add, edit, delete, search এবং category filter করুন।
+        </p>
+
+    </div>
+
+
+    <div class="product-form">
+
+        <h2 id="productFormTitle">
+            ➕ Add New Product
         </h2>
 
+
+        <div class="form-grid">
+
+            <div class="form-group">
+
+                <label>Product Name</label>
+
+                <input
+                    type="text"
+                    id="productName"
+                    placeholder="Product name"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Price</label>
+
+                <input
+                    type="number"
+                    id="productPrice"
+                    placeholder="৳"
+                    min="0"
+                    step="1"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Category</label>
+
+                <select id="productCategory">
+
+                    <option>Fashion</option>
+                    <option>Beauty</option>
+                    <option>Electronics</option>
+                    <option>Food</option>
+                    <option>Home</option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Image URL</label>
+
+                <input
+                    type="text"
+                    id="productImage"
+                    placeholder="https://..."
+                >
+
+            </div>
+
+
+            <div
+                class="form-group"
+                style="grid-column:1/-1;"
+            >
+
+                <label>
+                    Upload Product Image
+                </label>
+
+
+                <div class="image-upload-box">
+
+                    <div class="image-upload-row">
+
+                        <label
+                            for="productImageFile"
+                            class="file-button"
+                        >
+                            🖼️ Choose Image
+                        </label>
+
+                        <input
+                            type="file"
+                            id="productImageFile"
+                            accept="image/*"
+                        >
+
+                        <span
+                            class="image-file-name"
+                            id="imageFileName"
+                        >
+                            কোনো image select করা হয়নি
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="image-preview"
+                        id="imagePreview"
+                    >
+
+                        <img
+                            id="previewImage"
+                            src=""
+                            alt="Product Preview"
+                        >
+
+                        <button
+                            type="button"
+                            class="remove-image"
+                            onclick="removeImage()"
+                        >
+                            ×
+                        </button>
+
+                    </div>
+
+
+                    <div class="image-url-help">
+
+                        আপনি চাইলে
+                        <b>Image URL</b>
+                        অথবা upload image ব্যবহার করতে পারেন।
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
         <button
-            onclick="showSectionById('orders')"
+            class="form-submit"
+            id="productSubmitBtn"
+            onclick="saveProduct()"
         >
-            View All
+            Add Product
+        </button>
+
+
+        <button
+            type="button"
+            class="cancel-edit-btn"
+            id="cancelEditBtn"
+            onclick="cancelProductEdit()"
+        >
+            Cancel Edit
         </button>
 
     </div>
 
 
-    <div id="recentOrders"></div>
+    <div class="panel">
 
-</div>
+        <div class="panel-header">
+
+            <h2>Saved Products</h2>
+
+            <button onclick="renderProducts()">
+                Refresh
+            </button>
+
+        </div>
 
 
+        <div class="product-tools">
 
-<div class="panel">
+            <div class="product-tools-row">
 
-    <div class="panel-header">
+                <div class="product-search">
 
-        <h2>
-            Quick Actions
-        </h2>
+                    <span class="search-icon">
+                        🔎
+                    </span>
+
+                    <input
+                        type="search"
+                        id="productSearch"
+                        placeholder="Product name বা category search করুন..."
+                        autocomplete="off"
+                    >
+
+                </div>
+
+
+                <select
+                    id="categoryFilter"
+                    class="category-filter"
+                >
+
+                    <option value="all">
+                        All Categories
+                    </option>
+
+                    <option value="Fashion">
+                        Fashion
+                    </option>
+
+                    <option value="Beauty">
+                        Beauty
+                    </option>
+
+                    <option value="Electronics">
+                        Electronics
+                    </option>
+
+                    <option value="Food">
+                        Food
+                    </option>
+
+                    <option value="Home">
+                        Home
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div
+                class="product-result-count"
+                id="productResultCount"
+            >
+                0 product
+            </div>
+
+        </div>
+
+
+        <div
+            class="product-list"
+            id="productsList"
+        ></div>
+
+    </div>
+
+</section>
+
+
+<!-- USERS -->
+
+<section class="section" id="users">
+
+    <div class="welcome">
+
+        <h1>Users</h1>
+
+        <p>
+            Registered customer information overview।
+        </p>
 
     </div>
 
 
-    <div class="quick-actions">
+    <div class="user-card">
 
-
-        <button
-            class="quick-action"
-            onclick="showSectionById('orders')"
-        >
-
-            <div class="quick-action-icon">
-                📦
-            </div>
-
-            <strong>
-                Manage Orders
-            </strong>
-
-            <span>
-                Status update করুন
-            </span>
-
-        </button>
-
-
-        <button
-            class="quick-action"
-            onclick="showSectionById('products')"
-        >
-
-            <div class="quick-action-icon">
-                ➕
-            </div>
-
-            <strong>
-                Add Product
-            </strong>
-
-            <span>
-                নতুন product যোগ করুন
-            </span>
-
-        </button>
-
-
-        <button
-            class="quick-action"
-            onclick="showSectionById('users')"
-        >
-
-            <div class="quick-action-icon">
-                👥
-            </div>
-
-            <strong>
-                Users
-            </strong>
-
-            <span>
-                User overview
-            </span>
-
-        </button>
-
-
-        <button
-            class="quick-action"
-            onclick="window.location.href='index.html'"
-        >
-
-            <div class="quick-action-icon">
-                🌐
-            </div>
-
-            <strong>
-                Website
-            </strong>
-
-            <span>
-                Live website
-            </span>
-
-        </button>
-
+        <div id="usersList"></div>
 
     </div>
 
-</div>
-
-
-</div>
-
-
-
-<div class="panel">
-
-<div class="panel-header">
-
-<h2>
-Sales Overview
-</h2>
-
-<span
-style="
-color:#98a2b3;
-font-size:9px;
-"
->
-Last 7 Orders
-</span>
-
-</div>
-
-
-<div class="sales-panel">
-
-<div class="sales-total">
-
-<span>
-Total Order Value
-</span>
-
-<strong id="salesOverviewTotal">
-৳0
-</strong>
-
-</div>
-
-
-<div
-class="sales-bars"
-id="salesBars"
-></div>
-
-</div>
-
-</div>
-
-
 </section>
-
-
-
-<!-- =====================================================
-     ORDERS
-===================================================== -->
-
-<section
-class="section"
-id="orders"
->
-
-
-<div class="welcome">
-
-<h1>
-Orders
-</h1>
-
-<p>
-সব customer orders এখান থেকে manage করুন।
-</p>
-
-</div>
-
-
-<div class="table-panel">
-
-<div class="panel-header">
-
-<h2>
-All Orders
-</h2>
-
-<button onclick="renderAll()">
-Refresh
-</button>
-
-</div>
-
-
-<div class="table-wrap">
-
-<table>
-
-<thead>
-
-<tr>
-
-<th>Order ID</th>
-
-<th>Customer</th>
-
-<th>Mobile</th>
-
-<th>Total</th>
-
-<th>Date</th>
-
-<th>Status</th>
-
-</tr>
-
-</thead>
-
-
-<tbody id="ordersTable"></tbody>
-
-</table>
-
-</div>
-
-</div>
-
-
-</section>
-
-
-
-<!-- =====================================================
-     PRODUCTS
-===================================================== -->
-
-<section
-class="section"
-id="products"
->
-
-
-<div class="welcome">
-
-<h1>
-Products
-</h1>
-
-<p>
-নতুন product যোগ, edit, search এবং category অনুযায়ী filter করুন।
-</p>
-
-</div>
-
-
-
-<!-- =====================================================
-     PRODUCT FORM
-===================================================== -->
-
-<div class="product-form">
-
-<h2 id="productFormTitle">
-➕ Add New Product
-</h2>
-
-
-<div class="form-grid">
-
-
-<div class="form-group">
-
-<label>
-Product Name
-</label>
-
-<input
-type="text"
-id="productName"
-placeholder="Product name"
->
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Price
-</label>
-
-<input
-type="number"
-id="productPrice"
-placeholder="৳"
-min="0"
-step="1"
->
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Category
-</label>
-
-<select id="productCategory">
-
-<option>Fashion</option>
-
-<option>Beauty</option>
-
-<option>Electronics</option>
-
-<option>Food</option>
-
-<option>Home</option>
-
-</select>
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Image URL
-</label>
-
-<input
-type="text"
-id="productImage"
-placeholder="https://..."
->
-
-</div>
-
-
-<div
-class="form-group"
-style="grid-column:1/-1;"
->
-
-<label>
-Upload Product Image
-</label>
-
-
-<div class="image-upload-box">
-
-
-<div class="image-upload-row">
-
-<label
-for="productImageFile"
-class="file-button"
->
-🖼️ Choose Image
-</label>
-
-
-<input
-type="file"
-id="productImageFile"
-accept="image/*"
->
-
-
-<span
-class="image-file-name"
-id="imageFileName"
->
-কোনো image select করা হয়নি
-</span>
-
-</div>
-
-
-<div
-class="image-preview"
-id="imagePreview"
->
-
-<img
-id="previewImage"
-src=""
-alt="Product Preview"
->
-
-
-<button
-type="button"
-class="remove-image"
-onclick="removeImage()"
->
-×
-</button>
-
-</div>
-
-
-<div class="image-url-help">
-
-আপনি চাইলে উপরের
-<b>Image URL</b>
-ব্যবহার করতে পারেন,
-অথবা এখান থেকে image upload করতে পারেন।
-
-</div>
-
-
-</div>
-
-</div>
-
-
-</div>
-
-
-<button
-class="form-submit"
-id="productSubmitBtn"
-onclick="saveProduct()"
->
-Add Product
-</button>
-
-
-<button
-type="button"
-class="cancel-edit-btn"
-id="cancelEditBtn"
-onclick="cancelProductEdit()"
->
-Cancel Edit
-</button>
-
-</div>
-
-
-
-<!-- =====================================================
-     PRODUCT LIST
-===================================================== -->
-
-<div class="panel">
-
-<div class="panel-header">
-
-<h2>
-Saved Products
-</h2>
-
-<button onclick="renderProducts()">
-Refresh
-</button>
-
-</div>
-
-
-<div class="product-tools">
-
-<div class="product-tools-row">
-
-
-<div class="product-search">
-
-<span class="search-icon">
-🔎
-</span>
-
-<input
-type="search"
-id="productSearch"
-placeholder="Product name বা category দিয়ে search করুন..."
-autocomplete="off"
->
-
-</div>
-
-
-<select
-id="categoryFilter"
-class="category-filter"
->
-
-<option value="all">
-All Categories
-</option>
-
-<option value="Fashion">
-Fashion
-</option>
-
-<option value="Beauty">
-Beauty
-</option>
-
-<option value="Electronics">
-Electronics
-</option>
-
-<option value="Food">
-Food
-</option>
-
-<option value="Home">
-Home
-</option>
-
-</select>
-
-
-</div>
-
-
-<div
-class="product-result-count"
-id="productResultCount"
->
-0 product
-</div>
-
-</div>
-
-
-<div
-class="product-list"
-id="productsList"
-></div>
-
-</div>
-
-
-</section>
-
-
-
-<!-- =====================================================
-     USERS
-===================================================== -->
-
-<section
-class="section"
-id="users"
->
-
-
-<div class="welcome">
-
-<h1>
-Users
-</h1>
-
-<p>
-Registered customer information overview।
-</p>
-
-</div>
-
-
-<div class="user-card">
-
-<div id="usersList"></div>
-
-</div>
-
-
-</section>
-
 
 </main>
 
 </div>
 
 
+<!-- ORDER DETAILS MODAL -->
 
 <div
-class="toast"
-id="toast"
-></div>
+    class="modal"
+    id="orderModal"
+    onclick="closeOrderModal(event)"
+>
 
+    <div
+        class="modal-box"
+        onclick="event.stopPropagation()"
+    >
+
+        <div class="modal-header">
+
+            <h2 id="modalOrderTitle">
+                Order Details
+            </h2>
+
+            <button
+                class="modal-close"
+                onclick="closeOrderModal()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div
+            class="modal-body"
+            id="orderModalBody"
+        ></div>
+
+
+        <div class="modal-footer">
+
+            <button onclick="closeOrderModal()">
+                Close
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div
+    class="toast"
+    id="toast"
+></div>
 
 
 <script>
@@ -2927,41 +1919,29 @@ id="toast"
 ===================================================== */
 
 let orders = [];
-
 let products = [];
-
 let users = [];
 
 let uploadedImageData = "";
-
 let editingProductId = null;
 
-
 const STATUS_NAMES = [
-
     "Order Placed",
-
     "Order Confirmed",
-
     "Processing",
-
     "Shipped",
-
     "Out for Delivery",
-
     "Delivered"
-
 ];
-
 
 
 /* =====================================================
    LOAD DATA
 ===================================================== */
 
-function loadData() {
+function loadData(){
 
-    try {
+    try{
 
         orders =
             JSON.parse(
@@ -2970,14 +1950,14 @@ function loadData() {
                 )
             ) || [];
 
-    } catch {
+    }catch{
 
         orders = [];
 
     }
 
 
-    try {
+    try{
 
         products =
             JSON.parse(
@@ -2986,14 +1966,14 @@ function loadData() {
                 )
             ) || [];
 
-    } catch {
+    }catch{
 
         products = [];
 
     }
 
 
-    try {
+    try{
 
         users =
             JSON.parse(
@@ -3002,7 +1982,7 @@ function loadData() {
                 )
             ) || [];
 
-    } catch {
+    }catch{
 
         users = [];
 
@@ -3011,12 +1991,11 @@ function loadData() {
 }
 
 
-
 /* =====================================================
-   SAVE
+   SAVE DATA
 ===================================================== */
 
-function saveOrders() {
+function saveOrders(){
 
     localStorage.setItem(
         "shoppingMelaOrders",
@@ -3026,7 +2005,7 @@ function saveOrders() {
 }
 
 
-function saveProducts() {
+function saveProducts(){
 
     localStorage.setItem(
         "shoppingMelaProducts",
@@ -3036,12 +2015,11 @@ function saveProducts() {
 }
 
 
-
 /* =====================================================
    MONEY
 ===================================================== */
 
-function money(amount) {
+function money(amount){
 
     return "৳" +
         Number(amount || 0)
@@ -3050,14 +2028,13 @@ function money(amount) {
 }
 
 
-
 /* =====================================================
-   ESCAPE HTML
+   ESCAPE
 ===================================================== */
 
-function escapeHTML(value) {
+function escapeHTML(value){
 
-    return String(value || "")
+    return String(value ?? "")
         .replace(/&/g,"&amp;")
         .replace(/</g,"&lt;")
         .replace(/>/g,"&gt;")
@@ -3067,34 +2044,21 @@ function escapeHTML(value) {
 }
 
 
-
 /* =====================================================
    DATE
 ===================================================== */
 
-function formatDate(value) {
+function formatDate(value){
 
-    if (!value) {
-
+    if(!value){
         return "—";
-
     }
 
+    const date = new Date(value);
 
-    const date =
-        new Date(value);
-
-
-    if (
-        Number.isNaN(
-            date.getTime()
-        )
-    ) {
-
+    if(Number.isNaN(date.getTime())){
         return "—";
-
     }
-
 
     return date.toLocaleDateString(
         "en-BD",
@@ -3108,138 +2072,110 @@ function formatDate(value) {
 }
 
 
-
 /* =====================================================
    ORDER STEP
 ===================================================== */
 
-function getStep(order) {
+function getStep(order){
 
     return Math.max(
         0,
         Math.min(
             5,
-            Number(
-                order.trackingStep ?? 0
-            )
+            Number(order.trackingStep ?? 0)
         )
     );
 
 }
 
 
-
 /* =====================================================
    STATUS CLASS
 ===================================================== */
 
-function statusClass(step) {
+function statusClass(step){
 
-    if (step === 5) {
-
+    if(step === 5){
         return "delivered";
-
     }
 
-
-    if (
-        step === 2 ||
-        step === 3 ||
-        step === 4
-    ) {
-
+    if(step >= 2){
         return "processing";
-
     }
-
 
     return "";
 
 }
 
 
-
 /* =====================================================
    STATS
 ===================================================== */
 
-function renderStats() {
+function renderStats(){
 
     const totalSales =
         orders.reduce(
-            (
-                sum,
-                order
-            ) =>
-                sum +
-                Number(
-                    order.total || 0
-                ),
+            (sum,order) =>
+                sum + Number(order.total || 0),
             0
         );
 
 
     const activeDelivery =
-        orders.filter(
-            order =>
-                getStep(order) >= 3 &&
-                getStep(order) < 5
-        ).length;
+        orders.filter(order => {
+
+            const step = getStep(order);
+
+            return step >= 3 && step < 5;
+
+        }).length;
 
 
     document.getElementById(
         "dashOrders"
-    ).textContent =
-        orders.length;
+    ).textContent = orders.length;
 
 
     document.getElementById(
         "dashSales"
-    ).textContent =
-        money(totalSales);
+    ).textContent = money(totalSales);
 
 
     document.getElementById(
         "dashDelivery"
-    ).textContent =
-        activeDelivery;
+    ).textContent = activeDelivery;
 
 
     document.getElementById(
         "dashUsers"
-    ).textContent =
-        users.length;
+    ).textContent = users.length;
 
 
     document.getElementById(
         "sidebarOrderCount"
-    ).textContent =
-        orders.length;
+    ).textContent = orders.length;
 
 
     document.getElementById(
         "salesOverviewTotal"
-    ).textContent =
-        money(totalSales);
+    ).textContent = money(totalSales);
 
 }
-
 
 
 /* =====================================================
    RECENT ORDERS
 ===================================================== */
 
-function renderRecentOrders() {
+function renderRecentOrders(){
 
     const box =
         document.getElementById(
             "recentOrders"
         );
 
-
     box.innerHTML = "";
-
 
     const recent =
         [...orders]
@@ -3247,21 +2183,17 @@ function renderRecentOrders() {
         .slice(0,6);
 
 
-    if (!recent.length) {
+    if(!recent.length){
 
         box.innerHTML = `
-
-            <div
-                style="
-                    padding:35px;
-                    text-align:center;
-                    color:#98a2b3;
-                    font-size:10px;
-                "
-            >
+            <div style="
+                padding:35px;
+                text-align:center;
+                color:#98a2b3;
+                font-size:10px;
+            ">
                 এখনো কোনো order নেই।
             </div>
-
         `;
 
         return;
@@ -3281,24 +2213,20 @@ function renderRecentOrders() {
         const row =
             document.createElement("div");
 
-
-        row.className =
-            "order-row";
+        row.className = "order-row";
 
 
         row.innerHTML = `
 
             <div class="order-id">
                 #${escapeHTML(
-                    order.orderId ||
-                    "SM000000"
+                    order.orderId || "SM000000"
                 )}
             </div>
 
             <div class="order-customer">
                 ${escapeHTML(
-                    customer.name ||
-                    "Customer"
+                    customer.name || "Customer"
                 )}
             </div>
 
@@ -3307,18 +2235,12 @@ function renderRecentOrders() {
             </div>
 
             <div>
-                <span
-                    class="
-                        status
-                        ${statusClass(step)}
-                    "
-                >
+                <span class="status ${statusClass(step)}">
                     ${STATUS_NAMES[step]}
                 </span>
             </div>
 
         `;
-
 
         box.appendChild(row);
 
@@ -3327,18 +2249,16 @@ function renderRecentOrders() {
 }
 
 
-
 /* =====================================================
-   SALES BARS
+   SALES
 ===================================================== */
 
-function renderSalesBars() {
+function renderSalesBars(){
 
     const box =
         document.getElementById(
             "salesBars"
         );
-
 
     box.innerHTML = "";
 
@@ -3349,13 +2269,9 @@ function renderSalesBars() {
         .slice(0,7);
 
 
-    if (!data.length) {
+    if(!data.length){
 
-        for (
-            let i = 0;
-            i < 7;
-            i++
-        ) {
+        for(let i=0;i<7;i++){
 
             createBar(
                 box,
@@ -3373,65 +2289,44 @@ function renderSalesBars() {
     const values =
         data.map(
             order =>
-                Number(
-                    order.total || 0
-                )
+                Number(order.total || 0)
         );
 
 
     const max =
-        Math.max(
-            ...values,
-            1
-        );
+        Math.max(...values,1);
 
 
-    data.forEach(
-        (
-            order,
-            index
-        ) => {
+    data.forEach((order,index)=>{
 
-            const value =
-                Number(
-                    order.total || 0
-                );
+        const value =
+            Number(order.total || 0);
 
 
-            const height =
-                Math.max(
-                    5,
-                    (value / max) * 120
-                );
-
-
-            createBar(
-                box,
-                height,
-                index + 1
+        const height =
+            Math.max(
+                5,
+                (value / max) * 120
             );
 
-        }
-    );
+
+        createBar(
+            box,
+            height,
+            index + 1
+        );
+
+    });
 
 }
 
 
-
-function createBar(
-    parent,
-    height,
-    label
-) {
+function createBar(parent,height,label){
 
     const wrap =
-        document.createElement(
-            "div"
-        );
+        document.createElement("div");
 
-
-    wrap.className =
-        "bar-wrap";
+    wrap.className = "bar-wrap";
 
 
     wrap.innerHTML = `
@@ -3453,44 +2348,136 @@ function createBar(
 }
 
 
+/* =====================================================
+   ORDER FILTER
+===================================================== */
+
+function getFilteredOrders(){
+
+    const search =
+        (
+            document.getElementById(
+                "orderSearch"
+            )?.value || ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    const status =
+        document.getElementById(
+            "orderStatusFilter"
+        )?.value || "all";
+
+
+    return orders.filter(order => {
+
+        const customer =
+            order.customer || {};
+
+
+        const id =
+            String(
+                order.orderId || ""
+            ).toLowerCase();
+
+
+        const name =
+            String(
+                customer.name || ""
+            ).toLowerCase();
+
+
+        const phone =
+            String(
+                customer.phone || ""
+            ).toLowerCase();
+
+
+        const matchesSearch =
+            !search ||
+            id.includes(search) ||
+            name.includes(search) ||
+            phone.includes(search);
+
+
+        const matchesStatus =
+            status === "all" ||
+            String(getStep(order)) === status;
+
+
+        return (
+            matchesSearch &&
+            matchesStatus
+        );
+
+    });
+
+}
+
 
 /* =====================================================
    ORDERS TABLE
 ===================================================== */
 
-function renderOrdersTable() {
+function renderOrdersTable(){
 
     const tbody =
         document.getElementById(
             "ordersTable"
         );
 
+    if(!tbody){
+        return;
+    }
+
 
     tbody.innerHTML = "";
 
 
     const list =
-        [...orders]
-        .map(
-            (
+        getFilteredOrders()
+        .map((order,index)=>{
+
+            const originalIndex =
+                orders.indexOf(order);
+
+            return {
                 order,
-                index
-            ) => ({
-                order,
-                index
-            })
-        )
+                originalIndex
+            };
+
+        })
         .reverse();
 
 
-    if (!list.length) {
+    const count =
+        document.getElementById(
+            "orderResultCount"
+        );
+
+
+    if(count){
+
+        count.textContent =
+            list.length +
+            (
+                list.length === 1
+                ? " order found"
+                : " orders found"
+            );
+
+    }
+
+
+    if(!list.length){
 
         tbody.innerHTML = `
 
             <tr>
 
                 <td
-                    colspan="6"
+                    colspan="7"
                     style="
                         text-align:center;
                         padding:45px;
@@ -3515,7 +2502,7 @@ function renderOrdersTable() {
             item.order;
 
         const index =
-            item.index;
+            item.originalIndex;
 
         const customer =
             order.customer || {};
@@ -3533,23 +2520,20 @@ function renderOrdersTable() {
             <td>
                 <strong>
                     #${escapeHTML(
-                        order.orderId ||
-                        "SM000000"
+                        order.orderId || "SM000000"
                     )}
                 </strong>
             </td>
 
             <td>
                 ${escapeHTML(
-                    customer.name ||
-                    "—"
+                    customer.name || "—"
                 )}
             </td>
 
             <td>
                 ${escapeHTML(
-                    customer.phone ||
-                    "—"
+                    customer.phone || "—"
                 )}
             </td>
 
@@ -3558,9 +2542,7 @@ function renderOrdersTable() {
             </td>
 
             <td>
-                ${formatDate(
-                    order.createdAt
-                )}
+                ${formatDate(order.createdAt)}
             </td>
 
             <td>
@@ -3578,10 +2560,7 @@ function renderOrdersTable() {
                     ${
                         STATUS_NAMES
                         .map(
-                            (
-                                name,
-                                statusIndex
-                            ) => `
+                            (name,statusIndex)=>`
 
                                 <option
                                     value="${statusIndex}"
@@ -3603,6 +2582,33 @@ function renderOrdersTable() {
 
             </td>
 
+            <td>
+
+                <button
+                    class="action-btn view-order"
+                    onclick="
+                        viewOrder(
+                            ${index}
+                        )
+                    "
+                >
+                    👁 View
+                </button>
+
+
+                <button
+                    class="action-btn delete-order"
+                    onclick="
+                        deleteOrder(
+                            ${index}
+                        )
+                    "
+                >
+                    🗑 Delete
+                </button>
+
+            </td>
+
         `;
 
 
@@ -3613,20 +2619,14 @@ function renderOrdersTable() {
 }
 
 
-
 /* =====================================================
-   CHANGE ORDER STATUS
+   CHANGE STATUS
 ===================================================== */
 
-function changeStatus(
-    index,
-    value
-) {
+function changeStatus(index,value){
 
-    if (!orders[index]) {
-
+    if(!orders[index]){
         return;
-
     }
 
 
@@ -3656,14 +2656,13 @@ function changeStatus(
 }
 
 
-
 /* =====================================================
    SYNC LAST ORDER
 ===================================================== */
 
-function syncLastOrder(order) {
+function syncLastOrder(order){
 
-    try {
+    try{
 
         const last =
             JSON.parse(
@@ -3673,15 +2672,14 @@ function syncLastOrder(order) {
             );
 
 
-        if (
+        if(
             last &&
             String(last.orderId) ===
             String(order.orderId)
-        ) {
+        ){
 
             last.trackingStep =
                 order.trackingStep;
-
 
             last.updatedAt =
                 order.updatedAt;
@@ -3694,7 +2692,7 @@ function syncLastOrder(order) {
 
         }
 
-    } catch {
+    }catch{
 
         /* ignore */
 
@@ -3703,28 +2701,330 @@ function syncLastOrder(order) {
 }
 
 
-
 /* =====================================================
-   IMAGE UPLOAD
+   VIEW ORDER
 ===================================================== */
 
-function handleImageUpload(event) {
+function viewOrder(index){
 
-    const file =
-        event.target.files &&
-        event.target.files[0];
+    const order =
+        orders[index];
 
 
-    if (!file) {
+    if(!order){
+
+        showToast(
+            "Order পাওয়া যায়নি"
+        );
 
         return;
 
     }
 
 
-    if (
+    const customer =
+        order.customer || {};
+
+    const step =
+        getStep(order);
+
+
+    const modal =
+        document.getElementById(
+            "orderModal"
+        );
+
+
+    const title =
+        document.getElementById(
+            "modalOrderTitle"
+        );
+
+
+    const body =
+        document.getElementById(
+            "orderModalBody"
+        );
+
+
+    title.textContent =
+        "Order #" +
+        (order.orderId || "SM000000");
+
+
+    let itemsHTML = "";
+
+
+    const items =
+        Array.isArray(order.items)
+        ? order.items
+        : [];
+
+
+    if(items.length){
+
+        itemsHTML = `
+
+            <div class="item-list">
+
+                <strong
+                    style="
+                        display:block;
+                        padding:12px 0;
+                        font-size:10px;
+                    "
+                >
+                    Order Items
+                </strong>
+
+                ${
+                    items.map(item=>`
+
+                        <div class="item-row">
+
+                            <div>
+                                ${escapeHTML(
+                                    item.name ||
+                                    item.title ||
+                                    "Product"
+                                )}
+
+                                ${
+                                    item.quantity
+                                    ? ` × ${escapeHTML(item.quantity)}`
+                                    : ""
+                                }
+                            </div>
+
+                            <strong>
+                                ${money(
+                                    item.price ||
+                                    item.total ||
+                                    0
+                                )}
+                            </strong>
+
+                        </div>
+
+                    `).join("")
+                }
+
+            </div>
+
+        `;
+
+    }
+
+
+    body.innerHTML = `
+
+        <div class="detail-grid">
+
+            <div class="detail-box">
+
+                <span class="detail-label">
+                    Customer
+                </span>
+
+                <div class="detail-value">
+                    ${escapeHTML(
+                        customer.name || "—"
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <span class="detail-label">
+                    Mobile
+                </span>
+
+                <div class="detail-value">
+                    ${escapeHTML(
+                        customer.phone || "—"
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <span class="detail-label">
+                    Email
+                </span>
+
+                <div class="detail-value">
+                    ${escapeHTML(
+                        customer.email || "—"
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <span class="detail-label">
+                    Order Date
+                </span>
+
+                <div class="detail-value">
+                    ${formatDate(
+                        order.createdAt
+                    )}
+                </div>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <span class="detail-label">
+                    Status
+                </span>
+
+                <div class="detail-value">
+                    ${STATUS_NAMES[step]}
+                </div>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <span class="detail-label">
+                    Total
+                </span>
+
+                <div class="detail-value">
+                    ${money(order.total)}
+                </div>
+
+            </div>
+
+
+            <div class="detail-box full">
+
+                <span class="detail-label">
+                    Address
+                </span>
+
+                <div class="detail-value">
+                    ${escapeHTML(
+                        customer.address ||
+                        order.address ||
+                        "—"
+                    )}
+                </div>
+
+            </div>
+
+        </div>
+
+        ${itemsHTML}
+
+    `;
+
+
+    modal.classList.add("show");
+
+}
+
+
+/* =====================================================
+   CLOSE ORDER MODAL
+===================================================== */
+
+function closeOrderModal(event){
+
+    if(
+        event &&
+        event.target !==
+        document.getElementById(
+            "orderModal"
+        )
+    ){
+        return;
+    }
+
+
+    document.getElementById(
+        "orderModal"
+    ).classList.remove("show");
+
+}
+
+
+/* =====================================================
+   DELETE ORDER
+===================================================== */
+
+function deleteOrder(index){
+
+    const order =
+        orders[index];
+
+
+    if(!order){
+        return;
+    }
+
+
+    const id =
+        order.orderId ||
+        "এই order";
+
+
+    const confirmed =
+        confirm(
+            `${id} delete করতে চান?`
+        );
+
+
+    if(!confirmed){
+        return;
+    }
+
+
+    orders.splice(
+        index,
+        1
+    );
+
+
+    saveOrders();
+
+    renderAll();
+
+    showToast(
+        "Order deleted ✓"
+    );
+
+}
+
+
+/* =====================================================
+   IMAGE UPLOAD
+===================================================== */
+
+function handleImageUpload(event){
+
+    const file =
+        event.target.files &&
+        event.target.files[0];
+
+
+    if(!file){
+        return;
+    }
+
+
+    if(
         !file.type.startsWith("image/")
-    ) {
+    ){
 
         showToast(
             "শুধু image file নির্বাচন করুন"
@@ -3737,11 +3037,10 @@ function handleImageUpload(event) {
     }
 
 
-    const maxSize =
-        2 * 1024 * 1024;
-
-
-    if (file.size > maxSize) {
+    if(
+        file.size >
+        2 * 1024 * 1024
+    ){
 
         showToast(
             "Image size 2MB-এর মধ্যে রাখুন"
@@ -3759,7 +3058,7 @@ function handleImageUpload(event) {
 
 
     reader.onload =
-        function () {
+        function(){
 
             uploadedImageData =
                 reader.result;
@@ -3789,12 +3088,11 @@ function handleImageUpload(event) {
 }
 
 
-
 /* =====================================================
    REMOVE IMAGE
 ===================================================== */
 
-function removeImage() {
+function removeImage(){
 
     uploadedImageData = "";
 
@@ -3823,28 +3121,19 @@ function removeImage() {
         );
 
 
-    if (fileInput) {
-
+    if(fileInput){
         fileInput.value = "";
-
     }
 
-
-    if (preview) {
-
+    if(preview){
         preview.classList.remove("show");
-
     }
 
-
-    if (previewImage) {
-
+    if(previewImage){
         previewImage.src = "";
-
     }
 
-
-    if (fileName) {
+    if(fileName){
 
         fileName.textContent =
             "কোনো image select করা হয়নি";
@@ -3854,12 +3143,11 @@ function removeImage() {
 }
 
 
-
 /* =====================================================
    IMAGE URL PREVIEW
 ===================================================== */
 
-function setupImageURLPreview() {
+function setupImageURLPreview(){
 
     const urlInput =
         document.getElementById(
@@ -3867,28 +3155,24 @@ function setupImageURLPreview() {
         );
 
 
-    if (!urlInput) {
-
+    if(!urlInput){
         return;
-
     }
 
 
     urlInput.addEventListener(
         "input",
-        function () {
+        function(){
 
             const url =
                 this.value.trim();
 
 
-            if (
+            if(
                 !url ||
                 uploadedImageData
-            ) {
-
+            ){
                 return;
-
             }
 
 
@@ -3905,7 +3189,7 @@ function setupImageURLPreview() {
 
 
             previewImage.onload =
-                function () {
+                function(){
 
                     preview.classList.add(
                         "show"
@@ -3915,7 +3199,7 @@ function setupImageURLPreview() {
 
 
             previewImage.onerror =
-                function () {
+                function(){
 
                     preview.classList.remove(
                         "show"
@@ -3924,8 +3208,7 @@ function setupImageURLPreview() {
                 };
 
 
-            previewImage.src =
-                url;
+            previewImage.src = url;
 
         }
     );
@@ -3933,13 +3216,11 @@ function setupImageURLPreview() {
 }
 
 
-
 /* =====================================================
-   1.45 — SAVE PRODUCT
-   ADD + EDIT
+   SAVE PRODUCT
 ===================================================== */
 
-function saveProduct() {
+function saveProduct(){
 
     const name =
         document.getElementById(
@@ -3967,7 +3248,7 @@ function saveProduct() {
         ).value.trim();
 
 
-    if (!name) {
+    if(!name){
 
         showToast(
             "Product name দিন"
@@ -3978,7 +3259,7 @@ function saveProduct() {
     }
 
 
-    if (!price || price <= 0) {
+    if(!price || price <= 0){
 
         showToast(
             "সঠিক product price দিন"
@@ -3995,11 +3276,9 @@ function saveProduct() {
         "";
 
 
-    /* =================================================
-       EDIT PRODUCT
-    ================================================= */
+    /* EDIT */
 
-    if (editingProductId) {
+    if(editingProductId){
 
         const product =
             products.find(
@@ -4009,7 +3288,7 @@ function saveProduct() {
             );
 
 
-        if (!product) {
+        if(!product){
 
             showToast(
                 "Product পাওয়া যায়নি"
@@ -4032,7 +3311,7 @@ function saveProduct() {
             category;
 
 
-        if (finalImage) {
+        if(finalImage){
 
             product.image =
                 finalImage;
@@ -4051,26 +3330,20 @@ function saveProduct() {
 
         saveProducts();
 
-
         cancelProductEdit();
 
-
         renderProducts();
-
 
         showToast(
             "Product updated successfully ✓"
         );
-
 
         return;
 
     }
 
 
-    /* =================================================
-       ADD NEW PRODUCT
-    ================================================= */
+    /* ADD */
 
     const newProduct = {
 
@@ -4104,12 +3377,9 @@ function saveProduct() {
 
     saveProducts();
 
-
     clearProductForm();
 
-
     renderProducts();
-
 
     showToast(
         "Product added successfully ✓"
@@ -4118,12 +3388,11 @@ function saveProduct() {
 }
 
 
-
 /* =====================================================
-   1.45 — EDIT PRODUCT
+   EDIT PRODUCT
 ===================================================== */
 
-function editProduct(productId) {
+function editProduct(productId){
 
     const product =
         products.find(
@@ -4133,7 +3402,7 @@ function editProduct(productId) {
         );
 
 
-    if (!product) {
+    if(!product){
 
         showToast(
             "Product পাওয়া যায়নি"
@@ -4169,23 +3438,20 @@ function editProduct(productId) {
     document.getElementById(
         "productImage"
     ).value =
-        (
-            product.imageType === "url"
-            ? product.image || ""
-            : ""
-        );
+        product.imageType === "url"
+        ? product.image || ""
+        : "";
 
 
     uploadedImageData = "";
 
 
-    if (product.image) {
+    if(product.image){
 
         const previewImage =
             document.getElementById(
                 "previewImage"
             );
-
 
         const preview =
             document.getElementById(
@@ -4198,19 +3464,9 @@ function editProduct(productId) {
 
 
         previewImage.onload =
-            function () {
+            function(){
 
                 preview.classList.add(
-                    "show"
-                );
-
-            };
-
-
-        previewImage.onerror =
-            function () {
-
-                preview.classList.remove(
                     "show"
                 );
 
@@ -4224,7 +3480,7 @@ function editProduct(productId) {
             ? "Saved uploaded image"
             : "Saved image URL";
 
-    } else {
+    }else{
 
         removeImage();
 
@@ -4263,16 +3519,13 @@ function editProduct(productId) {
 }
 
 
-
 /* =====================================================
-   1.45 — CANCEL PRODUCT EDIT
+   CANCEL PRODUCT EDIT
 ===================================================== */
 
-function cancelProductEdit() {
+function cancelProductEdit(){
 
-    editingProductId =
-        null;
-
+    editingProductId = null;
 
     clearProductForm();
 
@@ -4296,12 +3549,11 @@ function cancelProductEdit() {
 }
 
 
-
 /* =====================================================
    CLEAR PRODUCT FORM
 ===================================================== */
 
-function clearProductForm() {
+function clearProductForm(){
 
     document.getElementById(
         "productName"
@@ -4329,53 +3581,11 @@ function clearProductForm() {
 }
 
 
-
 /* =====================================================
-   1.45 — PRODUCT SEARCH + CATEGORY FILTER
+   PRODUCT FILTER
 ===================================================== */
 
-function setupProductTools() {
-
-    const searchInput =
-        document.getElementById(
-            "productSearch"
-        );
-
-
-    const categoryFilter =
-        document.getElementById(
-            "categoryFilter"
-        );
-
-
-    if (searchInput) {
-
-        searchInput.addEventListener(
-            "input",
-            renderProducts
-        );
-
-    }
-
-
-    if (categoryFilter) {
-
-        categoryFilter.addEventListener(
-            "change",
-            renderProducts
-        );
-
-    }
-
-}
-
-
-
-/* =====================================================
-   1.45 — FILTER PRODUCTS
-===================================================== */
-
-function getFilteredProducts() {
+function getFilteredProducts(){
 
     const search =
         (
@@ -4390,57 +3600,50 @@ function getFilteredProducts() {
     const category =
         document.getElementById(
             "categoryFilter"
-        )?.value ||
-        "all";
+        )?.value || "all";
 
 
-    return products.filter(
-        product => {
+    return products.filter(product => {
 
-            const name =
-                String(
-                    product.name || ""
-                )
-                .toLowerCase();
+        const name =
+            String(
+                product.name || ""
+            ).toLowerCase();
 
 
-            const productCategory =
-                String(
-                    product.category || ""
-                )
-                .toLowerCase();
+        const productCategory =
+            String(
+                product.category || ""
+            ).toLowerCase();
 
 
-            const matchesSearch =
-                !search ||
-                name.includes(search) ||
-                productCategory.includes(search);
+        const matchesSearch =
+            !search ||
+            name.includes(search) ||
+            productCategory.includes(search);
 
 
-            const matchesCategory =
-                category === "all" ||
-                String(
-                    product.category || ""
-                ) === category;
+        const matchesCategory =
+            category === "all" ||
+            String(product.category || "") ===
+            category;
 
 
-            return (
-                matchesSearch &&
-                matchesCategory
-            );
+        return (
+            matchesSearch &&
+            matchesCategory
+        );
 
-        }
-    );
+    });
 
 }
 
 
-
 /* =====================================================
-   PRODUCTS
+   RENDER PRODUCTS
 ===================================================== */
 
-function renderProducts() {
+function renderProducts(){
 
     const box =
         document.getElementById(
@@ -4448,10 +3651,8 @@ function renderProducts() {
         );
 
 
-    if (!box) {
-
+    if(!box){
         return;
-
     }
 
 
@@ -4468,7 +3669,7 @@ function renderProducts() {
         );
 
 
-    if (count) {
+    if(count){
 
         count.textContent =
             filtered.length +
@@ -4481,18 +3682,16 @@ function renderProducts() {
     }
 
 
-    if (!filtered.length) {
+    if(!filtered.length){
 
         box.innerHTML = `
 
-            <div
-                style="
-                    padding:40px;
-                    text-align:center;
-                    color:#98a2b3;
-                    font-size:10px;
-                "
-            >
+            <div style="
+                padding:40px;
+                text-align:center;
+                color:#98a2b3;
+                font-size:10px;
+            ">
 
                 🔎
 
@@ -4500,7 +3699,7 @@ function renderProducts() {
 
                 ${
                     products.length
-                    ? "আপনার search/filter অনুযায়ী কোনো product পাওয়া যায়নি।"
+                    ? "Search/filter অনুযায়ী কোনো product পাওয়া যায়নি।"
                     : "এখনো কোনো product add করা হয়নি।"
                 }
 
@@ -4528,21 +3727,17 @@ function renderProducts() {
             "product-item";
 
 
-        const safeImage =
-            product.image || "";
-
-
         let imageHTML =
             "🛍️";
 
 
-        if (safeImage) {
+        if(product.image){
 
             imageHTML = `
 
                 <img
                     src="${escapeHTML(
-                        safeImage
+                        product.image
                     )}"
                     alt="${escapeHTML(
                         product.name
@@ -4561,39 +3756,29 @@ function renderProducts() {
         row.innerHTML = `
 
             <div class="product-image">
-
                 ${imageHTML}
-
             </div>
 
 
             <div>
 
                 <span class="product-name">
-
                     ${escapeHTML(
                         product.name
                     )}
-
                 </span>
 
 
                 <span class="product-category">
-
                     ${escapeHTML(
                         product.category ||
                         "Other"
                     )}
-
                 </span>
 
 
                 <span class="product-price">
-
-                    ${money(
-                        product.price
-                    )}
-
+                    ${money(product.price)}
                 </span>
 
             </div>
@@ -4640,12 +3825,11 @@ function renderProducts() {
 }
 
 
-
 /* =====================================================
    DELETE PRODUCT
 ===================================================== */
 
-function deleteProduct(productId) {
+function deleteProduct(productId){
 
     const product =
         products.find(
@@ -4655,10 +3839,8 @@ function deleteProduct(productId) {
         );
 
 
-    if (!product) {
-
+    if(!product){
         return;
-
     }
 
 
@@ -4668,10 +3850,8 @@ function deleteProduct(productId) {
         );
 
 
-    if (!confirmed) {
-
+    if(!confirmed){
         return;
-
     }
 
 
@@ -4683,10 +3863,10 @@ function deleteProduct(productId) {
         );
 
 
-    if (
+    if(
         String(editingProductId) ===
         String(productId)
-    ) {
+    ){
 
         cancelProductEdit();
 
@@ -4695,9 +3875,7 @@ function deleteProduct(productId) {
 
     saveProducts();
 
-
     renderProducts();
-
 
     showToast(
         "Product deleted ✓"
@@ -4706,12 +3884,11 @@ function deleteProduct(productId) {
 }
 
 
-
 /* =====================================================
    USERS
 ===================================================== */
 
-function renderUsers() {
+function renderUsers(){
 
     const box =
         document.getElementById(
@@ -4719,14 +3896,12 @@ function renderUsers() {
         );
 
 
-    if (!box) {
-
+    if(!box){
         return;
-
     }
 
 
-    if (!users.length) {
+    if(!users.length){
 
         box.innerHTML = `
 
@@ -4749,52 +3924,39 @@ function renderUsers() {
 
 
     box.innerHTML =
-        users
-        .map(
-            user => `
+        users.map(user=>`
 
-                <div
-                    style="
-                        padding:12px 0;
-                        border-bottom:
-                        1px solid #f2f4f7;
-                    "
-                >
+            <div style="
+                padding:12px 0;
+                border-bottom:1px solid #f2f4f7;
+            ">
 
-                    <strong
-                        style="
-                            font-size:11px;
-                        "
-                    >
-                        ${escapeHTML(
-                            user.name ||
-                            "User"
-                        )}
-                    </strong>
+                <strong style="
+                    font-size:11px;
+                ">
+                    ${escapeHTML(
+                        user.name || "User"
+                    )}
+                </strong>
 
 
-                    <div
-                        style="
-                            color:#667085;
-                            font-size:9px;
-                            margin-top:4px;
-                        "
-                    >
-                        ${escapeHTML(
-                            user.email ||
-                            user.phone ||
-                            "No contact"
-                        )}
-                    </div>
-
+                <div style="
+                    color:#667085;
+                    font-size:9px;
+                    margin-top:4px;
+                ">
+                    ${escapeHTML(
+                        user.email ||
+                        user.phone ||
+                        "No contact"
+                    )}
                 </div>
 
-            `
-        )
-        .join("");
+            </div>
+
+        `).join("");
 
 }
-
 
 
 /* =====================================================
@@ -4804,14 +3966,15 @@ function renderUsers() {
 function showSection(
     sectionId,
     button
-) {
+){
 
     document
-    .querySelectorAll(".section")
-    .forEach(
-        section =>
-            section.classList.remove("active")
-    );
+        .querySelectorAll(".section")
+        .forEach(section =>
+            section.classList.remove(
+                "active"
+            )
+        );
 
 
     const target =
@@ -4820,10 +3983,8 @@ function showSection(
         );
 
 
-    if (!target) {
-
+    if(!target){
         return;
-
     }
 
 
@@ -4831,33 +3992,25 @@ function showSection(
 
 
     document
-    .querySelectorAll(".nav-item")
-    .forEach(
-        item =>
-            item.classList.remove("active")
-    );
+        .querySelectorAll(".nav-item")
+        .forEach(item =>
+            item.classList.remove(
+                "active"
+            )
+        );
 
 
-    if (button) {
-
+    if(button){
         button.classList.add("active");
-
     }
 
 
     const titles = {
 
-        dashboard:
-            "Dashboard",
-
-        orders:
-            "Orders",
-
-        products:
-            "Products",
-
-        users:
-            "Users"
+        dashboard:"Dashboard",
+        orders:"Orders",
+        products:"Products",
+        users:"Users"
 
     };
 
@@ -4865,39 +4018,31 @@ function showSection(
     document.getElementById(
         "pageTitle"
     ).textContent =
-        titles[sectionId] ||
-        "Admin";
+        titles[sectionId] || "Admin";
 
 
-    if (sectionId === "orders") {
-
+    if(sectionId === "orders"){
         renderOrdersTable();
-
     }
 
 
-    if (sectionId === "products") {
-
+    if(sectionId === "products"){
         renderProducts();
-
     }
 
 
-    if (sectionId === "users") {
-
+    if(sectionId === "users"){
         renderUsers();
-
     }
 
 }
 
 
-
 /* =====================================================
-   QUICK NAVIGATION
+   QUICK NAV
 ===================================================== */
 
-function showSectionById(id) {
+function showSectionById(id){
 
     const buttons =
         document.querySelectorAll(
@@ -4916,10 +4061,10 @@ function showSectionById(id) {
             .toLowerCase();
 
 
-        if (
+        if(
             text ===
             id.toLowerCase()
-        ) {
+        ){
 
             targetButton =
                 button;
@@ -4937,12 +4082,11 @@ function showSectionById(id) {
 }
 
 
-
 /* =====================================================
    RENDER ALL
 ===================================================== */
 
-function renderAll() {
+function renderAll(){
 
     loadData();
 
@@ -4961,12 +4105,11 @@ function renderAll() {
 }
 
 
-
 /* =====================================================
    TOAST
 ===================================================== */
 
-function showToast(message) {
+function showToast(message){
 
     const toast =
         document.getElementById(
@@ -4988,12 +4131,10 @@ function showToast(message) {
 
     window.toastTimer =
         setTimeout(
-            function () {
-
+            ()=>{
                 toast.classList.remove(
                     "show"
                 );
-
             },
             2300
         );
@@ -5001,23 +4142,20 @@ function showToast(message) {
 }
 
 
-
 /* =====================================================
    ADMIN LOGOUT
 ===================================================== */
 
-function adminLogout() {
+function adminLogout(){
 
-    const confirmLogout =
+    const confirmed =
         confirm(
             "আপনি কি Admin Panel থেকে Logout করতে চান?"
         );
 
 
-    if (!confirmLogout) {
-
+    if(!confirmed){
         return;
-
     }
 
 
@@ -5038,12 +4176,11 @@ function adminLogout() {
 }
 
 
-
 /* =====================================================
-   AUTO SESSION CHECK
+   SESSION CHECK
 ===================================================== */
 
-function checkAdminSession() {
+function checkAdminSession(){
 
     const loggedIn =
         sessionStorage.getItem(
@@ -5063,10 +4200,10 @@ function checkAdminSession() {
         24 * 60 * 60 * 1000;
 
 
-    if (
+    if(
         loggedIn !== "true" ||
         !loginTime
-    ) {
+    ){
 
         window.location.replace(
             "admin-login.html"
@@ -5077,10 +4214,10 @@ function checkAdminSession() {
     }
 
 
-    if (
+    if(
         Date.now() - loginTime >=
         duration
-    ) {
+    ){
 
         sessionStorage.removeItem(
             "shoppingMelaAdminLoggedIn"
@@ -5105,21 +4242,16 @@ function checkAdminSession() {
 }
 
 
-
 /* =====================================================
-   PAGE LOAD
+   EVENT SETUP
 ===================================================== */
 
 document.addEventListener(
     "DOMContentLoaded",
-    function () {
+    function(){
 
-        if (
-            !checkAdminSession()
-        ) {
-
+        if(!checkAdminSession()){
             return;
-
         }
 
 
@@ -5132,7 +4264,7 @@ document.addEventListener(
             );
 
 
-        if (fileInput) {
+        if(fileInput){
 
             fileInput.addEventListener(
                 "change",
@@ -5142,10 +4274,71 @@ document.addEventListener(
         }
 
 
+        const productSearch =
+            document.getElementById(
+                "productSearch"
+            );
+
+
+        if(productSearch){
+
+            productSearch.addEventListener(
+                "input",
+                renderProducts
+            );
+
+        }
+
+
+        const categoryFilter =
+            document.getElementById(
+                "categoryFilter"
+            );
+
+
+        if(categoryFilter){
+
+            categoryFilter.addEventListener(
+                "change",
+                renderProducts
+            );
+
+        }
+
+
+        const orderSearch =
+            document.getElementById(
+                "orderSearch"
+            );
+
+
+        if(orderSearch){
+
+            orderSearch.addEventListener(
+                "input",
+                renderOrdersTable
+            );
+
+        }
+
+
+        const orderStatusFilter =
+            document.getElementById(
+                "orderStatusFilter"
+            );
+
+
+        if(orderStatusFilter){
+
+            orderStatusFilter.addEventListener(
+                "change",
+                renderOrdersTable
+            );
+
+        }
+
+
         setupImageURLPreview();
-
-        setupProductTools();
-
 
         renderAll();
 
@@ -5153,13 +4346,12 @@ document.addEventListener(
 );
 
 
-
 /* =====================================================
    PERIODIC SESSION CHECK
 ===================================================== */
 
 setInterval(
-    function () {
+    function(){
 
         checkAdminSession();
 
@@ -5169,7 +4361,6 @@ setInterval(
 
 </script>
 
-
 </body>
-
 </html>
+```
