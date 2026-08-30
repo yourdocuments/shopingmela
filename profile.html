@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="bn">
-
 <head>
 
     <meta charset="UTF-8">
@@ -10,13 +9,11 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>
-        Business Profile — Shopping Mela
-    </title>
+    <title>Shopping Mela — Business Profile</title>
 
     <meta
         name="description"
-        content="Shopping Mela verified local business profile."
+        content="Shopping Mela verified local business profile"
     >
 
     <link
@@ -27,34 +24,124 @@
 
     <style>
 
-        /* =================================================
+        /* =====================================================
            PROFILE PAGE
-        ================================================= */
+        ====================================================== */
 
         body {
-            background: #f5f7fb;
+            background: #f3f4f6;
         }
 
 
         .profile-page {
-            padding: 35px 0 60px;
+            min-height: 100vh;
         }
 
 
-        /* =================================================
-           COVER
-        ================================================= */
+
+        /* =====================================================
+           PROFILE TOP HEADER
+        ====================================================== */
+
+        .profile-topbar {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+
+        .profile-topbar-inner {
+            max-width: 1200px;
+            margin: auto;
+            padding: 14px 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+
+        .profile-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            text-decoration: none;
+
+            color: #374151;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        .profile-back:hover {
+            color: #2563eb;
+        }
+
+
+        .profile-brand-mini {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+
+            font-weight: 800;
+
+            color: #111827;
+        }
+
+
+        .profile-brand-mini-icon {
+            width: 34px;
+            height: 34px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #2563eb;
+
+            border-radius: 9px;
+
+            color: #ffffff;
+        }
+
+
+
+        /* =====================================================
+           PROFILE COVER
+        ====================================================== */
+
+        .profile-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+
+        .profile-cover-wrapper {
+            position: relative;
+
+            background: #ffffff;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 5px 25px
+                rgba(0,0,0,.06);
+        }
+
 
         .profile-cover {
             height: 330px;
 
-            border-radius:
-                22px 22px 0 0;
-
             background-image:
                 linear-gradient(
-                    rgba(0,0,0,.18),
-                    rgba(0,0,0,.35)
+                    rgba(0,0,0,.10),
+                    rgba(0,0,0,.20)
                 ),
                 url(
                     "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1600&q=85"
@@ -63,534 +150,98 @@
             background-size: cover;
 
             background-position: center;
-
-            position: relative;
-
-            overflow: hidden;
         }
 
 
-        .cover-ad-label {
+        .cover-edit {
             position: absolute;
 
-            top: 20px;
-            right: 20px;
+            right: 18px;
+            top: 18px;
 
-            padding:
-                8px 14px;
+            border: 0;
 
-            background:
-                rgba(0,0,0,.55);
+            padding: 9px 13px;
 
-            color: white;
+            border-radius: 10px;
 
-            border-radius: 50px;
+            background: rgba(255,255,255,.92);
 
-            font-size: 12px;
+            color: #111827;
 
             font-weight: 700;
 
-            backdrop-filter:
-                blur(5px);
+            cursor: pointer;
         }
 
 
-        /* =================================================
-           PROFILE HEADER
-        ================================================= */
 
-        .profile-header {
-            background: white;
+        /* =====================================================
+           PROFILE IDENTITY
+        ====================================================== */
 
-            padding:
-                0 35px 25px;
-
-            border-radius:
-                0 0 22px 22px;
-
-            border:
-                1px solid #e8ebf0;
+        .profile-identity {
+            padding: 0 28px 24px;
 
             position: relative;
         }
 
 
-        .profile-main {
-            display: flex;
-
-            align-items: flex-end;
-
-            gap: 22px;
-
-            margin-top: -70px;
-
-            position: relative;
-        }
-
-
-        /* =================================================
-           PROFILE LOGO
-        ================================================= */
-
-        .profile-logo {
-            width: 145px;
-            height: 145px;
+        .profile-avatar-large {
+            width: 130px;
+            height: 130px;
 
             border-radius: 50%;
 
-            background:
-                linear-gradient(
-                    135deg,
-                    #ffffff,
-                    #f0f4f9
-                );
+            background: #ffffff;
 
-            border:
-                6px solid white;
+            border: 6px solid #ffffff;
 
             box-shadow:
-                0 8px 25px
-                rgba(0,0,0,.14);
+                0 4px 20px
+                rgba(0,0,0,.15);
 
             display: flex;
-
             align-items: center;
             justify-content: center;
 
             font-size: 58px;
 
-            flex-shrink: 0;
+            position: relative;
+
+            margin-top: -65px;
         }
 
 
-        /* =================================================
-           PROFILE TITLE
-        ================================================= */
+        .profile-verified-check {
+            position: absolute;
 
-        .profile-title-area {
-            padding-bottom: 12px;
+            right: 3px;
+            bottom: 8px;
 
-            flex: 1;
-        }
-
-
-        .profile-title-line {
-            display: flex;
-
-            align-items: center;
-
-            flex-wrap: wrap;
-
-            gap: 9px;
-        }
-
-
-        .profile-title-line h1 {
-            margin: 0;
-
-            font-size:
-                clamp(25px,4vw,36px);
-
-            color: #111827;
-        }
-
-
-        /* =================================================
-           VERIFIED BADGE
-        ================================================= */
-
-        .verified-badge-large {
-
-            width: 27px;
-            height: 27px;
+            width: 30px;
+            height: 30px;
 
             border-radius: 50%;
 
             background: #1877f2;
 
-            color: white;
+            border: 4px solid #ffffff;
 
-            display: inline-flex;
-
+            display: flex;
             align-items: center;
             justify-content: center;
+
+            color: #ffffff;
 
             font-size: 17px;
 
             font-weight: 900;
-
-            box-shadow:
-                0 2px 7px
-                rgba(24,119,242,.35);
-
-            position: relative;
-
-            cursor: help;
         }
 
 
-        .verified-badge-large::after {
-
-            content:
-                "Verified Business";
-
-            position: absolute;
-
-            left: 50%;
-
-            bottom: 135%;
-
-            transform:
-                translateX(-50%);
-
-            background:
-                #111827;
-
-            color: white;
-
-            padding:
-                7px 10px;
-
-            border-radius: 7px;
-
-            font-size: 11px;
-
-            white-space: nowrap;
-
-            opacity: 0;
-
-            pointer-events: none;
-
-            transition: .2s ease;
-        }
-
-
-        .verified-badge-large:hover::after {
-
-            opacity: 1;
-
-        }
-
-
-        .profile-category {
-
-            color: #6b7280;
-
-            font-size: 14px;
-
-            margin-top: 7px;
-        }
-
-
-        .profile-meta {
-
-            display: flex;
-
-            flex-wrap: wrap;
-
-            gap: 15px;
-
-            margin-top: 9px;
-
-            color: #6b7280;
-
-            font-size: 13px;
-        }
-
-
-        /* =================================================
-           ACTIONS
-        ================================================= */
-
-        .profile-actions {
-
-            display: flex;
-
-            gap: 9px;
-
-            padding-bottom: 14px;
-        }
-
-
-        .profile-action {
-
-            border: none;
-
-            border-radius: 10px;
-
-            padding:
-                11px 17px;
-
-            font-weight: 700;
-
-            cursor: pointer;
-
-            background:
-                #eef2f7;
-
-            color:
-                #111827;
-
-            transition:
-                .2s ease;
-        }
-
-
-        .profile-action:hover {
-
-            transform:
-                translateY(-1px);
-
-        }
-
-
-        .profile-action.primary {
-
-            background:
-                #1877f2;
-
-            color: white;
-        }
-
-
-        /* =================================================
-           PROFILE NAV
-        ================================================= */
-
-        .profile-nav {
-
-            display: flex;
-
-            gap: 5px;
-
-            margin-top: 22px;
-
-            border-top:
-                1px solid #edf0f4;
-
-            padding-top: 15px;
-
-            overflow-x: auto;
-        }
-
-
-        .profile-nav button {
-
-            border: none;
-
-            background: transparent;
-
-            padding:
-                10px 17px;
-
-            border-radius: 9px;
-
-            font-weight: 700;
-
-            color: #6b7280;
-
-            cursor: pointer;
-
-            white-space: nowrap;
-        }
-
-
-        .profile-nav button.active {
-
-            color:
-                #1877f2;
-
-            background:
-                #edf5ff;
-        }
-
-
-        /* =================================================
-           PROFILE CONTENT
-        ================================================= */
-
-        .profile-content {
-
-            display: grid;
-
-            grid-template-columns:
-                330px 1fr;
-
-            gap: 22px;
-
-            margin-top: 25px;
-        }
-
-
-        .profile-card {
-
-            background: white;
-
-            border:
-                1px solid #e8ebf0;
-
-            border-radius: 18px;
-
-            padding: 23px;
-
-            margin-bottom: 20px;
-        }
-
-
-        .profile-card h2 {
-
-            font-size: 20px;
-
-            margin:
-                0 0 17px;
-
-            color: #111827;
-        }
-
-
-        .about-text {
-
-            color: #5f6875;
-
-            line-height: 1.8;
-
-            font-size: 14px;
-        }
-
-
-        /* =================================================
-           BUSINESS INFO
-        ================================================= */
-
-        .business-info {
-
-            display: grid;
-
-            gap: 15px;
-        }
-
-
-        .business-info-row {
-
-            display: flex;
-
-            align-items: flex-start;
-
-            gap: 12px;
-
-            color: #4b5563;
-
-            font-size: 14px;
-        }
-
-
-        .business-info-icon {
-
-            width: 36px;
-            height: 36px;
-
-            border-radius: 10px;
-
-            background:
-                #f1f5f9;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            flex-shrink: 0;
-
-        }
-
-
-        .business-info-row strong {
-
-            display: block;
-
-            color: #111827;
-
-            margin-bottom: 3px;
-        }
-
-
-        /* =================================================
-           VERIFIED INFORMATION
-        ================================================= */
-
-        .verification-card {
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #eff6ff,
-                    #f8fbff
-                );
-
-            border:
-                1px solid #dbeafe;
-        }
-
-
-        .verification-title {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 9px;
-
-            font-weight: 800;
-
-            color:
-                #1558b0;
-
-            margin-bottom: 8px;
-        }
-
-
-        .small-blue-check {
-
-            width: 22px;
-            height: 22px;
-
-            border-radius: 50%;
-
-            background:
-                #1877f2;
-
-            color: white;
-
-            display: inline-flex;
-
-            align-items: center;
-            justify-content: center;
-
-            font-size: 13px;
-
-            font-weight: 900;
-        }
-
-
-        .verification-card p {
-
-            font-size: 13px;
-
-            line-height: 1.7;
-
-            color:
-                #526274;
-
-            margin: 0;
-        }
-
-
-        /* =================================================
-           PRODUCT AREA
-        ================================================= */
-
-        .profile-products-header {
+        .profile-title-row {
+            margin-top: 13px;
 
             display: flex;
 
@@ -598,26 +249,495 @@
 
             justify-content: space-between;
 
-            gap: 10px;
-
-            margin-bottom: 18px;
+            gap: 20px;
         }
 
 
-        .profile-products-header h2 {
-
+        .profile-title-area h1 {
             margin: 0;
+
+            color: #111827;
+
+            font-size: 30px;
+
+            line-height: 1.2;
         }
 
 
-        .mini-link {
+        .verified-title-badge {
+            display: inline-flex;
 
-            border: none;
+            align-items: center;
+
+            gap: 5px;
+
+            margin-left: 7px;
+
+            color: #1877f2;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            vertical-align: middle;
+        }
+
+
+        .verified-circle {
+            width: 20px;
+            height: 20px;
+
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #1877f2;
+
+            color: #ffffff;
+
+            font-size: 12px;
+
+            font-weight: 900;
+        }
+
+
+        .profile-category {
+            color: #6b7280;
+
+            margin-top: 7px;
+
+            font-size: 14px;
+        }
+
+
+        .profile-location {
+            color: #6b7280;
+
+            margin-top: 6px;
+
+            font-size: 13px;
+        }
+
+
+
+        /* =====================================================
+           PROFILE ACTIONS
+        ====================================================== */
+
+        .profile-actions-main {
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            flex-wrap: wrap;
+        }
+
+
+        .profile-action-btn {
+            border: 0;
+
+            padding: 11px 16px;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            font-weight: 800;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 7px;
+        }
+
+
+        .profile-follow-btn {
+            background: #1877f2;
+
+            color: #ffffff;
+        }
+
+
+        .profile-follow-btn.following {
+            background: #e5e7eb;
+
+            color: #111827;
+        }
+
+
+        .profile-share-btn {
+            background: #eef2ff;
+
+            color: #1d4ed8;
+        }
+
+
+        .profile-contact-btn {
+            background: #f3f4f6;
+
+            color: #111827;
+        }
+
+
+
+        /* =====================================================
+           FOLLOW STATS
+        ====================================================== */
+
+        .profile-stats {
+            display: flex;
+
+            align-items: center;
+
+            gap: 28px;
+
+            margin-top: 20px;
+
+            padding-top: 18px;
+
+            border-top: 1px solid #f0f0f0;
+        }
+
+
+        .profile-stat {
+            cursor: pointer;
+        }
+
+
+        .profile-stat strong {
+            color: #111827;
+
+            font-size: 17px;
+        }
+
+
+        .profile-stat span {
+            color: #6b7280;
+
+            font-size: 13px;
+
+            margin-left: 4px;
+        }
+
+
+
+        /* =====================================================
+           PROFILE NAV
+        ====================================================== */
+
+        .profile-nav {
+            background: #ffffff;
+
+            border-top: 1px solid #e5e7eb;
+
+            padding: 0 28px;
+
+            display: flex;
+
+            gap: 5px;
+
+            overflow-x: auto;
+        }
+
+
+        .profile-nav button {
+            border: 0;
 
             background: transparent;
 
-            color:
-                #1877f2;
+            padding: 16px 18px;
+
+            color: #6b7280;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            white-space: nowrap;
+
+            border-bottom: 3px solid transparent;
+        }
+
+
+        .profile-nav button.active {
+            color: #1877f2;
+
+            border-bottom-color: #1877f2;
+        }
+
+
+
+        /* =====================================================
+           CONTENT LAYOUT
+        ====================================================== */
+
+        .profile-content {
+            max-width: 1200px;
+
+            margin: 20px auto 60px;
+
+            padding: 0 20px;
+
+            display: grid;
+
+            grid-template-columns:
+                350px 1fr;
+
+            gap: 20px;
+        }
+
+
+        .profile-card {
+            background: #ffffff;
+
+            border-radius: 16px;
+
+            border: 1px solid #e5e7eb;
+
+            padding: 20px;
+
+            box-shadow:
+                0 4px 18px
+                rgba(0,0,0,.04);
+
+            margin-bottom: 20px;
+        }
+
+
+        .profile-card:last-child {
+            margin-bottom: 0;
+        }
+
+
+        .profile-card h2 {
+            margin: 0 0 16px;
+
+            color: #111827;
+
+            font-size: 19px;
+        }
+
+
+
+        /* =====================================================
+           ABOUT
+        ====================================================== */
+
+        .about-text {
+            color: #4b5563;
+
+            line-height: 1.7;
+
+            font-size: 14px;
+
+            margin-bottom: 17px;
+        }
+
+
+        .about-item {
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 10px;
+
+            padding: 9px 0;
+
+            color: #4b5563;
+
+            font-size: 14px;
+        }
+
+
+        .about-item-icon {
+            width: 28px;
+
+            flex-shrink: 0;
+
+            text-align: center;
+        }
+
+
+
+        /* =====================================================
+           VERIFIED INFORMATION
+        ====================================================== */
+
+        .verified-info-box {
+            background: #eff6ff;
+
+            border: 1px solid #bfdbfe;
+
+            border-radius: 12px;
+
+            padding: 14px;
+
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 10px;
+        }
+
+
+        .verified-info-icon {
+            width: 30px;
+            height: 30px;
+
+            background: #1877f2;
+
+            color: white;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: 900;
+
+            flex-shrink: 0;
+        }
+
+
+        .verified-info-box strong {
+            color: #1e40af;
+
+            display: block;
+
+            font-size: 13px;
+        }
+
+
+        .verified-info-box p {
+            margin: 4px 0 0;
+
+            color: #3b82f6;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+
+
+        /* =====================================================
+           POSTS
+        ====================================================== */
+
+        .post-card {
+            background: #ffffff;
+
+            border-radius: 16px;
+
+            border: 1px solid #e5e7eb;
+
+            margin-bottom: 20px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 4px 18px
+                rgba(0,0,0,.04);
+        }
+
+
+        .post-header {
+            padding: 17px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+        }
+
+
+        .post-avatar {
+            width: 44px;
+            height: 44px;
+
+            border-radius: 50%;
+
+            background: #eff6ff;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 21px;
+        }
+
+
+        .post-author {
+            font-weight: 800;
+
+            color: #111827;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 5px;
+        }
+
+
+        .post-time {
+            color: #9ca3af;
+
+            font-size: 12px;
+
+            margin-top: 3px;
+        }
+
+
+        .post-content {
+            padding: 0 17px 17px;
+
+            color: #374151;
+
+            line-height: 1.65;
+
+            font-size: 14px;
+        }
+
+
+        .post-image {
+            width: 100%;
+
+            height: 260px;
+
+            background-size: cover;
+
+            background-position: center;
+        }
+
+
+        .post-actions {
+            border-top: 1px solid #f0f0f0;
+
+            display: flex;
+        }
+
+
+        .post-actions button {
+            flex: 1;
+
+            border: 0;
+
+            background: #ffffff;
+
+            padding: 13px;
+
+            color: #6b7280;
 
             font-weight: 700;
 
@@ -625,280 +745,401 @@
         }
 
 
-        .profile-product-grid {
+        .post-actions button:hover {
+            background: #f9fafb;
 
+            color: #1877f2;
+        }
+
+
+
+        /* =====================================================
+           PRODUCTS
+        ====================================================== */
+
+        .profile-products {
             display: grid;
 
             grid-template-columns:
-                repeat(3,1fr);
+                repeat(2, 1fr);
 
-            gap: 15px;
+            gap: 14px;
         }
 
 
         .profile-product {
+            border: 1px solid #e5e7eb;
 
-            border:
-                1px solid #e8ebf0;
-
-            border-radius: 14px;
+            border-radius: 13px;
 
             overflow: hidden;
 
-            background: white;
-
-            transition:
-                .2s ease;
-        }
-
-
-        .profile-product:hover {
-
-            transform:
-                translateY(-3px);
-
-            box-shadow:
-                0 8px 20px
-                rgba(0,0,0,.07);
-
+            background: #ffffff;
         }
 
 
         .profile-product-image {
-
-            height: 175px;
+            height: 180px;
 
             background-size: cover;
 
             background-position: center;
-
-            position: relative;
-        }
-
-
-        .profile-product-discount {
-
-            position: absolute;
-
-            top: 10px;
-            left: 10px;
-
-            background:
-                #111827;
-
-            color: white;
-
-            padding:
-                5px 9px;
-
-            border-radius: 6px;
-
-            font-size: 11px;
-
-            font-weight: 800;
         }
 
 
         .profile-product-info {
-
             padding: 13px;
         }
 
 
         .profile-product-info h3 {
+            margin: 0 0 6px;
 
-            font-size: 15px;
+            font-size: 14px;
 
-            margin:
-                0 0 8px;
-
-            color:
-                #111827;
+            color: #111827;
         }
 
 
         .profile-product-price {
+            font-weight: 900;
 
+            color: #1877f2;
+
+            font-size: 15px;
+        }
+
+
+
+        /* =====================================================
+           REVIEWS
+        ====================================================== */
+
+        .review-summary {
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            padding-bottom: 18px;
+
+            border-bottom: 1px solid #eeeeee;
+
+            margin-bottom: 15px;
+        }
+
+
+        .review-number {
+            font-size: 34px;
+
+            font-weight: 900;
+
+            color: #111827;
+        }
+
+
+        .stars {
+            color: #f59e0b;
+
+            letter-spacing: 2px;
+        }
+
+
+        .review {
+            padding: 13px 0;
+
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+
+        .review:last-child {
+            border-bottom: 0;
+        }
+
+
+        .review-name {
             font-weight: 800;
 
-            color:
-                #111827;
+            color: #111827;
+
+            font-size: 13px;
         }
 
 
-        /* =================================================
-           FOLLOWERS
-        ================================================= */
+        .review p {
+            color: #6b7280;
 
-        .profile-stats {
+            font-size: 13px;
 
-            display: grid;
+            margin: 6px 0 0;
 
-            grid-template-columns:
-                repeat(3,1fr);
-
-            border-top:
-                1px solid #edf0f4;
-
-            margin-top: 18px;
-
-            padding-top: 18px;
-
-            text-align: center;
+            line-height: 1.5;
         }
 
 
-        .profile-stat strong {
 
+        /* =====================================================
+           TAB CONTENT
+        ====================================================== */
+
+        .profile-tab-content {
+            display: none;
+        }
+
+
+        .profile-tab-content.active {
             display: block;
-
-            font-size: 18px;
-
-            color:
-                #111827;
         }
 
 
-        .profile-stat span {
 
-            color:
-                #7a8491;
+        /* =====================================================
+           EMPTY MESSAGE
+        ====================================================== */
 
-            font-size: 12px;
+        .empty-message {
+            text-align: center;
 
+            padding: 45px 20px;
+
+            color: #9ca3af;
         }
 
 
-        /* =================================================
+        .empty-message-icon {
+            font-size: 45px;
+
+            margin-bottom: 10px;
+        }
+
+
+
+        /* =====================================================
            TOAST
-        ================================================= */
+        ====================================================== */
 
         .profile-toast {
-
             position: fixed;
 
             left: 50%;
-
             bottom: 25px;
 
             transform:
-                translate(-50%,20px);
+                translate(-50%, 100px);
 
-            background:
-                #111827;
+            background: #111827;
 
-            color: white;
+            color: #ffffff;
 
-            padding:
-                12px 19px;
+            padding: 12px 18px;
 
             border-radius: 10px;
 
             font-size: 14px;
 
+            font-weight: 700;
+
             opacity: 0;
 
             pointer-events: none;
 
-            transition:
-                .25s ease;
+            transition: .3s;
 
             z-index: 9999;
         }
 
 
         .profile-toast.show {
+            transform:
+                translate(-50%, 0);
 
             opacity: 1;
-
-            transform:
-                translate(-50%,0);
-
         }
 
 
-        /* =================================================
+
+        /* =====================================================
            MOBILE
-        ================================================= */
+        ====================================================== */
 
-        @media(max-width:900px) {
-
-            .profile-content {
-
-                grid-template-columns: 1fr;
-
-            }
-
-            .profile-product-grid {
-
-                grid-template-columns:
-                    repeat(2,1fr);
-
-            }
-
-        }
-
-
-        @media(max-width:650px) {
+        @media (max-width: 850px) {
 
             .profile-cover {
-
-                height: 220px;
-
+                height: 240px;
             }
 
 
-            .profile-header {
-
-                padding:
-                    0 18px 20px;
-
+            .profile-content {
+                grid-template-columns: 1fr;
             }
 
 
-            .profile-main {
-
-                flex-direction:
-                    column;
-
+            .profile-title-row {
                 align-items:
                     flex-start;
 
-                margin-top:
-                    -55px;
-
+                flex-direction:
+                    column;
             }
 
 
-            .profile-logo {
-
-                width: 110px;
-                height: 110px;
-
-                font-size: 43px;
-
-            }
-
-
-            .profile-actions {
-
+            .profile-actions-main {
                 width: 100%;
+            }
 
+        }
+
+
+        @media (max-width: 600px) {
+
+            .profile-topbar-inner {
+                padding:
+                    11px 14px;
             }
 
 
-            .profile-action {
-
-                flex: 1;
-
+            .profile-container {
+                padding:
+                    10px;
             }
 
 
-            .profile-product-grid {
+            .profile-cover-wrapper {
+                border-radius:
+                    12px;
+            }
+
+
+            .profile-cover {
+                height: 190px;
+            }
+
+
+            .cover-edit {
+                right: 10px;
+                top: 10px;
+
+                font-size: 11px;
+
+                padding:
+                    8px 10px;
+            }
+
+
+            .profile-identity {
+                padding:
+                    0 15px 18px;
+            }
+
+
+            .profile-avatar-large {
+                width: 100px;
+                height: 100px;
+
+                font-size: 44px;
+
+                margin-top: -50px;
+            }
+
+
+            .profile-verified-check {
+                width: 25px;
+                height: 25px;
+
+                font-size: 13px;
+
+                right: 1px;
+                bottom: 5px;
+
+                border-width: 3px;
+            }
+
+
+            .profile-title-area h1 {
+                font-size: 23px;
+            }
+
+
+            .profile-actions-main {
+                display: grid;
 
                 grid-template-columns:
-                    1fr;
+                    1fr 1fr 1fr;
 
+                width: 100%;
+            }
+
+
+            .profile-action-btn {
+                padding:
+                    10px 7px;
+
+                font-size: 12px;
+            }
+
+
+            .profile-stats {
+                gap: 18px;
+            }
+
+
+            .profile-stat strong {
+                font-size: 15px;
+            }
+
+
+            .profile-stat span {
+                display: block;
+
+                margin-left: 0;
+
+                margin-top: 2px;
+            }
+
+
+            .profile-nav {
+                padding:
+                    0 10px;
+            }
+
+
+            .profile-nav button {
+                padding:
+                    14px 13px;
+
+                font-size: 12px;
+            }
+
+
+            .profile-content {
+                padding:
+                    0 10px;
+
+                margin-top: 10px;
+            }
+
+
+            .profile-card {
+                padding: 16px;
+
+                border-radius:
+                    13px;
+            }
+
+
+            .profile-products {
+                grid-template-columns: 1fr 1fr;
+            }
+
+
+            .profile-product-image {
+                height: 140px;
+            }
+
+
+            .post-image {
+                height: 210px;
             }
 
         }
@@ -908,48 +1149,32 @@
 </head>
 
 
-
 <body>
 
 
-
-<!-- =====================================================
-     TOP BAR
-====================================================== -->
-
-<div class="top-bar">
-
-    🛍️
-
-    <span>
-        Shopping Mela
-    </span>
-
-    — Local Business Profile
-
-</div>
+<div class="profile-page">
 
 
+    <!-- =====================================================
+         TOP HEADER
+    ====================================================== -->
 
-<!-- =====================================================
-     HEADER
-====================================================== -->
+    <header class="profile-topbar">
 
-<header class="header">
+        <div class="profile-topbar-inner">
 
-    <div class="container">
-
-        <div class="header-main">
-
-
-            <!-- LOGO -->
 
             <a
                 href="index.html"
-                class="logo"
+                class="profile-back"
             >
+                ← Back
+            </a>
 
-                <div class="logo-icon">
+
+            <div class="profile-brand-mini">
+
+                <div class="profile-brand-mini-icon">
                     🛍️
                 </div>
 
@@ -957,190 +1182,109 @@
                     Shopping Mela
                 </span>
 
-            </a>
-
-
-
-            <!-- SEARCH -->
-
-            <div class="header-search">
-
-                <input
-                    type="search"
-                    id="profileSearch"
-                    placeholder="Brand, product বা shop খুঁজুন..."
-                >
-
-                <button
-                    type="button"
-                    onclick="searchProfile()"
-                >
-                    🔍
-                </button>
-
             </div>
 
 
-
-            <!-- ACTION -->
-
-            <div class="header-actions">
-
-                <a
-                    href="products.html"
-                    class="header-action"
-                    style="text-decoration:none;"
-                >
-
-                    <span class="header-action-icon">
-                        🛒
-                    </span>
-
-                    <span>
-                        Products
-                    </span>
-
-                </a>
-
-            </div>
+            <button
+                class="profile-contact-btn profile-action-btn"
+                onclick="showToast('Contact option শীঘ্রই আসছে')"
+            >
+                ☎ Contact
+            </button>
 
         </div>
 
-
-
-        <!-- NAV -->
-
-        <nav class="navigation">
-
-            <div class="navigation-inner">
-
-                <a href="index.html">
-                    Home
-                </a>
-
-                <a href="index.html#categories">
-                    Categories
-                </a>
-
-                <a href="brands.html">
-                    Local Brands
-                </a>
-
-                <a href="products.html">
-                    Products
-                </a>
-
-                <a href="index.html#offers">
-                    Offers
-                </a>
-
-                <a href="blog.html">
-                    Blog
-                </a>
-
-                <a href="index.html#advertise">
-                    Advertise With Us
-                </a>
-
-            </div>
-
-        </nav>
-
-    </div>
-
-</header>
+    </header>
 
 
 
-<!-- =====================================================
-     PROFILE
-====================================================== -->
+    <!-- =====================================================
+         PROFILE HEADER
+    ====================================================== -->
 
-<main class="profile-page">
+    <div class="profile-container">
 
-    <div class="container">
-
-
-        <!-- =================================================
-             PROFILE TOP
-        ================================================== -->
-
-        <section>
+        <section class="profile-cover-wrapper">
 
 
             <!-- COVER -->
 
-            <div class="profile-cover">
+            <div
+                class="profile-cover"
+                id="profileCover"
+            ></div>
 
-                <div class="cover-ad-label">
-                    FEATURED BUSINESS
+
+            <button
+                class="cover-edit"
+                onclick="showToast('Cover photo update option শীঘ্রই আসছে')"
+            >
+                📷 Cover Photo
+            </button>
+
+
+
+            <!-- IDENTITY -->
+
+            <div class="profile-identity">
+
+
+                <div
+                    class="profile-avatar-large"
+                    id="profileAvatar"
+                >
+                    👗
+
+                    <span
+                        class="profile-verified-check"
+                        id="verifiedCheck"
+                    >
+                        ✓
+                    </span>
+
                 </div>
 
-            </div>
 
 
+                <div class="profile-title-row">
 
-            <!-- PROFILE HEADER -->
-
-            <div class="profile-header">
-
-
-                <div class="profile-main">
-
-
-                    <!-- LOGO -->
-
-                    <div class="profile-logo">
-                        👗
-                    </div>
-
-
-
-                    <!-- TITLE -->
 
                     <div class="profile-title-area">
 
-                        <div class="profile-title-line">
+                        <h1 id="profileName">
 
-                            <h1>
-                                Anjona Ladies Tailors
-                            </h1>
-
-
-                            <!-- BLUE VERIFIED -->
+                            Anjona Ladies Tailors
 
                             <span
-                                class="verified-badge-large"
-                                title="Verified Business"
+                                class="verified-title-badge"
                             >
-                                ✓
+
+                                <span
+                                    class="verified-circle"
+                                >
+                                    ✓
+                                </span>
+
+                                Verified
+
                             </span>
 
-                        </div>
+                        </h1>
 
 
-                        <div class="profile-category">
-
+                        <div
+                            class="profile-category"
+                            id="profileCategory"
+                        >
                             Fashion & Tailoring
-                            · Local Business
-
                         </div>
 
 
-                        <div class="profile-meta">
-
-                            <span>
-                                📍 Local Business
-                            </span>
-
-                            <span>
-                                🕐 Open Today
-                            </span>
-
-                            <span>
-                                ⭐ 4.9 Rating
-                            </span>
-
+                        <div
+                            class="profile-location"
+                            id="profileLocation"
+                        >
+                            📍 Local Business
                         </div>
 
                     </div>
@@ -1149,10 +1293,14 @@
 
                     <!-- ACTIONS -->
 
-                    <div class="profile-actions">
+                    <div class="profile-actions-main">
+
 
                         <button
-                            class="profile-action primary"
+                            class="
+                                profile-action-btn
+                                profile-follow-btn
+                            "
                             id="followBtn"
                             onclick="toggleFollow()"
                         >
@@ -1161,7 +1309,399 @@
 
 
                         <button
-                            class="profile-action"
+                            class="
+                                profile-action-btn
+                                profile-share-btn
+                            "
+                            onclick="shareProfile()"
+                        >
+                            ↗ Share
+                        </button>
+
+
+                        <button
+                            class="
+                                profile-action-btn
+                                profile-contact-btn
+                            "
+                            onclick="contactBrand()"
+                        >
+                            ☎ Contact
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- STATS -->
+
+                <div class="profile-stats">
+
+
+                    <div class="profile-stat">
+
+                        <strong id="followersCount">
+                            1.2K
+                        </strong>
+
+                        <span>
+                            Followers
+                        </span>
+
+                    </div>
+
+
+                    <div class="profile-stat">
+
+                        <strong>
+                            28
+                        </strong>
+
+                        <span>
+                            Products
+                        </span>
+
+                    </div>
+
+
+                    <div class="profile-stat">
+
+                        <strong>
+                            4.9
+                        </strong>
+
+                        <span>
+                            Rating
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 PROFILE NAVIGATION
+            ================================================== -->
+
+            <nav class="profile-nav">
+
+                <button
+                    class="active"
+                    data-tab="posts"
+                    onclick="switchTab('posts', this)"
+                >
+                    Posts
+                </button>
+
+
+                <button
+                    data-tab="products"
+                    onclick="switchTab('products', this)"
+                >
+                    Products
+                </button>
+
+
+                <button
+                    data-tab="about"
+                    onclick="switchTab('about', this)"
+                >
+                    About
+                </button>
+
+
+                <button
+                    data-tab="reviews"
+                    onclick="switchTab('reviews', this)"
+                >
+                    Reviews
+                </button>
+
+            </nav>
+
+        </section>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         PROFILE CONTENT
+    ====================================================== -->
+
+    <div class="profile-content">
+
+
+        <!-- =================================================
+             LEFT SIDEBAR
+        ================================================== -->
+
+        <aside>
+
+
+            <!-- ABOUT CARD -->
+
+            <div class="profile-card">
+
+                <h2>
+                    About
+                </h2>
+
+
+                <p
+                    class="about-text"
+                    id="aboutDescription"
+                >
+                    Ladies three-piece, tailoring,
+                    custom dress ও fashion services।
+                    আপনার পছন্দ অনুযায়ী custom design
+                    তৈরি করা হয়।
+                </p>
+
+
+                <div class="about-item">
+
+                    <div class="about-item-icon">
+                        🏪
+                    </div>
+
+                    <div>
+                        Local Business
+                    </div>
+
+                </div>
+
+
+                <div class="about-item">
+
+                    <div class="about-item-icon">
+                        📍
+                    </div>
+
+                    <div id="aboutLocation">
+                        Moulvibazar, Sylhet
+                    </div>
+
+                </div>
+
+
+                <div class="about-item">
+
+                    <div class="about-item-icon">
+                        📞
+                    </div>
+
+                    <div id="aboutContact">
+                        Contact Business
+                    </div>
+
+                </div>
+
+
+                <div class="about-item">
+
+                    <div class="about-item-icon">
+                        🕐
+                    </div>
+
+                    <div>
+                        Open · 10:00 AM – 8:00 PM
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- VERIFIED CARD -->
+
+            <div class="profile-card">
+
+                <h2>
+                    Verification
+                </h2>
+
+
+                <div class="verified-info-box">
+
+                    <div class="verified-info-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Verified Business Profile
+                        </strong>
+
+                        <p>
+                            এই profile-এর business
+                            information Shopping Mela
+                            কর্তৃপক্ষ দ্বারা verified।
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- BUSINESS INFO -->
+
+            <div class="profile-card">
+
+                <h2>
+                    Business Information
+                </h2>
+
+
+                <div class="about-item">
+
+                    <div class="about-item-icon">
+                        🏷️
+                    </div>
+
+                    <div>
+                        Business Profile
+                    </div>
+
+                </div>
+
+
+                <div class="about-item">
+
+                    <div class="about-item-icon">
+                        📅
+                    </div>
+
+                    <div>
+                        Joined Shopping Mela · 2026
+                    </div>
+
+                </div>
+
+
+                <div class="about-item">
+
+                    <div class="about-item-icon">
+                        🔵
+                    </div>
+
+                    <div>
+                        Verified by Shopping Mela
+                    </div>
+
+                </div>
+
+            </div>
+
+        </aside>
+
+
+
+        <!-- =================================================
+             RIGHT CONTENT
+        ================================================== -->
+
+        <section>
+
+
+            <!-- =================================================
+                 POSTS TAB
+            ================================================== -->
+
+            <div
+                id="postsTab"
+                class="profile-tab-content active"
+            >
+
+
+                <!-- POST 1 -->
+
+                <article class="post-card">
+
+                    <div class="post-header">
+
+                        <div class="post-avatar">
+                            👗
+                        </div>
+
+                        <div>
+
+                            <div class="post-author">
+
+                                <span id="postBrandName">
+                                    Anjona Ladies Tailors
+                                </span>
+
+                                <span
+                                    class="verified-circle"
+                                    style="
+                                        width:16px;
+                                        height:16px;
+                                        font-size:9px;
+                                    "
+                                >
+                                    ✓
+                                </span>
+
+                            </div>
+
+                            <div class="post-time">
+                                2 hours ago · 🌐
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="post-content">
+
+                        নতুন collection এসেছে! 🎉
+
+                        <br><br>
+
+                        Ladies three-piece,
+                        custom tailoring এবং
+                        নতুন fashion design-এর
+                        জন্য আমাদের সঙ্গে যোগাযোগ করুন।
+
+                    </div>
+
+
+                    <div
+                        class="post-image"
+                        style="
+                            background-image:
+                            url('https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=1000&q=85');
+                        "
+                    ></div>
+
+
+                    <div class="post-actions">
+
+                        <button
+                            onclick="likePost(this)"
+                        >
+                            ♡ Like
+                        </button>
+
+                        <button
+                            onclick="showToast('Comment section শীঘ্রই আসছে')"
+                        >
+                            💬 Comment
+                        </button>
+
+                        <button
                             onclick="shareProfile()"
                         >
                             ↗ Share
@@ -1169,312 +1709,115 @@
 
                     </div>
 
-                </div>
+                </article>
 
 
 
-                <!-- PROFILE NAV -->
+                <!-- POST 2 -->
 
-                <div class="profile-nav">
+                <article class="post-card">
 
-                    <button
-                        class="active"
-                        onclick="showTab('products',this)"
-                    >
-                        Products
-                    </button>
+                    <div class="post-header">
 
-
-                    <button
-                        onclick="showTab('about',this)"
-                    >
-                        About
-                    </button>
-
-
-                    <button
-                        onclick="showTab('reviews',this)"
-                    >
-                        Reviews
-                    </button>
-
-
-                    <button
-                        onclick="showTab('contact',this)"
-                    >
-                        Contact
-                    </button>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =================================================
-             CONTENT
-        ================================================== -->
-
-        <div class="profile-content">
-
-
-
-            <!-- =================================================
-                 LEFT COLUMN
-            ================================================== -->
-
-            <aside>
-
-
-                <!-- ABOUT -->
-
-                <div class="profile-card">
-
-                    <h2>
-                        About
-                    </h2>
-
-                    <p class="about-text">
-
-                        Anjona Ladies Tailors একটি
-                        local fashion ও tailoring business।
-                        Ladies three-piece, custom dress,
-                        alteration এবং tailoring service
-                        প্রদান করা হয়।
-
-                    </p>
-
-
-                    <div class="profile-stats">
-
-                        <div class="profile-stat">
-
-                            <strong id="followerCount">
-                                1.2K
-                            </strong>
-
-                            <span>
-                                Followers
-                            </span>
-
+                        <div class="post-avatar">
+                            👗
                         </div>
 
+                        <div>
 
-                        <div class="profile-stat">
+                            <div class="post-author">
 
-                            <strong>
-                                48
-                            </strong>
+                                <span>
+                                    Anjona Ladies Tailors
+                                </span>
 
-                            <span>
-                                Products
-                            </span>
-
-                        </div>
-
-
-                        <div class="profile-stat">
-
-                            <strong>
-                                4.9
-                            </strong>
-
-                            <span>
-                                Rating
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- VERIFIED -->
-
-                <div class="profile-card verification-card">
-
-                    <div class="verification-title">
-
-                        <span class="small-blue-check">
-                            ✓
-                        </span>
-
-                        Verified Business
-
-                    </div>
-
-
-                    <p>
-
-                        এই business profile Shopping Mela
-                        কর্তৃক verified হিসেবে চিহ্নিত।
-                        Verified badge business identity
-                        ও profile authenticity বোঝাতে ব্যবহৃত হয়।
-
-                    </p>
-
-                </div>
-
-
-
-                <!-- BUSINESS INFO -->
-
-                <div class="profile-card">
-
-                    <h2>
-                        Business Information
-                    </h2>
-
-
-                    <div class="business-info">
-
-
-                        <div class="business-info-row">
-
-                            <div class="business-info-icon">
-                                📍
-                            </div>
-
-                            <div>
-
-                                <strong>
-                                    Location
-                                </strong>
-
-                                Local Area
+                                <span
+                                    class="verified-circle"
+                                    style="
+                                        width:16px;
+                                        height:16px;
+                                        font-size:9px;
+                                    "
+                                >
+                                    ✓
+                                </span>
 
                             </div>
 
-                        </div>
-
-
-
-                        <div class="business-info-row">
-
-                            <div class="business-info-icon">
-                                📞
-                            </div>
-
-                            <div>
-
-                                <strong>
-                                    Phone
-                                </strong>
-
-                                Contact business
-
-                            </div>
-
-                        </div>
-
-
-
-                        <div class="business-info-row">
-
-                            <div class="business-info-icon">
-                                🕐
-                            </div>
-
-                            <div>
-
-                                <strong>
-                                    Business Hours
-                                </strong>
-
-                                10:00 AM — 8:00 PM
-
-                            </div>
-
-                        </div>
-
-
-
-                        <div class="business-info-row">
-
-                            <div class="business-info-icon">
-                                🏷️
-                            </div>
-
-                            <div>
-
-                                <strong>
-                                    Category
-                                </strong>
-
-                                Fashion & Tailoring
-
+                            <div class="post-time">
+                                Yesterday · 🌐
                             </div>
 
                         </div>
 
                     </div>
 
-                </div>
 
-            </aside>
+                    <div class="post-content">
 
+                        আপনার পছন্দের design আমাদের
+                        কাছে পাঠান। আমরা আপনার জন্য
+                        custom dress তৈরি করতে পারি। ✨
 
-
-            <!-- =================================================
-                 RIGHT COLUMN
-            ================================================== -->
-
-            <section>
+                    </div>
 
 
-
-                <!-- PRODUCTS -->
-
-                <div
-                    class="profile-card"
-                    id="productsTab"
-                >
-
-                    <div class="profile-products-header">
-
-                        <h2>
-                            Products
-                        </h2>
+                    <div class="post-actions">
 
                         <button
-                            class="mini-link"
-                            onclick="goProducts()"
+                            onclick="likePost(this)"
                         >
-                            সব দেখুন →
+                            ♡ Like
+                        </button>
+
+                        <button
+                            onclick="showToast('Comment section শীঘ্রই আসছে')"
+                        >
+                            💬 Comment
+                        </button>
+
+                        <button
+                            onclick="shareProfile()"
+                        >
+                            ↗ Share
                         </button>
 
                     </div>
 
+                </article>
+
+            </div>
 
 
-                    <div class="profile-product-grid">
+
+            <!-- =================================================
+                 PRODUCTS TAB
+            ================================================== -->
+
+            <div
+                id="productsTab"
+                class="profile-tab-content"
+            >
+
+                <div class="profile-card">
+
+                    <h2>
+                        Products
+                    </h2>
 
 
+                    <div class="profile-products">
 
-                        <!-- PRODUCT 1 -->
 
-                        <article class="profile-product">
+                        <div class="profile-product">
 
                             <div
                                 class="profile-product-image"
                                 style="
                                     background-image:
-                                    url('https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=700&q=80');
+                                    url('https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=700&q=85');
                                 "
-                            >
-
-                                <span
-                                    class="profile-product-discount"
-                                >
-                                    -20%
-                                </span>
-
-                            </div>
-
+                            ></div>
 
                             <div class="profile-product-info">
 
@@ -1482,280 +1825,287 @@
                                     Ladies Three Piece
                                 </h3>
 
-                                <div
-                                    class="profile-product-price"
-                                >
+                                <div class="profile-product-price">
                                     ৳1,250
                                 </div>
 
                             </div>
 
-                        </article>
+                        </div>
 
 
 
-                        <!-- PRODUCT 2 -->
-
-                        <article class="profile-product">
+                        <div class="profile-product">
 
                             <div
                                 class="profile-product-image"
                                 style="
                                     background-image:
-                                    url('https://images.unsplash.com/photo-1583391733956-6c78276477e9?auto=format&fit=crop&w=700&q=80');
+                                    url('https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=700&q=85');
                                 "
-                            >
-
-                                <span
-                                    class="profile-product-discount"
-                                >
-                                    NEW
-                                </span>
-
-                            </div>
-
+                            ></div>
 
                             <div class="profile-product-info">
 
                                 <h3>
-                                    Cotton Kurti
+                                    Handmade Fashion Bag
                                 </h3>
 
-                                <div
-                                    class="profile-product-price"
-                                >
-                                    ৳780
+                                <div class="profile-product-price">
+                                    ৳890
                                 </div>
 
                             </div>
 
-                        </article>
+                        </div>
 
 
 
-                        <!-- PRODUCT 3 -->
-
-                        <article class="profile-product">
+                        <div class="profile-product">
 
                             <div
                                 class="profile-product-image"
                                 style="
                                     background-image:
-                                    url('https://images.unsplash.com/photo-1591369822096-ffd140ec948f?auto=format&fit=crop&w=700&q=80');
+                                    url('https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=700&q=85');
                                 "
-                            >
-
-                                <span
-                                    class="profile-product-discount"
-                                >
-                                    HOT
-                                </span>
-
-                            </div>
-
+                            ></div>
 
                             <div class="profile-product-info">
 
                                 <h3>
-                                    Custom Dress
+                                    Fashion Collection
                                 </h3>
 
-                                <div
-                                    class="profile-product-price"
-                                >
-                                    ৳1,450
+                                <div class="profile-product-price">
+                                    ৳1,490
                                 </div>
 
                             </div>
 
-                        </article>
+                        </div>
+
+
+
+                        <div class="profile-product">
+
+                            <div
+                                class="profile-product-image"
+                                style="
+                                    background-image:
+                                    url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=700&q=85');
+                                "
+                            ></div>
+
+                            <div class="profile-product-info">
+
+                                <h3>
+                                    New Dress Collection
+                                </h3>
+
+                                <div class="profile-product-price">
+                                    ৳1,750
+                                </div>
+
+                            </div>
+
+                        </div>
 
                     </div>
 
                 </div>
 
+            </div>
 
 
-                <!-- POSTS -->
+
+            <!-- =================================================
+                 ABOUT TAB
+            ================================================== -->
+
+            <div
+                id="aboutTab"
+                class="profile-tab-content"
+            >
 
                 <div class="profile-card">
 
                     <h2>
-                        Latest Updates
+                        About This Business
                     </h2>
 
 
-                    <div class="about-text">
+                    <p class="about-text">
 
-                        📢 নতুন collection এসেছে।
-                        Ladies three-piece ও custom
-                        tailoring-এর জন্য আমাদের
-                        business profile follow করুন।
+                        Anjona Ladies Tailors একটি
+                        local fashion ও tailoring business।
+                        এখানে ladies three-piece,
+                        custom dress এবং tailoring service
+                        পাওয়া যায়।
+
+                    </p>
+
+
+                    <div class="about-item">
+
+                        <div class="about-item-icon">
+                            🏪
+                        </div>
+
+                        <div>
+                            Fashion & Tailoring
+                        </div>
+
+                    </div>
+
+
+                    <div class="about-item">
+
+                        <div class="about-item-icon">
+                            📍
+                        </div>
+
+                        <div>
+                            Moulvibazar, Sylhet
+                        </div>
+
+                    </div>
+
+
+                    <div class="about-item">
+
+                        <div class="about-item-icon">
+                            🕐
+                        </div>
+
+                        <div>
+                            Saturday – Thursday
+                            · 10:00 AM – 8:00 PM
+                        </div>
+
+                    </div>
+
+
+                    <div class="about-item">
+
+                        <div class="about-item-icon">
+                            🔵
+                        </div>
+
+                        <div>
+                            Shopping Mela Verified
+                        </div>
 
                     </div>
 
                 </div>
 
+            </div>
 
 
-                <!-- CONTACT -->
+
+            <!-- =================================================
+                 REVIEWS TAB
+            ================================================== -->
+
+            <div
+                id="reviewsTab"
+                class="profile-tab-content"
+            >
 
                 <div class="profile-card">
 
                     <h2>
-                        Contact Business
+                        Customer Reviews
                     </h2>
 
 
-                    <button
-                        class="profile-action primary"
-                        onclick="contactBusiness()"
-                    >
-                        📞 Contact করুন
-                    </button>
+                    <div class="review-summary">
+
+                        <div class="review-number">
+                            4.9
+                        </div>
+
+                        <div>
+
+                            <div class="stars">
+                                ★★★★★
+                            </div>
+
+                            <small>
+                                128 Reviews
+                            </small>
+
+                        </div>
+
+                    </div>
 
 
-                    <button
-                        class="profile-action"
-                        onclick="showToast('Message option শীঘ্রই আসছে!')"
-                    >
-                        💬 Message
-                    </button>
+
+                    <div class="review">
+
+                        <div class="review-name">
+                            Rahima
+                        </div>
+
+                        <div class="stars">
+                            ★★★★★
+                        </div>
+
+                        <p>
+                            Dress-এর quality খুব ভালো।
+                            Service-ও সুন্দর।
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="review">
+
+                        <div class="review-name">
+                            Nusrat
+                        </div>
+
+                        <div class="stars">
+                            ★★★★★
+                        </div>
+
+                        <p>
+                            Custom design খুব সুন্দর
+                            করে বানিয়েছে।
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="review">
+
+                        <div class="review-name">
+                            Jannat
+                        </div>
+
+                        <div class="stars">
+                            ★★★★☆
+                        </div>
+
+                        <p>
+                            ভালো collection এবং
+                            friendly service।
+                        </p>
+
+                    </div>
 
                 </div>
 
-            </section>
+            </div>
 
-        </div>
+        </section>
 
     </div>
 
-</main>
-
-
-
-<!-- =====================================================
-     FOOTER
-====================================================== -->
-
-<footer class="footer">
-
-    <div class="container">
-
-        <div class="footer-main">
-
-
-            <div class="footer-brand">
-
-                <a
-                    href="index.html"
-                    class="logo"
-                >
-
-                    <div class="logo-icon">
-                        🛍️
-                    </div>
-
-                    <span>
-                        Shopping Mela
-                    </span>
-
-                </a>
-
-
-                <p>
-
-                    Local brands, businesses,
-                    products এবং community content-এর
-                    modern online platform।
-
-                </p>
-
-            </div>
-
-
-
-            <div>
-
-                <h3>
-                    Shopping
-                </h3>
-
-                <a href="index.html#categories">
-                    Categories
-                </a>
-
-                <a href="brands.html">
-                    Local Brands
-                </a>
-
-                <a href="products.html">
-                    Products
-                </a>
-
-                <a href="index.html#offers">
-                    Offers
-                </a>
-
-            </div>
-
-
-
-            <div>
-
-                <h3>
-                    Community
-                </h3>
-
-                <a href="blog.html">
-                    Blog
-                </a>
-
-                <a href="index.html#advertise">
-                    Advertise
-                </a>
-
-            </div>
-
-
-
-            <div>
-
-                <h3>
-                    Support
-                </h3>
-
-                <a href="#">
-                    About Us
-                </a>
-
-                <a href="#">
-                    Contact
-                </a>
-
-                <a href="#">
-                    Privacy Policy
-                </a>
-
-                <a href="#">
-                    Terms
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <div class="footer-bottom">
-
-            © 2026 Shopping Mela.
-            All Rights Reserved.
-
-        </div>
-
-    </div>
-
-</footer>
+</div>
 
 
 
@@ -1773,35 +2123,637 @@
 
 
 <!-- =====================================================
-     JAVASCRIPT
+     PROFILE JAVASCRIPT
 ====================================================== -->
-
-<script src="script.js"></script>
-
 
 <script>
 
-    /* =================================================
-       TOAST
-    ================================================= */
 
-    function showToast(message) {
+/* =====================================================
+   BRAND DATABASE
+   Frontend demo data
+====================================================== */
 
-        const toast =
-            document.getElementById(
-                "profileToast"
-            );
+const brandDatabase = {
 
-        toast.textContent =
-            message;
+    "Anjona Ladies Tailors": {
 
-        toast.classList.add(
-            "show"
+        icon: "👗",
+
+        category:
+            "Fashion & Tailoring",
+
+        location:
+            "Moulvibazar, Sylhet",
+
+        description:
+            "Ladies three-piece, tailoring, custom dress ও fashion services। আপনার পছন্দ অনুযায়ী custom design তৈরি করা হয়।",
+
+        contact:
+            "Contact Business",
+
+        cover:
+            "https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1600&q=85"
+
+    },
+
+
+    "Local Attar Shop": {
+
+        icon: "🌿",
+
+        category:
+            "Perfume & Attar",
+
+        location:
+            "Moulvibazar, Sylhet",
+
+        description:
+            "Premium attar, perfume ও fragrance collection।",
+
+        contact:
+            "Contact Business",
+
+        cover:
+            "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=1600&q=85"
+
+    },
+
+
+    "Local Food House": {
+
+        icon: "🍽️",
+
+        category:
+            "Restaurant & Food",
+
+        location:
+            "Moulvibazar, Sylhet",
+
+        description:
+            "Homemade food, snacks এবং local food delivery।",
+
+        contact:
+            "Contact Business",
+
+        cover:
+            "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=85"
+
+    },
+
+
+    "SNK Local Services": {
+
+        icon: "💼",
+
+        category:
+            "IT & Services",
+
+        location:
+            "Moulvibazar, Sylhet",
+
+        description:
+            "Website, printing, digital services ও local business solutions।",
+
+        contact:
+            "Contact Business",
+
+        cover:
+            "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1600&q=85"
+
+    }
+
+};
+
+
+
+/* =====================================================
+   LOAD SELECTED PROFILE
+====================================================== */
+
+function loadProfile() {
+
+    let selectedBrand =
+        localStorage.getItem(
+            "shoppingMelaSelectedBrand"
         );
 
 
+    if (!selectedBrand) {
+
+        selectedBrand =
+            "Anjona Ladies Tailors";
+
+    }
+
+
+    const savedProfile =
+        localStorage.getItem(
+            "shoppingMelaProfile_" +
+            selectedBrand
+        );
+
+
+    let data =
+        brandDatabase[
+            selectedBrand
+        ];
+
+
+    /*
+       Admin panel থেকে নতুন profile
+       save করা থাকলে সেটি ব্যবহার হবে।
+    */
+
+    if (savedProfile) {
+
+        try {
+
+            const adminData =
+                JSON.parse(
+                    savedProfile
+                );
+
+
+            data = {
+
+                icon:
+                    brandDatabase[
+                        selectedBrand
+                    ]?.icon
+                    || "🏪",
+
+                category:
+                    adminData.category
+                    || "Local Business",
+
+                location:
+                    adminData.location
+                    || "Local Business",
+
+                description:
+                    adminData.description
+                    || "Local business profile.",
+
+                contact:
+                    adminData.contact
+                    || "Contact Business",
+
+                cover:
+                    brandDatabase[
+                        selectedBrand
+                    ]?.cover
+                    ||
+                    "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=85"
+
+            };
+
+
+        } catch (error) {
+
+            console.log(
+                "Profile data error"
+            );
+
+        }
+
+    }
+
+
+    if (!data) {
+
+        data = {
+
+            icon: "🏪",
+
+            category:
+                "Local Business",
+
+            location:
+                "Bangladesh",
+
+            description:
+                "Shopping Mela local business profile.",
+
+            contact:
+                "Contact Business",
+
+            cover:
+                "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=85"
+
+        };
+
+    }
+
+
+
+    document
+        .getElementById(
+            "profileName"
+        )
+        .innerHTML =
+
+        selectedBrand +
+
+        `
+        <span class="verified-title-badge">
+
+            <span class="verified-circle">
+                ✓
+            </span>
+
+            Verified
+
+        </span>
+        `;
+
+
+
+    document
+        .getElementById(
+            "postBrandName"
+        )
+        .textContent =
+        selectedBrand;
+
+
+
+    document
+        .getElementById(
+            "profileCategory"
+        )
+        .textContent =
+        data.category;
+
+
+
+    document
+        .getElementById(
+            "profileLocation"
+        )
+        .textContent =
+        "📍 " +
+        data.location;
+
+
+
+    document
+        .getElementById(
+            "profileAvatar"
+        )
+        .childNodes[0]
+        .nodeValue =
+        data.icon + " ";
+
+
+
+    document
+        .getElementById(
+            "aboutDescription"
+        )
+        .textContent =
+        data.description;
+
+
+
+    document
+        .getElementById(
+            "aboutLocation"
+        )
+        .textContent =
+        data.location;
+
+
+
+    document
+        .getElementById(
+            "aboutContact"
+        )
+        .textContent =
+        data.contact;
+
+
+
+    document
+        .getElementById(
+            "profileCover"
+        )
+        .style.backgroundImage =
+
+        `
+        linear-gradient(
+            rgba(0,0,0,.10),
+            rgba(0,0,0,.20)
+        ),
+        url("${data.cover}")
+        `;
+
+
+
+    document.title =
+        selectedBrand +
+        " — Shopping Mela";
+
+}
+
+
+
+/* =====================================================
+   FOLLOW
+====================================================== */
+
+let isFollowing = false;
+
+
+function toggleFollow() {
+
+    const button =
+        document.getElementById(
+            "followBtn"
+        );
+
+
+    const count =
+        document.getElementById(
+            "followersCount"
+        );
+
+
+    if (!isFollowing) {
+
+        isFollowing = true;
+
+
+        button.textContent =
+            "✓ Following";
+
+
+        button.classList.add(
+            "following"
+        );
+
+
+        count.textContent =
+            "1.3K";
+
+
+        showToast(
+            "Profile follow করা হয়েছে ✓"
+        );
+
+
+    } else {
+
+        isFollowing = false;
+
+
+        button.textContent =
+            "+ Follow";
+
+
+        button.classList.remove(
+            "following"
+        );
+
+
+        count.textContent =
+            "1.2K";
+
+
+        showToast(
+            "Profile unfollow করা হয়েছে"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   SHARE PROFILE
+====================================================== */
+
+function shareProfile() {
+
+    const brand =
+        localStorage.getItem(
+            "shoppingMelaSelectedBrand"
+        )
+        ||
+        "Shopping Mela";
+
+
+    const shareData = {
+
+        title:
+            brand +
+            " — Shopping Mela",
+
+        text:
+            brand +
+            " profile Shopping Mela-তে দেখুন।",
+
+        url:
+            window.location.href
+
+    };
+
+
+    if (
+        navigator.share
+    ) {
+
+        navigator
+            .share(
+                shareData
+            )
+            .then(
+                () => {}
+            )
+            .catch(
+                () => {}
+            );
+
+    } else {
+
+        navigator
+            .clipboard
+            ?.writeText(
+                window.location.href
+            );
+
+
+        showToast(
+            "Profile link copy হয়েছে 🔗"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   CONTACT
+====================================================== */
+
+function contactBrand() {
+
+    const brand =
+        localStorage.getItem(
+            "shoppingMelaSelectedBrand"
+        )
+        ||
+        "Business";
+
+
+    showToast(
+        brand +
+        " contact option শীঘ্রই আসছে ☎"
+    );
+
+}
+
+
+
+/* =====================================================
+   TAB SWITCH
+====================================================== */
+
+function switchTab(
+    tabName,
+    button
+) {
+
+
+    document
+        .querySelectorAll(
+            ".profile-nav button"
+        )
+        .forEach(
+            item => {
+
+                item.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+
+    button.classList.add(
+        "active"
+    );
+
+
+
+    document
+        .querySelectorAll(
+            ".profile-tab-content"
+        )
+        .forEach(
+            content => {
+
+                content.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+
+    const target =
+        document.getElementById(
+            tabName +
+            "Tab"
+        );
+
+
+    if (target) {
+
+        target.classList.add(
+            "active"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   LIKE POST
+====================================================== */
+
+function likePost(button) {
+
+    if (
+        button.dataset.liked ===
+        "true"
+    ) {
+
+        button.dataset.liked =
+            "false";
+
+        button.textContent =
+            "♡ Like";
+
+
+        showToast(
+            "Like remove করা হয়েছে"
+        );
+
+    } else {
+
+        button.dataset.liked =
+            "true";
+
+        button.textContent =
+            "♥ Liked";
+
+
+        showToast(
+            "Post liked ❤️"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   TOAST
+====================================================== */
+
+function showToast(
+    message
+) {
+
+    const toast =
+        document.getElementById(
+            "profileToast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        window.profileToastTimer
+    );
+
+
+    window.profileToastTimer =
         setTimeout(
-            function() {
+            () => {
 
                 toast.classList.remove(
                     "show"
@@ -1811,298 +2763,23 @@
             2500
         );
 
-    }
+}
 
 
 
-    /* =================================================
-       FOLLOW
-    ================================================= */
+/* =====================================================
+   PAGE LOAD
+====================================================== */
 
-    let isFollowing = false;
+document.addEventListener(
+    "DOMContentLoaded",
+    loadProfile
+);
 
-
-    function toggleFollow() {
-
-        const button =
-            document.getElementById(
-                "followBtn"
-            );
-
-
-        const count =
-            document.getElementById(
-                "followerCount"
-            );
-
-
-        isFollowing =
-            !isFollowing;
-
-
-        if (isFollowing) {
-
-            button.textContent =
-                "✓ Following";
-
-
-            button.style.background =
-                "#16a34a";
-
-
-            showToast(
-                "Anjona Ladies Tailors follow করা হয়েছে ❤️"
-            );
-
-        } else {
-
-            button.textContent =
-                "+ Follow";
-
-
-            button.style.background =
-                "#1877f2";
-
-
-            showToast(
-                "Following বাতিল করা হয়েছে"
-            );
-
-        }
-
-    }
-
-
-
-    /* =================================================
-       SHARE
-    ================================================= */
-
-    function shareProfile() {
-
-        const shareData = {
-
-            title:
-                "Anjona Ladies Tailors",
-
-            text:
-                "Shopping Mela-তে Anjona Ladies Tailors দেখুন।",
-
-            url:
-                window.location.href
-
-        };
-
-
-        if (
-            navigator.share
-        ) {
-
-            navigator
-                .share(shareData)
-                .catch(
-                    function() {}
-                );
-
-        } else {
-
-            navigator
-                .clipboard
-                ?.writeText(
-                    window.location.href
-                );
-
-
-            showToast(
-                "Profile link copy করা হয়েছে 🔗"
-            );
-
-        }
-
-    }
-
-
-
-    /* =================================================
-       SEARCH
-    ================================================= */
-
-    function searchProfile() {
-
-        const input =
-            document.getElementById(
-                "profileSearch"
-            );
-
-
-        const value =
-            input.value.trim();
-
-
-        if (!value) {
-
-            input.focus();
-
-            return;
-
-        }
-
-
-        window.location.href =
-            "products.html?search=" +
-            encodeURIComponent(
-                value
-            );
-
-    }
-
-
-
-    document
-        .getElementById(
-            "profileSearch"
-        )
-        .addEventListener(
-            "keydown",
-            function(event) {
-
-                if (
-                    event.key === "Enter"
-                ) {
-
-                    searchProfile();
-
-                }
-
-            }
-        );
-
-
-
-    /* =================================================
-       TAB
-    ================================================= */
-
-    function showTab(
-        tab,
-        button
-    ) {
-
-        document
-            .querySelectorAll(
-                ".profile-nav button"
-            )
-            .forEach(
-                function(item) {
-
-                    item.classList.remove(
-                        "active"
-                    );
-
-                }
-            );
-
-
-        button.classList.add(
-            "active"
-        );
-
-
-        if (
-            tab === "products"
-        ) {
-
-            document
-                .getElementById(
-                    "productsTab"
-                )
-                .scrollIntoView({
-                    behavior: "smooth",
-                    block: "start"
-                });
-
-        }
-
-
-        if (
-            tab === "about"
-        ) {
-
-            showToast(
-                "About section নিচে দেখুন"
-            );
-
-            document
-                .querySelector(
-                    ".profile-content"
-                )
-                .scrollIntoView({
-                    behavior: "smooth"
-                });
-
-        }
-
-
-        if (
-            tab === "reviews"
-        ) {
-
-            showToast(
-                "Reviews section শীঘ্রই আসছে ⭐"
-            );
-
-        }
-
-
-        if (
-            tab === "contact"
-        ) {
-
-            document
-                .querySelector(
-                    ".profile-content section"
-                )
-                .lastElementChild
-                .scrollIntoView({
-                    behavior: "smooth"
-                });
-
-        }
-
-    }
-
-
-
-    /* =================================================
-       PRODUCTS
-    ================================================= */
-
-    function goProducts() {
-
-        window.location.href =
-            "products.html";
-
-    }
-
-
-
-    /* =================================================
-       CONTACT
-    ================================================= */
-
-    function contactBusiness() {
-
-        showToast(
-            "Business contact option শীঘ্রই যুক্ত হবে 📞"
-        );
-
-    }
 
 </script>
 
 
-
 </body>
-
 </html>
 ```
