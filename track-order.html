@@ -1,0 +1,2298 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Track Order — Shopping Mela</title>
+
+    <meta
+        name="description"
+        content="Shopping Mela Order Tracking"
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <style>
+
+        /* =====================================================
+           TRACK ORDER PAGE
+        ====================================================== */
+
+        .track-page {
+
+            min-height: 100vh;
+
+            background: #f5f6f8;
+
+            padding: 35px 0 60px;
+
+        }
+
+
+        .track-container {
+
+            max-width: 900px;
+
+            margin: auto;
+
+            padding: 0 20px;
+
+        }
+
+
+        /* =====================================================
+           HEADER
+        ====================================================== */
+
+        .track-heading {
+
+            text-align: center;
+
+            margin-bottom: 28px;
+
+        }
+
+
+        .track-heading h1 {
+
+            margin: 0;
+
+            color: #101828;
+
+            font-size: 30px;
+
+            font-weight: 800;
+
+        }
+
+
+        .track-heading p {
+
+            margin: 8px 0 0;
+
+            color: #667085;
+
+            font-size: 13px;
+
+        }
+
+
+        /* =====================================================
+           SEARCH
+        ====================================================== */
+
+        .track-search-card {
+
+            background: #ffffff;
+
+            border: 1px solid #e7eaf0;
+
+            border-radius: 16px;
+
+            padding: 22px;
+
+            box-shadow:
+                0 5px 20px
+                rgba(16,24,40,.04);
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .track-search {
+
+            display: flex;
+
+            gap: 10px;
+
+        }
+
+
+        .track-search input {
+
+            flex: 1;
+
+            min-width: 0;
+
+            border: 1px solid #d0d5dd;
+
+            border-radius: 9px;
+
+            padding: 13px 14px;
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 13px;
+
+            color: #101828;
+
+        }
+
+
+        .track-search input:focus {
+
+            border-color: #1877f2;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(24,119,242,.08);
+
+        }
+
+
+        .track-search button {
+
+            border: none;
+
+            background: #1877f2;
+
+            color: #ffffff;
+
+            padding: 0 20px;
+
+            border-radius: 9px;
+
+            cursor: pointer;
+
+            font-family: inherit;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+        }
+
+
+        .search-help {
+
+            margin: 10px 0 0;
+
+            color: #98a2b3;
+
+            font-size: 10px;
+
+        }
+
+
+        /* =====================================================
+           RESULT
+        ====================================================== */
+
+        #trackingResult {
+
+            display: none;
+
+        }
+
+
+        .tracking-card {
+
+            background: #ffffff;
+
+            border: 1px solid #e7eaf0;
+
+            border-radius: 16px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 5px 20px
+                rgba(16,24,40,.04);
+
+        }
+
+
+        /* =====================================================
+           ORDER HEADER
+        ====================================================== */
+
+        .tracking-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+            padding: 20px;
+
+            background: #fafbfc;
+
+            border-bottom:
+                1px solid #eaecf0;
+
+        }
+
+
+        .tracking-order-id strong {
+
+            display: block;
+
+            color: #101828;
+
+            font-size: 15px;
+
+        }
+
+
+        .tracking-date {
+
+            display: block;
+
+            color: #667085;
+
+            font-size: 10px;
+
+            margin-top: 5px;
+
+        }
+
+
+        .current-status {
+
+            padding: 8px 12px;
+
+            background: #ecfdf3;
+
+            color: #12b76a;
+
+            border-radius: 20px;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+        }
+
+
+        /* =====================================================
+           TIMELINE
+        ====================================================== */
+
+        .tracking-body {
+
+            padding: 30px 25px;
+
+        }
+
+
+        .timeline {
+
+            position: relative;
+
+            max-width: 700px;
+
+            margin: auto;
+
+        }
+
+
+        .timeline-line {
+
+            position: absolute;
+
+            left: 19px;
+
+            top: 20px;
+
+            bottom: 20px;
+
+            width: 2px;
+
+            background: #eaecf0;
+
+        }
+
+
+        .timeline-progress {
+
+            position: absolute;
+
+            left: 19px;
+
+            top: 20px;
+
+            width: 2px;
+
+            background: #1877f2;
+
+            transition: .4s;
+
+        }
+
+
+        .timeline-item {
+
+            position: relative;
+
+            display: grid;
+
+            grid-template-columns:
+                40px
+                1fr;
+
+            gap: 15px;
+
+            min-height: 82px;
+
+        }
+
+
+        .timeline-icon {
+
+            position: relative;
+
+            z-index: 2;
+
+            width: 40px;
+
+            height: 40px;
+
+            border-radius: 50%;
+
+            background: #f2f4f7;
+
+            border: 2px solid #eaecf0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #98a2b3;
+
+            font-size: 15px;
+
+        }
+
+
+        .timeline-item.completed
+        .timeline-icon {
+
+            background: #1877f2;
+
+            border-color: #1877f2;
+
+            color: #ffffff;
+
+        }
+
+
+        .timeline-item.active
+        .timeline-icon {
+
+            background: #ffffff;
+
+            border-color: #1877f2;
+
+            color: #1877f2;
+
+            box-shadow:
+                0 0 0 5px
+                rgba(24,119,242,.10);
+
+        }
+
+
+        .timeline-content {
+
+            padding-bottom: 20px;
+
+        }
+
+
+        .timeline-content h3 {
+
+            margin: 2px 0 5px;
+
+            color: #101828;
+
+            font-size: 13px;
+
+        }
+
+
+        .timeline-content p {
+
+            margin: 0;
+
+            color: #667085;
+
+            font-size: 10px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .timeline-item.completed
+        .timeline-content h3 {
+
+            color: #101828;
+
+        }
+
+
+        .timeline-time {
+
+            display: block;
+
+            margin-top: 5px;
+
+            color: #98a2b3;
+
+            font-size: 9px;
+
+        }
+
+
+        /* =====================================================
+           ORDER DETAILS
+        ====================================================== */
+
+        .order-details {
+
+            border-top:
+                1px solid #eaecf0;
+
+            padding: 22px 25px;
+
+        }
+
+
+        .order-details h2 {
+
+            margin: 0 0 16px;
+
+            color: #101828;
+
+            font-size: 17px;
+
+        }
+
+
+        .details-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 12px;
+
+        }
+
+
+        .detail-box {
+
+            background: #f8fafc;
+
+            border: 1px solid #eaecf0;
+
+            border-radius: 9px;
+
+            padding: 12px;
+
+        }
+
+
+        .detail-box span {
+
+            display: block;
+
+            color: #98a2b3;
+
+            font-size: 9px;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .detail-box strong {
+
+            display: block;
+
+            color: #344054;
+
+            font-size: 11px;
+
+            word-break: break-word;
+
+        }
+
+
+        /* =====================================================
+           PRODUCTS
+        ====================================================== */
+
+        .tracked-products {
+
+            border-top:
+                1px solid #eaecf0;
+
+            padding: 22px 25px;
+
+        }
+
+
+        .tracked-products h2 {
+
+            margin: 0 0 15px;
+
+            color: #101828;
+
+            font-size: 17px;
+
+        }
+
+
+        .tracked-product {
+
+            display: grid;
+
+            grid-template-columns:
+                55px
+                1fr
+                auto;
+
+            gap: 12px;
+
+            align-items: center;
+
+            padding: 10px 0;
+
+            border-bottom:
+                1px solid #f2f4f7;
+
+        }
+
+
+        .tracked-product:last-child {
+
+            border-bottom: none;
+
+        }
+
+
+        .tracked-image {
+
+            width: 55px;
+
+            height: 55px;
+
+            border-radius: 9px;
+
+            background:
+                #f2f4f7
+                center / cover
+                no-repeat;
+
+        }
+
+
+        .tracked-info h3 {
+
+            margin: 0;
+
+            color: #101828;
+
+            font-size: 12px;
+
+        }
+
+
+        .tracked-info p {
+
+            margin: 4px 0 0;
+
+            color: #667085;
+
+            font-size: 10px;
+
+        }
+
+
+        .tracked-price {
+
+            color: #101828;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+        }
+
+
+        /* =====================================================
+           ACTIONS
+        ====================================================== */
+
+        .tracking-actions {
+
+            display: flex;
+
+            gap: 10px;
+
+            padding: 0 25px 25px;
+
+        }
+
+
+        .tracking-action {
+
+            flex: 1;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            border: 1px solid #d0d5dd;
+
+            background: #ffffff;
+
+            color: #344054;
+
+            padding: 11px;
+
+            border-radius: 9px;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+        }
+
+
+        .tracking-action.primary {
+
+            background: #1877f2;
+
+            border-color: #1877f2;
+
+            color: #ffffff;
+
+        }
+
+
+        /* =====================================================
+           NOT FOUND
+        ====================================================== */
+
+        .track-not-found {
+
+            display: none;
+
+            background: #ffffff;
+
+            border: 1px solid #e7eaf0;
+
+            border-radius: 16px;
+
+            padding: 55px 20px;
+
+            text-align: center;
+
+        }
+
+
+        .not-found-icon {
+
+            width: 70px;
+
+            height: 70px;
+
+            margin: 0 auto 15px;
+
+            border-radius: 50%;
+
+            background: #fff4ed;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 30px;
+
+        }
+
+
+        .track-not-found h2 {
+
+            margin: 0 0 8px;
+
+            color: #101828;
+
+            font-size: 19px;
+
+        }
+
+
+        .track-not-found p {
+
+            margin: 0;
+
+            color: #667085;
+
+            font-size: 11px;
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        @media (max-width: 600px) {
+
+            .track-page {
+
+                padding: 22px 0 45px;
+
+            }
+
+
+            .track-container {
+
+                padding: 0 12px;
+
+            }
+
+
+            .track-heading h1 {
+
+                font-size: 25px;
+
+            }
+
+
+            .track-search-card {
+
+                padding: 15px;
+
+            }
+
+
+            .track-search {
+
+                flex-direction: column;
+
+            }
+
+
+            .track-search button {
+
+                min-height: 44px;
+
+            }
+
+
+            .tracking-header {
+
+                align-items: flex-start;
+
+                flex-direction: column;
+
+                padding: 16px;
+
+            }
+
+
+            .tracking-body {
+
+                padding: 25px 16px;
+
+            }
+
+
+            .order-details,
+            .tracked-products {
+
+                padding: 18px 16px;
+
+            }
+
+
+            .tracking-actions {
+
+                padding: 0 16px 18px;
+
+                flex-direction: column;
+
+            }
+
+
+            .details-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     TOP BAR
+====================================================== -->
+
+<div class="top-bar">
+
+    🛍️ <span>Shopping Mela</span>
+    — Track Your Order
+
+</div>
+
+
+
+<!-- =====================================================
+     HEADER
+====================================================== -->
+
+<header class="header">
+
+    <div class="container">
+
+        <div class="header-main">
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+
+                <div class="logo-icon">
+                    🛍️
+                </div>
+
+                <span>
+                    Shopping Mela
+                </span>
+
+            </a>
+
+
+            <div class="header-actions">
+
+                <button
+                    class="header-action"
+                    onclick="
+                        window.location.href='orders.html'
+                    "
+                >
+
+                    <span class="header-action-icon">
+                        📦
+                    </span>
+
+                    <span>
+                        Orders
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="header-action"
+                    onclick="
+                        window.location.href='cart.html'
+                    "
+                >
+
+                    <span class="header-action-icon">
+                        🛒
+                    </span>
+
+                    <span>
+                        Cart
+                    </span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+====================================================== -->
+
+<main class="track-page">
+
+    <div class="track-container">
+
+
+        <!-- =================================================
+             HEADING
+        ================================================== -->
+
+        <div class="track-heading">
+
+            <h1>
+                Track Your Order
+            </h1>
+
+            <p>
+                আপনার Order ID দিয়ে
+                order status দেখুন।
+            </p>
+
+        </div>
+
+
+
+        <!-- =================================================
+             SEARCH
+        ================================================== -->
+
+        <section class="track-search-card">
+
+            <div class="track-search">
+
+                <input
+                    type="text"
+                    id="orderIdInput"
+                    placeholder="যেমন: SM12345678"
+                    autocomplete="off"
+                >
+
+                <button
+                    onclick="trackOrder()"
+                >
+                    Track Order
+                </button>
+
+            </div>
+
+
+            <p class="search-help">
+
+                💡 আপনার Order ID
+                <b>My Orders</b>
+                page-এ পাওয়া যাবে।
+
+            </p>
+
+        </section>
+
+
+
+        <!-- =================================================
+             NOT FOUND
+        ================================================== -->
+
+        <div
+            class="track-not-found"
+            id="trackNotFound"
+        >
+
+            <div class="not-found-icon">
+                🔎
+            </div>
+
+            <h2>
+                Order Not Found
+            </h2>
+
+            <p>
+                Order ID সঠিকভাবে লিখে আবার চেষ্টা করুন।
+            </p>
+
+        </div>
+
+
+
+        <!-- =================================================
+             TRACKING RESULT
+        ================================================== -->
+
+        <section
+            id="trackingResult"
+            class="tracking-card"
+        >
+
+
+            <!-- ORDER HEADER -->
+
+            <div class="tracking-header">
+
+                <div class="tracking-order-id">
+
+                    <strong id="resultOrderId">
+                        Order #SM000000
+                    </strong>
+
+                    <span
+                        class="tracking-date"
+                        id="resultDate"
+                    >
+                        Date
+                    </span>
+
+                </div>
+
+
+                <div
+                    class="current-status"
+                    id="currentStatus"
+                >
+                    Order Placed
+                </div>
+
+            </div>
+
+
+
+            <!-- TIMELINE -->
+
+            <div class="tracking-body">
+
+                <div class="timeline">
+
+                    <div
+                        class="timeline-line"
+                    ></div>
+
+
+                    <div
+                        class="timeline-progress"
+                        id="timelineProgress"
+                    ></div>
+
+
+                    <!-- 1 -->
+
+                    <div
+                        class="
+                            timeline-item
+                            completed
+                        "
+                        data-step="0"
+                    >
+
+                        <div class="timeline-icon">
+                            ✓
+                        </div>
+
+                        <div class="timeline-content">
+
+                            <h3>
+                                Order Placed
+                            </h3>
+
+                            <p>
+                                আপনার order successfully
+                                received হয়েছে।
+                            </p>
+
+                            <span
+                                class="timeline-time"
+                                data-time="0"
+                            >
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- 2 -->
+
+                    <div
+                        class="
+                            timeline-item
+                            completed
+                        "
+                        data-step="1"
+                    >
+
+                        <div class="timeline-icon">
+                            ✓
+                        </div>
+
+                        <div class="timeline-content">
+
+                            <h3>
+                                Order Confirmed
+                            </h3>
+
+                            <p>
+                                Seller আপনার order
+                                confirm করেছে।
+                            </p>
+
+                            <span
+                                class="timeline-time"
+                                data-time="1"
+                            >
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- 3 -->
+
+                    <div
+                        class="
+                            timeline-item
+                            completed
+                        "
+                        data-step="2"
+                    >
+
+                        <div class="timeline-icon">
+                            ✓
+                        </div>
+
+                        <div class="timeline-content">
+
+                            <h3>
+                                Processing
+                            </h3>
+
+                            <p>
+                                আপনার product
+                                প্রস্তুত করা হচ্ছে।
+                            </p>
+
+                            <span
+                                class="timeline-time"
+                                data-time="2"
+                            >
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- 4 -->
+
+                    <div
+                        class="
+                            timeline-item
+                            completed
+                        "
+                        data-step="3"
+                    >
+
+                        <div class="timeline-icon">
+                            ✓
+                        </div>
+
+                        <div class="timeline-content">
+
+                            <h3>
+                                Shipped
+                            </h3>
+
+                            <p>
+                                আপনার order courier-এর
+                                কাছে পাঠানো হয়েছে।
+                            </p>
+
+                            <span
+                                class="timeline-time"
+                                data-time="3"
+                            >
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- 5 -->
+
+                    <div
+                        class="
+                            timeline-item
+                            completed
+                        "
+                        data-step="4"
+                    >
+
+                        <div class="timeline-icon">
+                            ✓
+                        </div>
+
+                        <div class="timeline-content">
+
+                            <h3>
+                                Out for Delivery
+                            </h3>
+
+                            <p>
+                                Courier আপনার এলাকায়
+                                delivery-এর জন্য বের হয়েছে।
+                            </p>
+
+                            <span
+                                class="timeline-time"
+                                data-time="4"
+                            >
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- 6 -->
+
+                    <div
+                        class="
+                            timeline-item
+                            completed
+                        "
+                        data-step="5"
+                    >
+
+                        <div class="timeline-icon">
+                            ✓
+                        </div>
+
+                        <div class="timeline-content">
+
+                            <h3>
+                                Delivered
+                            </h3>
+
+                            <p>
+                                Order successfully
+                                delivered হয়েছে।
+                            </p>
+
+                            <span
+                                class="timeline-time"
+                                data-time="5"
+                            >
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ORDER DETAILS -->
+
+            <div class="order-details">
+
+                <h2>
+                    📦 Delivery Details
+                </h2>
+
+
+                <div class="details-grid">
+
+
+                    <div class="detail-box">
+
+                        <span>
+                            Customer
+                        </span>
+
+                        <strong
+                            id="customerName"
+                        >
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <span>
+                            Mobile
+                        </span>
+
+                        <strong
+                            id="customerPhone"
+                        >
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <span>
+                            District
+                        </span>
+
+                        <strong
+                            id="customerDistrict"
+                        >
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <span>
+                            Division
+                        </span>
+
+                        <strong
+                            id="customerDivision"
+                        >
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <span>
+                            Address
+                        </span>
+
+                        <strong
+                            id="customerAddress"
+                        >
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <span>
+                            Payment
+                        </span>
+
+                        <strong
+                            id="paymentMethod"
+                        >
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div class="detail-box">
+
+                        <span>
+                            Order Total
+                        </span>
+
+                        <strong
+                            id="orderTotal"
+                        >
+                            ৳0
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PRODUCTS -->
+
+            <div class="tracked-products">
+
+                <h2>
+                    🛍️ Ordered Products
+                </h2>
+
+
+                <div
+                    id="trackedProductsList"
+                >
+                </div>
+
+            </div>
+
+
+
+            <!-- ACTIONS -->
+
+            <div class="tracking-actions">
+
+                <a
+                    href="orders.html"
+                    class="tracking-action"
+                >
+                    ← My Orders
+                </a>
+
+
+                <a
+                    href="index.html#products"
+                    class="
+                        tracking-action
+                        primary
+                    "
+                >
+                    🛍️ Continue Shopping
+                </a>
+
+            </div>
+
+
+        </section>
+
+    </div>
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-bottom">
+
+            © 2026 Shopping Mela.
+            All Rights Reserved.
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script>
+
+
+/* =====================================================
+   ORDERS
+===================================================== */
+
+let orders = [];
+
+
+
+/* =====================================================
+   LOAD ORDERS
+===================================================== */
+
+function loadOrders() {
+
+    try {
+
+        orders =
+            JSON.parse(
+                localStorage.getItem(
+                    "shoppingMelaOrders"
+                )
+            ) || [];
+
+    } catch (error) {
+
+        orders = [];
+
+    }
+
+}
+
+
+
+/* =====================================================
+   MONEY
+===================================================== */
+
+function money(amount) {
+
+    return "৳" +
+        Number(amount || 0)
+            .toLocaleString("en-BD");
+
+}
+
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value) {
+
+    return String(value || "")
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+
+/* =====================================================
+   FORMAT DATE
+===================================================== */
+
+function formatDate(
+    dateString
+) {
+
+    if (!dateString) {
+
+        return "Date unavailable";
+
+    }
+
+
+    const date =
+        new Date(
+            dateString
+        );
+
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return "Date unavailable";
+
+    }
+
+
+    return date.toLocaleDateString(
+        "en-BD",
+        {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        }
+    )
+    +
+    " • "
+    +
+    date.toLocaleTimeString(
+        "en-BD",
+        {
+            hour: "2-digit",
+            minute: "2-digit"
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   PAYMENT NAME
+===================================================== */
+
+function paymentName(
+    value
+) {
+
+    const names = {
+
+        cod:
+            "Cash on Delivery",
+
+        mobile:
+            "Mobile Payment",
+
+        bank:
+            "Bank / Card"
+
+    };
+
+
+    return (
+        names[value] ||
+        value ||
+        "Cash on Delivery"
+    );
+
+}
+
+
+
+/* =====================================================
+   FIND ORDER
+===================================================== */
+
+function findOrder(
+    orderId
+) {
+
+    return orders.find(
+        order =>
+            String(
+                order.orderId
+            ).toUpperCase() ===
+            String(
+                orderId
+            ).trim().toUpperCase()
+    );
+
+}
+
+
+
+/* =====================================================
+   TRACK ORDER
+===================================================== */
+
+function trackOrder() {
+
+    const input =
+        document.getElementById(
+            "orderIdInput"
+        );
+
+
+    const orderId =
+        input.value.trim();
+
+
+    const result =
+        document.getElementById(
+            "trackingResult"
+        );
+
+
+    const notFound =
+        document.getElementById(
+            "trackNotFound"
+        );
+
+
+    if (!orderId) {
+
+        input.focus();
+
+        return;
+
+    }
+
+
+    const order =
+        findOrder(
+            orderId
+        );
+
+
+    if (!order) {
+
+        result.style.display =
+            "none";
+
+        notFound.style.display =
+            "block";
+
+        return;
+
+    }
+
+
+    notFound.style.display =
+        "none";
+
+    result.style.display =
+        "block";
+
+
+    renderTracking(
+        order
+    );
+
+
+    result.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+}
+
+
+
+/* =====================================================
+   RENDER TRACKING
+===================================================== */
+
+function renderTracking(
+    order
+) {
+
+    const customer =
+        order.customer ||
+        {};
+
+
+    document.getElementById(
+        "resultOrderId"
+    ).textContent =
+        "Order #" +
+        (
+            order.orderId ||
+            "SM000000"
+        );
+
+
+    document.getElementById(
+        "resultDate"
+    ).textContent =
+        formatDate(
+            order.createdAt
+        );
+
+
+    document.getElementById(
+        "customerName"
+    ).textContent =
+        customer.name ||
+        "—";
+
+
+    document.getElementById(
+        "customerPhone"
+    ).textContent =
+        customer.phone ||
+        "—";
+
+
+    document.getElementById(
+        "customerDistrict"
+    ).textContent =
+        customer.district ||
+        "—";
+
+
+    document.getElementById(
+        "customerDivision"
+    ).textContent =
+        customer.division ||
+        "—";
+
+
+    document.getElementById(
+        "customerAddress"
+    ).textContent =
+        customer.address ||
+        "—";
+
+
+    document.getElementById(
+        "paymentMethod"
+    ).textContent =
+        paymentName(
+            order.paymentMethod
+        );
+
+
+    document.getElementById(
+        "orderTotal"
+    ).textContent =
+        money(
+            order.total
+        );
+
+
+    renderProducts(
+        order.products || []
+    );
+
+
+    /*
+       Demo tracking progression.
+
+       New orders start at:
+       Order Placed
+
+       This can later be connected
+       with Admin Panel.
+    */
+
+    const currentStep =
+        Number(
+            order.trackingStep ??
+            0
+        );
+
+
+    updateTimeline(
+        currentStep,
+        order.createdAt
+    );
+
+}
+
+
+
+/* =====================================================
+   RENDER PRODUCTS
+===================================================== */
+
+function renderProducts(
+    products
+) {
+
+    const list =
+        document.getElementById(
+            "trackedProductsList"
+        );
+
+
+    list.innerHTML = "";
+
+
+    if (!products.length) {
+
+        list.innerHTML = `
+
+            <p style="
+                color:#667085;
+                font-size:11px;
+                margin:0;
+            ">
+                Product information পাওয়া যায়নি।
+            </p>
+
+        `;
+
+        return;
+
+    }
+
+
+    products.forEach(
+        item => {
+
+            const quantity =
+                Number(
+                    item.quantity ||
+                    1
+                );
+
+
+            const total =
+                Number(
+                    item.price ||
+                    0
+                ) *
+                quantity;
+
+
+            const product =
+                document.createElement(
+                    "div"
+                );
+
+
+            product.className =
+                "tracked-product";
+
+
+            product.innerHTML = `
+
+                <div
+                    class="tracked-image"
+                    style="
+                        background-image:
+                        url('${escapeHTML(
+                            item.image
+                        )}');
+                    "
+                ></div>
+
+
+                <div
+                    class="tracked-info"
+                >
+
+                    <h3>
+                        ${escapeHTML(
+                            item.name
+                        )}
+                    </h3>
+
+                    <p>
+                        Qty:
+                        ${quantity}
+                        ×
+                        ${money(
+                            item.price
+                        )}
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="tracked-price"
+                >
+                    ${money(total)}
+                </div>
+
+            `;
+
+
+            list.appendChild(
+                product
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   UPDATE TIMELINE
+===================================================== */
+
+function updateTimeline(
+    currentStep,
+    createdAt
+) {
+
+    const items =
+        document.querySelectorAll(
+            ".timeline-item"
+        );
+
+
+    const progress =
+        document.getElementById(
+            "timelineProgress"
+        );
+
+
+    const status =
+        document.getElementById(
+            "currentStatus"
+        );
+
+
+    const statusNames = [
+
+        "Order Placed",
+
+        "Order Confirmed",
+
+        "Processing",
+
+        "Shipped",
+
+        "Out for Delivery",
+
+        "Delivered"
+
+    ];
+
+
+    const safeStep =
+        Math.max(
+            0,
+            Math.min(
+                5,
+                currentStep
+            )
+        );
+
+
+    /*
+       Status
+    */
+
+    status.textContent =
+        statusNames[
+            safeStep
+        ];
+
+
+    /*
+       Timeline
+    */
+
+    items.forEach(
+        (
+            item,
+            index
+        ) => {
+
+            item.classList.remove(
+                "completed",
+                "active"
+            );
+
+
+            if (
+                index <
+                safeStep
+            ) {
+
+                item.classList.add(
+                    "completed"
+                );
+
+            }
+
+
+            if (
+                index ===
+                safeStep
+            ) {
+
+                item.classList.add(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+
+    /*
+       Progress height
+    */
+
+    const maxHeight =
+        5 * 82;
+
+
+    const progressHeight =
+        Math.max(
+            0,
+            Math.min(
+                maxHeight,
+                safeStep * 82
+            )
+        );
+
+
+    progress.style.height =
+        progressHeight +
+        "px";
+
+
+    /*
+       Demo times
+    */
+
+    const baseDate =
+        createdAt
+            ? new Date(createdAt)
+            : new Date();
+
+
+    const timeElements =
+        document.querySelectorAll(
+            "[data-time]"
+        );
+
+
+    timeElements.forEach(
+        element => {
+
+            const step =
+                Number(
+                    element.dataset.time
+                );
+
+
+            if (
+                step <=
+                safeStep
+            ) {
+
+                const date =
+                    new Date(
+                        baseDate.getTime() +
+                        step *
+                        1000 *
+                        60 *
+                        60 *
+                        6
+                    );
+
+
+                element.textContent =
+                    formatDate(
+                        date.toISOString()
+                    );
+
+            } else {
+
+                element.textContent =
+                    "Pending";
+
+            }
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   ENTER KEY
+===================================================== */
+
+document
+    .getElementById(
+        "orderIdInput"
+    )
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key ===
+                "Enter"
+            ) {
+
+                trackOrder();
+
+            }
+
+        }
+    );
+
+
+
+/* =====================================================
+   AUTO TRACK LAST ORDER
+===================================================== */
+
+function autoTrackLastOrder() {
+
+    try {
+
+        const lastOrder =
+            JSON.parse(
+                localStorage.getItem(
+                    "shoppingMelaLastOrder"
+                )
+            );
+
+
+        if (
+            lastOrder &&
+            lastOrder.orderId
+        ) {
+
+            document.getElementById(
+                "orderIdInput"
+            ).value =
+                lastOrder.orderId;
+
+
+            trackOrder();
+
+        }
+
+    } catch (error) {
+
+        /*
+           Nothing to do.
+        */
+
+    }
+
+}
+
+
+
+/* =====================================================
+   INIT
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        loadOrders();
+
+        autoTrackLastOrder();
+
+    }
+);
+
+</script>
+
+
+</body>
+
+</html>
+```
