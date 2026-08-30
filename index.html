@@ -73,7 +73,7 @@
             </div>
 
 
-            <!-- ACTIONS -->
+            <!-- HEADER ACTIONS -->
 
             <div class="header-actions">
 
@@ -82,6 +82,7 @@
                     type="button"
                     onclick="showToast('আপনার Wishlist শীঘ্রই আসছে ❤️')"
                 >
+
                     <span class="header-action-icon">
                         ♡
                     </span>
@@ -89,6 +90,7 @@
                     <span>
                         Wishlist
                     </span>
+
                 </button>
 
 
@@ -97,6 +99,7 @@
                     type="button"
                     onclick="showToast('Shopping Cart শীঘ্রই আসছে 🛒')"
                 >
+
                     <span class="header-action-icon">
                         🛒
                     </span>
@@ -104,6 +107,7 @@
                     <span>
                         Cart
                     </span>
+
                 </button>
 
             </div>
@@ -157,6 +161,11 @@
 </header>
 
 
+
+<!-- =====================================================
+     MAIN
+====================================================== -->
+
 <main>
 
 
@@ -172,6 +181,7 @@
             class="hero-slider"
             id="heroSlider"
         >
+
 
             <!-- SLIDE 1 -->
 
@@ -224,6 +234,7 @@
                 </div>
 
             </div>
+
 
 
             <!-- SLIDE 2 -->
@@ -279,6 +290,7 @@
             </div>
 
 
+
             <!-- SLIDE 3 -->
 
             <div
@@ -332,7 +344,8 @@
             </div>
 
 
-            <!-- ARROWS -->
+
+            <!-- SLIDER PREVIOUS -->
 
             <button
                 class="slider-arrow slider-prev"
@@ -341,6 +354,9 @@
             >
                 ‹
             </button>
+
+
+            <!-- SLIDER NEXT -->
 
             <button
                 class="slider-arrow slider-next"
@@ -359,6 +375,7 @@
             ></div>
 
         </div>
+
 
 
         <!-- TRUST STRIP -->
@@ -425,16 +442,16 @@
             <div class="trust-item">
 
                 <div class="trust-icon">
-                    🔵
+                    ✍️
                 </div>
 
                 <div>
                     <strong>
-                        Verified Brands
+                        Community Blog
                     </strong>
 
                     <small>
-                        যাচাই করা Business
+                        নিজের Post প্রকাশ করুন
                     </small>
                 </div>
 
@@ -483,12 +500,16 @@
         </div>
 
 
+
         <div class="category-grid">
+
 
             <div
                 class="category-card"
+                data-category="fashion"
                 onclick="filterCategory('Fashion')"
             >
+
                 <div class="category-icon">
                     👗
                 </div>
@@ -496,13 +517,17 @@
                 <h3>
                     Fashion
                 </h3>
+
             </div>
+
 
 
             <div
                 class="category-card"
+                data-category="food"
                 onclick="filterCategory('Food')"
             >
+
                 <div class="category-icon">
                     🍔
                 </div>
@@ -510,13 +535,17 @@
                 <h3>
                     Food
                 </h3>
+
             </div>
+
 
 
             <div
                 class="category-card"
+                data-category="electronics"
                 onclick="filterCategory('Electronics')"
             >
+
                 <div class="category-icon">
                     📱
                 </div>
@@ -524,13 +553,17 @@
                 <h3>
                     Electronics
                 </h3>
+
             </div>
+
 
 
             <div
                 class="category-card"
+                data-category="beauty"
                 onclick="filterCategory('Beauty')"
             >
+
                 <div class="category-icon">
                     💄
                 </div>
@@ -538,13 +571,17 @@
                 <h3>
                     Beauty
                 </h3>
+
             </div>
+
 
 
             <div
                 class="category-card"
+                data-category="grocery"
                 onclick="filterCategory('Grocery')"
             >
+
                 <div class="category-icon">
                     🛒
                 </div>
@@ -552,13 +589,17 @@
                 <h3>
                     Grocery
                 </h3>
+
             </div>
+
 
 
             <div
                 class="category-card"
+                data-category="home"
                 onclick="filterCategory('Home')"
             >
+
                 <div class="category-icon">
                     🏠
                 </div>
@@ -566,13 +607,17 @@
                 <h3>
                     Home
                 </h3>
+
             </div>
+
 
 
             <div
                 class="category-card"
+                data-category="services"
                 onclick="filterCategory('Services')"
             >
+
                 <div class="category-icon">
                     🛠️
                 </div>
@@ -580,13 +625,17 @@
                 <h3>
                     Services
                 </h3>
+
             </div>
+
 
 
             <div
                 class="category-card"
+                data-category="others"
                 onclick="filterCategory('Others')"
             >
+
                 <div class="category-icon">
                     ✨
                 </div>
@@ -594,6 +643,7 @@
                 <h3>
                     Others
                 </h3>
+
             </div>
 
         </div>
@@ -605,7 +655,7 @@
 
 
 <!-- =====================================================
-     VERIFIED LOCAL BRANDS
+     LOCAL BRANDS
 ====================================================== -->
 
 <section
@@ -624,7 +674,7 @@
                 </h2>
 
                 <p>
-                    Verified ও জনপ্রিয় local business
+                    আপনার এলাকার জনপ্রিয় business ও brand
                 </p>
 
             </div>
@@ -639,14 +689,19 @@
         </div>
 
 
+
         <div class="brand-grid">
 
 
             <!-- =================================================
-                 VERIFIED BRAND 1
+                 BRAND 1 — VERIFIED
             ================================================== -->
 
-            <article class="brand-card">
+            <article
+                class="brand-card"
+                data-brand="Anjona Ladies Tailors"
+                data-category="Fashion"
+            >
 
                 <div
                     class="brand-cover"
@@ -660,6 +715,7 @@
                         SPONSORED
                     </span>
 
+
                     <div class="brand-logo">
                         👗
                     </div>
@@ -667,18 +723,17 @@
                 </div>
 
 
+
                 <div class="brand-info">
 
-                    <h3 class="verified-name">
+                    <h3 class="brand-name">
 
                         Anjona Ladies Tailors
 
-                        <!-- BLUE VERIFIED BADGE -->
-
                         <span
                             class="verified-badge"
-                            title="Shopping Mela Verified Business"
-                            aria-label="Verified"
+                            title="Verified by Shopping Mela"
+                            onclick="showVerification(event,'Anjona Ladies Tailors')"
                         >
                             ✓
                         </span>
@@ -686,7 +741,7 @@
                     </h3>
 
 
-                    <div class="verified-label">
+                    <div class="verified-text">
                         🔵 Verified Business
                     </div>
 
@@ -709,9 +764,9 @@
 
                     <button
                         class="brand-btn"
-                        onclick="openBrandProfile('Anjona Ladies Tailors', true)"
+                        onclick="showToast('Anjona Ladies Tailors profile শীঘ্রই আসছে!')"
                     >
-                        Verified Profile দেখুন →
+                        Brand দেখুন →
                     </button>
 
                 </div>
@@ -721,10 +776,14 @@
 
 
             <!-- =================================================
-                 VERIFIED BRAND 2
+                 BRAND 2 — VERIFIED
             ================================================== -->
 
-            <article class="brand-card">
+            <article
+                class="brand-card"
+                data-brand="Local Attar Shop"
+                data-category="Beauty"
+            >
 
                 <div
                     class="brand-cover"
@@ -738,6 +797,7 @@
                         FEATURED
                     </span>
 
+
                     <div class="brand-logo">
                         🌿
                     </div>
@@ -745,16 +805,17 @@
                 </div>
 
 
+
                 <div class="brand-info">
 
-                    <h3 class="verified-name">
+                    <h3 class="brand-name">
 
                         Local Attar Shop
 
                         <span
                             class="verified-badge"
-                            title="Shopping Mela Verified Business"
-                            aria-label="Verified"
+                            title="Verified by Shopping Mela"
+                            onclick="showVerification(event,'Local Attar Shop')"
                         >
                             ✓
                         </span>
@@ -762,7 +823,7 @@
                     </h3>
 
 
-                    <div class="verified-label">
+                    <div class="verified-text">
                         🔵 Verified Business
                     </div>
 
@@ -785,9 +846,9 @@
 
                     <button
                         class="brand-btn"
-                        onclick="openBrandProfile('Local Attar Shop', true)"
+                        onclick="showToast('Attar Shop profile শীঘ্রই আসছে!')"
                     >
-                        Verified Profile দেখুন →
+                        Brand দেখুন →
                     </button>
 
                 </div>
@@ -797,10 +858,14 @@
 
 
             <!-- =================================================
-                 UNVERIFIED BRAND
+                 BRAND 3 — VERIFIED
             ================================================== -->
 
-            <article class="brand-card">
+            <article
+                class="brand-card"
+                data-brand="Local Food House"
+                data-category="Food"
+            >
 
                 <div
                     class="brand-cover"
@@ -814,6 +879,7 @@
                         SPONSORED
                     </span>
 
+
                     <div class="brand-logo">
                         🍽️
                     </div>
@@ -821,17 +887,26 @@
                 </div>
 
 
+
                 <div class="brand-info">
 
-                    <h3 class="verified-name">
+                    <h3 class="brand-name">
 
                         Local Food House
+
+                        <span
+                            class="verified-badge"
+                            title="Verified by Shopping Mela"
+                            onclick="showVerification(event,'Local Food House')"
+                        >
+                            ✓
+                        </span>
 
                     </h3>
 
 
-                    <div class="unverified-label">
-                        Profile not verified
+                    <div class="verified-text">
+                        🔵 Verified Business
                     </div>
 
 
@@ -853,9 +928,9 @@
 
                     <button
                         class="brand-btn"
-                        onclick="openBrandProfile('Local Food House', false)"
+                        onclick="showToast('Food House profile শীঘ্রই আসছে!')"
                     >
-                        Brand Profile দেখুন →
+                        Brand দেখুন →
                     </button>
 
                 </div>
@@ -865,10 +940,14 @@
 
 
             <!-- =================================================
-                 VERIFIED BRAND 4
+                 BRAND 4 — VERIFIED
             ================================================== -->
 
-            <article class="brand-card">
+            <article
+                class="brand-card"
+                data-brand="SNK Local Services"
+                data-category="Services"
+            >
 
                 <div
                     class="brand-cover"
@@ -882,6 +961,7 @@
                         FEATURED
                     </span>
 
+
                     <div class="brand-logo">
                         💼
                     </div>
@@ -889,16 +969,17 @@
                 </div>
 
 
+
                 <div class="brand-info">
 
-                    <h3 class="verified-name">
+                    <h3 class="brand-name">
 
                         SNK Local Services
 
                         <span
                             class="verified-badge"
-                            title="Shopping Mela Verified Business"
-                            aria-label="Verified"
+                            title="Verified by Shopping Mela"
+                            onclick="showVerification(event,'SNK Local Services')"
                         >
                             ✓
                         </span>
@@ -906,7 +987,7 @@
                     </h3>
 
 
-                    <div class="verified-label">
+                    <div class="verified-text">
                         🔵 Verified Business
                     </div>
 
@@ -929,9 +1010,9 @@
 
                     <button
                         class="brand-btn"
-                        onclick="openBrandProfile('SNK Local Services', true)"
+                        onclick="showToast('SNK Services profile শীঘ্রই আসছে!')"
                     >
-                        Verified Profile দেখুন →
+                        Brand দেখুন →
                     </button>
 
                 </div>
@@ -947,27 +1028,27 @@
 
 
 <!-- =====================================================
-     VERIFIED PROFILE INFORMATION
+     VERIFIED INFORMATION
 ====================================================== -->
 
 <section class="container">
 
     <div class="verification-info">
 
-        <div class="verification-icon">
-            🔵✓
+        <div class="verification-info-icon">
+            ✓
         </div>
 
         <div>
 
-            <h2>
-                Blue Verified Badge কী?
-            </h2>
+            <h3>
+                🔵 Verified Business
+            </h3>
 
             <p>
-                Shopping Mela কর্তৃক যাচাই করা
-                Local Business ও Brand-এর profile-এ
-                এই blue verified badge দেখানো হবে।
+                Blue verified badge থাকা profileগুলো
+                Shopping Mela-এর verification process
+                সম্পন্ন করেছে।
             </p>
 
         </div>
@@ -1055,6 +1136,7 @@
         </div>
 
 
+
         <div
             class="product-grid"
             id="productGrid"
@@ -1101,7 +1183,10 @@
 
                         Local Fashion Brand
 
-                        <span class="mini-verified">
+                        <span
+                            class="mini-verified"
+                            title="Verified"
+                        >
                             ✓
                         </span>
 
@@ -1165,7 +1250,10 @@
 
                         Local Attar Shop
 
-                        <span class="mini-verified">
+                        <span
+                            class="mini-verified"
+                            title="Verified"
+                        >
                             ✓
                         </span>
 
@@ -1337,6 +1425,7 @@
             </a>
 
         </div>
+
 
 
         <div class="blog-grid">
@@ -1554,6 +1643,7 @@
 
                 </a>
 
+
                 <p>
                     Shopping Mela হলো local brands,
                     businesses, products এবং
@@ -1562,6 +1652,7 @@
                 </p>
 
             </div>
+
 
 
             <div>
@@ -1589,6 +1680,7 @@
             </div>
 
 
+
             <div>
 
                 <h3>
@@ -1608,6 +1700,7 @@
                 </a>
 
             </div>
+
 
 
             <div>
@@ -1637,6 +1730,7 @@
         </div>
 
 
+
         <div class="footer-bottom">
 
             © 2026 Shopping Mela.
@@ -1664,54 +1758,42 @@
 
 
 <!-- =====================================================
-     PROFILE MODAL
+     VERIFICATION POPUP
 ====================================================== -->
 
 <div
-    class="profile-modal"
-    id="profileModal"
+    class="verification-popup"
+    id="verificationPopup"
 >
 
-    <div class="profile-modal-box">
+    <div class="verification-popup-box">
 
         <button
-            class="profile-modal-close"
-            onclick="closeBrandProfile()"
-            aria-label="Close"
+            class="verification-close"
+            onclick="closeVerification()"
         >
             ×
         </button>
 
 
-        <div class="profile-modal-icon">
-            🏪
+        <div class="big-verification-badge">
+            ✓
         </div>
 
 
-        <h2 id="profileName">
-            Brand Name
-        </h2>
+        <h3>
+            Verified Business
+        </h3>
 
 
-        <div
-            id="profileVerification"
-            class="profile-verification"
-        >
-            🔵✓ Verified Business
-        </div>
-
-
-        <p id="profileDescription">
-            Brand profile information
+        <p id="verificationMessage">
+            This business is verified by Shopping Mela.
         </p>
 
 
-        <button
-            class="primary-btn"
-            onclick="closeBrandProfile()"
-        >
-            Close
-        </button>
+        <div class="verification-status">
+            🔵 Shopping Mela Verified
+        </div>
 
     </div>
 
@@ -1721,85 +1803,72 @@
 
 <!-- =====================================================
      SCRIPT
+     Main functionality is connected to script.js
 ====================================================== -->
 
 <script src="script.js"></script>
 
 
 <!-- =====================================================
-     1.8 VERIFIED PROFILE FALLBACK JS
+     SMALL FALLBACK VERIFICATION SCRIPT
 ====================================================== -->
 
 <script>
 
-function openBrandProfile(name, verified) {
+function showVerification(event, brandName) {
 
-    const modal =
-        document.getElementById("profileModal");
+    event.stopPropagation();
 
-    const profileName =
-        document.getElementById("profileName");
+    const popup =
+        document.getElementById("verificationPopup");
 
-    const verification =
-        document.getElementById("profileVerification");
+    const message =
+        document.getElementById("verificationMessage");
 
-    const description =
-        document.getElementById("profileDescription");
+    if (message) {
 
-
-    profileName.textContent = name;
-
-
-    if (verified === true) {
-
-        verification.innerHTML =
-            "🔵✓ Verified Business";
-
-        verification.className =
-            "profile-verification verified";
-
-        description.textContent =
-            "এই Business-টি Shopping Mela কর্তৃক verified profile হিসেবে প্রদর্শিত হচ্ছে।";
-
-    } else {
-
-        verification.innerHTML =
-            "Profile Not Verified";
-
-        verification.className =
-            "profile-verification unverified";
-
-        description.textContent =
-            "এই Business-এর profile এখনো Shopping Mela verification সম্পন্ন করেনি।";
+        message.textContent =
+            brandName +
+            " একটি verified business profile হিসেবে Shopping Mela-তে তালিকাভুক্ত।";
 
     }
 
+    if (popup) {
 
-    modal.classList.add("show");
+        popup.classList.add("show");
 
-}
-
-
-function closeBrandProfile() {
-
-    const modal =
-        document.getElementById("profileModal");
-
-    modal.classList.remove("show");
+    }
 
 }
 
 
-document.addEventListener(
+function closeVerification() {
+
+    const popup =
+        document.getElementById("verificationPopup");
+
+    if (popup) {
+
+        popup.classList.remove("show");
+
+    }
+
+}
+
+
+window.addEventListener(
     "click",
     function(event) {
 
-        const modal =
-            document.getElementById("profileModal");
+        const popup =
+            document.getElementById("verificationPopup");
 
-        if (event.target === modal) {
+        if (
+            popup &&
+            event.target === popup
+        ) {
 
-            closeBrandProfile();
+            popup.classList.remove("show");
 
         }
 
@@ -1811,4 +1880,3 @@ document.addEventListener(
 
 </body>
 </html>
-```
