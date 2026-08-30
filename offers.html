@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="bn">
 
@@ -12,12 +11,12 @@
     >
 
     <title>
-        Offers — Shopping Mela
+        Offers & Deals — Shopping Mela
     </title>
 
     <meta
         name="description"
-        content="Shopping Mela — Local brands, special offers, discounts and deals."
+        content="Shopping Mela Local Offers, Deals, Discounts এবং Sponsored Promotions."
     >
 
     <link
@@ -43,7 +42,7 @@
         Shopping Mela
     </span>
 
-    — Local Brands-এর Special Offers
+    — Local Brands-এর সেরা Offers এক জায়গায়
 
 </div>
 
@@ -102,14 +101,17 @@
 
 
 
-            <!-- HEADER ACTIONS -->
+            <!-- ACTIONS -->
 
             <div class="header-actions">
 
                 <button
                     class="header-action"
+                    type="button"
                     onclick="
-                        showToast('Wishlist শীঘ্রই আসছে ❤️')
+                        showToast(
+                            'Wishlist শীঘ্রই আসছে ❤️'
+                        )
                     "
                 >
 
@@ -126,8 +128,11 @@
 
                 <button
                     class="header-action"
+                    type="button"
                     onclick="
-                        showToast('Cart শীঘ্রই আসছে 🛒')
+                        showToast(
+                            'Shopping Cart শীঘ্রই আসছে 🛒'
+                        )
                     "
                 >
 
@@ -197,55 +202,61 @@
 <main>
 
 
-
 <!-- =====================================================
      OFFERS HERO
 ====================================================== -->
 
-<section class="products-page-hero">
+<section class="offers-hero">
 
     <div class="container">
 
-        <div class="products-hero-content">
+        <div class="offers-hero-content">
 
             <span class="page-label">
                 🔥 SHOPPING MELA DEALS
             </span>
 
+
             <h1>
-                আজকের Special Offers
+                Local Offers &
+                Special Deals
             </h1>
 
+
             <p>
-                Local brands ও sellers-এর
-                discount, promotion এবং special deals
-                এক জায়গায় খুঁজে নিন।
+                আপনার এলাকার দোকান, brand ও
+                business-এর latest discount,
+                promotion এবং special offer খুঁজে নিন।
             </p>
 
 
-            <div class="products-hero-actions">
+            <div class="offers-hero-buttons">
 
                 <button
                     class="primary-btn"
                     onclick="
                         document
-                        .getElementById('offerArea')
+                        .getElementById('offers')
                         .scrollIntoView({
                             behavior:'smooth'
                         })
                     "
                 >
-                    Offers দেখুন →
+                    🔥 Offers দেখুন
                 </button>
 
 
                 <button
                     class="light-btn"
                     onclick="
-                        window.location.href='brands.html'
+                        document
+                        .getElementById('promote')
+                        .scrollIntoView({
+                            behavior:'smooth'
+                        })
                     "
                 >
-                    Local Brands
+                    📢 আপনার Offer দিন
                 </button>
 
             </div>
@@ -259,53 +270,52 @@
 
 
 <!-- =====================================================
-     OFFER AREA
+     OFFER FILTERS
 ====================================================== -->
 
 <section
     class="section"
-    id="offerArea"
+    id="offers"
 >
 
     <div class="container">
 
-
-        <!-- HEADING -->
 
         <div class="section-heading">
 
             <div>
 
                 <h2>
-                    Featured Offers
+                    Today's Offers
                 </h2>
 
                 <p id="offerResultText">
-                    সব available offers দেখানো হচ্ছে
+                    Local businesses-এর
+                    available offers
                 </p>
 
             </div>
 
 
-            <div class="offer-count-badge">
-                🔥 Limited Deals
-            </div>
+            <span class="offer-live-badge">
+                🔴 LIVE DEALS
+            </span>
 
         </div>
 
 
 
-        <!-- =================================================
-             OFFER FILTER
-        ================================================== -->
+        <!-- FILTER BUTTONS -->
 
-        <div class="product-filters">
-
+        <div class="offer-filters">
 
             <button
-                class="product-filter active"
+                class="offer-filter active"
                 onclick="
-                    filterOffers('all', this)
+                    filterOffers(
+                        'all',
+                        this
+                    )
                 "
             >
                 All Offers
@@ -313,9 +323,12 @@
 
 
             <button
-                class="product-filter"
+                class="offer-filter"
                 onclick="
-                    filterOffers('Fashion', this)
+                    filterOffers(
+                        'Fashion',
+                        this
+                    )
                 "
             >
                 👗 Fashion
@@ -323,9 +336,12 @@
 
 
             <button
-                class="product-filter"
+                class="offer-filter"
                 onclick="
-                    filterOffers('Beauty', this)
+                    filterOffers(
+                        'Beauty',
+                        this
+                    )
                 "
             >
                 💄 Beauty
@@ -333,9 +349,12 @@
 
 
             <button
-                class="product-filter"
+                class="offer-filter"
                 onclick="
-                    filterOffers('Food', this)
+                    filterOffers(
+                        'Food',
+                        this
+                    )
                 "
             >
                 🍔 Food
@@ -343,9 +362,12 @@
 
 
             <button
-                class="product-filter"
+                class="offer-filter"
                 onclick="
-                    filterOffers('Electronics', this)
+                    filterOffers(
+                        'Electronics',
+                        this
+                    )
                 "
             >
                 📱 Electronics
@@ -353,14 +375,16 @@
 
 
             <button
-                class="product-filter"
+                class="offer-filter"
                 onclick="
-                    filterOffers('Home', this)
+                    filterOffers(
+                        'Services',
+                        this
+                    )
                 "
             >
-                🏠 Home
+                🛠️ Services
             </button>
-
 
         </div>
 
@@ -382,42 +406,39 @@
             <article
                 class="offer-card"
                 data-category="Fashion"
-                data-search="three piece anjona fashion ladies"
+                data-search="
+                    Anjona Ladies Tailors
+                    three piece tailoring
+                    fashion
+                    discount
+                "
             >
 
-                <div
-                    class="offer-card-image"
-                    style="
-                        background-image:
-                        url('https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=900&q=85');
-                    "
-                >
+                <div class="offer-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=900&q=85"
+                        alt="Fashion Offer"
+                    >
+
 
                     <span class="offer-discount">
                         20% OFF
                     </span>
 
 
-                    <span class="offer-featured">
-                        FEATURED
+                    <span class="offer-sponsored">
+                        SPONSORED
                     </span>
 
                 </div>
 
 
-                <div class="offer-card-body">
+                <div class="offer-info">
 
-                    <div class="offer-brand-line">
 
-                        Anjona Ladies Tailors
-
-                        <span
-                            class="verified-badge small"
-                            title="Verified Brand"
-                        >
-                            ✓
-                        </span>
-
+                    <div class="offer-category">
+                        👗 Fashion
                     </div>
 
 
@@ -428,8 +449,9 @@
 
 
                     <p>
-                        Selected three-piece collection-এ
-                        limited-time special discount।
+                        Selected three-piece,
+                        tailoring ও custom dress-এর
+                        উপর special discount।
                     </p>
 
 
@@ -446,24 +468,44 @@
                     </div>
 
 
-                    <div class="offer-bottom">
+                    <div class="offer-brand">
 
-                        <span>
-                            ⏳ Limited Offer
-                        </span>
+                        <div class="offer-brand-icon">
+                            👗
+                        </div>
 
-                        <button
-                            class="product-cart-btn"
-                            onclick="
-                                claimOffer(
-                                    'Ladies Three Piece'
-                                )
-                            "
-                        >
-                            Offer নিন →
-                        </button>
+                        <div>
+
+                            <strong>
+                                Anjona Ladies Tailors
+                            </strong>
+
+                            <small>
+                                ✓ Verified Local Brand
+                            </small>
+
+                        </div>
 
                     </div>
+
+
+                    <div class="offer-validity">
+                        ⏰ Valid until 30 Sep 2026
+                    </div>
+
+
+                    <button
+                        class="offer-button"
+                        onclick="
+                            showOffer(
+                                'Ladies Three Piece Special Discount',
+                                'Anjona Ladies Tailors',
+                                '20% discount on selected three-piece and tailoring services.'
+                            )
+                        "
+                    >
+                        Offer Details →
+                    </button>
 
                 </div>
 
@@ -476,42 +518,37 @@
             <article
                 class="offer-card"
                 data-category="Beauty"
-                data-search="attar perfume beauty fragrance"
+                data-search="
+                    Premium Attar perfume beauty
+                    fragrance discount
+                "
             >
 
-                <div
-                    class="offer-card-image"
-                    style="
-                        background-image:
-                        url('https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=900&q=85');
-                    "
-                >
+                <div class="offer-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=900&q=85"
+                        alt="Attar Offer"
+                    >
+
 
                     <span class="offer-discount">
                         15% OFF
                     </span>
 
 
-                    <span class="offer-featured">
-                        HOT
+                    <span class="offer-sponsored">
+                        FEATURED
                     </span>
 
                 </div>
 
 
-                <div class="offer-card-body">
+                <div class="offer-info">
 
-                    <div class="offer-brand-line">
 
-                        Local Attar Shop
-
-                        <span
-                            class="verified-badge small"
-                            title="Verified Brand"
-                        >
-                            ✓
-                        </span>
-
+                    <div class="offer-category">
+                        💄 Beauty
                     </div>
 
 
@@ -522,8 +559,9 @@
 
 
                     <p>
-                        Premium fragrance collection-এর
-                        selected items-এ discount।
+                        Premium attar ও fragrance
+                        collection-এর selected items-এ
+                        special price।
                     </p>
 
 
@@ -540,24 +578,44 @@
                     </div>
 
 
-                    <div class="offer-bottom">
+                    <div class="offer-brand">
 
-                        <span>
-                            🔥 Popular Deal
-                        </span>
+                        <div class="offer-brand-icon">
+                            🌿
+                        </div>
 
-                        <button
-                            class="product-cart-btn"
-                            onclick="
-                                claimOffer(
-                                    'Premium Attar'
-                                )
-                            "
-                        >
-                            Offer নিন →
-                        </button>
+                        <div>
+
+                            <strong>
+                                Local Attar Shop
+                            </strong>
+
+                            <small>
+                                ✓ Verified Local Brand
+                            </small>
+
+                        </div>
 
                     </div>
+
+
+                    <div class="offer-validity">
+                        ⏰ Limited Time Offer
+                    </div>
+
+
+                    <button
+                        class="offer-button"
+                        onclick="
+                            showOffer(
+                                'Premium Attar Special Deal',
+                                'Local Attar Shop',
+                                'Selected premium attar products are available at a special discounted price.'
+                            )
+                        "
+                    >
+                        Offer Details →
+                    </button>
 
                 </div>
 
@@ -570,53 +628,50 @@
             <article
                 class="offer-card"
                 data-category="Food"
-                data-search="homemade food snacks food"
+                data-search="
+                    homemade food restaurant food
+                    snacks offer
+                "
             >
 
-                <div
-                    class="offer-card-image"
-                    style="
-                        background-image:
-                        url('https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85');
-                    "
-                >
+                <div class="offer-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=85"
+                        alt="Food Offer"
+                    >
+
 
                     <span class="offer-discount">
-                        10% OFF
+                        HOT DEAL
                     </span>
 
 
-                    <span class="offer-featured">
-                        HOT
+                    <span class="offer-sponsored">
+                        SPONSORED
                     </span>
 
                 </div>
 
 
-                <div class="offer-card-body">
+                <div class="offer-info">
 
-                    <div class="offer-brand-line">
 
-                        Local Food Brand
-
-                        <span
-                            class="verified-badge small"
-                            title="Verified Brand"
-                        >
-                            ✓
-                        </span>
-
+                    <div class="offer-category">
+                        🍔 Food
                     </div>
 
 
                     <h3>
-                        Homemade Food Combo
+                        Homemade Food
+                        Combo Offer
                     </h3>
 
 
                     <p>
-                        Homemade food ও snacks combo-তে
-                        special promotional price।
+                        Local homemade food,
+                        snacks ও combo meal-এর
+                        special offer।
                     </p>
 
 
@@ -627,30 +682,50 @@
                         </strong>
 
                         <del>
-                            ৳390
+                            ৳450
                         </del>
 
                     </div>
 
 
-                    <div class="offer-bottom">
+                    <div class="offer-brand">
 
-                        <span>
-                            🍔 Today Only
-                        </span>
+                        <div class="offer-brand-icon">
+                            🍽️
+                        </div>
 
-                        <button
-                            class="product-cart-btn"
-                            onclick="
-                                claimOffer(
-                                    'Homemade Food Combo'
-                                )
-                            "
-                        >
-                            Offer নিন →
-                        </button>
+                        <div>
+
+                            <strong>
+                                Local Food House
+                            </strong>
+
+                            <small>
+                                ✓ Verified Local Brand
+                            </small>
+
+                        </div>
 
                     </div>
+
+
+                    <div class="offer-validity">
+                        ⏰ Offer available today
+                    </div>
+
+
+                    <button
+                        class="offer-button"
+                        onclick="
+                            showOffer(
+                                'Homemade Food Combo Offer',
+                                'Local Food House',
+                                'Special combo meal available at discounted price.'
+                            )
+                        "
+                    >
+                        Offer Details →
+                    </button>
 
                 </div>
 
@@ -662,88 +737,105 @@
 
             <article
                 class="offer-card"
-                data-category="Electronics"
-                data-search="wireless earbuds electronics gadget"
+                data-category="Services"
+                data-search="
+                    website IT printing services
+                    business service
+                "
             >
 
-                <div
-                    class="offer-card-image"
-                    style="
-                        background-image:
-                        url('https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?auto=format&fit=crop&w=900&q=85');
-                    "
-                >
+                <div class="offer-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=85"
+                        alt="IT Service Offer"
+                    >
+
 
                     <span class="offer-discount">
-                        12% OFF
+                        START ৳325
                     </span>
 
 
-                    <span class="offer-featured">
-                        TRENDING
+                    <span class="offer-sponsored">
+                        FEATURED
                     </span>
 
                 </div>
 
 
-                <div class="offer-card-body">
+                <div class="offer-info">
 
-                    <div class="offer-brand-line">
 
-                        Mela Electronics
-
-                        <span
-                            class="verified-badge small"
-                            title="Verified Brand"
-                        >
-                            ✓
-                        </span>
-
+                    <div class="offer-category">
+                        🛠️ Services
                     </div>
 
 
                     <h3>
-                        Wireless Earbuds Deal
+                        Small Business
+                        Website Package
                     </h3>
 
 
                     <p>
-                        Selected wireless audio products-এ
-                        limited-time discount।
+                        Local business-এর জন্য
+                        affordable website design,
+                        hosting ও digital service।
                     </p>
 
 
                     <div class="offer-price">
 
                         <strong>
-                            ৳1,450
+                            ৳325/mo
                         </strong>
 
                         <del>
-                            ৳1,650
+                            ৳500/mo
                         </del>
 
                     </div>
 
 
-                    <div class="offer-bottom">
+                    <div class="offer-brand">
 
-                        <span>
-                            ⚡ Limited Stock
-                        </span>
+                        <div class="offer-brand-icon">
+                            💼
+                        </div>
 
-                        <button
-                            class="product-cart-btn"
-                            onclick="
-                                claimOffer(
-                                    'Wireless Earbuds'
-                                )
-                            "
-                        >
-                            Offer নিন →
-                        </button>
+                        <div>
+
+                            <strong>
+                                SNK Local Services
+                            </strong>
+
+                            <small>
+                                ✓ Verified Local Brand
+                            </small>
+
+                        </div>
 
                     </div>
+
+
+                    <div class="offer-validity">
+                        ⏰ New Business Offer
+                    </div>
+
+
+                    <button
+                        class="offer-button"
+                        onclick="
+                            showOffer(
+                                'Small Business Website Package',
+                                'SNK Local Services',
+                                'Affordable website packages for local businesses.'
+                            )
+                        "
+                    >
+                        Offer Details →
+                    </button>
 
                 </div>
 
@@ -755,88 +847,96 @@
 
             <article
                 class="offer-card"
-                data-category="Home"
-                data-search="home decor lamp home decoration"
+                data-category="Fashion"
+                data-search="
+                    handmade bag local handmade
+                    fashion new product
+                "
             >
 
-                <div
-                    class="offer-card-image"
-                    style="
-                        background-image:
-                        url('https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=900&q=85');
-                    "
-                >
+                <div class="offer-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=85"
+                        alt="Handmade Bag Offer"
+                    >
+
 
                     <span class="offer-discount">
-                        18% OFF
-                    </span>
-
-
-                    <span class="offer-featured">
-                        FEATURED
+                        NEW
                     </span>
 
                 </div>
 
 
-                <div class="offer-card-body">
+                <div class="offer-info">
 
-                    <div class="offer-brand-line">
 
-                        Home Decor BD
-
-                        <span
-                            class="verified-badge small"
-                            title="Verified Brand"
-                        >
-                            ✓
-                        </span>
-
+                    <div class="offer-category">
+                        👗 Fashion
                     </div>
 
 
                     <h3>
-                        Home Decor Lamp
+                        Handmade Bag
+                        New Collection
                     </h3>
 
 
                     <p>
-                        Home decoration collection-এর
-                        selected lamp-এ special offer।
+                        Local handmade brand-এর
+                        নতুন collection এখন
+                        Shopping Mela-তে।
                     </p>
 
 
                     <div class="offer-price">
 
                         <strong>
-                            ৳1,150
+                            ৳890
                         </strong>
 
-                        <del>
-                            ৳1,400
-                        </del>
+                    </div>
+
+
+                    <div class="offer-brand">
+
+                        <div class="offer-brand-icon">
+                            👜
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Local Handmade Brand
+                            </strong>
+
+                            <small>
+                                Local Seller
+                            </small>
+
+                        </div>
 
                     </div>
 
 
-                    <div class="offer-bottom">
-
-                        <span>
-                            ✨ Special Deal
-                        </span>
-
-                        <button
-                            class="product-cart-btn"
-                            onclick="
-                                claimOffer(
-                                    'Home Decor Lamp'
-                                )
-                            "
-                        >
-                            Offer নিন →
-                        </button>
-
+                    <div class="offer-validity">
+                        ⏰ New Arrival
                     </div>
+
+
+                    <button
+                        class="offer-button"
+                        onclick="
+                            showOffer(
+                                'Handmade Bag New Collection',
+                                'Local Handmade Brand',
+                                'New handmade bag collection from a local seller.'
+                            )
+                        "
+                    >
+                        Offer Details →
+                    </button>
 
                 </div>
 
@@ -848,88 +948,96 @@
 
             <article
                 class="offer-card"
-                data-category="Fashion"
-                data-search="handmade bag ladies bag fashion"
+                data-category="Electronics"
+                data-search="
+                    electronics mobile accessories
+                    local electronics
+                "
             >
 
-                <div
-                    class="offer-card-image"
-                    style="
-                        background-image:
-                        url('https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=900&q=85');
-                    "
-                >
+                <div class="offer-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=85"
+                        alt="Electronics Offer"
+                    >
+
 
                     <span class="offer-discount">
                         10% OFF
                     </span>
 
-
-                    <span class="offer-featured">
-                        NEW
-                    </span>
-
                 </div>
 
 
-                <div class="offer-card-body">
+                <div class="offer-info">
 
-                    <div class="offer-brand-line">
 
-                        Local Handmade Brand
-
-                        <span
-                            class="verified-badge small"
-                            title="Verified Brand"
-                        >
-                            ✓
-                        </span>
-
+                    <div class="offer-category">
+                        📱 Electronics
                     </div>
 
 
                     <h3>
-                        Handmade Bag
+                        Mobile Accessories
+                        Weekend Deal
                     </h3>
 
 
                     <p>
-                        Local handmade collection-এর
-                        selected bag-এ launch offer।
+                        Selected mobile accessories
+                        ও gadgets-এর উপর
+                        weekend discount।
                     </p>
 
 
                     <div class="offer-price">
 
                         <strong>
-                            ৳890
+                            10% OFF
                         </strong>
 
-                        <del>
-                            ৳990
-                        </del>
+                    </div>
+
+
+                    <div class="offer-brand">
+
+                        <div class="offer-brand-icon">
+                            📱
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Local Electronics Store
+                            </strong>
+
+                            <small>
+                                Local Seller
+                            </small>
+
+                        </div>
 
                     </div>
 
 
-                    <div class="offer-bottom">
-
-                        <span>
-                            ✨ New Arrival
-                        </span>
-
-                        <button
-                            class="product-cart-btn"
-                            onclick="
-                                claimOffer(
-                                    'Handmade Bag'
-                                )
-                            "
-                        >
-                            Offer নিন →
-                        </button>
-
+                    <div class="offer-validity">
+                        ⏰ Weekend Deal
                     </div>
+
+
+                    <button
+                        class="offer-button"
+                        onclick="
+                            showOffer(
+                                'Mobile Accessories Weekend Deal',
+                                'Local Electronics Store',
+                                'Selected mobile accessories are available with weekend discounts.'
+                            )
+                        "
+                    >
+                        Offer Details →
+                    </button>
 
                 </div>
 
@@ -940,10 +1048,10 @@
 
 
 
-        <!-- NO RESULT -->
+        <!-- NO RESULTS -->
 
         <div
-            class="no-product-result"
+            class="no-offer-result"
             id="noOfferResult"
         >
 
@@ -956,15 +1064,9 @@
             </h3>
 
             <p>
-                অন্য category বা keyword দিয়ে চেষ্টা করুন।
+                অন্য category অথবা keyword
+                দিয়ে চেষ্টা করুন।
             </p>
-
-            <button
-                class="secondary-btn"
-                onclick="resetOffers()"
-            >
-                সব Offers দেখুন
-            </button>
 
         </div>
 
@@ -975,12 +1077,120 @@
 
 
 <!-- =====================================================
-     BUSINESS AD BANNER
+     HOW OFFERS WORK
 ====================================================== -->
 
-<section class="container">
+<section class="section">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div>
+
+                <h2>
+                    Shopping Mela Offers কীভাবে কাজ করে?
+                </h2>
+
+                <p>
+                    সহজে local deals খুঁজে নিন
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="offer-steps">
+
+
+            <div class="offer-step">
+
+                <div class="offer-step-number">
+                    01
+                </div>
+
+                <div class="offer-step-icon">
+                    🔎
+                </div>
+
+                <h3>
+                    Offer খুঁজুন
+                </h3>
+
+                <p>
+                    আপনার প্রয়োজনের category
+                    বা product search করুন।
+                </p>
+
+            </div>
+
+
+
+            <div class="offer-step">
+
+                <div class="offer-step-number">
+                    02
+                </div>
+
+                <div class="offer-step-icon">
+                    🏪
+                </div>
+
+                <h3>
+                    Brand বাছাই করুন
+                </h3>
+
+                <p>
+                    Local brand ও seller-এর
+                    offer details দেখুন।
+                </p>
+
+            </div>
+
+
+
+            <div class="offer-step">
+
+                <div class="offer-step-number">
+                    03
+                </div>
+
+                <div class="offer-step-icon">
+                    🎁
+                </div>
+
+                <h3>
+                    Deal নিন
+                </h3>
+
+                <p>
+                    Brand-এর সাথে যোগাযোগ করে
+                    offer ব্যবহার করুন।
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PROMOTE OFFER
+====================================================== -->
+
+<section
+    class="container"
+    id="promote"
+>
 
     <div class="advertise-section">
+
 
         <div class="advertise-text">
 
@@ -988,15 +1198,18 @@
                 📢 FOR LOCAL BUSINESS
             </small>
 
+
             <h2>
                 আপনার Offer এখানে
                 প্রচার করুন
             </h2>
 
+
             <p>
-                আপনার shop, brand বা product-এর
-                special offer Shopping Mela-তে
-                local customers-এর সামনে দেখান।
+                আপনার shop, brand, product বা
+                service-এর special offer
+                Shopping Mela audience-এর
+                সামনে দেখান।
             </p>
 
         </div>
@@ -1005,15 +1218,21 @@
         <button
             class="advertise-button"
             onclick="
-                window.location.href='index.html#advertise'
+                showToast(
+                    'Offer promotion form শীঘ্রই আসছে!'
+                )
             "
         >
-            Advertise করুন →
+            📢 Promote Your Offer →
         </button>
 
     </div>
 
 </section>
+
+
+
+</main>
 
 
 
@@ -1048,8 +1267,8 @@
 
                 <p>
                     Local brands, products,
-                    offers, businesses এবং
-                    community এক জায়গায়।
+                    offers এবং community
+                    এক জায়গায়।
                 </p>
 
             </div>
@@ -1145,6 +1364,92 @@
 
 
 <!-- =====================================================
+     OFFER MODAL
+====================================================== -->
+
+<div
+    class="offer-modal"
+    id="offerModal"
+    onclick="closeOfferOutside(event)"
+>
+
+    <div class="offer-modal-content">
+
+
+        <button
+            class="modal-close"
+            onclick="closeOfferModal()"
+            aria-label="Close"
+        >
+            ×
+        </button>
+
+
+        <div class="offer-modal-icon">
+            🎁
+        </div>
+
+
+        <span
+            class="modal-category"
+            id="offerModalCategory"
+        >
+            Special Offer
+        </span>
+
+
+        <h2 id="offerModalTitle">
+            Offer Title
+        </h2>
+
+
+        <div
+            class="offer-modal-brand"
+            id="offerModalBrand"
+        >
+            Local Brand
+        </div>
+
+
+        <p id="offerModalDescription">
+            Offer details
+        </p>
+
+
+        <div class="offer-modal-actions">
+
+            <button
+                class="primary-btn"
+                onclick="
+                    showToast(
+                        'Brand contact option শীঘ্রই আসছে!'
+                    )
+                "
+            >
+                📞 Contact Brand
+            </button>
+
+
+            <button
+                class="secondary-btn"
+                onclick="
+                    showToast(
+                        'Offer saved ❤️'
+                    )
+                "
+            >
+                ♡ Save Offer
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
      TOAST
 ====================================================== -->
 
@@ -1185,13 +1490,16 @@ function showToast(message) {
     );
 
 
-    setTimeout(function() {
+    setTimeout(
+        function() {
 
-        toast.classList.remove(
-            "show"
-        );
+            toast.classList.remove(
+                "show"
+            );
 
-    }, 2500);
+        },
+        2500
+    );
 
 }
 
@@ -1214,15 +1522,17 @@ function filterOffers(
 
     document
         .querySelectorAll(
-            ".product-filter"
+            ".offer-filter"
         )
-        .forEach(function(btn) {
+        .forEach(
+            function(btn) {
 
-            btn.classList.remove(
-                "active"
-            );
+                btn.classList.remove(
+                    "active"
+                );
 
-        });
+            }
+        );
 
 
     if (button) {
@@ -1237,38 +1547,37 @@ function filterOffers(
     let count = 0;
 
 
-    offers.forEach(function(offer) {
+    offers.forEach(
+        function(offer) {
 
-        const offerCategory =
-            offer.dataset.category;
+            if (
+                category === "all" ||
+                offer.dataset.category ===
+                category
+            ) {
 
+                offer.style.display =
+                    "";
 
-        if (
-            category === "all" ||
-            offerCategory === category
-        ) {
+                count++;
 
-            offer.style.display =
-                "";
+            } else {
 
-            count++;
+                offer.style.display =
+                    "none";
 
-        } else {
-
-            offer.style.display =
-                "none";
+            }
 
         }
+    );
 
-    });
 
-
-    updateOfferResult(
+    updateOfferCount(
         count
     );
 
 
-    showOfferNoResult(
+    showNoOffer(
         count
     );
 
@@ -1312,58 +1621,59 @@ function searchOffers() {
     let count = 0;
 
 
-    offers.forEach(function(offer) {
+    offers.forEach(
+        function(offer) {
 
-        const searchText =
-            (
-                offer.dataset.search ||
-                ""
-            ).toLowerCase();
-
-
-        const visibleText =
-            offer.innerText.toLowerCase();
+            const searchable =
+                (
+                    offer.dataset.search ||
+                    ""
+                ).toLowerCase();
 
 
-        if (
-            searchText.includes(query) ||
-            visibleText.includes(query)
-        ) {
+            if (
+                searchable.includes(
+                    query
+                )
+            ) {
 
-            offer.style.display =
-                "";
+                offer.style.display =
+                    "";
 
-            count++;
+                count++;
 
-        } else {
+            } else {
 
-            offer.style.display =
-                "none";
+                offer.style.display =
+                    "none";
+
+            }
 
         }
-
-    });
+    );
 
 
     document
         .querySelectorAll(
-            ".product-filter"
+            ".offer-filter"
         )
-        .forEach(function(btn) {
+        .forEach(
+            function(btn) {
 
-            btn.classList.remove(
-                "active"
-            );
+                btn.classList.remove(
+                    "active"
+                );
 
-        });
+            }
+        );
 
 
-    updateOfferResult(
+    updateOfferCount(
         count
     );
 
 
-    showOfferNoResult(
+    showNoOffer(
         count
     );
 
@@ -1388,7 +1698,7 @@ function searchOffers() {
 
 
 /* =====================================================
-   ENTER SEARCH
+   SEARCH ENTER
 ====================================================== */
 
 document
@@ -1413,78 +1723,7 @@ document
 
 
 /* =====================================================
-   CLAIM OFFER
-====================================================== */
-
-function claimOffer(
-    offerName
-) {
-
-    showToast(
-        offerName +
-        " Offer selected 🎉"
-    );
-
-}
-
-
-
-/* =====================================================
-   RESULT TEXT
-====================================================== */
-
-function updateOfferResult(
-    count
-) {
-
-    document
-        .getElementById(
-            "offerResultText"
-        )
-        .textContent =
-        count +
-        "টি Offer পাওয়া গেছে";
-
-}
-
-
-
-/* =====================================================
-   NO RESULT
-====================================================== */
-
-function showOfferNoResult(
-    count
-) {
-
-    const noResult =
-        document.getElementById(
-            "noOfferResult"
-        );
-
-
-    if (
-        count === 0
-    ) {
-
-        noResult.classList.add(
-            "show"
-        );
-
-    } else {
-
-        noResult.classList.remove(
-            "show"
-        );
-
-    }
-
-}
-
-
-
-/* =====================================================
-   RESET
+   RESET OFFERS
 ====================================================== */
 
 function resetOffers() {
@@ -1495,12 +1734,14 @@ function resetOffers() {
         );
 
 
-    offers.forEach(function(offer) {
+    offers.forEach(
+        function(offer) {
 
-        offer.style.display =
-            "";
+            offer.style.display =
+                "";
 
-    });
+        }
+    );
 
 
     document
@@ -1512,42 +1753,200 @@ function resetOffers() {
 
     document
         .querySelectorAll(
-            ".product-filter"
+            ".offer-filter"
         )
-        .forEach(function(btn) {
+        .forEach(
+            function(btn) {
 
-            btn.classList.remove(
-                "active"
-            );
+                btn.classList.remove(
+                    "active"
+                );
 
-        });
-
-
-    const allButton =
-        document.querySelector(
-            ".product-filter"
+            }
         );
 
 
-    if (allButton) {
+    const firstFilter =
+        document.querySelector(
+            ".offer-filter"
+        );
 
-        allButton.classList.add(
+
+    if (firstFilter) {
+
+        firstFilter.classList.add(
             "active"
         );
 
     }
 
 
-    updateOfferResult(
+    updateOfferCount(
         offers.length
     );
 
 
-    showOfferNoResult(
+    showNoOffer(
         offers.length
     );
 
 }
+
+
+
+/* =====================================================
+   UPDATE COUNT
+====================================================== */
+
+function updateOfferCount(
+    count
+) {
+
+    document
+        .getElementById(
+            "offerResultText"
+        )
+        .textContent =
+        count +
+        "টি Offer available";
+
+}
+
+
+
+/* =====================================================
+   NO RESULT
+====================================================== */
+
+function showNoOffer(
+    count
+) {
+
+    const result =
+        document.getElementById(
+            "noOfferResult"
+        );
+
+
+    if (
+        count === 0
+    ) {
+
+        result.classList.add(
+            "show"
+        );
+
+    } else {
+
+        result.classList.remove(
+            "show"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   SHOW OFFER MODAL
+====================================================== */
+
+function showOffer(
+    title,
+    brand,
+    description
+) {
+
+    document
+        .getElementById(
+            "offerModalTitle"
+        )
+        .textContent =
+        title;
+
+
+    document
+        .getElementById(
+            "offerModalBrand"
+        )
+        .textContent =
+        brand;
+
+
+    document
+        .getElementById(
+            "offerModalDescription"
+        )
+        .textContent =
+        description;
+
+
+    document
+        .getElementById(
+            "offerModal"
+        )
+        .classList.add(
+            "show"
+        );
+
+}
+
+
+
+/* =====================================================
+   CLOSE MODAL
+====================================================== */
+
+function closeOfferModal() {
+
+    document
+        .getElementById(
+            "offerModal"
+        )
+        .classList.remove(
+            "show"
+        );
+
+}
+
+
+
+function closeOfferOutside(
+    event
+) {
+
+    if (
+        event.target.id ===
+        "offerModal"
+    ) {
+
+        closeOfferModal();
+
+    }
+
+}
+
+
+
+/* =====================================================
+   ESC KEY
+====================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closeOfferModal();
+
+        }
+
+    }
+);
 
 
 
@@ -1565,7 +1964,12 @@ document.addEventListener(
             );
 
 
-        updateOfferResult(
+        updateOfferCount(
+            offers.length
+        );
+
+
+        showNoOffer(
             offers.length
         );
 
