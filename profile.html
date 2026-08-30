@@ -1,51 +1,29 @@
 <!DOCTYPE html>
 <html lang="bn">
-
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>
-        Profile — Shopping Mela
-    </title>
+    <title>Brand Profile — Shopping Mela</title>
 
     <meta
         name="description"
-        content="Shopping Mela verified local business and community profile."
+        content="Verified local business profile on Shopping Mela."
     >
 
-    <link
-        rel="stylesheet"
-        href="style.css"
-    >
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
-
 <body>
-
 
 <!-- =====================================================
      TOP BAR
 ====================================================== -->
 
 <div class="top-bar">
-
-    🛍️
-
-    <span>
-        Shopping Mela
-    </span>
-
-    — Local Brands & Verified Profiles
-
+    🛍️ <span>Shopping Mela</span>
+    — Local Brands & Business Marketplace
 </div>
-
 
 
 <!-- =====================================================
@@ -58,13 +36,7 @@
 
         <div class="header-main">
 
-
-            <!-- LOGO -->
-
-            <a
-                href="index.html"
-                class="logo"
-            >
+            <a href="index.html" class="logo">
 
                 <div class="logo-icon">
                     🛍️
@@ -77,21 +49,17 @@
             </a>
 
 
-
-            <!-- SEARCH -->
-
             <div class="header-search">
 
                 <input
                     type="search"
-                    id="profileSearch"
-                    placeholder="Brand, shop বা profile খুঁজুন..."
-                    aria-label="Search profiles"
+                    id="searchInput"
+                    placeholder="পণ্য, ব্র্যান্ড বা দোকান খুঁজুন..."
                 >
 
                 <button
                     type="button"
-                    onclick="searchProfile()"
+                    id="searchBtn"
                 >
                     🔍
                 </button>
@@ -99,49 +67,26 @@
             </div>
 
 
-
-            <!-- ACTIONS -->
-
             <div class="header-actions">
 
                 <button
                     class="header-action"
                     onclick="showToast('Wishlist শীঘ্রই আসছে ❤️')"
                 >
-
-                    <span class="header-action-icon">
-                        ♡
-                    </span>
-
-                    <span>
-                        Wishlist
-                    </span>
-
+                    ♡ Wishlist
                 </button>
-
 
                 <button
                     class="header-action"
                     onclick="showToast('Cart শীঘ্রই আসছে 🛒')"
                 >
-
-                    <span class="header-action-icon">
-                        🛒
-                    </span>
-
-                    <span>
-                        Cart
-                    </span>
-
+                    🛒 Cart
                 </button>
 
             </div>
 
         </div>
 
-
-
-        <!-- NAVIGATION -->
 
         <nav class="navigation">
 
@@ -155,14 +100,11 @@
                     Categories
                 </a>
 
-                <a
-                    href="brands.html"
-                    class="active"
-                >
+                <a href="index.html#brands">
                     Local Brands
                 </a>
 
-                <a href="products.html">
+                <a href="index.html#products">
                     Products
                 </a>
 
@@ -175,7 +117,7 @@
                 </a>
 
                 <a href="index.html#advertise">
-                    Advertise With Us
+                    Advertise
                 </a>
 
             </div>
@@ -188,78 +130,85 @@
 
 
 
-<main>
-
-
-
 <!-- =====================================================
-     PROFILE HERO
+     PROFILE
 ====================================================== -->
 
-<section class="profile-hero">
+<main>
+
+<section class="profile-page">
 
     <div class="container">
 
+
+        <!-- =================================================
+             COVER
+        ================================================== -->
+
         <div class="profile-cover">
 
-            <div class="profile-cover-content">
+            <img
+                src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1600&q=85"
+                alt="Anjona Ladies Tailors Cover"
+            >
 
-                <span class="profile-cover-label">
-                    FEATURED LOCAL BRAND
-                </span>
-
-            </div>
+            <div class="profile-cover-overlay"></div>
 
         </div>
 
 
 
-        <!-- PROFILE HEADER CARD -->
+        <!-- =================================================
+             PROFILE HEADER
+        ================================================== -->
 
-        <div class="profile-header-card">
+        <div class="profile-header">
 
+            <div class="profile-avatar">
 
-            <div class="profile-avatar-large">
-                👗
+                <span>
+                    👗
+                </span>
+
             </div>
 
 
             <div class="profile-main-info">
 
-                <div class="profile-name-row">
+                <h1 class="profile-name">
 
-                    <h1>
-                        Anjona Ladies Tailors
-                    </h1>
+                    Anjona Ladies Tailors
 
-                    <span
-                        class="verified-badge"
-                        title="Verified Profile"
+                    <button
+                        class="verified-badge large"
+                        onclick="showVerification()"
+                        title="Verified by Shopping Mela"
                     >
                         ✓
-                    </span>
+                    </button>
+
+                </h1>
+
+
+                <div class="profile-verified">
+
+                    🔵 Verified Business
 
                 </div>
 
 
                 <p class="profile-category">
+
                     Fashion & Tailoring
+
                 </p>
 
 
                 <p class="profile-location">
+
                     📍 Local Business
+
                 </p>
-
-
-                <div class="profile-status">
-
-                    <span class="status-dot">
-                    </span>
-
-                    Open for Business
-
-                </div>
 
             </div>
 
@@ -267,15 +216,24 @@
             <div class="profile-actions">
 
                 <button
-                    class="primary-btn"
-                    onclick="showToast('Contact feature শীঘ্রই আসছে!')"
+                    class="profile-follow"
+                    id="followBtn"
+                    onclick="toggleFollow()"
+                >
+                    + Follow
+                </button>
+
+
+                <button
+                    class="profile-contact"
+                    onclick="showToast('Contact option শীঘ্রই আসছে 📞')"
                 >
                     📞 Contact
                 </button>
 
 
                 <button
-                    class="secondary-btn"
+                    class="profile-share"
                     onclick="shareProfile()"
                 >
                     ↗ Share
@@ -287,723 +245,712 @@
 
 
 
-        <!-- VERIFIED NOTICE -->
+        <!-- =================================================
+             PROFILE NAV
+        ================================================== -->
 
-        <div class="verified-notice">
+        <div class="profile-nav">
 
-            <div class="verified-notice-icon">
-                ✓
-            </div>
+            <button
+                class="profile-tab active"
+                onclick="openTab('about', this)"
+            >
+                About
+            </button>
 
-            <div>
 
-                <strong>
-                    🔵 Verified Profile
-                </strong>
+            <button
+                class="profile-tab"
+                onclick="openTab('products', this)"
+            >
+                Products
+            </button>
 
-                <p>
-                    এই profile-টি Shopping Mela কর্তৃপক্ষ
-                    দ্বারা verified।
-                </p>
+
+            <button
+                class="profile-tab"
+                onclick="openTab('offers', this)"
+            >
+                Offers
+            </button>
+
+
+            <button
+                class="profile-tab"
+                onclick="openTab('reviews', this)"
+            >
+                Reviews
+            </button>
+
+
+            <button
+                class="profile-tab"
+                onclick="openTab('posts', this)"
+            >
+                Posts
+            </button>
+
+        </div>
+
+
+
+        <!-- =================================================
+             ABOUT TAB
+        ================================================== -->
+
+        <div
+            class="profile-tab-content active"
+            id="about"
+        >
+
+            <div class="profile-columns">
+
+
+                <div class="profile-left">
+
+
+                    <div class="profile-card">
+
+                        <h2>
+                            About this Business
+                        </h2>
+
+                        <p>
+
+                            Anjona Ladies Tailors একটি
+                            local fashion ও tailoring business।
+                            এখানে ladies three-piece, custom dress,
+                            tailoring এবং fashion services পাওয়া যায়।
+
+                        </p>
+
+                    </div>
+
+
+
+                    <div class="profile-card">
+
+                        <h2>
+                            Business Information
+                        </h2>
+
+
+                        <div class="business-info-row">
+
+                            <span>
+                                🏪 Business Type
+                            </span>
+
+                            <strong>
+                                Local Business
+                            </strong>
+
+                        </div>
+
+
+                        <div class="business-info-row">
+
+                            <span>
+                                👗 Category
+                            </span>
+
+                            <strong>
+                                Fashion & Tailoring
+                            </strong>
+
+                        </div>
+
+
+                        <div class="business-info-row">
+
+                            <span>
+                                📍 Location
+                            </span>
+
+                            <strong>
+                                Bangladesh
+                            </strong>
+
+                        </div>
+
+
+                        <div class="business-info-row">
+
+                            <span>
+                                🔵 Verification
+                            </span>
+
+                            <strong class="verified-green">
+                                Verified
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="profile-right">
+
+
+                    <div class="profile-card">
+
+                        <h2>
+                            Why Verified?
+                        </h2>
+
+                        <p>
+
+                            এই profile-এ থাকা blue verified badge
+                            দেখায় যে businessটি Shopping Mela-এর
+                            verification process সম্পন্ন করেছে।
+
+                        </p>
+
+
+                        <div class="verification-box">
+
+                            <div class="big-verification-badge">
+                                ✓
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Verified Business
+                                </strong>
+
+                                <small>
+                                    Verified by Shopping Mela
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="profile-card">
+
+                        <h2>
+                            Business Stats
+                        </h2>
+
+
+                        <div class="profile-stats">
+
+                            <div>
+
+                                <strong>
+                                    1.2K
+                                </strong>
+
+                                <span>
+                                    Followers
+                                </span>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    48
+                                </strong>
+
+                                <span>
+                                    Products
+                                </span>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    4.8 ★
+                                </strong>
+
+                                <span>
+                                    Rating
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
 
         </div>
 
-    </div>
-
-</section>
 
 
+        <!-- =================================================
+             PRODUCTS TAB
+        ================================================== -->
 
-<!-- =====================================================
-     PROFILE CONTENT
-====================================================== -->
+        <div
+            class="profile-tab-content"
+            id="products"
+        >
 
-<section class="section">
+            <div class="profile-card">
 
-    <div class="container">
+                <div class="profile-section-heading">
 
-        <div class="profile-layout">
+                    <div>
 
+                        <h2>
+                            Products
+                        </h2>
 
-            <!-- =================================================
-                 LEFT CONTENT
-            ================================================== -->
-
-            <div class="profile-content">
-
-
-                <!-- ABOUT -->
-
-                <section class="profile-card">
-
-                    <div class="profile-card-heading">
-
-                        <div>
-
-                            <h2>
-                                About This Brand
-                            </h2>
-
-                            <p>
-                                Brand সম্পর্কে জানুন
-                            </p>
-
-                        </div>
+                        <p>
+                            এই business-এর featured products
+                        </p>
 
                     </div>
-
-
-                    <p class="about-text">
-
-                        Anjona Ladies Tailors একটি local
-                        fashion ও tailoring business।
-                        Ladies three-piece, custom dress,
-                        tailoring এবং fashion-related
-                        services এখানে পাওয়া যায়।
-
-                    </p>
-
-
-                    <p class="about-text">
-
-                        আপনার পছন্দ অনুযায়ী dress design,
-                        measurement এবং custom tailoring
-                        service-এর জন্য যোগাযোগ করতে পারেন।
-
-                    </p>
-
-                </section>
-
-
-
-                <!-- PRODUCTS -->
-
-                <section class="profile-card">
-
-                    <div class="profile-card-heading">
-
-                        <div>
-
-                            <h2>
-                                Featured Products
-                            </h2>
-
-                            <p>
-                                এই Brand-এর জনপ্রিয় products
-                            </p>
-
-                        </div>
-
-
-                        <a
-                            href="products.html"
-                            class="view-all"
-                        >
-                            সব দেখুন →
-                        </a>
-
-                    </div>
-
-
-                    <div class="profile-product-grid">
-
-
-                        <!-- PRODUCT -->
-
-                        <article class="profile-product">
-
-                            <div
-                                class="profile-product-image"
-                                style="
-                                    background-image:
-                                    url('https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=700&q=85');
-                                "
-                            >
-
-                                <span>
-                                    -20%
-                                </span>
-
-                            </div>
-
-
-                            <div class="profile-product-info">
-
-                                <h3>
-                                    Ladies Three Piece
-                                </h3>
-
-                                <strong>
-                                    ৳1,250
-                                </strong>
-
-                            </div>
-
-                        </article>
-
-
-
-                        <!-- PRODUCT -->
-
-                        <article class="profile-product">
-
-                            <div
-                                class="profile-product-image"
-                                style="
-                                    background-image:
-                                    url('https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&w=700&q=85');
-                                "
-                            >
-
-                                <span>
-                                    NEW
-                                </span>
-
-                            </div>
-
-
-                            <div class="profile-product-info">
-
-                                <h3>
-                                    Custom Dress
-                                </h3>
-
-                                <strong>
-                                    ৳1,800
-                                </strong>
-
-                            </div>
-
-                        </article>
-
-
-
-                        <!-- PRODUCT -->
-
-                        <article class="profile-product">
-
-                            <div
-                                class="profile-product-image"
-                                style="
-                                    background-image:
-                                    url('https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=700&q=85');
-                                "
-                            >
-
-                                <span>
-                                    POPULAR
-                                </span>
-
-                            </div>
-
-
-                            <div class="profile-product-info">
-
-                                <h3>
-                                    Ladies Fashion Dress
-                                </h3>
-
-                                <strong>
-                                    ৳2,100
-                                </strong>
-
-                            </div>
-
-                        </article>
-
-                    </div>
-
-                </section>
-
-
-
-                <!-- BUSINESS INFO -->
-
-                <section class="profile-card">
-
-                    <div class="profile-card-heading">
-
-                        <div>
-
-                            <h2>
-                                Business Information
-                            </h2>
-
-                            <p>
-                                এই business সম্পর্কে তথ্য
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="business-info-grid">
-
-
-                        <div class="business-info-item">
-
-                            <span>
-                                🏷️
-                            </span>
-
-                            <div>
-
-                                <small>
-                                    Category
-                                </small>
-
-                                <strong>
-                                    Fashion & Tailoring
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-
-
-                        <div class="business-info-item">
-
-                            <span>
-                                📍
-                            </span>
-
-                            <div>
-
-                                <small>
-                                    Business Type
-                                </small>
-
-                                <strong>
-                                    Local Business
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-
-
-                        <div class="business-info-item">
-
-                            <span>
-                                🕒
-                            </span>
-
-                            <div>
-
-                                <small>
-                                    Status
-                                </small>
-
-                                <strong>
-                                    Open
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-
-
-                        <div class="business-info-item">
-
-                            <span>
-                                🔵
-                            </span>
-
-                            <div>
-
-                                <small>
-                                    Verification
-                                </small>
-
-                                <strong>
-                                    Verified
-                                </strong>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </section>
-
-
-
-                <!-- REVIEWS -->
-
-                <section class="profile-card">
-
-                    <div class="profile-card-heading">
-
-                        <div>
-
-                            <h2>
-                                Customer Reviews
-                            </h2>
-
-                            <p>
-                                Customer feedback
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="rating-summary">
-
-                        <div class="rating-number">
-                            4.8
-                        </div>
-
-                        <div>
-
-                            <div class="stars">
-                                ★★★★★
-                            </div>
-
-                            <small>
-                                Based on 24 reviews
-                            </small>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="review-item">
-
-                        <div class="review-avatar">
-                            R
-                        </div>
-
-                        <div>
-
-                            <div class="review-author">
-
-                                <strong>
-                                    Rahima
-                                </strong>
-
-                                <span>
-                                    🔵 Verified Buyer
-                                </span>
-
-                            </div>
-
-                            <div class="review-stars">
-                                ★★★★★
-                            </div>
-
-                            <p>
-                                ভালো tailoring service।
-                                Dress-এর finishing সুন্দর।
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="review-item">
-
-                        <div class="review-avatar">
-                            S
-                        </div>
-
-                        <div>
-
-                            <div class="review-author">
-
-                                <strong>
-                                    Sumaiya
-                                </strong>
-
-                                <span>
-                                    🔵 Verified Buyer
-                                </span>
-
-                            </div>
-
-                            <div class="review-stars">
-                                ★★★★★
-                            </div>
-
-                            <p>
-                                Custom dress-এর কাজ
-                                ভালো হয়েছে।
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </section>
-
-
-            </div>
-
-
-
-            <!-- =================================================
-                 RIGHT SIDEBAR
-            ================================================== -->
-
-            <aside class="profile-sidebar">
-
-
-                <!-- CONTACT -->
-
-                <div class="profile-side-card">
-
-                    <h3>
-                        Contact
-                    </h3>
-
-
-                    <button
-                        class="contact-item"
-                        onclick="showToast('Phone feature শীঘ্রই আসছে!')"
-                    >
-
-                        <span>
-                            📞
-                        </span>
-
-                        <div>
-
-                            <small>
-                                Phone
-                            </small>
-
-                            <strong>
-                                Contact Business
-                            </strong>
-
-                        </div>
-
-                    </button>
-
-
-                    <button
-                        class="contact-item"
-                        onclick="showToast('Message feature শীঘ্রই আসছে!')"
-                    >
-
-                        <span>
-                            💬
-                        </span>
-
-                        <div>
-
-                            <small>
-                                Message
-                            </small>
-
-                            <strong>
-                                Send Message
-                            </strong>
-
-                        </div>
-
-                    </button>
-
-
-                    <button
-                        class="contact-item"
-                        onclick="showToast('Location feature শীঘ্রই আসছে!')"
-                    >
-
-                        <span>
-                            📍
-                        </span>
-
-                        <div>
-
-                            <small>
-                                Location
-                            </small>
-
-                            <strong>
-                                View Location
-                            </strong>
-
-                        </div>
-
-                    </button>
-
-                </div>
-
-
-
-                <!-- VERIFICATION -->
-
-                <div class="profile-side-card verification-card">
-
-                    <div class="verification-symbol">
-                        ✓
-                    </div>
-
-
-                    <h3>
-                        Verified Business
-                    </h3>
-
-
-                    <p>
-                        Shopping Mela এই business-এর
-                        profile যাচাই করেছে।
-                    </p>
-
-
-                    <button
-                        class="verification-link"
-                        onclick="showVerificationInfo()"
-                    >
-                        Verification সম্পর্কে জানুন →
-                    </button>
-
-                </div>
-
-
-
-                <!-- SHARE -->
-
-                <div class="profile-side-card">
-
-                    <h3>
-                        Share Profile
-                    </h3>
-
-
-                    <div class="share-buttons">
-
-                        <button
-                            onclick="shareProfile()"
-                            title="Share"
-                        >
-                            ↗
-                        </button>
-
-
-                        <button
-                            onclick="copyProfileLink()"
-                            title="Copy link"
-                        >
-                            🔗
-                        </button>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- AD -->
-
-                <div class="profile-ad-card">
 
                     <span>
-                        📢 FEATURED AD
+                        4 Products
                     </span>
-
-                    <h3>
-                        আপনার Brand-ও
-                        এখানে দেখান
-                    </h3>
-
-                    <p>
-                        Local customers-এর কাছে
-                        আপনার business প্রচার করুন।
-                    </p>
-
-                    <button
-                        onclick="
-                            window.location.href='index.html#advertise'
-                        "
-                    >
-                        Advertise করুন →
-                    </button>
 
                 </div>
 
 
-            </aside>
+                <div class="profile-product-grid">
 
+
+                    <article class="profile-product">
+
+                        <div
+                            class="profile-product-image"
+                            style="
+                                background-image:
+                                url('https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=700&q=80');
+                            "
+                        >
+
+                            <span>
+                                -20%
+                            </span>
+
+                        </div>
+
+                        <div class="profile-product-info">
+
+                            <h3>
+                                Ladies Three Piece
+                            </h3>
+
+                            <p>
+                                Premium local fashion
+                            </p>
+
+                            <strong>
+                                ৳1,250
+                            </strong>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <article class="profile-product">
+
+                        <div
+                            class="profile-product-image"
+                            style="
+                                background-image:
+                                url('https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=700&q=80');
+                            "
+                        >
+
+                            <span>
+                                NEW
+                            </span>
+
+                        </div>
+
+                        <div class="profile-product-info">
+
+                            <h3>
+                                Custom Dress
+                            </h3>
+
+                            <p>
+                                Custom tailoring
+                            </p>
+
+                            <strong>
+                                ৳1,800
+                            </strong>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <article class="profile-product">
+
+                        <div
+                            class="profile-product-image"
+                            style="
+                                background-image:
+                                url('https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?auto=format&fit=crop&w=700&q=80');
+                            "
+                        >
+
+                            <span>
+                                HOT
+                            </span>
+
+                        </div>
+
+                        <div class="profile-product-info">
+
+                            <h3>
+                                Ladies Fashion Set
+                            </h3>
+
+                            <p>
+                                Local collection
+                            </p>
+
+                            <strong>
+                                ৳1,450
+                            </strong>
+
+                        </div>
+
+                    </article>
+
+
+
+                    <article class="profile-product">
+
+                        <div
+                            class="profile-product-image"
+                            style="
+                                background-image:
+                                url('https://images.unsplash.com/photo-1583743814966-8936f37f4678?auto=format&fit=crop&w=700&q=80');
+                            "
+                        >
+
+                            <span>
+                                SALE
+                            </span>
+
+                        </div>
+
+                        <div class="profile-product-info">
+
+                            <h3>
+                                Tailored Outfit
+                            </h3>
+
+                            <p>
+                                Made to order
+                            </p>
+
+                            <strong>
+                                ৳1,600
+                            </strong>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+            </div>
 
         </div>
+
+
+
+        <!-- =================================================
+             OFFERS TAB
+        ================================================== -->
+
+        <div
+            class="profile-tab-content"
+            id="offers"
+        >
+
+            <div class="profile-card">
+
+                <h2>
+                    🔥 Special Offers
+                </h2>
+
+                <div class="profile-offer">
+
+                    <div>
+
+                        <span>
+                            SPECIAL OFFER
+                        </span>
+
+                        <h3>
+                            Three Piece-এ 20% ছাড়
+                        </h3>
+
+                        <p>
+                            Limited time local brand offer।
+                        </p>
+
+                    </div>
+
+                    <button
+                        onclick="showToast('Offer details শীঘ্রই আসছে!')"
+                    >
+                        View Offer →
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             REVIEWS TAB
+        ================================================== -->
+
+        <div
+            class="profile-tab-content"
+            id="reviews"
+        >
+
+            <div class="profile-card">
+
+                <div class="review-summary">
+
+                    <div class="review-score">
+
+                        <strong>
+                            4.8
+                        </strong>
+
+                        <span>
+                            ★★★★★
+                        </span>
+
+                        <small>
+                            126 Reviews
+                        </small>
+
+                    </div>
+
+
+                    <div class="review-message">
+
+                        ⭐ Highly rated local business
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="review-item">
+
+                    <div class="review-avatar">
+                        👤
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Local Customer
+                        </strong>
+
+                        <div class="review-stars">
+                            ★★★★★
+                        </div>
+
+                        <p>
+                            Product quality ভালো এবং
+                            tailoring service খুব সুন্দর।
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="review-item">
+
+                    <div class="review-avatar">
+                        👩
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Happy Customer
+                        </strong>
+
+                        <div class="review-stars">
+                            ★★★★★
+                        </div>
+
+                        <p>
+                            Custom dress-এর fitting
+                            অনেক ভালো হয়েছে।
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             POSTS TAB
+        ================================================== -->
+
+        <div
+            class="profile-tab-content"
+            id="posts"
+        >
+
+            <div class="profile-card">
+
+                <div class="post-header">
+
+                    <div class="post-avatar">
+                        👗
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Anjona Ladies Tailors
+                        </strong>
+
+                        <div>
+                            🔵 · 2 days ago
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <h2>
+                    নতুন Fashion Collection এসেছে! 👗
+                </h2>
+
+
+                <p>
+
+                    আমাদের নতুন local fashion collection
+                    এখন Shopping Mela-তে available।
+
+                </p>
+
+
+                <div
+                    class="post-image"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1200&q=85');
+                    "
+                ></div>
+
+
+                <div class="post-actions">
+
+                    <button
+                        onclick="showToast('Like করা হয়েছে ❤️')"
+                    >
+                        ❤️ Like
+                    </button>
+
+                    <button
+                        onclick="showToast('Comment option শীঘ্রই আসছে')"
+                    >
+                        💬 Comment
+                    </button>
+
+                    <button
+                        onclick="shareProfile()"
+                    >
+                        ↗ Share
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
 
     </div>
 
 </section>
 
+</main>
+
 
 
 <!-- =====================================================
-     VERIFICATION INFO MODAL
+     VERIFICATION MODAL
 ====================================================== -->
 
 <div
-    class="modal"
-    id="verificationModal"
+    class="verification-popup"
+    id="verificationPopup"
 >
 
-    <div
-        class="modal-overlay"
-        onclick="closeVerificationInfo()"
-    >
-    </div>
-
-
-    <div class="modal-box">
+    <div class="verification-popup-box">
 
         <button
-            class="modal-close"
-            onclick="closeVerificationInfo()"
+            class="verification-close"
+            onclick="closeVerification()"
         >
             ×
         </button>
 
 
-        <div class="verification-modal-icon">
+        <div class="big-verification-badge">
             ✓
         </div>
 
 
         <h2>
-            🔵 Verified Profile
+            Verified Business
         </h2>
 
 
         <p>
-
-            Blue Verified Badge মানে Shopping Mela
-            কর্তৃপক্ষ profile বা business information
-            যাচাই করেছে।
-
+            Anjona Ladies Tailors-এর profile
+            Shopping Mela verification process
+            সম্পন্ন করেছে।
         </p>
 
 
-        <p>
-
-            এই badge profile-এর authenticity
-            বোঝাতে ব্যবহার করা হয়।
-
-        </p>
-
-
-        <button
-            class="primary-btn"
-            onclick="closeVerificationInfo()"
-        >
-            বুঝেছি
-        </button>
+        <div class="verification-status">
+            🔵 Verified by Shopping Mela
+        </div>
 
     </div>
 
@@ -1011,7 +958,16 @@
 
 
 
-</main>
+<!-- =====================================================
+     TOAST
+====================================================== -->
+
+<div
+    class="toast"
+    id="toast"
+>
+    Done!
+</div>
 
 
 
@@ -1024,7 +980,6 @@
     <div class="container">
 
         <div class="footer-main">
-
 
             <div class="footer-brand">
 
@@ -1043,15 +998,13 @@
 
                 </a>
 
-
                 <p>
-                    Local brands, businesses,
-                    products এবং community
-                    এক জায়গায়।
+                    Local brands, products,
+                    businesses এবং community
+                    content-এর modern platform।
                 </p>
 
             </div>
-
 
 
             <div>
@@ -1064,20 +1017,15 @@
                     Categories
                 </a>
 
-                <a href="brands.html">
+                <a href="index.html#brands">
                     Local Brands
                 </a>
 
-                <a href="products.html">
+                <a href="index.html#products">
                     Products
                 </a>
 
-                <a href="index.html#offers">
-                    Offers
-                </a>
-
             </div>
-
 
 
             <div>
@@ -1090,7 +1038,7 @@
                     Blog
                 </a>
 
-                <a href="blog.html#writePost">
+                <a href="blog.html">
                     Write a Post
                 </a>
 
@@ -1099,7 +1047,6 @@
                 </a>
 
             </div>
-
 
 
             <div>
@@ -1120,14 +1067,9 @@
                     Privacy Policy
                 </a>
 
-                <a href="#">
-                    Terms
-                </a>
-
             </div>
 
         </div>
-
 
 
         <div class="footer-bottom">
@@ -1144,293 +1086,236 @@
 
 
 <!-- =====================================================
-     TOAST
-====================================================== -->
-
-<div
-    class="toast"
-    id="toast"
->
-    Done!
-</div>
-
-
-
-<!-- =====================================================
      JAVASCRIPT
 ====================================================== -->
 
+<script src="script.js"></script>
+
+
 <script>
-
-
-/* =====================================================
-   TOAST
-====================================================== */
 
 function showToast(message) {
 
     const toast =
-        document.getElementById(
-            "toast"
-        );
+        document.getElementById("toast");
 
-    toast.textContent =
-        message;
+    toast.textContent = message;
 
-    toast.classList.add(
-        "show"
+    toast.classList.add("show");
+
+    setTimeout(
+        function() {
+
+            toast.classList.remove("show");
+
+        },
+        2500
     );
-
-
-    setTimeout(function() {
-
-        toast.classList.remove(
-            "show"
-        );
-
-    }, 2500);
 
 }
 
 
 
-/* =====================================================
-   SHARE PROFILE
-====================================================== */
+function showVerification() {
+
+    const popup =
+        document.getElementById("verificationPopup");
+
+    if (popup) {
+
+        popup.classList.add("show");
+
+    }
+
+}
+
+
+
+function closeVerification() {
+
+    const popup =
+        document.getElementById("verificationPopup");
+
+    if (popup) {
+
+        popup.classList.remove("show");
+
+    }
+
+}
+
+
+
+function openTab(tabId, button) {
+
+    const contents =
+        document.querySelectorAll(
+            ".profile-tab-content"
+        );
+
+    contents.forEach(
+        function(content) {
+
+            content.classList.remove("active");
+
+        }
+    );
+
+
+    const tabs =
+        document.querySelectorAll(
+            ".profile-tab"
+        );
+
+    tabs.forEach(
+        function(tab) {
+
+            tab.classList.remove("active");
+
+        }
+    );
+
+
+    const selected =
+        document.getElementById(tabId);
+
+    if (selected) {
+
+        selected.classList.add("active");
+
+    }
+
+
+    if (button) {
+
+        button.classList.add("active");
+
+    }
+
+}
+
+
+
+function toggleFollow() {
+
+    const button =
+        document.getElementById("followBtn");
+
+    if (!button) {
+        return;
+    }
+
+
+    if (
+        button.classList.contains("following")
+    ) {
+
+        button.classList.remove("following");
+
+        button.textContent =
+            "+ Follow";
+
+        showToast(
+            "আপনি unfollow করেছেন"
+        );
+
+    } else {
+
+        button.classList.add("following");
+
+        button.textContent =
+            "✓ Following";
+
+        showToast(
+            "Business follow করা হয়েছে ❤️"
+        );
+
+    }
+
+}
+
+
 
 function shareProfile() {
 
-    const shareData = {
-
-        title:
-            "Anjona Ladies Tailors — Shopping Mela",
-
-        text:
-            "এই Local Brand profile-টি Shopping Mela-তে দেখুন।",
-
-        url:
-            window.location.href
-
-    };
+    const profileUrl =
+        window.location.href;
 
 
     if (
         navigator.share
     ) {
 
-        navigator
-            .share(
-                shareData
-            )
-            .catch(
-                function() {}
-            );
+        navigator.share({
+
+            title:
+                "Anjona Ladies Tailors — Shopping Mela",
+
+            text:
+                "এই verified local business profileটি দেখুন।",
+
+            url:
+                profileUrl
+
+        }).catch(
+            function() {}
+        );
 
     } else {
-
-        copyProfileLink();
-
-        showToast(
-            "Profile link copy হয়েছে 🔗"
-        );
-
-    }
-
-}
-
-
-
-/* =====================================================
-   COPY PROFILE LINK
-====================================================== */
-
-function copyProfileLink() {
-
-    const url =
-        window.location.href;
-
-
-    if (
-        navigator.clipboard
-    ) {
-
-        navigator.clipboard
-            .writeText(
-                url
-            )
-            .then(function() {
-
-                showToast(
-                    "Profile link copy হয়েছে 🔗"
-                );
-
-            });
-
-    } else {
-
-        showToast(
-            "Link copy করা যায়নি"
-        );
-
-    }
-
-}
-
-
-
-/* =====================================================
-   VERIFICATION INFO
-====================================================== */
-
-function showVerificationInfo() {
-
-    document
-        .getElementById(
-            "verificationModal"
-        )
-        .classList.add(
-            "show"
-        );
-
-}
-
-
-function closeVerificationInfo() {
-
-    document
-        .getElementById(
-            "verificationModal"
-        )
-        .classList.remove(
-            "show"
-        );
-
-}
-
-
-
-/* =====================================================
-   SEARCH
-====================================================== */
-
-function searchProfile() {
-
-    const input =
-        document
-            .getElementById(
-                "profileSearch"
-            );
-
-
-    const query =
-        input.value
-            .trim()
-            .toLowerCase();
-
-
-    if (!query) {
-
-        showToast(
-            "কিছু search করুন 🔍"
-        );
-
-        return;
-
-    }
-
-
-    const profileText =
-        document
-            .querySelector(
-                ".profile-main-info"
-            )
-            .innerText
-            .toLowerCase();
-
-
-    if (
-        profileText.includes(
-            query
-        )
-    ) {
-
-        showToast(
-            "Profile পাওয়া গেছে 🔵"
-        );
-
-        document
-            .querySelector(
-                ".profile-hero"
-            )
-            .scrollIntoView({
-                behavior: "smooth"
-            });
-
-    } else {
-
-        showToast(
-            "এই profile-এ কিছু পাওয়া যায়নি"
-        );
-
-    }
-
-}
-
-
-
-/* =====================================================
-   ESCAPE MODAL
-====================================================== */
-
-document.addEventListener(
-    "keydown",
-    function(event) {
 
         if (
-            event.key === "Escape"
+            navigator.clipboard
         ) {
 
-            closeVerificationInfo();
+            navigator.clipboard
+                .writeText(profileUrl)
+                .then(
+                    function() {
+
+                        showToast(
+                            "Profile link copy হয়েছে 🔗"
+                        );
+
+                    }
+                );
+
+        } else {
+
+            showToast(
+                "Profile link: " +
+                profileUrl
+            );
+
+        }
+
+    }
+
+}
+
+
+
+window.addEventListener(
+    "click",
+    function(event) {
+
+        const popup =
+            document.getElementById(
+                "verificationPopup"
+            );
+
+        if (
+            popup &&
+            event.target === popup
+        ) {
+
+            popup.classList.remove("show");
 
         }
 
     }
 );
 
-
-
-/* =====================================================
-   PROFILE CARD ANIMATION
-====================================================== */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function() {
-
-        const cards =
-            document.querySelectorAll(
-                ".profile-card, .profile-side-card"
-            );
-
-
-        cards.forEach(
-            function(card, index) {
-
-                card.style.animationDelay =
-                    (index * 80) +
-                    "ms";
-
-            }
-        );
-
-    }
-);
-
-
 </script>
 
-
 </body>
-
 </html>
-```
