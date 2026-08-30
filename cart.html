@@ -1,0 +1,1858 @@
+```html
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Shopping Cart — Shopping Mela</title>
+
+    <meta
+        name="description"
+        content="Shopping Mela shopping cart"
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <style>
+
+        /* =====================================================
+           CART PAGE
+        ====================================================== */
+
+        .cart-page {
+            background: #f5f6f8;
+            min-height: 100vh;
+            padding: 30px 0 60px;
+        }
+
+
+        .cart-container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+
+        /* =====================================================
+           PAGE HEADING
+        ====================================================== */
+
+        .cart-heading {
+            margin-bottom: 25px;
+        }
+
+
+        .cart-heading h1 {
+            margin: 0;
+
+            color: #101828;
+
+            font-size: 30px;
+
+            font-weight: 800;
+        }
+
+
+        .cart-heading p {
+            margin: 7px 0 0;
+
+            color: #667085;
+
+            font-size: 14px;
+        }
+
+
+        /* =====================================================
+           CART GRID
+        ====================================================== */
+
+        .cart-grid {
+            display: grid;
+
+            grid-template-columns:
+                1.7fr
+                .8fr;
+
+            gap: 22px;
+
+            align-items: start;
+        }
+
+
+        /* =====================================================
+           CART CARD
+        ====================================================== */
+
+        .cart-card {
+            background: #ffffff;
+
+            border: 1px solid #e7eaf0;
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 5px 20px rgba(16,24,40,.04);
+
+            overflow: hidden;
+        }
+
+
+        .cart-card-header {
+            padding: 20px 22px;
+
+            border-bottom:
+                1px solid #eaecf0;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+
+        .cart-card-header h2 {
+            margin: 0;
+
+            color: #101828;
+
+            font-size: 18px;
+        }
+
+
+        .cart-count {
+            background: #eef5ff;
+
+            color: #1877f2;
+
+            padding: 5px 10px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: 800;
+        }
+
+
+        /* =====================================================
+           CART ITEM
+        ====================================================== */
+
+        .cart-item {
+            display: grid;
+
+            grid-template-columns:
+                110px
+                1fr
+                auto;
+
+            gap: 18px;
+
+            padding: 20px 22px;
+
+            border-bottom:
+                1px solid #eaecf0;
+        }
+
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+
+        .cart-item-image {
+            width: 110px;
+            height: 110px;
+
+            border-radius: 12px;
+
+            background-size: cover;
+
+            background-position: center;
+
+            position: relative;
+        }
+
+
+        .discount-badge {
+            position: absolute;
+
+            top: 8px;
+            left: 8px;
+
+            background: #e53935;
+
+            color: #ffffff;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            padding: 4px 7px;
+
+            border-radius: 5px;
+        }
+
+
+        /* =====================================================
+           ITEM INFO
+        ====================================================== */
+
+        .cart-item-info h3 {
+            margin: 0 0 7px;
+
+            color: #101828;
+
+            font-size: 16px;
+        }
+
+
+        .cart-item-brand {
+            color: #667085;
+
+            font-size: 12px;
+
+            margin-bottom: 7px;
+        }
+
+
+        .verified-mini {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 4px;
+
+            color: #1877f2;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            margin-bottom: 12px;
+        }
+
+
+        .verified-mini-badge {
+            width: 16px;
+            height: 16px;
+
+            background: #1877f2;
+
+            color: #ffffff;
+
+            border-radius: 50%;
+
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 9px;
+
+            font-weight: 800;
+        }
+
+
+        /* =====================================================
+           QUANTITY
+        ====================================================== */
+
+        .quantity-area {
+            display: flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            margin-top: 7px;
+        }
+
+
+        .quantity-label {
+            color: #667085;
+
+            font-size: 12px;
+
+            font-weight: 600;
+        }
+
+
+        .quantity-control {
+            display: inline-flex;
+
+            align-items: center;
+
+            border: 1px solid #d0d5dd;
+
+            border-radius: 8px;
+
+            overflow: hidden;
+        }
+
+
+        .quantity-btn {
+            width: 32px;
+            height: 32px;
+
+            border: none;
+
+            background: #f8fafc;
+
+            color: #101828;
+
+            cursor: pointer;
+
+            font-size: 17px;
+
+            font-weight: 700;
+        }
+
+
+        .quantity-btn:hover {
+            background: #eef5ff;
+
+            color: #1877f2;
+        }
+
+
+        .quantity-number {
+            min-width: 35px;
+
+            text-align: center;
+
+            color: #101828;
+
+            font-size: 13px;
+
+            font-weight: 800;
+        }
+
+
+        /* =====================================================
+           ACTIONS
+        ====================================================== */
+
+        .item-actions {
+            display: flex;
+
+            gap: 12px;
+
+            margin-top: 12px;
+        }
+
+
+        .item-action-btn {
+            border: none;
+
+            background: transparent;
+
+            padding: 0;
+
+            cursor: pointer;
+
+            color: #667085;
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+
+        .item-action-btn:hover {
+            color: #1877f2;
+        }
+
+
+        .remove-btn:hover {
+            color: #e53935;
+        }
+
+
+        /* =====================================================
+           ITEM PRICE
+        ====================================================== */
+
+        .cart-item-price {
+            text-align: right;
+
+            min-width: 100px;
+        }
+
+
+        .cart-current-price {
+            display: block;
+
+            color: #101828;
+
+            font-size: 17px;
+
+            font-weight: 800;
+        }
+
+
+        .cart-old-price {
+            display: block;
+
+            margin-top: 5px;
+
+            color: #98a2b3;
+
+            font-size: 11px;
+
+            text-decoration: line-through;
+        }
+
+
+        .item-savings {
+            display: block;
+
+            margin-top: 7px;
+
+            color: #12b76a;
+
+            font-size: 11px;
+
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           EMPTY CART
+        ====================================================== */
+
+        .empty-cart {
+            display: none;
+
+            text-align: center;
+
+            padding: 65px 25px;
+        }
+
+
+        .empty-cart-icon {
+            width: 75px;
+            height: 75px;
+
+            margin: 0 auto 15px;
+
+            background: #eef5ff;
+
+            color: #1877f2;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            font-size: 35px;
+        }
+
+
+        .empty-cart h2 {
+            margin: 0 0 8px;
+
+            color: #101828;
+
+            font-size: 22px;
+        }
+
+
+        .empty-cart p {
+            margin: 0 auto 20px;
+
+            max-width: 420px;
+
+            color: #667085;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+        }
+
+
+        .continue-btn {
+            display: inline-block;
+
+            background: #1877f2;
+
+            color: #ffffff;
+
+            text-decoration: none;
+
+            padding: 12px 20px;
+
+            border-radius: 9px;
+
+            font-size: 13px;
+
+            font-weight: 800;
+        }
+
+
+        /* =====================================================
+           SUMMARY
+        ====================================================== */
+
+        .summary-card {
+            background: #ffffff;
+
+            border: 1px solid #e7eaf0;
+
+            border-radius: 16px;
+
+            padding: 22px;
+
+            box-shadow:
+                0 5px 20px rgba(16,24,40,.04);
+
+            position: sticky;
+
+            top: 20px;
+        }
+
+
+        .summary-card h2 {
+            margin: 0 0 20px;
+
+            color: #101828;
+
+            font-size: 19px;
+        }
+
+
+        .summary-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin: 13px 0;
+
+            color: #667085;
+
+            font-size: 14px;
+        }
+
+
+        .summary-row strong {
+            color: #101828;
+        }
+
+
+        .discount-row strong {
+            color: #12b76a;
+        }
+
+
+        .summary-total {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            border-top:
+                1px solid #eaecf0;
+
+            margin-top: 18px;
+
+            padding-top: 18px;
+
+            color: #101828;
+
+            font-size: 18px;
+
+            font-weight: 800;
+        }
+
+
+        .summary-total strong {
+            color: #1877f2;
+
+            font-size: 20px;
+        }
+
+
+        /* =====================================================
+           CHECKOUT BUTTON
+        ====================================================== */
+
+        .checkout-btn {
+            width: 100%;
+
+            border: none;
+
+            background: #1877f2;
+
+            color: #ffffff;
+
+            padding: 14px;
+
+            border-radius: 10px;
+
+            margin-top: 20px;
+
+            font-size: 14px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition: .2s;
+        }
+
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 18px rgba(24,119,242,.20);
+        }
+
+
+        .continue-shopping {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 13px;
+
+            color: #1877f2;
+
+            text-decoration: none;
+
+            font-size: 12px;
+
+            font-weight: 700;
+        }
+
+
+        /* =====================================================
+           SECURITY
+        ====================================================== */
+
+        .cart-security {
+            margin-top: 18px;
+
+            padding: 14px;
+
+            border-radius: 10px;
+
+            background: #f8fafc;
+
+            border: 1px solid #eaecf0;
+
+            color: #667085;
+
+            font-size: 11px;
+
+            line-height: 1.6;
+
+            text-align: center;
+        }
+
+
+        /* =====================================================
+           CLEAR CART
+        ====================================================== */
+
+        .clear-cart {
+            border: none;
+
+            background: transparent;
+
+            color: #e53935;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        .clear-cart:hover {
+            text-decoration: underline;
+        }
+
+
+        /* =====================================================
+           TOAST
+        ====================================================== */
+
+        .cart-toast {
+            position: fixed;
+
+            left: 50%;
+
+            bottom: 25px;
+
+            transform:
+                translateX(-50%)
+                translateY(20px);
+
+            background: #111827;
+
+            color: #ffffff;
+
+            padding: 12px 20px;
+
+            border-radius: 9px;
+
+            font-size: 13px;
+
+            opacity: 0;
+
+            visibility: hidden;
+
+            transition: .25s;
+
+            z-index: 9999;
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,.2);
+        }
+
+
+        .cart-toast.show {
+            opacity: 1;
+
+            visibility: visible;
+
+            transform:
+                translateX(-50%)
+                translateY(0);
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ====================================================== */
+
+        @media (max-width: 850px) {
+
+            .cart-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-card {
+                position: static;
+            }
+
+        }
+
+
+        @media (max-width: 600px) {
+
+            .cart-page {
+                padding: 18px 0 40px;
+            }
+
+            .cart-container {
+                padding: 0 12px;
+            }
+
+            .cart-heading h1 {
+                font-size: 25px;
+            }
+
+            .cart-item {
+                grid-template-columns:
+                    85px
+                    1fr;
+
+                gap: 13px;
+
+                padding: 16px;
+            }
+
+            .cart-item-image {
+                width: 85px;
+                height: 85px;
+            }
+
+            .cart-item-price {
+                grid-column: 2;
+
+                text-align: left;
+
+                min-width: auto;
+
+                margin-top: -5px;
+            }
+
+            .cart-card-header {
+                padding: 16px;
+            }
+
+            .summary-card {
+                padding: 18px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     TOP BAR
+====================================================== -->
+
+<div class="top-bar">
+
+    🛍️ <span>Shopping Mela</span>
+    — আপনার Shopping Cart
+
+</div>
+
+
+
+<!-- =====================================================
+     HEADER
+====================================================== -->
+
+<header class="header">
+
+    <div class="container">
+
+        <div class="header-main">
+
+
+            <!-- LOGO -->
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+
+                <div class="logo-icon">
+                    🛍️
+                </div>
+
+                <span>
+                    Shopping Mela
+                </span>
+
+            </a>
+
+
+
+            <!-- ACTIONS -->
+
+            <div class="header-actions">
+
+                <button
+                    class="header-action"
+                    onclick="goHome()"
+                >
+
+                    <span class="header-action-icon">
+                        🏠
+                    </span>
+
+                    <span>
+                        Home
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="header-action"
+                    onclick="showToast('আপনি Cart-এই আছেন 🛒')"
+                >
+
+                    <span class="header-action-icon">
+                        🛒
+                    </span>
+
+                    <span>
+                        Cart
+                    </span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+====================================================== -->
+
+<main class="cart-page">
+
+    <div class="cart-container">
+
+
+        <!-- PAGE HEADING -->
+
+        <div class="cart-heading">
+
+            <h1>
+                Shopping Cart 🛒
+            </h1>
+
+            <p>
+                আপনার পছন্দের products review করে
+                checkout করুন।
+            </p>
+
+        </div>
+
+
+
+        <div class="cart-grid">
+
+
+            <!-- =================================================
+                 CART ITEMS
+            ================================================== -->
+
+            <section class="cart-card">
+
+
+                <div class="cart-card-header">
+
+                    <h2>
+                        My Cart
+                    </h2>
+
+                    <div
+                        class="cart-count"
+                        id="cartCount"
+                    >
+                        2 Items
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     ITEM 1
+                ================================================== -->
+
+                <article
+                    class="cart-item"
+                    data-id="product-1"
+                    data-price="1250"
+                    data-old-price="1550"
+                    data-discount="300"
+                >
+
+
+                    <div
+                        class="cart-item-image"
+                        style="
+                            background-image:
+                            url('https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=700&q=80');
+                        "
+                    >
+
+                        <span class="discount-badge">
+                            -20%
+                        </span>
+
+                    </div>
+
+
+
+                    <div class="cart-item-info">
+
+                        <h3>
+                            Ladies Three Piece
+                        </h3>
+
+                        <div class="cart-item-brand">
+                            Anjona Ladies Tailors
+                        </div>
+
+
+                        <div class="verified-mini">
+
+                            <span class="verified-mini-badge">
+                                ✓
+                            </span>
+
+                            Verified Seller
+
+                        </div>
+
+
+                        <div class="quantity-area">
+
+                            <span class="quantity-label">
+                                Quantity
+                            </span>
+
+                            <div class="quantity-control">
+
+                                <button
+                                    class="quantity-btn"
+                                    onclick="changeQuantity('product-1', -1)"
+                                >
+                                    −
+                                </button>
+
+                                <span
+                                    class="quantity-number"
+                                    id="quantity-product-1"
+                                >
+                                    1
+                                </span>
+
+                                <button
+                                    class="quantity-btn"
+                                    onclick="changeQuantity('product-1', 1)"
+                                >
+                                    +
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="item-actions">
+
+                            <button
+                                class="item-action-btn"
+                                onclick="moveToWishlist('Ladies Three Piece')"
+                            >
+                                ♡ Wishlist
+                            </button>
+
+                            <button
+                                class="item-action-btn remove-btn"
+                                onclick="removeItem('product-1')"
+                            >
+                                🗑 Remove
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="cart-item-price">
+
+                        <span
+                            class="cart-current-price"
+                            id="price-product-1"
+                        >
+                            ৳1,250
+                        </span>
+
+                        <span class="cart-old-price">
+                            ৳1,550
+                        </span>
+
+                        <span class="item-savings">
+                            Save ৳300
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     ITEM 2
+                ================================================== -->
+
+                <article
+                    class="cart-item"
+                    data-id="product-2"
+                    data-price="650"
+                    data-old-price="750"
+                    data-discount="100"
+                >
+
+
+                    <div
+                        class="cart-item-image"
+                        style="
+                            background-image:
+                            url('https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=700&q=80');
+                        "
+                    >
+
+                        <span class="discount-badge">
+                            -15%
+                        </span>
+
+                    </div>
+
+
+
+                    <div class="cart-item-info">
+
+                        <h3>
+                            Premium Attar
+                        </h3>
+
+                        <div class="cart-item-brand">
+                            Local Attar Shop
+                        </div>
+
+
+                        <div class="verified-mini">
+
+                            <span class="verified-mini-badge">
+                                ✓
+                            </span>
+
+                            Verified Seller
+
+                        </div>
+
+
+                        <div class="quantity-area">
+
+                            <span class="quantity-label">
+                                Quantity
+                            </span>
+
+                            <div class="quantity-control">
+
+                                <button
+                                    class="quantity-btn"
+                                    onclick="changeQuantity('product-2', -1)"
+                                >
+                                    −
+                                </button>
+
+                                <span
+                                    class="quantity-number"
+                                    id="quantity-product-2"
+                                >
+                                    1
+                                </span>
+
+                                <button
+                                    class="quantity-btn"
+                                    onclick="changeQuantity('product-2', 1)"
+                                >
+                                    +
+                                </button>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="item-actions">
+
+                            <button
+                                class="item-action-btn"
+                                onclick="moveToWishlist('Premium Attar')"
+                            >
+                                ♡ Wishlist
+                            </button>
+
+                            <button
+                                class="item-action-btn remove-btn"
+                                onclick="removeItem('product-2')"
+                            >
+                                🗑 Remove
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="cart-item-price">
+
+                        <span
+                            class="cart-current-price"
+                            id="price-product-2"
+                        >
+                            ৳650
+                        </span>
+
+                        <span class="cart-old-price">
+                            ৳750
+                        </span>
+
+                        <span class="item-savings">
+                            Save ৳100
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     EMPTY CART
+                ================================================== -->
+
+                <div
+                    class="empty-cart"
+                    id="emptyCart"
+                >
+
+                    <div class="empty-cart-icon">
+                        🛒
+                    </div>
+
+                    <h2>
+                        Your Cart is Empty
+                    </h2>
+
+                    <p>
+                        এখনো কোনো product আপনার cart-এ নেই।
+                        Shopping Mela থেকে আপনার পছন্দের
+                        product যোগ করুন।
+                    </p>
+
+                    <a
+                        href="index.html#products"
+                        class="continue-btn"
+                    >
+                        Shopping শুরু করুন →
+                    </a>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =================================================
+                 SUMMARY
+            ================================================== -->
+
+            <aside class="summary-card">
+
+                <h2>
+                    Cart Summary
+                </h2>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Subtotal
+                    </span>
+
+                    <strong id="subtotal">
+                        ৳1,900
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row discount-row">
+
+                    <span>
+                        Total Discount
+                    </span>
+
+                    <strong id="discount">
+                        -৳400
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Delivery
+                    </span>
+
+                    <strong id="delivery">
+                        ৳80
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-total">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong id="grandTotal">
+                        ৳1,580
+                    </strong>
+
+                </div>
+
+
+                <button
+                    class="checkout-btn"
+                    onclick="goCheckout()"
+                >
+                    Proceed to Checkout →
+                </button>
+
+
+                <a
+                    href="index.html#products"
+                    class="continue-shopping"
+                >
+                    ← Continue Shopping
+                </a>
+
+
+                <div class="cart-security">
+
+                    🔒 Secure Checkout<br>
+
+                    আপনার order information
+                    নিরাপদভাবে process করা হবে।
+
+                </div>
+
+
+                <button
+                    class="clear-cart"
+                    onclick="clearCart()"
+                    style="
+                        display:block;
+                        margin:18px auto 0;
+                    "
+                >
+                    Clear Cart
+                </button>
+
+            </aside>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-bottom">
+
+            © 2026 Shopping Mela.
+            All Rights Reserved.
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     TOAST
+====================================================== -->
+
+<div
+    class="cart-toast"
+    id="cartToast"
+>
+    Done!
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script>
+
+    /* =====================================================
+       CART DATA
+    ====================================================== */
+
+    const cartData = {
+
+        "product-1": {
+            quantity: 1,
+            price: 1250,
+            discount: 300,
+            name: "Ladies Three Piece"
+        },
+
+        "product-2": {
+            quantity: 1,
+            price: 650,
+            discount: 100,
+            name: "Premium Attar"
+        }
+
+    };
+
+
+
+    let deliveryCharge = 80;
+
+
+
+    /* =====================================================
+       FORMAT MONEY
+    ====================================================== */
+
+    function money(amount) {
+
+        return "৳" +
+            Number(amount)
+                .toLocaleString("en-BD");
+
+    }
+
+
+
+    /* =====================================================
+       UPDATE CART
+    ====================================================== */
+
+    function updateCart() {
+
+        let subtotal = 0;
+
+        let discount = 0;
+
+        let totalItems = 0;
+
+
+        Object.keys(cartData).forEach(id => {
+
+            const item =
+                cartData[id];
+
+
+            subtotal +=
+                item.price *
+                item.quantity;
+
+
+            discount +=
+                item.discount *
+                item.quantity;
+
+
+            totalItems +=
+                item.quantity;
+
+
+            const quantityElement =
+                document.getElementById(
+                    "quantity-" + id
+                );
+
+
+            const priceElement =
+                document.getElementById(
+                    "price-" + id
+                );
+
+
+            if (quantityElement) {
+
+                quantityElement.textContent =
+                    item.quantity;
+
+            }
+
+
+            if (priceElement) {
+
+                priceElement.textContent =
+                    money(
+                        item.price *
+                        item.quantity
+                    );
+
+            }
+
+        });
+
+
+        const grandTotal =
+            subtotal -
+            discount +
+            deliveryCharge;
+
+
+        document.getElementById(
+            "subtotal"
+        ).textContent =
+            money(subtotal);
+
+
+        document.getElementById(
+            "discount"
+        ).textContent =
+            "-" + money(discount);
+
+
+        document.getElementById(
+            "delivery"
+        ).textContent =
+            money(deliveryCharge);
+
+
+        document.getElementById(
+            "grandTotal"
+        ).textContent =
+            money(grandTotal);
+
+
+        document.getElementById(
+            "cartCount"
+        ).textContent =
+            totalItems +
+            (totalItems === 1
+                ? " Item"
+                : " Items");
+
+
+        checkEmptyCart();
+
+    }
+
+
+
+    /* =====================================================
+       CHANGE QUANTITY
+    ====================================================== */
+
+    function changeQuantity(
+        id,
+        change
+    ) {
+
+        if (!cartData[id]) {
+            return;
+        }
+
+
+        cartData[id].quantity +=
+            change;
+
+
+        if (
+            cartData[id].quantity < 1
+        ) {
+
+            cartData[id].quantity = 1;
+
+        }
+
+
+        updateCart();
+
+
+        showToast(
+            cartData[id].name +
+            " quantity updated"
+        );
+
+    }
+
+
+
+    /* =====================================================
+       REMOVE ITEM
+    ====================================================== */
+
+    function removeItem(id) {
+
+        if (!cartData[id]) {
+            return;
+        }
+
+
+        const productName =
+            cartData[id].name;
+
+
+        delete cartData[id];
+
+
+        const item =
+            document.querySelector(
+                '.cart-item[data-id="' +
+                id +
+                '"]'
+            );
+
+
+        if (item) {
+
+            item.remove();
+
+        }
+
+
+        updateCart();
+
+
+        showToast(
+            productName +
+            " cart থেকে remove করা হয়েছে"
+        );
+
+    }
+
+
+
+    /* =====================================================
+       MOVE TO WISHLIST
+    ====================================================== */
+
+    function moveToWishlist(
+        productName
+    ) {
+
+        showToast(
+            productName +
+            " Wishlist-এ যোগ করা হয়েছে ❤️"
+        );
+
+    }
+
+
+
+    /* =====================================================
+       CLEAR CART
+    ====================================================== */
+
+    function clearCart() {
+
+        const hasItems =
+            Object.keys(cartData)
+                .length > 0;
+
+
+        if (!hasItems) {
+
+            showToast(
+                "Cart ইতোমধ্যে empty"
+            );
+
+            return;
+
+        }
+
+
+        const confirmClear =
+            confirm(
+                "আপনি কি পুরো Cart clear করতে চান?"
+            );
+
+
+        if (!confirmClear) {
+            return;
+        }
+
+
+        Object.keys(cartData)
+            .forEach(id => {
+
+                delete cartData[id];
+
+            });
+
+
+        document
+            .querySelectorAll(
+                ".cart-item"
+            )
+            .forEach(item => {
+
+                item.remove();
+
+            });
+
+
+        updateCart();
+
+
+        showToast(
+            "আপনার Cart clear করা হয়েছে"
+        );
+
+    }
+
+
+
+    /* =====================================================
+       CHECK EMPTY CART
+    ====================================================== */
+
+    function checkEmptyCart() {
+
+        const itemCount =
+            Object.keys(cartData)
+                .length;
+
+
+        const emptyCart =
+            document.getElementById(
+                "emptyCart"
+            );
+
+
+        if (itemCount === 0) {
+
+            emptyCart.style.display =
+                "block";
+
+        } else {
+
+            emptyCart.style.display =
+                "none";
+
+        }
+
+    }
+
+
+
+    /* =====================================================
+       CHECKOUT
+    ====================================================== */
+
+    function goCheckout() {
+
+        const itemCount =
+            Object.keys(cartData)
+                .length;
+
+
+        if (itemCount === 0) {
+
+            showToast(
+                "Checkout করার আগে Cart-এ product যোগ করুন"
+            );
+
+            return;
+
+        }
+
+
+        /*
+         * DEMO CART DATA SAVE
+         */
+
+        localStorage.setItem(
+            "shoppingMelaCart",
+            JSON.stringify(cartData)
+        );
+
+
+        window.location.href =
+            "checkout.html";
+
+    }
+
+
+
+    /* =====================================================
+       HOME
+    ====================================================== */
+
+    function goHome() {
+
+        window.location.href =
+            "index.html";
+
+    }
+
+
+
+    /* =====================================================
+       TOAST
+    ====================================================== */
+
+    function showToast(message) {
+
+        const toast =
+            document.getElementById(
+                "cartToast"
+            );
+
+
+        toast.textContent =
+            message;
+
+
+        toast.classList.add(
+            "show"
+        );
+
+
+        clearTimeout(
+            window.cartToastTimer
+        );
+
+
+        window.cartToastTimer =
+            setTimeout(() => {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            }, 2500);
+
+    }
+
+
+
+    /* =====================================================
+       INITIALIZE
+    ====================================================== */
+
+    updateCart();
+
+</script>
+
+
+</body>
+
+</html>
+```
