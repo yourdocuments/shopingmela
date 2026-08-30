@@ -1,1608 +1,124 @@
-<!DOCTYPE html>
+/* =========================================================
+SHOPPING MELA
+1.3 — script.js
+Main JavaScript
+========================================================= */
 
-<html lang="bn">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-```
-<title>Shopping Mela — Local Brands & Online Shopping</title>
-
-<meta
-    name="description"
-    content="Shopping Mela — Local brands, products, offers, advertisements and community blogs."
->
-
-<link rel="stylesheet" href="style.css">
-```
-
-</head>
-
-<body>
+document.addEventListener("DOMContentLoaded", () => {
 
 ```
-<!-- =====================================================
-     TOP BAR
-====================================================== -->
+/* =====================================================
+   TOAST MESSAGE
+====================================================== */
 
-<div class="top-bar">
-    🛍️ <span>Shopping Mela</span> — আপনার এলাকার Local Brand ও Business এখন এক জায়গায়
-</div>
+window.showToast = function (message) {
 
+    const toast = document.getElementById("toast");
 
-<!-- =====================================================
-     HEADER
-====================================================== -->
+    if (!toast) return;
 
-<header class="header">
+    toast.textContent = message;
+    toast.classList.add("show");
 
-    <div class="container">
+    clearTimeout(window.shoppingMelaToastTimer);
 
-        <div class="header-main">
+    window.shoppingMelaToastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+    }, 2500);
+};
 
-            <!-- LOGO -->
-            <a href="index.html" class="logo">
-                <div class="logo-icon">🛍️</div>
-                <span>Shopping Mela</span>
-            </a>
 
+/* =====================================================
+   SMOOTH SCROLL
+====================================================== */
 
-            <!-- SEARCH -->
-            <div class="header-search">
+window.scrollToSection = function (id) {
 
-                <input
-                    type="search"
-                    id="searchInput"
-                    placeholder="পণ্য, ব্র্যান্ড বা দোকান খুঁজুন..."
-                    aria-label="Search"
-                >
+    const section = document.getElementById(id);
 
-                <button
-                    type="button"
-                    id="searchBtn"
-                    aria-label="Search"
-                >
-                    🔍
-                </button>
+    if (!section) return;
 
-            </div>
+    section.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+};
 
 
-            <!-- HEADER ACTIONS -->
-            <div class="header-actions">
+/* =====================================================
+   HERO SLIDER
+====================================================== */
 
-                <button
-                    class="header-action"
-                    type="button"
-                    onclick="showToast('আপনার Wishlist শীঘ্রই আসছে ❤️')"
-                >
-                    <span class="header-action-icon">♡</span>
-                    <span>Wishlist</span>
-                </button>
+const slides = document.querySelectorAll(".hero-slide");
+const dotsContainer = document.getElementById("sliderDots");
+const nextButton = document.getElementById("nextSlide");
+const prevButton = document.getElementById("prevSlide");
+const heroSlider = document.getElementById("heroSlider");
 
+let currentSlide = 0;
+let sliderTimer = null;
 
-                <button
-                    class="header-action"
-                    type="button"
-                    onclick="showToast('Shopping Cart শীঘ্রই আসছে 🛒')"
-                >
-                    <span class="header-action-icon">🛒</span>
-                    <span>Cart</span>
-                </button>
 
-            </div>
+if (slides.length > 0) {
 
-        </div>
+    /* CREATE DOTS */
 
+    if (dotsContainer) {
 
-        <!-- NAVIGATION -->
+        dotsContainer.innerHTML = "";
 
-        <nav class="navigation">
+        slides.forEach((slide, index) => {
 
-            <div class="navigation-inner">
+            const dot = document.createElement("span");
 
-                <a href="index.html" class="active">
-                    Home
-                </a>
+            dot.className = "slider-dot";
 
-                <a href="#categories">
-                    Categories
-                </a>
-
-                <a href="#brands">
-                    Local Brands
-                </a>
-
-                <a href="#products">
-                    Products
-                </a>
-
-                <a href="#offers">
-                    Offers
-                </a>
-
-                <a href="blog.html">
-                    Blog
-                </a>
-
-                <a href="#advertise">
-                    Advertise With Us
-                </a>
-
-            </div>
-
-        </nav>
-
-    </div>
-
-</header>
-
-
-<main>
-
-
-    <!-- =================================================
-         HERO ADVERTISEMENT SLIDER
-    ================================================== -->
-
-    <section class="hero">
-
-        <div class="container">
-
-            <div class="hero-slider" id="heroSlider">
-
-
-                <!-- SLIDE 1 -->
-
-                <div
-                    class="hero-slide active"
-                    style="
-                        background-image:
-                        url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=85');
-                    "
-                >
-
-                    <div class="hero-content">
-
-                        <div class="ad-label">
-                            📢 FEATURED AD
-                        </div>
-
-                        <div class="hero-brand">
-                            LOCAL BRAND SPOTLIGHT
-                        </div>
-
-                        <h1>
-                            আপনার এলাকার
-                            সেরা Brand এক জায়গায়
-                        </h1>
-
-                        <p>
-                            Shopping Mela-তে স্থানীয় ব্যবসা ও
-                            ব্র্যান্ডকে খুঁজে নিন সহজেই।
-                        </p>
-
-                        <div class="hero-buttons">
-
-                            <button
-                                class="primary-btn"
-                                onclick="scrollToSection('brands')"
-                            >
-                                Brands দেখুন →
-                            </button>
-
-                            <button
-                                class="light-btn"
-                                onclick="scrollToSection('advertise')"
-                            >
-                                আপনার বিজ্ঞাপন দিন
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- SLIDE 2 -->
-
-                <div
-                    class="hero-slide"
-                    style="
-                        background-image:
-                        url('https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1600&q=85');
-                    "
-                >
-
-                    <div class="hero-content">
-
-                        <div class="ad-label">
-                            🔥 SPECIAL OFFER
-                        </div>
-
-                        <div class="hero-brand">
-                            SHOPPING MELA DEAL
-                        </div>
-
-                        <h1>
-                            Local Business,
-                            Local Shopping
-                        </h1>
-
-                        <p>
-                            আপনার কাছের দোকান, service ও
-                            local products এক প্ল্যাটফর্মে।
-                        </p>
-
-                        <div class="hero-buttons">
-
-                            <button
-                                class="primary-btn"
-                                onclick="scrollToSection('products')"
-                            >
-                                Products দেখুন →
-                            </button>
-
-                            <button
-                                class="light-btn"
-                                onclick="showToast('Offer details শীঘ্রই আসছে!')"
-                            >
-                                Offer দেখুন
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- SLIDE 3 -->
-
-                <div
-                    class="hero-slide"
-                    style="
-                        background-image:
-                        url('https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1600&q=85');
-                    "
-                >
-
-                    <div class="hero-content">
-
-                        <div class="ad-label">
-                            📣 BUSINESS AD
-                        </div>
-
-                        <div class="hero-brand">
-                            GROW YOUR BUSINESS
-                        </div>
-
-                        <h1>
-                            আপনার Brand-এর
-                            Advertisement দিন
-                        </h1>
-
-                        <p>
-                            Local customers-এর সামনে আপনার
-                            business ও products তুলে ধরুন।
-                        </p>
-
-                        <div class="hero-buttons">
-
-                            <button
-                                class="primary-btn"
-                                onclick="scrollToSection('advertise')"
-                            >
-                                Advertise করুন →
-                            </button>
-
-                            <button
-                                class="light-btn"
-                                onclick="showToast('Advertising plans শীঘ্রই আসছে!')"
-                            >
-                                Plans দেখুন
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- SLIDER ARROWS -->
-
-                <button
-                    class="slider-arrow slider-prev"
-                    id="prevSlide"
-                    aria-label="Previous slide"
-                >
-                    ‹
-                </button>
-
-                <button
-                    class="slider-arrow slider-next"
-                    id="nextSlide"
-                    aria-label="Next slide"
-                >
-                    ›
-                </button>
-
-
-                <!-- DOTS -->
-
-                <div
-                    class="slider-dots"
-                    id="sliderDots"
-                ></div>
-
-            </div>
-
-
-            <!-- TRUST STRIP -->
-
-            <div class="trust-strip">
-
-                <div class="trust-item">
-
-                    <div class="trust-icon">
-                        🏪
-                    </div>
-
-                    <div>
-                        <strong>Local Brands</strong>
-                        <small>আপনার এলাকার ব্যবসা</small>
-                    </div>
-
-                </div>
-
-
-                <div class="trust-item">
-
-                    <div class="trust-icon">
-                        📢
-                    </div>
-
-                    <div>
-                        <strong>Business Ads</strong>
-                        <small>আপনার Brand প্রচার করুন</small>
-                    </div>
-
-                </div>
-
-
-                <div class="trust-item">
-
-                    <div class="trust-icon">
-                        🛒
-                    </div>
-
-                    <div>
-                        <strong>Easy Shopping</strong>
-                        <small>সহজে পণ্য খুঁজুন</small>
-                    </div>
-
-                </div>
-
-
-                <div class="trust-item">
-
-                    <div class="trust-icon">
-                        ✍️
-                    </div>
-
-                    <div>
-                        <strong>Community Blog</strong>
-                        <small>নিজের Post প্রকাশ করুন</small>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =================================================
-         CATEGORIES
-    ================================================== -->
-
-    <section
-        class="section"
-        id="categories"
-    >
-
-        <div class="container">
-
-            <div class="section-heading">
-
-                <div>
-                    <h2>জনপ্রিয় Categories</h2>
-
-                    <p>
-                        আপনার প্রয়োজনের category বেছে নিন
-                    </p>
-                </div>
-
-                <a
-                    href="#categories"
-                    class="view-all"
-                >
-                    সব দেখুন →
-                </a>
-
-            </div>
-
-
-            <div class="category-grid">
-
-                <div
-                    class="category-card"
-                    data-category="fashion"
-                    onclick="filterCategory('Fashion')"
-                >
-                    <div class="category-icon">👗</div>
-                    <h3>Fashion</h3>
-                </div>
-
-
-                <div
-                    class="category-card"
-                    data-category="food"
-                    onclick="filterCategory('Food')"
-                >
-                    <div class="category-icon">🍔</div>
-                    <h3>Food</h3>
-                </div>
-
-
-                <div
-                    class="category-card"
-                    data-category="electronics"
-                    onclick="filterCategory('Electronics')"
-                >
-                    <div class="category-icon">📱</div>
-                    <h3>Electronics</h3>
-                </div>
-
-
-                <div
-                    class="category-card"
-                    data-category="beauty"
-                    onclick="filterCategory('Beauty')"
-                >
-                    <div class="category-icon">💄</div>
-                    <h3>Beauty</h3>
-                </div>
-
-
-                <div
-                    class="category-card"
-                    data-category="grocery"
-                    onclick="filterCategory('Grocery')"
-                >
-                    <div class="category-icon">🛒</div>
-                    <h3>Grocery</h3>
-                </div>
-
-
-                <div
-                    class="category-card"
-                    data-category="home"
-                    onclick="filterCategory('Home')"
-                >
-                    <div class="category-icon">🏠</div>
-                    <h3>Home</h3>
-                </div>
-
-
-                <div
-                    class="category-card"
-                    data-category="services"
-                    onclick="filterCategory('Services')"
-                >
-                    <div class="category-icon">🛠️</div>
-                    <h3>Services</h3>
-                </div>
-
-
-                <div
-                    class="category-card"
-                    data-category="others"
-                    onclick="filterCategory('Others')"
-                >
-                    <div class="category-icon">✨</div>
-                    <h3>Others</h3>
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =================================================
-         LOCAL BRANDS
-    ================================================== -->
-
-    <section
-        class="section"
-        id="brands"
-    >
-
-        <div class="container">
-
-            <div class="section-heading">
-
-                <div>
-
-                    <h2>
-                        Featured Local Brands
-                    </h2>
-
-                    <p>
-                        আপনার এলাকার জনপ্রিয় business ও brand
-                    </p>
-
-                </div>
-
-                <a
-                    href="brands.html"
-                    class="view-all"
-                >
-                    সব Brands →
-                </a>
-
-            </div>
-
-
-            <div class="brand-grid">
-
-
-                <!-- BRAND 1 -->
-
-                <article class="brand-card">
-
-                    <div
-                        class="brand-cover"
-                        style="
-                            background-image:
-                            url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=900&q=80');
-                        "
-                    >
-
-                        <span class="sponsored">
-                            SPONSORED
-                        </span>
-
-                        <div class="brand-logo">
-                            👗
-                        </div>
-
-                    </div>
-
-
-                    <div class="brand-info">
-
-                        <h3>
-                            Anjona Ladies Tailors
-                        </h3>
-
-                        <div class="brand-category">
-                            Fashion & Tailoring
-                        </div>
-
-                        <div class="brand-location">
-                            📍 Local Business
-                        </div>
-
-                        <p class="brand-description">
-                            Ladies three-piece, tailoring,
-                            custom dress ও fashion services।
-                        </p>
-
-                        <button
-                            class="brand-btn"
-                            onclick="showToast('Anjona Ladies Tailors profile শীঘ্রই আসছে!')"
-                        >
-                            Brand দেখুন →
-                        </button>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- BRAND 2 -->
-
-                <article class="brand-card">
-
-                    <div
-                        class="brand-cover"
-                        style="
-                            background-image:
-                            url('https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=900&q=80');
-                        "
-                    >
-
-                        <span class="sponsored">
-                            FEATURED
-                        </span>
-
-                        <div class="brand-logo">
-                            🌿
-                        </div>
-
-                    </div>
-
-
-                    <div class="brand-info">
-
-                        <h3>
-                            Local Attar Shop
-                        </h3>
-
-                        <div class="brand-category">
-                            Perfume & Attar
-                        </div>
-
-                        <div class="brand-location">
-                            📍 Local Business
-                        </div>
-
-                        <p class="brand-description">
-                            Premium attar, perfume ও
-                            fragrance collection।
-                        </p>
-
-                        <button
-                            class="brand-btn"
-                            onclick="showToast('Attar Shop profile শীঘ্রই আসছে!')"
-                        >
-                            Brand দেখুন →
-                        </button>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- BRAND 3 -->
-
-                <article class="brand-card">
-
-                    <div
-                        class="brand-cover"
-                        style="
-                            background-image:
-                            url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80');
-                        "
-                    >
-
-                        <span class="sponsored">
-                            SPONSORED
-                        </span>
-
-                        <div class="brand-logo">
-                            🍽️
-                        </div>
-
-                    </div>
-
-
-                    <div class="brand-info">
-
-                        <h3>
-                            Local Food House
-                        </h3>
-
-                        <div class="brand-category">
-                            Restaurant & Food
-                        </div>
-
-                        <div class="brand-location">
-                            📍 Local Business
-                        </div>
-
-                        <p class="brand-description">
-                            Homemade food, snacks এবং
-                            local food delivery।
-                        </p>
-
-                        <button
-                            class="brand-btn"
-                            onclick="showToast('Food House profile শীঘ্রই আসছে!')"
-                        >
-                            Brand দেখুন →
-                        </button>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- BRAND 4 -->
-
-                <article class="brand-card">
-
-                    <div
-                        class="brand-cover"
-                        style="
-                            background-image:
-                            url('https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=80');
-                        "
-                    >
-
-                        <span class="sponsored">
-                            FEATURED
-                        </span>
-
-                        <div class="brand-logo">
-                            💼
-                        </div>
-
-                    </div>
-
-
-                    <div class="brand-info">
-
-                        <h3>
-                            SNK Local Services
-                        </h3>
-
-                        <div class="brand-category">
-                            IT & Services
-                        </div>
-
-                        <div class="brand-location">
-                            📍 Local Business
-                        </div>
-
-                        <p class="brand-description">
-                            Website, printing, digital services
-                            ও local business solutions।
-                        </p>
-
-                        <button
-                            class="brand-btn"
-                            onclick="showToast('SNK Services profile শীঘ্রই আসছে!')"
-                        >
-                            Brand দেখুন →
-                        </button>
-
-                    </div>
-
-                </article>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =================================================
-         OFFER BANNER
-    ================================================== -->
-
-    <section
-        class="container"
-        id="offers"
-    >
-
-        <div class="offer-banner">
-
-            <div class="offer-content">
-
-                <small>
-                    🔥 SHOPPING MELA SPECIAL
-                </small>
-
-                <h2>
-                    Local Business-এর
-                    Special Offers
-                </h2>
-
-                <p>
-                    আপনার কাছের দোকান ও brand-এর
-                    নতুন offer এবং promotion খুঁজে নিন।
-                </p>
-
-                <button
-                    class="light-btn"
-                    onclick="showToast('All offers শীঘ্রই আসছে!')"
-                >
-                    সব Offers দেখুন →
-                </button>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =================================================
-         PRODUCTS
-    ================================================== -->
-
-    <section
-        class="section"
-        id="products"
-    >
-
-        <div class="container">
-
-            <div class="section-heading">
-
-                <div>
-
-                    <h2>
-                        Trending Products
-                    </h2>
-
-                    <p>
-                        Local sellers-এর জনপ্রিয় products
-                    </p>
-
-                </div>
-
-                <a
-                    href="products.html"
-                    class="view-all"
-                >
-                    সব Products →
-                </a>
-
-            </div>
-
-
-            <div
-                class="product-grid"
-                id="productGrid"
-            >
-
-
-                <!-- PRODUCT 1 -->
-
-                <article
-                    class="product-card"
-                    data-product="Ladies Three Piece"
-                    data-category="Fashion"
-                >
-
-                    <div
-                        class="product-image"
-                        style="
-                            background-image:
-                            url('https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=700&q=80');
-                        "
-                    >
-
-                        <span class="discount">
-                            -20%
-                        </span>
-
-                        <button
-                            class="product-heart"
-                            onclick="showToast('Wishlist-এ যোগ করা হয়েছে ❤️')"
-                        >
-                            ♡
-                        </button>
-
-                    </div>
-
-
-                    <div class="product-info">
-
-                        <h3>
-                            Ladies Three Piece
-                        </h3>
-
-                        <div class="product-brand">
-                            Local Fashion Brand
-                        </div>
-
-                        <div class="product-price">
-
-                            <span class="current-price">
-                                ৳1,250
-                            </span>
-
-                            <span class="old-price">
-                                ৳1,550
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- PRODUCT 2 -->
-
-                <article
-                    class="product-card"
-                    data-product="Premium Attar"
-                    data-category="Beauty"
-                >
-
-                    <div
-                        class="product-image"
-                        style="
-                            background-image:
-                            url('https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=700&q=80');
-                        "
-                    >
-
-                        <span class="discount">
-                            -15%
-                        </span>
-
-                        <button
-                            class="product-heart"
-                            onclick="showToast('Wishlist-এ যোগ করা হয়েছে ❤️')"
-                        >
-                            ♡
-                        </button>
-
-                    </div>
-
-
-                    <div class="product-info">
-
-                        <h3>
-                            Premium Attar
-                        </h3>
-
-                        <div class="product-brand">
-                            Local Attar Shop
-                        </div>
-
-                        <div class="product-price">
-
-                            <span class="current-price">
-                                ৳650
-                            </span>
-
-                            <span class="old-price">
-                                ৳750
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- PRODUCT 3 -->
-
-                <article
-                    class="product-card"
-                    data-product="Handmade Bag"
-                    data-category="Fashion"
-                >
-
-                    <div
-                        class="product-image"
-                        style="
-                            background-image:
-                            url('https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=700&q=80');
-                        "
-                    >
-
-                        <span class="discount">
-                            NEW
-                        </span>
-
-                        <button
-                            class="product-heart"
-                            onclick="showToast('Wishlist-এ যোগ করা হয়েছে ❤️')"
-                        >
-                            ♡
-                        </button>
-
-                    </div>
-
-
-                    <div class="product-info">
-
-                        <h3>
-                            Handmade Bag
-                        </h3>
-
-                        <div class="product-brand">
-                            Local Handmade Brand
-                        </div>
-
-                        <div class="product-price">
-
-                            <span class="current-price">
-                                ৳890
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- PRODUCT 4 -->
-
-                <article
-                    class="product-card"
-                    data-product="Homemade Food"
-                    data-category="Food"
-                >
-
-                    <div
-                        class="product-image"
-                        style="
-                            background-image:
-                            url('https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=700&q=80');
-                        "
-                    >
-
-                        <span class="discount">
-                            HOT
-                        </span>
-
-                        <button
-                            class="product-heart"
-                            onclick="showToast('Wishlist-এ যোগ করা হয়েছে ❤️')"
-                        >
-                            ♡
-                        </button>
-
-                    </div>
-
-
-                    <div class="product-info">
-
-                        <h3>
-                            Homemade Food
-                        </h3>
-
-                        <div class="product-brand">
-                            Local Food Brand
-                        </div>
-
-                        <div class="product-price">
-
-                            <span class="current-price">
-                                ৳350
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =================================================
-         BLOG
-    ================================================== -->
-
-    <section
-        class="section"
-        id="blog"
-    >
-
-        <div class="container">
-
-            <div class="section-heading">
-
-                <div>
-
-                    <h2>
-                        Shopping Mela Blog
-                    </h2>
-
-                    <p>
-                        Local people ও business-এর গল্প,
-                        tips এবং information
-                    </p>
-
-                </div>
-
-                <a
-                    href="blog.html"
-                    class="view-all"
-                >
-                    সব Blog →
-                </a>
-
-            </div>
-
-
-            <div class="blog-grid">
-
-
-                <!-- BLOG 1 -->
-
-                <article class="blog-card">
-
-                    <div
-                        class="blog-image"
-                        style="
-                            background-image:
-                            url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=900&q=80');
-                        "
-                    ></div>
-
-
-                    <div class="blog-info">
-
-                        <div class="blog-meta">
-
-                            <span class="blog-category">
-                                Local Business
-                            </span>
-
-                            <span>
-                                5 min read
-                            </span>
-
-                        </div>
-
-                        <h3>
-                            Local Brand কীভাবে
-                            নিজের Business বড় করতে পারে?
-                        </h3>
-
-                        <p>
-                            Local customers-এর কাছে
-                            আপনার business পৌঁছে দেওয়ার
-                            কিছু সহজ উপায়।
-                        </p>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- BLOG 2 -->
-
-                <article class="blog-card">
-
-                    <div
-                        class="blog-image"
-                        style="
-                            background-image:
-                            url('https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=900&q=80');
-                        "
-                    ></div>
-
-
-                    <div class="blog-info">
-
-                        <div class="blog-meta">
-
-                            <span class="blog-category">
-                                Shopping Tips
-                            </span>
-
-                            <span>
-                                4 min read
-                            </span>
-
-                        </div>
-
-                        <h3>
-                            Online Shopping করার সময়
-                            কী কী বিষয় দেখবেন?
-                        </h3>
-
-                        <p>
-                            নিরাপদে এবং ভালোভাবে
-                            local products কেনার
-                            কিছু useful tips।
-                        </p>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- BLOG 3 -->
-
-                <article class="blog-card">
-
-                    <div
-                        class="blog-image"
-                        style="
-                            background-image:
-                            url('https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=80');
-                        "
-                    ></div>
-
-
-                    <div class="blog-info">
-
-                        <div class="blog-meta">
-
-                            <span class="blog-category">
-                                Community
-                            </span>
-
-                            <span>
-                                3 min read
-                            </span>
-
-                        </div>
-
-                        <h3>
-                            Local Business কেন
-                            আমাদের জন্য গুরুত্বপূর্ণ?
-                        </h3>
-
-                        <p>
-                            নিজের এলাকার উদ্যোক্তা ও
-                            ছোট business-কে support করার
-                            গুরুত্ব।
-                        </p>
-
-                    </div>
-
-                </article>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =================================================
-         ADVERTISE SECTION
-    ================================================== -->
-
-    <section
-        class="container"
-        id="advertise"
-    >
-
-        <div class="advertise-section">
-
-            <div class="advertise-text">
-
-                <small>
-                    📢 FOR LOCAL BUSINESS
-                </small>
-
-                <h2>
-                    আপনার Business-এর
-                    Advertisement দিন
-                </h2>
-
-                <p>
-                    Shopping Mela-তে আপনার brand,
-                    shop, service বা product-এর
-                    banner advertisement দেখান।
-                </p>
-
-            </div>
-
-
-            <button
-                class="advertise-button"
-                onclick="showToast('Advertising form শীঘ্রই আসছে!')"
-            >
-                Advertise করুন →
-            </button>
-
-        </div>
-
-    </section>
-
-</main>
-
-
-
-<!-- =====================================================
-     FOOTER
-====================================================== -->
-
-<footer class="footer">
-
-    <div class="container">
-
-        <div class="footer-main">
-
-
-            <div class="footer-brand">
-
-                <a
-                    href="index.html"
-                    class="logo"
-                >
-
-                    <div class="logo-icon">
-                        🛍️
-                    </div>
-
-                    <span>
-                        Shopping Mela
-                    </span>
-
-                </a>
-
-                <p>
-                    Shopping Mela হলো local brands,
-                    businesses, products এবং
-                    community content-এর একটি
-                    modern online platform।
-                </p>
-
-            </div>
-
-
-            <div>
-
-                <h3>
-                    Shopping
-                </h3>
-
-                <a href="#categories">
-                    Categories
-                </a>
-
-                <a href="#brands">
-                    Local Brands
-                </a>
-
-                <a href="#products">
-                    Products
-                </a>
-
-                <a href="#offers">
-                    Offers
-                </a>
-
-            </div>
-
-
-            <div>
-
-                <h3>
-                    Community
-                </h3>
-
-                <a href="blog.html">
-                    Blog
-                </a>
-
-                <a href="blog.html">
-                    Write a Post
-                </a>
-
-                <a href="#advertise">
-                    Advertise
-                </a>
-
-            </div>
-
-
-            <div>
-
-                <h3>
-                    Support
-                </h3>
-
-                <a href="#">
-                    About Us
-                </a>
-
-                <a href="#">
-                    Contact
-                </a>
-
-                <a href="#">
-                    Privacy Policy
-                </a>
-
-                <a href="#">
-                    Terms
-                </a>
-
-            </div>
-
-        </div>
-
-
-        <div class="footer-bottom">
-
-            © 2026 Shopping Mela.
-            All Rights Reserved.
-
-        </div>
-
-    </div>
-
-</footer>
-
-
-
-<!-- =====================================================
-     TOAST
-====================================================== -->
-
-<div
-    class="toast"
-    id="toast"
->
-    Done!
-</div>
-
-
-
-<!-- =====================================================
-     TEMPORARY JS
-     Full functionality will move to 1.3 script.js
-====================================================== -->
-
-<script>
-
-    function showToast(message) {
-
-        const toast =
-            document.getElementById("toast");
-
-        toast.textContent = message;
-
-        toast.classList.add("show");
-
-        setTimeout(() => {
-
-            toast.classList.remove("show");
-
-        }, 2500);
-    }
-
-
-    function scrollToSection(id) {
-
-        const section =
-            document.getElementById(id);
-
-        if (section) {
-
-            section.scrollIntoView({
-                behavior: "smooth"
-            });
-
-        }
-    }
-
-
-    function filterCategory(category) {
-
-        const products =
-            document.querySelectorAll(
-                ".product-card"
-            );
-
-        let found = false;
-
-        products.forEach(product => {
-
-            const productCategory =
-                product.dataset.category;
-
-            if (
-                productCategory === category
-                || category === "All"
-            ) {
-
-                product.style.display = "";
-
-                found = true;
-
-            } else {
-
-                product.style.display = "none";
-
+            if (index === 0) {
+                dot.classList.add("active");
             }
 
+            dot.setAttribute(
+                "aria-label",
+                `Slide ${index + 1}`
+            );
+
+            dot.addEventListener("click", () => {
+
+                goToSlide(index);
+                restartSlider();
+
+            });
+
+            dotsContainer.appendChild(dot);
         });
-
-
-        scrollToSection("products");
-
-
-        if (found) {
-
-            showToast(
-                category +
-                " category selected"
-            );
-
-        } else {
-
-            showToast(
-                "এই category-তে এখনো product নেই"
-            );
-
-        }
-
     }
-
-
-    /* SIMPLE HERO SLIDER */
-
-    const slides =
-        document.querySelectorAll(
-            ".hero-slide"
-        );
-
-    const dotsContainer =
-        document.getElementById(
-            "sliderDots"
-        );
-
-    let currentSlide = 0;
-
-
-    slides.forEach((slide, index) => {
-
-        const dot =
-            document.createElement("span");
-
-        dot.className =
-            "slider-dot" +
-            (index === 0 ? " active" : "");
-
-        dot.addEventListener(
-            "click",
-            () => goToSlide(index)
-        );
-
-        dotsContainer.appendChild(dot);
-
-    });
 
 
     const dots =
-        document.querySelectorAll(
-            ".slider-dot"
-        );
+        document.querySelectorAll(".slider-dot");
 
+
+    /* GO TO SLIDE */
 
     function goToSlide(index) {
 
-        slides[currentSlide]
-            .classList.remove("active");
+        if (index < 0) {
+            index = slides.length - 1;
+        }
 
-        dots[currentSlide]
-            .classList.remove("active");
+        if (index >= slides.length) {
+            index = 0;
+        }
+
+
+        slides.forEach(slide => {
+            slide.classList.remove("active");
+        });
+
+
+        dots.forEach(dot => {
+            dot.classList.remove("active");
+        });
 
 
         currentSlide = index;
@@ -1611,176 +127,672 @@
         slides[currentSlide]
             .classList.add("active");
 
-        dots[currentSlide]
-            .classList.add("active");
 
+        if (dots[currentSlide]) {
+            dots[currentSlide]
+                .classList.add("active");
+        }
     }
 
+
+    /* NEXT SLIDE */
 
     function nextSlide() {
 
-        let next =
-            currentSlide + 1;
-
-        if (next >= slides.length) {
-
-            next = 0;
-
-        }
-
-        goToSlide(next);
+        goToSlide(currentSlide + 1);
 
     }
 
+
+    /* PREVIOUS SLIDE */
 
     function previousSlide() {
 
-        let previous =
-            currentSlide - 1;
-
-        if (previous < 0) {
-
-            previous = slides.length - 1;
-
-        }
-
-        goToSlide(previous);
+        goToSlide(currentSlide - 1);
 
     }
 
 
-    document
-        .getElementById("nextSlide")
-        .addEventListener(
+    /* BUTTONS */
+
+    if (nextButton) {
+
+        nextButton.addEventListener(
             "click",
-            nextSlide
-        );
+            () => {
 
-
-    document
-        .getElementById("prevSlide")
-        .addEventListener(
-            "click",
-            previousSlide
-        );
-
-
-    setInterval(
-        nextSlide,
-        5000
-    );
-
-
-    /* SEARCH */
-
-    const searchInput =
-        document.getElementById(
-            "searchInput"
-        );
-
-    const searchBtn =
-        document.getElementById(
-            "searchBtn"
-        );
-
-
-    function performSearch() {
-
-        const query =
-            searchInput.value
-                .trim()
-                .toLowerCase();
-
-
-        if (!query) {
-
-            showToast(
-                "কিছু search করুন 🔍"
-            );
-
-            return;
-
-        }
-
-
-        const products =
-            document.querySelectorAll(
-                ".product-card"
-            );
-
-        let found = false;
-
-
-        products.forEach(product => {
-
-            const name =
-                product.dataset.product
-                    .toLowerCase();
-
-            const category =
-                product.dataset.category
-                    .toLowerCase();
-
-            if (
-                name.includes(query)
-                ||
-                category.includes(query)
-            ) {
-
-                product.style.display = "";
-
-                found = true;
-
-            } else {
-
-                product.style.display = "none";
+                nextSlide();
+                restartSlider();
 
             }
-
-        });
-
-
-        scrollToSection("products");
+        );
+    }
 
 
-        if (found) {
+    if (prevButton) {
 
-            showToast(
-                "Search result পাওয়া গেছে 🔎"
-            );
+        prevButton.addEventListener(
+            "click",
+            () => {
+
+                previousSlide();
+                restartSlider();
+
+            }
+        );
+    }
+
+
+    /* AUTO SLIDER */
+
+    function startSlider() {
+
+        clearInterval(sliderTimer);
+
+        sliderTimer = setInterval(() => {
+
+            nextSlide();
+
+        }, 5000);
+    }
+
+
+    function restartSlider() {
+
+        clearInterval(sliderTimer);
+
+        startSlider();
+    }
+
+
+    startSlider();
+
+
+    /* PAUSE ON MOUSE */
+
+    if (heroSlider) {
+
+        heroSlider.addEventListener(
+            "mouseenter",
+            () => {
+
+                clearInterval(sliderTimer);
+
+            }
+        );
+
+
+        heroSlider.addEventListener(
+            "mouseleave",
+            () => {
+
+                startSlider();
+
+            }
+        );
+    }
+
+
+    /* MOBILE SWIPE */
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+
+    if (heroSlider) {
+
+        heroSlider.addEventListener(
+            "touchstart",
+            event => {
+
+                touchStartX =
+                    event.changedTouches[0].screenX;
+
+            },
+            { passive: true }
+        );
+
+
+        heroSlider.addEventListener(
+            "touchend",
+            event => {
+
+                touchEndX =
+                    event.changedTouches[0].screenX;
+
+                const distance =
+                    touchStartX - touchEndX;
+
+
+                if (Math.abs(distance) < 50) {
+                    return;
+                }
+
+
+                if (distance > 0) {
+
+                    nextSlide();
+
+                } else {
+
+                    previousSlide();
+
+                }
+
+
+                restartSlider();
+
+            },
+            { passive: true }
+        );
+    }
+}
+
+
+/* =====================================================
+   PRODUCT FILTER
+====================================================== */
+
+window.filterCategory = function (category) {
+
+    const products =
+        document.querySelectorAll(".product-card");
+
+
+    if (!products.length) {
+
+        showToast(
+            "এখনো কোনো product যোগ করা হয়নি"
+        );
+
+        return;
+    }
+
+
+    let found = false;
+
+
+    products.forEach(product => {
+
+        const productCategory =
+            (
+                product.dataset.category || ""
+            ).toLowerCase();
+
+
+        const selectedCategory =
+            category.toLowerCase();
+
+
+        if (
+            selectedCategory === "all" ||
+            productCategory === selectedCategory
+        ) {
+
+            product.style.display = "";
+
+            found = true;
 
         } else {
 
-            showToast(
-                "কোনো product পাওয়া যায়নি"
-            );
+            product.style.display = "none";
 
         }
+    });
 
+
+    scrollToSection("products");
+
+
+    if (found) {
+
+        showToast(
+            `${category} category selected`
+        );
+
+    } else {
+
+        showToast(
+            "এই category-তে এখনো product নেই"
+        );
+    }
+};
+
+
+/* =====================================================
+   SHOW ALL PRODUCTS
+====================================================== */
+
+window.showAllProducts = function () {
+
+    const products =
+        document.querySelectorAll(".product-card");
+
+
+    products.forEach(product => {
+
+        product.style.display = "";
+
+    });
+
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+
+    if (searchInput) {
+        searchInput.value = "";
     }
 
+
+    showToast(
+        "সব Products দেখানো হচ্ছে"
+    );
+};
+
+
+/* =====================================================
+   SEARCH
+====================================================== */
+
+const searchInput =
+    document.getElementById("searchInput");
+
+const searchBtn =
+    document.getElementById("searchBtn");
+
+
+function performSearch() {
+
+    if (!searchInput) return;
+
+
+    const query =
+        searchInput.value
+            .trim()
+            .toLowerCase();
+
+
+    const products =
+        document.querySelectorAll(".product-card");
+
+
+    if (!query) {
+
+        products.forEach(product => {
+            product.style.display = "";
+        });
+
+
+        showToast(
+            "কিছু search করুন 🔍"
+        );
+
+        return;
+    }
+
+
+    let found = false;
+
+
+    products.forEach(product => {
+
+        const name =
+            (
+                product.dataset.product || ""
+            ).toLowerCase();
+
+
+        const category =
+            (
+                product.dataset.category || ""
+            ).toLowerCase();
+
+
+        const text =
+            product.textContent.toLowerCase();
+
+
+        if (
+            name.includes(query) ||
+            category.includes(query) ||
+            text.includes(query)
+        ) {
+
+            product.style.display = "";
+
+            found = true;
+
+        } else {
+
+            product.style.display = "none";
+
+        }
+    });
+
+
+    scrollToSection("products");
+
+
+    if (found) {
+
+        showToast(
+            "Search result পাওয়া গেছে 🔎"
+        );
+
+    } else {
+
+        showToast(
+            "কোনো product পাওয়া যায়নি"
+        );
+    }
+}
+
+
+if (searchBtn) {
 
     searchBtn.addEventListener(
         "click",
         performSearch
     );
+}
 
+
+if (searchInput) {
 
     searchInput.addEventListener(
         "keydown",
-        function(event) {
+        event => {
 
             if (event.key === "Enter") {
 
                 performSearch();
 
             }
-
         }
     );
+}
 
-</script>
+
+/* =====================================================
+   CLEAR SEARCH WITH ESC
+====================================================== */
+
+document.addEventListener(
+    "keydown",
+    event => {
+
+        if (event.key === "Escape") {
+
+            if (searchInput) {
+                searchInput.value = "";
+            }
+
+            const products =
+                document.querySelectorAll(
+                    ".product-card"
+                );
+
+
+            products.forEach(product => {
+
+                product.style.display = "";
+
+            });
+        }
+    }
+);
+
+
+/* =====================================================
+   WISHLIST
+====================================================== */
+
+const wishlistButtons =
+    document.querySelectorAll(
+        ".product-heart"
+    );
+
+
+wishlistButtons.forEach(button => {
+
+    button.addEventListener(
+        "click",
+        event => {
+
+            /*
+             * Prevent the inline onclick
+             * from causing duplicate messages.
+             */
+
+            event.stopPropagation();
+
+
+            const current =
+                button.textContent.trim();
+
+
+            if (current === "♡") {
+
+                button.textContent = "♥";
+
+                button.classList.add(
+                    "wishlist-active"
+                );
+
+
+                showToast(
+                    "Wishlist-এ যোগ করা হয়েছে ❤️"
+                );
+
+            } else {
+
+                button.textContent = "♡";
+
+                button.classList.remove(
+                    "wishlist-active"
+                );
+
+
+                showToast(
+                    "Wishlist থেকে সরানো হয়েছে"
+                );
+            }
+        }
+    );
+});
+
+
+/* =====================================================
+   HEADER WISHLIST / CART
+====================================================== */
+
+const headerActions =
+    document.querySelectorAll(
+        ".header-action"
+    );
+
+
+headerActions.forEach(button => {
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            const text =
+                button.textContent
+                    .toLowerCase();
+
+
+            if (text.includes("wishlist")) {
+
+                showToast(
+                    "আপনার Wishlist শীঘ্রই আসছে ❤️"
+                );
+
+            }
+
+
+            if (text.includes("cart")) {
+
+                showToast(
+                    "Shopping Cart শীঘ্রই আসছে 🛒"
+                );
+
+            }
+        }
+    );
+});
+
+
+/* =====================================================
+   NAVIGATION ACTIVE STATE
+====================================================== */
+
+const navLinks =
+    document.querySelectorAll(
+        ".navigation a"
+    );
+
+
+navLinks.forEach(link => {
+
+    link.addEventListener(
+        "click",
+        () => {
+
+            navLinks.forEach(item => {
+
+                item.classList.remove(
+                    "active"
+                );
+
+            });
+
+
+            link.classList.add(
+                "active"
+            );
+        }
+    );
+});
+
+
+/* =====================================================
+   CATEGORY CARD EFFECT
+====================================================== */
+
+const categoryCards =
+    document.querySelectorAll(
+        ".category-card"
+    );
+
+
+categoryCards.forEach(card => {
+
+    card.addEventListener(
+        "click",
+        () => {
+
+            categoryCards.forEach(item => {
+
+                item.classList.remove(
+                    "selected"
+                );
+
+            });
+
+
+            card.classList.add(
+                "selected"
+            );
+        }
+    );
+});
+
+
+/* =====================================================
+   ADVERTISEMENT BUTTONS
+====================================================== */
+
+const advertiseButtons =
+    document.querySelectorAll(
+        ".advertise-button"
+    );
+
+
+advertiseButtons.forEach(button => {
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            showToast(
+                "Advertising form শীঘ্রই আসছে! 📢"
+            );
+        }
+    );
+});
+
+
+/* =====================================================
+   IMAGE FALLBACK
+====================================================== */
+
+document
+    .querySelectorAll(
+        ".product-image, .brand-cover, .blog-image"
+    )
+    .forEach(element => {
+
+        const background =
+            element.style.backgroundImage;
+
+
+        if (!background) return;
+
+
+        const match =
+            background.match(
+                /url\(["']?(.*?)["']?\)/
+            );
+
+
+        if (!match) return;
+
+
+        const image =
+            new Image();
+
+
+        image.onerror = () => {
+
+            element.style.backgroundImage =
+                "none";
+
+            element.classList.add(
+                "image-fallback"
+            );
+        };
+
+
+        image.src = match[1];
+
+    });
+
+
+/* =====================================================
+   PAGE LOAD
+====================================================== */
+
+document.body.classList.add(
+    "shopping-mela-loaded"
+);
+
+
+console.log(
+    "Shopping Mela — 1.3 script.js loaded successfully."
+);
 ```
 
-</body>
-</html>
+});
