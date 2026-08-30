@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="bn">
 
@@ -15,7 +14,7 @@
 
 
 <!-- =====================================================
-     1.43 — ADMIN SESSION PROTECTION
+     1.44 — ADMIN SESSION PROTECTION
 ====================================================== -->
 
 <script>
@@ -37,7 +36,9 @@
 
     const loginTime =
         Number(
-            sessionStorage.getItem(LOGIN_TIME_KEY) || 0
+            sessionStorage.getItem(
+                LOGIN_TIME_KEY
+            ) || 0
         );
 
 
@@ -46,9 +47,13 @@
         !loginTime
     ) {
 
-        sessionStorage.removeItem(SESSION_KEY);
+        sessionStorage.removeItem(
+            SESSION_KEY
+        );
 
-        sessionStorage.removeItem(LOGIN_TIME_KEY);
+        sessionStorage.removeItem(
+            LOGIN_TIME_KEY
+        );
 
         window.location.replace(
             "admin-login.html"
@@ -64,9 +69,13 @@
         SESSION_DURATION
     ) {
 
-        sessionStorage.removeItem(SESSION_KEY);
+        sessionStorage.removeItem(
+            SESSION_KEY
+        );
 
-        sessionStorage.removeItem(LOGIN_TIME_KEY);
+        sessionStorage.removeItem(
+            LOGIN_TIME_KEY
+        );
 
         window.location.replace(
             "admin-login.html"
@@ -75,7 +84,6 @@
         return;
 
     }
-
 
 })();
 
@@ -86,6 +94,11 @@
 
 * {
     box-sizing: border-box;
+}
+
+
+html {
+    scroll-behavior: smooth;
 }
 
 
@@ -107,9 +120,18 @@ body {
 
 button,
 input,
-select {
+select,
+textarea {
 
     font-family: inherit;
+
+}
+
+
+button {
+
+    -webkit-tap-highlight-color:
+        transparent;
 
 }
 
@@ -138,6 +160,8 @@ select {
 
     overflow-y: auto;
 
+    transition: .25s;
+
 }
 
 
@@ -149,7 +173,8 @@ select {
 
     gap: 10px;
 
-    padding: 0 8px 25px;
+    padding:
+        0 8px 25px;
 
     font-size: 17px;
 
@@ -199,7 +224,8 @@ select {
 
     letter-spacing: .8px;
 
-    padding: 0 10px 8px;
+    padding:
+        0 10px 8px;
 
 }
 
@@ -296,6 +322,8 @@ select {
 
     min-height: 100vh;
 
+    transition: .25s;
+
 }
 
 
@@ -369,6 +397,26 @@ select {
 }
 
 
+.refresh-header {
+
+    border: 0;
+
+    background: #eef5ff;
+
+    color: #1877f2;
+
+    width: 32px;
+    height: 32px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+
+}
+
+
 .admin-user {
 
     display: flex;
@@ -420,6 +468,10 @@ select {
     gap: 5px;
 
     line-height: 1.2;
+
+    font-size: 10px;
+
+    font-weight: 800;
 
 }
 
@@ -506,7 +558,8 @@ select {
 
 .welcome p {
 
-    margin: 6px 0 0;
+    margin:
+        6px 0 0;
 
     color: #667085;
 
@@ -825,12 +878,16 @@ select {
 
     text-align: center;
 
+    transition: .2s;
+
 }
 
 
 .quick-action:hover {
 
     border-color: #1877f2;
+
+    transform: translateY(-1px);
 
 }
 
@@ -973,6 +1030,98 @@ select {
 
 
 /* =====================================================
+   TOOLBAR
+===================================================== */
+
+.toolbar {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    padding: 13px 15px;
+
+    background: #ffffff;
+
+    border-bottom:
+        1px solid #eaecf0;
+
+}
+
+
+.search-box {
+
+    position: relative;
+
+    flex: 1;
+
+    max-width: 330px;
+
+}
+
+
+.search-box input {
+
+    width: 100%;
+
+    padding:
+        9px 10px 9px 32px;
+
+    border:
+        1px solid #d0d5dd;
+
+    border-radius: 7px;
+
+    outline: none;
+
+    font-size: 9px;
+
+}
+
+
+.search-box span {
+
+    position: absolute;
+
+    left: 10px;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    color: #98a2b3;
+
+    font-size: 12px;
+
+}
+
+
+.filter-select {
+
+    border:
+        1px solid #d0d5dd;
+
+    border-radius: 7px;
+
+    padding: 9px;
+
+    background: #ffffff;
+
+    outline: none;
+
+    font-size: 9px;
+
+    color: #344054;
+
+}
+
+
+/* =====================================================
    TABLE
 ===================================================== */
 
@@ -1003,7 +1152,7 @@ table {
 
     border-collapse: collapse;
 
-    min-width: 700px;
+    min-width: 760px;
 
 }
 
@@ -1068,6 +1217,34 @@ td strong {
 }
 
 
+.details-btn {
+
+    border: 0;
+
+    background: #f2f4f7;
+
+    color: #344054;
+
+    border-radius: 6px;
+
+    padding: 6px 8px;
+
+    cursor: pointer;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+}
+
+
+.details-btn:hover {
+
+    background: #e4e7ec;
+
+}
+
+
 /* =====================================================
    PRODUCTS FORM
 ===================================================== */
@@ -1123,7 +1300,8 @@ td strong {
 
 
 .form-group input,
-.form-group select {
+.form-group select,
+.form-group textarea {
 
     width: 100%;
 
@@ -1143,8 +1321,18 @@ td strong {
 }
 
 
+.form-group textarea {
+
+    min-height: 70px;
+
+    resize: vertical;
+
+}
+
+
 .form-group input:focus,
-.form-group select:focus {
+.form-group select:focus,
+.form-group textarea:focus {
 
     border-color: #1877f2;
 
@@ -1336,6 +1524,17 @@ td strong {
 }
 
 
+.form-submit.secondary {
+
+    background: #f2f4f7;
+
+    color: #344054;
+
+    margin-left: 7px;
+
+}
+
+
 /* =====================================================
    PRODUCT LIST
 ===================================================== */
@@ -1364,6 +1563,13 @@ td strong {
 
     border-bottom:
         1px solid #f2f4f7;
+
+}
+
+
+.product-item:last-child {
+
+    border-bottom: 0;
 
 }
 
@@ -1445,11 +1651,56 @@ td strong {
 }
 
 
+.product-stock {
+
+    display: inline-block;
+
+    margin-top: 5px;
+
+    color: #12b76a;
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+}
+
+
+.product-stock.out {
+
+    color: #f04438;
+
+}
+
+
 .product-actions {
 
     display: flex;
 
     gap: 6px;
+
+    flex-wrap: wrap;
+
+}
+
+
+.edit-product {
+
+    border: 0;
+
+    background: #eef5ff;
+
+    color: #1877f2;
+
+    padding: 7px 9px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-size: 8px;
+
+    font-weight: 800;
 
 }
 
@@ -1506,6 +1757,237 @@ td strong {
 }
 
 
+.user-row {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 13px 0;
+
+    border-bottom:
+        1px solid #f2f4f7;
+
+}
+
+
+.user-row:last-child {
+
+    border-bottom: 0;
+
+}
+
+
+.user-avatar {
+
+    width: 38px;
+    height: 38px;
+
+    min-width: 38px;
+
+    border-radius: 50%;
+
+    background: #eef5ff;
+
+    color: #1877f2;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: 800;
+
+    font-size: 11px;
+
+}
+
+
+.user-info strong {
+
+    display: block;
+
+    font-size: 10px;
+
+}
+
+
+.user-info span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: #667085;
+
+    font-size: 8px;
+
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(16,24,40,.55);
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+    z-index: 5000;
+
+}
+
+
+.modal-overlay.show {
+
+    display: flex;
+
+}
+
+
+.modal {
+
+    width: 100%;
+
+    max-width: 500px;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: #ffffff;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 20px 60px
+        rgba(16,24,40,.20);
+
+}
+
+
+.modal-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 16px 18px;
+
+    border-bottom:
+        1px solid #eaecf0;
+
+}
+
+
+.modal-header h2 {
+
+    margin: 0;
+
+    font-size: 14px;
+
+}
+
+
+.modal-close {
+
+    width: 30px;
+    height: 30px;
+
+    border: 0;
+
+    background: #f2f4f7;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+}
+
+
+.modal-body {
+
+    padding: 18px;
+
+}
+
+
+.detail-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 10px;
+
+}
+
+
+.detail-box {
+
+    padding: 11px;
+
+    background: #f9fafb;
+
+    border-radius: 8px;
+
+}
+
+
+.detail-box.full {
+
+    grid-column: 1/-1;
+
+}
+
+
+.detail-box small {
+
+    display: block;
+
+    color: #98a2b3;
+
+    font-size: 8px;
+
+}
+
+
+.detail-box strong {
+
+    display: block;
+
+    margin-top: 4px;
+
+    color: #101828;
+
+    font-size: 10px;
+
+    word-break: break-word;
+
+}
+
+
 /* =====================================================
    TOAST
 ===================================================== */
@@ -1553,6 +2035,37 @@ td strong {
 
 
 /* =====================================================
+   MOBILE MENU BUTTON
+===================================================== */
+
+.mobile-menu {
+
+    display: none;
+
+    border: 0;
+
+    background: #f2f4f7;
+
+    width: 32px;
+    height: 32px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-size: 15px;
+
+}
+
+
+.sidebar-overlay {
+
+    display: none;
+
+}
+
+
+/* =====================================================
    MOBILE
 ===================================================== */
 
@@ -1590,7 +2103,8 @@ td strong {
 
         justify-content: center;
 
-        padding: 0 0 18px;
+        padding:
+            0 0 18px;
 
     }
 
@@ -1660,7 +2174,8 @@ td strong {
 
     .content {
 
-        padding: 15px 12px;
+        padding:
+            15px 12px;
 
     }
 
@@ -1723,6 +2238,163 @@ td strong {
 
     }
 
+
+    .toolbar {
+
+        align-items: stretch;
+
+        flex-direction: column;
+
+    }
+
+
+    .search-box {
+
+        max-width: none;
+
+    }
+
+
+    .filter-select {
+
+        width: 100%;
+
+    }
+
+
+    .detail-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .detail-box.full {
+
+        grid-column: auto;
+
+    }
+
+
+    .mobile-menu {
+
+        display: block;
+
+    }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 450px) {
+
+    .sidebar {
+
+        transform:
+            translateX(-100%);
+
+        width: 235px;
+
+        box-shadow:
+            10px 0 30px
+            rgba(0,0,0,.15);
+
+    }
+
+
+    .sidebar.open {
+
+        transform:
+            translateX(0);
+
+    }
+
+
+    .admin-logo {
+
+        justify-content: flex-start;
+
+        padding:
+            0 8px 25px;
+
+    }
+
+
+    .admin-logo span {
+
+        display: block;
+
+    }
+
+
+    .nav-title {
+
+        display: block;
+
+    }
+
+
+    .nav-item {
+
+        justify-content: flex-start;
+
+        padding:
+            11px 10px;
+
+    }
+
+
+    .nav-item span {
+
+        display: inline;
+
+    }
+
+
+    .nav-badge {
+
+        display: block;
+
+    }
+
+
+    .main {
+
+        margin-left: 0;
+
+    }
+
+
+    .sidebar-overlay {
+
+        position: fixed;
+
+        inset: 0;
+
+        background:
+            rgba(16,24,40,.45);
+
+        z-index: 900;
+
+    }
+
+
+    .sidebar-overlay.show {
+
+        display: block;
+
+    }
+
+
+    .header-right {
+
+        gap: 5px;
+
+    }
+
 }
 
 </style>
@@ -1737,7 +2409,10 @@ td strong {
      SIDEBAR
 ===================================================== -->
 
-<aside class="sidebar">
+<aside
+    class="sidebar"
+    id="sidebar"
+>
 
     <div class="admin-logo">
 
@@ -1753,6 +2428,7 @@ td strong {
 
 
     <nav class="admin-nav">
+
 
         <div class="nav-title">
             Dashboard
@@ -1854,6 +2530,13 @@ td strong {
 </aside>
 
 
+<div
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+    onclick="closeMobileSidebar()"
+></div>
+
+
 
 <!-- =====================================================
      MAIN
@@ -1864,15 +2547,45 @@ td strong {
 
 <header class="top-header">
 
+
     <div
-        class="page-title"
-        id="pageTitle"
+        style="
+            display:flex;
+            align-items:center;
+            gap:9px;
+        "
     >
-        Dashboard
+
+        <button
+            class="mobile-menu"
+            onclick="toggleMobileSidebar()"
+            aria-label="Menu"
+        >
+            ☰
+        </button>
+
+
+        <div
+            class="page-title"
+            id="pageTitle"
+        >
+            Dashboard
+        </div>
+
     </div>
 
 
     <div class="header-right">
+
+
+        <button
+            class="refresh-header"
+            onclick="renderAll()"
+            title="Refresh Dashboard"
+        >
+            ↻
+        </button>
+
 
         <a
             href="index.html"
@@ -2266,17 +2979,82 @@ Orders
 
 <div class="table-panel">
 
-<div class="panel-header">
 
-<h2>
-All Orders
-</h2>
+<div class="toolbar">
 
-<button onclick="renderAll()">
-Refresh
-</button>
+
+<div class="search-box">
+
+<span>
+🔎
+</span>
+
+<input
+    type="search"
+    id="orderSearch"
+    placeholder="Order ID, customer বা mobile search করুন..."
+    oninput="renderOrdersTable()"
+>
 
 </div>
+
+
+<select
+    class="filter-select"
+    id="orderFilter"
+    onchange="renderOrdersTable()"
+>
+
+<option value="all">
+All Status
+</option>
+
+<option value="0">
+Order Placed
+</option>
+
+<option value="1">
+Order Confirmed
+</option>
+
+<option value="2">
+Processing
+</option>
+
+<option value="3">
+Shipped
+</option>
+
+<option value="4">
+Out for Delivery
+</option>
+
+<option value="5">
+Delivered
+</option>
+
+</select>
+
+
+<button
+    onclick="renderAll()"
+    style="
+        border:0;
+        background:#eef5ff;
+        color:#1877f2;
+        border-radius:7px;
+        padding:9px 12px;
+        cursor:pointer;
+        font-size:9px;
+        font-weight:800;
+    "
+>
+    Refresh
+</button>
+
+
+</div>
+
 
 
 <div class="table-wrap">
@@ -2298,6 +3076,8 @@ Refresh
 <th>Date</th>
 
 <th>Status</th>
+
+<th>Details</th>
 
 </tr>
 
@@ -2343,7 +3123,7 @@ Products
 
 <div class="product-form">
 
-<h2>
+<h2 id="productFormTitle">
 ➕ Add New Product
 </h2>
 
@@ -2358,9 +3138,9 @@ Product Name
 </label>
 
 <input
-type="text"
-id="productName"
-placeholder="Product name"
+    type="text"
+    id="productName"
+    placeholder="Product name"
 >
 
 </div>
@@ -2373,11 +3153,11 @@ Price
 </label>
 
 <input
-type="number"
-id="productPrice"
-placeholder="৳"
-min="0"
-step="1"
+    type="number"
+    id="productPrice"
+    placeholder="৳"
+    min="0"
+    step="1"
 >
 
 </div>
@@ -2409,14 +3189,46 @@ Category
 <div class="form-group">
 
 <label>
+Stock
+</label>
+
+<input
+    type="number"
+    id="productStock"
+    placeholder="Stock quantity"
+    min="0"
+    step="1"
+    value="10"
+>
+
+</div>
+
+
+<div class="form-group">
+
+<label>
 Image URL
 </label>
 
 <input
-type="text"
-id="productImage"
-placeholder="https://..."
+    type="text"
+    id="productImage"
+    placeholder="https://..."
 >
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Product Description
+</label>
+
+<textarea
+    id="productDescription"
+    placeholder="Short product description..."
+></textarea>
 
 </div>
 
@@ -2504,9 +3316,20 @@ onclick="removeImage()"
 
 <button
 class="form-submit"
-onclick="addProduct()"
+id="productSubmitBtn"
+onclick="saveProduct()"
 >
 Add Product
+</button>
+
+
+<button
+class="form-submit secondary"
+id="cancelEditBtn"
+onclick="cancelProductEdit()"
+style="display:none;"
+>
+Cancel Edit
 </button>
 
 </div>
@@ -2528,10 +3351,61 @@ Refresh
 </div>
 
 
+<div class="product-list">
+
+
 <div
-class="product-list"
-id="productsList"
-></div>
+class="toolbar"
+style="
+    padding:0 0 15px;
+    border-bottom:1px solid #eaecf0;
+"
+>
+
+<div class="search-box">
+
+<span>
+🔎
+</span>
+
+<input
+    type="search"
+    id="productSearch"
+    placeholder="Product search করুন..."
+    oninput="renderProducts()"
+>
+
+</div>
+
+
+<select
+    class="filter-select"
+    id="productFilter"
+    onchange="renderProducts()"
+>
+
+<option value="all">
+All Category
+</option>
+
+<option>Fashion</option>
+
+<option>Beauty</option>
+
+<option>Electronics</option>
+
+<option>Food</option>
+
+<option>Home</option>
+
+</select>
+
+</div>
+
+
+<div id="productsList"></div>
+
+</div>
 
 </div>
 
@@ -2565,7 +3439,33 @@ Registered customer information overview।
 
 <div class="user-card">
 
+
+<div class="toolbar"
+style="
+    padding:0 0 15px;
+"
+>
+
+<div class="search-box">
+
+<span>
+🔎
+</span>
+
+<input
+    type="search"
+    id="userSearch"
+    placeholder="User search করুন..."
+    oninput="renderUsers()"
+>
+
+</div>
+
+</div>
+
+
 <div id="usersList"></div>
+
 
 </div>
 
@@ -2579,9 +3479,52 @@ Registered customer information overview।
 
 
 
+<!-- =====================================================
+     ORDER DETAILS MODAL
+===================================================== -->
+
 <div
-class="toast"
-id="toast"
+    class="modal-overlay"
+    id="orderModal"
+    onclick="closeModalOutside(event)"
+>
+
+
+<div class="modal">
+
+
+<div class="modal-header">
+
+<h2>
+Order Details
+</h2>
+
+<button
+    class="modal-close"
+    onclick="closeOrderModal()"
+>
+×
+</button>
+
+</div>
+
+
+<div
+    class="modal-body"
+    id="orderModalBody"
+>
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<div
+    class="toast"
+    id="toast"
 ></div>
 
 
@@ -2599,6 +3542,8 @@ let products = [];
 let users = [];
 
 let uploadedImageData = "";
+
+let editingProductId = null;
 
 
 const STATUS_NAMES = [
@@ -2721,7 +3666,7 @@ function money(amount) {
 
 function escapeHTML(value) {
 
-    return String(value || "")
+    return String(value ?? "")
         .replace(/&/g,"&amp;")
         .replace(/</g,"&lt;")
         .replace(/>/g,"&gt;")
@@ -2984,6 +3929,35 @@ function renderRecentOrders() {
         `;
 
 
+        row.style.cursor =
+            "pointer";
+
+
+        row.title =
+            "Click to view order details";
+
+
+        row.addEventListener(
+            "click",
+            function () {
+
+                const originalIndex =
+                    orders.indexOf(order);
+
+                if (
+                    originalIndex >= 0
+                ) {
+
+                    openOrderDetails(
+                        originalIndex
+                    );
+
+                }
+
+            }
+        );
+
+
         box.appendChild(row);
 
     });
@@ -3130,7 +4104,42 @@ function renderOrdersTable() {
         );
 
 
+    if (!tbody) {
+
+        return;
+
+    }
+
+
     tbody.innerHTML = "";
+
+
+    const searchInput =
+        document.getElementById(
+            "orderSearch"
+        );
+
+
+    const filterInput =
+        document.getElementById(
+            "orderFilter"
+        );
+
+
+    const search =
+        (
+            searchInput
+            ? searchInput.value
+            : ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    const filter =
+        filterInput
+        ? filterInput.value
+        : "all";
 
 
     const list =
@@ -3144,7 +4153,51 @@ function renderOrdersTable() {
                 index
             })
         )
-        .reverse();
+        .reverse()
+        .filter(
+            item => {
+
+                const order =
+                    item.order;
+
+                const customer =
+                    order.customer ||
+                    {};
+
+
+                const searchable =
+                    [
+                        order.orderId,
+                        customer.name,
+                        customer.phone,
+                        customer.email
+                    ]
+                    .join(" ")
+                    .toLowerCase();
+
+
+                const matchesSearch =
+                    !search ||
+                    searchable.includes(
+                        search
+                    );
+
+
+                const matchesFilter =
+                    filter === "all" ||
+                    String(
+                        getStep(order)
+                    ) ===
+                    String(filter);
+
+
+                return (
+                    matchesSearch &&
+                    matchesFilter
+                );
+
+            }
+        );
 
 
     if (!list.length) {
@@ -3154,7 +4207,7 @@ function renderOrdersTable() {
             <tr>
 
                 <td
-                    colspan="6"
+                    colspan="7"
                     style="
                         text-align:center;
                         padding:45px;
@@ -3195,13 +4248,16 @@ function renderOrdersTable() {
         tr.innerHTML = `
 
             <td>
+
                 <strong>
                     #${escapeHTML(
                         order.orderId ||
                         "SM000000"
                     )}
                 </strong>
+
             </td>
+
 
             <td>
                 ${escapeHTML(
@@ -3210,6 +4266,7 @@ function renderOrdersTable() {
                 )}
             </td>
 
+
             <td>
                 ${escapeHTML(
                     customer.phone ||
@@ -3217,15 +4274,18 @@ function renderOrdersTable() {
                 )}
             </td>
 
+
             <td>
                 ${money(order.total)}
             </td>
+
 
             <td>
                 ${formatDate(
                     order.createdAt
                 )}
             </td>
+
 
             <td>
 
@@ -3264,6 +4324,22 @@ function renderOrdersTable() {
                     }
 
                 </select>
+
+            </td>
+
+
+            <td>
+
+                <button
+                    class="details-btn"
+                    onclick="
+                        openOrderDetails(
+                            ${index}
+                        )
+                    "
+                >
+                    View
+                </button>
 
             </td>
 
@@ -3361,6 +4437,303 @@ function syncLastOrder(order) {
     } catch {
 
         /* ignore */
+
+    }
+
+}
+
+
+
+/* =====================================================
+   ORDER DETAILS
+===================================================== */
+
+function openOrderDetails(index) {
+
+    const order =
+        orders[index];
+
+
+    if (!order) {
+
+        return;
+
+    }
+
+
+    const customer =
+        order.customer || {};
+
+
+    const items =
+        Array.isArray(order.items)
+        ? order.items
+        : [];
+
+
+    const step =
+        getStep(order);
+
+
+    const itemHTML =
+        items.length
+        ? items
+            .map(
+                item => `
+
+                    <div
+                        style="
+                            display:flex;
+                            justify-content:space-between;
+                            gap:10px;
+                            padding:9px 0;
+                            border-bottom:
+                            1px solid #f2f4f7;
+                            font-size:9px;
+                        "
+                    >
+
+                        <span>
+                            ${escapeHTML(
+                                item.name ||
+                                "Product"
+                            )}
+                            ×
+                            ${escapeHTML(
+                                item.quantity ||
+                                1
+                            )}
+                        </span>
+
+                        <strong>
+                            ${money(
+                                Number(
+                                    item.price ||
+                                    0
+                                ) *
+                                Number(
+                                    item.quantity ||
+                                    1
+                                )
+                            )}
+                        </strong>
+
+                    </div>
+
+                `
+            )
+            .join("")
+        : `
+
+            <div
+                style="
+                    color:#98a2b3;
+                    font-size:9px;
+                    padding:10px 0;
+                "
+            >
+                Item information পাওয়া যায়নি।
+            </div>
+
+        `;
+
+
+    const body =
+        document.getElementById(
+            "orderModalBody"
+        );
+
+
+    body.innerHTML = `
+
+        <div class="detail-grid">
+
+
+            <div class="detail-box">
+
+                <small>
+                    Order ID
+                </small>
+
+                <strong>
+                    #${escapeHTML(
+                        order.orderId ||
+                        "SM000000"
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <small>
+                    Status
+                </small>
+
+                <strong>
+                    ${STATUS_NAMES[step]}
+                </strong>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <small>
+                    Customer
+                </small>
+
+                <strong>
+                    ${escapeHTML(
+                        customer.name ||
+                        "—"
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <small>
+                    Mobile
+                </small>
+
+                <strong>
+                    ${escapeHTML(
+                        customer.phone ||
+                        "—"
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <small>
+                    Email
+                </small>
+
+                <strong>
+                    ${escapeHTML(
+                        customer.email ||
+                        "—"
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="detail-box">
+
+                <small>
+                    Order Date
+                </small>
+
+                <strong>
+                    ${formatDate(
+                        order.createdAt
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="detail-box full">
+
+                <small>
+                    Delivery Address
+                </small>
+
+                <strong>
+                    ${escapeHTML(
+                        customer.address ||
+                        order.address ||
+                        "—"
+                    )}
+                </strong>
+
+            </div>
+
+
+            <div class="detail-box full">
+
+                <small>
+                    Products
+                </small>
+
+                <div
+                    style="
+                        margin-top:7px;
+                    "
+                >
+                    ${itemHTML}
+                </div>
+
+            </div>
+
+
+            <div
+                class="detail-box full"
+                style="
+                    background:#eef5ff;
+                "
+            >
+
+                <small>
+                    Total
+                </small>
+
+                <strong
+                    style="
+                        color:#1877f2;
+                        font-size:15px;
+                    "
+                >
+                    ${money(
+                        order.total
+                    )}
+                </strong>
+
+            </div>
+
+
+        </div>
+
+    `;
+
+
+    document.getElementById(
+        "orderModal"
+    ).classList.add("show");
+
+}
+
+
+
+/* =====================================================
+   CLOSE MODAL
+===================================================== */
+
+function closeOrderModal() {
+
+    document.getElementById(
+        "orderModal"
+    ).classList.remove("show");
+
+}
+
+
+function closeModalOutside(event) {
+
+    if (
+        event.target.id ===
+        "orderModal"
+    ) {
+
+        closeOrderModal();
 
     }
 
@@ -3496,7 +4869,9 @@ function removeImage() {
 
     if (preview) {
 
-        preview.classList.remove("show");
+        preview.classList.remove(
+            "show"
+        );
 
     }
 
@@ -3599,10 +4974,10 @@ function setupImageURLPreview() {
 
 
 /* =====================================================
-   ADD PRODUCT
+   SAVE PRODUCT
 ===================================================== */
 
-function addProduct() {
+function saveProduct() {
 
     const name =
         document.getElementById(
@@ -3624,9 +4999,26 @@ function addProduct() {
         ).value;
 
 
+    const stock =
+        Math.max(
+            0,
+            Number(
+                document.getElementById(
+                    "productStock"
+                ).value || 0
+            )
+        );
+
+
     const imageURL =
         document.getElementById(
             "productImage"
+        ).value.trim();
+
+
+    const description =
+        document.getElementById(
+            "productDescription"
         ).value.trim();
 
 
@@ -3658,6 +5050,77 @@ function addProduct() {
         "";
 
 
+    if (editingProductId) {
+
+        const product =
+            products.find(
+                item =>
+                    String(item.id) ===
+                    String(editingProductId)
+            );
+
+
+        if (!product) {
+
+            cancelProductEdit();
+
+            return;
+
+        }
+
+
+        product.name =
+            name;
+
+        product.price =
+            price;
+
+        product.category =
+            category;
+
+        product.stock =
+            stock;
+
+        product.description =
+            description;
+
+
+        if (finalImage) {
+
+            product.image =
+                finalImage;
+
+            product.imageType =
+                uploadedImageData
+                ? "upload"
+                : "url";
+
+        }
+
+
+        product.updatedAt =
+            new Date().toISOString();
+
+
+        saveProducts();
+
+
+        cancelProductEdit();
+
+
+        renderProducts();
+
+
+        showToast(
+            "Product updated successfully ✓"
+        );
+
+
+        return;
+
+    }
+
+
     const newProduct = {
 
         id:
@@ -3668,6 +5131,10 @@ function addProduct() {
         price,
 
         category,
+
+        stock,
+
+        description,
 
         image:
             finalImage,
@@ -3706,6 +5173,158 @@ function addProduct() {
 
 
 /* =====================================================
+   EDIT PRODUCT
+===================================================== */
+
+function editProduct(productId) {
+
+    const product =
+        products.find(
+            item =>
+                String(item.id) ===
+                String(productId)
+        );
+
+
+    if (!product) {
+
+        return;
+
+    }
+
+
+    editingProductId =
+        product.id;
+
+
+    document.getElementById(
+        "productName"
+    ).value =
+        product.name || "";
+
+
+    document.getElementById(
+        "productPrice"
+    ).value =
+        product.price || "";
+
+
+    document.getElementById(
+        "productCategory"
+    ).value =
+        product.category ||
+        "Fashion";
+
+
+    document.getElementById(
+        "productStock"
+    ).value =
+        product.stock ?? 0;
+
+
+    document.getElementById(
+        "productImage"
+    ).value =
+        product.imageType === "url"
+        ? product.image || ""
+        : "";
+
+
+    document.getElementById(
+        "productDescription"
+    ).value =
+        product.description || "";
+
+
+    document.getElementById(
+        "productFormTitle"
+    ).textContent =
+        "✏️ Edit Product";
+
+
+    document.getElementById(
+        "productSubmitBtn"
+    ).textContent =
+        "Update Product";
+
+
+    document.getElementById(
+        "cancelEditBtn"
+    ).style.display =
+        "inline-block";
+
+
+    if (product.image) {
+
+        document.getElementById(
+            "previewImage"
+        ).src =
+            product.image;
+
+
+        document.getElementById(
+            "imagePreview"
+        ).classList.add("show");
+
+
+        document.getElementById(
+            "imageFileName"
+        ).textContent =
+            product.imageType === "upload"
+            ? "Saved uploaded image"
+            : "Image URL preview";
+
+    }
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+
+    showToast(
+        "Product edit mode চালু হয়েছে"
+    );
+
+}
+
+
+
+/* =====================================================
+   CANCEL PRODUCT EDIT
+===================================================== */
+
+function cancelProductEdit() {
+
+    editingProductId = null;
+
+
+    document.getElementById(
+        "productFormTitle"
+    ).textContent =
+        "➕ Add New Product";
+
+
+    document.getElementById(
+        "productSubmitBtn"
+    ).textContent =
+        "Add Product";
+
+
+    document.getElementById(
+        "cancelEditBtn"
+    ).style.display =
+        "none";
+
+
+    clearProductForm();
+
+}
+
+
+
+/* =====================================================
    CLEAR PRODUCT FORM
 ===================================================== */
 
@@ -3722,7 +5341,24 @@ function clearProductForm() {
 
 
     document.getElementById(
+        "productCategory"
+    ).value =
+        "Fashion";
+
+
+    document.getElementById(
+        "productStock"
+    ).value =
+        "10";
+
+
+    document.getElementById(
         "productImage"
+    ).value = "";
+
+
+    document.getElementById(
+        "productDescription"
     ).value = "";
 
 
@@ -3744,10 +5380,84 @@ function renderProducts() {
         );
 
 
+    if (!box) {
+
+        return;
+
+    }
+
+
     box.innerHTML = "";
 
 
-    if (!products.length) {
+    const searchInput =
+        document.getElementById(
+            "productSearch"
+        );
+
+
+    const filterInput =
+        document.getElementById(
+            "productFilter"
+        );
+
+
+    const search =
+        (
+            searchInput
+            ? searchInput.value
+            : ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    const filter =
+        filterInput
+        ? filterInput.value
+        : "all";
+
+
+    const filtered =
+        products
+        .slice()
+        .reverse()
+        .filter(
+            product => {
+
+                const searchable =
+                    [
+                        product.name,
+                        product.category,
+                        product.description
+                    ]
+                    .join(" ")
+                    .toLowerCase();
+
+
+                const searchMatch =
+                    !search ||
+                    searchable.includes(
+                        search
+                    );
+
+
+                const categoryMatch =
+                    filter === "all" ||
+                    product.category ===
+                    filter;
+
+
+                return (
+                    searchMatch &&
+                    categoryMatch
+                );
+
+            }
+        );
+
+
+    if (!filtered.length) {
 
         box.innerHTML = `
 
@@ -3759,7 +5469,7 @@ function renderProducts() {
                     font-size:10px;
                 "
             >
-                এখনো কোনো product add করা হয়নি।
+                কোনো product পাওয়া যায়নি।
             </div>
 
         `;
@@ -3769,10 +5479,7 @@ function renderProducts() {
     }
 
 
-    products
-    .slice()
-    .reverse()
-    .forEach(product => {
+    filtered.forEach(product => {
 
         const row =
             document.createElement(
@@ -3814,6 +5521,12 @@ function renderProducts() {
         }
 
 
+        const stock =
+            Number(
+                product.stock ?? 0
+            );
+
+
         row.innerHTML = `
 
             <div class="product-image">
@@ -3851,10 +5564,41 @@ function renderProducts() {
 
                 </span>
 
+
+                <span
+                    class="
+                        product-stock
+                        ${stock <= 0 ? "out" : ""}
+                    "
+                >
+
+                    ${
+                        stock > 0
+                        ? "Stock: " + stock
+                        : "Out of Stock"
+                    }
+
+                </span>
+
             </div>
 
 
             <div class="product-actions">
+
+
+                <button
+                    class="edit-product"
+                    onclick="
+                        editProduct(
+                            '${escapeHTML(
+                                product.id
+                            )}'
+                        )
+                    "
+                >
+                    ✏️ Edit
+                </button>
+
 
                 <button
                     class="delete-product"
@@ -3868,6 +5612,7 @@ function renderProducts() {
                 >
                     🗑️ Delete
                 </button>
+
 
             </div>
 
@@ -3927,6 +5672,16 @@ function deleteProduct(productId) {
     saveProducts();
 
 
+    if (
+        String(editingProductId) ===
+        String(productId)
+    ) {
+
+        cancelProductEdit();
+
+    }
+
+
     renderProducts();
 
 
@@ -3950,7 +5705,55 @@ function renderUsers() {
         );
 
 
-    if (!users.length) {
+    if (!box) {
+
+        return;
+
+    }
+
+
+    const searchInput =
+        document.getElementById(
+            "userSearch"
+        );
+
+
+    const search =
+        (
+            searchInput
+            ? searchInput.value
+            : ""
+        )
+        .trim()
+        .toLowerCase();
+
+
+    const filtered =
+        users.filter(
+            user => {
+
+                const searchable =
+                    [
+                        user.name,
+                        user.email,
+                        user.phone
+                    ]
+                    .join(" ")
+                    .toLowerCase();
+
+
+                return (
+                    !search ||
+                    searchable.includes(
+                        search
+                    )
+                );
+
+            }
+        );
+
+
+    if (!filtered.length) {
 
         box.innerHTML = `
 
@@ -3960,8 +5763,11 @@ function renderUsers() {
 
                 <br><br>
 
-                এখনো কোনো registered
-                user data পাওয়া যায়নি।
+                ${
+                    users.length
+                    ? "Search অনুযায়ী কোনো user পাওয়া যায়নি।"
+                    : "এখনো কোনো registered user data পাওয়া যায়নি।"
+                }
 
             </div>
 
@@ -3973,47 +5779,63 @@ function renderUsers() {
 
 
     box.innerHTML =
-        users
+        filtered
         .map(
-            user => `
+            user => {
 
-                <div
-                    style="
-                        padding:12px 0;
-                        border-bottom:
-                        1px solid #f2f4f7;
-                    "
-                >
-
-                    <strong
-                        style="
-                            font-size:11px;
-                        "
-                    >
-                        ${escapeHTML(
-                            user.name ||
-                            "User"
-                        )}
-                    </strong>
+                const name =
+                    user.name ||
+                    "User";
 
 
-                    <div
-                        style="
-                            color:#667085;
-                            font-size:9px;
-                            margin-top:4px;
-                        "
-                    >
-                        ${escapeHTML(
-                            user.email ||
-                            user.phone ||
-                            "No contact"
-                        )}
+                const first =
+                    name
+                    .trim()
+                    .charAt(0)
+                    .toUpperCase();
+
+
+                return `
+
+                    <div class="user-row">
+
+
+                        <div class="user-avatar">
+
+                            ${escapeHTML(
+                                first
+                            )}
+
+                        </div>
+
+
+                        <div class="user-info">
+
+                            <strong>
+                                ${escapeHTML(
+                                    name
+                                )}
+                            </strong>
+
+
+                            <span>
+
+                                ${escapeHTML(
+                                    user.email ||
+                                    user.phone ||
+                                    "No contact"
+                                )}
+
+                            </span>
+
+                        </div>
+
+
                     </div>
 
-                </div>
+                `;
 
-            `
+            }
         )
         .join("");
 
@@ -4034,7 +5856,9 @@ function showSection(
     .querySelectorAll(".section")
     .forEach(
         section =>
-            section.classList.remove("active")
+            section.classList.remove(
+                "active"
+            )
     );
 
 
@@ -4051,20 +5875,26 @@ function showSection(
     }
 
 
-    target.classList.add("active");
+    target.classList.add(
+        "active"
+    );
 
 
     document
     .querySelectorAll(".nav-item")
     .forEach(
         item =>
-            item.classList.remove("active")
+            item.classList.remove(
+                "active"
+            )
     );
 
 
     if (button) {
 
-        button.classList.add("active");
+        button.classList.add(
+            "active"
+        );
 
     }
 
@@ -4113,6 +5943,9 @@ function showSection(
 
     }
 
+
+    closeMobileSidebar();
+
 }
 
 
@@ -4129,7 +5962,8 @@ function showSectionById(id) {
         );
 
 
-    let targetButton = null;
+    let targetButton =
+        null;
 
 
     buttons.forEach(button => {
@@ -4202,7 +6036,9 @@ function showToast(message) {
         message;
 
 
-    toast.classList.add("show");
+    toast.classList.add(
+        "show"
+    );
 
 
     clearTimeout(
@@ -4227,7 +6063,65 @@ function showToast(message) {
 
 
 /* =====================================================
-   1.43 — ADMIN LOGOUT
+   MOBILE SIDEBAR
+===================================================== */
+
+function toggleMobileSidebar() {
+
+    const sidebar =
+        document.getElementById(
+            "sidebar"
+        );
+
+
+    const overlay =
+        document.getElementById(
+            "sidebarOverlay"
+        );
+
+
+    sidebar.classList.toggle(
+        "open"
+    );
+
+
+    overlay.classList.toggle(
+        "show"
+    );
+
+}
+
+
+
+function closeMobileSidebar() {
+
+    const sidebar =
+        document.getElementById(
+            "sidebar"
+        );
+
+
+    const overlay =
+        document.getElementById(
+            "sidebarOverlay"
+        );
+
+
+    sidebar.classList.remove(
+        "open"
+    );
+
+
+    overlay.classList.remove(
+        "show"
+    );
+
+}
+
+
+
+/* =====================================================
+   1.44 — ADMIN LOGOUT
 ===================================================== */
 
 function adminLogout() {
@@ -4264,7 +6158,7 @@ function adminLogout() {
 
 
 /* =====================================================
-   1.43 — AUTO SESSION CHECK
+   1.44 — AUTO SESSION CHECK
 ===================================================== */
 
 function checkAdminSession() {
@@ -4377,7 +6271,7 @@ document.addEventListener(
 
 
 /* =====================================================
-   1.43 — PERIODIC SESSION CHECK
+   1.44 — PERIODIC SESSION CHECK
 ===================================================== */
 
 setInterval(
@@ -4389,10 +6283,32 @@ setInterval(
     60 * 1000
 );
 
+
+
+/* =====================================================
+   1.44 — ESC KEY
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closeOrderModal();
+
+            closeMobileSidebar();
+
+        }
+
+    }
+);
+
 </script>
 
 
 </body>
 
 </html>
-```
