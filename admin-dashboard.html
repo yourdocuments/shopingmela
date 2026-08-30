@@ -52,11 +52,6 @@ button{cursor:pointer}
   font-style:normal;
 }
 
-.logo small{
-  color:#98a2b3;
-  font-size:8px;
-}
-
 .nav-title{
   margin:22px 10px 8px;
   color:#98a2b3;
@@ -251,11 +246,6 @@ button{cursor:pointer}
 .status.cancelled{
   background:#fff1f0;
   color:#f04438;
-}
-
-.status.shipped{
-  background:#f4f3ff;
-  color:#6941c6;
 }
 
 .quick{
@@ -609,57 +599,46 @@ th{
   font-size:10px;
 }
 
-
-/* SECURITY SCREEN */
-
-#securityScreen{
-  position:fixed;
-  inset:0;
-  background:#f5f6f8;
-  display:none;
+.login-required{
+  min-height:100vh;
+  display:flex;
   align-items:center;
   justify-content:center;
-  z-index:9999;
-  text-align:center;
-  padding:20px;
+  background:#f5f6f8;
 }
 
-#securityScreen.show{
-  display:flex;
-}
-
-.security-box{
+.login-box{
+  width:90%;
+  max-width:400px;
   background:#fff;
-  padding:30px;
+  border:1px solid #eaecf0;
   border-radius:15px;
-  border:1px solid #e4e7ec;
-  max-width:360px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 10px 30px #10182815;
 }
 
-.security-box h2{
+.login-box h2{
   margin:0 0 8px;
-  font-size:20px;
 }
 
-.security-box p{
+.login-box p{
   color:#667085;
+  font-size:12px;
+}
+
+.login-box a{
+  display:inline-block;
+  margin-top:15px;
+  padding:10px 18px;
+  background:#1877f2;
+  color:#fff;
+  text-decoration:none;
+  border-radius:7px;
   font-size:11px;
 }
 
-.security-box a{
-  display:inline-block;
-  margin-top:10px;
-  padding:10px 15px;
-  background:#1877f2;
-  color:#fff;
-  border-radius:7px;
-  text-decoration:none;
-  font-size:10px;
-}
-
-
 @media(max-width:900px){
-
   .sidebar{
     width:190px;
   }
@@ -675,11 +654,9 @@ th{
   .grid{
     grid-template-columns:1fr;
   }
-
 }
 
 @media(max-width:650px){
-
   .sidebar{
     position:static;
     width:100%;
@@ -723,7 +700,6 @@ th{
   .header-right .site{
     display:none;
   }
-
 }
 </style>
 
@@ -731,133 +707,65 @@ th{
 
 <body>
 
-<!-- ================================
-     SECURITY SCREEN
-================================ -->
+<!--
+  SECURITY GATE
+  Dashboard content is not shown until session is verified.
+-->
 
-<div id="securityScreen">
-
-  <div class="security-box">
-
-```
-<div style="font-size:40px">🔒</div>
-
-<h2>Admin Login Required</h2>
-
-<p>
-  এই Dashboard দেখতে হলে প্রথমে Admin Login করতে হবে।
-</p>
-
-<a href="admin-login.html">
-  Go to Admin Login
-</a>
-```
-
+<div id="securityGate" class="login-required">
+  <div class="login-box">
+    <h2>🔐 Admin Login Required</h2>
+    <p>Your admin session is missing or expired.</p>
+    <a href="admin-login.html">Go to Admin Login</a>
   </div>
-
 </div>
 
-<!-- ================================
-     SIDEBAR
-================================ -->
+<div id="dashboardApp" style="display:none;">
 
 <aside class="sidebar">
 
   <div class="logo">
-
-```
-<i>🛍️</i>
-
-<span>
-  Shopping Mela
-  <br>
-  <small>Admin Panel</small>
-</span>
-```
-
+    <i>🛍️</i>
+    <span>
+      Shopping Mela<br>
+      <small>Admin Panel</small>
+    </span>
   </div>
 
-  <div class="nav-title">
-    Management
-  </div>
+  <div class="nav-title">Management</div>
 
-<button
-class="nav active"
-data-section="dashboard"
-
->
-
-```
-📊 Dashboard
-```
-
+  <button class="nav active" data-section="dashboard">
+    📊 Dashboard
   </button>
 
-<button
-class="nav"
-data-section="orders"
-
->
-
-```
-📦 Orders
-```
-
+  <button class="nav" data-section="orders">
+    📦 Orders
   </button>
 
-<button
-class="nav"
-data-section="products"
-
->
-
-```
-🛒 Products
-```
-
+  <button class="nav" data-section="products">
+    🛒 Products
   </button>
 
-<button
-class="nav"
-data-section="users"
-
->
-
-```
-👥 Users
-```
-
+  <button class="nav" data-section="users">
+    👥 Users
   </button>
 
 </aside>
-
-<!-- ================================
-     MAIN
-================================ -->
 
 <main class="main">
 
 <header class="header">
 
-  <h2 id="pageTitle">
-    Dashboard
-  </h2>
+  <h2 id="pageTitle">Dashboard</h2>
 
   <div class="header-right">
 
 ```
-<a
-  class="site"
-  href="index.html"
->
+<a class="site" href="index.html">
   🌐 View Site
 </a>
 
-
-<button
-  class="logout"
-  id="logoutBtn"
->
+<button class="logout" onclick="logout()">
   Logout
 </button>
 ```
@@ -868,93 +776,36 @@ data-section="users"
 
 <div class="content">
 
-<!-- ================================
-     DASHBOARD
-================================ -->
+<!-- DASHBOARD -->
 
-<section
-  id="dashboard"
-  class="section active"
->
+<section id="dashboard" class="section active">
 
   <div class="welcome">
-
-```
-<h1>
-  Welcome, Admin 👋
-</h1>
-
-<p>
-  Shopping Mela store overview.
-</p>
-```
-
+    <h1>Welcome, Admin 👋</h1>
+    <p>Shopping Mela store overview.</p>
   </div>
 
   <div class="stats">
 
 ```
 <div class="card">
-
-  <div class="stat-label">
-    Total Products
-  </div>
-
-  <div
-    class="stat-value"
-    id="statProducts"
-  >
-    0
-  </div>
-
+  <div class="stat-label">Total Products</div>
+  <div class="stat-value" id="statProducts">0</div>
 </div>
 
-
 <div class="card">
-
-  <div class="stat-label">
-    Total Orders
-  </div>
-
-  <div
-    class="stat-value"
-    id="statOrders"
-  >
-    0
-  </div>
-
+  <div class="stat-label">Total Orders</div>
+  <div class="stat-value" id="statOrders">0</div>
 </div>
 
-
 <div class="card">
-
-  <div class="stat-label">
-    Total Users
-  </div>
-
-  <div
-    class="stat-value"
-    id="statUsers"
-  >
-    0
-  </div>
-
+  <div class="stat-label">Total Users</div>
+  <div class="stat-value" id="statUsers">0</div>
 </div>
 
-
 <div class="card">
-
-  <div class="stat-label">
-    Total Sales
-  </div>
-
-  <div
-    class="stat-value"
-    id="statSales"
-  >
-    ৳0
-  </div>
-
+  <div class="stat-label">Total Sales</div>
+  <div class="stat-value" id="statSales">৳0</div>
 </div>
 ```
 
@@ -966,71 +817,38 @@ data-section="users"
 <div class="panel">
 
   <div class="panel-head">
-
-    <h3>
-      Recent Orders
-    </h3>
-
-    <button
-      onclick="showSection('orders')"
-    >
+    <h3>Recent Orders</h3>
+    <button onclick="showSection('orders')">
       View all →
     </button>
-
   </div>
-
 
   <div id="recentOrders"></div>
 
 </div>
 
-
 <div class="panel">
 
   <div class="panel-head">
-
-    <h3>
-      Quick Actions
-    </h3>
-
+    <h3>Quick Actions</h3>
   </div>
-
 
   <div class="quick">
 
-    <button
-      onclick="showSection('products');resetProductForm()"
-    >
-      ➕
-      <br>
-      Add Product
+    <button onclick="showSection('products');resetProductForm()">
+      ➕<br>Add Product
     </button>
 
-
-    <button
-      onclick="showSection('orders')"
-    >
-      📦
-      <br>
-      Orders
+    <button onclick="showSection('orders')">
+      📦<br>Orders
     </button>
 
-
-    <button
-      onclick="showSection('users')"
-    >
-      👥
-      <br>
-      Users
+    <button onclick="showSection('users')">
+      👥<br>Users
     </button>
 
-
-    <button
-      onclick="showSection('products')"
-    >
-      🛒
-      <br>
-      Products
+    <button onclick="showSection('products')">
+      🛒<br>Products
     </button>
 
   </div>
@@ -1042,27 +860,13 @@ data-section="users"
 
 </section>
 
-<!-- ================================
-     ORDERS
-================================ -->
+<!-- ORDERS -->
 
-<section
-  id="orders"
-  class="section"
->
+<section id="orders" class="section">
 
   <div class="welcome">
-
-```
-<h1>
-  Orders
-</h1>
-
-<p>
-  Manage customer orders.
-</p>
-```
-
+    <h1>Orders</h1>
+    <p>Manage customer orders.</p>
   </div>
 
   <div class="toolbar">
@@ -1071,34 +875,17 @@ data-section="users"
 <input
   id="orderSearch"
   placeholder="Search order, customer, phone..."
+  oninput="renderOrders()"
 >
 
+<select id="orderStatus" onchange="renderOrders()">
 
-<select id="orderStatus">
-
-  <option value="all">
-    All Status
-  </option>
-
-  <option>
-    Pending
-  </option>
-
-  <option>
-    Processing
-  </option>
-
-  <option>
-    Shipped
-  </option>
-
-  <option>
-    Delivered
-  </option>
-
-  <option>
-    Cancelled
-  </option>
+  <option value="all">All Status</option>
+  <option>Pending</option>
+  <option>Processing</option>
+  <option>Shipped</option>
+  <option>Delivered</option>
+  <option>Cancelled</option>
 
 </select>
 ```
@@ -1111,37 +898,15 @@ data-section="users"
 <table>
 
   <thead>
-
     <tr>
-
-      <th>
-        Order
-      </th>
-
-      <th>
-        Customer
-      </th>
-
-      <th>
-        Total
-      </th>
-
-      <th>
-        Status
-      </th>
-
-      <th>
-        Date
-      </th>
-
-      <th>
-        Action
-      </th>
-
+      <th>Order</th>
+      <th>Customer</th>
+      <th>Total</th>
+      <th>Status</th>
+      <th>Date</th>
+      <th>Action</th>
     </tr>
-
   </thead>
-
 
   <tbody id="ordersTable"></tbody>
 
@@ -1152,27 +917,13 @@ data-section="users"
 
 </section>
 
-<!-- ================================
-     PRODUCTS
-================================ -->
+<!-- PRODUCTS -->
 
-<section
-  id="products"
-  class="section"
->
+<section id="products" class="section">
 
   <div class="welcome">
-
-```
-<h1>
-  Products
-</h1>
-
-<p>
-  Add, edit and remove products.
-</p>
-```
-
+    <h1>Products</h1>
+    <p>Add, edit and remove products.</p>
   </div>
 
   <div class="form">
@@ -1182,30 +933,15 @@ data-section="users"
   ➕ Add New Product
 </h3>
 
-
 <div class="form-grid">
 
-
   <div>
-
-    <label>
-      Product Name
-    </label>
-
-    <input
-      id="productName"
-      placeholder="Product name"
-    >
-
+    <label>Product Name</label>
+    <input id="productName" placeholder="Product name">
   </div>
 
-
   <div>
-
-    <label>
-      Price (৳)
-    </label>
-
+    <label>Price (৳)</label>
     <input
       id="productPrice"
       type="number"
@@ -1213,56 +949,29 @@ data-section="users"
       step="0.01"
       placeholder="0"
     >
-
   </div>
-
 
   <div>
 
-    <label>
-      Category
-    </label>
+    <label>Category</label>
 
     <select id="productCategory">
 
-      <option>
-        Fashion
-      </option>
-
-      <option>
-        Electronics
-      </option>
-
-      <option>
-        Beauty
-      </option>
-
-      <option>
-        Home
-      </option>
-
-      <option>
-        Food
-      </option>
-
-      <option>
-        Accessories
-      </option>
-
-      <option>
-        Other
-      </option>
+      <option>Fashion</option>
+      <option>Electronics</option>
+      <option>Beauty</option>
+      <option>Home</option>
+      <option>Food</option>
+      <option>Accessories</option>
+      <option>Other</option>
 
     </select>
 
   </div>
 
-
   <div>
 
-    <label>
-      Image URL
-    </label>
+    <label>Image URL</label>
 
     <input
       id="productImage"
@@ -1271,29 +980,20 @@ data-section="users"
 
   </div>
 
-
   <div class="full">
 
-    <label>
-      Upload Image
-    </label>
+    <label>Upload Image</label>
 
     <input
       id="productFile"
       type="file"
       accept="image/*"
+      onchange="handleFile(event)"
     >
 
+    <div id="preview" class="preview">
 
-    <div
-      id="preview"
-      class="preview"
-    >
-
-      <img
-        id="previewImg"
-        alt=""
-      >
+      <img id="previewImg" alt="">
 
     </div>
 
@@ -1301,20 +1001,20 @@ data-section="users"
 
 </div>
 
-
 <div class="form-actions">
 
   <button
     class="primary"
     id="saveBtn"
+    onclick="saveProduct()"
   >
     Add Product
   </button>
 
-
   <button
     class="secondary"
     id="cancelBtn"
+    onclick="resetProductForm()"
     style="display:none"
   >
     Cancel
@@ -1331,82 +1031,46 @@ data-section="users"
 <input
   id="productSearch"
   placeholder="Search products..."
+  oninput="renderProducts()"
 >
 
+<select
+  id="productFilter"
+  onchange="renderProducts()"
+>
 
-<select id="productFilter">
-
-  <option value="all">
-    All Categories
-  </option>
-
-  <option>
-    Fashion
-  </option>
-
-  <option>
-    Electronics
-  </option>
-
-  <option>
-    Beauty
-  </option>
-
-  <option>
-    Home
-  </option>
-
-  <option>
-    Food
-  </option>
-
-  <option>
-    Accessories
-  </option>
-
-  <option>
-    Other
-  </option>
+  <option value="all">All Categories</option>
+  <option>Fashion</option>
+  <option>Electronics</option>
+  <option>Beauty</option>
+  <option>Home</option>
+  <option>Food</option>
+  <option>Accessories</option>
+  <option>Other</option>
 
 </select>
 ```
 
   </div>
 
-  <div
-    class="products"
-    id="productsList"
-  ></div>
+  <div class="products" id="productsList"></div>
 
 </section>
 
-<!-- ================================
-     USERS
-================================ -->
+<!-- USERS -->
 
-<section
-  id="users"
-  class="section"
->
+<section id="users" class="section">
 
   <div class="welcome">
 
 ```
-<h1>
-  Users
-</h1>
-
-<p>
-  Registered customer information.
-</p>
+<h1>Users</h1>
+<p>Registered customer information.</p>
 ```
 
   </div>
 
-  <div
-    class="users"
-    id="usersList"
-  ></div>
+  <div class="users" id="usersList"></div>
 
 </section>
 
@@ -1414,13 +1078,12 @@ data-section="users"
 
 </main>
 
-<!-- ================================
-     ORDER MODAL
-================================ -->
+<!-- ORDER MODAL -->
 
 <div
   class="modal"
   id="orderModal"
+  onclick="if(event.target===this)closeModal()"
 >
 
   <div class="modal-box">
@@ -1428,16 +1091,13 @@ data-section="users"
 ```
 <div class="modal-head">
 
-  <strong>
-    Order Details
-  </strong>
+  <strong>Order Details</strong>
 
-  <button id="closeModalBtn">
+  <button onclick="closeModal()">
     ✕
   </button>
 
 </div>
-
 
 <div
   class="modal-body"
@@ -1449,236 +1109,34 @@ data-section="users"
 
 </div>
 
-<div
-  class="toast"
-  id="toast"
-></div>
+<div class="toast" id="toast"></div>
+
+</div>
 
 <script>
-
 "use strict";
 
 
-/* =================================================
-   AUTHENTICATION
-================================================= */
-
-const AUTH_KEY =
-  "shoppingMelaAdminLoggedIn";
-
-const LOGIN_TIME_KEY =
-  "shoppingMelaAdminLoginTime";
-
-const SESSION_TIME =
-  24 * 60 * 60 * 1000;
-
-
-/*
-  IMPORTANT:
-
-  admin-login.html এবং
-  admin-dashboard.html
-
-  দুই জায়গায় একই key ব্যবহার হচ্ছে।
-*/
-
-
-function isAdminLoggedIn(){
-
-  const logged =
-    localStorage.getItem(AUTH_KEY);
-
-  const loginTime =
-    Number(
-      localStorage.getItem(LOGIN_TIME_KEY) || 0
-    );
-
-
-  if(
-    logged !== "true" ||
-    !loginTime
-  ){
-
-    return false;
-
-  }
-
-
-  if(
-    Date.now() - loginTime >= SESSION_TIME
-  ){
-
-    localStorage.removeItem(AUTH_KEY);
-
-    localStorage.removeItem(LOGIN_TIME_KEY);
-
-    return false;
-
-  }
-
-
-  return true;
-
-}
-
-
-/*
-  Dashboard protection
-*/
-
-function protectDashboard(){
-
-  if(!isAdminLoggedIn()){
-
-    document
-      .getElementById("securityScreen")
-      .classList.add("show");
-
-    return false;
-
-  }
-
-
-  document
-    .getElementById("securityScreen")
-    .classList.remove("show");
-
-  return true;
-
-}
-
-
-/*
-  Logout
-*/
-
-function logout(){
-
-  const confirmLogout =
-    confirm(
-      "আপনি কি Logout করতে চান?"
-    );
-
-
-  if(!confirmLogout){
-
-    return;
-
-  }
-
-
-  localStorage.removeItem(
-    AUTH_KEY
-  );
-
-  localStorage.removeItem(
-    LOGIN_TIME_KEY
-  );
-
-
-  /*
-    replace ব্যবহার করা হয়েছে।
-    তাই logout করার পরে browser Back
-    দিয়ে dashboard-এ সহজে ফিরতে পারবে না।
-  */
-
-  window.location.replace(
-    "admin-login.html"
-  );
-
-}
-
-
-/*
-  Logout button
-*/
-
-document
-  .getElementById("logoutBtn")
-  .addEventListener(
-    "click",
-    logout
-  );
-
-
-/*
-  Browser Back / Forward / Refresh
-*/
-
-window.addEventListener(
-  "pageshow",
-  function(){
-
-    protectDashboard();
-
-  }
-);
-
-
-/*
-  প্রতি 30 second-এ authentication check
-*/
-
-setInterval(
-  function(){
-
-    if(!isAdminLoggedIn()){
-
-      window.location.replace(
-        "admin-login.html"
-      );
-
-    }
-
-  },
-  30000
-);
-
-
-/*
-  অন্য tab থেকে logout করলে
-  এই tab-ও logout হবে।
-*/
-
-window.addEventListener(
-  "storage",
-  function(event){
-
-    if(
-      event.key === AUTH_KEY ||
-      event.key === LOGIN_TIME_KEY
-    ){
-
-      if(!isAdminLoggedIn()){
-
-        window.location.replace(
-          "admin-login.html"
-        );
-
-      }
-
-    }
-
-  }
-);
-
-
-/* =================================================
-   DATA
-================================================= */
+/* =========================================================
+   STORAGE KEYS
+========================================================= */
 
 const KEYS = {
 
-  products:
-    "shoppingMelaProducts",
+  products:"shoppingMelaProducts",
 
-  orders:
-    "shoppingMelaOrders",
+  orders:"shoppingMelaOrders",
 
-  users:
-    "shoppingMelaUsers"
+  users:"shoppingMelaUsers",
+
+  logged:"shoppingMelaAdminLoggedIn",
+
+  loginTime:"shoppingMelaAdminLoginTime"
 
 };
+
+
+const SESSION_LIMIT = 24 * 60 * 60 * 1000;
 
 
 let products = [];
@@ -1687,14 +1145,192 @@ let users = [];
 let editingId = null;
 
 
-/* =================================================
-   HELPERS
-================================================= */
+/* =========================================================
+   SECURITY
+========================================================= */
 
-function read(
-  key,
-  fallback = []
-){
+function isAdminLoggedIn(){
+
+  const logged =
+    sessionStorage.getItem(KEYS.logged);
+
+  const loginTime =
+    Number(
+      sessionStorage.getItem(KEYS.loginTime) || 0
+    );
+
+  if(logged !== "true"){
+    return false;
+  }
+
+  if(!loginTime){
+    return false;
+  }
+
+  if(Date.now() - loginTime >= SESSION_LIMIT){
+
+    clearAdminSession();
+
+    return false;
+  }
+
+  return true;
+}
+
+
+function clearAdminSession(){
+
+  sessionStorage.removeItem(KEYS.logged);
+
+  sessionStorage.removeItem(KEYS.loginTime);
+
+}
+
+
+function redirectToLogin(){
+
+  clearAdminSession();
+
+  /*
+    Replace current browser history entry.
+    This prevents simple Back navigation from returning
+    to the dashboard URL.
+  */
+
+  window.location.replace("admin-login.html");
+
+}
+
+
+function securityCheck(){
+
+  if(!isAdminLoggedIn()){
+
+    redirectToLogin();
+
+    return false;
+
+  }
+
+  return true;
+
+}
+
+
+/*
+  Initial security gate.
+*/
+
+(function(){
+
+  if(!isAdminLoggedIn()){
+
+    document.getElementById("securityGate").style.display="flex";
+
+    document.getElementById("dashboardApp").style.display="none";
+
+    /*
+      Give browser a moment to render the message,
+      then redirect.
+    */
+
+    setTimeout(function(){
+
+      redirectToLogin();
+
+    },500);
+
+    return;
+
+  }
+
+
+  document.getElementById("securityGate").style.display="none";
+
+  document.getElementById("dashboardApp").style.display="block";
+
+})();
+
+
+/*
+  Browser Back / Forward security.
+*/
+
+window.addEventListener("pageshow",function(){
+
+  if(!isAdminLoggedIn()){
+
+    redirectToLogin();
+
+  }
+
+});
+
+
+window.addEventListener("popstate",function(){
+
+  if(!isAdminLoggedIn()){
+
+    redirectToLogin();
+
+  }
+
+});
+
+
+/*
+  Check session every 30 seconds.
+*/
+
+setInterval(function(){
+
+  if(!isAdminLoggedIn()){
+
+    redirectToLogin();
+
+  }
+
+},30000);
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+function logout(){
+
+  if(!isAdminLoggedIn()){
+
+    redirectToLogin();
+
+    return;
+
+  }
+
+
+  const ok =
+    confirm("আপনি কি Logout করতে চান?");
+
+  if(!ok)return;
+
+
+  clearAdminSession();
+
+
+  /*
+    Prevent dashboard from remaining in history.
+  */
+
+  window.location.replace("admin-login.html");
+
+}
+
+
+/* =========================================================
+   STORAGE FUNCTIONS
+========================================================= */
+
+function read(key,fallback=[]){
 
   try{
 
@@ -1702,7 +1338,6 @@ function read(
       JSON.parse(
         localStorage.getItem(key)
       );
-
 
     return Array.isArray(value)
       ? value
@@ -1741,27 +1376,31 @@ function saveProducts(){
 }
 
 
+function saveOrders(){
+
+  localStorage.setItem(
+    KEYS.orders,
+    JSON.stringify(orders)
+  );
+
+}
+
+
 function money(value){
 
   return "৳" +
     Number(value || 0)
-      .toLocaleString(
-        "en-BD",
-        {
-          maximumFractionDigits:2
-        }
-      );
+    .toLocaleString("en-BD",{
+      maximumFractionDigits:2
+    });
 
 }
 
 
 function esc(value){
 
-  return String(
-    value ?? ""
-  ).replace(
-    /[&<>"']/g,
-    function(match){
+  return String(value ?? "")
+    .replace(/[&<>"']/g,function(match){
 
       return {
 
@@ -1773,8 +1412,7 @@ function esc(value){
 
       }[match];
 
-    }
-  );
+    });
 
 }
 
@@ -1794,30 +1432,26 @@ function orderTotal(order){
 
   if(order?.total != null){
 
-    return Number(
-      order.total
-    ) || 0;
+    return Number(order.total) || 0;
 
   }
 
 
   if(order?.amount != null){
 
-    return Number(
-      order.amount
-    ) || 0;
+    return Number(order.amount) || 0;
 
   }
 
 
-  if(
-    Array.isArray(
-      order?.items
-    )
-  ){
+  if(Array.isArray(order?.items)){
 
     return order.items.reduce(
+
       function(total,item){
+
+        const price =
+          Number(item.price) || 0;
 
         const quantity =
           Number(
@@ -1826,17 +1460,13 @@ function orderTotal(order){
             1
           ) || 1;
 
-        const price =
-          Number(
-            item.price
-          ) || 0;
-
-
         return total +
           price * quantity;
 
       },
+
       0
+
     );
 
   }
@@ -1873,8 +1503,7 @@ function orderPhone(order){
 
 function orderStatus(order){
 
-  return order.status ||
-    "Pending";
+  return order.status || "Pending";
 
 }
 
@@ -1891,101 +1520,72 @@ function orderDate(order){
 }
 
 
-/* =================================================
+/* =========================================================
    TOAST
-================================================= */
+========================================================= */
 
 function showToast(message){
 
   const toast =
-    document.getElementById(
-      "toast"
-    );
+    document.getElementById("toast");
 
+  toast.textContent = message;
 
-  toast.textContent =
-    message;
+  toast.classList.add("show");
 
+  clearTimeout(window.__toast);
 
-  toast.classList.add(
-    "show"
-  );
+  window.__toast =
+    setTimeout(function(){
 
+      toast.classList.remove("show");
 
-  clearTimeout(
-    window.__toastTimer
-  );
-
-
-  window.__toastTimer =
-    setTimeout(
-      function(){
-
-        toast.classList.remove(
-          "show"
-        );
-
-      },
-      2200
-    );
+    },2200);
 
 }
 
 
-/* =================================================
+/* =========================================================
    NAVIGATION
-================================================= */
+========================================================= */
 
 function showSection(id){
 
-  if(!isAdminLoggedIn()){
-
-    window.location.replace(
-      "admin-login.html"
-    );
-
-    return;
-
-  }
+  if(!securityCheck())return;
 
 
   document
-    .querySelectorAll(
-      ".section"
-    )
-    .forEach(
-      function(section){
+    .querySelectorAll(".section")
+    .forEach(function(section){
 
-        section.classList.toggle(
-          "active",
-          section.id === id
-        );
+      section.classList.toggle(
+        "active",
+        section.id === id
+      );
 
-      }
-    );
+    });
 
 
   document
-    .querySelectorAll(
-      ".nav"
-    )
-    .forEach(
-      function(button){
+    .querySelectorAll(".nav")
+    .forEach(function(button){
 
-        button.classList.toggle(
-          "active",
-          button.dataset.section === id
-        );
+      button.classList.toggle(
+        "active",
+        button.dataset.section === id
+      );
 
-      }
-    );
+    });
 
 
   const titles = {
 
     dashboard:"Dashboard",
+
     orders:"Orders",
+
     products:"Products",
+
     users:"Users"
 
   };
@@ -1997,54 +1597,39 @@ function showSection(id){
     titles[id] || "Admin";
 
 
-  if(id === "orders"){
-
+  if(id === "orders")
     renderOrders();
 
-  }
-
-
-  if(id === "products"){
-
+  if(id === "products")
     renderProducts();
 
-  }
-
-
-  if(id === "users"){
-
+  if(id === "users")
     renderUsers();
-
-  }
 
 }
 
 
 document
-  .querySelectorAll(
-    ".nav"
-  )
-  .forEach(
-    function(button){
+  .querySelectorAll(".nav")
+  .forEach(function(button){
 
-      button.addEventListener(
-        "click",
-        function(){
+    button.addEventListener(
+      "click",
+      function(){
 
-          showSection(
-            button.dataset.section
-          );
+        showSection(
+          button.dataset.section
+        );
 
-        }
-      );
+      }
+    );
 
-    }
-  );
+  });
 
 
-/* =================================================
+/* =========================================================
    STATS
-================================================= */
+========================================================= */
 
 function renderStats(){
 
@@ -2068,26 +1653,18 @@ function renderStats(){
 
   const sales =
     orders
-      .filter(
-        function(order){
+      .filter(function(order){
 
-          return (
-            orderStatus(order)
-              .toLowerCase() !==
-            "cancelled"
-          );
+        return orderStatus(order)
+          .toLowerCase() !== "cancelled";
 
-        }
-      )
-      .reduce(
-        function(total,order){
+      })
+      .reduce(function(total,order){
 
-          return total +
-            orderTotal(order);
+        return total +
+          orderTotal(order);
 
-        },
-        0
-      );
+      },0);
 
 
   document.getElementById(
@@ -2098,9 +1675,9 @@ function renderStats(){
 }
 
 
-/* =================================================
+/* =========================================================
    RECENT ORDERS
-================================================= */
+========================================================= */
 
 function renderRecentOrders(){
 
@@ -2118,13 +1695,8 @@ function renderRecentOrders(){
 
   if(!list.length){
 
-    box.innerHTML = `
-      <div class="empty">
-        📦
-        <br><br>
-        No orders yet.
-      </div>
-    `;
+    box.innerHTML =
+      '<div class="empty">📦<br><br>No orders yet.</div>';
 
     return;
 
@@ -2132,75 +1704,69 @@ function renderRecentOrders(){
 
 
   box.innerHTML =
-    list.map(
-      function(order){
+    list.map(function(order){
 
-        const status =
-          orderStatus(order);
+      return `
 
+        <div class="order-row">
 
-        return `
+          <div>
 
-          <div class="order-row">
+            <strong>
+              #${esc(idOf(order) || "—")}
+            </strong>
 
-            <div>
+            <br>
 
-              <strong>
-                #${esc(
-                  idOf(order) || "—"
-                )}
-              </strong>
-
-              <br>
-
-              <span class="muted">
-                ${esc(
-                  orderName(order)
-                )}
-              </span>
-
-            </div>
-
-
-            <div>
-              ${esc(
-                orderPhone(order)
-              )}
-            </div>
-
-
-            <div>
-              <strong>
-                ${money(
-                  orderTotal(order)
-                )}
-              </strong>
-            </div>
-
-
-            <div>
-
-              <span class="status ${status.toLowerCase()}">
-                ${esc(status)}
-              </span>
-
-            </div>
+            <span class="muted">
+              ${esc(orderName(order))}
+            </span>
 
           </div>
 
-        `;
 
-      }
-    ).join("");
+          <div>
+            ${esc(orderPhone(order))}
+          </div>
+
+
+          <div>
+            <strong>
+              ${money(orderTotal(order))}
+            </strong>
+          </div>
+
+
+          <div>
+
+            <span class="status ${esc(
+              orderStatus(order)
+                .toLowerCase()
+            )}">
+
+              ${esc(orderStatus(order))}
+
+            </span>
+
+          </div>
+
+        </div>
+
+      `;
+
+    }).join("");
 
 }
 
 
-/* =================================================
+/* =========================================================
    ORDERS
-================================================= */
+========================================================= */
 
 function renderOrders(){
+
+  if(!securityCheck())return;
+
 
   const search =
     (
@@ -2212,34 +1778,29 @@ function renderOrders(){
     .trim();
 
 
-  const status =
+  const selectedStatus =
     document.getElementById(
       "orderStatus"
     )?.value || "all";
 
 
   const list =
-    orders.filter(
-      function(order){
+    orders.filter(function(order){
 
-        const text =
-          JSON.stringify(
-            order
-          ).toLowerCase();
+      const text =
+        JSON.stringify(order)
+          .toLowerCase();
 
 
-        return (
-          (!search ||
-            text.includes(search))
-          &&
-          (
-            status === "all" ||
-            orderStatus(order) === status
-          )
-        );
+      return (
+        (!search || text.includes(search)) &&
+        (
+          selectedStatus === "all" ||
+          orderStatus(order) === selectedStatus
+        )
+      );
 
-      }
-    );
+    });
 
 
   const table =
@@ -2250,21 +1811,16 @@ function renderOrders(){
 
   if(!list.length){
 
-    table.innerHTML = `
-
+    table.innerHTML =
+      `
       <tr>
-
         <td colspan="6">
-
           <div class="empty">
             No matching orders.
           </div>
-
         </td>
-
       </tr>
-
-    `;
+      `;
 
     return;
 
@@ -2272,276 +1828,149 @@ function renderOrders(){
 
 
   table.innerHTML =
-    [...list]
+    list
+      .slice()
       .reverse()
-      .map(
-        function(order){
+      .map(function(order){
 
-          const id =
-            idOf(order);
-
-
-          const currentStatus =
-            orderStatus(order);
+        const orderId =
+          idOf(order);
 
 
-          return `
-
-            <tr>
-
-              <td>
-                <strong>
-                  #${esc(id || "—")}
-                </strong>
-              </td>
+        const currentStatus =
+          orderStatus(order);
 
 
-              <td>
+        return `
 
-                ${esc(
-                  orderName(order)
-                )}
+        <tr>
 
-                <br>
-
-                <span class="muted">
-                  ${esc(
-                    orderPhone(order)
-                  )}
-                </span>
-
-              </td>
+          <td>
+            <strong>
+              #${esc(orderId || "—")}
+            </strong>
+          </td>
 
 
-              <td>
+          <td>
 
-                <strong>
-                  ${money(
-                    orderTotal(order)
-                  )}
-                </strong>
+            ${esc(orderName(order))}
 
-              </td>
+            <br>
 
+            <span class="muted">
+              ${esc(orderPhone(order))}
+            </span>
 
-              <td>
-
-                <select
-                  class="status"
-                  data-order-status="${esc(id)}"
-                >
-
-                  ${
-                    [
-                      "Pending",
-                      "Processing",
-                      "Shipped",
-                      "Delivered",
-                      "Cancelled"
-                    ]
-                    .map(
-                      function(item){
-
-                        return `
-                          <option
-                            ${
-                              item === currentStatus
-                              ? "selected"
-                              : ""
-                            }
-                          >
-                            ${item}
-                          </option>
-                        `;
-
-                      }
-                    )
-                    .join("")
-                  }
-
-                </select>
-
-              </td>
+          </td>
 
 
-              <td>
-                ${esc(
-                  orderDate(order) || "—"
-                )}
-              </td>
+          <td>
+            <strong>
+              ${money(orderTotal(order))}
+            </strong>
+          </td>
 
 
-              <td>
+          <td>
 
-                <button
-                  class="action view"
-                  data-view-order="${esc(id)}"
-                >
-                  View
-                </button>
+            <select
+              class="status"
+              onchange="changeStatus('${esc(orderId)}',this.value)"
+            >
+
+              ${[
+                "Pending",
+                "Processing",
+                "Shipped",
+                "Delivered",
+                "Cancelled"
+              ].map(function(status){
+
+                return `
+                  <option
+                    ${status === currentStatus
+                      ? "selected"
+                      : ""}
+                  >
+                    ${status}
+                  </option>
+                `;
+
+              }).join("")}
+
+            </select>
+
+          </td>
 
 
-                <button
-                  class="action danger"
-                  data-delete-order="${esc(id)}"
-                >
-                  Delete
-                </button>
+          <td>
+            ${esc(orderDate(order) || "—")}
+          </td>
 
-              </td>
 
-            </tr>
+          <td>
 
-          `;
+            <button
+              class="action view"
+              onclick="viewOrder('${esc(orderId)}')"
+            >
+              View
+            </button>
 
-        }
-      )
+
+            <button
+              class="action danger"
+              onclick="deleteOrder('${esc(orderId)}')"
+            >
+              Delete
+            </button>
+
+          </td>
+
+        </tr>
+
+        `;
+
+      })
       .join("");
 
 }
 
 
-/* =================================================
-   ORDER EVENTS
-================================================= */
-
-document
-  .getElementById(
-    "orderSearch"
-  )
-  .addEventListener(
-    "input",
-    renderOrders
-  );
-
-
-document
-  .getElementById(
-    "orderStatus"
-  )
-  .addEventListener(
-    "change",
-    renderOrders
-  );
-
-
-document
-  .getElementById(
-    "ordersTable"
-  )
-  .addEventListener(
-    "change",
-    function(event){
-
-      const select =
-        event.target.closest(
-          "[data-order-status]"
-        );
-
-
-      if(!select){
-
-        return;
-
-      }
-
-
-      changeStatus(
-        select.dataset.orderStatus,
-        select.value
-      );
-
-    }
-  );
-
-
-document
-  .getElementById(
-    "ordersTable"
-  )
-  .addEventListener(
-    "click",
-    function(event){
-
-      const viewButton =
-        event.target.closest(
-          "[data-view-order]"
-        );
-
-
-      if(viewButton){
-
-        viewOrder(
-          viewButton.dataset.viewOrder
-        );
-
-        return;
-
-      }
-
-
-      const deleteButton =
-        event.target.closest(
-          "[data-delete-order]"
-        );
-
-
-      if(deleteButton){
-
-        deleteOrder(
-          deleteButton.dataset.deleteOrder
-        );
-
-      }
-
-    }
-  );
-
-
 function findOrder(id){
 
-  return orders.find(
-    function(order){
+  return orders.find(function(order){
 
-      return idOf(order) ===
-        String(id);
+    return idOf(order) === String(id);
 
-    }
-  );
+  });
 
 }
 
 
-function changeStatus(
-  id,
-  status
-){
+function changeStatus(id,status){
+
+  if(!securityCheck())return;
+
 
   const order =
     findOrder(id);
 
 
-  if(!order){
-
-    return;
-
-  }
+  if(!order)return;
 
 
-  order.status =
-    status;
+  order.status = status;
 
 
-  localStorage.setItem(
-    KEYS.orders,
-    JSON.stringify(orders)
-  );
-
+  saveOrders();
 
   renderOrders();
-  renderRecentOrders();
-  renderStats();
 
+  renderRecentOrders();
+
+  renderStats();
 
   showToast(
     "Order status updated ✓"
@@ -2552,38 +1981,29 @@ function changeStatus(
 
 function deleteOrder(id){
 
-  if(
-    !confirm(
-      "এই order delete করতে চান?"
-    )
-  ){
+  if(!securityCheck())return;
 
-    return;
 
-  }
+  if(!confirm(
+    "এই order delete করতে চান?"
+  ))return;
 
 
   orders =
-    orders.filter(
-      function(order){
+    orders.filter(function(order){
 
-        return idOf(order) !==
-          String(id);
+      return idOf(order) !== String(id);
 
-      }
-    );
+    });
 
 
-  localStorage.setItem(
-    KEYS.orders,
-    JSON.stringify(orders)
-  );
-
+  saveOrders();
 
   renderOrders();
-  renderRecentOrders();
-  renderStats();
 
+  renderRecentOrders();
+
+  renderStats();
 
   showToast(
     "Order deleted ✓"
@@ -2592,29 +2012,26 @@ function deleteOrder(id){
 }
 
 
-/* =================================================
-   ORDER MODAL
-================================================= */
+/* =========================================================
+   ORDER VIEW
+========================================================= */
 
 function viewOrder(id){
+
+  if(!securityCheck())return;
+
 
   const order =
     findOrder(id);
 
 
-  if(!order){
-
-    return;
-
-  }
+  if(!order)return;
 
 
   const items =
-    Array.isArray(
-      order.items
-    )
-    ? order.items
-    : [];
+    Array.isArray(order.items)
+      ? order.items
+      : [];
 
 
   let html = `
@@ -2622,63 +2039,31 @@ function viewOrder(id){
     <div class="detail">
 
       <div>
-        <small>
-          Order ID
-        </small>
-
-        <b>
-          #${esc(
-            idOf(order)
-          )}
-        </b>
+        <small>Order ID</small>
+        <b>#${esc(idOf(order))}</b>
       </div>
 
 
       <div>
-        <small>
-          Status
-        </small>
-
-        <b>
-          ${esc(
-            orderStatus(order)
-          )}
-        </b>
+        <small>Status</small>
+        <b>${esc(orderStatus(order))}</b>
       </div>
 
 
       <div>
-        <small>
-          Customer
-        </small>
-
-        <b>
-          ${esc(
-            orderName(order)
-          )}
-        </b>
+        <small>Customer</small>
+        <b>${esc(orderName(order))}</b>
       </div>
 
 
       <div>
-        <small>
-          Phone
-        </small>
-
-        <b>
-          ${esc(
-            orderPhone(order) || "—"
-          )}
-        </b>
+        <small>Phone</small>
+        <b>${esc(orderPhone(order) || "—")}</b>
       </div>
 
 
       <div class="full">
-
-        <small>
-          Address
-        </small>
-
+        <small>Address</small>
         <b>
           ${esc(
             order.address ||
@@ -2686,37 +2071,24 @@ function viewOrder(id){
             "—"
           )}
         </b>
-
       </div>
 
 
       <div>
-
-        <small>
-          Date
-        </small>
-
+        <small>Date</small>
         <b>
           ${esc(
             orderDate(order) || "—"
           )}
         </b>
-
       </div>
 
 
       <div>
-
-        <small>
-          Total
-        </small>
-
+        <small>Total</small>
         <b>
-          ${money(
-            orderTotal(order)
-          )}
+          ${money(orderTotal(order))}
         </b>
-
       </div>
 
     </div>
@@ -2726,81 +2098,64 @@ function viewOrder(id){
 
   if(items.length){
 
-    html += `
-      <h4>
-        Items
-      </h4>
-    `;
+    html += "<h4>Items</h4>";
 
 
-    html += items
-      .map(
-        function(item){
+    html += items.map(function(item){
 
-          const quantity =
-            Number(
-              item.quantity ??
-              item.qty ??
-              1
-            ) || 1;
+      const quantity =
+        Number(
+          item.quantity ??
+          item.qty ??
+          1
+        ) || 1;
 
 
-          const price =
-            Number(
-              item.price
-            ) || 0;
+      const itemTotal =
+        (Number(item.price) || 0) *
+        quantity;
 
 
-          return `
+      return `
 
-            <div
-              style="
-                display:flex;
-                justify-content:space-between;
-                padding:9px 0;
-                border-bottom:1px solid #eee;
-                font-size:10px
-              "
-            >
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          padding:9px 0;
+          border-bottom:1px solid #eee;
+          font-size:10px;
+        ">
 
-              <span>
-                ${esc(
-                  item.name ||
-                  item.title ||
-                  "Product"
-                )}
-                ×
-                ${esc(quantity)}
-              </span>
+          <span>
+            ${esc(
+              item.name ||
+              item.title ||
+              "Product"
+            )}
+            × ${quantity}
+          </span>
 
-              <b>
-                ${money(
-                  price * quantity
-                )}
-              </b>
+          <b>
+            ${money(itemTotal)}
+          </b>
 
-            </div>
+        </div>
 
-          `;
+      `;
 
-        }
-      )
-      .join("");
+    }).join("");
 
   }
 
 
   document.getElementById(
     "orderDetails"
-  ).innerHTML =
-    html;
+  ).innerHTML = html;
 
 
   document.getElementById(
     "orderModal"
-  ).classList.add(
-    "show"
-  );
+  ).classList.add("show");
 
 }
 
@@ -2809,65 +2164,28 @@ function closeModal(){
 
   document.getElementById(
     "orderModal"
-  ).classList.remove(
-    "show"
-  );
+  ).classList.remove("show");
 
 }
 
 
-document
-  .getElementById(
-    "closeModalBtn"
-  )
-  .addEventListener(
-    "click",
-    closeModal
-  );
-
-
-document
-  .getElementById(
-    "orderModal"
-  )
-  .addEventListener(
-    "click",
-    function(event){
-
-      if(
-        event.target === this
-      ){
-
-        closeModal();
-
-      }
-
-    }
-  );
-
-
-/* =================================================
+/* =========================================================
    PRODUCT IMAGE
-================================================= */
+========================================================= */
 
 function handleFile(event){
+
+  if(!securityCheck())return;
+
 
   const file =
     event.target.files?.[0];
 
 
-  if(!file){
-
-    return;
-
-  }
+  if(!file)return;
 
 
-  if(
-    !file.type.startsWith(
-      "image/"
-    )
-  ){
+  if(!file.type.startsWith("image/")){
 
     showToast(
       "Please select an image file."
@@ -2882,37 +2200,24 @@ function handleFile(event){
     new FileReader();
 
 
-  reader.onload =
-    function(){
+  reader.onload = function(){
 
-      document.getElementById(
-        "productImage"
-      ).value =
-        reader.result;
-
-
-      showPreview(
-        reader.result
-      );
-
-    };
+    document.getElementById(
+      "productImage"
+    ).value =
+      reader.result;
 
 
-  reader.readAsDataURL(
-    file
-  );
+    showPreview(
+      reader.result
+    );
+
+  };
+
+
+  reader.readAsDataURL(file);
 
 }
-
-
-document
-  .getElementById(
-    "productFile"
-  )
-  .addEventListener(
-    "change",
-    handleFile
-  );
 
 
 function showPreview(src){
@@ -2921,7 +2226,6 @@ function showPreview(src){
     document.getElementById(
       "preview"
     );
-
 
   const image =
     document.getElementById(
@@ -2935,9 +2239,7 @@ function showPreview(src){
       "show"
     );
 
-    image.removeAttribute(
-      "src"
-    );
+    image.removeAttribute("src");
 
     return;
 
@@ -2964,16 +2266,13 @@ function showPreview(src){
     };
 
 
-  image.src =
-    src;
+  image.src = src;
 
 }
 
 
 document
-  .getElementById(
-    "productImage"
-  )
+  .getElementById("productImage")
   .addEventListener(
     "input",
     function(event){
@@ -2986,21 +2285,13 @@ document
   );
 
 
-/* =================================================
-   PRODUCT SAVE
-================================================= */
+/* =========================================================
+   PRODUCTS
+========================================================= */
 
 function saveProduct(){
 
-  if(!isAdminLoggedIn()){
-
-    window.location.replace(
-      "admin-login.html"
-    );
-
-    return;
-
-  }
+  if(!securityCheck())return;
 
 
   const name =
@@ -3040,10 +2331,7 @@ function saveProduct(){
   }
 
 
-  if(
-    !Number.isFinite(price) ||
-    price < 0
-  ){
+  if(!Number.isFinite(price) || price < 0){
 
     showToast(
       "Valid price দিন"
@@ -3057,29 +2345,23 @@ function saveProduct(){
   if(editingId !== null){
 
     const product =
-      products.find(
-        function(item){
+      products.find(function(item){
 
-          return String(item.id) ===
-            String(editingId);
+        return String(item.id) ===
+          String(editingId);
 
-        }
-      );
+      });
 
 
     if(product){
 
-      product.name =
-        name;
+      product.name = name;
 
-      product.price =
-        price;
+      product.price = price;
 
-      product.category =
-        category;
+      product.category = category;
 
-      product.image =
-        image;
+      product.image = image;
 
     }
 
@@ -3092,20 +2374,15 @@ function saveProduct(){
 
     products.push({
 
-      id:
-        Date.now().toString(),
+      id:Date.now().toString(),
 
-      name:
-        name,
+      name:name,
 
-      price:
-        price,
+      price:price,
 
-      category:
-        category,
+      category:category,
 
-      image:
-        image,
+      image:image,
 
       createdAt:
         new Date().toISOString()
@@ -3131,37 +2408,28 @@ function saveProduct(){
 }
 
 
-/* =================================================
-   PRODUCT EDIT
-================================================= */
-
 function editProduct(id){
 
+  if(!securityCheck())return;
+
+
   const product =
-    products.find(
-      function(item){
+    products.find(function(item){
 
-        return String(item.id) ===
-          String(id);
+      return String(item.id) ===
+        String(id);
 
-      }
-    );
+    });
 
 
-  if(!product){
-
-    return;
-
-  }
+  if(!product)return;
 
 
   editingId =
     product.id;
 
 
-  showSection(
-    "products"
-  );
+  showSection("products");
 
 
   document.getElementById(
@@ -3179,8 +2447,7 @@ function editProduct(id){
   document.getElementById(
     "productCategory"
   ).value =
-    product.category ||
-    "Other";
+    product.category || "Other";
 
 
   document.getElementById(
@@ -3220,50 +2487,35 @@ function editProduct(id){
 }
 
 
-/* =================================================
-   PRODUCT DELETE
-================================================= */
-
 function deleteProduct(id){
 
+  if(!securityCheck())return;
+
+
   const product =
-    products.find(
-      function(item){
+    products.find(function(item){
 
-        return String(item.id) ===
-          String(id);
+      return String(item.id) ===
+        String(id);
 
-      }
-    );
+    });
 
 
-  if(!product){
-
-    return;
-
-  }
+  if(!product)return;
 
 
-  if(
-    !confirm(
-      `"${product.name}" delete করতে চান?`
-    )
-  ){
-
-    return;
-
-  }
+  if(!confirm(
+    `"${product.name}" delete করতে চান?`
+  ))return;
 
 
   products =
-    products.filter(
-      function(item){
+    products.filter(function(item){
 
-        return String(item.id) !==
-          String(id);
+      return String(item.id) !==
+        String(id);
 
-      }
-    );
+    });
 
 
   saveProducts();
@@ -3272,7 +2524,6 @@ function deleteProduct(id){
 
   renderStats();
 
-
   showToast(
     "Product deleted ✓"
   );
@@ -3280,29 +2531,25 @@ function deleteProduct(id){
 }
 
 
-/* =================================================
-   RESET PRODUCT FORM
-================================================= */
-
 function resetProductForm(){
 
-  editingId =
-    null;
+  if(!securityCheck())return;
 
 
-  document.getElementById(
-    "productName"
-  ).value = "";
+  editingId = null;
 
 
-  document.getElementById(
-    "productPrice"
-  ).value = "";
-
-
-  document.getElementById(
+  [
+    "productName",
+    "productPrice",
     "productImage"
-  ).value = "";
+  ].forEach(function(id){
+
+    document.getElementById(
+      id
+    ).value = "";
+
+  });
 
 
   document.getElementById(
@@ -3339,31 +2586,10 @@ function resetProductForm(){
 }
 
 
-document
-  .getElementById(
-    "saveBtn"
-  )
-  .addEventListener(
-    "click",
-    saveProduct
-  );
-
-
-document
-  .getElementById(
-    "cancelBtn"
-  )
-  .addEventListener(
-    "click",
-    resetProductForm
-  );
-
-
-/* =================================================
-   PRODUCTS RENDER
-================================================= */
-
 function renderProducts(){
+
+  if(!securityCheck())return;
+
 
   const search =
     (
@@ -3382,26 +2608,23 @@ function renderProducts(){
 
 
   const list =
-    products.filter(
-      function(product){
+    products.filter(function(product){
 
-        const text =
-          `${product.name || ""} ${product.category || ""}`
-            .toLowerCase();
+      const text =
+        `${product.name || ""} ${
+          product.category || ""
+        }`.toLowerCase();
 
 
-        return (
-          (!search ||
-            text.includes(search))
-          &&
-          (
-            category === "all" ||
-            product.category === category
-          )
-        );
+      return (
+        (!search || text.includes(search)) &&
+        (
+          category === "all" ||
+          product.category === category
+        )
+      );
 
-      }
-    );
+    });
 
 
   const box =
@@ -3416,13 +2639,12 @@ function renderProducts(){
 
       <div class="empty">
 
-        🛒
-        <br><br>
+        🛒<br><br>
 
         ${
           products.length
-          ? "No matching products."
-          : "No products yet."
+            ? "No matching products."
+            : "No products yet."
         }
 
       </div>
@@ -3437,170 +2659,90 @@ function renderProducts(){
   box.innerHTML =
     [...list]
       .reverse()
-      .map(
-        function(product){
+      .map(function(product){
 
-          return `
+        return `
 
-            <div class="product">
+          <div class="product">
 
+            <div class="pic">
 
-              <div class="pic">
+              ${
+                product.image
 
-                ${
-                  product.image
+                ? `
+                  <img
+                    src="${esc(product.image)}"
+                    alt="${esc(product.name)}"
+                    onerror="this.remove()"
+                  >
+                `
 
-                  ? `
-
-                    <img
-                      src="${esc(product.image)}"
-                      alt="${esc(product.name)}"
-                      onerror="this.remove()"
-                    >
-
-                  `
-
-                  : "🛍️"
-                }
-
-              </div>
-
-
-              <div>
-
-                <div class="pname">
-
-                  ${esc(
-                    product.name
-                  )}
-
-                </div>
-
-
-                <span class="tag">
-
-                  ${esc(
-                    product.category ||
-                    "Other"
-                  )}
-
-                </span>
-
-
-                <div class="price">
-
-                  ${money(
-                    product.price
-                  )}
-
-                </div>
-
-              </div>
-
-
-              <div class="product-actions">
-
-                <button
-                  class="action view"
-                  data-edit-product="${esc(product.id)}"
-                >
-                  ✏️ Edit
-                </button>
-
-
-                <button
-                  class="action danger"
-                  data-delete-product="${esc(product.id)}"
-                >
-                  🗑️ Delete
-                </button>
-
-              </div>
-
+                : "🛍️"
+              }
 
             </div>
 
-          `;
 
-        }
-      )
+            <div>
+
+              <div class="pname">
+                ${esc(product.name)}
+              </div>
+
+
+              <span class="tag">
+                ${esc(
+                  product.category ||
+                  "Other"
+                )}
+              </span>
+
+
+              <div class="price">
+                ${money(product.price)}
+              </div>
+
+            </div>
+
+
+            <div class="product-actions">
+
+              <button
+                class="action view"
+                onclick="editProduct('${esc(product.id)}')"
+              >
+                ✏️ Edit
+              </button>
+
+
+              <button
+                class="action danger"
+                onclick="deleteProduct('${esc(product.id)}')"
+              >
+                🗑️ Delete
+              </button>
+
+            </div>
+
+          </div>
+
+        `;
+
+      })
       .join("");
 
 }
 
 
-/* =================================================
-   PRODUCT EVENTS
-================================================= */
-
-document
-  .getElementById(
-    "productSearch"
-  )
-  .addEventListener(
-    "input",
-    renderProducts
-  );
-
-
-document
-  .getElementById(
-    "productFilter"
-  )
-  .addEventListener(
-    "change",
-    renderProducts
-  );
-
-
-document
-  .getElementById(
-    "productsList"
-  )
-  .addEventListener(
-    "click",
-    function(event){
-
-      const editButton =
-        event.target.closest(
-          "[data-edit-product]"
-        );
-
-
-      if(editButton){
-
-        editProduct(
-          editButton.dataset.editProduct
-        );
-
-        return;
-
-      }
-
-
-      const deleteButton =
-        event.target.closest(
-          "[data-delete-product]"
-        );
-
-
-      if(deleteButton){
-
-        deleteProduct(
-          deleteButton.dataset.deleteProduct
-        );
-
-      }
-
-    }
-  );
-
-
-/* =================================================
+/* =========================================================
    USERS
-================================================= */
+========================================================= */
 
 function renderUsers(){
+
+  if(!securityCheck())return;
+
 
   const box =
     document.getElementById(
@@ -3610,18 +2752,13 @@ function renderUsers(){
 
   if(!users.length){
 
-    box.innerHTML = `
-
+    box.innerHTML =
+      `
       <div class="empty">
-
-        👥
-        <br><br>
-
+        👥<br><br>
         No registered users found.
-
       </div>
-
-    `;
+      `;
 
     return;
 
@@ -3629,82 +2766,69 @@ function renderUsers(){
 
 
   box.innerHTML =
-    users
-      .map(
-        function(user){
+    users.map(function(user){
 
-          const name =
-            user.name ||
-            user.username ||
-            "User";
+      const name =
+        user.name ||
+        user.username ||
+        "User";
 
 
-          const contact =
-            user.email ||
-            user.phone ||
-            "No contact";
+      const contact =
+        user.email ||
+        user.phone ||
+        "No contact";
 
 
-          const first =
-            name.trim()
-              .charAt(0)
-              .toUpperCase();
+      const firstLetter =
+        name.trim()
+          .charAt(0)
+          .toUpperCase();
 
 
-          return `
+      return `
 
-            <div class="user">
+        <div class="user">
 
-              <div class="avatar">
+          <div class="avatar">
+            ${esc(firstLetter)}
+          </div>
 
-                ${esc(first)}
+          <div>
 
-              </div>
+            <strong style="font-size:11px">
+              ${esc(name)}
+            </strong>
 
-
-              <div>
-
-                <strong
-                  style="
-                    font-size:11px
-                  "
-                >
-
-                  ${esc(name)}
-
-                </strong>
-
-
-                <div
-                  class="muted"
-                  style="
-                    font-size:9px;
-                    margin-top:3px
-                  "
-                >
-
-                  ${esc(contact)}
-
-                </div>
-
-              </div>
-
+            <div
+              class="muted"
+              style="
+                font-size:9px;
+                margin-top:3px;
+              "
+            >
+              ${esc(contact)}
             </div>
 
-          `;
+          </div>
 
-        }
-      )
-      .join("");
+        </div>
+
+      `;
+
+    }).join("");
 
 }
 
 
-/* =================================================
+/* =========================================================
    RENDER ALL
-================================================= */
+========================================================= */
 
 function renderAll(){
+
+  if(!securityCheck())return;
+
 
   loadData();
 
@@ -3721,9 +2845,9 @@ function renderAll(){
 }
 
 
-/* =================================================
-   STORAGE UPDATE
-================================================= */
+/* =========================================================
+   STORAGE SYNC
+========================================================= */
 
 window.addEventListener(
   "storage",
@@ -3734,6 +2858,22 @@ window.addEventListener(
         .includes(event.key)
     ){
 
+      if(
+        event.key === KEYS.logged ||
+        event.key === KEYS.loginTime
+      ){
+
+        if(!isAdminLoggedIn()){
+
+          redirectToLogin();
+
+          return;
+
+        }
+
+      }
+
+
       renderAll();
 
     }
@@ -3742,13 +2882,21 @@ window.addEventListener(
 );
 
 
-/* =================================================
-   START DASHBOARD
-================================================= */
+/* =========================================================
+   START APPLICATION
+========================================================= */
 
-if(
-  protectDashboard()
-){
+if(isAdminLoggedIn()){
+
+  document.getElementById(
+    "securityGate"
+  ).style.display = "none";
+
+
+  document.getElementById(
+    "dashboardApp"
+  ).style.display = "block";
+
 
   renderAll();
 
