@@ -1,0 +1,1900 @@
+```html
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Local Brands — Shopping Mela
+    </title>
+
+    <meta
+        name="description"
+        content="Shopping Mela Local Brands — verified local businesses, shops and brands."
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     TOP BAR
+====================================================== -->
+
+<div class="top-bar">
+
+    🛍️
+
+    <span>
+        Shopping Mela
+    </span>
+
+    — Verified Local Brands & Businesses
+
+</div>
+
+
+
+<!-- =====================================================
+     HEADER
+====================================================== -->
+
+<header class="header">
+
+    <div class="container">
+
+        <div class="header-main">
+
+
+            <!-- LOGO -->
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+
+                <div class="logo-icon">
+                    🛍️
+                </div>
+
+                <span>
+                    Shopping Mela
+                </span>
+
+            </a>
+
+
+
+            <!-- SEARCH -->
+
+            <div class="header-search">
+
+                <input
+                    type="search"
+                    id="brandSearch"
+                    placeholder="Brand, shop বা business খুঁজুন..."
+                    aria-label="Search brands"
+                >
+
+                <button
+                    type="button"
+                    onclick="searchBrands()"
+                    aria-label="Search"
+                >
+                    🔍
+                </button>
+
+            </div>
+
+
+
+            <!-- ACTIONS -->
+
+            <div class="header-actions">
+
+                <button
+                    class="header-action"
+                    onclick="showToast('Wishlist শীঘ্রই আসছে ❤️')"
+                >
+
+                    <span class="header-action-icon">
+                        ♡
+                    </span>
+
+                    <span>
+                        Wishlist
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="header-action"
+                    onclick="showToast('Cart শীঘ্রই আসছে 🛒')"
+                >
+
+                    <span class="header-action-icon">
+                        🛒
+                    </span>
+
+                    <span>
+                        Cart
+                    </span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="navigation">
+
+            <div class="navigation-inner">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="index.html#categories">
+                    Categories
+                </a>
+
+                <a
+                    href="brands.html"
+                    class="active"
+                >
+                    Local Brands
+                </a>
+
+                <a href="products.html">
+                    Products
+                </a>
+
+                <a href="index.html#offers">
+                    Offers
+                </a>
+
+                <a href="blog.html">
+                    Blog
+                </a>
+
+                <a href="index.html#advertise">
+                    Advertise With Us
+                </a>
+
+            </div>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+
+<main>
+
+
+
+<!-- =====================================================
+     BRANDS HERO
+====================================================== -->
+
+<section class="brands-page-hero">
+
+    <div class="container">
+
+        <div class="brands-hero-content">
+
+            <span class="page-label">
+                🏪 SHOPPING MELA MARKETPLACE
+            </span>
+
+            <h1>
+                Discover Local Brands
+            </h1>
+
+            <p>
+                আপনার এলাকার trusted local brand,
+                shop ও business এক জায়গায় খুঁজে নিন।
+            </p>
+
+
+            <div class="brands-hero-stats">
+
+                <div>
+
+                    <strong id="brandStatCount">
+                        8+
+                    </strong>
+
+                    <span>
+                        Local Brands
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        🔵
+                    </strong>
+
+                    <span>
+                        Verified Profiles
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        📢
+                    </strong>
+
+                    <span>
+                        Featured Ads
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     BRAND SEARCH / FILTER
+====================================================== -->
+
+<section class="section brands-directory">
+
+    <div class="container">
+
+
+        <div class="directory-toolbar">
+
+
+            <div>
+
+                <h2>
+                    Local Brands
+                </h2>
+
+                <p id="resultText">
+                    সব Local Brand দেখানো হচ্ছে
+                </p>
+
+            </div>
+
+
+            <button
+                class="primary-btn"
+                onclick="
+                    window.location.href='index.html#advertise'
+                "
+            >
+                📢 আপনার Brand যুক্ত করুন
+            </button>
+
+        </div>
+
+
+
+        <!-- CATEGORY FILTER -->
+
+        <div class="brand-filters">
+
+            <button
+                class="brand-filter active"
+                onclick="filterBrands('all', this)"
+            >
+                All
+            </button>
+
+
+            <button
+                class="brand-filter"
+                onclick="filterBrands('Fashion', this)"
+            >
+                👗 Fashion
+            </button>
+
+
+            <button
+                class="brand-filter"
+                onclick="filterBrands('Beauty', this)"
+            >
+                💄 Beauty
+            </button>
+
+
+            <button
+                class="brand-filter"
+                onclick="filterBrands('Food', this)"
+            >
+                🍔 Food
+            </button>
+
+
+            <button
+                class="brand-filter"
+                onclick="filterBrands('Electronics', this)"
+            >
+                📱 Electronics
+            </button>
+
+
+            <button
+                class="brand-filter"
+                onclick="filterBrands('Services', this)"
+            >
+                🛠️ Services
+            </button>
+
+
+            <button
+                class="brand-filter"
+                onclick="filterBrands('Home', this)"
+            >
+                🏠 Home
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             BRAND GRID
+        ================================================== -->
+
+        <div
+            class="brand-grid brand-directory-grid"
+            id="brandGrid"
+        >
+
+
+
+            <!-- =================================================
+                 BRAND 1
+            ================================================== -->
+
+            <article
+                class="brand-card directory-brand-card"
+                data-category="Fashion"
+                data-name="Anjona Ladies Tailors"
+            >
+
+                <div
+                    class="brand-cover"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1000&q=85');
+                    "
+                >
+
+                    <span class="sponsored">
+                        SPONSORED
+                    </span>
+
+
+                    <div class="brand-logo">
+                        👗
+                    </div>
+
+                </div>
+
+
+                <div class="brand-info">
+
+                    <div class="brand-title-row">
+
+                        <h3>
+                            Anjona Ladies Tailors
+                        </h3>
+
+                        <span
+                            class="verified-badge"
+                            title="Verified Profile"
+                        >
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <div class="brand-category">
+                        Fashion & Tailoring
+                    </div>
+
+
+                    <div class="brand-location">
+                        📍 Local Business
+                    </div>
+
+
+                    <p class="brand-description">
+                        Ladies three-piece, tailoring,
+                        custom dress ও fashion services।
+                    </p>
+
+
+                    <div class="brand-tags">
+
+                        <span>
+                            🔵 Verified
+                        </span>
+
+                        <span>
+                            ⭐ Featured
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="brand-btn"
+                        onclick="
+                            window.location.href='profile.html'
+                        "
+                    >
+                        View Profile →
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 BRAND 2
+            ================================================== -->
+
+            <article
+                class="brand-card directory-brand-card"
+                data-category="Beauty"
+                data-name="Local Attar Shop"
+            >
+
+                <div
+                    class="brand-cover"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=1000&q=85');
+                    "
+                >
+
+                    <span class="sponsored">
+                        FEATURED
+                    </span>
+
+
+                    <div class="brand-logo">
+                        🌿
+                    </div>
+
+                </div>
+
+
+                <div class="brand-info">
+
+                    <div class="brand-title-row">
+
+                        <h3>
+                            Local Attar Shop
+                        </h3>
+
+                        <span
+                            class="verified-badge"
+                            title="Verified Profile"
+                        >
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <div class="brand-category">
+                        Perfume & Attar
+                    </div>
+
+
+                    <div class="brand-location">
+                        📍 Local Business
+                    </div>
+
+
+                    <p class="brand-description">
+                        Premium attar, perfume ও
+                        fragrance collection।
+                    </p>
+
+
+                    <div class="brand-tags">
+
+                        <span>
+                            🔵 Verified
+                        </span>
+
+                        <span>
+                            ⭐ Featured
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="brand-btn"
+                        onclick="showToast('Attar Shop profile শীঘ্রই আসছে!')"
+                    >
+                        View Profile →
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 BRAND 3
+            ================================================== -->
+
+            <article
+                class="brand-card directory-brand-card"
+                data-category="Food"
+                data-name="Local Food House"
+            >
+
+                <div
+                    class="brand-cover"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1000&q=85');
+                    "
+                >
+
+                    <span class="sponsored">
+                        SPONSORED
+                    </span>
+
+
+                    <div class="brand-logo">
+                        🍽️
+                    </div>
+
+                </div>
+
+
+                <div class="brand-info">
+
+                    <div class="brand-title-row">
+
+                        <h3>
+                            Local Food House
+                        </h3>
+
+                        <span
+                            class="verified-badge"
+                            title="Verified Profile"
+                        >
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <div class="brand-category">
+                        Restaurant & Food
+                    </div>
+
+
+                    <div class="brand-location">
+                        📍 Local Business
+                    </div>
+
+
+                    <p class="brand-description">
+                        Homemade food, snacks এবং
+                        local food delivery।
+                    </p>
+
+
+                    <div class="brand-tags">
+
+                        <span>
+                            🔵 Verified
+                        </span>
+
+                        <span>
+                            🍴 Food
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="brand-btn"
+                        onclick="showToast('Food House profile শীঘ্রই আসছে!')"
+                    >
+                        View Profile →
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 BRAND 4
+            ================================================== -->
+
+            <article
+                class="brand-card directory-brand-card"
+                data-category="Services"
+                data-name="SNK Local Services"
+            >
+
+                <div
+                    class="brand-cover"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1000&q=85');
+                    "
+                >
+
+                    <span class="sponsored">
+                        FEATURED
+                    </span>
+
+
+                    <div class="brand-logo">
+                        💼
+                    </div>
+
+                </div>
+
+
+                <div class="brand-info">
+
+                    <div class="brand-title-row">
+
+                        <h3>
+                            SNK Local Services
+                        </h3>
+
+                        <span
+                            class="verified-badge"
+                            title="Verified Profile"
+                        >
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <div class="brand-category">
+                        IT & Services
+                    </div>
+
+
+                    <div class="brand-location">
+                        📍 Local Business
+                    </div>
+
+
+                    <p class="brand-description">
+                        Website, printing, digital services
+                        ও local business solutions।
+                    </p>
+
+
+                    <div class="brand-tags">
+
+                        <span>
+                            🔵 Verified
+                        </span>
+
+                        <span>
+                            💼 Services
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="brand-btn"
+                        onclick="showToast('SNK Services profile শীঘ্রই আসছে!')"
+                    >
+                        View Profile →
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 BRAND 5
+            ================================================== -->
+
+            <article
+                class="brand-card directory-brand-card"
+                data-category="Electronics"
+                data-name="Mela Electronics"
+            >
+
+                <div
+                    class="brand-cover"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1468495244123-6c6c332eeece?auto=format&fit=crop&w=1000&q=85');
+                    "
+                >
+
+                    <span class="sponsored">
+                        FEATURED
+                    </span>
+
+
+                    <div class="brand-logo">
+                        📱
+                    </div>
+
+                </div>
+
+
+                <div class="brand-info">
+
+                    <div class="brand-title-row">
+
+                        <h3>
+                            Mela Electronics
+                        </h3>
+
+                        <span
+                            class="verified-badge"
+                            title="Verified Profile"
+                        >
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <div class="brand-category">
+                        Electronics
+                    </div>
+
+
+                    <div class="brand-location">
+                        📍 Local Business
+                    </div>
+
+
+                    <p class="brand-description">
+                        Mobile accessories, gadgets এবং
+                        everyday electronics।
+                    </p>
+
+
+                    <div class="brand-tags">
+
+                        <span>
+                            🔵 Verified
+                        </span>
+
+                        <span>
+                            📱 Electronics
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="brand-btn"
+                        onclick="showToast('Mela Electronics profile শীঘ্রই আসছে!')"
+                    >
+                        View Profile →
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 BRAND 6
+            ================================================== -->
+
+            <article
+                class="brand-card directory-brand-card"
+                data-category="Home"
+                data-name="Home Decor BD"
+            >
+
+                <div
+                    class="brand-cover"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1000&q=85');
+                    "
+                >
+
+                    <span class="sponsored">
+                        SPONSORED
+                    </span>
+
+
+                    <div class="brand-logo">
+                        🏠
+                    </div>
+
+                </div>
+
+
+                <div class="brand-info">
+
+                    <div class="brand-title-row">
+
+                        <h3>
+                            Home Decor BD
+                        </h3>
+
+                        <span
+                            class="verified-badge"
+                            title="Verified Profile"
+                        >
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <div class="brand-category">
+                        Home & Decor
+                    </div>
+
+
+                    <div class="brand-location">
+                        📍 Local Business
+                    </div>
+
+
+                    <p class="brand-description">
+                        Home decor, handmade items এবং
+                        সুন্দর interior accessories।
+                    </p>
+
+
+                    <div class="brand-tags">
+
+                        <span>
+                            🔵 Verified
+                        </span>
+
+                        <span>
+                            🏠 Home
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="brand-btn"
+                        onclick="showToast('Home Decor profile শীঘ্রই আসছে!')"
+                    >
+                        View Profile →
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 BRAND 7
+            ================================================== -->
+
+            <article
+                class="brand-card directory-brand-card"
+                data-category="Fashion"
+                data-name="Mela Fashion House"
+            >
+
+                <div
+                    class="brand-cover"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1000&q=85');
+                    "
+                >
+
+                    <span class="sponsored">
+                        FEATURED
+                    </span>
+
+
+                    <div class="brand-logo">
+                        👚
+                    </div>
+
+                </div>
+
+
+                <div class="brand-info">
+
+                    <div class="brand-title-row">
+
+                        <h3>
+                            Mela Fashion House
+                        </h3>
+
+                        <span
+                            class="verified-badge"
+                            title="Verified Profile"
+                        >
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <div class="brand-category">
+                        Fashion
+                    </div>
+
+
+                    <div class="brand-location">
+                        📍 Local Business
+                    </div>
+
+
+                    <p class="brand-description">
+                        Ladies fashion, clothing,
+                        accessories এবং seasonal collection।
+                    </p>
+
+
+                    <div class="brand-tags">
+
+                        <span>
+                            🔵 Verified
+                        </span>
+
+                        <span>
+                            👗 Fashion
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="brand-btn"
+                        onclick="showToast('Fashion House profile শীঘ্রই আসছে!')"
+                    >
+                        View Profile →
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 BRAND 8
+            ================================================== -->
+
+            <article
+                class="brand-card directory-brand-card"
+                data-category="Food"
+                data-name="Homemade Taste"
+            >
+
+                <div
+                    class="brand-cover"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1000&q=85');
+                    "
+                >
+
+                    <span class="sponsored">
+                        NEW
+                    </span>
+
+
+                    <div class="brand-logo">
+                        🍲
+                    </div>
+
+                </div>
+
+
+                <div class="brand-info">
+
+                    <div class="brand-title-row">
+
+                        <h3>
+                            Homemade Taste
+                        </h3>
+
+                        <span
+                            class="verified-badge"
+                            title="Verified Profile"
+                        >
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <div class="brand-category">
+                        Homemade Food
+                    </div>
+
+
+                    <div class="brand-location">
+                        📍 Local Business
+                    </div>
+
+
+                    <p class="brand-description">
+                        Homemade meals, snacks এবং
+                        local food orders।
+                    </p>
+
+
+                    <div class="brand-tags">
+
+                        <span>
+                            🔵 Verified
+                        </span>
+
+                        <span>
+                            🍲 Food
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="brand-btn"
+                        onclick="showToast('Homemade Taste profile শীঘ্রই আসছে!')"
+                    >
+                        View Profile →
+                    </button>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+
+
+        <!-- NO RESULT -->
+
+        <div
+            class="no-brand-result"
+            id="noBrandResult"
+        >
+
+            <div>
+                🔎
+            </div>
+
+            <h3>
+                কোনো Brand পাওয়া যায়নি
+            </h3>
+
+            <p>
+                অন্য keyword বা category দিয়ে search করুন।
+            </p>
+
+            <button
+                class="secondary-btn"
+                onclick="resetBrands()"
+            >
+                সব Brands দেখুন
+            </button>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     VERIFIED EXPLANATION
+====================================================== -->
+
+<section class="container">
+
+    <div class="verified-banner">
+
+        <div class="verified-banner-icon">
+            ✓
+        </div>
+
+
+        <div>
+
+            <h2>
+                🔵 Verified Local Brands
+            </h2>
+
+            <p>
+                Blue badge থাকা profile-গুলো Shopping Mela
+                কর্তৃপক্ষের verification process-এর মাধ্যমে
+                verified হিসেবে চিহ্নিত।
+            </p>
+
+        </div>
+
+
+        <button
+            class="secondary-btn"
+            onclick="showVerificationInfo()"
+        >
+            কীভাবে কাজ করে?
+        </button>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ADVERTISE CTA
+====================================================== -->
+
+<section class="container">
+
+    <div class="advertise-section">
+
+        <div class="advertise-text">
+
+            <small>
+                📢 FOR LOCAL BUSINESS
+            </small>
+
+            <h2>
+                আপনার Brand-ও
+                Shopping Mela-তে দেখান
+            </h2>
+
+            <p>
+                Featured profile, banner advertisement
+                এবং local customer reach-এর সুযোগ নিন।
+            </p>
+
+        </div>
+
+
+        <button
+            class="advertise-button"
+            onclick="
+                window.location.href='index.html#advertise'
+            "
+        >
+            Advertise করুন →
+        </button>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     VERIFICATION MODAL
+====================================================== -->
+
+<div
+    class="modal"
+    id="verificationModal"
+>
+
+    <div
+        class="modal-overlay"
+        onclick="closeVerificationInfo()"
+    >
+    </div>
+
+
+    <div class="modal-box">
+
+        <button
+            class="modal-close"
+            onclick="closeVerificationInfo()"
+        >
+            ×
+        </button>
+
+
+        <div class="verification-modal-icon">
+            ✓
+        </div>
+
+
+        <h2>
+            🔵 Verified Profile
+        </h2>
+
+
+        <p>
+            Verified badge থাকা profile-গুলো Shopping Mela
+            কর্তৃপক্ষের verification process-এর মাধ্যমে
+            verified হিসেবে চিহ্নিত।
+        </p>
+
+
+        <p>
+            Verification badge profile-এর authenticity
+            বোঝাতে ব্যবহার করা হয়।
+        </p>
+
+
+        <button
+            class="primary-btn"
+            onclick="closeVerificationInfo()"
+        >
+            বুঝেছি
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-main">
+
+
+            <div class="footer-brand">
+
+                <a
+                    href="index.html"
+                    class="logo"
+                >
+
+                    <div class="logo-icon">
+                        🛍️
+                    </div>
+
+                    <span>
+                        Shopping Mela
+                    </span>
+
+                </a>
+
+
+                <p>
+                    Local brands, businesses,
+                    products এবং community
+                    এক জায়গায়।
+                </p>
+
+            </div>
+
+
+
+            <div>
+
+                <h3>
+                    Shopping
+                </h3>
+
+                <a href="index.html#categories">
+                    Categories
+                </a>
+
+                <a href="brands.html">
+                    Local Brands
+                </a>
+
+                <a href="products.html">
+                    Products
+                </a>
+
+                <a href="index.html#offers">
+                    Offers
+                </a>
+
+            </div>
+
+
+
+            <div>
+
+                <h3>
+                    Community
+                </h3>
+
+                <a href="blog.html">
+                    Blog
+                </a>
+
+                <a href="blog.html#writePost">
+                    Write a Post
+                </a>
+
+                <a href="index.html#advertise">
+                    Advertise
+                </a>
+
+            </div>
+
+
+
+            <div>
+
+                <h3>
+                    Support
+                </h3>
+
+                <a href="#">
+                    About Us
+                </a>
+
+                <a href="#">
+                    Contact
+                </a>
+
+                <a href="#">
+                    Privacy Policy
+                </a>
+
+                <a href="#">
+                    Terms
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            © 2026 Shopping Mela.
+            All Rights Reserved.
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     TOAST
+====================================================== -->
+
+<div
+    class="toast"
+    id="toast"
+>
+    Done!
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script>
+
+
+/* =====================================================
+   TOAST
+====================================================== */
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+    toast.textContent =
+        message;
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    setTimeout(function() {
+
+        toast.classList.remove(
+            "show"
+        );
+
+    }, 2500);
+
+}
+
+
+
+/* =====================================================
+   FILTER BRANDS
+====================================================== */
+
+function filterBrands(
+    category,
+    button
+) {
+
+    const brands =
+        document.querySelectorAll(
+            ".directory-brand-card"
+        );
+
+
+    document
+        .querySelectorAll(
+            ".brand-filter"
+        )
+        .forEach(function(btn) {
+
+            btn.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    if (button) {
+
+        button.classList.add(
+            "active"
+        );
+
+    }
+
+
+    let count = 0;
+
+
+    brands.forEach(function(brand) {
+
+        const brandCategory =
+            brand.dataset.category;
+
+
+        if (
+            category === "all" ||
+            brandCategory === category
+        ) {
+
+            brand.style.display =
+                "";
+
+            count++;
+
+        } else {
+
+            brand.style.display =
+                "none";
+
+        }
+
+    });
+
+
+    updateResultText(
+        count
+    );
+
+
+    showNoResult(
+        count
+    );
+
+}
+
+
+
+/* =====================================================
+   SEARCH BRANDS
+====================================================== */
+
+function searchBrands() {
+
+    const input =
+        document.getElementById(
+            "brandSearch"
+        );
+
+
+    const query =
+        input.value
+            .trim()
+            .toLowerCase();
+
+
+    if (!query) {
+
+        resetBrands();
+
+        return;
+
+    }
+
+
+    document
+        .querySelectorAll(
+            ".brand-filter"
+        )
+        .forEach(function(btn) {
+
+            btn.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    const brands =
+        document.querySelectorAll(
+            ".directory-brand-card"
+        );
+
+
+    let count = 0;
+
+
+    brands.forEach(function(brand) {
+
+        const name =
+            (
+                brand.dataset.name ||
+                ""
+            ).toLowerCase();
+
+
+        const text =
+            brand.innerText.toLowerCase();
+
+
+        if (
+            name.includes(query) ||
+            text.includes(query)
+        ) {
+
+            brand.style.display =
+                "";
+
+            count++;
+
+        } else {
+
+            brand.style.display =
+                "none";
+
+        }
+
+    });
+
+
+    updateResultText(
+        count
+    );
+
+
+    showNoResult(
+        count
+    );
+
+
+    if (count > 0) {
+
+        showToast(
+            count +
+            "টি Brand পাওয়া গেছে 🔎"
+        );
+
+    } else {
+
+        showToast(
+            "কোনো Brand পাওয়া যায়নি"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   ENTER SEARCH
+====================================================== */
+
+document
+    .getElementById(
+        "brandSearch"
+    )
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                searchBrands();
+
+            }
+
+        }
+    );
+
+
+
+/* =====================================================
+   RESET
+====================================================== */
+
+function resetBrands() {
+
+    const brands =
+        document.querySelectorAll(
+            ".directory-brand-card"
+        );
+
+
+    brands.forEach(function(brand) {
+
+        brand.style.display =
+            "";
+
+    });
+
+
+    document
+        .getElementById(
+            "brandSearch"
+        )
+        .value = "";
+
+
+    document
+        .querySelectorAll(
+            ".brand-filter"
+        )
+        .forEach(function(btn) {
+
+            btn.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    const allButton =
+        document.querySelector(
+            ".brand-filter"
+        );
+
+
+    if (allButton) {
+
+        allButton.classList.add(
+            "active"
+        );
+
+    }
+
+
+    const total =
+        brands.length;
+
+
+    updateResultText(
+        total
+    );
+
+
+    showNoResult(
+        total
+    );
+
+}
+
+
+
+/* =====================================================
+   RESULT TEXT
+====================================================== */
+
+function updateResultText(
+    count
+) {
+
+    document
+        .getElementById(
+            "resultText"
+        )
+        .textContent =
+        count +
+        "টি Local Brand পাওয়া গেছে";
+
+}
+
+
+
+/* =====================================================
+   NO RESULT
+====================================================== */
+
+function showNoResult(
+    count
+) {
+
+    const noResult =
+        document.getElementById(
+            "noBrandResult"
+        );
+
+
+    if (
+        count === 0
+    ) {
+
+        noResult.classList.add(
+            "show"
+        );
+
+    } else {
+
+        noResult.classList.remove(
+            "show"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   VERIFICATION MODAL
+====================================================== */
+
+function showVerificationInfo() {
+
+    document
+        .getElementById(
+            "verificationModal"
+        )
+        .classList.add(
+            "show"
+        );
+
+}
+
+
+function closeVerificationInfo() {
+
+    document
+        .getElementById(
+            "verificationModal"
+        )
+        .classList.remove(
+            "show"
+        );
+
+}
+
+
+
+/* =====================================================
+   ESC KEY
+====================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closeVerificationInfo();
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   INITIALIZE
+====================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        const brands =
+            document.querySelectorAll(
+                ".directory-brand-card"
+            );
+
+
+        updateResultText(
+            brands.length
+        );
+
+
+        document
+            .getElementById(
+                "brandStatCount"
+            )
+            .textContent =
+            brands.length +
+            "+";
+
+    }
+);
+
+
+</script>
+
+
+</body>
+
+</html>
+```
