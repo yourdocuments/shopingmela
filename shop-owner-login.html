@@ -1,342 +1,2792 @@
+```html
 <!DOCTYPE html>
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shopping Mela — Shop Owner Login</title>
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Shopping Mela — Shop Owner Dashboard</title>
 
 <style>
 *{box-sizing:border-box}
 
 body{
   margin:0;
-  min-height:100vh;
   font-family:Arial,"Noto Sans Bengali",sans-serif;
-  background:linear-gradient(135deg,#eef5ff,#f8f9fb);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
+  background:#f5f6f8;
   color:#101828;
 }
 
-.login-card{
-  width:100%;
-  max-width:410px;
-  background:#fff;
-  border:1px solid #eaecf0;
-  border-radius:20px;
-  padding:30px;
-  box-shadow:0 15px 45px rgba(16,24,40,.08);
+button,input,select,textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+  position:fixed;
+  left:0;
+  top:0;
+  bottom:0;
+  width:235px;
+  background:#101828;
+  color:#fff;
+  padding:20px 14px;
+  z-index:20;
+  overflow:auto;
 }
 
 .logo{
-  text-align:center;
-  margin-bottom:25px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:0 8px 22px;
+  border-bottom:1px solid #ffffff12;
+  font-weight:800;
 }
 
 .logo-icon{
-  width:58px;
-  height:58px;
-  border-radius:16px;
+  width:38px;
+  height:38px;
+  border-radius:10px;
   background:#1877f2;
-  color:#fff;
   display:grid;
   place-items:center;
-  font-size:28px;
-  margin:0 auto 12px;
+  font-size:19px;
 }
 
-.logo h1{
-  font-size:21px;
+.logo small{
+  display:block;
+  color:#98a2b3;
+  font-size:8px;
+  margin-top:3px;
+}
+
+.nav-title{
+  margin:22px 10px 8px;
+  color:#98a2b3;
+  font-size:9px;
+  text-transform:uppercase;
+}
+
+.nav{
+  width:100%;
+  border:0;
+  background:transparent;
+  color:#d0d5dd;
+  padding:11px 10px;
+  border-radius:8px;
+  text-align:left;
+  margin:2px 0;
+  font-size:11px;
+}
+
+.nav:hover,
+.nav.active{
+  background:#1877f2;
+  color:#fff;
+}
+
+.owner-box{
+  margin-top:25px;
+  padding:12px;
+  background:#ffffff0d;
+  border-radius:10px;
+}
+
+.owner-avatar{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  background:#1877f2;
+  display:grid;
+  place-items:center;
+  font-weight:800;
+  margin-bottom:8px;
+}
+
+.owner-name{
+  font-size:10px;
+  font-weight:800;
+}
+
+.owner-id{
+  color:#98a2b3;
+  font-size:8px;
+  margin-top:3px;
+}
+
+/* ================= MAIN ================= */
+
+.main{
+  margin-left:235px;
+  min-height:100vh;
+}
+
+.header{
+  height:65px;
+  background:#fff;
+  border-bottom:1px solid #eaecf0;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 25px;
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+.header h2{
+  font-size:17px;
   margin:0;
 }
 
-.logo p{
-  margin:6px 0 0;
+.header-right{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.site{
+  padding:8px 12px;
+  border:1px solid #d0d5dd;
+  border-radius:7px;
+  text-decoration:none;
+  color:#344054;
+  font-size:10px;
+}
+
+.logout{
+  border:0;
+  background:#fff1f0;
+  color:#f04438;
+  padding:8px 12px;
+  border-radius:7px;
+  font-size:10px;
+  font-weight:700;
+}
+
+.content{
+  padding:25px;
+}
+
+.section{
+  display:none;
+}
+
+.section.active{
+  display:block;
+}
+
+.welcome h1{
+  margin:0;
+  font-size:25px;
+}
+
+.welcome p{
   color:#667085;
   font-size:11px;
 }
 
-.title{
-  font-size:16px;
-  font-weight:800;
-  margin-bottom:18px;
+/* ================= STATS ================= */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px;
+  margin:22px 0;
 }
 
-.field{
-  margin-bottom:15px;
+.card{
+  background:#fff;
+  border:1px solid #e7eaf0;
+  border-radius:13px;
+  padding:18px;
 }
 
-.field label{
-  display:block;
-  font-size:10px;
+.stat-label{
   color:#667085;
-  margin-bottom:6px;
+  font-size:10px;
 }
 
-.field input{
-  width:100%;
-  padding:12px 13px;
-  border:1px solid #d0d5dd;
-  border-radius:9px;
-  outline:none;
-  font-size:12px;
-}
-
-.field input:focus{
-  border-color:#1877f2;
-  box-shadow:0 0 0 3px #1877f21a;
-}
-
-.login-btn{
-  width:100%;
-  border:0;
-  background:#1877f2;
-  color:#fff;
-  padding:12px;
-  border-radius:9px;
-  font-size:12px;
+.stat-value{
+  font-size:24px;
   font-weight:800;
-  cursor:pointer;
   margin-top:5px;
 }
 
-.login-btn:hover{
-  background:#1266d6;
+/* ================= PANELS ================= */
+
+.grid{
+  display:grid;
+  grid-template-columns:1.5fr 1fr;
+  gap:18px;
 }
 
-.error{
-  display:none;
-  background:#fff1f0;
-  color:#d92d20;
-  border:1px solid #fecdca;
-  border-radius:8px;
-  padding:10px;
-  font-size:10px;
-  margin-bottom:14px;
+.panel{
+  background:#fff;
+  border:1px solid #e7eaf0;
+  border-radius:13px;
+  overflow:hidden;
 }
 
-.error.show{
-  display:block;
+.panel-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:16px 18px;
+  border-bottom:1px solid #eaecf0;
 }
 
-.demo{
-  margin-top:20px;
-  padding:12px;
-  background:#f9fafb;
-  border-radius:9px;
-  font-size:9px;
-  color:#667085;
-  line-height:1.7;
+.panel-head h3{
+  margin:0;
+  font-size:13px;
 }
 
-.demo strong{
-  color:#344054;
-}
-
-.back{
-  display:block;
-  text-align:center;
-  margin-top:18px;
+.panel-head button{
+  border:0;
+  background:none;
   color:#1877f2;
-  text-decoration:none;
+  font-size:9px;
+}
+
+/* ================= QUICK ================= */
+
+.quick{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  padding:18px;
+}
+
+.quick button{
+  background:#fff;
+  border:1px solid #eaecf0;
+  border-radius:9px;
+  padding:18px 8px;
   font-size:10px;
 }
 
-.footer{
-  text-align:center;
-  margin-top:22px;
-  color:#98a2b3;
+.quick button:hover{
+  border-color:#1877f2;
+}
+
+/* ================= TABLE ================= */
+
+.toolbar{
+  background:#fff;
+  border:1px solid #e7eaf0;
+  border-bottom:0;
+  border-radius:13px 13px 0 0;
+  padding:16px 18px;
+  display:grid;
+  grid-template-columns:1fr 190px;
+  gap:10px;
+}
+
+.toolbar input,
+.toolbar select,
+.form input,
+.form select,
+.form textarea{
+  width:100%;
+  padding:10px;
+  border:1px solid #d0d5dd;
+  border-radius:7px;
+  outline:0;
+  background:#fff;
+  font-size:10px;
+}
+
+.toolbar input:focus,
+.form input:focus,
+.form select:focus,
+.form textarea:focus{
+  border-color:#1877f2;
+}
+
+.table-box{
+  background:#fff;
+  border:1px solid #e7eaf0;
+  border-radius:0 0 13px 13px;
+  overflow:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:750px;
+}
+
+th,
+td{
+  text-align:left;
+  padding:12px 14px;
+  border-bottom:1px solid #f2f4f7;
+  font-size:9px;
+}
+
+th{
+  background:#f9fafb;
+  color:#667085;
+}
+
+.action{
+  border:0;
+  border-radius:6px;
+  padding:6px 8px;
   font-size:8px;
+  font-weight:700;
+  margin-right:4px;
+}
+
+.edit{
+  background:#eef5ff;
+  color:#1877f2;
+}
+
+.danger{
+  background:#fff1f0;
+  color:#f04438;
+}
+
+/* ================= FORM ================= */
+
+.form{
+  background:#fff;
+  border:1px solid #e7eaf0;
+  border-radius:13px;
+  padding:20px;
+  margin-bottom:18px;
+}
+
+.form h3{
+  margin:0 0 15px;
+  font-size:14px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.full{
+  grid-column:1/-1;
+}
+
+.form label{
+  display:block;
+  color:#667085;
+  font-size:9px;
+  margin-bottom:5px;
+}
+
+.form textarea{
+  min-height:80px;
+  resize:vertical;
+}
+
+.form-actions{
+  margin-top:14px;
+}
+
+.primary{
+  border:0;
+  background:#1877f2;
+  color:#fff;
+  padding:10px 16px;
+  border-radius:7px;
+  font-size:10px;
+  font-weight:800;
+}
+
+.secondary{
+  border:1px solid #d0d5dd;
+  background:#fff;
+  padding:9px 15px;
+  border-radius:7px;
+  font-size:10px;
+  margin-left:6px;
+}
+
+/* ================= PRODUCTS ================= */
+
+.products{
+  background:#fff;
+  border:1px solid #e7eaf0;
+  border-radius:13px;
+  padding:18px;
+}
+
+.product{
+  display:grid;
+  grid-template-columns:65px 1fr auto;
+  gap:13px;
+  align-items:center;
+  padding:12px 0;
+  border-bottom:1px solid #f2f4f7;
+}
+
+.product:last-child{
+  border:0;
+}
+
+.pic{
+  width:65px;
+  height:65px;
+  border-radius:9px;
+  background:#f2f4f7;
+  overflow:hidden;
+  display:grid;
+  place-items:center;
+}
+
+.pic img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.pname{
+  font-size:11px;
+  font-weight:800;
+}
+
+.tag{
+  display:inline-block;
+  background:#eef5ff;
+  color:#1877f2;
+  border-radius:12px;
+  padding:3px 6px;
+  font-size:7px;
+  margin-top:4px;
+}
+
+.price{
+  font-size:11px;
+  font-weight:800;
+  margin-top:5px;
+}
+
+/* ================= PROFILE ================= */
+
+.profile-card{
+  background:#fff;
+  border:1px solid #e7eaf0;
+  border-radius:13px;
+  padding:22px;
+  max-width:750px;
+}
+
+.profile-top{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  padding-bottom:20px;
+  border-bottom:1px solid #eaecf0;
+  margin-bottom:20px;
+}
+
+.profile-avatar{
+  width:60px;
+  height:60px;
+  border-radius:50%;
+  background:#eef5ff;
+  color:#1877f2;
+  display:grid;
+  place-items:center;
+  font-size:23px;
+  font-weight:800;
+}
+
+.profile-name{
+  font-size:16px;
+  font-weight:800;
+}
+
+.profile-id{
+  color:#667085;
+  font-size:9px;
+  margin-top:4px;
+}
+
+/* ================= EMPTY ================= */
+
+.empty{
+  text-align:center;
+  padding:45px;
+  color:#98a2b3;
+  font-size:10px;
+}
+
+/* ================= TOAST ================= */
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:24px;
+  transform:translate(-50%,30px);
+  opacity:0;
+  background:#101828;
+  color:#fff;
+  padding:11px 16px;
+  border-radius:8px;
+  font-size:10px;
+  z-index:200;
+  transition:.2s;
+}
+
+.toast.show{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+  .sidebar{
+    width:190px;
+  }
+
+  .main{
+    margin-left:190px;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:650px){
+
+  .sidebar{
+    position:static;
+    width:100%;
+    height:auto;
+  }
+
+  .main{
+    margin-left:0;
+  }
+
+  .header{
+    padding:0 14px;
+  }
+
+  .content{
+    padding:14px;
+  }
+
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .form-grid,
+  .toolbar{
+    grid-template-columns:1fr;
+  }
+
+  .full{
+    grid-column:auto;
+  }
+
+  .product{
+    grid-template-columns:55px 1fr;
+  }
+
+  .product-actions{
+    grid-column:2;
+  }
+
+  .header-right .site{
+    display:none;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="login-card">
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
 
   <div class="logo">
-    <div class="logo-icon">🏪</div>
-    <h1>Shopping Mela</h1>
-    <p>Shop Owner Portal</p>
+
+    <div class="logo-icon">
+      🏪
+    </div>
+
+    <div>
+      Shopping Mela
+      <small>Shop Owner Panel</small>
+    </div>
+
   </div>
 
-  <div class="title">Shop Owner Login</div>
+  <div class="nav-title">
+    My Store
+  </div>
 
-  <div class="error" id="errorBox"></div>
+  <button class="nav active" data-section="dashboard">
+    📊 Dashboard
+  </button>
 
-  <form id="loginForm">
+  <button class="nav" data-section="products">
+    🛒 My Products
+  </button>
 
-    <div class="field">
-      <label>Customer / Shop Owner ID</label>
-      <input
-        type="text"
-        id="ownerId"
-        placeholder="Enter your ID"
-        autocomplete="username"
-        required
-      >
+  <button class="nav" data-section="orders">
+    📦 My Orders
+  </button>
+
+  <button class="nav" data-section="profile">
+    👤 My Profile
+  </button>
+
+  <div class="owner-box">
+
+    <div class="owner-avatar" id="sideAvatar">
+      S
     </div>
 
-    <div class="field">
-      <label>Password</label>
-      <input
-        type="password"
-        id="password"
-        placeholder="Enter password"
-        autocomplete="current-password"
-        required
-      >
+    <div class="owner-name" id="sideName">
+      Shop Owner
     </div>
 
-    <button class="login-btn" type="submit">
-      Login to My Store
+    <div class="owner-id" id="sideId">
+      ID: —
+    </div>
+
+  </div>
+
+</aside>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="main">
+
+<header class="header">
+
+  <h2 id="pageTitle">
+    Dashboard
+  </h2>
+
+  <div class="header-right">
+
+    <a class="site" href="index.html">
+      🌐 View Site
+    </a>
+
+    <button class="logout" onclick="logout()">
+      Logout
     </button>
 
-  </form>
-
-  <div class="demo">
-    <strong>Demo Login</strong><br>
-    Owner ID: <strong>10001</strong><br>
-    Password: <strong>123456</strong>
   </div>
 
-  <a href="index.html" class="back">
-    ← Back to Shopping Mela
-  </a>
+</header>
 
-  <div class="footer">
-    © Shopping Mela — Shop Owner Portal
+
+<div class="content">
+
+<!-- ================= DASHBOARD ================= -->
+
+<section id="dashboard" class="section active">
+
+  <div class="welcome">
+
+    <h1>
+      Welcome, <span id="welcomeName">Shop Owner</span> 👋
+    </h1>
+
+    <p>
+      Manage your Shopping Mela store from here.
+    </p>
+
   </div>
+
+
+  <div class="stats">
+
+    <div class="card">
+
+      <div class="stat-label">
+        My Products
+      </div>
+
+      <div class="stat-value" id="statProducts">
+        0
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="stat-label">
+        My Orders
+      </div>
+
+      <div class="stat-value" id="statOrders">
+        0
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="stat-label">
+        Pending Orders
+      </div>
+
+      <div class="stat-value" id="statPending">
+        0
+      </div>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="stat-label">
+        Total Sales
+      </div>
+
+      <div class="stat-value" id="statSales">
+        ৳0
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="grid">
+
+    <div class="panel">
+
+      <div class="panel-head">
+
+        <h3>
+          Recent Orders
+        </h3>
+
+        <button onclick="showSection('orders')">
+          View all →
+        </button>
+
+      </div>
+
+      <div id="recentOrders"></div>
+
+    </div>
+
+
+    <div class="panel">
+
+      <div class="panel-head">
+
+        <h3>
+          Quick Actions
+        </h3>
+
+      </div>
+
+      <div class="quick">
+
+        <button onclick="showSection('products');resetProductForm()">
+          ➕<br>Add Product
+        </button>
+
+        <button onclick="showSection('products')">
+          🛒<br>My Products
+        </button>
+
+        <button onclick="showSection('orders')">
+          📦<br>Orders
+        </button>
+
+        <button onclick="showSection('profile')">
+          👤<br>Profile
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= PRODUCTS ================= -->
+
+<section id="products" class="section">
+
+  <div class="welcome">
+
+    <h1>
+      My Products
+    </h1>
+
+    <p>
+      Add and manage products for your store.
+    </p>
+
+  </div>
+
+
+  <div class="form">
+
+    <h3 id="formTitle">
+      ➕ Add New Product
+    </h3>
+
+    <div class="form-grid">
+
+      <div>
+
+        <label>
+          Product Name
+        </label>
+
+        <input
+          id="productName"
+          placeholder="Product name"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Price (৳)
+        </label>
+
+        <input
+          id="productPrice"
+          type="number"
+          min="0"
+          step="0.01"
+          placeholder="0"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Category
+        </label>
+
+        <select id="productCategory">
+
+          <option>Fashion</option>
+          <option>Electronics</option>
+          <option>Beauty</option>
+          <option>Home</option>
+          <option>Food</option>
+          <option>Accessories</option>
+          <option>Other</option>
+
+        </select>
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Image URL
+        </label>
+
+        <input
+          id="productImage"
+          placeholder="https://..."
+        >
+
+      </div>
+
+
+      <div class="full">
+
+        <label>
+          Product Description
+        </label>
+
+        <textarea
+          id="productDescription"
+          placeholder="Product details..."
+        ></textarea>
+
+      </div>
+
+    </div>
+
+
+    <div class="form-actions">
+
+      <button
+        class="primary"
+        id="saveBtn"
+        onclick="saveProduct()"
+      >
+        Add Product
+      </button>
+
+      <button
+        class="secondary"
+        id="cancelBtn"
+        onclick="resetProductForm()"
+        style="display:none"
+      >
+        Cancel
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div class="toolbar">
+
+    <input
+      id="productSearch"
+      placeholder="Search my products..."
+      oninput="renderProducts()"
+    >
+
+    <select
+      id="productFilter"
+      onchange="renderProducts()"
+    >
+
+      <option value="all">
+        All Categories
+      </option>
+
+      <option>Fashion</option>
+      <option>Electronics</option>
+      <option>Beauty</option>
+      <option>Home</option>
+      <option>Food</option>
+      <option>Accessories</option>
+      <option>Other</option>
+
+    </select>
+
+  </div>
+
+
+  <div
+    class="products"
+    id="productsList"
+  ></div>
+
+</section>
+
+
+<!-- ================= ORDERS ================= -->
+
+<section id="orders" class="section">
+
+  <div class="welcome">
+
+    <h1>
+      My Orders
+    </h1>
+
+    <p>
+      Orders received for your store.
+    </p>
+
+  </div>
+
+
+  <div class="toolbar">
+
+    <input
+      id="orderSearch"
+      placeholder="Search customer, phone, order..."
+      oninput="renderOrders()"
+    >
+
+    <select
+      id="orderStatus"
+      onchange="renderOrders()"
+    >
+
+      <option value="all">
+        All Status
+      </option>
+
+      <option>Pending</option>
+      <option>Processing</option>
+      <option>Shipped</option>
+      <option>Delivered</option>
+      <option>Cancelled</option>
+
+    </select>
+
+  </div>
+
+
+  <div class="table-box">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>
+            Order
+          </th>
+
+          <th>
+            Customer
+          </th>
+
+          <th>
+            Total
+          </th>
+
+          <th>
+            Status
+          </th>
+
+          <th>
+            Date
+          </th>
+
+        </tr>
+
+      </thead>
+
+      <tbody id="ordersTable"></tbody>
+
+    </table>
+
+  </div>
+
+</section>
+
+
+<!-- ================= PROFILE ================= -->
+
+<section id="profile" class="section">
+
+  <div class="welcome">
+
+    <h1>
+      My Profile
+    </h1>
+
+    <p>
+      Manage your shop owner information.
+    </p>
+
+  </div>
+
+
+  <div class="profile-card">
+
+    <div class="profile-top">
+
+      <div
+        class="profile-avatar"
+        id="profileAvatar"
+      >
+        S
+      </div>
+
+      <div>
+
+        <div
+          class="profile-name"
+          id="profileName"
+        >
+          Shop Owner
+        </div>
+
+        <div
+          class="profile-id"
+          id="profileId"
+        >
+          Customer ID: —
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="form-grid">
+
+      <div>
+
+        <label>
+          Shop Owner Name
+        </label>
+
+        <input
+          id="ownerName"
+          placeholder="Your name"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Shop Name
+        </label>
+
+        <input
+          id="shopName"
+          placeholder="Your shop name"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Phone
+        </label>
+
+        <input
+          id="ownerPhone"
+          placeholder="01XXXXXXXXX"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Email
+        </label>
+
+        <input
+          id="ownerEmail"
+          type="email"
+          placeholder="example@email.com"
+        >
+
+      </div>
+
+
+      <div class="full">
+
+        <label>
+          Shop Address
+        </label>
+
+        <textarea
+          id="shopAddress"
+          placeholder="Shop address"
+        ></textarea>
+
+      </div>
+
+    </div>
+
+
+    <div class="form-actions">
+
+      <button
+        class="primary"
+        onclick="saveProfile()"
+      >
+        Save Profile
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
 
 </div>
+
+</main>
+
+
+<div
+  class="toast"
+  id="toast"
+></div>
+
 
 <script>
 "use strict";
 
-/*
-  SHOP OWNER LOGIN
-  ----------------
-  Firebase আসার আগে demo/testing-এর জন্য
-  localStorage + sessionStorage ব্যবহার করা হচ্ছে।
-*/
 
-const OWNER_SESSION_KEY = "shoppingMelaShopOwnerLoggedIn";
-const OWNER_ID_KEY = "shoppingMelaShopOwnerId";
-const OWNER_LOGIN_TIME_KEY = "shoppingMelaShopOwnerLoginTime";
+/* ==================================================
+   SECURITY / SESSION
+   ================================================== */
 
-const DEMO_OWNER = {
-  id: "10001",
-  password: "123456",
-  name: "Demo Shop Owner"
-};
+const SESSION_KEY =
+  "shoppingMelaShopOwnerLoggedIn";
 
-/* যদি আগে থেকেই login করা থাকে */
-function isLoggedIn(){
-  return (
-    sessionStorage.getItem(OWNER_SESSION_KEY) === "true" &&
-    sessionStorage.getItem(OWNER_ID_KEY)
-  );
-}
+const OWNER_ID_KEY =
+  "shoppingMelaShopOwnerId";
+
+const LOGIN_TIME_KEY =
+  "shoppingMelaShopOwnerLoginTime";
+
 
 /*
-  Login
+  Dashboard শুধুমাত্র login করা owner-এর জন্য।
 */
-document.getElementById("loginForm").addEventListener("submit", function(e){
 
-  e.preventDefault();
+function checkOwnerSession(){
+
+  const logged =
+    sessionStorage.getItem(SESSION_KEY);
 
   const ownerId =
-    document.getElementById("ownerId").value.trim();
+    sessionStorage.getItem(OWNER_ID_KEY);
 
-  const password =
-    document.getElementById("password").value;
-
-  const errorBox =
-    document.getElementById("errorBox");
-
-  errorBox.classList.remove("show");
-  errorBox.textContent = "";
-
-  if(!ownerId){
-    showError("Owner ID দিন।");
-    return;
-  }
-
-  if(!password){
-    showError("Password দিন।");
-    return;
-  }
+  const loginTime =
+    Number(
+      sessionStorage.getItem(LOGIN_TIME_KEY) || 0
+    );
 
   /*
-    আপাতত demo account।
-    পরে Firebase Authentication দিয়ে replace হবে।
+    24 hours session
   */
+
   if(
-    ownerId === DEMO_OWNER.id &&
-    password === DEMO_OWNER.password
+    logged !== "true" ||
+    !ownerId ||
+    !loginTime ||
+    Date.now() - loginTime >= 86400000
   ){
 
-    sessionStorage.setItem(
-      OWNER_SESSION_KEY,
-      "true"
-    );
-
-    sessionStorage.setItem(
-      OWNER_ID_KEY,
-      DEMO_OWNER.id
-    );
-
-    sessionStorage.setItem(
-      OWNER_LOGIN_TIME_KEY,
-      String(Date.now())
-    );
-
-    /*
-      Owner-এর basic information
-      testing-এর জন্য save করছি।
-    */
-    localStorage.setItem(
-      "shoppingMelaCurrentShopOwner",
-      JSON.stringify({
-        id: DEMO_OWNER.id,
-        name: DEMO_OWNER.name
-      })
-    );
+    sessionStorage.removeItem(SESSION_KEY);
+    sessionStorage.removeItem(OWNER_ID_KEY);
+    sessionStorage.removeItem(LOGIN_TIME_KEY);
 
     window.location.href =
-      "shop-owner-dashboard.html";
+      "shop-owner-login.html";
+
+    return false;
+  }
+
+  return true;
+}
+
+
+/* ==================================================
+   OWNER DATA
+   ================================================== */
+
+let owner = {
+  id:"",
+  name:"Shop Owner",
+  shopName:"",
+  phone:"",
+  email:"",
+  address:""
+};
+
+
+let products = [];
+let orders = [];
+
+let editingId = null;
+
+
+/* ==================================================
+   STORAGE KEYS
+   ================================================== */
+
+const PRODUCTS_KEY =
+  "shoppingMelaProducts";
+
+const ORDERS_KEY =
+  "shoppingMelaOrders";
+
+const OWNER_PROFILE_PREFIX =
+  "shoppingMelaShopOwnerProfile_";
+
+
+/* ==================================================
+   HELPERS
+   ================================================== */
+
+function readArray(key){
+
+  try{
+
+    const value =
+      JSON.parse(
+        localStorage.getItem(key)
+      );
+
+    return Array.isArray(value)
+      ? value
+      : [];
+
+  }catch(error){
+
+    return [];
+
+  }
+
+}
+
+
+function money(value){
+
+  return "৳" +
+    Number(value || 0)
+      .toLocaleString(
+        "en-BD",
+        {
+          maximumFractionDigits:2
+        }
+      );
+
+}
+
+
+function esc(value){
+
+  return String(
+    value ?? ""
+  ).replace(
+    /[&<>"']/g,
+    function(match){
+
+      return {
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
+      }[match];
+
+    }
+  );
+
+}
+
+
+function showToast(message){
+
+  const toast =
+    document.getElementById("toast");
+
+  toast.textContent =
+    message;
+
+  toast.classList.add("show");
+
+  clearTimeout(
+    window.__toastTimer
+  );
+
+  window.__toastTimer =
+    setTimeout(
+      function(){
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      2200
+    );
+
+}
+
+
+/* ==================================================
+   OWNER PROFILE
+   ================================================== */
+
+function loadOwner(){
+
+  const id =
+    sessionStorage.getItem(
+      OWNER_ID_KEY
+    );
+
+  owner.id = id || "";
+
+
+  const saved =
+    localStorage.getItem(
+      OWNER_PROFILE_PREFIX + owner.id
+    );
+
+
+  if(saved){
+
+    try{
+
+      const data =
+        JSON.parse(saved);
+
+      owner = {
+        ...owner,
+        ...data
+      };
+
+    }catch(error){}
+
+  }
+
+
+  /*
+    যদি profile আগে save না থাকে,
+    login থেকে basic name নেওয়া হবে।
+  */
+
+  const currentOwner =
+    localStorage.getItem(
+      "shoppingMelaCurrentShopOwner"
+    );
+
+  if(currentOwner){
+
+    try{
+
+      const data =
+        JSON.parse(currentOwner);
+
+      if(
+        data.id === owner.id &&
+        (!owner.name ||
+         owner.name === "Shop Owner")
+      ){
+
+        owner.name =
+          data.name ||
+          "Shop Owner";
+
+      }
+
+    }catch(error){}
+
+  }
+
+}
+
+
+/* ==================================================
+   OWNER-SPECIFIC PRODUCT FILTER
+   ================================================== */
+
+function loadProducts(){
+
+  const allProducts =
+    readArray(PRODUCTS_KEY);
+
+
+  /*
+    গুরুত্বপূর্ণ:
+
+    এই dashboard-এ ownerId ছাড়া
+    অন্য owner's product দেখানো হবে না।
+
+    নতুন product-এর সাথে ownerId save হবে।
+  */
+
+  products =
+    allProducts.filter(
+      function(product){
+
+        return String(
+          product.ownerId || ""
+        ) === String(
+          owner.id
+        );
+
+      }
+    );
+
+}
+
+
+/* ==================================================
+   OWNER-SPECIFIC ORDERS
+   ================================================== */
+
+function loadOrders(){
+
+  const allOrders =
+    readArray(ORDERS_KEY);
+
+
+  /*
+    Order-এর ownerId থাকলে
+    শুধুমাত্র সেই owner's orders দেখাবে।
+
+    পুরোনো demo order-এ ownerId না থাকলে
+    এখানে দেখানো হবে না।
+  */
+
+  orders =
+    allOrders.filter(
+      function(order){
+
+        return String(
+          order.ownerId || ""
+        ) === String(
+          owner.id
+        );
+
+      }
+    );
+
+}
+
+
+/* ==================================================
+   HEADER / PROFILE UI
+   ================================================== */
+
+function renderOwnerInfo(){
+
+  const displayName =
+    owner.name ||
+    "Shop Owner";
+
+
+  document.getElementById(
+    "welcomeName"
+  ).textContent =
+    displayName;
+
+
+  document.getElementById(
+    "sideName"
+  ).textContent =
+    displayName;
+
+
+  document.getElementById(
+    "sideId"
+  ).textContent =
+    "ID: " + owner.id;
+
+
+  document.getElementById(
+    "profileName"
+  ).textContent =
+    displayName;
+
+
+  document.getElementById(
+    "profileId"
+  ).textContent =
+    "Customer ID: " + owner.id;
+
+
+  const first =
+    displayName
+      .trim()
+      .charAt(0)
+      .toUpperCase() ||
+    "S";
+
+
+  document.getElementById(
+    "sideAvatar"
+  ).textContent =
+    first;
+
+
+  document.getElementById(
+    "profileAvatar"
+  ).textContent =
+    first;
+
+
+  document.getElementById(
+    "ownerName"
+  ).value =
+    owner.name || "";
+
+
+  document.getElementById(
+    "shopName"
+  ).value =
+    owner.shopName || "";
+
+
+  document.getElementById(
+    "ownerPhone"
+  ).value =
+    owner.phone || "";
+
+
+  document.getElementById(
+    "ownerEmail"
+  ).value =
+    owner.email || "";
+
+
+  document.getElementById(
+    "shopAddress"
+  ).value =
+    owner.address || "";
+
+}
+
+
+/* ==================================================
+   NAVIGATION
+   ================================================== */
+
+function showSection(id){
+
+  document
+    .querySelectorAll(".section")
+    .forEach(
+      function(section){
+
+        section.classList.toggle(
+          "active",
+          section.id === id
+        );
+
+      }
+    );
+
+
+  document
+    .querySelectorAll(".nav")
+    .forEach(
+      function(button){
+
+        button.classList.toggle(
+          "active",
+          button.dataset.section === id
+        );
+
+      }
+    );
+
+
+  const titles = {
+
+    dashboard:"Dashboard",
+    products:"My Products",
+    orders:"My Orders",
+    profile:"My Profile"
+
+  };
+
+
+  document.getElementById(
+    "pageTitle"
+  ).textContent =
+    titles[id] || "Shop Owner";
+
+
+  if(id === "products")
+    renderProducts();
+
+  if(id === "orders")
+    renderOrders();
+
+}
+
+
+document
+  .querySelectorAll(".nav")
+  .forEach(
+    function(button){
+
+      button.addEventListener(
+        "click",
+        function(){
+
+          showSection(
+            button.dataset.section
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+/* ==================================================
+   STATS
+   ================================================== */
+
+function renderStats(){
+
+  document.getElementById(
+    "statProducts"
+  ).textContent =
+    products.length;
+
+
+  document.getElementById(
+    "statOrders"
+  ).textContent =
+    orders.length;
+
+
+  const pending =
+    orders.filter(
+      function(order){
+
+        return (
+          String(
+            order.status ||
+            "Pending"
+          ).toLowerCase()
+          === "pending"
+        );
+
+      }
+    ).length;
+
+
+  document.getElementById(
+    "statPending"
+  ).textContent =
+    pending;
+
+
+  const sales =
+    orders
+      .filter(
+        function(order){
+
+          return String(
+            order.status ||
+            ""
+          ).toLowerCase()
+          !== "cancelled";
+
+        }
+      )
+      .reduce(
+        function(total,order){
+
+          return total +
+            Number(
+              order.total ||
+              order.amount ||
+              0
+            );
+
+        },
+        0
+      );
+
+
+  document.getElementById(
+    "statSales"
+  ).textContent =
+    money(sales);
+
+}
+
+
+/* ==================================================
+   RECENT ORDERS
+   ================================================== */
+
+function renderRecentOrders(){
+
+  const box =
+    document.getElementById(
+      "recentOrders"
+    );
+
+
+  const list =
+    [...orders]
+      .reverse()
+      .slice(0,6);
+
+
+  if(!list.length){
+
+    box.innerHTML =
+      `<div class="empty">
+        📦<br><br>
+        No orders yet.
+      </div>`;
+
+    return;
+
+  }
+
+
+  box.innerHTML =
+    list.map(
+      function(order){
+
+        const id =
+          order.id ||
+          order.orderId ||
+          "—";
+
+
+        const name =
+          order.customerName ||
+          order.name ||
+          order.customer?.name ||
+          "Customer";
+
+
+        const total =
+          Number(
+            order.total ||
+            order.amount ||
+            0
+          );
+
+
+        const status =
+          order.status ||
+          "Pending";
+
+
+        return `
+          <div style="
+            display:grid;
+            grid-template-columns:1.3fr 1fr .8fr .8fr;
+            gap:10px;
+            padding:13px 18px;
+            border-bottom:1px solid #f2f4f7;
+            align-items:center;
+            font-size:9px;
+          ">
+
+            <div>
+              <strong>
+                #${esc(id)}
+              </strong>
+
+              <br>
+
+              <span style="color:#667085">
+                ${esc(name)}
+              </span>
+            </div>
+
+            <div>
+              ${esc(
+                order.phone ||
+                order.customerPhone ||
+                ""
+              )}
+            </div>
+
+            <strong>
+              ${money(total)}
+            </strong>
+
+            <span style="
+              color:#1877f2;
+              font-size:8px;
+              font-weight:800;
+            ">
+              ${esc(status)}
+            </span>
+
+          </div>
+        `;
+
+      }
+    ).join("");
+
+}
+
+
+/* ==================================================
+   PRODUCTS
+   ================================================== */
+
+function saveProduct(){
+
+  const name =
+    document.getElementById(
+      "productName"
+    ).value.trim();
+
+
+  const price =
+    Number(
+      document.getElementById(
+        "productPrice"
+      ).value
+    );
+
+
+  const category =
+    document.getElementById(
+      "productCategory"
+    ).value;
+
+
+  const image =
+    document.getElementById(
+      "productImage"
+    ).value.trim();
+
+
+  const description =
+    document.getElementById(
+      "productDescription"
+    ).value.trim();
+
+
+  if(!name){
+
+    showToast(
+      "Product name দিন"
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !Number.isFinite(price) ||
+    price < 0
+  ){
+
+    showToast(
+      "Valid price দিন"
+    );
+
+    return;
+
+  }
+
+
+  const allProducts =
+    readArray(PRODUCTS_KEY);
+
+
+  if(editingId !== null){
+
+    const product =
+      allProducts.find(
+        function(item){
+
+          return (
+            String(item.id) ===
+            String(editingId)
+          );
+
+        }
+      );
+
+
+    /*
+      Security check:
+      অন্য owner's product edit করা যাবে না।
+    */
+
+    if(
+      !product ||
+      String(product.ownerId) !==
+      String(owner.id)
+    ){
+
+      showToast(
+        "এই product আপনার নয়"
+      );
+
+      return;
+
+    }
+
+
+    product.name =
+      name;
+
+    product.price =
+      price;
+
+    product.category =
+      category;
+
+    product.image =
+      image;
+
+    product.description =
+      description;
+
+
+    showToast(
+      "Product updated ✓"
+    );
 
   }else{
 
-    showError(
-      "Owner ID অথবা Password সঠিক নয়।"
+    allProducts.push({
+
+      id:
+        Date.now().toString(),
+
+      ownerId:
+        owner.id,
+
+      name:
+        name,
+
+      price:
+        price,
+
+      category:
+        category,
+
+      image:
+        image,
+
+      description:
+        description,
+
+      createdAt:
+        new Date().toISOString()
+
+    });
+
+
+    showToast(
+      "Product added ✓"
     );
+
   }
 
-});
+
+  localStorage.setItem(
+    PRODUCTS_KEY,
+    JSON.stringify(
+      allProducts
+    )
+  );
 
 
-function showError(message){
+  loadProducts();
+
+  resetProductForm();
+
+  renderProducts();
+
+  renderStats();
+
+}
+
+
+function editProduct(id){
+
+  const product =
+    products.find(
+      function(item){
+
+        return String(item.id) ===
+          String(id);
+
+      }
+    );
+
+
+  if(!product){
+
+    showToast(
+      "Product পাওয়া যায়নি"
+    );
+
+    return;
+
+  }
+
+
+  editingId =
+    product.id;
+
+
+  document.getElementById(
+    "productName"
+  ).value =
+    product.name || "";
+
+
+  document.getElementById(
+    "productPrice"
+  ).value =
+    product.price ?? "";
+
+
+  document.getElementById(
+    "productCategory"
+  ).value =
+    product.category || "Other";
+
+
+  document.getElementById(
+    "productImage"
+  ).value =
+    product.image || "";
+
+
+  document.getElementById(
+    "productDescription"
+  ).value =
+    product.description || "";
+
+
+  document.getElementById(
+    "formTitle"
+  ).textContent =
+    "✏️ Edit Product";
+
+
+  document.getElementById(
+    "saveBtn"
+  ).textContent =
+    "Update Product";
+
+
+  document.getElementById(
+    "cancelBtn"
+  ).style.display =
+    "inline-block";
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+function deleteProduct(id){
+
+  const product =
+    products.find(
+      function(item){
+
+        return String(item.id) ===
+          String(id);
+
+      }
+    );
+
+
+  if(!product)
+    return;
+
+
+  if(
+    !confirm(
+      `"${product.name}" delete করতে চান?`
+    )
+  )
+    return;
+
+
+  const allProducts =
+    readArray(PRODUCTS_KEY);
+
+
+  /*
+    শুধু নিজের product delete করা যাবে।
+  */
+
+  const exists =
+    allProducts.find(
+      function(item){
+
+        return (
+          String(item.id) ===
+          String(id) &&
+          String(item.ownerId) ===
+          String(owner.id)
+        );
+
+      }
+    );
+
+
+  if(!exists){
+
+    showToast(
+      "এই product আপনার নয়"
+    );
+
+    return;
+
+  }
+
+
+  const updated =
+    allProducts.filter(
+      function(item){
+
+        return !(
+          String(item.id) ===
+          String(id) &&
+          String(item.ownerId) ===
+          String(owner.id)
+        );
+
+      }
+    );
+
+
+  localStorage.setItem(
+    PRODUCTS_KEY,
+    JSON.stringify(updated)
+  );
+
+
+  loadProducts();
+
+  renderProducts();
+
+  renderStats();
+
+  showToast(
+    "Product deleted ✓"
+  );
+
+}
+
+
+function resetProductForm(){
+
+  editingId =
+    null;
+
+
+  document.getElementById(
+    "productName"
+  ).value = "";
+
+
+  document.getElementById(
+    "productPrice"
+  ).value = "";
+
+
+  document.getElementById(
+    "productCategory"
+  ).value =
+    "Fashion";
+
+
+  document.getElementById(
+    "productImage"
+  ).value = "";
+
+
+  document.getElementById(
+    "productDescription"
+  ).value = "";
+
+
+  document.getElementById(
+    "formTitle"
+  ).textContent =
+    "➕ Add New Product";
+
+
+  document.getElementById(
+    "saveBtn"
+  ).textContent =
+    "Add Product";
+
+
+  document.getElementById(
+    "cancelBtn"
+  ).style.display =
+    "none";
+
+}
+
+
+function renderProducts(){
+
+  const query =
+    (
+      document.getElementById(
+        "productSearch"
+      )?.value || ""
+    )
+    .toLowerCase()
+    .trim();
+
+
+  const category =
+    document.getElementById(
+      "productFilter"
+    )?.value ||
+    "all";
+
+
+  const list =
+    products.filter(
+      function(product){
+
+        const text =
+          `${product.name || ""} ${
+            product.category || ""
+          }`
+          .toLowerCase();
+
+
+        return (
+          (!query ||
+            text.includes(query))
+          &&
+          (
+            category === "all" ||
+            product.category === category
+          )
+        );
+
+      }
+    );
+
 
   const box =
-    document.getElementById("errorBox");
+    document.getElementById(
+      "productsList"
+    );
 
-  box.textContent = message;
-  box.classList.add("show");
+
+  if(!list.length){
+
+    box.innerHTML =
+      `<div class="empty">
+        🛒<br><br>
+        ${
+          products.length
+          ? "No matching products."
+          : "No products yet. Add your first product."
+        }
+      </div>`;
+
+    return;
+
+  }
+
+
+  box.innerHTML =
+    [...list]
+      .reverse()
+      .map(
+        function(product){
+
+          return `
+            <div class="product">
+
+              <div class="pic">
+
+                ${
+                  product.image
+                  ?
+                  `<img
+                    src="${esc(product.image)}"
+                    alt="${esc(product.name)}"
+                    onerror="this.style.display='none'"
+                  >`
+                  :
+                  "🛍️"
+                }
+
+              </div>
+
+
+              <div>
+
+                <div class="pname">
+                  ${esc(product.name)}
+                </div>
+
+                <span class="tag">
+                  ${esc(
+                    product.category ||
+                    "Other"
+                  )}
+                </span>
+
+                <div class="price">
+                  ${money(product.price)}
+                </div>
+
+              </div>
+
+
+              <div class="product-actions">
+
+                <button
+                  class="action edit"
+                  onclick="editProduct('${esc(product.id)}')"
+                >
+                  ✏️ Edit
+                </button>
+
+                <button
+                  class="action danger"
+                  onclick="deleteProduct('${esc(product.id)}')"
+                >
+                  🗑️ Delete
+                </button>
+
+              </div>
+
+            </div>
+          `;
+
+        }
+      )
+      .join("");
+
 }
 
 
-/*
-  যদি already logged in থাকে,
-  login page-এ না থেকে dashboard-এ যাবে।
-*/
-if(isLoggedIn()){
-  window.location.href =
-    "shop-owner-dashboard.html";
+/* ==================================================
+   ORDERS
+   ================================================== */
+
+function renderOrders(){
+
+  const query =
+    (
+      document.getElementById(
+        "orderSearch"
+      )?.value || ""
+    )
+    .toLowerCase()
+    .trim();
+
+
+  const status =
+    document.getElementById(
+      "orderStatus"
+    )?.value ||
+    "all";
+
+
+  const list =
+    orders.filter(
+      function(order){
+
+        const text =
+          JSON.stringify(
+            order
+          ).toLowerCase();
+
+
+        const orderStatus =
+          order.status ||
+          "Pending";
+
+
+        return (
+          (!query ||
+            text.includes(query))
+          &&
+          (
+            status === "all" ||
+            orderStatus === status
+          )
+        );
+
+      }
+    );
+
+
+  const tbody =
+    document.getElementById(
+      "ordersTable"
+    );
+
+
+  if(!list.length){
+
+    tbody.innerHTML =
+      `<tr>
+        <td colspan="5">
+          <div class="empty">
+            📦<br><br>
+            No orders found.
+          </div>
+        </td>
+      </tr>`;
+
+    return;
+
+  }
+
+
+  tbody.innerHTML =
+    [...list]
+      .reverse()
+      .map(
+        function(order){
+
+          const id =
+            order.id ||
+            order.orderId ||
+            "—";
+
+
+          const name =
+            order.customerName ||
+            order.name ||
+            order.customer?.name ||
+            "Customer";
+
+
+          const phone =
+            order.phone ||
+            order.customerPhone ||
+            order.customer?.phone ||
+            "";
+
+
+          const total =
+            Number(
+              order.total ||
+              order.amount ||
+              0
+            );
+
+
+          const orderStatus =
+            order.status ||
+            "Pending";
+
+
+          const date =
+            order.date ||
+            order.createdAt ||
+            "—";
+
+
+          return `
+            <tr>
+
+              <td>
+                <strong>
+                  #${esc(id)}
+                </strong>
+              </td>
+
+              <td>
+                ${esc(name)}
+                <br>
+                <span style="color:#667085">
+                  ${esc(phone)}
+                </span>
+              </td>
+
+              <td>
+                <strong>
+                  ${money(total)}
+                </strong>
+              </td>
+
+              <td>
+                <span style="
+                  font-size:8px;
+                  font-weight:800;
+                  color:#1877f2;
+                ">
+                  ${esc(orderStatus)}
+                </span>
+              </td>
+
+              <td>
+                ${esc(date)}
+              </td>
+
+            </tr>
+          `;
+
+        }
+      )
+      .join("");
+
 }
+
+
+/* ==================================================
+   PROFILE SAVE
+   ================================================== */
+
+function saveProfile(){
+
+  owner.name =
+    document.getElementById(
+      "ownerName"
+    ).value.trim() ||
+    "Shop Owner";
+
+
+  owner.shopName =
+    document.getElementById(
+      "shopName"
+    ).value.trim();
+
+
+  owner.phone =
+    document.getElementById(
+      "ownerPhone"
+    ).value.trim();
+
+
+  owner.email =
+    document.getElementById(
+      "ownerEmail"
+    ).value.trim();
+
+
+  owner.address =
+    document.getElementById(
+      "shopAddress"
+    ).value.trim();
+
+
+  localStorage.setItem(
+    OWNER_PROFILE_PREFIX +
+    owner.id,
+    JSON.stringify(owner)
+  );
+
+
+  renderOwnerInfo();
+
+
+  showToast(
+    "Profile saved ✓"
+  );
+
+}
+
+
+/* ==================================================
+   LOGOUT
+   ================================================== */
+
+function logout(){
+
+  const confirmed =
+    confirm(
+      "আপনি কি Logout করতে চান?"
+    );
+
+
+  if(!confirmed)
+    return;
+
+
+  sessionStorage.removeItem(
+    SESSION_KEY
+  );
+
+  sessionStorage.removeItem(
+    OWNER_ID_KEY
+  );
+
+  sessionStorage.removeItem(
+    LOGIN_TIME_KEY
+  );
+
+
+  /*
+    Login page-এ ফেরত যাবে।
+  */
+
+  window.location.replace(
+    "shop-owner-login.html"
+  );
+
+}
+
+
+/* ==================================================
+   STORAGE CHANGE
+   ================================================== */
+
+window.addEventListener(
+  "storage",
+  function(event){
+
+    if(
+      event.key === PRODUCTS_KEY ||
+      event.key === ORDERS_KEY
+    ){
+
+      loadProducts();
+      loadOrders();
+
+      renderStats();
+      renderRecentOrders();
+      renderProducts();
+      renderOrders();
+
+    }
+
+  }
+);
+
+
+/* ==================================================
+   INITIALIZE
+   ================================================== */
+
+if(
+  checkOwnerSession()
+){
+
+  loadOwner();
+
+  loadProducts();
+
+  loadOrders();
+
+  renderOwnerInfo();
+
+  renderStats();
+
+  renderRecentOrders();
+
+  renderProducts();
+
+  renderOrders();
+
+}
+
 </script>
 
 </body>
