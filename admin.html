@@ -1,0 +1,2063 @@
+```html
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Shopping Mela — Verified Local Brands</title>
+
+    <meta
+        name="description"
+        content="Shopping Mela — Verified local brands, businesses, products and services."
+    >
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* =====================================================
+           1.20 VERIFIED PROFILE SYSTEM
+        ===================================================== */
+
+        .verified-name {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .verified-badge {
+            width: 19px;
+            height: 19px;
+            border-radius: 50%;
+            background: #1877f2;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 900;
+            box-shadow: 0 2px 5px rgba(24,119,242,.30);
+            flex-shrink: 0;
+        }
+
+        .verified-badge.large {
+            width: 24px;
+            height: 24px;
+            font-size: 15px;
+        }
+
+        .verified-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #1877f2;
+            font-size: 13px;
+            font-weight: 700;
+            margin-top: 5px;
+        }
+
+        /* =====================================================
+           VERIFIED PROFILE SECTION
+        ===================================================== */
+
+        .verified-section {
+            padding: 70px 0;
+            background: #f7f9fc;
+        }
+
+        .verified-profile-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 30px;
+        }
+
+        .verified-profile-card {
+            background: #fff;
+            border: 1px solid #e7eaf0;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,.06);
+            transition: .25s ease;
+        }
+
+        .verified-profile-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 35px rgba(0,0,0,.10);
+        }
+
+        .profile-cover {
+            height: 145px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .profile-cover::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                transparent 35%,
+                rgba(0,0,0,.35)
+            );
+        }
+
+        .verified-tag {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            z-index: 2;
+            background: rgba(255,255,255,.95);
+            color: #1877f2;
+            padding: 7px 11px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .profile-body {
+            padding: 0 20px 22px;
+            position: relative;
+        }
+
+        .profile-avatar {
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            background: #fff;
+            border: 4px solid #fff;
+            box-shadow: 0 5px 15px rgba(0,0,0,.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            position: relative;
+            margin-top: -38px;
+            z-index: 3;
+        }
+
+        .profile-title {
+            margin-top: 12px;
+            font-size: 19px;
+            font-weight: 800;
+            color: #17191c;
+        }
+
+        .profile-category {
+            margin-top: 5px;
+            color: #777;
+            font-size: 13px;
+        }
+
+        .profile-location {
+            margin-top: 9px;
+            color: #666;
+            font-size: 13px;
+        }
+
+        .profile-description {
+            margin-top: 13px;
+            color: #666;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #eee;
+            margin: 18px 0;
+            padding: 12px 0;
+        }
+
+        .profile-stat {
+            text-align: center;
+        }
+
+        .profile-stat strong {
+            display: block;
+            color: #17191c;
+            font-size: 15px;
+        }
+
+        .profile-stat span {
+            color: #888;
+            font-size: 11px;
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 9px;
+        }
+
+        .profile-btn {
+            flex: 1;
+            border: 0;
+            border-radius: 9px;
+            padding: 10px 12px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: .2s;
+        }
+
+        .profile-btn.primary {
+            background: #1877f2;
+            color: white;
+        }
+
+        .profile-btn.primary:hover {
+            background: #0d65d9;
+        }
+
+        .profile-btn.secondary {
+            background: #eef4ff;
+            color: #1877f2;
+        }
+
+        .profile-btn.secondary:hover {
+            background: #e1ecff;
+        }
+
+        /* =====================================================
+           VERIFICATION INFO
+        ===================================================== */
+
+        .verification-info {
+            margin-top: 40px;
+            background: white;
+            border: 1px solid #e5e8ed;
+            border-radius: 16px;
+            padding: 25px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .verification-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: #eaf3ff;
+            color: #1877f2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 25px;
+            flex-shrink: 0;
+        }
+
+        .verification-info h3 {
+            margin: 0 0 5px;
+            font-size: 17px;
+        }
+
+        .verification-info p {
+            margin: 0;
+            color: #777;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 900px) {
+            .verified-profile-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .verified-profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .verification-info {
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     TOP BAR
+====================================================== -->
+
+<div class="top-bar">
+    🛍️ <span>Shopping Mela</span> — আপনার এলাকার Local Brand ও Business এখন এক জায়গায়
+</div>
+
+
+<!-- =====================================================
+     HEADER
+====================================================== -->
+
+<header class="header">
+
+    <div class="container">
+
+        <div class="header-main">
+
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🛍️</div>
+                <span>Shopping Mela</span>
+            </a>
+
+            <div class="header-search">
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="পণ্য, ব্র্যান্ড বা দোকান খুঁজুন..."
+                    aria-label="Search"
+                >
+
+                <button
+                    type="button"
+                    id="searchBtn"
+                    aria-label="Search"
+                >
+                    🔍
+                </button>
+
+            </div>
+
+            <div class="header-actions">
+
+                <button
+                    class="header-action"
+                    type="button"
+                    onclick="showToast('আপনার Wishlist শীঘ্রই আসছে ❤️')"
+                >
+                    <span class="header-action-icon">♡</span>
+                    <span>Wishlist</span>
+                </button>
+
+                <button
+                    class="header-action"
+                    type="button"
+                    onclick="showToast('Shopping Cart শীঘ্রই আসছে 🛒')"
+                >
+                    <span class="header-action-icon">🛒</span>
+                    <span>Cart</span>
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <nav class="navigation">
+
+            <div class="navigation-inner">
+
+                <a href="index.html" class="active">
+                    Home
+                </a>
+
+                <a href="#categories">
+                    Categories
+                </a>
+
+                <a href="#brands">
+                    Local Brands
+                </a>
+
+                <a href="#verified">
+                    Verified
+                </a>
+
+                <a href="#products">
+                    Products
+                </a>
+
+                <a href="#offers">
+                    Offers
+                </a>
+
+                <a href="blog.html">
+                    Blog
+                </a>
+
+                <a href="#advertise">
+                    Advertise With Us
+                </a>
+
+            </div>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<main>
+
+
+<!-- =====================================================
+     HERO
+====================================================== -->
+
+<section class="hero">
+
+    <div class="container">
+
+        <div class="hero-slider" id="heroSlider">
+
+            <div
+                class="hero-slide active"
+                style="
+                    background-image:
+                    url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=85');
+                "
+            >
+
+                <div class="hero-content">
+
+                    <div class="ad-label">
+                        📢 FEATURED AD
+                    </div>
+
+                    <div class="hero-brand">
+                        LOCAL BRAND SPOTLIGHT
+                    </div>
+
+                    <h1>
+                        আপনার এলাকার
+                        সেরা Brand এক জায়গায়
+                    </h1>
+
+                    <p>
+                        Shopping Mela-তে স্থানীয় ব্যবসা ও
+                        ব্র্যান্ডকে খুঁজে নিন সহজেই।
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <button
+                            class="primary-btn"
+                            onclick="scrollToSection('verified')"
+                        >
+                            Verified Brands দেখুন →
+                        </button>
+
+                        <button
+                            class="light-btn"
+                            onclick="scrollToSection('advertise')"
+                        >
+                            আপনার বিজ্ঞাপন দিন
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="hero-slide"
+                style="
+                    background-image:
+                    url('https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1600&q=85');
+                "
+            >
+
+                <div class="hero-content">
+
+                    <div class="ad-label">
+                        🔥 SPECIAL OFFER
+                    </div>
+
+                    <div class="hero-brand">
+                        SHOPPING MELA DEAL
+                    </div>
+
+                    <h1>
+                        Local Business,
+                        Local Shopping
+                    </h1>
+
+                    <p>
+                        আপনার কাছের দোকান, service ও
+                        local products এক প্ল্যাটফর্মে।
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <button
+                            class="primary-btn"
+                            onclick="scrollToSection('products')"
+                        >
+                            Products দেখুন →
+                        </button>
+
+                        <button
+                            class="light-btn"
+                            onclick="showToast('Offer details শীঘ্রই আসছে!')"
+                        >
+                            Offer দেখুন
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="hero-slide"
+                style="
+                    background-image:
+                    url('https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1600&q=85');
+                "
+            >
+
+                <div class="hero-content">
+
+                    <div class="ad-label">
+                        📣 BUSINESS AD
+                    </div>
+
+                    <div class="hero-brand">
+                        GROW YOUR BUSINESS
+                    </div>
+
+                    <h1>
+                        আপনার Brand-এর
+                        Advertisement দিন
+                    </h1>
+
+                    <p>
+                        Local customers-এর সামনে আপনার
+                        business ও products তুলে ধরুন।
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <button
+                            class="primary-btn"
+                            onclick="scrollToSection('advertise')"
+                        >
+                            Advertise করুন →
+                        </button>
+
+                        <button
+                            class="light-btn"
+                            onclick="showToast('Advertising plans শীঘ্রই আসছে!')"
+                        >
+                            Plans দেখুন
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="slider-arrow slider-prev"
+                id="prevSlide"
+                aria-label="Previous slide"
+            >
+                ‹
+            </button>
+
+            <button
+                class="slider-arrow slider-next"
+                id="nextSlide"
+                aria-label="Next slide"
+            >
+                ›
+            </button>
+
+            <div
+                class="slider-dots"
+                id="sliderDots"
+            ></div>
+
+        </div>
+
+
+        <div class="trust-strip">
+
+            <div class="trust-item">
+                <div class="trust-icon">🏪</div>
+                <div>
+                    <strong>Local Brands</strong>
+                    <small>আপনার এলাকার ব্যবসা</small>
+                </div>
+            </div>
+
+            <div class="trust-item">
+                <div class="trust-icon">🔵</div>
+                <div>
+                    <strong>Verified Brands</strong>
+                    <small>Verified Business</small>
+                </div>
+            </div>
+
+            <div class="trust-item">
+                <div class="trust-icon">🛒</div>
+                <div>
+                    <strong>Easy Shopping</strong>
+                    <small>সহজে পণ্য খুঁজুন</small>
+                </div>
+            </div>
+
+            <div class="trust-item">
+                <div class="trust-icon">✍️</div>
+                <div>
+                    <strong>Community Blog</strong>
+                    <small>নিজের Post প্রকাশ করুন</small>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CATEGORIES
+====================================================== -->
+
+<section class="section" id="categories">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div>
+                <h2>জনপ্রিয় Categories</h2>
+
+                <p>
+                    আপনার প্রয়োজনের category বেছে নিন
+                </p>
+            </div>
+
+            <a
+                href="#categories"
+                class="view-all"
+            >
+                সব দেখুন →
+            </a>
+
+        </div>
+
+
+        <div class="category-grid">
+
+            <div
+                class="category-card"
+                onclick="filterCategory('Fashion')"
+            >
+                <div class="category-icon">👗</div>
+                <h3>Fashion</h3>
+            </div>
+
+            <div
+                class="category-card"
+                onclick="filterCategory('Food')"
+            >
+                <div class="category-icon">🍔</div>
+                <h3>Food</h3>
+            </div>
+
+            <div
+                class="category-card"
+                onclick="filterCategory('Electronics')"
+            >
+                <div class="category-icon">📱</div>
+                <h3>Electronics</h3>
+            </div>
+
+            <div
+                class="category-card"
+                onclick="filterCategory('Beauty')"
+            >
+                <div class="category-icon">💄</div>
+                <h3>Beauty</h3>
+            </div>
+
+            <div
+                class="category-card"
+                onclick="filterCategory('Grocery')"
+            >
+                <div class="category-icon">🛒</div>
+                <h3>Grocery</h3>
+            </div>
+
+            <div
+                class="category-card"
+                onclick="filterCategory('Home')"
+            >
+                <div class="category-icon">🏠</div>
+                <h3>Home</h3>
+            </div>
+
+            <div
+                class="category-card"
+                onclick="filterCategory('Services')"
+            >
+                <div class="category-icon">🛠️</div>
+                <h3>Services</h3>
+            </div>
+
+            <div
+                class="category-card"
+                onclick="filterCategory('Others')"
+            >
+                <div class="category-icon">✨</div>
+                <h3>Others</h3>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     VERIFIED LOCAL BRANDS
+====================================================== -->
+
+<section
+    class="verified-section"
+    id="verified"
+>
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div>
+
+                <h2>
+                    🔵 Verified Local Brands
+                </h2>
+
+                <p>
+                    Shopping Mela-তে যাচাই করা
+                    Local Business ও Brand
+                </p>
+
+            </div>
+
+            <a
+                href="brands.html"
+                class="view-all"
+            >
+                সব Verified Brands →
+            </a>
+
+        </div>
+
+
+        <div class="verified-profile-grid">
+
+
+            <!-- PROFILE 1 -->
+
+            <article class="verified-profile-card">
+
+                <div
+                    class="profile-cover"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=900&q=80');
+                    "
+                >
+
+                    <span class="verified-tag">
+                        🔵 Verified
+                    </span>
+
+                </div>
+
+
+                <div class="profile-body">
+
+                    <div class="profile-avatar">
+                        👗
+                    </div>
+
+
+                    <h3 class="profile-title">
+
+                        <span class="verified-name">
+                            Anjona Ladies Tailors
+
+                            <span
+                                class="verified-badge"
+                                title="Shopping Mela Verified"
+                            >
+                                ✓
+                            </span>
+                        </span>
+
+                    </h3>
+
+
+                    <div class="verified-label">
+                        🔵 Shopping Mela Verified
+                    </div>
+
+
+                    <div class="profile-category">
+                        Fashion & Tailoring
+                    </div>
+
+
+                    <div class="profile-location">
+                        📍 Local Business
+                    </div>
+
+
+                    <p class="profile-description">
+                        Ladies three-piece, tailoring,
+                        custom dress ও fashion services।
+                    </p>
+
+
+                    <div class="profile-stats">
+
+                        <div class="profile-stat">
+                            <strong>32</strong>
+                            <span>Products</span>
+                        </div>
+
+                        <div class="profile-stat">
+                            <strong>4.9★</strong>
+                            <span>Rating</span>
+                        </div>
+
+                        <div class="profile-stat">
+                            <strong>1.2K</strong>
+                            <span>Followers</span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="profile-actions">
+
+                        <button
+                            class="profile-btn primary"
+                            onclick="viewProfile('Anjona Ladies Tailors')"
+                        >
+                            Profile দেখুন
+                        </button>
+
+                        <button
+                            class="profile-btn secondary"
+                            onclick="followBrand('Anjona Ladies Tailors', this)"
+                        >
+                            Follow
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROFILE 2 -->
+
+            <article class="verified-profile-card">
+
+                <div
+                    class="profile-cover"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=900&q=80');
+                    "
+                >
+
+                    <span class="verified-tag">
+                        🔵 Verified
+                    </span>
+
+                </div>
+
+
+                <div class="profile-body">
+
+                    <div class="profile-avatar">
+                        🌿
+                    </div>
+
+
+                    <h3 class="profile-title">
+
+                        <span class="verified-name">
+                            Local Attar Shop
+
+                            <span
+                                class="verified-badge"
+                                title="Shopping Mela Verified"
+                            >
+                                ✓
+                            </span>
+                        </span>
+
+                    </h3>
+
+
+                    <div class="verified-label">
+                        🔵 Shopping Mela Verified
+                    </div>
+
+
+                    <div class="profile-category">
+                        Perfume & Attar
+                    </div>
+
+
+                    <div class="profile-location">
+                        📍 Local Business
+                    </div>
+
+
+                    <p class="profile-description">
+                        Premium attar, perfume ও
+                        fragrance collection।
+                    </p>
+
+
+                    <div class="profile-stats">
+
+                        <div class="profile-stat">
+                            <strong>48</strong>
+                            <span>Products</span>
+                        </div>
+
+                        <div class="profile-stat">
+                            <strong>4.8★</strong>
+                            <span>Rating</span>
+                        </div>
+
+                        <div class="profile-stat">
+                            <strong>860</strong>
+                            <span>Followers</span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="profile-actions">
+
+                        <button
+                            class="profile-btn primary"
+                            onclick="viewProfile('Local Attar Shop')"
+                        >
+                            Profile দেখুন
+                        </button>
+
+                        <button
+                            class="profile-btn secondary"
+                            onclick="followBrand('Local Attar Shop', this)"
+                        >
+                            Follow
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- PROFILE 3 -->
+
+            <article class="verified-profile-card">
+
+                <div
+                    class="profile-cover"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80');
+                    "
+                >
+
+                    <span class="verified-tag">
+                        🔵 Verified
+                    </span>
+
+                </div>
+
+
+                <div class="profile-body">
+
+                    <div class="profile-avatar">
+                        🍽️
+                    </div>
+
+
+                    <h3 class="profile-title">
+
+                        <span class="verified-name">
+                            Local Food House
+
+                            <span
+                                class="verified-badge"
+                                title="Shopping Mela Verified"
+                            >
+                                ✓
+                            </span>
+                        </span>
+
+                    </h3>
+
+
+                    <div class="verified-label">
+                        🔵 Shopping Mela Verified
+                    </div>
+
+
+                    <div class="profile-category">
+                        Restaurant & Food
+                    </div>
+
+
+                    <div class="profile-location">
+                        📍 Local Business
+                    </div>
+
+
+                    <p class="profile-description">
+                        Homemade food, snacks এবং
+                        local food delivery।
+                    </p>
+
+
+                    <div class="profile-stats">
+
+                        <div class="profile-stat">
+                            <strong>25</strong>
+                            <span>Products</span>
+                        </div>
+
+                        <div class="profile-stat">
+                            <strong>4.9★</strong>
+                            <span>Rating</span>
+                        </div>
+
+                        <div class="profile-stat">
+                            <strong>1.5K</strong>
+                            <span>Followers</span>
+                        </div>
+
+                    </div>
+
+
+                    <div class="profile-actions">
+
+                        <button
+                            class="profile-btn primary"
+                            onclick="viewProfile('Local Food House')"
+                        >
+                            Profile দেখুন
+                        </button>
+
+                        <button
+                            class="profile-btn secondary"
+                            onclick="followBrand('Local Food House', this)"
+                        >
+                            Follow
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+
+        <!-- VERIFICATION EXPLANATION -->
+
+        <div class="verification-info">
+
+            <div class="verification-icon">
+                🔵
+            </div>
+
+            <div>
+
+                <h3>
+                    🔵 Verified Badge কী?
+                </h3>
+
+                <p>
+                    এই badge দেখায় যে Business/Profile-টি
+                    Shopping Mela-এর verification process-এর
+                    মাধ্যমে যাচাই করা হয়েছে। Verified badge
+                    শুধুমাত্র অনুমোদিত ও যাচাই করা profile-এ
+                    প্রদর্শিত হবে।
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     PRODUCTS
+====================================================== -->
+
+<section
+    class="section"
+    id="products"
+>
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div>
+
+                <h2>
+                    Trending Products
+                </h2>
+
+                <p>
+                    Local sellers-এর জনপ্রিয় products
+                </p>
+
+            </div>
+
+            <a
+                href="products.html"
+                class="view-all"
+            >
+                সব Products →
+            </a>
+
+        </div>
+
+
+        <div
+            class="product-grid"
+            id="productGrid"
+        >
+
+            <article
+                class="product-card"
+                data-product="Ladies Three Piece"
+                data-category="Fashion"
+            >
+
+                <div
+                    class="product-image"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=700&q=80');
+                    "
+                >
+
+                    <span class="discount">
+                        -20%
+                    </span>
+
+                    <button
+                        class="product-heart"
+                        onclick="showToast('Wishlist-এ যোগ করা হয়েছে ❤️')"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <h3>
+                        Ladies Three Piece
+                    </h3>
+
+                    <div class="product-brand">
+                        Anjona Ladies Tailors
+                        <span class="verified-badge">
+                            ✓
+                        </span>
+                    </div>
+
+                    <div class="product-price">
+
+                        <span class="current-price">
+                            ৳1,250
+                        </span>
+
+                        <span class="old-price">
+                            ৳1,550
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article
+                class="product-card"
+                data-product="Premium Attar"
+                data-category="Beauty"
+            >
+
+                <div
+                    class="product-image"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=700&q=80');
+                    "
+                >
+
+                    <span class="discount">
+                        -15%
+                    </span>
+
+                    <button
+                        class="product-heart"
+                        onclick="showToast('Wishlist-এ যোগ করা হয়েছে ❤️')"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <h3>
+                        Premium Attar
+                    </h3>
+
+                    <div class="product-brand">
+                        Local Attar Shop
+                        <span class="verified-badge">
+                            ✓
+                        </span>
+                    </div>
+
+                    <div class="product-price">
+
+                        <span class="current-price">
+                            ৳650
+                        </span>
+
+                        <span class="old-price">
+                            ৳750
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article
+                class="product-card"
+                data-product="Handmade Bag"
+                data-category="Fashion"
+            >
+
+                <div
+                    class="product-image"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=700&q=80');
+                    "
+                >
+
+                    <span class="discount">
+                        NEW
+                    </span>
+
+                    <button
+                        class="product-heart"
+                        onclick="showToast('Wishlist-এ যোগ করা হয়েছে ❤️')"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <h3>
+                        Handmade Bag
+                    </h3>
+
+                    <div class="product-brand">
+                        Local Handmade Brand
+                    </div>
+
+                    <div class="product-price">
+
+                        <span class="current-price">
+                            ৳890
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <article
+                class="product-card"
+                data-product="Homemade Food"
+                data-category="Food"
+            >
+
+                <div
+                    class="product-image"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=700&q=80');
+                    "
+                >
+
+                    <span class="discount">
+                        HOT
+                    </span>
+
+                    <button
+                        class="product-heart"
+                        onclick="showToast('Wishlist-এ যোগ করা হয়েছে ❤️')"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <h3>
+                        Homemade Food
+                    </h3>
+
+                    <div class="product-brand">
+                        Local Food House
+                        <span class="verified-badge">
+                            ✓
+                        </span>
+                    </div>
+
+                    <div class="product-price">
+
+                        <span class="current-price">
+                            ৳350
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     OFFERS
+====================================================== -->
+
+<section
+    class="container"
+    id="offers"
+>
+
+    <div class="offer-banner">
+
+        <div class="offer-content">
+
+            <small>
+                🔥 SHOPPING MELA SPECIAL
+            </small>
+
+            <h2>
+                Local Business-এর
+                Special Offers
+            </h2>
+
+            <p>
+                আপনার কাছের দোকান ও brand-এর
+                নতুন offer এবং promotion খুঁজে নিন।
+            </p>
+
+            <button
+                class="light-btn"
+                onclick="showToast('All offers শীঘ্রই আসছে!')"
+            >
+                সব Offers দেখুন →
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     ADVERTISE
+====================================================== -->
+
+<section
+    class="container"
+    id="advertise"
+>
+
+    <div class="advertise-section">
+
+        <div class="advertise-text">
+
+            <small>
+                📢 FOR LOCAL BUSINESS
+            </small>
+
+            <h2>
+                আপনার Business-এর
+                Advertisement দিন
+            </h2>
+
+            <p>
+                Shopping Mela-তে আপনার brand,
+                shop, service বা product-এর
+                banner advertisement দেখান।
+            </p>
+
+        </div>
+
+
+        <button
+            class="advertise-button"
+            onclick="showToast('Advertising form শীঘ্রই আসছে!')"
+        >
+            Advertise করুন →
+        </button>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-main">
+
+            <div class="footer-brand">
+
+                <a
+                    href="index.html"
+                    class="logo"
+                >
+
+                    <div class="logo-icon">
+                        🛍️
+                    </div>
+
+                    <span>
+                        Shopping Mela
+                    </span>
+
+                </a>
+
+                <p>
+                    Shopping Mela হলো local brands,
+                    businesses, products এবং
+                    community content-এর একটি
+                    modern online platform।
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Shopping
+                </h3>
+
+                <a href="#categories">
+                    Categories
+                </a>
+
+                <a href="#brands">
+                    Local Brands
+                </a>
+
+                <a href="#verified">
+                    Verified Brands
+                </a>
+
+                <a href="#products">
+                    Products
+                </a>
+
+                <a href="#offers">
+                    Offers
+                </a>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Community
+                </h3>
+
+                <a href="blog.html">
+                    Blog
+                </a>
+
+                <a href="blog.html">
+                    Write a Post
+                </a>
+
+                <a href="#advertise">
+                    Advertise
+                </a>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Support
+                </h3>
+
+                <a href="#">
+                    About Us
+                </a>
+
+                <a href="#">
+                    Contact
+                </a>
+
+                <a href="#">
+                    Privacy Policy
+                </a>
+
+                <a href="#">
+                    Terms
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            © 2026 Shopping Mela.
+            All Rights Reserved.
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =====================================================
+     TOAST
+====================================================== -->
+
+<div
+    class="toast"
+    id="toast"
+>
+    Done!
+</div>
+
+
+<!-- =====================================================
+     1.20 JAVASCRIPT
+====================================================== -->
+
+<script>
+
+    /* =====================================================
+       TOAST
+    ===================================================== */
+
+    function showToast(message) {
+
+        const toast =
+            document.getElementById("toast");
+
+        if (!toast) return;
+
+        toast.textContent = message;
+
+        toast.classList.add("show");
+
+        setTimeout(() => {
+
+            toast.classList.remove("show");
+
+        }, 2500);
+
+    }
+
+
+    /* =====================================================
+       SCROLL
+    ===================================================== */
+
+    function scrollToSection(id) {
+
+        const section =
+            document.getElementById(id);
+
+        if (section) {
+
+            section.scrollIntoView({
+                behavior: "smooth"
+            });
+
+        }
+
+    }
+
+
+    /* =====================================================
+       CATEGORY FILTER
+    ===================================================== */
+
+    function filterCategory(category) {
+
+        const products =
+            document.querySelectorAll(
+                ".product-card"
+            );
+
+        let found = false;
+
+        products.forEach(product => {
+
+            const productCategory =
+                product.dataset.category;
+
+            if (
+                productCategory === category ||
+                category === "All"
+            ) {
+
+                product.style.display = "";
+
+                found = true;
+
+            } else {
+
+                product.style.display = "none";
+
+            }
+
+        });
+
+
+        scrollToSection("products");
+
+
+        if (found) {
+
+            showToast(
+                category +
+                " category selected"
+            );
+
+        } else {
+
+            showToast(
+                "এই category-তে এখনো product নেই"
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       VERIFIED PROFILE
+    ===================================================== */
+
+    function viewProfile(brandName) {
+
+        showToast(
+            brandName +
+            " verified profile শীঘ্রই আসছে 🔵"
+        );
+
+    }
+
+
+    /* =====================================================
+       FOLLOW SYSTEM
+    ===================================================== */
+
+    function followBrand(brandName, button) {
+
+        if (!button) return;
+
+        const isFollowing =
+            button.dataset.following === "true";
+
+
+        if (isFollowing) {
+
+            button.textContent = "Follow";
+
+            button.dataset.following = "false";
+
+            showToast(
+                brandName +
+                " unfollow করা হয়েছে"
+            );
+
+        } else {
+
+            button.textContent = "Following ✓";
+
+            button.dataset.following = "true";
+
+            showToast(
+                brandName +
+                " Follow করা হয়েছে 💙"
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       HERO SLIDER
+    ===================================================== */
+
+    const slides =
+        document.querySelectorAll(
+            ".hero-slide"
+        );
+
+    const dotsContainer =
+        document.getElementById(
+            "sliderDots"
+        );
+
+    let currentSlide = 0;
+
+
+    slides.forEach((slide, index) => {
+
+        const dot =
+            document.createElement("span");
+
+        dot.className =
+            "slider-dot" +
+            (index === 0
+                ? " active"
+                : "");
+
+        dot.addEventListener(
+            "click",
+            () => goToSlide(index)
+        );
+
+        dotsContainer.appendChild(dot);
+
+    });
+
+
+    const dots =
+        document.querySelectorAll(
+            ".slider-dot"
+        );
+
+
+    function goToSlide(index) {
+
+        if (!slides.length) return;
+
+        slides[currentSlide]
+            .classList.remove("active");
+
+        if (dots[currentSlide]) {
+
+            dots[currentSlide]
+                .classList.remove("active");
+
+        }
+
+
+        currentSlide = index;
+
+
+        slides[currentSlide]
+            .classList.add("active");
+
+        if (dots[currentSlide]) {
+
+            dots[currentSlide]
+                .classList.add("active");
+
+        }
+
+    }
+
+
+    function nextSlide() {
+
+        let next =
+            currentSlide + 1;
+
+        if (
+            next >=
+            slides.length
+        ) {
+
+            next = 0;
+
+        }
+
+        goToSlide(next);
+
+    }
+
+
+    function previousSlide() {
+
+        let previous =
+            currentSlide - 1;
+
+        if (previous < 0) {
+
+            previous =
+                slides.length - 1;
+
+        }
+
+        goToSlide(previous);
+
+    }
+
+
+    const nextButton =
+        document.getElementById(
+            "nextSlide"
+        );
+
+    const previousButton =
+        document.getElementById(
+            "prevSlide"
+        );
+
+
+    if (nextButton) {
+
+        nextButton.addEventListener(
+            "click",
+            nextSlide
+        );
+
+    }
+
+
+    if (previousButton) {
+
+        previousButton.addEventListener(
+            "click",
+            previousSlide
+        );
+
+    }
+
+
+    setInterval(
+        nextSlide,
+        5000
+    );
+
+
+    /* =====================================================
+       SEARCH
+    ===================================================== */
+
+    const searchInput =
+        document.getElementById(
+            "searchInput"
+        );
+
+    const searchBtn =
+        document.getElementById(
+            "searchBtn"
+        );
+
+
+    function performSearch() {
+
+        const query =
+            searchInput.value
+                .trim()
+                .toLowerCase();
+
+
+        if (!query) {
+
+            showToast(
+                "কিছু search করুন 🔍"
+            );
+
+            return;
+
+        }
+
+
+        const products =
+            document.querySelectorAll(
+                ".product-card"
+            );
+
+
+        let found = false;
+
+
+        products.forEach(product => {
+
+            const name =
+                (
+                    product.dataset.product ||
+                    ""
+                ).toLowerCase();
+
+
+            const category =
+                (
+                    product.dataset.category ||
+                    ""
+                ).toLowerCase();
+
+
+            const brand =
+                (
+                    product
+                        .querySelector(".product-brand")
+                        ?.textContent ||
+                    ""
+                ).toLowerCase();
+
+
+            if (
+                name.includes(query) ||
+                category.includes(query) ||
+                brand.includes(query)
+            ) {
+
+                product.style.display = "";
+
+                found = true;
+
+            } else {
+
+                product.style.display = "none";
+
+            }
+
+        });
+
+
+        scrollToSection("products");
+
+
+        if (found) {
+
+            showToast(
+                "Search result পাওয়া গেছে 🔎"
+            );
+
+        } else {
+
+            showToast(
+                "কোনো product পাওয়া যায়নি"
+            );
+
+        }
+
+    }
+
+
+    if (searchBtn) {
+
+        searchBtn.addEventListener(
+            "click",
+            performSearch
+        );
+
+    }
+
+
+    if (searchInput) {
+
+        searchInput.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key === "Enter"
+                ) {
+
+                    performSearch();
+
+                }
+
+            }
+        );
+
+    }
+
+</script>
+
+</body>
+</html>
+```
