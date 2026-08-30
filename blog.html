@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="bn">
 
@@ -12,12 +11,12 @@
     >
 
     <title>
-        Blog — Shopping Mela
+        Products — Shopping Mela
     </title>
 
     <meta
         name="description"
-        content="Shopping Mela Community Blog — সবাই সহজে নিজের post প্রকাশ করতে পারবেন।"
+        content="Shopping Mela — Local sellers-এর products, deals এবং verified brands."
     >
 
     <link
@@ -43,7 +42,7 @@
         Shopping Mela
     </span>
 
-    — Local Brands & Community Blog
+    — Local Products & Brands এক জায়গায়
 
 </div>
 
@@ -85,14 +84,14 @@
 
                 <input
                     type="search"
-                    id="blogSearch"
-                    placeholder="Blog post খুঁজুন..."
-                    aria-label="Search blog"
+                    id="productSearch"
+                    placeholder="Product, brand বা category খুঁজুন..."
+                    aria-label="Search products"
                 >
 
                 <button
                     type="button"
-                    onclick="searchBlog()"
+                    onclick="searchProducts()"
                     aria-label="Search"
                 >
                     🔍
@@ -102,21 +101,22 @@
 
 
 
-            <!-- ACTIONS -->
+            <!-- HEADER ACTIONS -->
 
             <div class="header-actions">
 
                 <button
                     class="header-action"
-                    onclick="scrollToWrite()"
+                    type="button"
+                    onclick="showWishlist()"
                 >
 
                     <span class="header-action-icon">
-                        ✍️
+                        ♡
                     </span>
 
                     <span>
-                        Write
+                        Wishlist
                     </span>
 
                 </button>
@@ -124,15 +124,23 @@
 
                 <button
                     class="header-action"
-                    onclick="showToast('Profile system শীঘ্রই আসছে!')"
+                    type="button"
+                    onclick="showCart()"
                 >
 
                     <span class="header-action-icon">
-                        👤
+                        🛒
                     </span>
 
                     <span>
-                        Profile
+                        Cart
+                    </span>
+
+                    <span
+                        class="cart-count"
+                        id="cartCount"
+                    >
+                        0
                     </span>
 
                 </button>
@@ -161,18 +169,18 @@
                     Local Brands
                 </a>
 
-                <a href="products.html">
+                <a
+                    href="products.html"
+                    class="active"
+                >
                     Products
                 </a>
 
-                <a href="index.html#offers">
+                <a href="offers.html">
                     Offers
                 </a>
 
-                <a
-                    href="blog.html"
-                    class="active"
-                >
+                <a href="blog.html">
                     Blog
                 </a>
 
@@ -194,45 +202,54 @@
 
 
 <!-- =====================================================
-     BLOG HERO
+     PRODUCTS HERO
 ====================================================== -->
 
-<section class="blog-page-hero">
+<section class="products-page-hero">
 
     <div class="container">
 
-        <div class="blog-hero-content">
+        <div class="products-hero-content">
 
             <span class="page-label">
-                ✍️ SHOPPING MELA COMMUNITY
+                🛒 SHOPPING MELA PRODUCTS
             </span>
 
             <h1>
-                Shopping Mela Blog
+                Local Products
+                সহজেই খুঁজে নিন
             </h1>
 
             <p>
-                আপনার গল্প, অভিজ্ঞতা, business tips,
-                shopping tips বা local information
-                সবার সাথে share করুন।
+                আপনার এলাকার sellers ও local brands-এর
+                products এক জায়গায় দেখুন,
+                compare করুন এবং পছন্দের item save করুন।
             </p>
 
 
-            <div class="blog-hero-buttons">
+            <div class="products-hero-actions">
 
                 <button
                     class="primary-btn"
-                    onclick="scrollToWrite()"
+                    onclick="
+                        document
+                        .getElementById('productsArea')
+                        .scrollIntoView({
+                            behavior:'smooth'
+                        })
+                    "
                 >
-                    ✍️ Write a Post
+                    Products দেখুন →
                 </button>
 
 
                 <button
                     class="light-btn"
-                    onclick="scrollToPosts()"
+                    onclick="
+                        window.location.href='offers.html'
+                    "
                 >
-                    Blog পড়ুন ↓
+                    🔥 Offers দেখুন
                 </button>
 
             </div>
@@ -246,521 +263,267 @@
 
 
 <!-- =====================================================
-     WRITE POST SECTION
-====================================================== -->
-
-<section
-    class="section write-section"
-    id="writePost"
->
-
-    <div class="container">
-
-        <div class="section-heading">
-
-            <div>
-
-                <h2>
-                    ✍️ নিজের Post লিখুন
-                </h2>
-
-                <p>
-                    খুব সহজে আপনার লেখা Shopping Mela
-                    Community-তে প্রকাশ করুন।
-                </p>
-
-            </div>
-
-        </div>
-
-
-
-        <div class="write-post-card">
-
-
-            <!-- AUTHOR -->
-
-            <div class="form-row">
-
-                <div class="form-group">
-
-                    <label for="authorName">
-                        আপনার নাম *
-                    </label>
-
-                    <input
-                        type="text"
-                        id="authorName"
-                        placeholder="যেমন: Sakhi Jahan"
-                        maxlength="50"
-                    >
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label for="authorRole">
-                        পরিচয়
-                    </label>
-
-                    <select id="authorRole">
-
-                        <option value="Community Member">
-                            Community Member
-                        </option>
-
-                        <option value="Local Business Owner">
-                            Local Business Owner
-                        </option>
-
-                        <option value="Seller">
-                            Seller
-                        </option>
-
-                        <option value="Student">
-                            Student
-                        </option>
-
-                        <option value="Writer">
-                            Writer
-                        </option>
-
-                    </select>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- TITLE -->
-
-            <div class="form-group">
-
-                <label for="postTitle">
-                    Post Title *
-                </label>
-
-                <input
-                    type="text"
-                    id="postTitle"
-                    placeholder="আপনার Post-এর title লিখুন..."
-                    maxlength="120"
-                >
-
-                <small
-                    class="character-count"
-                    id="titleCount"
-                >
-                    0 / 120
-                </small>
-
-            </div>
-
-
-
-            <!-- CATEGORY -->
-
-            <div class="form-group">
-
-                <label for="postCategory">
-                    Category *
-                </label>
-
-                <select id="postCategory">
-
-                    <option value="">
-                        Category নির্বাচন করুন
-                    </option>
-
-                    <option value="Local Business">
-                        🏪 Local Business
-                    </option>
-
-                    <option value="Shopping Tips">
-                        🛒 Shopping Tips
-                    </option>
-
-                    <option value="Fashion">
-                        👗 Fashion
-                    </option>
-
-                    <option value="Food">
-                        🍔 Food
-                    </option>
-
-                    <option value="Technology">
-                        📱 Technology
-                    </option>
-
-                    <option value="Lifestyle">
-                        ✨ Lifestyle
-                    </option>
-
-                    <option value="Community">
-                        🤝 Community
-                    </option>
-
-                    <option value="Others">
-                        📝 Others
-                    </option>
-
-                </select>
-
-            </div>
-
-
-
-            <!-- IMAGE URL -->
-
-            <div class="form-group">
-
-                <label for="postImage">
-                    Image URL
-                </label>
-
-                <input
-                    type="url"
-                    id="postImage"
-                    placeholder="https://example.com/image.jpg"
-                >
-
-                <small>
-                    চাইলে আপনার post-এর জন্য একটি
-                    online image ব্যবহার করতে পারেন।
-                </small>
-
-            </div>
-
-
-
-            <!-- CONTENT -->
-
-            <div class="form-group">
-
-                <label for="postContent">
-                    আপনার লেখা *
-                </label>
-
-                <textarea
-                    id="postContent"
-                    rows="9"
-                    maxlength="3000"
-                    placeholder="এখানে আপনার post লিখুন..."
-                ></textarea>
-
-                <small
-                    class="character-count"
-                    id="contentCount"
-                >
-                    0 / 3000
-                </small>
-
-            </div>
-
-
-
-            <!-- VERIFIED OPTION -->
-
-            <div class="verified-info">
-
-                <div class="verified-icon">
-                    ✓
-                </div>
-
-                <div>
-
-                    <strong>
-                        🔵 Verified Profile
-                    </strong>
-
-                    <p>
-                        Verified badge শুধুমাত্র Shopping Mela
-                        কর্তৃপক্ষ অনুমোদিত profile-এ দেওয়া হবে।
-                    </p>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- ACTIONS -->
-
-            <div class="write-actions">
-
-                <button
-                    type="button"
-                    class="secondary-btn"
-                    onclick="previewPost()"
-                >
-                    👁️ Preview
-                </button>
-
-
-                <button
-                    type="button"
-                    class="primary-btn"
-                    onclick="publishPost()"
-                >
-                    🚀 Publish Post
-                </button>
-
-            </div>
-
-
-            <p class="publish-note">
-                আপনার post publish করার পর এই browser-এ
-                সংরক্ষিত থাকবে।
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     PREVIEW MODAL
-====================================================== -->
-
-<div
-    class="modal"
-    id="previewModal"
->
-
-    <div class="modal-overlay"
-         onclick="closePreview()">
-    </div>
-
-
-    <div class="modal-box">
-
-        <button
-            class="modal-close"
-            onclick="closePreview()"
-            aria-label="Close"
-        >
-            ×
-        </button>
-
-
-        <div id="previewContent">
-        </div>
-
-
-        <div class="modal-actions">
-
-            <button
-                class="secondary-btn"
-                onclick="closePreview()"
-            >
-                Edit
-            </button>
-
-
-            <button
-                class="primary-btn"
-                onclick="publishFromPreview()"
-            >
-                🚀 Publish
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-
-<!-- =====================================================
-     BLOG POSTS
+     PRODUCTS AREA
 ====================================================== -->
 
 <section
     class="section"
-    id="blogPosts"
+    id="productsArea"
 >
 
     <div class="container">
 
+
+        <!-- SECTION HEADING -->
 
         <div class="section-heading">
 
             <div>
 
                 <h2>
-                    Community Posts
+                    Trending Products
                 </h2>
 
-                <p id="postCount">
-                    Latest posts from Shopping Mela community
+                <p id="productResultText">
+                    সব products দেখানো হচ্ছে
                 </p>
 
             </div>
 
 
-            <button
-                class="view-all"
-                onclick="resetBlog()"
-            >
-                সব Posts →
-            </button>
+            <div class="offer-count-badge">
+                ✓ Local Sellers
+            </div>
 
         </div>
 
 
 
-        <!-- CATEGORY FILTER -->
+        <!-- =================================================
+             FILTERS
+        ================================================== -->
 
-        <div class="blog-filters">
+        <div class="product-filters">
+
 
             <button
-                class="blog-filter active"
-                onclick="filterBlog('all', this)"
+                class="product-filter active"
+                onclick="
+                    filterProducts('all', this)
+                "
             >
                 All
             </button>
 
 
             <button
-                class="blog-filter"
-                onclick="filterBlog('Local Business', this)"
-            >
-                🏪 Business
-            </button>
-
-
-            <button
-                class="blog-filter"
-                onclick="filterBlog('Shopping Tips', this)"
-            >
-                🛒 Shopping
-            </button>
-
-
-            <button
-                class="blog-filter"
-                onclick="filterBlog('Fashion', this)"
+                class="product-filter"
+                onclick="
+                    filterProducts('Fashion', this)
+                "
             >
                 👗 Fashion
             </button>
 
 
             <button
-                class="blog-filter"
-                onclick="filterBlog('Food', this)"
+                class="product-filter"
+                onclick="
+                    filterProducts('Beauty', this)
+                "
+            >
+                💄 Beauty
+            </button>
+
+
+            <button
+                class="product-filter"
+                onclick="
+                    filterProducts('Food', this)
+                "
             >
                 🍔 Food
             </button>
 
 
             <button
-                class="blog-filter"
-                onclick="filterBlog('Technology', this)"
+                class="product-filter"
+                onclick="
+                    filterProducts('Electronics', this)
+                "
             >
-                📱 Technology
+                📱 Electronics
             </button>
 
 
             <button
-                class="blog-filter"
-                onclick="filterBlog('Community', this)"
+                class="product-filter"
+                onclick="
+                    filterProducts('Home', this)
+                "
             >
-                🤝 Community
+                🏠 Home
             </button>
 
         </div>
 
 
 
-        <!-- POSTS -->
+        <!-- =================================================
+             SORT
+        ================================================== -->
+
+        <div class="product-toolbar">
+
+            <div>
+
+                <strong>
+                    Local Marketplace
+                </strong>
+
+                <span>
+                    — নতুন products ও deals
+                </span>
+
+            </div>
+
+
+            <select
+                id="sortProducts"
+                onchange="sortProducts()"
+                aria-label="Sort products"
+            >
+
+                <option value="default">
+                    Sort: Featured
+                </option>
+
+                <option value="low">
+                    Price: Low to High
+                </option>
+
+                <option value="high">
+                    Price: High to Low
+                </option>
+
+                <option value="discount">
+                    Biggest Discount
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <!-- =================================================
+             PRODUCT GRID
+        ================================================== -->
 
         <div
-            class="blog-grid"
-            id="blogGrid"
+            class="product-grid"
+            id="productGrid"
         >
 
 
-            <!-- DEFAULT POST 1 -->
+
+            <!-- PRODUCT 1 -->
 
             <article
-                class="blog-card blog-post"
-                data-category="Local Business"
-                data-title="Local Brand কীভাবে নিজের Business বড় করতে পারে"
+                class="product-card marketplace-product"
+                data-category="Fashion"
+                data-product="
+                    Ladies Three Piece
+                    Anjona Fashion
+                    Three Piece
+                "
+                data-price="1250"
+                data-discount="20"
             >
 
                 <div
-                    class="blog-image"
+                    class="product-image"
                     style="
                         background-image:
-                        url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=900&q=85');
+                        url('https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=800&q=85');
                     "
-                ></div>
+                >
+
+                    <span class="discount">
+                        -20%
+                    </span>
 
 
-                <div class="blog-info">
+                    <button
+                        class="product-heart"
+                        onclick="
+                            toggleWishlist(
+                                this,
+                                'Ladies Three Piece'
+                            )
+                        "
+                        aria-label="Add to wishlist"
+                    >
+                        ♡
+                    </button>
 
-                    <div class="blog-meta">
+                </div>
 
-                        <span class="blog-category">
-                            Local Business
+
+                <div class="product-info">
+
+                    <div class="product-brand-row">
+
+                        <span class="product-brand">
+                            Anjona Ladies Tailors
                         </span>
 
-                        <span>
-                            5 min read
+                        <span
+                            class="verified-badge small"
+                            title="Verified Brand"
+                        >
+                            ✓
                         </span>
 
                     </div>
 
 
                     <h3>
-                        Local Brand কীভাবে নিজের
-                        Business বড় করতে পারে?
+                        Ladies Three Piece
                     </h3>
 
 
-                    <p>
-                        Local customers-এর কাছে আপনার
-                        business পৌঁছে দেওয়ার কিছু সহজ উপায়।
-                    </p>
+                    <div class="product-rating">
+                        ★★★★★
+                        <span>
+                            4.9
+                        </span>
+                    </div>
 
 
-                    <div class="post-author">
+                    <div class="product-price">
 
-                        <div class="author-avatar">
-                            S
-                        </div>
+                        <span class="current-price">
+                            ৳1,250
+                        </span>
 
-                        <div>
-
-                            <strong>
-                                Shopping Mela Team
-                            </strong>
-
-                            <span>
-                                🔵 Verified
-                            </span>
-
-                        </div>
+                        <span class="old-price">
+                            ৳1,550
+                        </span>
 
                     </div>
 
 
                     <button
-                        class="read-post-btn"
-                        onclick="readPost(
-                            'Local Brand কীভাবে নিজের Business বড় করতে পারে?',
-                            'Local Business',
-                            'Local customers-এর কাছে আপনার business পৌঁছে দেওয়ার কিছু সহজ উপায়।',
-                            'Shopping Mela Team'
-                        )"
+                        class="product-cart-btn"
+                        onclick="
+                            addToCart(
+                                'Ladies Three Piece',
+                                1250
+                            )
+                        "
                     >
-                        Read Post →
+                        🛒 Add to Cart
                     </button>
 
                 </div>
@@ -769,81 +532,103 @@
 
 
 
-            <!-- DEFAULT POST 2 -->
+            <!-- PRODUCT 2 -->
 
             <article
-                class="blog-card blog-post"
-                data-category="Shopping Tips"
-                data-title="Online Shopping করার সময় কী কী বিষয় দেখবেন"
+                class="product-card marketplace-product"
+                data-category="Beauty"
+                data-product="
+                    Premium Attar
+                    Local Attar Shop
+                    Perfume Fragrance
+                "
+                data-price="650"
+                data-discount="15"
             >
 
                 <div
-                    class="blog-image"
+                    class="product-image"
                     style="
                         background-image:
-                        url('https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=900&q=85');
+                        url('https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=800&q=85');
                     "
-                ></div>
+                >
+
+                    <span class="discount">
+                        -15%
+                    </span>
 
 
-                <div class="blog-info">
+                    <button
+                        class="product-heart"
+                        onclick="
+                            toggleWishlist(
+                                this,
+                                'Premium Attar'
+                            )
+                        "
+                        aria-label="Add to wishlist"
+                    >
+                        ♡
+                    </button>
 
-                    <div class="blog-meta">
+                </div>
 
-                        <span class="blog-category">
-                            Shopping Tips
+
+                <div class="product-info">
+
+                    <div class="product-brand-row">
+
+                        <span class="product-brand">
+                            Local Attar Shop
                         </span>
 
-                        <span>
-                            4 min read
+                        <span
+                            class="verified-badge small"
+                            title="Verified Brand"
+                        >
+                            ✓
                         </span>
 
                     </div>
 
 
                     <h3>
-                        Online Shopping করার সময়
-                        কী কী বিষয় দেখবেন?
+                        Premium Attar
                     </h3>
 
 
-                    <p>
-                        নিরাপদে এবং ভালোভাবে local products
-                        কেনার কিছু useful tips।
-                    </p>
+                    <div class="product-rating">
+                        ★★★★★
+                        <span>
+                            4.8
+                        </span>
+                    </div>
 
 
-                    <div class="post-author">
+                    <div class="product-price">
 
-                        <div class="author-avatar">
-                            M
-                        </div>
+                        <span class="current-price">
+                            ৳650
+                        </span>
 
-                        <div>
-
-                            <strong>
-                                Mela Community
-                            </strong>
-
-                            <span>
-                                🔵 Verified
-                            </span>
-
-                        </div>
+                        <span class="old-price">
+                            ৳750
+                        </span>
 
                     </div>
 
 
                     <button
-                        class="read-post-btn"
-                        onclick="readPost(
-                            'Online Shopping করার সময় কী কী বিষয় দেখবেন?',
-                            'Shopping Tips',
-                            'নিরাপদে এবং ভালোভাবে local products কেনার কিছু useful tips।',
-                            'Mela Community'
-                        )"
+                        class="product-cart-btn"
+                        onclick="
+                            addToCart(
+                                'Premium Attar',
+                                650
+                            )
+                        "
                     >
-                        Read Post →
+                        🛒 Add to Cart
                     </button>
 
                 </div>
@@ -852,97 +637,429 @@
 
 
 
-            <!-- DEFAULT POST 3 -->
+            <!-- PRODUCT 3 -->
 
             <article
-                class="blog-card blog-post"
-                data-category="Community"
-                data-title="Local Business কেন আমাদের জন্য গুরুত্বপূর্ণ"
+                class="product-card marketplace-product"
+                data-category="Fashion"
+                data-product="
+                    Handmade Bag
+                    Local Handmade Brand
+                    Fashion Bag
+                "
+                data-price="890"
+                data-discount="10"
             >
 
                 <div
-                    class="blog-image"
+                    class="product-image"
                     style="
                         background-image:
-                        url('https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=85');
+                        url('https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=85');
                     "
-                ></div>
+                >
+
+                    <span class="discount">
+                        NEW
+                    </span>
 
 
-                <div class="blog-info">
+                    <button
+                        class="product-heart"
+                        onclick="
+                            toggleWishlist(
+                                this,
+                                'Handmade Bag'
+                            )
+                        "
+                        aria-label="Add to wishlist"
+                    >
+                        ♡
+                    </button>
 
-                    <div class="blog-meta">
+                </div>
 
-                        <span class="blog-category">
-                            Community
+
+                <div class="product-info">
+
+                    <div class="product-brand-row">
+
+                        <span class="product-brand">
+                            Local Handmade Brand
                         </span>
 
-                        <span>
-                            3 min read
+                        <span
+                            class="verified-badge small"
+                            title="Verified Brand"
+                        >
+                            ✓
                         </span>
 
                     </div>
 
 
                     <h3>
-                        Local Business কেন
-                        আমাদের জন্য গুরুত্বপূর্ণ?
+                        Handmade Bag
                     </h3>
 
 
-                    <p>
-                        নিজের এলাকার উদ্যোক্তা ও ছোট
-                        business-কে support করার গুরুত্ব।
-                    </p>
+                    <div class="product-rating">
+                        ★★★★☆
+                        <span>
+                            4.6
+                        </span>
+                    </div>
 
 
-                    <div class="post-author">
+                    <div class="product-price">
 
-                        <div class="author-avatar">
-                            C
-                        </div>
-
-                        <div>
-
-                            <strong>
-                                Community Writer
-                            </strong>
-
-                            <span>
-                                🔵 Verified
-                            </span>
-
-                        </div>
+                        <span class="current-price">
+                            ৳890
+                        </span>
 
                     </div>
 
 
                     <button
-                        class="read-post-btn"
-                        onclick="readPost(
-                            'Local Business কেন আমাদের জন্য গুরুত্বপূর্ণ?',
-                            'Community',
-                            'নিজের এলাকার উদ্যোক্তা ও ছোট business-কে support করার গুরুত্ব।',
-                            'Community Writer'
-                        )"
+                        class="product-cart-btn"
+                        onclick="
+                            addToCart(
+                                'Handmade Bag',
+                                890
+                            )
+                        "
                     >
-                        Read Post →
+                        🛒 Add to Cart
                     </button>
 
                 </div>
 
             </article>
+
+
+
+            <!-- PRODUCT 4 -->
+
+            <article
+                class="product-card marketplace-product"
+                data-category="Food"
+                data-product="
+                    Homemade Food
+                    Local Food Brand
+                    Snacks
+                "
+                data-price="350"
+                data-discount="10"
+            >
+
+                <div
+                    class="product-image"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=85');
+                    "
+                >
+
+                    <span class="discount">
+                        HOT
+                    </span>
+
+
+                    <button
+                        class="product-heart"
+                        onclick="
+                            toggleWishlist(
+                                this,
+                                'Homemade Food'
+                            )
+                        "
+                        aria-label="Add to wishlist"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <div class="product-brand-row">
+
+                        <span class="product-brand">
+                            Local Food Brand
+                        </span>
+
+                        <span
+                            class="verified-badge small"
+                            title="Verified Brand"
+                        >
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <h3>
+                        Homemade Food
+                    </h3>
+
+
+                    <div class="product-rating">
+                        ★★★★★
+                        <span>
+                            4.9
+                        </span>
+                    </div>
+
+
+                    <div class="product-price">
+
+                        <span class="current-price">
+                            ৳350
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="product-cart-btn"
+                        onclick="
+                            addToCart(
+                                'Homemade Food',
+                                350
+                            )
+                        "
+                    >
+                        🛒 Add to Cart
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PRODUCT 5 -->
+
+            <article
+                class="product-card marketplace-product"
+                data-category="Electronics"
+                data-product="
+                    Wireless Earbuds
+                    Mela Electronics
+                    Gadget
+                "
+                data-price="1450"
+                data-discount="12"
+            >
+
+                <div
+                    class="product-image"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?auto=format&fit=crop&w=800&q=85');
+                    "
+                >
+
+                    <span class="discount">
+                        -12%
+                    </span>
+
+
+                    <button
+                        class="product-heart"
+                        onclick="
+                            toggleWishlist(
+                                this,
+                                'Wireless Earbuds'
+                            )
+                        "
+                        aria-label="Add to wishlist"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <div class="product-brand-row">
+
+                        <span class="product-brand">
+                            Mela Electronics
+                        </span>
+
+                        <span
+                            class="verified-badge small"
+                            title="Verified Brand"
+                        >
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <h3>
+                        Wireless Earbuds
+                    </h3>
+
+
+                    <div class="product-rating">
+                        ★★★★☆
+                        <span>
+                            4.5
+                        </span>
+                    </div>
+
+
+                    <div class="product-price">
+
+                        <span class="current-price">
+                            ৳1,450
+                        </span>
+
+                        <span class="old-price">
+                            ৳1,650
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="product-cart-btn"
+                        onclick="
+                            addToCart(
+                                'Wireless Earbuds',
+                                1450
+                            )
+                        "
+                    >
+                        🛒 Add to Cart
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PRODUCT 6 -->
+
+            <article
+                class="product-card marketplace-product"
+                data-category="Home"
+                data-product="
+                    Home Decor Lamp
+                    Home Decor BD
+                    Lamp Decoration
+                "
+                data-price="1150"
+                data-discount="18"
+            >
+
+                <div
+                    class="product-image"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1507473885765-e6ed057f782c?auto=format&fit=crop&w=800&q=85');
+                    "
+                >
+
+                    <span class="discount">
+                        -18%
+                    </span>
+
+
+                    <button
+                        class="product-heart"
+                        onclick="
+                            toggleWishlist(
+                                this,
+                                'Home Decor Lamp'
+                            )
+                        "
+                        aria-label="Add to wishlist"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <div class="product-brand-row">
+
+                        <span class="product-brand">
+                            Home Decor BD
+                        </span>
+
+                        <span
+                            class="verified-badge small"
+                            title="Verified Brand"
+                        >
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <h3>
+                        Home Decor Lamp
+                    </h3>
+
+
+                    <div class="product-rating">
+                        ★★★★☆
+                        <span>
+                            4.7
+                        </span>
+                    </div>
+
+
+                    <div class="product-price">
+
+                        <span class="current-price">
+                            ৳1,150
+                        </span>
+
+                        <span class="old-price">
+                            ৳1,400
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="product-cart-btn"
+                        onclick="
+                            addToCart(
+                                'Home Decor Lamp',
+                                1150
+                            )
+                        "
+                    >
+                        🛒 Add to Cart
+                    </button>
+
+                </div>
+
+            </article>
+
 
 
         </div>
 
 
 
-        <!-- NO RESULT -->
+        <!-- =================================================
+             NO RESULT
+        ================================================== -->
 
         <div
-            class="no-blog-result"
-            id="noBlogResult"
+            class="no-product-result"
+            id="noProductResult"
         >
 
             <div>
@@ -950,22 +1067,22 @@
             </div>
 
             <h3>
-                কোনো Post পাওয়া যায়নি
+                কোনো Product পাওয়া যায়নি
             </h3>
 
             <p>
-                অন্য keyword বা category দিয়ে search করুন।
+                অন্য keyword বা category দিয়ে চেষ্টা করুন।
             </p>
+
 
             <button
                 class="secondary-btn"
-                onclick="resetBlog()"
+                onclick="resetProducts()"
             >
-                সব Posts দেখুন
+                সব Products দেখুন
             </button>
 
         </div>
-
 
     </div>
 
@@ -974,36 +1091,46 @@
 
 
 <!-- =====================================================
-     BLOG GUIDELINE
+     SELLER CTA
 ====================================================== -->
 
 <section class="container">
 
-    <div class="blog-guideline">
+    <div class="advertise-section">
 
-        <div class="guideline-icon">
-            💡
-        </div>
+        <div class="advertise-text">
 
-
-        <div>
+            <small>
+                🏪 FOR LOCAL SELLERS
+            </small>
 
             <h2>
-                কী ধরনের Post করতে পারবেন?
+                আপনার Product
+                Shopping Mela-তে দেখান
             </h2>
 
             <p>
-                Local business story, shopping experience,
-                product review, fashion tips, food story,
-                technology tips, local information এবং
-                community-related লেখা।
+                Local customers-এর সামনে আপনার
+                products ও offers তুলে ধরুন।
             </p>
 
         </div>
 
+
+        <button
+            class="advertise-button"
+            onclick="
+                window.location.href=
+                'index.html#advertise'
+            "
+        >
+            Seller / Advertise করুন →
+        </button>
+
     </div>
 
 </section>
+
 
 
 </main>
@@ -1040,9 +1167,9 @@
 
 
                 <p>
-                    Local brands, businesses,
-                    products এবং community
-                    এক জায়গায়।
+                    Local brands, products,
+                    offers, businesses এবং
+                    community এক জায়গায়।
                 </p>
 
             </div>
@@ -1067,7 +1194,7 @@
                     Products
                 </a>
 
-                <a href="index.html#offers">
+                <a href="offers.html">
                     Offers
                 </a>
 
@@ -1085,7 +1212,7 @@
                     Blog
                 </a>
 
-                <a href="#writePost">
+                <a href="blog.html#writePost">
                     Write a Post
                 </a>
 
@@ -1121,7 +1248,6 @@
 
             </div>
 
-
         </div>
 
 
@@ -1135,52 +1261,6 @@
     </div>
 
 </footer>
-
-
-
-<!-- =====================================================
-     READ POST MODAL
-====================================================== -->
-
-<div
-    class="modal"
-    id="readModal"
->
-
-    <div
-        class="modal-overlay"
-        onclick="closeReadPost()"
-    >
-    </div>
-
-
-    <div class="modal-box read-modal-box">
-
-        <button
-            class="modal-close"
-            onclick="closeReadPost()"
-        >
-            ×
-        </button>
-
-
-        <div
-            id="readPostContent"
-            class="read-post-content"
-        >
-        </div>
-
-
-        <button
-            class="primary-btn"
-            onclick="closeReadPost()"
-        >
-            Close
-        </button>
-
-    </div>
-
-</div>
 
 
 
@@ -1205,23 +1285,41 @@
 
 
 /* =====================================================
+   GLOBAL DATA
+====================================================== */
+
+let cartItems = 0;
+
+let wishlistItems = 0;
+
+
+
+/* =====================================================
    TOAST
 ====================================================== */
 
 function showToast(message) {
 
     const toast =
-        document.getElementById("toast");
+        document.getElementById(
+            "toast"
+        );
+
 
     toast.textContent =
         message;
 
-    toast.classList.add("show");
+
+    toast.classList.add(
+        "show"
+    );
 
 
     setTimeout(function() {
 
-        toast.classList.remove("show");
+        toast.classList.remove(
+            "show"
+        );
 
     }, 2500);
 
@@ -1230,692 +1328,23 @@ function showToast(message) {
 
 
 /* =====================================================
-   SCROLL
+   FILTER PRODUCTS
 ====================================================== */
 
-function scrollToWrite() {
-
-    document
-        .getElementById("writePost")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
-
-}
-
-
-function scrollToPosts() {
-
-    document
-        .getElementById("blogPosts")
-        .scrollIntoView({
-            behavior: "smooth"
-        });
-
-}
-
-
-
-/* =====================================================
-   CHARACTER COUNTER
-====================================================== */
-
-const titleInput =
-    document.getElementById(
-        "postTitle"
-    );
-
-
-const contentInput =
-    document.getElementById(
-        "postContent"
-    );
-
-
-titleInput.addEventListener(
-    "input",
-    function() {
-
-        document
-            .getElementById("titleCount")
-            .textContent =
-            this.value.length +
-            " / 120";
-
-    }
-);
-
-
-contentInput.addEventListener(
-    "input",
-    function() {
-
-        document
-            .getElementById("contentCount")
-            .textContent =
-            this.value.length +
-            " / 3000";
-
-    }
-);
-
-
-
-/* =====================================================
-   GET FORM DATA
-====================================================== */
-
-function getPostData() {
-
-    return {
-
-        author:
-            document
-                .getElementById("authorName")
-                .value
-                .trim(),
-
-        role:
-            document
-                .getElementById("authorRole")
-                .value,
-
-        title:
-            document
-                .getElementById("postTitle")
-                .value
-                .trim(),
-
-        category:
-            document
-                .getElementById("postCategory")
-                .value,
-
-        image:
-            document
-                .getElementById("postImage")
-                .value
-                .trim(),
-
-        content:
-            document
-                .getElementById("postContent")
-                .value
-                .trim(),
-
-        date:
-            new Date().toLocaleDateString(
-                "bn-BD"
-            )
-
-    };
-
-}
-
-
-
-/* =====================================================
-   VALIDATION
-====================================================== */
-
-function validatePost(data) {
-
-    if (!data.author) {
-
-        showToast(
-            "আপনার নাম লিখুন"
-        );
-
-        document
-            .getElementById("authorName")
-            .focus();
-
-        return false;
-
-    }
-
-
-    if (!data.title) {
-
-        showToast(
-            "Post title লিখুন"
-        );
-
-        document
-            .getElementById("postTitle")
-            .focus();
-
-        return false;
-
-    }
-
-
-    if (!data.category) {
-
-        showToast(
-            "Category নির্বাচন করুন"
-        );
-
-        document
-            .getElementById("postCategory")
-            .focus();
-
-        return false;
-
-    }
-
-
-    if (!data.content) {
-
-        showToast(
-            "আপনার লেখা লিখুন"
-        );
-
-        document
-            .getElementById("postContent")
-            .focus();
-
-        return false;
-
-    }
-
-
-    if (data.content.length < 20) {
-
-        showToast(
-            "Post কমপক্ষে ২০ character লিখুন"
-        );
-
-        document
-            .getElementById("postContent")
-            .focus();
-
-        return false;
-
-    }
-
-
-    return true;
-
-}
-
-
-
-/* =====================================================
-   PREVIEW
-====================================================== */
-
-let previewData = null;
-
-
-function previewPost() {
-
-    const data =
-        getPostData();
-
-
-    if (
-        !validatePost(data)
-    ) {
-
-        return;
-
-    }
-
-
-    previewData =
-        data;
-
-
-    const imageHTML =
-        data.image
-            ? `
-                <div
-                    class="preview-image"
-                    style="
-                        background-image:
-                        url('${escapeAttribute(data.image)}');
-                    "
-                ></div>
-            `
-            : "";
-
-
-    document
-        .getElementById(
-            "previewContent"
-        )
-        .innerHTML = `
-
-            ${imageHTML}
-
-            <div class="preview-meta">
-
-                <span class="blog-category">
-                    ${escapeHTML(data.category)}
-                </span>
-
-                <span>
-                    Preview
-                </span>
-
-            </div>
-
-
-            <h2>
-                ${escapeHTML(data.title)}
-            </h2>
-
-
-            <div class="preview-author">
-
-                <div class="author-avatar">
-                    ${escapeHTML(
-                        data.author
-                            .charAt(0)
-                            .toUpperCase()
-                    )}
-                </div>
-
-                <div>
-
-                    <strong>
-                        ${escapeHTML(data.author)}
-                    </strong>
-
-                    <span>
-                        ${escapeHTML(data.role)}
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div class="preview-text">
-
-                ${escapeHTML(data.content)
-                    .replace(/\n/g, "<br>")}
-
-            </div>
-
-        `;
-
-
-    document
-        .getElementById(
-            "previewModal"
-        )
-        .classList.add("show");
-
-}
-
-
-
-/* =====================================================
-   CLOSE PREVIEW
-====================================================== */
-
-function closePreview() {
-
-    document
-        .getElementById(
-            "previewModal"
-        )
-        .classList.remove("show");
-
-}
-
-
-
-/* =====================================================
-   PUBLISH FROM PREVIEW
-====================================================== */
-
-function publishFromPreview() {
-
-    if (!previewData) {
-
-        return;
-
-    }
-
-
-    savePost(
-        previewData
-    );
-
-    closePreview();
-
-}
-
-
-
-/* =====================================================
-   PUBLISH POST
-====================================================== */
-
-function publishPost() {
-
-    const data =
-        getPostData();
-
-
-    if (
-        !validatePost(data)
-    ) {
-
-        return;
-
-    }
-
-
-    savePost(
-        data
-    );
-
-}
-
-
-
-/* =====================================================
-   SAVE POST
-====================================================== */
-
-function savePost(data) {
-
-    let posts =
-        JSON.parse(
-            localStorage.getItem(
-                "shoppingMelaPosts"
-            )
-        ) || [];
-
-
-    data.id =
-        Date.now();
-
-
-    posts.unshift(
-        data
-    );
-
-
-    localStorage.setItem(
-        "shoppingMelaPosts",
-        JSON.stringify(posts)
-    );
-
-
-    addPostToPage(
-        data,
-        true
-    );
-
-
-    clearForm();
-
-
-    showToast(
-        "🎉 আপনার Post সফলভাবে Publish হয়েছে!"
-    );
-
-
-    setTimeout(function() {
-
-        scrollToPosts();
-
-    }, 500);
-
-}
-
-
-
-/* =====================================================
-   ADD POST TO PAGE
-====================================================== */
-
-function addPostToPage(
-    data,
-    top = false
-) {
-
-    const grid =
-        document.getElementById(
-            "blogGrid"
-        );
-
-
-    const article =
-        document.createElement(
-            "article"
-        );
-
-
-    article.className =
-        "blog-card blog-post user-post";
-
-
-    article.dataset.category =
-        data.category;
-
-
-    article.dataset.title =
-        data.title.toLowerCase();
-
-
-    const image =
-        data.image
-            ? data.image
-            : "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=85";
-
-
-    article.innerHTML = `
-
-        <div
-            class="blog-image"
-            style="
-                background-image:
-                url('${escapeAttribute(image)}');
-            "
-        >
-
-            <span class="user-post-label">
-                COMMUNITY POST
-            </span>
-
-        </div>
-
-
-        <div class="blog-info">
-
-            <div class="blog-meta">
-
-                <span class="blog-category">
-                    ${escapeHTML(data.category)}
-                </span>
-
-                <span>
-                    New
-                </span>
-
-            </div>
-
-
-            <h3>
-                ${escapeHTML(data.title)}
-            </h3>
-
-
-            <p>
-                ${escapeHTML(
-                    data.content.substring(
-                        0,
-                        140
-                    )
-                )}
-                ${data.content.length > 140 ? "..." : ""}
-            </p>
-
-
-            <div class="post-author">
-
-                <div class="author-avatar">
-                    ${escapeHTML(
-                        data.author
-                            .charAt(0)
-                            .toUpperCase()
-                    )}
-                </div>
-
-
-                <div>
-
-                    <strong>
-                        ${escapeHTML(data.author)}
-                    </strong>
-
-                    <span>
-                        ${escapeHTML(data.role)}
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <button
-                class="read-post-btn"
-                onclick="readPost(
-                    ${JSON.stringify(data.title)},
-                    ${JSON.stringify(data.category)},
-                    ${JSON.stringify(data.content)},
-                    ${JSON.stringify(data.author)}
-                )"
-            >
-                Read Post →
-            </button>
-
-        </div>
-
-    `;
-
-
-    if (top) {
-
-        grid.prepend(
-            article
-        );
-
-    } else {
-
-        grid.appendChild(
-            article
-        );
-
-    }
-
-
-    updatePostCount();
-
-}
-
-
-
-/* =====================================================
-   LOAD SAVED POSTS
-====================================================== */
-
-function loadSavedPosts() {
-
-    const posts =
-        JSON.parse(
-            localStorage.getItem(
-                "shoppingMelaPosts"
-            )
-        ) || [];
-
-
-    posts.forEach(function(post) {
-
-        addPostToPage(
-            post,
-            false
-        );
-
-    });
-
-
-    updatePostCount();
-
-}
-
-
-
-/* =====================================================
-   CLEAR FORM
-====================================================== */
-
-function clearForm() {
-
-    document
-        .getElementById("authorName")
-        .value = "";
-
-
-    document
-        .getElementById("postTitle")
-        .value = "";
-
-
-    document
-        .getElementById("postCategory")
-        .value = "";
-
-
-    document
-        .getElementById("postImage")
-        .value = "";
-
-
-    document
-        .getElementById("postContent")
-        .value = "";
-
-
-    document
-        .getElementById("titleCount")
-        .textContent =
-        "0 / 120";
-
-
-    document
-        .getElementById("contentCount")
-        .textContent =
-        "0 / 3000";
-
-}
-
-
-
-/* =====================================================
-   FILTER BLOG
-====================================================== */
-
-function filterBlog(
+function filterProducts(
     category,
     button
 ) {
 
-    const posts =
+    const products =
         document.querySelectorAll(
-            ".blog-post"
+            ".marketplace-product"
         );
 
 
     document
         .querySelectorAll(
-            ".blog-filter"
+            ".product-filter"
         )
         .forEach(function(btn) {
 
@@ -1938,24 +1367,25 @@ function filterBlog(
     let count = 0;
 
 
-    posts.forEach(function(post) {
+    products.forEach(function(product) {
 
-        const postCategory =
-            post.dataset.category;
+        const productCategory =
+            product.dataset.category;
 
 
         if (
             category === "all" ||
-            postCategory === category
+            productCategory === category
         ) {
 
-            post.style.display = "";
+            product.style.display =
+                "";
 
             count++;
 
         } else {
 
-            post.style.display =
+            product.style.display =
                 "none";
 
         }
@@ -1963,69 +1393,91 @@ function filterBlog(
     });
 
 
-    updatePostCount(
+    updateProductResult(
         count
     );
 
 
-    const noResult =
-        document.getElementById(
-            "noBlogResult"
-        );
-
-
-    if (count === 0) {
-
-        noResult.classList.add(
-            "show"
-        );
-
-    } else {
-
-        noResult.classList.remove(
-            "show"
-        );
-
-    }
+    showProductNoResult(
+        count
+    );
 
 }
 
 
 
 /* =====================================================
-   SEARCH BLOG
+   SEARCH PRODUCTS
 ====================================================== */
 
-function searchBlog() {
+function searchProducts() {
+
+    const input =
+        document.getElementById(
+            "productSearch"
+        );
+
 
     const query =
-        document
-            .getElementById(
-                "blogSearch"
-            )
-            .value
+        input.value
             .trim()
             .toLowerCase();
 
 
-    const posts =
-        document.querySelectorAll(
-            ".blog-post"
-        );
-
-
     if (!query) {
 
-        resetBlog();
+        resetProducts();
 
         return;
 
     }
 
 
+    const products =
+        document.querySelectorAll(
+            ".marketplace-product"
+        );
+
+
+    let count = 0;
+
+
+    products.forEach(function(product) {
+
+        const productText =
+            (
+                product.dataset.product ||
+                ""
+            ).toLowerCase();
+
+
+        const visibleText =
+            product.innerText.toLowerCase();
+
+
+        if (
+            productText.includes(query) ||
+            visibleText.includes(query)
+        ) {
+
+            product.style.display =
+                "";
+
+            count++;
+
+        } else {
+
+            product.style.display =
+                "none";
+
+        }
+
+    });
+
+
     document
         .querySelectorAll(
-            ".blog-filter"
+            ".product-filter"
         )
         .forEach(function(btn) {
 
@@ -2036,72 +1488,27 @@ function searchBlog() {
         });
 
 
-    let count = 0;
-
-
-    posts.forEach(function(post) {
-
-        const title =
-            (
-                post.dataset.title ||
-                ""
-            ).toLowerCase();
-
-
-        const text =
-            post.innerText.toLowerCase();
-
-
-        if (
-            title.includes(query) ||
-            text.includes(query)
-        ) {
-
-            post.style.display =
-                "";
-
-            count++;
-
-        } else {
-
-            post.style.display =
-                "none";
-
-        }
-
-    });
-
-
-    updatePostCount(
+    updateProductResult(
         count
     );
 
 
-    const noResult =
-        document.getElementById(
-            "noBlogResult"
-        );
+    showProductNoResult(
+        count
+    );
 
 
-    if (count === 0) {
-
-        noResult.classList.add(
-            "show"
-        );
+    if (count > 0) {
 
         showToast(
-            "কোনো Blog পাওয়া যায়নি"
+            count +
+            "টি Product পাওয়া গেছে 🔎"
         );
 
     } else {
 
-        noResult.classList.remove(
-            "show"
-        );
-
         showToast(
-            count +
-            "টি Post পাওয়া গেছে 🔎"
+            "কোনো Product পাওয়া যায়নি"
         );
 
     }
@@ -2116,7 +1523,7 @@ function searchBlog() {
 
 document
     .getElementById(
-        "blogSearch"
+        "productSearch"
     )
     .addEventListener(
         "keydown",
@@ -2126,7 +1533,7 @@ document
                 event.key === "Enter"
             ) {
 
-                searchBlog();
+                searchProducts();
 
             }
 
@@ -2136,20 +1543,319 @@ document
 
 
 /* =====================================================
-   RESET BLOG
+   SORT PRODUCTS
 ====================================================== */
 
-function resetBlog() {
+function sortProducts() {
 
-    const posts =
-        document.querySelectorAll(
-            ".blog-post"
+    const grid =
+        document.getElementById(
+            "productGrid"
         );
 
 
-    posts.forEach(function(post) {
+    const select =
+        document.getElementById(
+            "sortProducts"
+        );
 
-        post.style.display =
+
+    const value =
+        select.value;
+
+
+    const products =
+        Array.from(
+            grid.querySelectorAll(
+                ".marketplace-product"
+            )
+        );
+
+
+    products.sort(
+        function(a, b) {
+
+            const priceA =
+                Number(
+                    a.dataset.price
+                );
+
+
+            const priceB =
+                Number(
+                    b.dataset.price
+                );
+
+
+            const discountA =
+                Number(
+                    a.dataset.discount
+                );
+
+
+            const discountB =
+                Number(
+                    b.dataset.discount
+                );
+
+
+            if (
+                value === "low"
+            ) {
+
+                return priceA - priceB;
+
+            }
+
+
+            if (
+                value === "high"
+            ) {
+
+                return priceB - priceA;
+
+            }
+
+
+            if (
+                value === "discount"
+            ) {
+
+                return discountB - discountA;
+
+            }
+
+
+            return 0;
+
+        }
+    );
+
+
+    products.forEach(
+        function(product) {
+
+            grid.appendChild(
+                product
+            );
+
+        }
+    );
+
+
+    showToast(
+        "Products sorted ✓"
+    );
+
+}
+
+
+
+/* =====================================================
+   ADD TO CART
+====================================================== */
+
+function addToCart(
+    productName,
+    price
+) {
+
+    cartItems++;
+
+
+    document
+        .getElementById(
+            "cartCount"
+        )
+        .textContent =
+        cartItems;
+
+
+    showToast(
+        productName +
+        " Cart-এ যোগ হয়েছে 🛒"
+    );
+
+}
+
+
+
+/* =====================================================
+   CART
+====================================================== */
+
+function showCart() {
+
+    if (
+        cartItems === 0
+    ) {
+
+        showToast(
+            "আপনার Cart এখনো খালি 🛒"
+        );
+
+        return;
+
+    }
+
+
+    showToast(
+        "Cart-এ " +
+        cartItems +
+        "টি item আছে 🛒"
+    );
+
+}
+
+
+
+/* =====================================================
+   WISHLIST
+====================================================== */
+
+function toggleWishlist(
+    button,
+    productName
+) {
+
+    const active =
+        button.classList.toggle(
+            "active"
+        );
+
+
+    if (active) {
+
+        wishlistItems++;
+
+
+        button.textContent =
+            "♥";
+
+
+        showToast(
+            productName +
+            " Wishlist-এ যোগ হয়েছে ❤️"
+        );
+
+    } else {
+
+        wishlistItems--;
+
+
+        button.textContent =
+            "♡";
+
+
+        showToast(
+            productName +
+            " Wishlist থেকে সরানো হয়েছে"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   WISHLIST HEADER
+====================================================== */
+
+function showWishlist() {
+
+    if (
+        wishlistItems === 0
+    ) {
+
+        showToast(
+            "আপনার Wishlist এখনো খালি ❤️"
+        );
+
+        return;
+
+    }
+
+
+    showToast(
+        "Wishlist-এ " +
+        wishlistItems +
+        "টি item আছে ❤️"
+    );
+
+}
+
+
+
+/* =====================================================
+   RESULT TEXT
+====================================================== */
+
+function updateProductResult(
+    count
+) {
+
+    document
+        .getElementById(
+            "productResultText"
+        )
+        .textContent =
+        count +
+        "টি Product পাওয়া গেছে";
+
+}
+
+
+
+/* =====================================================
+   NO RESULT
+====================================================== */
+
+function showProductNoResult(
+    count
+) {
+
+    const box =
+        document.getElementById(
+            "noProductResult"
+        );
+
+
+    if (
+        count === 0
+    ) {
+
+        box.classList.add(
+            "show"
+        );
+
+    } else {
+
+        box.classList.remove(
+            "show"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   RESET PRODUCTS
+====================================================== */
+
+function resetProducts() {
+
+    const products =
+        document.querySelectorAll(
+            ".marketplace-product"
+        );
+
+
+    products.forEach(function(product) {
+
+        product.style.display =
             "";
 
     });
@@ -2157,14 +1863,14 @@ function resetBlog() {
 
     document
         .getElementById(
-            "blogSearch"
+            "productSearch"
         )
         .value = "";
 
 
     document
         .querySelectorAll(
-            ".blog-filter"
+            ".product-filter"
         )
         .forEach(function(btn) {
 
@@ -2177,7 +1883,7 @@ function resetBlog() {
 
     const allButton =
         document.querySelector(
-            ".blog-filter"
+            ".product-filter"
         );
 
 
@@ -2190,226 +1896,16 @@ function resetBlog() {
     }
 
 
-    document
-        .getElementById(
-            "noBlogResult"
-        )
-        .classList.remove(
-            "show"
-        );
+    updateProductResult(
+        products.length
+    );
 
 
-    updatePostCount();
+    showProductNoResult(
+        products.length
+    );
 
 }
-
-
-
-/* =====================================================
-   UPDATE COUNT
-====================================================== */
-
-function updatePostCount(
-    customCount = null
-) {
-
-    const posts =
-        document.querySelectorAll(
-            ".blog-post"
-        );
-
-
-    const visible =
-        customCount !== null
-            ? customCount
-            : Array.from(posts)
-                .filter(
-                    post =>
-                        post.style.display !== "none"
-                )
-                .length;
-
-
-    document
-        .getElementById(
-            "postCount"
-        )
-        .textContent =
-        visible +
-        "টি Community Post";
-
-}
-
-
-
-/* =====================================================
-   READ POST
-====================================================== */
-
-function readPost(
-    title,
-    category,
-    content,
-    author
-) {
-
-    document
-        .getElementById(
-            "readPostContent"
-        )
-        .innerHTML = `
-
-            <div class="blog-meta">
-
-                <span class="blog-category">
-                    ${escapeHTML(category)}
-                </span>
-
-                <span>
-                    Shopping Mela Blog
-                </span>
-
-            </div>
-
-
-            <h1>
-                ${escapeHTML(title)}
-            </h1>
-
-
-            <div class="post-author">
-
-                <div class="author-avatar">
-                    ${escapeHTML(
-                        author
-                            .charAt(0)
-                            .toUpperCase()
-                    )}
-                </div>
-
-
-                <div>
-
-                    <strong>
-                        ${escapeHTML(author)}
-                    </strong>
-
-                    <span>
-                        Community Author
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <div class="full-post-text">
-
-                ${escapeHTML(content)
-                    .replace(/\n/g, "<br>")}
-
-            </div>
-
-        `;
-
-
-    document
-        .getElementById(
-            "readModal"
-        )
-        .classList.add(
-            "show"
-        );
-
-}
-
-
-
-/* =====================================================
-   CLOSE READ POST
-====================================================== */
-
-function closeReadPost() {
-
-    document
-        .getElementById(
-            "readModal"
-        )
-        .classList.remove(
-            "show"
-        );
-
-}
-
-
-
-/* =====================================================
-   HTML SECURITY
-====================================================== */
-
-function escapeHTML(text) {
-
-    return String(text)
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-}
-
-
-function escapeAttribute(text) {
-
-    return String(text)
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-}
-
-
-
-/* =====================================================
-   CLOSE MODAL WITH ESC
-====================================================== */
-
-document.addEventListener(
-    "keydown",
-    function(event) {
-
-        if (
-            event.key === "Escape"
-        ) {
-
-            closePreview();
-
-            closeReadPost();
-
-        }
-
-    }
-);
 
 
 
@@ -2421,9 +1917,15 @@ document.addEventListener(
     "DOMContentLoaded",
     function() {
 
-        loadSavedPosts();
+        const products =
+            document.querySelectorAll(
+                ".marketplace-product"
+            );
 
-        updatePostCount();
+
+        updateProductResult(
+            products.length
+        );
 
     }
 );
