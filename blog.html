@@ -1,35 +1,35 @@
+```html
 <!DOCTYPE html>
-
 <html lang="bn">
 
 <head>
 
-```
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<title>
-    Shopping Mela Blog — Local Stories & Community
-</title>
+    <title>
+        Blog — Shopping Mela
+    </title>
 
-<meta
-    name="description"
-    content="Shopping Mela Blog — Local business, shopping tips, community stories and useful information."
->
+    <meta
+        name="description"
+        content="Shopping Mela Community Blog — সবাই সহজে নিজের post প্রকাশ করতে পারবেন।"
+    >
 
-<link
-    rel="stylesheet"
-    href="style.css"
->
-```
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
 
 </head>
 
+
 <body>
+
 
 <!-- =====================================================
      TOP BAR
@@ -37,17 +37,17 @@
 
 <div class="top-bar">
 
-```
-🛍️
+    🛍️
 
-<span>
-    Shopping Mela
-</span>
+    <span>
+        Shopping Mela
+    </span>
 
-— Local Business, Shopping & Community Blog
-```
+    — Local Brands & Community Blog
 
 </div>
+
+
 
 <!-- =====================================================
      HEADER
@@ -55,659 +55,12 @@
 
 <header class="header">
 
-```
-<div class="container">
+    <div class="container">
 
+        <div class="header-main">
 
-    <div class="header-main">
 
-
-        <!-- LOGO -->
-
-        <a
-            href="index.html"
-            class="logo"
-        >
-
-            <div class="logo-icon">
-                🛍️
-            </div>
-
-            <span>
-                Shopping Mela
-            </span>
-
-        </a>
-
-
-
-        <!-- SEARCH -->
-
-        <div class="header-search">
-
-            <input
-                type="search"
-                id="headerSearch"
-                placeholder="Blog, topic বা information খুঁজুন..."
-                aria-label="Search Blog"
-            >
-
-            <button
-                type="button"
-                id="headerSearchBtn"
-                aria-label="Search"
-            >
-                🔍
-            </button>
-
-        </div>
-
-
-
-        <!-- ACTIONS -->
-
-        <div class="header-actions">
-
-            <button
-                type="button"
-                class="header-action"
-                onclick="showBlogToast('Wishlist শীঘ্রই আসছে ❤️')"
-            >
-
-                <span class="header-action-icon">
-                    ♡
-                </span>
-
-                <span>
-                    Wishlist
-                </span>
-
-            </button>
-
-
-            <button
-                type="button"
-                class="header-action"
-                onclick="showBlogToast('Cart শীঘ্রই আসছে 🛒')"
-            >
-
-                <span class="header-action-icon">
-                    🛒
-                </span>
-
-                <span>
-                    Cart
-                </span>
-
-            </button>
-
-        </div>
-
-    </div>
-
-
-
-    <!-- NAVIGATION -->
-
-    <nav class="navigation">
-
-        <div class="navigation-inner">
-
-            <a href="index.html">
-                Home
-            </a>
-
-            <a href="index.html#categories">
-                Categories
-            </a>
-
-            <a href="index.html#brands">
-                Local Brands
-            </a>
-
-            <a href="index.html#products">
-                Products
-            </a>
-
-            <a href="index.html#offers">
-                Offers
-            </a>
-
-            <a
-                href="blog.html"
-                class="active"
-            >
-                Blog
-            </a>
-
-            <a href="index.html#advertise">
-                Advertise With Us
-            </a>
-
-        </div>
-
-    </nav>
-
-
-</div>
-```
-
-</header>
-
-<!-- =====================================================
-     BLOG HERO
-====================================================== -->
-
-<section class="blog-hero">
-
-```
-<div class="container">
-
-    <div class="blog-hero-inner">
-
-
-        <div class="blog-hero-content">
-
-            <div class="ad-label">
-                ✍️ SHOPPING MELA COMMUNITY
-            </div>
-
-
-            <h1>
-                Shopping Mela Blog
-            </h1>
-
-
-            <p>
-                Local business, shopping tips,
-                উদ্যোক্তার গল্প এবং community
-                information এক জায়গায়।
-            </p>
-
-
-            <button
-                type="button"
-                class="primary-btn"
-                id="openPostModal"
-            >
-                ✍️ Write a Post
-            </button>
-
-        </div>
-
-
-        <div class="blog-hero-icon">
-
-            <div>
-                ✍️
-            </div>
-
-            <span>
-                আপনার গল্প
-                আপনিই লিখুন
-            </span>
-
-        </div>
-
-
-    </div>
-
-</div>
-```
-
-</section>
-
-<!-- =====================================================
-     BLOG SEARCH & FILTER
-====================================================== -->
-
-<section class="section blog-tools-section">
-
-```
-<div class="container">
-
-
-    <div class="blog-tools">
-
-
-        <!-- SEARCH -->
-
-        <div class="blog-search-box">
-
-            <input
-                type="search"
-                id="blogSearch"
-                placeholder="Blog search করুন..."
-                aria-label="Blog Search"
-            >
-
-            <button
-                type="button"
-                id="blogSearchBtn"
-                aria-label="Search Blog"
-            >
-                🔍
-            </button>
-
-        </div>
-
-
-
-        <!-- FILTER -->
-
-        <div class="blog-filter">
-
-            <button
-                type="button"
-                class="active"
-                data-filter="All"
-            >
-                All
-            </button>
-
-
-            <button
-                type="button"
-                data-filter="Local Business"
-            >
-                Local Business
-            </button>
-
-
-            <button
-                type="button"
-                data-filter="Shopping Tips"
-            >
-                Shopping Tips
-            </button>
-
-
-            <button
-                type="button"
-                data-filter="Community"
-            >
-                Community
-            </button>
-
-
-            <button
-                type="button"
-                data-filter="Lifestyle"
-            >
-                Lifestyle
-            </button>
-
-
-            <button
-                type="button"
-                data-filter="Others"
-            >
-                Others
-            </button>
-
-        </div>
-
-
-    </div>
-
-</div>
-```
-
-</section>
-
-<!-- =====================================================
-     BLOG POSTS
-====================================================== -->
-
-<main>
-
-<section
-    class="section"
-    id="blogPosts"
->
-
-```
-<div class="container">
-
-
-    <div class="section-heading">
-
-
-        <div>
-
-            <h2>
-                Latest Posts
-            </h2>
-
-            <p>
-                Shopping Mela community-এর
-                নতুন এবং জনপ্রিয় লেখা
-            </p>
-
-        </div>
-
-
-        <button
-            type="button"
-            class="view-all"
-            id="openPostModalTop"
-        >
-            ✍️ Write Post
-        </button>
-
-
-    </div>
-
-
-
-    <!-- BLOG GRID -->
-
-    <div
-        class="blog-post-grid"
-        id="blogPostGrid"
-    >
-
-        <!--
-            Posts will be automatically
-            generated by blog.js
-        -->
-
-    </div>
-
-
-
-    <!-- EMPTY RESULT -->
-
-    <div
-        class="empty-blog"
-        id="emptyBlog"
-    >
-
-        <div class="empty-blog-icon">
-            🔎
-        </div>
-
-        <h3>
-            কোনো Post পাওয়া যায়নি
-        </h3>
-
-        <p>
-            অন্য keyword অথবা category দিয়ে
-            আবার চেষ্টা করুন।
-        </p>
-
-        <button
-            type="button"
-            class="primary-btn"
-            onclick="filterBlogs('All','')"
-        >
-            সব Post দেখুন
-        </button>
-
-    </div>
-
-
-</div>
-```
-
-</section>
-
-<!-- =====================================================
-     COMMUNITY CTA
-====================================================== -->
-
-<section class="container">
-
-```
-<div class="blog-community-cta">
-
-
-    <div class="blog-community-icon">
-        ✍️
-    </div>
-
-
-    <div class="blog-community-text">
-
-        <small>
-            SHOPPING MELA COMMUNITY
-        </small>
-
-        <h2>
-            আপনার অভিজ্ঞতা শেয়ার করুন
-        </h2>
-
-        <p>
-            Local business, shopping experience,
-            useful tips অথবা নিজের গল্প—
-            Shopping Mela community-তে লিখুন।
-        </p>
-
-    </div>
-
-
-    <button
-        type="button"
-        class="advertise-button"
-        id="openPostModalBottom"
-    >
-        Write a Post →
-    </button>
-
-
-</div>
-```
-
-</section>
-
-</main>
-
-<!-- =====================================================
-     WRITE POST MODAL
-====================================================== -->
-
-<div
-    class="post-modal"
-    id="postModal"
->
-
-```
-<div class="post-modal-box">
-
-
-    <!--
-        blog.js
-        এই অংশটি automatically
-        form দিয়ে replace করবে।
-    -->
-
-
-    <div class="modal-header">
-
-        <h2>
-            ✍️ Write a Post
-        </h2>
-
-        <button
-            class="close-modal"
-            id="closePostModal"
-            type="button"
-        >
-            ×
-        </button>
-
-    </div>
-
-
-    <form id="postForm">
-
-
-        <div class="post-form-group">
-
-            <label for="postAuthor">
-                আপনার নাম
-            </label>
-
-            <input
-                type="text"
-                id="postAuthor"
-                placeholder="আপনার নাম লিখুন"
-                required
-            >
-
-        </div>
-
-
-
-        <div class="post-form-group">
-
-            <label for="postTitle">
-                Post Title
-            </label>
-
-            <input
-                type="text"
-                id="postTitle"
-                placeholder="আপনার Post-এর title লিখুন"
-                required
-            >
-
-        </div>
-
-
-
-        <div class="post-form-group">
-
-            <label for="postCategory">
-                Category
-            </label>
-
-            <select
-                id="postCategory"
-                required
-            >
-
-                <option value="">
-                    Category নির্বাচন করুন
-                </option>
-
-                <option value="Local Business">
-                    Local Business
-                </option>
-
-                <option value="Shopping Tips">
-                    Shopping Tips
-                </option>
-
-                <option value="Community">
-                    Community
-                </option>
-
-                <option value="Lifestyle">
-                    Lifestyle
-                </option>
-
-                <option value="Others">
-                    Others
-                </option>
-
-            </select>
-
-        </div>
-
-
-
-        <div class="post-form-group">
-
-            <label for="postImage">
-                Post Image
-            </label>
-
-            <input
-                type="file"
-                id="postImage"
-                accept="image/*"
-            >
-
-
-            <div
-                class="image-preview"
-                id="imagePreview"
-            >
-
-                <img
-                    id="previewImage"
-                    src=""
-                    alt="Image Preview"
-                >
-
-            </div>
-
-        </div>
-
-
-
-        <div class="post-form-group">
-
-            <label for="postContent">
-                আপনার Post
-            </label>
-
-            <textarea
-                id="postContent"
-                placeholder="আপনার গল্প, তথ্য বা experience লিখুন..."
-                required
-            ></textarea>
-
-        </div>
-
-
-
-        <div class="form-actions">
-
-            <button
-                type="button"
-                class="cancel-btn"
-                id="cancelPost"
-            >
-                Cancel
-            </button>
-
-
-            <button
-                type="submit"
-                class="publish-btn"
-            >
-                Publish Post
-            </button>
-
-        </div>
-
-
-    </form>
-
-
-</div>
-```
-
-</div>
-
-<!-- =====================================================
-     FOOTER
-====================================================== -->
-
-<footer class="footer">
-
-```
-<div class="container">
-
-
-    <div class="footer-main">
-
-
-        <!-- BRAND -->
-
-        <div class="footer-brand">
+            <!-- LOGO -->
 
             <a
                 href="index.html"
@@ -725,114 +78,1111 @@
             </a>
 
 
+
+            <!-- SEARCH -->
+
+            <div class="header-search">
+
+                <input
+                    type="search"
+                    id="blogSearch"
+                    placeholder="Blog post খুঁজুন..."
+                    aria-label="Search blog"
+                >
+
+                <button
+                    type="button"
+                    onclick="searchBlog()"
+                    aria-label="Search"
+                >
+                    🔍
+                </button>
+
+            </div>
+
+
+
+            <!-- ACTIONS -->
+
+            <div class="header-actions">
+
+                <button
+                    class="header-action"
+                    onclick="scrollToWrite()"
+                >
+
+                    <span class="header-action-icon">
+                        ✍️
+                    </span>
+
+                    <span>
+                        Write
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="header-action"
+                    onclick="showToast('Profile system শীঘ্রই আসছে!')"
+                >
+
+                    <span class="header-action-icon">
+                        👤
+                    </span>
+
+                    <span>
+                        Profile
+                    </span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="navigation">
+
+            <div class="navigation-inner">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="index.html#categories">
+                    Categories
+                </a>
+
+                <a href="brands.html">
+                    Local Brands
+                </a>
+
+                <a href="products.html">
+                    Products
+                </a>
+
+                <a href="index.html#offers">
+                    Offers
+                </a>
+
+                <a
+                    href="blog.html"
+                    class="active"
+                >
+                    Blog
+                </a>
+
+                <a href="index.html#advertise">
+                    Advertise With Us
+                </a>
+
+            </div>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+
+<main>
+
+
+<!-- =====================================================
+     BLOG HERO
+====================================================== -->
+
+<section class="blog-page-hero">
+
+    <div class="container">
+
+        <div class="blog-hero-content">
+
+            <span class="page-label">
+                ✍️ SHOPPING MELA COMMUNITY
+            </span>
+
+            <h1>
+                Shopping Mela Blog
+            </h1>
+
             <p>
-                Local brands, products,
-                businesses এবং community
-                content-এর modern online platform।
+                আপনার গল্প, অভিজ্ঞতা, business tips,
+                shopping tips বা local information
+                সবার সাথে share করুন।
+            </p>
+
+
+            <div class="blog-hero-buttons">
+
+                <button
+                    class="primary-btn"
+                    onclick="scrollToWrite()"
+                >
+                    ✍️ Write a Post
+                </button>
+
+
+                <button
+                    class="light-btn"
+                    onclick="scrollToPosts()"
+                >
+                    Blog পড়ুন ↓
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     WRITE POST SECTION
+====================================================== -->
+
+<section
+    class="section write-section"
+    id="writePost"
+>
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div>
+
+                <h2>
+                    ✍️ নিজের Post লিখুন
+                </h2>
+
+                <p>
+                    খুব সহজে আপনার লেখা Shopping Mela
+                    Community-তে প্রকাশ করুন।
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="write-post-card">
+
+
+            <!-- AUTHOR -->
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="authorName">
+                        আপনার নাম *
+                    </label>
+
+                    <input
+                        type="text"
+                        id="authorName"
+                        placeholder="যেমন: Sakhi Jahan"
+                        maxlength="50"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="authorRole">
+                        পরিচয়
+                    </label>
+
+                    <select id="authorRole">
+
+                        <option value="Community Member">
+                            Community Member
+                        </option>
+
+                        <option value="Local Business Owner">
+                            Local Business Owner
+                        </option>
+
+                        <option value="Seller">
+                            Seller
+                        </option>
+
+                        <option value="Student">
+                            Student
+                        </option>
+
+                        <option value="Writer">
+                            Writer
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TITLE -->
+
+            <div class="form-group">
+
+                <label for="postTitle">
+                    Post Title *
+                </label>
+
+                <input
+                    type="text"
+                    id="postTitle"
+                    placeholder="আপনার Post-এর title লিখুন..."
+                    maxlength="120"
+                >
+
+                <small
+                    class="character-count"
+                    id="titleCount"
+                >
+                    0 / 120
+                </small>
+
+            </div>
+
+
+
+            <!-- CATEGORY -->
+
+            <div class="form-group">
+
+                <label for="postCategory">
+                    Category *
+                </label>
+
+                <select id="postCategory">
+
+                    <option value="">
+                        Category নির্বাচন করুন
+                    </option>
+
+                    <option value="Local Business">
+                        🏪 Local Business
+                    </option>
+
+                    <option value="Shopping Tips">
+                        🛒 Shopping Tips
+                    </option>
+
+                    <option value="Fashion">
+                        👗 Fashion
+                    </option>
+
+                    <option value="Food">
+                        🍔 Food
+                    </option>
+
+                    <option value="Technology">
+                        📱 Technology
+                    </option>
+
+                    <option value="Lifestyle">
+                        ✨ Lifestyle
+                    </option>
+
+                    <option value="Community">
+                        🤝 Community
+                    </option>
+
+                    <option value="Others">
+                        📝 Others
+                    </option>
+
+                </select>
+
+            </div>
+
+
+
+            <!-- IMAGE URL -->
+
+            <div class="form-group">
+
+                <label for="postImage">
+                    Image URL
+                </label>
+
+                <input
+                    type="url"
+                    id="postImage"
+                    placeholder="https://example.com/image.jpg"
+                >
+
+                <small>
+                    চাইলে আপনার post-এর জন্য একটি
+                    online image ব্যবহার করতে পারেন।
+                </small>
+
+            </div>
+
+
+
+            <!-- CONTENT -->
+
+            <div class="form-group">
+
+                <label for="postContent">
+                    আপনার লেখা *
+                </label>
+
+                <textarea
+                    id="postContent"
+                    rows="9"
+                    maxlength="3000"
+                    placeholder="এখানে আপনার post লিখুন..."
+                ></textarea>
+
+                <small
+                    class="character-count"
+                    id="contentCount"
+                >
+                    0 / 3000
+                </small>
+
+            </div>
+
+
+
+            <!-- VERIFIED OPTION -->
+
+            <div class="verified-info">
+
+                <div class="verified-icon">
+                    ✓
+                </div>
+
+                <div>
+
+                    <strong>
+                        🔵 Verified Profile
+                    </strong>
+
+                    <p>
+                        Verified badge শুধুমাত্র Shopping Mela
+                        কর্তৃপক্ষ অনুমোদিত profile-এ দেওয়া হবে।
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ACTIONS -->
+
+            <div class="write-actions">
+
+                <button
+                    type="button"
+                    class="secondary-btn"
+                    onclick="previewPost()"
+                >
+                    👁️ Preview
+                </button>
+
+
+                <button
+                    type="button"
+                    class="primary-btn"
+                    onclick="publishPost()"
+                >
+                    🚀 Publish Post
+                </button>
+
+            </div>
+
+
+            <p class="publish-note">
+                আপনার post publish করার পর এই browser-এ
+                সংরক্ষিত থাকবে।
             </p>
 
         </div>
 
+    </div>
+
+</section>
 
 
-        <!-- SHOPPING -->
 
-        <div>
+<!-- =====================================================
+     PREVIEW MODAL
+====================================================== -->
 
-            <h3>
-                Shopping
-            </h3>
+<div
+    class="modal"
+    id="previewModal"
+>
 
-            <a href="index.html#categories">
-                Categories
-            </a>
+    <div class="modal-overlay"
+         onclick="closePreview()">
+    </div>
 
-            <a href="index.html#brands">
-                Local Brands
-            </a>
 
-            <a href="index.html#products">
-                Products
-            </a>
+    <div class="modal-box">
 
-            <a href="index.html#offers">
-                Offers
-            </a>
+        <button
+            class="modal-close"
+            onclick="closePreview()"
+            aria-label="Close"
+        >
+            ×
+        </button>
 
+
+        <div id="previewContent">
         </div>
 
 
+        <div class="modal-actions">
 
-        <!-- COMMUNITY -->
-
-        <div>
-
-            <h3>
-                Community
-            </h3>
-
-            <a href="blog.html">
-                Blog
-            </a>
-
-            <a
-                href="javascript:void(0)"
-                id="footerWritePost"
+            <button
+                class="secondary-btn"
+                onclick="closePreview()"
             >
-                Write a Post
-            </a>
-
-            <a href="index.html#advertise">
-                Advertise
-            </a>
-
-        </div>
+                Edit
+            </button>
 
 
-
-        <!-- SUPPORT -->
-
-        <div>
-
-            <h3>
-                Support
-            </h3>
-
-            <a href="#">
-                About Us
-            </a>
-
-            <a href="#">
-                Contact
-            </a>
-
-            <a href="#">
-                Privacy Policy
-            </a>
-
-            <a href="#">
-                Terms
-            </a>
+            <button
+                class="primary-btn"
+                onclick="publishFromPreview()"
+            >
+                🚀 Publish
+            </button>
 
         </div>
 
-
     </div>
-
-
-
-    <div class="footer-bottom">
-
-        © 2026 Shopping Mela.
-        All Rights Reserved.
-
-    </div>
-
 
 </div>
-```
+
+
+
+<!-- =====================================================
+     BLOG POSTS
+====================================================== -->
+
+<section
+    class="section"
+    id="blogPosts"
+>
+
+    <div class="container">
+
+
+        <div class="section-heading">
+
+            <div>
+
+                <h2>
+                    Community Posts
+                </h2>
+
+                <p id="postCount">
+                    Latest posts from Shopping Mela community
+                </p>
+
+            </div>
+
+
+            <button
+                class="view-all"
+                onclick="resetBlog()"
+            >
+                সব Posts →
+            </button>
+
+        </div>
+
+
+
+        <!-- CATEGORY FILTER -->
+
+        <div class="blog-filters">
+
+            <button
+                class="blog-filter active"
+                onclick="filterBlog('all', this)"
+            >
+                All
+            </button>
+
+
+            <button
+                class="blog-filter"
+                onclick="filterBlog('Local Business', this)"
+            >
+                🏪 Business
+            </button>
+
+
+            <button
+                class="blog-filter"
+                onclick="filterBlog('Shopping Tips', this)"
+            >
+                🛒 Shopping
+            </button>
+
+
+            <button
+                class="blog-filter"
+                onclick="filterBlog('Fashion', this)"
+            >
+                👗 Fashion
+            </button>
+
+
+            <button
+                class="blog-filter"
+                onclick="filterBlog('Food', this)"
+            >
+                🍔 Food
+            </button>
+
+
+            <button
+                class="blog-filter"
+                onclick="filterBlog('Technology', this)"
+            >
+                📱 Technology
+            </button>
+
+
+            <button
+                class="blog-filter"
+                onclick="filterBlog('Community', this)"
+            >
+                🤝 Community
+            </button>
+
+        </div>
+
+
+
+        <!-- POSTS -->
+
+        <div
+            class="blog-grid"
+            id="blogGrid"
+        >
+
+
+            <!-- DEFAULT POST 1 -->
+
+            <article
+                class="blog-card blog-post"
+                data-category="Local Business"
+                data-title="Local Brand কীভাবে নিজের Business বড় করতে পারে"
+            >
+
+                <div
+                    class="blog-image"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=900&q=85');
+                    "
+                ></div>
+
+
+                <div class="blog-info">
+
+                    <div class="blog-meta">
+
+                        <span class="blog-category">
+                            Local Business
+                        </span>
+
+                        <span>
+                            5 min read
+                        </span>
+
+                    </div>
+
+
+                    <h3>
+                        Local Brand কীভাবে নিজের
+                        Business বড় করতে পারে?
+                    </h3>
+
+
+                    <p>
+                        Local customers-এর কাছে আপনার
+                        business পৌঁছে দেওয়ার কিছু সহজ উপায়।
+                    </p>
+
+
+                    <div class="post-author">
+
+                        <div class="author-avatar">
+                            S
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Shopping Mela Team
+                            </strong>
+
+                            <span>
+                                🔵 Verified
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="read-post-btn"
+                        onclick="readPost(
+                            'Local Brand কীভাবে নিজের Business বড় করতে পারে?',
+                            'Local Business',
+                            'Local customers-এর কাছে আপনার business পৌঁছে দেওয়ার কিছু সহজ উপায়।',
+                            'Shopping Mela Team'
+                        )"
+                    >
+                        Read Post →
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- DEFAULT POST 2 -->
+
+            <article
+                class="blog-card blog-post"
+                data-category="Shopping Tips"
+                data-title="Online Shopping করার সময় কী কী বিষয় দেখবেন"
+            >
+
+                <div
+                    class="blog-image"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=900&q=85');
+                    "
+                ></div>
+
+
+                <div class="blog-info">
+
+                    <div class="blog-meta">
+
+                        <span class="blog-category">
+                            Shopping Tips
+                        </span>
+
+                        <span>
+                            4 min read
+                        </span>
+
+                    </div>
+
+
+                    <h3>
+                        Online Shopping করার সময়
+                        কী কী বিষয় দেখবেন?
+                    </h3>
+
+
+                    <p>
+                        নিরাপদে এবং ভালোভাবে local products
+                        কেনার কিছু useful tips।
+                    </p>
+
+
+                    <div class="post-author">
+
+                        <div class="author-avatar">
+                            M
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Mela Community
+                            </strong>
+
+                            <span>
+                                🔵 Verified
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="read-post-btn"
+                        onclick="readPost(
+                            'Online Shopping করার সময় কী কী বিষয় দেখবেন?',
+                            'Shopping Tips',
+                            'নিরাপদে এবং ভালোভাবে local products কেনার কিছু useful tips।',
+                            'Mela Community'
+                        )"
+                    >
+                        Read Post →
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- DEFAULT POST 3 -->
+
+            <article
+                class="blog-card blog-post"
+                data-category="Community"
+                data-title="Local Business কেন আমাদের জন্য গুরুত্বপূর্ণ"
+            >
+
+                <div
+                    class="blog-image"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=85');
+                    "
+                ></div>
+
+
+                <div class="blog-info">
+
+                    <div class="blog-meta">
+
+                        <span class="blog-category">
+                            Community
+                        </span>
+
+                        <span>
+                            3 min read
+                        </span>
+
+                    </div>
+
+
+                    <h3>
+                        Local Business কেন
+                        আমাদের জন্য গুরুত্বপূর্ণ?
+                    </h3>
+
+
+                    <p>
+                        নিজের এলাকার উদ্যোক্তা ও ছোট
+                        business-কে support করার গুরুত্ব।
+                    </p>
+
+
+                    <div class="post-author">
+
+                        <div class="author-avatar">
+                            C
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Community Writer
+                            </strong>
+
+                            <span>
+                                🔵 Verified
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <button
+                        class="read-post-btn"
+                        onclick="readPost(
+                            'Local Business কেন আমাদের জন্য গুরুত্বপূর্ণ?',
+                            'Community',
+                            'নিজের এলাকার উদ্যোক্তা ও ছোট business-কে support করার গুরুত্ব।',
+                            'Community Writer'
+                        )"
+                    >
+                        Read Post →
+                    </button>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+
+
+        <!-- NO RESULT -->
+
+        <div
+            class="no-blog-result"
+            id="noBlogResult"
+        >
+
+            <div>
+                🔎
+            </div>
+
+            <h3>
+                কোনো Post পাওয়া যায়নি
+            </h3>
+
+            <p>
+                অন্য keyword বা category দিয়ে search করুন।
+            </p>
+
+            <button
+                class="secondary-btn"
+                onclick="resetBlog()"
+            >
+                সব Posts দেখুন
+            </button>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     BLOG GUIDELINE
+====================================================== -->
+
+<section class="container">
+
+    <div class="blog-guideline">
+
+        <div class="guideline-icon">
+            💡
+        </div>
+
+
+        <div>
+
+            <h2>
+                কী ধরনের Post করতে পারবেন?
+            </h2>
+
+            <p>
+                Local business story, shopping experience,
+                product review, fashion tips, food story,
+                technology tips, local information এবং
+                community-related লেখা।
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-main">
+
+
+            <div class="footer-brand">
+
+                <a
+                    href="index.html"
+                    class="logo"
+                >
+
+                    <div class="logo-icon">
+                        🛍️
+                    </div>
+
+                    <span>
+                        Shopping Mela
+                    </span>
+
+                </a>
+
+
+                <p>
+                    Local brands, businesses,
+                    products এবং community
+                    এক জায়গায়।
+                </p>
+
+            </div>
+
+
+
+            <div>
+
+                <h3>
+                    Shopping
+                </h3>
+
+                <a href="index.html#categories">
+                    Categories
+                </a>
+
+                <a href="brands.html">
+                    Local Brands
+                </a>
+
+                <a href="products.html">
+                    Products
+                </a>
+
+                <a href="index.html#offers">
+                    Offers
+                </a>
+
+            </div>
+
+
+
+            <div>
+
+                <h3>
+                    Community
+                </h3>
+
+                <a href="blog.html">
+                    Blog
+                </a>
+
+                <a href="#writePost">
+                    Write a Post
+                </a>
+
+                <a href="index.html#advertise">
+                    Advertise
+                </a>
+
+            </div>
+
+
+
+            <div>
+
+                <h3>
+                    Support
+                </h3>
+
+                <a href="#">
+                    About Us
+                </a>
+
+                <a href="#">
+                    Contact
+                </a>
+
+                <a href="#">
+                    Privacy Policy
+                </a>
+
+                <a href="#">
+                    Terms
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            © 2026 Shopping Mela.
+            All Rights Reserved.
+
+        </div>
+
+    </div>
 
 </footer>
+
+
+
+<!-- =====================================================
+     READ POST MODAL
+====================================================== -->
+
+<div
+    class="modal"
+    id="readModal"
+>
+
+    <div
+        class="modal-overlay"
+        onclick="closeReadPost()"
+    >
+    </div>
+
+
+    <div class="modal-box read-modal-box">
+
+        <button
+            class="modal-close"
+            onclick="closeReadPost()"
+        >
+            ×
+        </button>
+
+
+        <div
+            id="readPostContent"
+            class="read-post-content"
+        >
+        </div>
+
+
+        <button
+            class="primary-btn"
+            onclick="closeReadPost()"
+        >
+            Close
+        </button>
+
+    </div>
+
+</div>
+
+
 
 <!-- =====================================================
      TOAST
@@ -840,118 +1190,1249 @@
 
 <div
     class="toast"
-    id="blogToast"
+    id="toast"
 >
     Done!
 </div>
 
-<!-- =====================================================
-     BLOG JAVASCRIPT
-     1.5
-====================================================== -->
 
-<script src="blog.js"></script>
 
 <!-- =====================================================
-     EXTRA BUTTON CONNECTIONS
+     JAVASCRIPT
 ====================================================== -->
 
 <script>
+
+
+/* =====================================================
+   TOAST
+====================================================== */
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent =
+        message;
+
+    toast.classList.add("show");
+
+
+    setTimeout(function() {
+
+        toast.classList.remove("show");
+
+    }, 2500);
+
+}
+
+
+
+/* =====================================================
+   SCROLL
+====================================================== */
+
+function scrollToWrite() {
+
+    document
+        .getElementById("writePost")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+function scrollToPosts() {
+
+    document
+        .getElementById("blogPosts")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+}
+
+
+
+/* =====================================================
+   CHARACTER COUNTER
+====================================================== */
+
+const titleInput =
+    document.getElementById(
+        "postTitle"
+    );
+
+
+const contentInput =
+    document.getElementById(
+        "postContent"
+    );
+
+
+titleInput.addEventListener(
+    "input",
+    function() {
+
+        document
+            .getElementById("titleCount")
+            .textContent =
+            this.value.length +
+            " / 120";
+
+    }
+);
+
+
+contentInput.addEventListener(
+    "input",
+    function() {
+
+        document
+            .getElementById("contentCount")
+            .textContent =
+            this.value.length +
+            " / 3000";
+
+    }
+);
+
+
+
+/* =====================================================
+   GET FORM DATA
+====================================================== */
+
+function getPostData() {
+
+    return {
+
+        author:
+            document
+                .getElementById("authorName")
+                .value
+                .trim(),
+
+        role:
+            document
+                .getElementById("authorRole")
+                .value,
+
+        title:
+            document
+                .getElementById("postTitle")
+                .value
+                .trim(),
+
+        category:
+            document
+                .getElementById("postCategory")
+                .value,
+
+        image:
+            document
+                .getElementById("postImage")
+                .value
+                .trim(),
+
+        content:
+            document
+                .getElementById("postContent")
+                .value
+                .trim(),
+
+        date:
+            new Date().toLocaleDateString(
+                "bn-BD"
+            )
+
+    };
+
+}
+
+
+
+/* =====================================================
+   VALIDATION
+====================================================== */
+
+function validatePost(data) {
+
+    if (!data.author) {
+
+        showToast(
+            "আপনার নাম লিখুন"
+        );
+
+        document
+            .getElementById("authorName")
+            .focus();
+
+        return false;
+
+    }
+
+
+    if (!data.title) {
+
+        showToast(
+            "Post title লিখুন"
+        );
+
+        document
+            .getElementById("postTitle")
+            .focus();
+
+        return false;
+
+    }
+
+
+    if (!data.category) {
+
+        showToast(
+            "Category নির্বাচন করুন"
+        );
+
+        document
+            .getElementById("postCategory")
+            .focus();
+
+        return false;
+
+    }
+
+
+    if (!data.content) {
+
+        showToast(
+            "আপনার লেখা লিখুন"
+        );
+
+        document
+            .getElementById("postContent")
+            .focus();
+
+        return false;
+
+    }
+
+
+    if (data.content.length < 20) {
+
+        showToast(
+            "Post কমপক্ষে ২০ character লিখুন"
+        );
+
+        document
+            .getElementById("postContent")
+            .focus();
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+
+/* =====================================================
+   PREVIEW
+====================================================== */
+
+let previewData = null;
+
+
+function previewPost() {
+
+    const data =
+        getPostData();
+
+
+    if (
+        !validatePost(data)
+    ) {
+
+        return;
+
+    }
+
+
+    previewData =
+        data;
+
+
+    const imageHTML =
+        data.image
+            ? `
+                <div
+                    class="preview-image"
+                    style="
+                        background-image:
+                        url('${escapeAttribute(data.image)}');
+                    "
+                ></div>
+            `
+            : "";
+
+
+    document
+        .getElementById(
+            "previewContent"
+        )
+        .innerHTML = `
+
+            ${imageHTML}
+
+            <div class="preview-meta">
+
+                <span class="blog-category">
+                    ${escapeHTML(data.category)}
+                </span>
+
+                <span>
+                    Preview
+                </span>
+
+            </div>
+
+
+            <h2>
+                ${escapeHTML(data.title)}
+            </h2>
+
+
+            <div class="preview-author">
+
+                <div class="author-avatar">
+                    ${escapeHTML(
+                        data.author
+                            .charAt(0)
+                            .toUpperCase()
+                    )}
+                </div>
+
+                <div>
+
+                    <strong>
+                        ${escapeHTML(data.author)}
+                    </strong>
+
+                    <span>
+                        ${escapeHTML(data.role)}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="preview-text">
+
+                ${escapeHTML(data.content)
+                    .replace(/\n/g, "<br>")}
+
+            </div>
+
+        `;
+
+
+    document
+        .getElementById(
+            "previewModal"
+        )
+        .classList.add("show");
+
+}
+
+
+
+/* =====================================================
+   CLOSE PREVIEW
+====================================================== */
+
+function closePreview() {
+
+    document
+        .getElementById(
+            "previewModal"
+        )
+        .classList.remove("show");
+
+}
+
+
+
+/* =====================================================
+   PUBLISH FROM PREVIEW
+====================================================== */
+
+function publishFromPreview() {
+
+    if (!previewData) {
+
+        return;
+
+    }
+
+
+    savePost(
+        previewData
+    );
+
+    closePreview();
+
+}
+
+
+
+/* =====================================================
+   PUBLISH POST
+====================================================== */
+
+function publishPost() {
+
+    const data =
+        getPostData();
+
+
+    if (
+        !validatePost(data)
+    ) {
+
+        return;
+
+    }
+
+
+    savePost(
+        data
+    );
+
+}
+
+
+
+/* =====================================================
+   SAVE POST
+====================================================== */
+
+function savePost(data) {
+
+    let posts =
+        JSON.parse(
+            localStorage.getItem(
+                "shoppingMelaPosts"
+            )
+        ) || [];
+
+
+    data.id =
+        Date.now();
+
+
+    posts.unshift(
+        data
+    );
+
+
+    localStorage.setItem(
+        "shoppingMelaPosts",
+        JSON.stringify(posts)
+    );
+
+
+    addPostToPage(
+        data,
+        true
+    );
+
+
+    clearForm();
+
+
+    showToast(
+        "🎉 আপনার Post সফলভাবে Publish হয়েছে!"
+    );
+
+
+    setTimeout(function() {
+
+        scrollToPosts();
+
+    }, 500);
+
+}
+
+
+
+/* =====================================================
+   ADD POST TO PAGE
+====================================================== */
+
+function addPostToPage(
+    data,
+    top = false
+) {
+
+    const grid =
+        document.getElementById(
+            "blogGrid"
+        );
+
+
+    const article =
+        document.createElement(
+            "article"
+        );
+
+
+    article.className =
+        "blog-card blog-post user-post";
+
+
+    article.dataset.category =
+        data.category;
+
+
+    article.dataset.title =
+        data.title.toLowerCase();
+
+
+    const image =
+        data.image
+            ? data.image
+            : "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=85";
+
+
+    article.innerHTML = `
+
+        <div
+            class="blog-image"
+            style="
+                background-image:
+                url('${escapeAttribute(image)}');
+            "
+        >
+
+            <span class="user-post-label">
+                COMMUNITY POST
+            </span>
+
+        </div>
+
+
+        <div class="blog-info">
+
+            <div class="blog-meta">
+
+                <span class="blog-category">
+                    ${escapeHTML(data.category)}
+                </span>
+
+                <span>
+                    New
+                </span>
+
+            </div>
+
+
+            <h3>
+                ${escapeHTML(data.title)}
+            </h3>
+
+
+            <p>
+                ${escapeHTML(
+                    data.content.substring(
+                        0,
+                        140
+                    )
+                )}
+                ${data.content.length > 140 ? "..." : ""}
+            </p>
+
+
+            <div class="post-author">
+
+                <div class="author-avatar">
+                    ${escapeHTML(
+                        data.author
+                            .charAt(0)
+                            .toUpperCase()
+                    )}
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        ${escapeHTML(data.author)}
+                    </strong>
+
+                    <span>
+                        ${escapeHTML(data.role)}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="read-post-btn"
+                onclick="readPost(
+                    ${JSON.stringify(data.title)},
+                    ${JSON.stringify(data.category)},
+                    ${JSON.stringify(data.content)},
+                    ${JSON.stringify(data.author)}
+                )"
+            >
+                Read Post →
+            </button>
+
+        </div>
+
+    `;
+
+
+    if (top) {
+
+        grid.prepend(
+            article
+        );
+
+    } else {
+
+        grid.appendChild(
+            article
+        );
+
+    }
+
+
+    updatePostCount();
+
+}
+
+
+
+/* =====================================================
+   LOAD SAVED POSTS
+====================================================== */
+
+function loadSavedPosts() {
+
+    const posts =
+        JSON.parse(
+            localStorage.getItem(
+                "shoppingMelaPosts"
+            )
+        ) || [];
+
+
+    posts.forEach(function(post) {
+
+        addPostToPage(
+            post,
+            false
+        );
+
+    });
+
+
+    updatePostCount();
+
+}
+
+
+
+/* =====================================================
+   CLEAR FORM
+====================================================== */
+
+function clearForm() {
+
+    document
+        .getElementById("authorName")
+        .value = "";
+
+
+    document
+        .getElementById("postTitle")
+        .value = "";
+
+
+    document
+        .getElementById("postCategory")
+        .value = "";
+
+
+    document
+        .getElementById("postImage")
+        .value = "";
+
+
+    document
+        .getElementById("postContent")
+        .value = "";
+
+
+    document
+        .getElementById("titleCount")
+        .textContent =
+        "0 / 120";
+
+
+    document
+        .getElementById("contentCount")
+        .textContent =
+        "0 / 3000";
+
+}
+
+
+
+/* =====================================================
+   FILTER BLOG
+====================================================== */
+
+function filterBlog(
+    category,
+    button
+) {
+
+    const posts =
+        document.querySelectorAll(
+            ".blog-post"
+        );
+
+
+    document
+        .querySelectorAll(
+            ".blog-filter"
+        )
+        .forEach(function(btn) {
+
+            btn.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    if (button) {
+
+        button.classList.add(
+            "active"
+        );
+
+    }
+
+
+    let count = 0;
+
+
+    posts.forEach(function(post) {
+
+        const postCategory =
+            post.dataset.category;
+
+
+        if (
+            category === "all" ||
+            postCategory === category
+        ) {
+
+            post.style.display = "";
+
+            count++;
+
+        } else {
+
+            post.style.display =
+                "none";
+
+        }
+
+    });
+
+
+    updatePostCount(
+        count
+    );
+
+
+    const noResult =
+        document.getElementById(
+            "noBlogResult"
+        );
+
+
+    if (count === 0) {
+
+        noResult.classList.add(
+            "show"
+        );
+
+    } else {
+
+        noResult.classList.remove(
+            "show"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   SEARCH BLOG
+====================================================== */
+
+function searchBlog() {
+
+    const query =
+        document
+            .getElementById(
+                "blogSearch"
+            )
+            .value
+            .trim()
+            .toLowerCase();
+
+
+    const posts =
+        document.querySelectorAll(
+            ".blog-post"
+        );
+
+
+    if (!query) {
+
+        resetBlog();
+
+        return;
+
+    }
+
+
+    document
+        .querySelectorAll(
+            ".blog-filter"
+        )
+        .forEach(function(btn) {
+
+            btn.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    let count = 0;
+
+
+    posts.forEach(function(post) {
+
+        const title =
+            (
+                post.dataset.title ||
+                ""
+            ).toLowerCase();
+
+
+        const text =
+            post.innerText.toLowerCase();
+
+
+        if (
+            title.includes(query) ||
+            text.includes(query)
+        ) {
+
+            post.style.display =
+                "";
+
+            count++;
+
+        } else {
+
+            post.style.display =
+                "none";
+
+        }
+
+    });
+
+
+    updatePostCount(
+        count
+    );
+
+
+    const noResult =
+        document.getElementById(
+            "noBlogResult"
+        );
+
+
+    if (count === 0) {
+
+        noResult.classList.add(
+            "show"
+        );
+
+        showToast(
+            "কোনো Blog পাওয়া যায়নি"
+        );
+
+    } else {
+
+        noResult.classList.remove(
+            "show"
+        );
+
+        showToast(
+            count +
+            "টি Post পাওয়া গেছে 🔎"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   ENTER SEARCH
+====================================================== */
+
+document
+    .getElementById(
+        "blogSearch"
+    )
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                searchBlog();
+
+            }
+
+        }
+    );
+
+
+
+/* =====================================================
+   RESET BLOG
+====================================================== */
+
+function resetBlog() {
+
+    const posts =
+        document.querySelectorAll(
+            ".blog-post"
+        );
+
+
+    posts.forEach(function(post) {
+
+        post.style.display =
+            "";
+
+    });
+
+
+    document
+        .getElementById(
+            "blogSearch"
+        )
+        .value = "";
+
+
+    document
+        .querySelectorAll(
+            ".blog-filter"
+        )
+        .forEach(function(btn) {
+
+            btn.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    const allButton =
+        document.querySelector(
+            ".blog-filter"
+        );
+
+
+    if (allButton) {
+
+        allButton.classList.add(
+            "active"
+        );
+
+    }
+
+
+    document
+        .getElementById(
+            "noBlogResult"
+        )
+        .classList.remove(
+            "show"
+        );
+
+
+    updatePostCount();
+
+}
+
+
+
+/* =====================================================
+   UPDATE COUNT
+====================================================== */
+
+function updatePostCount(
+    customCount = null
+) {
+
+    const posts =
+        document.querySelectorAll(
+            ".blog-post"
+        );
+
+
+    const visible =
+        customCount !== null
+            ? customCount
+            : Array.from(posts)
+                .filter(
+                    post =>
+                        post.style.display !== "none"
+                )
+                .length;
+
+
+    document
+        .getElementById(
+            "postCount"
+        )
+        .textContent =
+        visible +
+        "টি Community Post";
+
+}
+
+
+
+/* =====================================================
+   READ POST
+====================================================== */
+
+function readPost(
+    title,
+    category,
+    content,
+    author
+) {
+
+    document
+        .getElementById(
+            "readPostContent"
+        )
+        .innerHTML = `
+
+            <div class="blog-meta">
+
+                <span class="blog-category">
+                    ${escapeHTML(category)}
+                </span>
+
+                <span>
+                    Shopping Mela Blog
+                </span>
+
+            </div>
+
+
+            <h1>
+                ${escapeHTML(title)}
+            </h1>
+
+
+            <div class="post-author">
+
+                <div class="author-avatar">
+                    ${escapeHTML(
+                        author
+                            .charAt(0)
+                            .toUpperCase()
+                    )}
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        ${escapeHTML(author)}
+                    </strong>
+
+                    <span>
+                        Community Author
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="full-post-text">
+
+                ${escapeHTML(content)
+                    .replace(/\n/g, "<br>")}
+
+            </div>
+
+        `;
+
+
+    document
+        .getElementById(
+            "readModal"
+        )
+        .classList.add(
+            "show"
+        );
+
+}
+
+
+
+/* =====================================================
+   CLOSE READ POST
+====================================================== */
+
+function closeReadPost() {
+
+    document
+        .getElementById(
+            "readModal"
+        )
+        .classList.remove(
+            "show"
+        );
+
+}
+
+
+
+/* =====================================================
+   HTML SECURITY
+====================================================== */
+
+function escapeHTML(text) {
+
+    return String(text)
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+function escapeAttribute(text) {
+
+    return String(text)
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+
+/* =====================================================
+   CLOSE MODAL WITH ESC
+====================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Escape"
+        ) {
+
+            closePreview();
+
+            closeReadPost();
+
+        }
+
+    }
+);
+
+
+
+/* =====================================================
+   INITIALIZE
+====================================================== */
 
 document.addEventListener(
     "DOMContentLoaded",
     function() {
 
+        loadSavedPosts();
 
-        const topButton =
-            document.getElementById(
-                "openPostModalTop"
-            );
-
-
-        const bottomButton =
-            document.getElementById(
-                "openPostModalBottom"
-            );
-
-
-        const footerButton =
-            document.getElementById(
-                "footerWritePost"
-            );
-
-
-        if (topButton) {
-
-            topButton.addEventListener(
-                "click",
-                function() {
-
-                    if (
-                        typeof openPostModal
-                        ===
-                        "function"
-                    ) {
-
-                        openPostModal();
-
-                    }
-
-                }
-            );
-
-        }
-
-
-        if (bottomButton) {
-
-            bottomButton.addEventListener(
-                "click",
-                function() {
-
-                    if (
-                        typeof openPostModal
-                        ===
-                        "function"
-                    ) {
-
-                        openPostModal();
-
-                    }
-
-                }
-            );
-
-        }
-
-
-        if (footerButton) {
-
-            footerButton.addEventListener(
-                "click",
-                function() {
-
-                    if (
-                        typeof openPostModal
-                        ===
-                        "function"
-                    ) {
-
-                        openPostModal();
-
-                    }
-
-                }
-            );
-
-        }
-
+        updatePostCount();
 
     }
 );
 
+
 </script>
+
 
 </body>
 
 </html>
+```
