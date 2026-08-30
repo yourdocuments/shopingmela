@@ -1,50 +1,35 @@
+# Shopping Mela — 1.8 Blue Verified Profile System
+
+নিচের কোডটি আপনার **`index.html`**-এ ব্যবহার করুন।
+Verified profile-এর জন্য `verified: true` data ব্যবহার করা হয়েছে, যাতে পরে সহজে Admin থেকে profile verify/unverify করা যায়।
+
+```html
 <!DOCTYPE html>
-
 <html lang="bn">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-```
-<meta charset="UTF-8">
+    <title>Shopping Mela — Local Brands & Online Shopping</title>
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+    <meta
+        name="description"
+        content="Shopping Mela — Local brands, products, offers, advertisements and community blogs."
+    >
 
-<title>
-    Shopping Mela — Local Brands & Online Shopping
-</title>
-
-<meta
-    name="description"
-    content="Shopping Mela — Local brands, products, offers, advertisements and community blogs."
->
-
-<link
-    rel="stylesheet"
-    href="style.css"
->
-```
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-```
 <!-- =====================================================
      TOP BAR
 ====================================================== -->
 
 <div class="top-bar">
-
-    🛍️
-    <span>Shopping Mela</span>
-    —
-    আপনার এলাকার Local Brand ও Business এখন এক জায়গায়
-
+    🛍️ <span>Shopping Mela</span>
+    — আপনার এলাকার Local Brand ও Business এখন এক জায়গায়
 </div>
-
 
 
 <!-- =====================================================
@@ -57,13 +42,9 @@
 
         <div class="header-main">
 
-
             <!-- LOGO -->
 
-            <a
-                href="index.html"
-                class="logo"
-            >
+            <a href="index.html" class="logo">
 
                 <div class="logo-icon">
                     🛍️
@@ -74,7 +55,6 @@
                 </span>
 
             </a>
-
 
 
             <!-- SEARCH -->
@@ -99,16 +79,15 @@
             </div>
 
 
-
-            <!-- HEADER ACTIONS -->
+            <!-- ACTIONS -->
 
             <div class="header-actions">
 
                 <button
                     class="header-action"
                     type="button"
+                    onclick="showToast('আপনার Wishlist শীঘ্রই আসছে ❤️')"
                 >
-
                     <span class="header-action-icon">
                         ♡
                     </span>
@@ -116,15 +95,14 @@
                     <span>
                         Wishlist
                     </span>
-
                 </button>
 
 
                 <button
                     class="header-action"
                     type="button"
+                    onclick="showToast('Shopping Cart শীঘ্রই আসছে 🛒')"
                 >
-
                     <span class="header-action-icon">
                         🛒
                     </span>
@@ -132,7 +110,6 @@
                     <span>
                         Cart
                     </span>
-
                 </button>
 
             </div>
@@ -140,10 +117,7 @@
         </div>
 
 
-
-        <!-- =================================================
-             NAVIGATION
-        ================================================== -->
+        <!-- NAVIGATION -->
 
         <nav class="navigation">
 
@@ -189,1260 +163,1370 @@
 </header>
 
 
-
-<!-- =====================================================
-     MAIN
-====================================================== -->
-
 <main>
 
 
-    <!-- =================================================
-         HERO ADVERTISEMENT SLIDER
-    ================================================== -->
+<!-- =====================================================
+     HERO SLIDER
+====================================================== -->
 
-    <section class="hero">
+<section class="hero">
 
-        <div class="container">
+    <div class="container">
+
+        <div
+            class="hero-slider"
+            id="heroSlider"
+        >
+
+            <!-- SLIDE 1 -->
 
             <div
-                class="hero-slider"
-                id="heroSlider"
+                class="hero-slide active"
+                style="
+                    background-image:
+                    url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=85');
+                "
             >
 
+                <div class="hero-content">
 
-                <!-- SLIDE 1 -->
+                    <div class="ad-label">
+                        📢 FEATURED AD
+                    </div>
 
-                <div
-                    class="hero-slide active"
-                    style="background-image:url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1600&q=85');"
-                >
+                    <div class="hero-brand">
+                        LOCAL BRAND SPOTLIGHT
+                    </div>
 
-                    <div class="hero-content">
+                    <h1>
+                        আপনার এলাকার
+                        সেরা Brand এক জায়গায়
+                    </h1>
 
-                        <div class="ad-label">
-                            📢 FEATURED AD
-                        </div>
+                    <p>
+                        Shopping Mela-তে স্থানীয় ব্যবসা ও
+                        ব্র্যান্ডকে খুঁজে নিন সহজেই।
+                    </p>
 
-                        <div class="hero-brand">
-                            LOCAL BRAND SPOTLIGHT
-                        </div>
+                    <div class="hero-buttons">
 
-                        <h1>
-                            আপনার এলাকার
-                            সেরা Brand এক জায়গায়
-                        </h1>
+                        <button
+                            class="primary-btn"
+                            onclick="scrollToSection('brands')"
+                        >
+                            Brands দেখুন →
+                        </button>
 
-                        <p>
-                            Shopping Mela-তে স্থানীয় ব্যবসা ও
-                            ব্র্যান্ডকে খুঁজে নিন সহজেই।
-                        </p>
-
-                        <div class="hero-buttons">
-
-                            <button
-                                class="primary-btn"
-                                onclick="scrollToSection('brands')"
-                            >
-                                Brands দেখুন →
-                            </button>
-
-                            <button
-                                class="light-btn"
-                                onclick="scrollToSection('advertise')"
-                            >
-                                আপনার বিজ্ঞাপন দিন
-                            </button>
-
-                        </div>
+                        <button
+                            class="light-btn"
+                            onclick="scrollToSection('advertise')"
+                        >
+                            আপনার বিজ্ঞাপন দিন
+                        </button>
 
                     </div>
 
                 </div>
-
-
-
-                <!-- SLIDE 2 -->
-
-                <div
-                    class="hero-slide"
-                    style="background-image:url('https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1600&q=85');"
-                >
-
-                    <div class="hero-content">
-
-                        <div class="ad-label">
-                            🔥 SPECIAL OFFER
-                        </div>
-
-                        <div class="hero-brand">
-                            SHOPPING MELA DEAL
-                        </div>
-
-                        <h1>
-                            Local Business,
-                            Local Shopping
-                        </h1>
-
-                        <p>
-                            আপনার কাছের দোকান, service ও
-                            local products এক প্ল্যাটফর্মে।
-                        </p>
-
-                        <div class="hero-buttons">
-
-                            <button
-                                class="primary-btn"
-                                onclick="scrollToSection('products')"
-                            >
-                                Products দেখুন →
-                            </button>
-
-                            <button
-                                class="light-btn"
-                                onclick="showToast('Offer details শীঘ্রই আসছে!')"
-                            >
-                                Offer দেখুন
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- SLIDE 3 -->
-
-                <div
-                    class="hero-slide"
-                    style="background-image:url('https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1600&q=85');"
-                >
-
-                    <div class="hero-content">
-
-                        <div class="ad-label">
-                            📣 BUSINESS AD
-                        </div>
-
-                        <div class="hero-brand">
-                            GROW YOUR BUSINESS
-                        </div>
-
-                        <h1>
-                            আপনার Brand-এর
-                            Advertisement দিন
-                        </h1>
-
-                        <p>
-                            Local customers-এর সামনে আপনার
-                            business ও products তুলে ধরুন।
-                        </p>
-
-                        <div class="hero-buttons">
-
-                            <button
-                                class="primary-btn"
-                                onclick="scrollToSection('advertise')"
-                            >
-                                Advertise করুন →
-                            </button>
-
-                            <button
-                                class="light-btn"
-                                onclick="showToast('Advertising plans শীঘ্রই আসছে!')"
-                            >
-                                Plans দেখুন
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- SLIDER ARROWS -->
-
-                <button
-                    class="slider-arrow slider-prev"
-                    id="prevSlide"
-                    aria-label="Previous slide"
-                >
-                    ‹
-                </button>
-
-
-                <button
-                    class="slider-arrow slider-next"
-                    id="nextSlide"
-                    aria-label="Next slide"
-                >
-                    ›
-                </button>
-
-
-
-                <!-- SLIDER DOTS -->
-
-                <div
-                    class="slider-dots"
-                    id="sliderDots"
-                ></div>
 
             </div>
 
 
+            <!-- SLIDE 2 -->
 
-            <!-- TRUST STRIP -->
+            <div
+                class="hero-slide"
+                style="
+                    background-image:
+                    url('https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1600&q=85');
+                "
+            >
 
-            <div class="trust-strip">
+                <div class="hero-content">
 
-                <div class="trust-item">
-
-                    <div class="trust-icon">
-                        🏪
+                    <div class="ad-label">
+                        🔥 SPECIAL OFFER
                     </div>
 
-                    <div>
-
-                        <strong>
-                            Local Brands
-                        </strong>
-
-                        <small>
-                            আপনার এলাকার ব্যবসা
-                        </small>
-
+                    <div class="hero-brand">
+                        SHOPPING MELA DEAL
                     </div>
 
-                </div>
+                    <h1>
+                        Local Business,
+                        Local Shopping
+                    </h1>
 
+                    <p>
+                        আপনার কাছের দোকান, service ও
+                        local products এক প্ল্যাটফর্মে।
+                    </p>
 
-                <div class="trust-item">
+                    <div class="hero-buttons">
 
-                    <div class="trust-icon">
-                        📢
-                    </div>
+                        <button
+                            class="primary-btn"
+                            onclick="scrollToSection('products')"
+                        >
+                            Products দেখুন →
+                        </button>
 
-                    <div>
-
-                        <strong>
-                            Business Ads
-                        </strong>
-
-                        <small>
-                            আপনার Brand প্রচার করুন
-                        </small>
-
-                    </div>
-
-                </div>
-
-
-                <div class="trust-item">
-
-                    <div class="trust-icon">
-                        🛒
-                    </div>
-
-                    <div>
-
-                        <strong>
-                            Easy Shopping
-                        </strong>
-
-                        <small>
-                            সহজে পণ্য খুঁজুন
-                        </small>
+                        <button
+                            class="light-btn"
+                            onclick="showToast('Offer details শীঘ্রই আসছে!')"
+                        >
+                            Offer দেখুন
+                        </button>
 
                     </div>
 
                 </div>
 
+            </div>
 
-                <div class="trust-item">
 
-                    <div class="trust-icon">
-                        ✍️
+            <!-- SLIDE 3 -->
+
+            <div
+                class="hero-slide"
+                style="
+                    background-image:
+                    url('https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1600&q=85');
+                "
+            >
+
+                <div class="hero-content">
+
+                    <div class="ad-label">
+                        📣 BUSINESS AD
                     </div>
 
-                    <div>
+                    <div class="hero-brand">
+                        GROW YOUR BUSINESS
+                    </div>
 
-                        <strong>
-                            Community Blog
-                        </strong>
+                    <h1>
+                        আপনার Brand-এর
+                        Advertisement দিন
+                    </h1>
 
-                        <small>
-                            নিজের Post প্রকাশ করুন
-                        </small>
+                    <p>
+                        Local customers-এর সামনে আপনার
+                        business ও products তুলে ধরুন।
+                    </p>
+
+                    <div class="hero-buttons">
+
+                        <button
+                            class="primary-btn"
+                            onclick="scrollToSection('advertise')"
+                        >
+                            Advertise করুন →
+                        </button>
+
+                        <button
+                            class="light-btn"
+                            onclick="showToast('Advertising plans শীঘ্রই আসছে!')"
+                        >
+                            Plans দেখুন
+                        </button>
 
                     </div>
 
+                </div>
+
+            </div>
+
+
+            <!-- ARROWS -->
+
+            <button
+                class="slider-arrow slider-prev"
+                id="prevSlide"
+                aria-label="Previous slide"
+            >
+                ‹
+            </button>
+
+            <button
+                class="slider-arrow slider-next"
+                id="nextSlide"
+                aria-label="Next slide"
+            >
+                ›
+            </button>
+
+
+            <!-- DOTS -->
+
+            <div
+                class="slider-dots"
+                id="sliderDots"
+            ></div>
+
+        </div>
+
+
+        <!-- TRUST STRIP -->
+
+        <div class="trust-strip">
+
+            <div class="trust-item">
+
+                <div class="trust-icon">
+                    🏪
+                </div>
+
+                <div>
+                    <strong>
+                        Local Brands
+                    </strong>
+
+                    <small>
+                        আপনার এলাকার ব্যবসা
+                    </small>
+                </div>
+
+            </div>
+
+
+            <div class="trust-item">
+
+                <div class="trust-icon">
+                    📢
+                </div>
+
+                <div>
+                    <strong>
+                        Business Ads
+                    </strong>
+
+                    <small>
+                        আপনার Brand প্রচার করুন
+                    </small>
+                </div>
+
+            </div>
+
+
+            <div class="trust-item">
+
+                <div class="trust-icon">
+                    🛒
+                </div>
+
+                <div>
+                    <strong>
+                        Easy Shopping
+                    </strong>
+
+                    <small>
+                        সহজে পণ্য খুঁজুন
+                    </small>
+                </div>
+
+            </div>
+
+
+            <div class="trust-item">
+
+                <div class="trust-icon">
+                    🔵
+                </div>
+
+                <div>
+                    <strong>
+                        Verified Brands
+                    </strong>
+
+                    <small>
+                        যাচাই করা Business
+                    </small>
                 </div>
 
             </div>
 
         </div>
 
-    </section>
+    </div>
+
+</section>
 
 
 
-    <!-- =================================================
-         CATEGORIES
-    ================================================== -->
+<!-- =====================================================
+     CATEGORIES
+====================================================== -->
 
-    <section
-        class="section"
-        id="categories"
-    >
+<section
+    class="section"
+    id="categories"
+>
 
-        <div class="container">
+    <div class="container">
 
-            <div class="section-heading">
+        <div class="section-heading">
 
-                <div>
+            <div>
 
-                    <h2>
-                        জনপ্রিয় Categories
-                    </h2>
+                <h2>
+                    জনপ্রিয় Categories
+                </h2>
 
-                    <p>
-                        আপনার প্রয়োজনের category বেছে নিন
-                    </p>
-
-                </div>
-
-                <a
-                    href="#categories"
-                    class="view-all"
-                >
-                    সব দেখুন →
-                </a>
+                <p>
+                    আপনার প্রয়োজনের category বেছে নিন
+                </p>
 
             </div>
 
+            <a
+                href="#categories"
+                class="view-all"
+            >
+                সব দেখুন →
+            </a>
+
+        </div>
 
 
-            <div class="category-grid">
+        <div class="category-grid">
 
+            <div
+                class="category-card"
+                onclick="filterCategory('Fashion')"
+            >
+                <div class="category-icon">
+                    👗
+                </div>
+
+                <h3>
+                    Fashion
+                </h3>
+            </div>
+
+
+            <div
+                class="category-card"
+                onclick="filterCategory('Food')"
+            >
+                <div class="category-icon">
+                    🍔
+                </div>
+
+                <h3>
+                    Food
+                </h3>
+            </div>
+
+
+            <div
+                class="category-card"
+                onclick="filterCategory('Electronics')"
+            >
+                <div class="category-icon">
+                    📱
+                </div>
+
+                <h3>
+                    Electronics
+                </h3>
+            </div>
+
+
+            <div
+                class="category-card"
+                onclick="filterCategory('Beauty')"
+            >
+                <div class="category-icon">
+                    💄
+                </div>
+
+                <h3>
+                    Beauty
+                </h3>
+            </div>
+
+
+            <div
+                class="category-card"
+                onclick="filterCategory('Grocery')"
+            >
+                <div class="category-icon">
+                    🛒
+                </div>
+
+                <h3>
+                    Grocery
+                </h3>
+            </div>
+
+
+            <div
+                class="category-card"
+                onclick="filterCategory('Home')"
+            >
+                <div class="category-icon">
+                    🏠
+                </div>
+
+                <h3>
+                    Home
+                </h3>
+            </div>
+
+
+            <div
+                class="category-card"
+                onclick="filterCategory('Services')"
+            >
+                <div class="category-icon">
+                    🛠️
+                </div>
+
+                <h3>
+                    Services
+                </h3>
+            </div>
+
+
+            <div
+                class="category-card"
+                onclick="filterCategory('Others')"
+            >
+                <div class="category-icon">
+                    ✨
+                </div>
+
+                <h3>
+                    Others
+                </h3>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     VERIFIED LOCAL BRANDS
+====================================================== -->
+
+<section
+    class="section"
+    id="brands"
+>
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div>
+
+                <h2>
+                    Featured Local Brands
+                </h2>
+
+                <p>
+                    Verified ও জনপ্রিয় local business
+                </p>
+
+            </div>
+
+            <a
+                href="brands.html"
+                class="view-all"
+            >
+                সব Brands →
+            </a>
+
+        </div>
+
+
+        <div class="brand-grid">
+
+
+            <!-- =================================================
+                 VERIFIED BRAND 1
+            ================================================== -->
+
+            <article class="brand-card">
 
                 <div
-                    class="category-card"
-                    data-category="fashion"
-                    onclick="filterCategory('Fashion')"
+                    class="brand-cover"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=900&q=80');
+                    "
                 >
 
-                    <div class="category-icon">
+                    <span class="sponsored">
+                        SPONSORED
+                    </span>
+
+                    <div class="brand-logo">
                         👗
                     </div>
 
-                    <h3>
-                        Fashion
-                    </h3>
-
                 </div>
 
 
-                <div
-                    class="category-card"
-                    data-category="food"
-                    onclick="filterCategory('Food')"
-                >
+                <div class="brand-info">
 
-                    <div class="category-icon">
-                        🍔
+                    <h3 class="verified-name">
+
+                        Anjona Ladies Tailors
+
+                        <!-- BLUE VERIFIED BADGE -->
+
+                        <span
+                            class="verified-badge"
+                            title="Shopping Mela Verified Business"
+                            aria-label="Verified"
+                        >
+                            ✓
+                        </span>
+
+                    </h3>
+
+
+                    <div class="verified-label">
+                        🔵 Verified Business
                     </div>
 
-                    <h3>
-                        Food
-                    </h3>
 
-                </div>
-
-
-                <div
-                    class="category-card"
-                    data-category="electronics"
-                    onclick="filterCategory('Electronics')"
-                >
-
-                    <div class="category-icon">
-                        📱
+                    <div class="brand-category">
+                        Fashion & Tailoring
                     </div>
 
-                    <h3>
-                        Electronics
-                    </h3>
 
-                </div>
-
-
-                <div
-                    class="category-card"
-                    data-category="beauty"
-                    onclick="filterCategory('Beauty')"
-                >
-
-                    <div class="category-icon">
-                        💄
+                    <div class="brand-location">
+                        📍 Local Business
                     </div>
 
-                    <h3>
-                        Beauty
-                    </h3>
 
-                </div>
-
-
-                <div
-                    class="category-card"
-                    data-category="grocery"
-                    onclick="filterCategory('Grocery')"
-                >
-
-                    <div class="category-icon">
-                        🛒
-                    </div>
-
-                    <h3>
-                        Grocery
-                    </h3>
-
-                </div>
-
-
-                <div
-                    class="category-card"
-                    data-category="home"
-                    onclick="filterCategory('Home')"
-                >
-
-                    <div class="category-icon">
-                        🏠
-                    </div>
-
-                    <h3>
-                        Home
-                    </h3>
-
-                </div>
-
-
-                <div
-                    class="category-card"
-                    data-category="services"
-                    onclick="filterCategory('Services')"
-                >
-
-                    <div class="category-icon">
-                        🛠️
-                    </div>
-
-                    <h3>
-                        Services
-                    </h3>
-
-                </div>
-
-
-                <div
-                    class="category-card"
-                    data-category="others"
-                    onclick="filterCategory('Others')"
-                >
-
-                    <div class="category-icon">
-                        ✨
-                    </div>
-
-                    <h3>
-                        Others
-                    </h3>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =================================================
-         LOCAL BRANDS
-    ================================================== -->
-
-    <section
-        class="section"
-        id="brands"
-    >
-
-        <div class="container">
-
-            <div class="section-heading">
-
-                <div>
-
-                    <h2>
-                        Featured Local Brands
-                    </h2>
-
-                    <p>
-                        আপনার এলাকার জনপ্রিয় business ও brand
+                    <p class="brand-description">
+                        Ladies three-piece, tailoring,
+                        custom dress ও fashion services।
                     </p>
 
+
+                    <button
+                        class="brand-btn"
+                        onclick="openBrandProfile('Anjona Ladies Tailors', true)"
+                    >
+                        Verified Profile দেখুন →
+                    </button>
+
                 </div>
 
-                <a
-                    href="brands.html"
-                    class="view-all"
+            </article>
+
+
+
+            <!-- =================================================
+                 VERIFIED BRAND 2
+            ================================================== -->
+
+            <article class="brand-card">
+
+                <div
+                    class="brand-cover"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=900&q=80');
+                    "
                 >
-                    সব Brands →
-                </a>
 
-            </div>
+                    <span class="sponsored">
+                        FEATURED
+                    </span>
+
+                    <div class="brand-logo">
+                        🌿
+                    </div>
+
+                </div>
 
 
+                <div class="brand-info">
 
-            <div class="brand-grid">
+                    <h3 class="verified-name">
 
+                        Local Attar Shop
 
-                <!-- BRAND 1 -->
-
-                <article class="brand-card">
-
-                    <div
-                        class="brand-cover"
-                        style="background-image:url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=900&q=80');"
-                    >
-
-                        <span class="sponsored">
-                            SPONSORED
+                        <span
+                            class="verified-badge"
+                            title="Shopping Mela Verified Business"
+                            aria-label="Verified"
+                        >
+                            ✓
                         </span>
 
-                        <div class="brand-logo">
-                            👗
-                        </div>
+                    </h3>
 
+
+                    <div class="verified-label">
+                        🔵 Verified Business
                     </div>
 
 
-                    <div class="brand-info">
-
-                        <h3>
-                            Anjona Ladies Tailors
-                        </h3>
-
-                        <div class="brand-category">
-                            Fashion & Tailoring
-                        </div>
-
-                        <div class="brand-location">
-                            📍 Local Business
-                        </div>
-
-                        <p class="brand-description">
-                            Ladies three-piece, tailoring,
-                            custom dress ও fashion services।
-                        </p>
-
-                        <button
-                            class="brand-btn"
-                            onclick="showToast('Anjona Ladies Tailors profile শীঘ্রই আসছে!')"
-                        >
-                            Brand দেখুন →
-                        </button>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- BRAND 2 -->
-
-                <article class="brand-card">
-
-                    <div
-                        class="brand-cover"
-                        style="background-image:url('https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=900&q=80');"
-                    >
-
-                        <span class="sponsored">
-                            FEATURED
-                        </span>
-
-                        <div class="brand-logo">
-                            🌿
-                        </div>
-
+                    <div class="brand-category">
+                        Perfume & Attar
                     </div>
 
 
-                    <div class="brand-info">
-
-                        <h3>
-                            Local Attar Shop
-                        </h3>
-
-                        <div class="brand-category">
-                            Perfume & Attar
-                        </div>
-
-                        <div class="brand-location">
-                            📍 Local Business
-                        </div>
-
-                        <p class="brand-description">
-                            Premium attar, perfume ও
-                            fragrance collection।
-                        </p>
-
-                        <button
-                            class="brand-btn"
-                            onclick="showToast('Attar Shop profile শীঘ্রই আসছে!')"
-                        >
-                            Brand দেখুন →
-                        </button>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- BRAND 3 -->
-
-                <article class="brand-card">
-
-                    <div
-                        class="brand-cover"
-                        style="background-image:url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80');"
-                    >
-
-                        <span class="sponsored">
-                            SPONSORED
-                        </span>
-
-                        <div class="brand-logo">
-                            🍽️
-                        </div>
-
+                    <div class="brand-location">
+                        📍 Local Business
                     </div>
 
 
-                    <div class="brand-info">
-
-                        <h3>
-                            Local Food House
-                        </h3>
-
-                        <div class="brand-category">
-                            Restaurant & Food
-                        </div>
-
-                        <div class="brand-location">
-                            📍 Local Business
-                        </div>
-
-                        <p class="brand-description">
-                            Homemade food, snacks এবং
-                            local food delivery।
-                        </p>
-
-                        <button
-                            class="brand-btn"
-                            onclick="showToast('Food House profile শীঘ্রই আসছে!')"
-                        >
-                            Brand দেখুন →
-                        </button>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- BRAND 4 -->
-
-                <article class="brand-card">
-
-                    <div
-                        class="brand-cover"
-                        style="background-image:url('https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=80');"
-                    >
-
-                        <span class="sponsored">
-                            FEATURED
-                        </span>
-
-                        <div class="brand-logo">
-                            💼
-                        </div>
-
-                    </div>
-
-
-                    <div class="brand-info">
-
-                        <h3>
-                            SNK Local Services
-                        </h3>
-
-                        <div class="brand-category">
-                            IT & Services
-                        </div>
-
-                        <div class="brand-location">
-                            📍 Local Business
-                        </div>
-
-                        <p class="brand-description">
-                            Website, printing, digital services
-                            ও local business solutions।
-                        </p>
-
-                        <button
-                            class="brand-btn"
-                            onclick="showToast('SNK Services profile শীঘ্রই আসছে!')"
-                        >
-                            Brand দেখুন →
-                        </button>
-
-                    </div>
-
-                </article>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =================================================
-         OFFER BANNER
-    ================================================== -->
-
-    <section
-        class="container"
-        id="offers"
-    >
-
-        <div class="offer-banner">
-
-            <div class="offer-content">
-
-                <small>
-                    🔥 SHOPPING MELA SPECIAL
-                </small>
-
-                <h2>
-                    Local Business-এর
-                    Special Offers
-                </h2>
-
-                <p>
-                    আপনার কাছের দোকান ও brand-এর
-                    নতুন offer এবং promotion খুঁজে নিন।
-                </p>
-
-                <button
-                    class="light-btn"
-                    onclick="showToast('All offers শীঘ্রই আসছে!')"
-                >
-                    সব Offers দেখুন →
-                </button>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =================================================
-         PRODUCTS
-    ================================================== -->
-
-    <section
-        class="section"
-        id="products"
-    >
-
-        <div class="container">
-
-            <div class="section-heading">
-
-                <div>
-
-                    <h2>
-                        Trending Products
-                    </h2>
-
-                    <p>
-                        Local sellers-এর জনপ্রিয় products
+                    <p class="brand-description">
+                        Premium attar, perfume ও
+                        fragrance collection।
                     </p>
 
+
+                    <button
+                        class="brand-btn"
+                        onclick="openBrandProfile('Local Attar Shop', true)"
+                    >
+                        Verified Profile দেখুন →
+                    </button>
+
                 </div>
 
-                <a
-                    href="products.html"
-                    class="view-all"
-                >
-                    সব Products →
-                </a>
-
-            </div>
+            </article>
 
 
 
-            <div
-                class="product-grid"
-                id="productGrid"
-            >
+            <!-- =================================================
+                 UNVERIFIED BRAND
+            ================================================== -->
 
+            <article class="brand-card">
 
-                <!-- PRODUCT 1 -->
-
-                <article
-                    class="product-card"
-                    data-product="Ladies Three Piece"
-                    data-category="Fashion"
+                <div
+                    class="brand-cover"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80');
+                    "
                 >
 
-                    <div
-                        class="product-image"
-                        style="background-image:url('https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=700&q=80');"
-                    >
+                    <span class="sponsored">
+                        SPONSORED
+                    </span>
 
-                        <span class="discount">
-                            -20%
-                        </span>
+                    <div class="brand-logo">
+                        🍽️
+                    </div>
 
-                        <button
-                            class="product-heart"
-                            type="button"
-                            aria-label="Wishlist"
-                        >
-                            ♡
-                        </button>
+                </div>
 
+
+                <div class="brand-info">
+
+                    <h3 class="verified-name">
+
+                        Local Food House
+
+                    </h3>
+
+
+                    <div class="unverified-label">
+                        Profile not verified
                     </div>
 
 
-                    <div class="product-info">
-
-                        <h3>
-                            Ladies Three Piece
-                        </h3>
-
-                        <div class="product-brand">
-                            Local Fashion Brand
-                        </div>
-
-                        <div class="product-price">
-
-                            <span class="current-price">
-                                ৳1,250
-                            </span>
-
-                            <span class="old-price">
-                                ৳1,550
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- PRODUCT 2 -->
-
-                <article
-                    class="product-card"
-                    data-product="Premium Attar"
-                    data-category="Beauty"
-                >
-
-                    <div
-                        class="product-image"
-                        style="background-image:url('https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=700&q=80');"
-                    >
-
-                        <span class="discount">
-                            -15%
-                        </span>
-
-                        <button
-                            class="product-heart"
-                            type="button"
-                            aria-label="Wishlist"
-                        >
-                            ♡
-                        </button>
-
+                    <div class="brand-category">
+                        Restaurant & Food
                     </div>
 
 
-                    <div class="product-info">
-
-                        <h3>
-                            Premium Attar
-                        </h3>
-
-                        <div class="product-brand">
-                            Local Attar Shop
-                        </div>
-
-                        <div class="product-price">
-
-                            <span class="current-price">
-                                ৳650
-                            </span>
-
-                            <span class="old-price">
-                                ৳750
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- PRODUCT 3 -->
-
-                <article
-                    class="product-card"
-                    data-product="Handmade Bag"
-                    data-category="Fashion"
-                >
-
-                    <div
-                        class="product-image"
-                        style="background-image:url('https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=700&q=80');"
-                    >
-
-                        <span class="discount">
-                            NEW
-                        </span>
-
-                        <button
-                            class="product-heart"
-                            type="button"
-                            aria-label="Wishlist"
-                        >
-                            ♡
-                        </button>
-
+                    <div class="brand-location">
+                        📍 Local Business
                     </div>
 
 
-                    <div class="product-info">
-
-                        <h3>
-                            Handmade Bag
-                        </h3>
-
-                        <div class="product-brand">
-                            Local Handmade Brand
-                        </div>
-
-                        <div class="product-price">
-
-                            <span class="current-price">
-                                ৳890
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- PRODUCT 4 -->
-
-                <article
-                    class="product-card"
-                    data-product="Homemade Food"
-                    data-category="Food"
-                >
-
-                    <div
-                        class="product-image"
-                        style="background-image:url('https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=700&q=80');"
-                    >
-
-                        <span class="discount">
-                            HOT
-                        </span>
-
-                        <button
-                            class="product-heart"
-                            type="button"
-                            aria-label="Wishlist"
-                        >
-                            ♡
-                        </button>
-
-                    </div>
-
-
-                    <div class="product-info">
-
-                        <h3>
-                            Homemade Food
-                        </h3>
-
-                        <div class="product-brand">
-                            Local Food Brand
-                        </div>
-
-                        <div class="product-price">
-
-                            <span class="current-price">
-                                ৳350
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =================================================
-         BLOG
-    ================================================== -->
-
-    <section
-        class="section"
-        id="blog"
-    >
-
-        <div class="container">
-
-            <div class="section-heading">
-
-                <div>
-
-                    <h2>
-                        Shopping Mela Blog
-                    </h2>
-
-                    <p>
-                        Local people ও business-এর গল্প,
-                        tips এবং information
+                    <p class="brand-description">
+                        Homemade food, snacks এবং
+                        local food delivery।
                     </p>
 
+
+                    <button
+                        class="brand-btn"
+                        onclick="openBrandProfile('Local Food House', false)"
+                    >
+                        Brand Profile দেখুন →
+                    </button>
+
                 </div>
 
-                <a
-                    href="blog.html"
-                    class="view-all"
+            </article>
+
+
+
+            <!-- =================================================
+                 VERIFIED BRAND 4
+            ================================================== -->
+
+            <article class="brand-card">
+
+                <div
+                    class="brand-cover"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=80');
+                    "
                 >
-                    সব Blog →
-                </a>
 
-            </div>
+                    <span class="sponsored">
+                        FEATURED
+                    </span>
 
-
-
-            <div class="blog-grid">
-
-
-                <!-- BLOG 1 -->
-
-                <article class="blog-card">
-
-                    <div
-                        class="blog-image"
-                        style="background-image:url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=900&q=80');"
-                    ></div>
-
-
-                    <div class="blog-info">
-
-                        <div class="blog-meta">
-
-                            <span class="blog-category">
-                                Local Business
-                            </span>
-
-                            <span>
-                                5 min read
-                            </span>
-
-                        </div>
-
-                        <h3>
-                            Local Brand কীভাবে
-                            নিজের Business বড় করতে পারে?
-                        </h3>
-
-                        <p>
-                            Local customers-এর কাছে
-                            আপনার business পৌঁছে দেওয়ার
-                            কিছু সহজ উপায়।
-                        </p>
-
+                    <div class="brand-logo">
+                        💼
                     </div>
 
-                </article>
+                </div>
 
 
+                <div class="brand-info">
 
-                <!-- BLOG 2 -->
+                    <h3 class="verified-name">
 
-                <article class="blog-card">
+                        SNK Local Services
 
-                    <div
-                        class="blog-image"
-                        style="background-image:url('https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=900&q=80');"
-                    ></div>
+                        <span
+                            class="verified-badge"
+                            title="Shopping Mela Verified Business"
+                            aria-label="Verified"
+                        >
+                            ✓
+                        </span>
+
+                    </h3>
 
 
-                    <div class="blog-info">
-
-                        <div class="blog-meta">
-
-                            <span class="blog-category">
-                                Shopping Tips
-                            </span>
-
-                            <span>
-                                4 min read
-                            </span>
-
-                        </div>
-
-                        <h3>
-                            Online Shopping করার সময়
-                            কী কী বিষয় দেখবেন?
-                        </h3>
-
-                        <p>
-                            নিরাপদে এবং ভালোভাবে
-                            local products কেনার
-                            কিছু useful tips।
-                        </p>
-
+                    <div class="verified-label">
+                        🔵 Verified Business
                     </div>
 
-                </article>
 
-
-
-                <!-- BLOG 3 -->
-
-                <article class="blog-card">
-
-                    <div
-                        class="blog-image"
-                        style="background-image:url('https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=80');"
-                    ></div>
-
-
-                    <div class="blog-info">
-
-                        <div class="blog-meta">
-
-                            <span class="blog-category">
-                                Community
-                            </span>
-
-                            <span>
-                                3 min read
-                            </span>
-
-                        </div>
-
-                        <h3>
-                            Local Business কেন
-                            আমাদের জন্য গুরুত্বপূর্ণ?
-                        </h3>
-
-                        <p>
-                            নিজের এলাকার উদ্যোক্তা ও
-                            ছোট business-কে support করার
-                            গুরুত্ব।
-                        </p>
-
+                    <div class="brand-category">
+                        IT & Services
                     </div>
 
-                </article>
 
-            </div>
+                    <div class="brand-location">
+                        📍 Local Business
+                    </div>
+
+
+                    <p class="brand-description">
+                        Website, printing, digital services
+                        ও local business solutions।
+                    </p>
+
+
+                    <button
+                        class="brand-btn"
+                        onclick="openBrandProfile('SNK Local Services', true)"
+                    >
+                        Verified Profile দেখুন →
+                    </button>
+
+                </div>
+
+            </article>
 
         </div>
 
-    </section>
+    </div>
+
+</section>
 
 
 
-    <!-- =================================================
-         ADVERTISE
-    ================================================== -->
+<!-- =====================================================
+     VERIFIED PROFILE INFORMATION
+====================================================== -->
 
-    <section
-        class="container"
-        id="advertise"
-    >
+<section class="container">
 
-        <div class="advertise-section">
+    <div class="verification-info">
 
-            <div class="advertise-text">
+        <div class="verification-icon">
+            🔵✓
+        </div>
 
-                <small>
-                    📢 FOR LOCAL BUSINESS
-                </small>
+        <div>
 
-                <h2>
-                    আপনার Business-এর
-                    Advertisement দিন
-                </h2>
+            <h2>
+                Blue Verified Badge কী?
+            </h2>
 
-                <p>
-                    Shopping Mela-তে আপনার brand,
-                    shop, service বা product-এর
-                    banner advertisement দেখান।
-                </p>
+            <p>
+                Shopping Mela কর্তৃক যাচাই করা
+                Local Business ও Brand-এর profile-এ
+                এই blue verified badge দেখানো হবে।
+            </p>
 
-            </div>
+        </div>
 
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     OFFER BANNER
+====================================================== -->
+
+<section
+    class="container"
+    id="offers"
+>
+
+    <div class="offer-banner">
+
+        <div class="offer-content">
+
+            <small>
+                🔥 SHOPPING MELA SPECIAL
+            </small>
+
+            <h2>
+                Local Business-এর
+                Special Offers
+            </h2>
+
+            <p>
+                আপনার কাছের দোকান ও brand-এর
+                নতুন offer এবং promotion খুঁজে নিন।
+            </p>
 
             <button
-                class="advertise-button"
-                type="button"
-                onclick="showToast('Advertising form শীঘ্রই আসছে!')"
+                class="light-btn"
+                onclick="showToast('All offers শীঘ্রই আসছে!')"
             >
-                Advertise করুন →
+                সব Offers দেখুন →
             </button>
 
         </div>
 
-    </section>
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PRODUCTS
+====================================================== -->
+
+<section
+    class="section"
+    id="products"
+>
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div>
+
+                <h2>
+                    Trending Products
+                </h2>
+
+                <p>
+                    Local sellers-এর জনপ্রিয় products
+                </p>
+
+            </div>
+
+            <a
+                href="products.html"
+                class="view-all"
+            >
+                সব Products →
+            </a>
+
+        </div>
+
+
+        <div
+            class="product-grid"
+            id="productGrid"
+        >
+
+
+            <!-- PRODUCT 1 -->
+
+            <article
+                class="product-card"
+                data-product="Ladies Three Piece"
+                data-category="Fashion"
+            >
+
+                <div
+                    class="product-image"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=700&q=80');
+                    "
+                >
+
+                    <span class="discount">
+                        -20%
+                    </span>
+
+                    <button
+                        class="product-heart"
+                        onclick="showToast('Wishlist-এ যোগ করা হয়েছে ❤️')"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <h3>
+                        Ladies Three Piece
+                    </h3>
+
+                    <div class="product-brand">
+
+                        Local Fashion Brand
+
+                        <span class="mini-verified">
+                            ✓
+                        </span>
+
+                    </div>
+
+                    <div class="product-price">
+
+                        <span class="current-price">
+                            ৳1,250
+                        </span>
+
+                        <span class="old-price">
+                            ৳1,550
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PRODUCT 2 -->
+
+            <article
+                class="product-card"
+                data-product="Premium Attar"
+                data-category="Beauty"
+            >
+
+                <div
+                    class="product-image"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=700&q=80');
+                    "
+                >
+
+                    <span class="discount">
+                        -15%
+                    </span>
+
+                    <button
+                        class="product-heart"
+                        onclick="showToast('Wishlist-এ যোগ করা হয়েছে ❤️')"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <h3>
+                        Premium Attar
+                    </h3>
+
+                    <div class="product-brand">
+
+                        Local Attar Shop
+
+                        <span class="mini-verified">
+                            ✓
+                        </span>
+
+                    </div>
+
+                    <div class="product-price">
+
+                        <span class="current-price">
+                            ৳650
+                        </span>
+
+                        <span class="old-price">
+                            ৳750
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PRODUCT 3 -->
+
+            <article
+                class="product-card"
+                data-product="Handmade Bag"
+                data-category="Fashion"
+            >
+
+                <div
+                    class="product-image"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=700&q=80');
+                    "
+                >
+
+                    <span class="discount">
+                        NEW
+                    </span>
+
+                    <button
+                        class="product-heart"
+                        onclick="showToast('Wishlist-এ যোগ করা হয়েছে ❤️')"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <h3>
+                        Handmade Bag
+                    </h3>
+
+                    <div class="product-brand">
+                        Local Handmade Brand
+                    </div>
+
+                    <div class="product-price">
+
+                        <span class="current-price">
+                            ৳890
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PRODUCT 4 -->
+
+            <article
+                class="product-card"
+                data-product="Homemade Food"
+                data-category="Food"
+            >
+
+                <div
+                    class="product-image"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=700&q=80');
+                    "
+                >
+
+                    <span class="discount">
+                        HOT
+                    </span>
+
+                    <button
+                        class="product-heart"
+                        onclick="showToast('Wishlist-এ যোগ করা হয়েছে ❤️')"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <h3>
+                        Homemade Food
+                    </h3>
+
+                    <div class="product-brand">
+                        Local Food Brand
+                    </div>
+
+                    <div class="product-price">
+
+                        <span class="current-price">
+                            ৳350
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     BLOG
+====================================================== -->
+
+<section
+    class="section"
+    id="blog"
+>
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div>
+
+                <h2>
+                    Shopping Mela Blog
+                </h2>
+
+                <p>
+                    Local people ও business-এর গল্প,
+                    tips এবং information
+                </p>
+
+            </div>
+
+            <a
+                href="blog.html"
+                class="view-all"
+            >
+                সব Blog →
+            </a>
+
+        </div>
+
+
+        <div class="blog-grid">
+
+
+            <!-- BLOG 1 -->
+
+            <article class="blog-card">
+
+                <div
+                    class="blog-image"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=900&q=80');
+                    "
+                ></div>
+
+
+                <div class="blog-info">
+
+                    <div class="blog-meta">
+
+                        <span class="blog-category">
+                            Local Business
+                        </span>
+
+                        <span>
+                            5 min read
+                        </span>
+
+                    </div>
+
+                    <h3>
+                        Local Brand কীভাবে
+                        নিজের Business বড় করতে পারে?
+                    </h3>
+
+                    <p>
+                        Local customers-এর কাছে
+                        আপনার business পৌঁছে দেওয়ার
+                        কিছু সহজ উপায়।
+                    </p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- BLOG 2 -->
+
+            <article class="blog-card">
+
+                <div
+                    class="blog-image"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=900&q=80');
+                    "
+                ></div>
+
+
+                <div class="blog-info">
+
+                    <div class="blog-meta">
+
+                        <span class="blog-category">
+                            Shopping Tips
+                        </span>
+
+                        <span>
+                            4 min read
+                        </span>
+
+                    </div>
+
+                    <h3>
+                        Online Shopping করার সময়
+                        কী কী বিষয় দেখবেন?
+                    </h3>
+
+                    <p>
+                        নিরাপদে এবং ভালোভাবে
+                        local products কেনার
+                        কিছু useful tips।
+                    </p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- BLOG 3 -->
+
+            <article class="blog-card">
+
+                <div
+                    class="blog-image"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=80');
+                    "
+                ></div>
+
+
+                <div class="blog-info">
+
+                    <div class="blog-meta">
+
+                        <span class="blog-category">
+                            Community
+                        </span>
+
+                        <span>
+                            3 min read
+                        </span>
+
+                    </div>
+
+                    <h3>
+                        Local Business কেন
+                        আমাদের জন্য গুরুত্বপূর্ণ?
+                    </h3>
+
+                    <p>
+                        নিজের এলাকার উদ্যোক্তা ও
+                        ছোট business-কে support করার
+                        গুরুত্ব।
+                    </p>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ADVERTISE
+====================================================== -->
+
+<section
+    class="container"
+    id="advertise"
+>
+
+    <div class="advertise-section">
+
+        <div class="advertise-text">
+
+            <small>
+                📢 FOR LOCAL BUSINESS
+            </small>
+
+            <h2>
+                আপনার Business-এর
+                Advertisement দিন
+            </h2>
+
+            <p>
+                Shopping Mela-তে আপনার brand,
+                shop, service বা product-এর
+                banner advertisement দেখান।
+            </p>
+
+        </div>
+
+
+        <button
+            class="advertise-button"
+            onclick="showToast('Advertising form শীঘ্রই আসছে!')"
+        >
+            Advertise করুন →
+        </button>
+
+    </div>
+
+</section>
 
 </main>
 
@@ -1486,7 +1570,6 @@
             </div>
 
 
-
             <div>
 
                 <h3>
@@ -1512,7 +1595,6 @@
             </div>
 
 
-
             <div>
 
                 <h3>
@@ -1532,7 +1614,6 @@
                 </a>
 
             </div>
-
 
 
             <div>
@@ -1562,7 +1643,6 @@
         </div>
 
 
-
         <div class="footer-bottom">
 
             © 2026 Shopping Mela.
@@ -1590,13 +1670,151 @@
 
 
 <!-- =====================================================
-     SHOPPING MELA — EXTERNAL JAVASCRIPT
-     1.3 script.js
+     PROFILE MODAL
+====================================================== -->
+
+<div
+    class="profile-modal"
+    id="profileModal"
+>
+
+    <div class="profile-modal-box">
+
+        <button
+            class="profile-modal-close"
+            onclick="closeBrandProfile()"
+            aria-label="Close"
+        >
+            ×
+        </button>
+
+
+        <div class="profile-modal-icon">
+            🏪
+        </div>
+
+
+        <h2 id="profileName">
+            Brand Name
+        </h2>
+
+
+        <div
+            id="profileVerification"
+            class="profile-verification"
+        >
+            🔵✓ Verified Business
+        </div>
+
+
+        <p id="profileDescription">
+            Brand profile information
+        </p>
+
+
+        <button
+            class="primary-btn"
+            onclick="closeBrandProfile()"
+        >
+            Close
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     SCRIPT
 ====================================================== -->
 
 <script src="script.js"></script>
-```
+
+
+<!-- =====================================================
+     1.8 VERIFIED PROFILE FALLBACK JS
+====================================================== -->
+
+<script>
+
+function openBrandProfile(name, verified) {
+
+    const modal =
+        document.getElementById("profileModal");
+
+    const profileName =
+        document.getElementById("profileName");
+
+    const verification =
+        document.getElementById("profileVerification");
+
+    const description =
+        document.getElementById("profileDescription");
+
+
+    profileName.textContent = name;
+
+
+    if (verified === true) {
+
+        verification.innerHTML =
+            "🔵✓ Verified Business";
+
+        verification.className =
+            "profile-verification verified";
+
+        description.textContent =
+            "এই Business-টি Shopping Mela কর্তৃক verified profile হিসেবে প্রদর্শিত হচ্ছে।";
+
+    } else {
+
+        verification.innerHTML =
+            "Profile Not Verified";
+
+        verification.className =
+            "profile-verification unverified";
+
+        description.textContent =
+            "এই Business-এর profile এখনো Shopping Mela verification সম্পন্ন করেনি।";
+
+    }
+
+
+    modal.classList.add("show");
+
+}
+
+
+function closeBrandProfile() {
+
+    const modal =
+        document.getElementById("profileModal");
+
+    modal.classList.remove("show");
+
+}
+
+
+document.addEventListener(
+    "click",
+    function(event) {
+
+        const modal =
+            document.getElementById("profileModal");
+
+        if (event.target === modal) {
+
+            closeBrandProfile();
+
+        }
+
+    }
+);
+
+</script>
+
 
 </body>
-
 </html>
+```
