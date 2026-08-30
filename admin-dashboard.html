@@ -1,10 +1,10 @@
+```html
 <!DOCTYPE html>
-
 <html lang="bn">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Shopping Mela — Admin Dashboard</title>
+<title>Shopping Mela — Owner Dashboard</title>
 
 <style>
 *{box-sizing:border-box}
@@ -50,6 +50,11 @@ button{cursor:pointer}
   display:grid;
   place-items:center;
   font-style:normal;
+}
+
+.logo small{
+  color:#98a2b3;
+  font-size:8px;
 }
 
 .nav-title{
@@ -129,13 +134,8 @@ button{cursor:pointer}
   padding:25px;
 }
 
-.section{
-  display:none;
-}
-
-.section.active{
-  display:block;
-}
+.section{display:none}
+.section.active{display:block}
 
 .welcome h1{
   margin:0;
@@ -238,11 +238,17 @@ button{cursor:pointer}
   color:#b54708;
 }
 
-.status.delivered{
+.status.active{
   background:#ecfdf3;
   color:#12b76a;
 }
 
+.status.pending{
+  background:#fffaeb;
+  color:#b54708;
+}
+
+.status.suspended,
 .status.cancelled{
   background:#fff1f0;
   color:#f04438;
@@ -270,7 +276,6 @@ button{cursor:pointer}
 .toolbar{
   background:#fff;
   border:1px solid #e7eaf0;
-  border-bottom:0;
   border-radius:13px 13px 0 0;
   padding:16px 18px;
   display:grid;
@@ -300,6 +305,7 @@ button{cursor:pointer}
 .table-box{
   background:#fff;
   border:1px solid #e7eaf0;
+  border-top:0;
   border-radius:0 0 13px 13px;
   overflow:auto;
 }
@@ -307,10 +313,11 @@ button{cursor:pointer}
 table{
   width:100%;
   border-collapse:collapse;
-  min-width:850px;
+  min-width:900px;
 }
 
-th,td{
+th,
+td{
   text-align:left;
   padding:12px 14px;
   border-bottom:1px solid #f2f4f7;
@@ -346,6 +353,25 @@ th{
   color:#fff;
 }
 
+.primary{
+  border:0;
+  background:#1877f2;
+  color:#fff;
+  padding:10px 16px;
+  border-radius:7px;
+  font-size:10px;
+  font-weight:800;
+}
+
+.secondary{
+  border:1px solid #d0d5dd;
+  background:#fff;
+  padding:9px 15px;
+  border-radius:7px;
+  font-size:10px;
+  margin-left:6px;
+}
+
 .form{
   background:#fff;
   border:1px solid #e7eaf0;
@@ -376,130 +402,8 @@ th{
   margin-bottom:5px;
 }
 
-.preview{
-  width:110px;
-  height:110px;
-  border-radius:9px;
-  overflow:hidden;
-  margin-top:10px;
-  background:#f2f4f7;
-  display:none;
-}
-
-.preview.show{
-  display:block;
-}
-
-.preview img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
 .form-actions{
   margin-top:14px;
-}
-
-.primary{
-  border:0;
-  background:#1877f2;
-  color:#fff;
-  padding:10px 16px;
-  border-radius:7px;
-  font-size:10px;
-  font-weight:800;
-}
-
-.secondary{
-  border:1px solid #d0d5dd;
-  background:#fff;
-  padding:9px 15px;
-  border-radius:7px;
-  font-size:10px;
-  margin-left:6px;
-}
-
-.products{
-  background:#fff;
-  border:1px solid #e7eaf0;
-  border-radius:13px;
-  padding:18px;
-}
-
-.product{
-  display:grid;
-  grid-template-columns:65px 1fr auto;
-  gap:13px;
-  align-items:center;
-  padding:12px 0;
-  border-bottom:1px solid #f2f4f7;
-}
-
-.product:last-child{
-  border:0;
-}
-
-.pic{
-  width:65px;
-  height:65px;
-  border-radius:9px;
-  background:#f2f4f7;
-  overflow:hidden;
-  display:grid;
-  place-items:center;
-}
-
-.pic img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.pname{
-  font-size:11px;
-  font-weight:800;
-}
-
-.tag{
-  display:inline-block;
-  background:#eef5ff;
-  color:#1877f2;
-  border-radius:12px;
-  padding:3px 6px;
-  font-size:7px;
-  margin-top:4px;
-}
-
-.price{
-  font-size:11px;
-  font-weight:800;
-  margin-top:5px;
-}
-
-.users{
-  background:#fff;
-  border:1px solid #e7eaf0;
-  border-radius:13px;
-  padding:18px;
-}
-
-.user{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:13px 0;
-  border-bottom:1px solid #f2f4f7;
-}
-
-.avatar{
-  width:36px;
-  height:36px;
-  border-radius:50%;
-  background:#eef5ff;
-  color:#1877f2;
-  display:grid;
-  place-items:center;
-  font-weight:800;
 }
 
 .modal{
@@ -599,61 +503,22 @@ th{
   font-size:10px;
 }
 
-.login-required{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#f5f6f8;
+.store-name{
+  font-weight:800;
+  font-size:10px;
 }
 
-.login-box{
-  width:90%;
-  max-width:400px;
-  background:#fff;
-  border:1px solid #eaecf0;
-  border-radius:15px;
-  padding:30px;
-  text-align:center;
-  box-shadow:0 10px 30px #10182815;
-}
-
-.login-box h2{
-  margin:0 0 8px;
-}
-
-.login-box p{
-  color:#667085;
-  font-size:12px;
-}
-
-.login-box a{
-  display:inline-block;
-  margin-top:15px;
-  padding:10px 18px;
-  background:#1877f2;
-  color:#fff;
-  text-decoration:none;
-  border-radius:7px;
-  font-size:11px;
+.store-id{
+  color:#98a2b3;
+  font-size:8px;
+  margin-top:3px;
 }
 
 @media(max-width:900px){
-  .sidebar{
-    width:190px;
-  }
-
-  .main{
-    margin-left:190px;
-  }
-
-  .stats{
-    grid-template-columns:1fr 1fr;
-  }
-
-  .grid{
-    grid-template-columns:1fr;
-  }
+  .sidebar{width:190px}
+  .main{margin-left:190px}
+  .stats{grid-template-columns:1fr 1fr}
+  .grid{grid-template-columns:1fr}
 }
 
 @media(max-width:650px){
@@ -663,9 +528,7 @@ th{
     height:auto;
   }
 
-  .main{
-    margin-left:0;
-  }
+  .main{margin-left:0}
 
   .header{
     padding:0 14px;
@@ -689,46 +552,23 @@ th{
     grid-column:auto;
   }
 
-  .product{
-    grid-template-columns:55px 1fr;
-  }
-
-  .product-actions{
-    grid-column:2;
-  }
-
   .header-right .site{
     display:none;
   }
 }
 </style>
-
 </head>
 
 <body>
 
-<!--
-  SECURITY GATE
-  Dashboard content is not shown until session is verified.
--->
-
-<div id="securityGate" class="login-required">
-  <div class="login-box">
-    <h2>🔐 Admin Login Required</h2>
-    <p>Your admin session is missing or expired.</p>
-    <a href="admin-login.html">Go to Admin Login</a>
-  </div>
-</div>
-
-<div id="dashboardApp" style="display:none;">
-
+<!-- SIDEBAR -->
 <aside class="sidebar">
 
   <div class="logo">
     <i>🛍️</i>
     <span>
       Shopping Mela<br>
-      <small>Admin Panel</small>
+      <small>OWNER CONTROL PANEL</small>
     </span>
   </div>
 
@@ -736,6 +576,10 @@ th{
 
   <button class="nav active" data-section="dashboard">
     📊 Dashboard
+  </button>
+
+  <button class="nav" data-section="stores">
+    🏪 Stores
   </button>
 
   <button class="nav" data-section="orders">
@@ -752,6 +596,8 @@ th{
 
 </aside>
 
+
+<!-- MAIN -->
 <main class="main">
 
 <header class="header">
@@ -760,368 +606,486 @@ th{
 
   <div class="header-right">
 
-```
-<a class="site" href="index.html">
-  🌐 View Site
-</a>
+    <a class="site" href="index.html">
+      🌐 View Site
+    </a>
 
-<button class="logout" onclick="logout()">
-  Logout
-</button>
-```
+    <button class="logout" onclick="logout()">
+      Logout
+    </button>
 
   </div>
 
 </header>
 
+
 <div class="content">
 
-<!-- DASHBOARD -->
+
+<!-- ================= DASHBOARD ================= -->
 
 <section id="dashboard" class="section active">
 
   <div class="welcome">
-    <h1>Welcome, Admin 👋</h1>
-    <p>Shopping Mela store overview.</p>
+    <h1>Welcome, Owner 👋</h1>
+    <p>Shopping Mela business overview.</p>
   </div>
 
   <div class="stats">
 
-```
-<div class="card">
-  <div class="stat-label">Total Products</div>
-  <div class="stat-value" id="statProducts">0</div>
-</div>
+    <div class="card">
+      <div class="stat-label">Total Stores</div>
+      <div class="stat-value" id="statStores">0</div>
+    </div>
 
-<div class="card">
-  <div class="stat-label">Total Orders</div>
-  <div class="stat-value" id="statOrders">0</div>
-</div>
+    <div class="card">
+      <div class="stat-label">Total Products</div>
+      <div class="stat-value" id="statProducts">0</div>
+    </div>
 
-<div class="card">
-  <div class="stat-label">Total Users</div>
-  <div class="stat-value" id="statUsers">0</div>
-</div>
+    <div class="card">
+      <div class="stat-label">Total Orders</div>
+      <div class="stat-value" id="statOrders">0</div>
+    </div>
 
-<div class="card">
-  <div class="stat-label">Total Sales</div>
-  <div class="stat-value" id="statSales">৳0</div>
-</div>
-```
+    <div class="card">
+      <div class="stat-label">Total Users</div>
+      <div class="stat-value" id="statUsers">0</div>
+    </div>
 
   </div>
+
 
   <div class="grid">
 
-```
-<div class="panel">
+    <div class="panel">
 
-  <div class="panel-head">
-    <h3>Recent Orders</h3>
-    <button onclick="showSection('orders')">
-      View all →
-    </button>
-  </div>
+      <div class="panel-head">
 
-  <div id="recentOrders"></div>
+        <h3>Recent Stores</h3>
 
-</div>
+        <button onclick="showSection('stores')">
+          View all →
+        </button>
 
-<div class="panel">
+      </div>
 
-  <div class="panel-head">
-    <h3>Quick Actions</h3>
-  </div>
+      <div id="recentStores"></div>
 
-  <div class="quick">
+    </div>
 
-    <button onclick="showSection('products');resetProductForm()">
-      ➕<br>Add Product
-    </button>
 
-    <button onclick="showSection('orders')">
-      📦<br>Orders
-    </button>
+    <div class="panel">
 
-    <button onclick="showSection('users')">
-      👥<br>Users
-    </button>
+      <div class="panel-head">
+        <h3>Quick Actions</h3>
+      </div>
 
-    <button onclick="showSection('products')">
-      🛒<br>Products
-    </button>
+      <div class="quick">
 
-  </div>
+        <button onclick="showSection('stores');resetStoreForm()">
+          🏪<br>
+          Add Store
+        </button>
 
-</div>
-```
+        <button onclick="showSection('orders')">
+          📦<br>
+          Orders
+        </button>
 
-  </div>
+        <button onclick="showSection('products')">
+          🛒<br>
+          Products
+        </button>
 
-</section>
+        <button onclick="showSection('users')">
+          👥<br>
+          Users
+        </button>
 
-<!-- ORDERS -->
-
-<section id="orders" class="section">
-
-  <div class="welcome">
-    <h1>Orders</h1>
-    <p>Manage customer orders.</p>
-  </div>
-
-  <div class="toolbar">
-
-```
-<input
-  id="orderSearch"
-  placeholder="Search order, customer, phone..."
-  oninput="renderOrders()"
->
-
-<select id="orderStatus" onchange="renderOrders()">
-
-  <option value="all">All Status</option>
-  <option>Pending</option>
-  <option>Processing</option>
-  <option>Shipped</option>
-  <option>Delivered</option>
-  <option>Cancelled</option>
-
-</select>
-```
-
-  </div>
-
-  <div class="table-box">
-
-```
-<table>
-
-  <thead>
-    <tr>
-      <th>Order</th>
-      <th>Customer</th>
-      <th>Total</th>
-      <th>Status</th>
-      <th>Date</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-
-  <tbody id="ordersTable"></tbody>
-
-</table>
-```
-
-  </div>
-
-</section>
-
-<!-- PRODUCTS -->
-
-<section id="products" class="section">
-
-  <div class="welcome">
-    <h1>Products</h1>
-    <p>Add, edit and remove products.</p>
-  </div>
-
-  <div class="form">
-
-```
-<h3 id="formTitle">
-  ➕ Add New Product
-</h3>
-
-<div class="form-grid">
-
-  <div>
-    <label>Product Name</label>
-    <input id="productName" placeholder="Product name">
-  </div>
-
-  <div>
-    <label>Price (৳)</label>
-    <input
-      id="productPrice"
-      type="number"
-      min="0"
-      step="0.01"
-      placeholder="0"
-    >
-  </div>
-
-  <div>
-
-    <label>Category</label>
-
-    <select id="productCategory">
-
-      <option>Fashion</option>
-      <option>Electronics</option>
-      <option>Beauty</option>
-      <option>Home</option>
-      <option>Food</option>
-      <option>Accessories</option>
-      <option>Other</option>
-
-    </select>
-
-  </div>
-
-  <div>
-
-    <label>Image URL</label>
-
-    <input
-      id="productImage"
-      placeholder="https://..."
-    >
-
-  </div>
-
-  <div class="full">
-
-    <label>Upload Image</label>
-
-    <input
-      id="productFile"
-      type="file"
-      accept="image/*"
-      onchange="handleFile(event)"
-    >
-
-    <div id="preview" class="preview">
-
-      <img id="previewImg" alt="">
+      </div>
 
     </div>
 
   </div>
 
-</div>
+</section>
 
-<div class="form-actions">
 
-  <button
-    class="primary"
-    id="saveBtn"
-    onclick="saveProduct()"
-  >
-    Add Product
-  </button>
+<!-- ================= STORES ================= -->
 
-  <button
-    class="secondary"
-    id="cancelBtn"
-    onclick="resetProductForm()"
-    style="display:none"
-  >
-    Cancel
-  </button>
+<section id="stores" class="section">
 
-</div>
-```
+  <div class="welcome">
+
+    <h1>Store Management</h1>
+
+    <p>
+      Shopping Mela-তে যেসব দোকান Store নেবে, Owner এখান থেকে তাদের control করবেন।
+    </p>
 
   </div>
+
+
+  <!-- ADD STORE FORM -->
+
+  <div class="form">
+
+    <h3 id="storeFormTitle">
+      🏪 Add New Store
+    </h3>
+
+    <div class="form-grid">
+
+      <div>
+
+        <label>Store Name</label>
+
+        <input
+          id="storeName"
+          placeholder="Example: Anjona Ladies Tailors"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>Owner Name</label>
+
+        <input
+          id="storeOwner"
+          placeholder="Store owner name"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>Customer ID</label>
+
+        <input
+          id="storeCustomerId"
+          placeholder="Example: 017XXXXXXXX"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>Phone</label>
+
+        <input
+          id="storePhone"
+          placeholder="01XXXXXXXXX"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>Category</label>
+
+        <select id="storeCategory">
+
+          <option>Fashion</option>
+          <option>Electronics</option>
+          <option>Beauty</option>
+          <option>Home</option>
+          <option>Food</option>
+          <option>Accessories</option>
+          <option>Other</option>
+
+        </select>
+
+      </div>
+
+
+      <div>
+
+        <label>Status</label>
+
+        <select id="storeStatus">
+
+          <option>Active</option>
+          <option>Pending</option>
+          <option>Suspended</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="full">
+
+        <label>Store Address</label>
+
+        <input
+          id="storeAddress"
+          placeholder="Store address"
+        >
+
+      </div>
+
+    </div>
+
+
+    <div class="form-actions">
+
+      <button
+        class="primary"
+        id="storeSaveBtn"
+        onclick="saveStore()"
+      >
+        Add Store
+      </button>
+
+      <button
+        class="secondary"
+        id="storeCancelBtn"
+        onclick="resetStoreForm()"
+        style="display:none"
+      >
+        Cancel
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- STORE SEARCH -->
 
   <div class="toolbar">
 
-```
-<input
-  id="productSearch"
-  placeholder="Search products..."
-  oninput="renderProducts()"
->
+    <input
+      id="storeSearch"
+      placeholder="Search store, owner, phone, customer ID..."
+      oninput="renderStores()"
+    >
 
-<select
-  id="productFilter"
-  onchange="renderProducts()"
->
+    <select
+      id="storeFilter"
+      onchange="renderStores()"
+    >
 
-  <option value="all">All Categories</option>
-  <option>Fashion</option>
-  <option>Electronics</option>
-  <option>Beauty</option>
-  <option>Home</option>
-  <option>Food</option>
-  <option>Accessories</option>
-  <option>Other</option>
+      <option value="all">
+        All Status
+      </option>
 
-</select>
-```
+      <option>
+        Active
+      </option>
+
+      <option>
+        Pending
+      </option>
+
+      <option>
+        Suspended
+      </option>
+
+    </select>
 
   </div>
 
-  <div class="products" id="productsList"></div>
+
+  <!-- STORE TABLE -->
+
+  <div class="table-box">
+
+    <table>
+
+      <thead>
+
+        <tr>
+
+          <th>Store</th>
+          <th>Owner</th>
+          <th>Customer ID</th>
+          <th>Phone</th>
+          <th>Category</th>
+          <th>Status</th>
+          <th>Action</th>
+
+        </tr>
+
+      </thead>
+
+      <tbody id="storesTable"></tbody>
+
+    </table>
+
+  </div>
 
 </section>
 
-<!-- USERS -->
+
+<!-- ================= ORDERS ================= -->
+
+<section id="orders" class="section">
+
+  <div class="welcome">
+
+    <h1>Orders</h1>
+
+    <p>
+      Customer orders management.
+    </p>
+
+  </div>
+
+  <div class="panel">
+
+    <div class="empty">
+
+      📦
+
+      <br><br>
+
+      Orders module will be connected here.
+
+      <br>
+
+      Firebase integration will come later.
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= PRODUCTS ================= -->
+
+<section id="products" class="section">
+
+  <div class="welcome">
+
+    <h1>Products</h1>
+
+    <p>
+      All products from Shopping Mela stores.
+    </p>
+
+  </div>
+
+  <div class="panel">
+
+    <div class="empty">
+
+      🛒
+
+      <br><br>
+
+      Product management module.
+
+      <br>
+
+      Store-wise product control will be added next.
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= USERS ================= -->
 
 <section id="users" class="section">
 
   <div class="welcome">
 
-```
-<h1>Users</h1>
-<p>Registered customer information.</p>
-```
+    <h1>Users</h1>
+
+    <p>
+      সাধারণ website users.
+    </p>
 
   </div>
 
-  <div class="users" id="usersList"></div>
+  <div class="panel">
+
+    <div class="empty">
+
+      👥
+
+      <br><br>
+
+      User management module.
+
+      <br>
+
+      এখানে শুধু সাধারণ visitor/user account থাকবে।
+
+    </div>
+
+  </div>
 
 </section>
+
 
 </div>
 
 </main>
 
-<!-- ORDER MODAL -->
+
+<!-- ================= STORE MODAL ================= -->
 
 <div
   class="modal"
-  id="orderModal"
-  onclick="if(event.target===this)closeModal()"
+  id="storeModal"
+  onclick="if(event.target===this)closeStoreModal()"
 >
 
   <div class="modal-box">
 
-```
-<div class="modal-head">
+    <div class="modal-head">
 
-  <strong>Order Details</strong>
+      <strong>
+        Store Details
+      </strong>
 
-  <button onclick="closeModal()">
-    ✕
-  </button>
+      <button onclick="closeStoreModal()">
+        ✕
+      </button>
 
-</div>
+    </div>
 
-<div
-  class="modal-body"
-  id="orderDetails"
-></div>
-```
+    <div
+      class="modal-body"
+      id="storeDetails"
+    ></div>
 
   </div>
 
 </div>
 
-<div class="toast" id="toast"></div>
 
-</div>
+<!-- TOAST -->
+
+<div
+  class="toast"
+  id="toast"
+></div>
+
 
 <script>
+
 "use strict";
 
 
-/* =========================================================
+/* =========================================
    STORAGE KEYS
-========================================================= */
+========================================= */
 
 const KEYS = {
+
+  stores:"shoppingMelaStores",
 
   products:"shoppingMelaProducts",
 
@@ -1136,199 +1100,20 @@ const KEYS = {
 };
 
 
-const SESSION_LIMIT = 24 * 60 * 60 * 1000;
-
+let stores = [];
 
 let products = [];
+
 let orders = [];
+
 let users = [];
-let editingId = null;
 
+let editingStoreId = null;
 
-/* =========================================================
-   SECURITY
-========================================================= */
 
-function isAdminLoggedIn(){
-
-  const logged =
-    sessionStorage.getItem(KEYS.logged);
-
-  const loginTime =
-    Number(
-      sessionStorage.getItem(KEYS.loginTime) || 0
-    );
-
-  if(logged !== "true"){
-    return false;
-  }
-
-  if(!loginTime){
-    return false;
-  }
-
-  if(Date.now() - loginTime >= SESSION_LIMIT){
-
-    clearAdminSession();
-
-    return false;
-  }
-
-  return true;
-}
-
-
-function clearAdminSession(){
-
-  sessionStorage.removeItem(KEYS.logged);
-
-  sessionStorage.removeItem(KEYS.loginTime);
-
-}
-
-
-function redirectToLogin(){
-
-  clearAdminSession();
-
-  /*
-    Replace current browser history entry.
-    This prevents simple Back navigation from returning
-    to the dashboard URL.
-  */
-
-  window.location.replace("admin-login.html");
-
-}
-
-
-function securityCheck(){
-
-  if(!isAdminLoggedIn()){
-
-    redirectToLogin();
-
-    return false;
-
-  }
-
-  return true;
-
-}
-
-
-/*
-  Initial security gate.
-*/
-
-(function(){
-
-  if(!isAdminLoggedIn()){
-
-    document.getElementById("securityGate").style.display="flex";
-
-    document.getElementById("dashboardApp").style.display="none";
-
-    /*
-      Give browser a moment to render the message,
-      then redirect.
-    */
-
-    setTimeout(function(){
-
-      redirectToLogin();
-
-    },500);
-
-    return;
-
-  }
-
-
-  document.getElementById("securityGate").style.display="none";
-
-  document.getElementById("dashboardApp").style.display="block";
-
-})();
-
-
-/*
-  Browser Back / Forward security.
-*/
-
-window.addEventListener("pageshow",function(){
-
-  if(!isAdminLoggedIn()){
-
-    redirectToLogin();
-
-  }
-
-});
-
-
-window.addEventListener("popstate",function(){
-
-  if(!isAdminLoggedIn()){
-
-    redirectToLogin();
-
-  }
-
-});
-
-
-/*
-  Check session every 30 seconds.
-*/
-
-setInterval(function(){
-
-  if(!isAdminLoggedIn()){
-
-    redirectToLogin();
-
-  }
-
-},30000);
-
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
-function logout(){
-
-  if(!isAdminLoggedIn()){
-
-    redirectToLogin();
-
-    return;
-
-  }
-
-
-  const ok =
-    confirm("আপনি কি Logout করতে চান?");
-
-  if(!ok)return;
-
-
-  clearAdminSession();
-
-
-  /*
-    Prevent dashboard from remaining in history.
-  */
-
-  window.location.replace("admin-login.html");
-
-}
-
-
-/* =========================================================
-   STORAGE FUNCTIONS
-========================================================= */
+/* =========================================
+   SAFE READ
+========================================= */
 
 function read(key,fallback=[]){
 
@@ -1352,177 +1137,69 @@ function read(key,fallback=[]){
 }
 
 
+/* =========================================
+   LOAD DATA
+========================================= */
+
 function loadData(){
 
+  stores =
+    read(
+      KEYS.stores,
+      []
+    );
+
   products =
-    read(KEYS.products,[]);
+    read(
+      KEYS.products,
+      []
+    );
 
   orders =
-    read(KEYS.orders,[]);
+    read(
+      KEYS.orders,
+      []
+    );
 
   users =
-    read(KEYS.users,[]);
+    read(
+      KEYS.users,
+      []
+    );
 
 }
 
 
-function saveProducts(){
-
-  localStorage.setItem(
-    KEYS.products,
-    JSON.stringify(products)
-  );
-
-}
-
-
-function saveOrders(){
-
-  localStorage.setItem(
-    KEYS.orders,
-    JSON.stringify(orders)
-  );
-
-}
-
-
-function money(value){
-
-  return "৳" +
-    Number(value || 0)
-    .toLocaleString("en-BD",{
-      maximumFractionDigits:2
-    });
-
-}
-
+/* =========================================
+   ESCAPE HTML
+========================================= */
 
 function esc(value){
 
   return String(value ?? "")
-    .replace(/[&<>"']/g,function(match){
+    .replace(
+      /[&<>"']/g,
+      function(match){
 
-      return {
+        return {
 
-        "&":"&amp;",
-        "<":"&lt;",
-        ">":"&gt;",
-        '"':"&quot;",
-        "'":"&#039;"
+          "&":"&amp;",
+          "<":"&lt;",
+          ">":"&gt;",
+          '"':"&quot;",
+          "'":"&#039;"
 
-      }[match];
+        }[match];
 
-    });
-
-}
-
-
-function idOf(item){
-
-  return String(
-    item?.id ??
-    item?.orderId ??
-    ""
-  );
-
-}
-
-
-function orderTotal(order){
-
-  if(order?.total != null){
-
-    return Number(order.total) || 0;
-
-  }
-
-
-  if(order?.amount != null){
-
-    return Number(order.amount) || 0;
-
-  }
-
-
-  if(Array.isArray(order?.items)){
-
-    return order.items.reduce(
-
-      function(total,item){
-
-        const price =
-          Number(item.price) || 0;
-
-        const quantity =
-          Number(
-            item.quantity ??
-            item.qty ??
-            1
-          ) || 1;
-
-        return total +
-          price * quantity;
-
-      },
-
-      0
-
+      }
     );
 
-  }
-
-
-  return 0;
-
 }
 
 
-function orderName(order){
-
-  return (
-    order.customerName ||
-    order.name ||
-    order.customer?.name ||
-    "Customer"
-  );
-
-}
-
-
-function orderPhone(order){
-
-  return (
-    order.phone ||
-    order.customerPhone ||
-    order.customer?.phone ||
-    ""
-  );
-
-}
-
-
-function orderStatus(order){
-
-  return order.status || "Pending";
-
-}
-
-
-function orderDate(order){
-
-  return (
-    order.date ||
-    order.createdAt ||
-    order.created ||
-    ""
-  );
-
-}
-
-
-/* =========================================================
+/* =========================================
    TOAST
-========================================================= */
+========================================= */
 
 function showToast(message){
 
@@ -1533,54 +1210,135 @@ function showToast(message){
 
   toast.classList.add("show");
 
-  clearTimeout(window.__toast);
+  clearTimeout(
+    window.__toast
+  );
 
   window.__toast =
-    setTimeout(function(){
+    setTimeout(
+      function(){
 
-      toast.classList.remove("show");
+        toast.classList.remove("show");
 
-    },2200);
+      },
+      2200
+    );
 
 }
 
 
-/* =========================================================
+/* =========================================
+   LOGIN SECURITY
+========================================= */
+
+function checkSession(){
+
+  const logged =
+    sessionStorage.getItem(
+      KEYS.logged
+    );
+
+  const loginTime =
+    Number(
+      sessionStorage.getItem(
+        KEYS.loginTime
+      ) || 0
+    );
+
+
+  if(
+    logged !== "true" ||
+    !loginTime ||
+    Date.now() - loginTime >= 86400000
+  ){
+
+    sessionStorage.removeItem(
+      KEYS.logged
+    );
+
+    sessionStorage.removeItem(
+      KEYS.loginTime
+    );
+
+    return false;
+
+  }
+
+  return true;
+
+}
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+function logout(){
+
+  if(
+    !confirm(
+      "আপনি কি Logout করতে চান?"
+    )
+  ){
+
+    return;
+
+  }
+
+  sessionStorage.removeItem(
+    KEYS.logged
+  );
+
+  sessionStorage.removeItem(
+    KEYS.loginTime
+  );
+
+  location.replace(
+    "admin-login.html"
+  );
+
+}
+
+
+/* =========================================
    NAVIGATION
-========================================================= */
+========================================= */
 
 function showSection(id){
 
-  if(!securityCheck())return;
-
-
   document
     .querySelectorAll(".section")
-    .forEach(function(section){
+    .forEach(
+      section => {
 
-      section.classList.toggle(
-        "active",
-        section.id === id
-      );
+        section.classList.toggle(
+          "active",
+          section.id === id
+        );
 
-    });
+      }
+    );
 
 
   document
     .querySelectorAll(".nav")
-    .forEach(function(button){
+    .forEach(
+      button => {
 
-      button.classList.toggle(
-        "active",
-        button.dataset.section === id
-      );
+        button.classList.toggle(
+          "active",
+          button.dataset.section === id
+        );
 
-    });
+      }
+    );
 
 
   const titles = {
 
     dashboard:"Dashboard",
+
+    stores:"Store Management",
 
     orders:"Orders",
 
@@ -1594,44 +1352,925 @@ function showSection(id){
   document.getElementById(
     "pageTitle"
   ).textContent =
-    titles[id] || "Admin";
+    titles[id] || "Owner Panel";
 
 
-  if(id === "orders")
-    renderOrders();
+  if(id === "stores")
+    renderStores();
 
-  if(id === "products")
-    renderProducts();
-
-  if(id === "users")
-    renderUsers();
+  if(id === "dashboard")
+    renderDashboard();
 
 }
 
 
 document
   .querySelectorAll(".nav")
-  .forEach(function(button){
+  .forEach(
+    button => {
 
-    button.addEventListener(
-      "click",
-      function(){
+      button.addEventListener(
+        "click",
+        function(){
 
-        showSection(
-          button.dataset.section
+          showSection(
+            button.dataset.section
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+/* =========================================
+   STORE FUNCTIONS
+========================================= */
+
+function saveStores(){
+
+  localStorage.setItem(
+    KEYS.stores,
+    JSON.stringify(stores)
+  );
+
+}
+
+
+/* ADD / UPDATE STORE */
+
+function saveStore(){
+
+  const name =
+    document
+      .getElementById("storeName")
+      .value
+      .trim();
+
+
+  const owner =
+    document
+      .getElementById("storeOwner")
+      .value
+      .trim();
+
+
+  const customerId =
+    document
+      .getElementById("storeCustomerId")
+      .value
+      .trim();
+
+
+  const phone =
+    document
+      .getElementById("storePhone")
+      .value
+      .trim();
+
+
+  const category =
+    document
+      .getElementById("storeCategory")
+      .value;
+
+
+  const status =
+    document
+      .getElementById("storeStatus")
+      .value;
+
+
+  const address =
+    document
+      .getElementById("storeAddress")
+      .value
+      .trim();
+
+
+  if(!name){
+
+    showToast(
+      "Store name দিন"
+    );
+
+    return;
+
+  }
+
+
+  if(!customerId){
+
+    showToast(
+      "Customer ID দিন"
+    );
+
+    return;
+
+  }
+
+
+  if(editingStoreId !== null){
+
+    const store =
+      stores.find(
+        item =>
+          String(item.id) ===
+          String(editingStoreId)
+      );
+
+
+    if(store){
+
+      store.name = name;
+
+      store.owner = owner;
+
+      store.customerId =
+        customerId;
+
+      store.phone = phone;
+
+      store.category =
+        category;
+
+      store.status =
+        status;
+
+      store.address =
+        address;
+
+    }
+
+
+    showToast(
+      "Store updated ✓"
+    );
+
+  }else{
+
+    stores.push({
+
+      id:
+        "STORE-" +
+        Date.now(),
+
+      name:name,
+
+      owner:owner,
+
+      customerId:
+        customerId,
+
+      phone:phone,
+
+      category:
+        category,
+
+      status:
+        status,
+
+      address:
+        address,
+
+      createdAt:
+        new Date().toISOString()
+
+    });
+
+
+    showToast(
+      "New Store added ✓"
+    );
+
+  }
+
+
+  saveStores();
+
+  resetStoreForm();
+
+  renderStores();
+
+  renderDashboard();
+
+}
+
+
+/* =========================================
+   EDIT STORE
+========================================= */
+
+function editStore(id){
+
+  const store =
+    stores.find(
+      item =>
+        String(item.id) ===
+        String(id)
+    );
+
+
+  if(!store)
+    return;
+
+
+  editingStoreId =
+    store.id;
+
+
+  showSection(
+    "stores"
+  );
+
+
+  document.getElementById(
+    "storeName"
+  ).value =
+    store.name || "";
+
+
+  document.getElementById(
+    "storeOwner"
+  ).value =
+    store.owner || "";
+
+
+  document.getElementById(
+    "storeCustomerId"
+  ).value =
+    store.customerId || "";
+
+
+  document.getElementById(
+    "storePhone"
+  ).value =
+    store.phone || "";
+
+
+  document.getElementById(
+    "storeCategory"
+  ).value =
+    store.category || "Other";
+
+
+  document.getElementById(
+    "storeStatus"
+  ).value =
+    store.status || "Active";
+
+
+  document.getElementById(
+    "storeAddress"
+  ).value =
+    store.address || "";
+
+
+  document.getElementById(
+    "storeFormTitle"
+  ).textContent =
+    "✏️ Edit Store";
+
+
+  document.getElementById(
+    "storeSaveBtn"
+  ).textContent =
+    "Update Store";
+
+
+  document.getElementById(
+    "storeCancelBtn"
+  ).style.display =
+    "inline-block";
+
+
+  window.scrollTo({
+
+    top:0,
+
+    behavior:"smooth"
+
+  });
+
+}
+
+
+/* =========================================
+   DELETE STORE
+========================================= */
+
+function deleteStore(id){
+
+  const store =
+    stores.find(
+      item =>
+        String(item.id) ===
+        String(id)
+    );
+
+
+  if(!store)
+    return;
+
+
+  if(
+    !confirm(
+      `"${store.name}" Store delete করতে চান?`
+    )
+  ){
+
+    return;
+
+  }
+
+
+  stores =
+    stores.filter(
+      item =>
+        String(item.id) !==
+        String(id)
+    );
+
+
+  saveStores();
+
+  renderStores();
+
+  renderDashboard();
+
+  showToast(
+    "Store deleted ✓"
+  );
+
+}
+
+
+/* =========================================
+   STORE STATUS
+========================================= */
+
+function changeStoreStatus(
+  id,
+  status
+){
+
+  const store =
+    stores.find(
+      item =>
+        String(item.id) ===
+        String(id)
+    );
+
+
+  if(!store)
+    return;
+
+
+  store.status =
+    status;
+
+
+  saveStores();
+
+  renderStores();
+
+  renderDashboard();
+
+  showToast(
+    "Store status updated ✓"
+  );
+
+}
+
+
+/* =========================================
+   RESET STORE FORM
+========================================= */
+
+function resetStoreForm(){
+
+  editingStoreId =
+    null;
+
+
+  document.getElementById(
+    "storeName"
+  ).value = "";
+
+
+  document.getElementById(
+    "storeOwner"
+  ).value = "";
+
+
+  document.getElementById(
+    "storeCustomerId"
+  ).value = "";
+
+
+  document.getElementById(
+    "storePhone"
+  ).value = "";
+
+
+  document.getElementById(
+    "storeCategory"
+  ).value = "Fashion";
+
+
+  document.getElementById(
+    "storeStatus"
+  ).value = "Active";
+
+
+  document.getElementById(
+    "storeAddress"
+  ).value = "";
+
+
+  document.getElementById(
+    "storeFormTitle"
+  ).textContent =
+    "🏪 Add New Store";
+
+
+  document.getElementById(
+    "storeSaveBtn"
+  ).textContent =
+    "Add Store";
+
+
+  document.getElementById(
+    "storeCancelBtn"
+  ).style.display =
+    "none";
+
+}
+
+
+/* =========================================
+   RENDER STORES
+========================================= */
+
+function renderStores(){
+
+  const search =
+    (
+      document
+        .getElementById(
+          "storeSearch"
+        )
+        ?.value || ""
+    )
+    .toLowerCase()
+    .trim();
+
+
+  const filter =
+    document
+      .getElementById(
+        "storeFilter"
+      )
+      ?.value || "all";
+
+
+  const list =
+    stores.filter(
+      store => {
+
+        const text =
+          `${store.name}
+           ${store.owner}
+           ${store.customerId}
+           ${store.phone}
+           ${store.category}`
+          .toLowerCase();
+
+
+        return (
+
+          (!search ||
+            text.includes(search))
+
+          &&
+
+          (
+            filter === "all" ||
+            store.status === filter
+          )
+
         );
 
       }
     );
 
-  });
+
+  const table =
+    document.getElementById(
+      "storesTable"
+    );
 
 
-/* =========================================================
-   STATS
-========================================================= */
+  if(!list.length){
 
-function renderStats(){
+    table.innerHTML = `
+
+      <tr>
+
+        <td colspan="7">
+
+          <div class="empty">
+
+            🏪
+
+            <br><br>
+
+            ${
+              stores.length
+              ? "No matching stores."
+              : "No stores added yet."
+            }
+
+          </div>
+
+        </td>
+
+      </tr>
+
+    `;
+
+    return;
+
+  }
+
+
+  table.innerHTML =
+    [...list]
+      .reverse()
+      .map(
+        store => `
+
+        <tr>
+
+          <td>
+
+            <div class="store-name">
+
+              ${esc(store.name)}
+
+            </div>
+
+            <div class="store-id">
+
+              ${esc(store.id)}
+
+            </div>
+
+          </td>
+
+
+          <td>
+
+            ${esc(
+              store.owner || "—"
+            )}
+
+          </td>
+
+
+          <td>
+
+            <strong>
+
+              ${esc(
+                store.customerId
+              )}
+
+            </strong>
+
+          </td>
+
+
+          <td>
+
+            ${esc(
+              store.phone || "—"
+            )}
+
+          </td>
+
+
+          <td>
+
+            ${esc(
+              store.category || "Other"
+            )}
+
+          </td>
+
+
+          <td>
+
+            <select
+              class="status ${String(
+                store.status
+              ).toLowerCase()}"
+              onchange="
+                changeStoreStatus(
+                  '${esc(store.id)}',
+                  this.value
+                )
+              "
+            >
+
+              <option
+                ${
+                  store.status === "Active"
+                  ? "selected"
+                  : ""
+                }
+              >
+                Active
+              </option>
+
+              <option
+                ${
+                  store.status === "Pending"
+                  ? "selected"
+                  : ""
+                }
+              >
+                Pending
+              </option>
+
+              <option
+                ${
+                  store.status === "Suspended"
+                  ? "selected"
+                  : ""
+                }
+              >
+                Suspended
+              </option>
+
+            </select>
+
+          </td>
+
+
+          <td>
+
+            <button
+              class="action view"
+              onclick="
+                viewStore(
+                  '${esc(store.id)}'
+                )
+              "
+            >
+              View
+            </button>
+
+
+            <button
+              class="action dark"
+              onclick="
+                editStore(
+                  '${esc(store.id)}'
+                )
+              "
+            >
+              Edit
+            </button>
+
+
+            <button
+              class="action danger"
+              onclick="
+                deleteStore(
+                  '${esc(store.id)}'
+                )
+              "
+            >
+              Delete
+            </button>
+
+          </td>
+
+        </tr>
+
+      `
+      )
+      .join("");
+
+}
+
+
+/* =========================================
+   VIEW STORE
+========================================= */
+
+function viewStore(id){
+
+  const store =
+    stores.find(
+      item =>
+        String(item.id) ===
+        String(id)
+    );
+
+
+  if(!store)
+    return;
+
+
+  document.getElementById(
+    "storeDetails"
+  ).innerHTML = `
+
+    <div class="detail">
+
+      <div>
+
+        <small>
+          Store ID
+        </small>
+
+        <b>
+          ${esc(store.id)}
+        </b>
+
+      </div>
+
+
+      <div>
+
+        <small>
+          Status
+        </small>
+
+        <b>
+          ${esc(
+            store.status || "Active"
+          )}
+        </b>
+
+      </div>
+
+
+      <div>
+
+        <small>
+          Store Name
+        </small>
+
+        <b>
+          ${esc(store.name)}
+        </b>
+
+      </div>
+
+
+      <div>
+
+        <small>
+          Owner Name
+        </small>
+
+        <b>
+          ${esc(
+            store.owner || "—"
+          )}
+        </b>
+
+      </div>
+
+
+      <div>
+
+        <small>
+          Customer ID
+        </small>
+
+        <b>
+          ${esc(
+            store.customerId
+          )}
+        </b>
+
+      </div>
+
+
+      <div>
+
+        <small>
+          Phone
+        </small>
+
+        <b>
+          ${esc(
+            store.phone || "—"
+          )}
+        </b>
+
+      </div>
+
+
+      <div>
+
+        <small>
+          Category
+        </small>
+
+        <b>
+          ${esc(
+            store.category || "Other"
+          )}
+        </b>
+
+      </div>
+
+
+      <div>
+
+        <small>
+          Created
+        </small>
+
+        <b>
+          ${
+            store.createdAt
+            ? new Date(
+                store.createdAt
+              ).toLocaleDateString(
+                "en-BD"
+              )
+            : "—"
+          }
+        </b>
+
+      </div>
+
+
+      <div class="full">
+
+        <small>
+          Address
+        </small>
+
+        <b>
+          ${esc(
+            store.address || "—"
+          )}
+        </b>
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  document
+    .getElementById(
+      "storeModal"
+    )
+    .classList.add(
+      "show"
+    );
+
+}
+
+
+/* =========================================
+   CLOSE STORE MODAL
+========================================= */
+
+function closeStoreModal(){
+
+  document
+    .getElementById(
+      "storeModal"
+    )
+    .classList.remove(
+      "show"
+    );
+
+}
+
+
+/* =========================================
+   DASHBOARD
+========================================= */
+
+function renderDashboard(){
+
+  document.getElementById(
+    "statStores"
+  ).textContent =
+    stores.length;
+
 
   document.getElementById(
     "statProducts"
@@ -1651,986 +2290,27 @@ function renderStats(){
     users.length;
 
 
-  const sales =
-    orders
-      .filter(function(order){
-
-        return orderStatus(order)
-          .toLowerCase() !== "cancelled";
-
-      })
-      .reduce(function(total,order){
-
-        return total +
-          orderTotal(order);
-
-      },0);
-
-
-  document.getElementById(
-    "statSales"
-  ).textContent =
-    money(sales);
+  renderRecentStores();
 
 }
 
 
-/* =========================================================
-   RECENT ORDERS
-========================================================= */
+/* =========================================
+   RECENT STORES
+========================================= */
 
-function renderRecentOrders(){
+function renderRecentStores(){
 
   const box =
     document.getElementById(
-      "recentOrders"
+      "recentStores"
     );
 
 
   const list =
-    [...orders]
+    [...stores]
       .reverse()
       .slice(0,6);
-
-
-  if(!list.length){
-
-    box.innerHTML =
-      '<div class="empty">📦<br><br>No orders yet.</div>';
-
-    return;
-
-  }
-
-
-  box.innerHTML =
-    list.map(function(order){
-
-      return `
-
-        <div class="order-row">
-
-          <div>
-
-            <strong>
-              #${esc(idOf(order) || "—")}
-            </strong>
-
-            <br>
-
-            <span class="muted">
-              ${esc(orderName(order))}
-            </span>
-
-          </div>
-
-
-          <div>
-            ${esc(orderPhone(order))}
-          </div>
-
-
-          <div>
-            <strong>
-              ${money(orderTotal(order))}
-            </strong>
-          </div>
-
-
-          <div>
-
-            <span class="status ${esc(
-              orderStatus(order)
-                .toLowerCase()
-            )}">
-
-              ${esc(orderStatus(order))}
-
-            </span>
-
-          </div>
-
-        </div>
-
-      `;
-
-    }).join("");
-
-}
-
-
-/* =========================================================
-   ORDERS
-========================================================= */
-
-function renderOrders(){
-
-  if(!securityCheck())return;
-
-
-  const search =
-    (
-      document.getElementById(
-        "orderSearch"
-      )?.value || ""
-    )
-    .toLowerCase()
-    .trim();
-
-
-  const selectedStatus =
-    document.getElementById(
-      "orderStatus"
-    )?.value || "all";
-
-
-  const list =
-    orders.filter(function(order){
-
-      const text =
-        JSON.stringify(order)
-          .toLowerCase();
-
-
-      return (
-        (!search || text.includes(search)) &&
-        (
-          selectedStatus === "all" ||
-          orderStatus(order) === selectedStatus
-        )
-      );
-
-    });
-
-
-  const table =
-    document.getElementById(
-      "ordersTable"
-    );
-
-
-  if(!list.length){
-
-    table.innerHTML =
-      `
-      <tr>
-        <td colspan="6">
-          <div class="empty">
-            No matching orders.
-          </div>
-        </td>
-      </tr>
-      `;
-
-    return;
-
-  }
-
-
-  table.innerHTML =
-    list
-      .slice()
-      .reverse()
-      .map(function(order){
-
-        const orderId =
-          idOf(order);
-
-
-        const currentStatus =
-          orderStatus(order);
-
-
-        return `
-
-        <tr>
-
-          <td>
-            <strong>
-              #${esc(orderId || "—")}
-            </strong>
-          </td>
-
-
-          <td>
-
-            ${esc(orderName(order))}
-
-            <br>
-
-            <span class="muted">
-              ${esc(orderPhone(order))}
-            </span>
-
-          </td>
-
-
-          <td>
-            <strong>
-              ${money(orderTotal(order))}
-            </strong>
-          </td>
-
-
-          <td>
-
-            <select
-              class="status"
-              onchange="changeStatus('${esc(orderId)}',this.value)"
-            >
-
-              ${[
-                "Pending",
-                "Processing",
-                "Shipped",
-                "Delivered",
-                "Cancelled"
-              ].map(function(status){
-
-                return `
-                  <option
-                    ${status === currentStatus
-                      ? "selected"
-                      : ""}
-                  >
-                    ${status}
-                  </option>
-                `;
-
-              }).join("")}
-
-            </select>
-
-          </td>
-
-
-          <td>
-            ${esc(orderDate(order) || "—")}
-          </td>
-
-
-          <td>
-
-            <button
-              class="action view"
-              onclick="viewOrder('${esc(orderId)}')"
-            >
-              View
-            </button>
-
-
-            <button
-              class="action danger"
-              onclick="deleteOrder('${esc(orderId)}')"
-            >
-              Delete
-            </button>
-
-          </td>
-
-        </tr>
-
-        `;
-
-      })
-      .join("");
-
-}
-
-
-function findOrder(id){
-
-  return orders.find(function(order){
-
-    return idOf(order) === String(id);
-
-  });
-
-}
-
-
-function changeStatus(id,status){
-
-  if(!securityCheck())return;
-
-
-  const order =
-    findOrder(id);
-
-
-  if(!order)return;
-
-
-  order.status = status;
-
-
-  saveOrders();
-
-  renderOrders();
-
-  renderRecentOrders();
-
-  renderStats();
-
-  showToast(
-    "Order status updated ✓"
-  );
-
-}
-
-
-function deleteOrder(id){
-
-  if(!securityCheck())return;
-
-
-  if(!confirm(
-    "এই order delete করতে চান?"
-  ))return;
-
-
-  orders =
-    orders.filter(function(order){
-
-      return idOf(order) !== String(id);
-
-    });
-
-
-  saveOrders();
-
-  renderOrders();
-
-  renderRecentOrders();
-
-  renderStats();
-
-  showToast(
-    "Order deleted ✓"
-  );
-
-}
-
-
-/* =========================================================
-   ORDER VIEW
-========================================================= */
-
-function viewOrder(id){
-
-  if(!securityCheck())return;
-
-
-  const order =
-    findOrder(id);
-
-
-  if(!order)return;
-
-
-  const items =
-    Array.isArray(order.items)
-      ? order.items
-      : [];
-
-
-  let html = `
-
-    <div class="detail">
-
-      <div>
-        <small>Order ID</small>
-        <b>#${esc(idOf(order))}</b>
-      </div>
-
-
-      <div>
-        <small>Status</small>
-        <b>${esc(orderStatus(order))}</b>
-      </div>
-
-
-      <div>
-        <small>Customer</small>
-        <b>${esc(orderName(order))}</b>
-      </div>
-
-
-      <div>
-        <small>Phone</small>
-        <b>${esc(orderPhone(order) || "—")}</b>
-      </div>
-
-
-      <div class="full">
-        <small>Address</small>
-        <b>
-          ${esc(
-            order.address ||
-            order.customer?.address ||
-            "—"
-          )}
-        </b>
-      </div>
-
-
-      <div>
-        <small>Date</small>
-        <b>
-          ${esc(
-            orderDate(order) || "—"
-          )}
-        </b>
-      </div>
-
-
-      <div>
-        <small>Total</small>
-        <b>
-          ${money(orderTotal(order))}
-        </b>
-      </div>
-
-    </div>
-
-  `;
-
-
-  if(items.length){
-
-    html += "<h4>Items</h4>";
-
-
-    html += items.map(function(item){
-
-      const quantity =
-        Number(
-          item.quantity ??
-          item.qty ??
-          1
-        ) || 1;
-
-
-      const itemTotal =
-        (Number(item.price) || 0) *
-        quantity;
-
-
-      return `
-
-        <div style="
-          display:flex;
-          justify-content:space-between;
-          padding:9px 0;
-          border-bottom:1px solid #eee;
-          font-size:10px;
-        ">
-
-          <span>
-            ${esc(
-              item.name ||
-              item.title ||
-              "Product"
-            )}
-            × ${quantity}
-          </span>
-
-          <b>
-            ${money(itemTotal)}
-          </b>
-
-        </div>
-
-      `;
-
-    }).join("");
-
-  }
-
-
-  document.getElementById(
-    "orderDetails"
-  ).innerHTML = html;
-
-
-  document.getElementById(
-    "orderModal"
-  ).classList.add("show");
-
-}
-
-
-function closeModal(){
-
-  document.getElementById(
-    "orderModal"
-  ).classList.remove("show");
-
-}
-
-
-/* =========================================================
-   PRODUCT IMAGE
-========================================================= */
-
-function handleFile(event){
-
-  if(!securityCheck())return;
-
-
-  const file =
-    event.target.files?.[0];
-
-
-  if(!file)return;
-
-
-  if(!file.type.startsWith("image/")){
-
-    showToast(
-      "Please select an image file."
-    );
-
-    return;
-
-  }
-
-
-  const reader =
-    new FileReader();
-
-
-  reader.onload = function(){
-
-    document.getElementById(
-      "productImage"
-    ).value =
-      reader.result;
-
-
-    showPreview(
-      reader.result
-    );
-
-  };
-
-
-  reader.readAsDataURL(file);
-
-}
-
-
-function showPreview(src){
-
-  const preview =
-    document.getElementById(
-      "preview"
-    );
-
-  const image =
-    document.getElementById(
-      "previewImg"
-    );
-
-
-  if(!src){
-
-    preview.classList.remove(
-      "show"
-    );
-
-    image.removeAttribute("src");
-
-    return;
-
-  }
-
-
-  image.onload =
-    function(){
-
-      preview.classList.add(
-        "show"
-      );
-
-    };
-
-
-  image.onerror =
-    function(){
-
-      preview.classList.remove(
-        "show"
-      );
-
-    };
-
-
-  image.src = src;
-
-}
-
-
-document
-  .getElementById("productImage")
-  .addEventListener(
-    "input",
-    function(event){
-
-      showPreview(
-        event.target.value
-      );
-
-    }
-  );
-
-
-/* =========================================================
-   PRODUCTS
-========================================================= */
-
-function saveProduct(){
-
-  if(!securityCheck())return;
-
-
-  const name =
-    document.getElementById(
-      "productName"
-    ).value.trim();
-
-
-  const price =
-    Number(
-      document.getElementById(
-        "productPrice"
-      ).value
-    );
-
-
-  const category =
-    document.getElementById(
-      "productCategory"
-    ).value;
-
-
-  const image =
-    document.getElementById(
-      "productImage"
-    ).value.trim();
-
-
-  if(!name){
-
-    showToast(
-      "Product name দিন"
-    );
-
-    return;
-
-  }
-
-
-  if(!Number.isFinite(price) || price < 0){
-
-    showToast(
-      "Valid price দিন"
-    );
-
-    return;
-
-  }
-
-
-  if(editingId !== null){
-
-    const product =
-      products.find(function(item){
-
-        return String(item.id) ===
-          String(editingId);
-
-      });
-
-
-    if(product){
-
-      product.name = name;
-
-      product.price = price;
-
-      product.category = category;
-
-      product.image = image;
-
-    }
-
-
-    showToast(
-      "Product updated ✓"
-    );
-
-  }else{
-
-    products.push({
-
-      id:Date.now().toString(),
-
-      name:name,
-
-      price:price,
-
-      category:category,
-
-      image:image,
-
-      createdAt:
-        new Date().toISOString()
-
-    });
-
-
-    showToast(
-      "Product added ✓"
-    );
-
-  }
-
-
-  saveProducts();
-
-  resetProductForm();
-
-  renderProducts();
-
-  renderStats();
-
-}
-
-
-function editProduct(id){
-
-  if(!securityCheck())return;
-
-
-  const product =
-    products.find(function(item){
-
-      return String(item.id) ===
-        String(id);
-
-    });
-
-
-  if(!product)return;
-
-
-  editingId =
-    product.id;
-
-
-  showSection("products");
-
-
-  document.getElementById(
-    "productName"
-  ).value =
-    product.name || "";
-
-
-  document.getElementById(
-    "productPrice"
-  ).value =
-    product.price ?? "";
-
-
-  document.getElementById(
-    "productCategory"
-  ).value =
-    product.category || "Other";
-
-
-  document.getElementById(
-    "productImage"
-  ).value =
-    product.image || "";
-
-
-  showPreview(
-    product.image || ""
-  );
-
-
-  document.getElementById(
-    "formTitle"
-  ).textContent =
-    "✏️ Edit Product";
-
-
-  document.getElementById(
-    "saveBtn"
-  ).textContent =
-    "Update Product";
-
-
-  document.getElementById(
-    "cancelBtn"
-  ).style.display =
-    "inline-block";
-
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-}
-
-
-function deleteProduct(id){
-
-  if(!securityCheck())return;
-
-
-  const product =
-    products.find(function(item){
-
-      return String(item.id) ===
-        String(id);
-
-    });
-
-
-  if(!product)return;
-
-
-  if(!confirm(
-    `"${product.name}" delete করতে চান?`
-  ))return;
-
-
-  products =
-    products.filter(function(item){
-
-      return String(item.id) !==
-        String(id);
-
-    });
-
-
-  saveProducts();
-
-  renderProducts();
-
-  renderStats();
-
-  showToast(
-    "Product deleted ✓"
-  );
-
-}
-
-
-function resetProductForm(){
-
-  if(!securityCheck())return;
-
-
-  editingId = null;
-
-
-  [
-    "productName",
-    "productPrice",
-    "productImage"
-  ].forEach(function(id){
-
-    document.getElementById(
-      id
-    ).value = "";
-
-  });
-
-
-  document.getElementById(
-    "productCategory"
-  ).value =
-    "Fashion";
-
-
-  document.getElementById(
-    "productFile"
-  ).value = "";
-
-
-  showPreview("");
-
-
-  document.getElementById(
-    "formTitle"
-  ).textContent =
-    "➕ Add New Product";
-
-
-  document.getElementById(
-    "saveBtn"
-  ).textContent =
-    "Add Product";
-
-
-  document.getElementById(
-    "cancelBtn"
-  ).style.display =
-    "none";
-
-}
-
-
-function renderProducts(){
-
-  if(!securityCheck())return;
-
-
-  const search =
-    (
-      document.getElementById(
-        "productSearch"
-      )?.value || ""
-    )
-    .toLowerCase()
-    .trim();
-
-
-  const category =
-    document.getElementById(
-      "productFilter"
-    )?.value || "all";
-
-
-  const list =
-    products.filter(function(product){
-
-      const text =
-        `${product.name || ""} ${
-          product.category || ""
-        }`.toLowerCase();
-
-
-      return (
-        (!search || text.includes(search)) &&
-        (
-          category === "all" ||
-          product.category === category
-        )
-      );
-
-    });
-
-
-  const box =
-    document.getElementById(
-      "productsList"
-    );
 
 
   if(!list.length){
@@ -2639,13 +2319,11 @@ function renderProducts(){
 
       <div class="empty">
 
-        🛒<br><br>
+        🏪
 
-        ${
-          products.length
-            ? "No matching products."
-            : "No products yet."
-        }
+        <br><br>
+
+        No stores yet.
 
       </div>
 
@@ -2657,197 +2335,98 @@ function renderProducts(){
 
 
   box.innerHTML =
-    [...list]
-      .reverse()
-      .map(function(product){
+    list
+      .map(
+        store => `
 
-        return `
-
-          <div class="product">
-
-            <div class="pic">
-
-              ${
-                product.image
-
-                ? `
-                  <img
-                    src="${esc(product.image)}"
-                    alt="${esc(product.name)}"
-                    onerror="this.remove()"
-                  >
-                `
-
-                : "🛍️"
-              }
-
-            </div>
-
-
-            <div>
-
-              <div class="pname">
-                ${esc(product.name)}
-              </div>
-
-
-              <span class="tag">
-                ${esc(
-                  product.category ||
-                  "Other"
-                )}
-              </span>
-
-
-              <div class="price">
-                ${money(product.price)}
-              </div>
-
-            </div>
-
-
-            <div class="product-actions">
-
-              <button
-                class="action view"
-                onclick="editProduct('${esc(product.id)}')"
-              >
-                ✏️ Edit
-              </button>
-
-
-              <button
-                class="action danger"
-                onclick="deleteProduct('${esc(product.id)}')"
-              >
-                🗑️ Delete
-              </button>
-
-            </div>
-
-          </div>
-
-        `;
-
-      })
-      .join("");
-
-}
-
-
-/* =========================================================
-   USERS
-========================================================= */
-
-function renderUsers(){
-
-  if(!securityCheck())return;
-
-
-  const box =
-    document.getElementById(
-      "usersList"
-    );
-
-
-  if(!users.length){
-
-    box.innerHTML =
-      `
-      <div class="empty">
-        👥<br><br>
-        No registered users found.
-      </div>
-      `;
-
-    return;
-
-  }
-
-
-  box.innerHTML =
-    users.map(function(user){
-
-      const name =
-        user.name ||
-        user.username ||
-        "User";
-
-
-      const contact =
-        user.email ||
-        user.phone ||
-        "No contact";
-
-
-      const firstLetter =
-        name.trim()
-          .charAt(0)
-          .toUpperCase();
-
-
-      return `
-
-        <div class="user">
-
-          <div class="avatar">
-            ${esc(firstLetter)}
-          </div>
+        <div class="order-row">
 
           <div>
 
-            <strong style="font-size:11px">
-              ${esc(name)}
+            <strong>
+
+              ${esc(
+                store.name
+              )}
+
             </strong>
 
-            <div
-              class="muted"
-              style="
-                font-size:9px;
-                margin-top:3px;
-              "
+            <br>
+
+            <span class="muted">
+
+              ${esc(
+                store.owner ||
+                "Store Owner"
+              )}
+
+            </span>
+
+          </div>
+
+
+          <div>
+
+            ${esc(
+              store.customerId
+            )}
+
+          </div>
+
+
+          <div>
+
+            ${esc(
+              store.category ||
+              "Other"
+            )}
+
+          </div>
+
+
+          <div>
+
+            <span
+              class="status ${String(
+                store.status
+              ).toLowerCase()}"
             >
-              ${esc(contact)}
-            </div>
+
+              ${esc(
+                store.status
+              )}
+
+            </span>
 
           </div>
 
         </div>
 
-      `;
-
-    }).join("");
+      `
+      )
+      .join("");
 
 }
 
 
-/* =========================================================
+/* =========================================
    RENDER ALL
-========================================================= */
+========================================= */
 
 function renderAll(){
 
-  if(!securityCheck())return;
-
-
   loadData();
 
-  renderStats();
+  renderDashboard();
 
-  renderRecentOrders();
-
-  renderOrders();
-
-  renderProducts();
-
-  renderUsers();
+  renderStores();
 
 }
 
 
-/* =========================================================
-   STORAGE SYNC
-========================================================= */
+/* =========================================
+   STORAGE UPDATE
+========================================= */
 
 window.addEventListener(
   "storage",
@@ -2858,22 +2437,6 @@ window.addEventListener(
         .includes(event.key)
     ){
 
-      if(
-        event.key === KEYS.logged ||
-        event.key === KEYS.loginTime
-      ){
-
-        if(!isAdminLoggedIn()){
-
-          redirectToLogin();
-
-          return;
-
-        }
-
-      }
-
-
       renderAll();
 
     }
@@ -2882,23 +2445,66 @@ window.addEventListener(
 );
 
 
-/* =========================================================
-   START APPLICATION
-========================================================= */
+/* =========================================
+   PROTECT DASHBOARD
+========================================= */
 
-if(isAdminLoggedIn()){
+if(
+  !checkSession()
+){
 
-  document.getElementById(
-    "securityGate"
-  ).style.display = "none";
+  document.body.innerHTML = `
 
+    <div
+      style="
+        font-family:Arial;
+        text-align:center;
+        padding:80px;
+      "
+    >
 
-  document.getElementById(
-    "dashboardApp"
-  ).style.display = "block";
+      <h2>
+        🔒 Admin Login Required
+      </h2>
 
+      <p>
+        Please login first to access Owner Dashboard.
+      </p>
+
+      <a
+        href="admin-login.html"
+      >
+        Go to Admin Login
+      </a>
+
+    </div>
+
+  `;
+
+}else{
 
   renderAll();
+
+
+  /*
+    Session প্রতি 60 seconds
+    check হবে।
+  */
+
+  setInterval(
+    function(){
+
+      if(!checkSession()){
+
+        location.replace(
+          "admin-login.html"
+        );
+
+      }
+
+    },
+    60000
+  );
 
 }
 
@@ -2906,3 +2512,4 @@ if(isAdminLoggedIn()){
 
 </body>
 </html>
+```
