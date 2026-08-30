@@ -1,0 +1,3112 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Seller Dashboard — Shopping Mela
+    </title>
+
+    <meta
+        name="description"
+        content="Shopping Mela Seller Dashboard — manage your business, products, orders and verification."
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+
+    <style>
+
+        /* =================================================
+           SELLER DASHBOARD
+        ================================================= */
+
+        body {
+            background: #f5f7fb;
+        }
+
+
+        .seller-page {
+            padding: 30px 0 60px;
+        }
+
+
+        /* =================================================
+           DASHBOARD HERO
+        ================================================= */
+
+        .seller-hero {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #111827,
+                    #1f2937
+                );
+
+            border-radius: 22px;
+
+            padding: 32px;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 25px;
+
+            margin-bottom: 24px;
+
+        }
+
+
+        .seller-hero-left {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+
+        }
+
+
+        .seller-avatar {
+
+            width: 82px;
+            height: 82px;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff,
+                    #e5e7eb
+                );
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 38px;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .seller-hero h1 {
+
+            margin:
+                0 0 7px;
+
+            font-size:
+                clamp(24px,4vw,34px);
+
+        }
+
+
+        .seller-hero p {
+
+            margin: 0;
+
+            color: #d1d5db;
+
+            font-size: 14px;
+
+        }
+
+
+        .seller-hero-actions {
+
+            display: flex;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+
+        }
+
+
+        .seller-btn {
+
+            border: none;
+
+            border-radius: 10px;
+
+            padding:
+                11px 17px;
+
+            cursor: pointer;
+
+            font-weight: 700;
+
+        }
+
+
+        .seller-btn.white {
+
+            background: white;
+
+            color: #111827;
+
+        }
+
+
+        .seller-btn.blue {
+
+            background: #1877f2;
+
+            color: white;
+
+        }
+
+
+        /* =================================================
+           DASHBOARD GRID
+        ================================================= */
+
+        .seller-layout {
+
+            display: grid;
+
+            grid-template-columns:
+                235px 1fr;
+
+            gap: 22px;
+
+        }
+
+
+        /* =================================================
+           SIDEBAR
+        ================================================= */
+
+        .seller-sidebar {
+
+            background: white;
+
+            border:
+                1px solid #e7ebf0;
+
+            border-radius: 18px;
+
+            padding: 12px;
+
+            height: fit-content;
+
+            position: sticky;
+
+            top: 20px;
+
+        }
+
+
+        .seller-menu-title {
+
+            padding:
+                12px 12px 7px;
+
+            color: #9ca3af;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+
+        }
+
+
+        .seller-menu-btn {
+
+            width: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            border: none;
+
+            background: transparent;
+
+            padding:
+                12px;
+
+            border-radius: 10px;
+
+            cursor: pointer;
+
+            color: #4b5563;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            text-align: left;
+
+        }
+
+
+        .seller-menu-btn:hover {
+
+            background: #f3f6fa;
+
+        }
+
+
+        .seller-menu-btn.active {
+
+            background: #edf5ff;
+
+            color: #1877f2;
+
+        }
+
+
+        .seller-menu-icon {
+
+            width: 27px;
+
+            text-align: center;
+
+            font-size: 17px;
+
+        }
+
+
+        /* =================================================
+           MAIN CONTENT
+        ================================================= */
+
+        .seller-main {
+
+            min-width: 0;
+
+        }
+
+
+        .dashboard-section {
+
+            display: none;
+
+        }
+
+
+        .dashboard-section.active {
+
+            display: block;
+
+        }
+
+
+        .dashboard-heading {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .dashboard-heading h2 {
+
+            margin: 0;
+
+            font-size: 23px;
+
+            color: #111827;
+
+        }
+
+
+        .dashboard-heading p {
+
+            margin:
+                5px 0 0;
+
+            color: #6b7280;
+
+            font-size: 13px;
+
+        }
+
+
+        /* =================================================
+           STATS
+        ================================================= */
+
+        .stats-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4,1fr);
+
+            gap: 15px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .stat-card {
+
+            background: white;
+
+            border:
+                1px solid #e8ebf0;
+
+            border-radius: 16px;
+
+            padding: 20px;
+
+        }
+
+
+        .stat-icon {
+
+            width: 42px;
+            height: 42px;
+
+            border-radius: 11px;
+
+            background: #f1f5f9;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 20px;
+
+            margin-bottom: 13px;
+
+        }
+
+
+        .stat-card strong {
+
+            display: block;
+
+            font-size: 25px;
+
+            color: #111827;
+
+        }
+
+
+        .stat-card span {
+
+            font-size: 12px;
+
+            color: #7b8491;
+
+        }
+
+
+        /* =================================================
+           CARD
+        ================================================= */
+
+        .dashboard-card {
+
+            background: white;
+
+            border:
+                1px solid #e8ebf0;
+
+            border-radius: 17px;
+
+            padding: 22px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .dashboard-card h3 {
+
+            margin:
+                0 0 17px;
+
+            color: #111827;
+
+        }
+
+
+        /* =================================================
+           VERIFICATION
+        ================================================= */
+
+        .verification-box {
+
+            border:
+                1px solid #dbeafe;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #eff6ff,
+                    #f8fbff
+                );
+
+            border-radius: 15px;
+
+            padding: 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+        }
+
+
+        .verification-left {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 13px;
+
+        }
+
+
+        .blue-check {
+
+            width: 45px;
+            height: 45px;
+
+            border-radius: 50%;
+
+            background: #1877f2;
+
+            color: white;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 25px;
+
+            font-weight: 900;
+
+        }
+
+
+        .verification-left strong {
+
+            display: block;
+
+            color: #1558b0;
+
+            margin-bottom: 4px;
+
+        }
+
+
+        .verification-left span {
+
+            color: #64748b;
+
+            font-size: 13px;
+
+        }
+
+
+        .verification-status {
+
+            background:
+                #dcfce7;
+
+            color:
+                #15803d;
+
+            padding:
+                7px 11px;
+
+            border-radius: 50px;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            white-space: nowrap;
+
+        }
+
+
+        /* =================================================
+           PRODUCTS TABLE
+        ================================================= */
+
+        .seller-table-wrap {
+
+            overflow-x: auto;
+
+        }
+
+
+        .seller-table {
+
+            width: 100%;
+
+            border-collapse: collapse;
+
+            min-width: 650px;
+
+        }
+
+
+        .seller-table th {
+
+            text-align: left;
+
+            font-size: 12px;
+
+            color: #7b8491;
+
+            padding:
+                12px;
+
+            border-bottom:
+                1px solid #edf0f4;
+
+        }
+
+
+        .seller-table td {
+
+            padding:
+                14px 12px;
+
+            border-bottom:
+                1px solid #f0f2f5;
+
+            font-size: 13px;
+
+            color: #4b5563;
+
+        }
+
+
+        .table-product {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+        }
+
+
+        .table-image {
+
+            width: 48px;
+            height: 48px;
+
+            border-radius: 9px;
+
+            background-size: cover;
+
+            background-position: center;
+
+        }
+
+
+        .table-product strong {
+
+            display: block;
+
+            color: #111827;
+
+            margin-bottom: 3px;
+
+        }
+
+
+        .table-status {
+
+            display: inline-block;
+
+            padding:
+                5px 9px;
+
+            border-radius: 50px;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+        }
+
+
+        .status-live {
+
+            background: #dcfce7;
+
+            color: #15803d;
+
+        }
+
+
+        .status-draft {
+
+            background: #fef3c7;
+
+            color: #a16207;
+
+        }
+
+
+        .table-action {
+
+            border: none;
+
+            background: #eef2f7;
+
+            padding:
+                7px 10px;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            font-weight: 700;
+
+        }
+
+
+        /* =================================================
+           ADD PRODUCT FORM
+        ================================================= */
+
+        .seller-form {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2,1fr);
+
+            gap: 17px;
+
+        }
+
+
+        .form-group {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 7px;
+
+        }
+
+
+        .form-group.full {
+
+            grid-column:
+                1 / -1;
+
+        }
+
+
+        .form-group label {
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            color: #374151;
+
+        }
+
+
+        .form-group input,
+
+        .form-group select,
+
+        .form-group textarea {
+
+            width: 100%;
+
+            box-sizing: border-box;
+
+            border:
+                1px solid #dfe4ea;
+
+            border-radius: 9px;
+
+            padding: 12px;
+
+            outline: none;
+
+            font-family: inherit;
+
+            font-size: 14px;
+
+            background: white;
+
+        }
+
+
+        .form-group textarea {
+
+            min-height: 110px;
+
+            resize: vertical;
+
+        }
+
+
+        .form-group input:focus,
+
+        .form-group select:focus,
+
+        .form-group textarea:focus {
+
+            border-color:
+                #1877f2;
+
+        }
+
+
+        .save-product {
+
+            border: none;
+
+            background:
+                #1877f2;
+
+            color: white;
+
+            border-radius: 10px;
+
+            padding:
+                12px 20px;
+
+            font-weight: 800;
+
+            cursor: pointer;
+
+        }
+
+
+        /* =================================================
+           ADVERTISEMENT PLANS
+        ================================================= */
+
+        .ad-plan-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3,1fr);
+
+            gap: 15px;
+
+        }
+
+
+        .ad-plan {
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 15px;
+
+            padding: 20px;
+
+        }
+
+
+        .ad-plan.featured {
+
+            border:
+                2px solid #1877f2;
+
+        }
+
+
+        .ad-plan h3 {
+
+            margin: 0 0 7px;
+
+        }
+
+
+        .ad-price {
+
+            font-size: 25px;
+
+            font-weight: 900;
+
+            margin:
+                10px 0;
+
+        }
+
+
+        .ad-plan p {
+
+            color: #6b7280;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+        }
+
+
+        .ad-plan button {
+
+            width: 100%;
+
+            border: none;
+
+            background: #111827;
+
+            color: white;
+
+            border-radius: 9px;
+
+            padding: 10px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+        }
+
+
+        /* =================================================
+           PROFILE EDIT
+        ================================================= */
+
+        .profile-edit {
+
+            display: grid;
+
+            grid-template-columns:
+                130px 1fr;
+
+            gap: 22px;
+
+        }
+
+
+        .edit-logo {
+
+            width: 120px;
+            height: 120px;
+
+            border-radius: 20px;
+
+            background:
+                #f1f5f9;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 45px;
+
+        }
+
+
+        .edit-fields {
+
+            display: grid;
+
+            gap: 15px;
+
+        }
+
+
+        /* =================================================
+           TOAST
+        ================================================= */
+
+        .seller-toast {
+
+            position: fixed;
+
+            left: 50%;
+
+            bottom: 25px;
+
+            transform:
+                translate(-50%,20px);
+
+            background:
+                #111827;
+
+            color: white;
+
+            padding:
+                12px 18px;
+
+            border-radius: 10px;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transition: .25s ease;
+
+            z-index: 9999;
+
+            font-size: 14px;
+
+        }
+
+
+        .seller-toast.show {
+
+            opacity: 1;
+
+            transform:
+                translate(-50%,0);
+
+        }
+
+
+        /* =================================================
+           MOBILE
+        ================================================= */
+
+        @media(max-width:900px) {
+
+            .seller-layout {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .seller-sidebar {
+
+                position: static;
+
+                display: flex;
+
+                overflow-x: auto;
+
+                gap: 5px;
+
+            }
+
+
+            .seller-menu-title {
+
+                display: none;
+
+            }
+
+
+            .seller-menu-btn {
+
+                min-width: max-content;
+
+            }
+
+
+            .stats-grid {
+
+                grid-template-columns:
+                    repeat(2,1fr);
+
+            }
+
+
+            .ad-plan-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+
+        @media(max-width:650px) {
+
+            .seller-hero {
+
+                flex-direction:
+                    column;
+
+                align-items:
+                    flex-start;
+
+                padding: 24px;
+
+            }
+
+
+            .seller-hero-actions {
+
+                width: 100%;
+
+            }
+
+
+            .seller-btn {
+
+                flex: 1;
+
+            }
+
+
+            .stats-grid {
+
+                grid-template-columns:
+                    1fr 1fr;
+
+            }
+
+
+            .seller-form {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .form-group.full {
+
+                grid-column: auto;
+
+            }
+
+
+            .profile-edit {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .verification-box {
+
+                align-items:
+                    flex-start;
+
+                flex-direction:
+                    column;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+
+<body>
+
+
+
+<!-- =====================================================
+     TOP BAR
+====================================================== -->
+
+<div class="top-bar">
+
+    🛍️
+
+    <span>
+        Shopping Mela
+    </span>
+
+    — Seller Center
+
+</div>
+
+
+
+<!-- =====================================================
+     HEADER
+====================================================== -->
+
+<header class="header">
+
+    <div class="container">
+
+        <div class="header-main">
+
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+
+                <div class="logo-icon">
+                    🛍️
+                </div>
+
+                <span>
+                    Shopping Mela
+                </span>
+
+            </a>
+
+
+
+            <div class="header-search">
+
+                <input
+                    type="search"
+                    placeholder="Shopping Mela search..."
+                    id="sellerSearch"
+                >
+
+                <button
+                    onclick="sellerSearch()"
+                >
+                    🔍
+                </button>
+
+            </div>
+
+
+
+            <div class="header-actions">
+
+                <button
+                    class="header-action"
+                    onclick="showToast('Notification system শীঘ্রই আসছে 🔔')"
+                >
+
+                    <span class="header-action-icon">
+                        🔔
+                    </span>
+
+                    <span>
+                        Alerts
+                    </span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <nav class="navigation">
+
+            <div class="navigation-inner">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="brands.html">
+                    Local Brands
+                </a>
+
+                <a href="products.html">
+                    Products
+                </a>
+
+                <a href="blog.html">
+                    Blog
+                </a>
+
+                <a
+                    href="seller.html"
+                    class="active"
+                >
+                    Seller Center
+                </a>
+
+            </div>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     SELLER PAGE
+====================================================== -->
+
+<main class="seller-page">
+
+    <div class="container">
+
+
+        <!-- =================================================
+             HERO
+        ================================================== -->
+
+        <section class="seller-hero">
+
+
+            <div class="seller-hero-left">
+
+                <div class="seller-avatar">
+                    👗
+                </div>
+
+
+                <div>
+
+                    <h1>
+                        Anjona Ladies Tailors
+                        ✓
+                    </h1>
+
+                    <p>
+                        Seller Dashboard · Verified Business
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="seller-hero-actions">
+
+                <button
+                    class="seller-btn white"
+                    onclick="viewPublicProfile()"
+                >
+                    👁 Public Profile
+                </button>
+
+
+                <button
+                    class="seller-btn blue"
+                    onclick="showSection('add-product')"
+                >
+                    + Add Product
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             LAYOUT
+        ================================================== -->
+
+        <div class="seller-layout">
+
+
+
+            <!-- =================================================
+                 SIDEBAR
+            ================================================== -->
+
+            <aside class="seller-sidebar">
+
+
+                <div class="seller-menu-title">
+                    Dashboard
+                </div>
+
+
+                <button
+                    class="seller-menu-btn active"
+                    onclick="showSection('overview',this)"
+                >
+
+                    <span class="seller-menu-icon">
+                        📊
+                    </span>
+
+                    Overview
+
+                </button>
+
+
+                <button
+                    class="seller-menu-btn"
+                    onclick="showSection('products',this)"
+                >
+
+                    <span class="seller-menu-icon">
+                        🛍️
+                    </span>
+
+                    My Products
+
+                </button>
+
+
+                <button
+                    class="seller-menu-btn"
+                    onclick="showSection('add-product',this)"
+                >
+
+                    <span class="seller-menu-icon">
+                        ➕
+                    </span>
+
+                    Add Product
+
+                </button>
+
+
+                <button
+                    class="seller-menu-btn"
+                    onclick="showSection('orders',this)"
+                >
+
+                    <span class="seller-menu-icon">
+                        📦
+                    </span>
+
+                    Orders
+
+                </button>
+
+
+
+                <div class="seller-menu-title">
+                    Business
+                </div>
+
+
+                <button
+                    class="seller-menu-btn"
+                    onclick="showSection('profile',this)"
+                >
+
+                    <span class="seller-menu-icon">
+                        🏪
+                    </span>
+
+                    Business Profile
+
+                </button>
+
+
+                <button
+                    class="seller-menu-btn"
+                    onclick="showSection('verification',this)"
+                >
+
+                    <span class="seller-menu-icon">
+                        ✓
+                    </span>
+
+                    Verification
+
+                </button>
+
+
+                <button
+                    class="seller-menu-btn"
+                    onclick="showSection('advertise',this)"
+                >
+
+                    <span class="seller-menu-icon">
+                        📢
+                    </span>
+
+                    Advertise
+
+                </button>
+
+
+                <div class="seller-menu-title">
+                    Account
+                </div>
+
+
+                <button
+                    class="seller-menu-btn"
+                    onclick="showToast('Settings শীঘ্রই আসছে ⚙️')"
+                >
+
+                    <span class="seller-menu-icon">
+                        ⚙️
+                    </span>
+
+                    Settings
+
+                </button>
+
+
+                <button
+                    class="seller-menu-btn"
+                    onclick="logoutSeller()"
+                >
+
+                    <span class="seller-menu-icon">
+                        🚪
+                    </span>
+
+                    Logout
+
+                </button>
+
+            </aside>
+
+
+
+            <!-- =================================================
+                 MAIN
+            ================================================== -->
+
+            <section class="seller-main">
+
+
+
+                <!-- =================================================
+                     OVERVIEW
+                ================================================== -->
+
+                <div
+                    class="dashboard-section active"
+                    id="overview"
+                >
+
+                    <div class="dashboard-heading">
+
+                        <div>
+
+                            <h2>
+                                Dashboard Overview
+                            </h2>
+
+                            <p>
+                                আপনার business-এর current activity
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="stats-grid">
+
+
+                        <div class="stat-card">
+
+                            <div class="stat-icon">
+                                👁️
+                            </div>
+
+                            <strong>
+                                12.8K
+                            </strong>
+
+                            <span>
+                                Profile Views
+                            </span>
+
+                        </div>
+
+
+
+                        <div class="stat-card">
+
+                            <div class="stat-icon">
+                                🛍️
+                            </div>
+
+                            <strong>
+                                48
+                            </strong>
+
+                            <span>
+                                Products
+                            </span>
+
+                        </div>
+
+
+
+                        <div class="stat-card">
+
+                            <div class="stat-icon">
+                                📦
+                            </div>
+
+                            <strong>
+                                126
+                            </strong>
+
+                            <span>
+                                Orders
+                            </span>
+
+                        </div>
+
+
+
+                        <div class="stat-card">
+
+                            <div class="stat-icon">
+                                ❤️
+                            </div>
+
+                            <strong>
+                                1.2K
+                            </strong>
+
+                            <span>
+                                Followers
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- VERIFICATION -->
+
+                    <div class="dashboard-card">
+
+                        <h3>
+                            Business Verification
+                        </h3>
+
+
+                        <div class="verification-box">
+
+                            <div class="verification-left">
+
+                                <div class="blue-check">
+                                    ✓
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Verified Business
+                                    </strong>
+
+                                    <span>
+                                        আপনার profile verified
+                                        এবং public profile-এ
+                                        blue badge দেখাবে।
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="verification-status">
+                                VERIFIED
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- QUICK ACTION -->
+
+                    <div class="dashboard-card">
+
+                        <h3>
+                            Quick Actions
+                        </h3>
+
+
+                        <div class="seller-hero-actions">
+
+                            <button
+                                class="seller-btn blue"
+                                onclick="showSection('add-product')"
+                            >
+                                + Add Product
+                            </button>
+
+
+                            <button
+                                class="seller-btn"
+                                style="
+                                    background:#eef2f7;
+                                    color:#111827;
+                                "
+                                onclick="showSection('advertise')"
+                            >
+                                📢 Create Advertisement
+                            </button>
+
+
+                            <button
+                                class="seller-btn"
+                                style="
+                                    background:#eef2f7;
+                                    color:#111827;
+                                "
+                                onclick="showSection('profile')"
+                            >
+                                ✏️ Edit Profile
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     MY PRODUCTS
+                ================================================== -->
+
+                <div
+                    class="dashboard-section"
+                    id="products"
+                >
+
+                    <div class="dashboard-heading">
+
+                        <div>
+
+                            <h2>
+                                My Products
+                            </h2>
+
+                            <p>
+                                আপনার listed products manage করুন
+                            </p>
+
+                        </div>
+
+
+                        <button
+                            class="save-product"
+                            onclick="showSection('add-product')"
+                        >
+                            + Add Product
+                        </button>
+
+                    </div>
+
+
+
+                    <div class="dashboard-card">
+
+                        <div class="seller-table-wrap">
+
+                            <table class="seller-table">
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>
+                                            Product
+                                        </th>
+
+                                        <th>
+                                            Price
+                                        </th>
+
+                                        <th>
+                                            Views
+                                        </th>
+
+                                        <th>
+                                            Status
+                                        </th>
+
+                                        <th>
+                                            Action
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+
+                                <tbody>
+
+
+                                    <tr>
+
+                                        <td>
+
+                                            <div class="table-product">
+
+                                                <div
+                                                    class="table-image"
+                                                    style="
+                                                        background-image:
+                                                        url('https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=300&q=80');
+                                                    "
+                                                ></div>
+
+                                                <div>
+
+                                                    <strong>
+                                                        Ladies Three Piece
+                                                    </strong>
+
+                                                    Fashion
+
+                                                </div>
+
+                                            </div>
+
+                                        </td>
+
+
+                                        <td>
+                                            ৳1,250
+                                        </td>
+
+
+                                        <td>
+                                            4.2K
+                                        </td>
+
+
+                                        <td>
+
+                                            <span
+                                                class="table-status status-live"
+                                            >
+                                                LIVE
+                                            </span>
+
+                                        </td>
+
+
+                                        <td>
+
+                                            <button
+                                                class="table-action"
+                                                onclick="showToast('Edit product শীঘ্রই আসছে')"
+                                            >
+                                                Edit
+                                            </button>
+
+                                        </td>
+
+                                    </tr>
+
+
+
+                                    <tr>
+
+                                        <td>
+
+                                            <div class="table-product">
+
+                                                <div
+                                                    class="table-image"
+                                                    style="
+                                                        background-image:
+                                                        url('https://images.unsplash.com/photo-1583391733956-6c78276477e9?auto=format&fit=crop&w=300&q=80');
+                                                    "
+                                                ></div>
+
+                                                <div>
+
+                                                    <strong>
+                                                        Cotton Kurti
+                                                    </strong>
+
+                                                    Fashion
+
+                                                </div>
+
+                                            </div>
+
+                                        </td>
+
+
+                                        <td>
+                                            ৳780
+                                        </td>
+
+
+                                        <td>
+                                            2.8K
+                                        </td>
+
+
+                                        <td>
+
+                                            <span
+                                                class="table-status status-live"
+                                            >
+                                                LIVE
+                                            </span>
+
+                                        </td>
+
+
+                                        <td>
+
+                                            <button
+                                                class="table-action"
+                                                onclick="showToast('Edit product শীঘ্রই আসছে')"
+                                            >
+                                                Edit
+                                            </button>
+
+                                        </td>
+
+                                    </tr>
+
+
+
+                                    <tr>
+
+                                        <td>
+
+                                            <div class="table-product">
+
+                                                <div
+                                                    class="table-image"
+                                                    style="
+                                                        background-image:
+                                                        url('https://images.unsplash.com/photo-1591369822096-ffd140ec948f?auto=format&fit=crop&w=300&q=80');
+                                                    "
+                                                ></div>
+
+                                                <div>
+
+                                                    <strong>
+                                                        Custom Dress
+                                                    </strong>
+
+                                                    Fashion
+
+                                                </div>
+
+                                            </div>
+
+                                        </td>
+
+
+                                        <td>
+                                            ৳1,450
+                                        </td>
+
+
+                                        <td>
+                                            1.9K
+                                        </td>
+
+
+                                        <td>
+
+                                            <span
+                                                class="table-status status-draft"
+                                            >
+                                                DRAFT
+                                            </span>
+
+                                        </td>
+
+
+                                        <td>
+
+                                            <button
+                                                class="table-action"
+                                                onclick="showToast('Draft edit শীঘ্রই আসছে')"
+                                            >
+                                                Edit
+                                            </button>
+
+                                        </td>
+
+                                    </tr>
+
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     ADD PRODUCT
+                ================================================== -->
+
+                <div
+                    class="dashboard-section"
+                    id="add-product"
+                >
+
+                    <div class="dashboard-heading">
+
+                        <div>
+
+                            <h2>
+                                Add New Product
+                            </h2>
+
+                            <p>
+                                আপনার নতুন product Shopping Mela-তে যুক্ত করুন
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="dashboard-card">
+
+                        <form
+                            class="seller-form"
+                            id="productForm"
+                            onsubmit="addProduct(event)"
+                        >
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Product Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="productName"
+                                    placeholder="যেমন: Ladies Three Piece"
+                                    required
+                                >
+
+                            </div>
+
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Category
+                                </label>
+
+                                <select
+                                    id="productCategory"
+                                    required
+                                >
+
+                                    <option value="">
+                                        Select Category
+                                    </option>
+
+                                    <option>
+                                        Fashion
+                                    </option>
+
+                                    <option>
+                                        Beauty
+                                    </option>
+
+                                    <option>
+                                        Food
+                                    </option>
+
+                                    <option>
+                                        Electronics
+                                    </option>
+
+                                    <option>
+                                        Home
+                                    </option>
+
+                                    <option>
+                                        Grocery
+                                    </option>
+
+                                    <option>
+                                        Services
+                                    </option>
+
+                                    <option>
+                                        Others
+                                    </option>
+
+                                </select>
+
+                            </div>
+
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Price
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="productPrice"
+                                    placeholder="৳"
+                                    min="0"
+                                    required
+                                >
+
+                            </div>
+
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Old Price
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="oldPrice"
+                                    placeholder="Optional"
+                                    min="0"
+                                >
+
+                            </div>
+
+
+
+                            <div class="form-group full">
+
+                                <label>
+                                    Product Image URL
+                                </label>
+
+                                <input
+                                    type="url"
+                                    id="productImage"
+                                    placeholder="https://example.com/product-image.jpg"
+                                >
+
+                            </div>
+
+
+
+                            <div class="form-group full">
+
+                                <label>
+                                    Product Description
+                                </label>
+
+                                <textarea
+                                    id="productDescription"
+                                    placeholder="Product সম্পর্কে লিখুন..."
+                                ></textarea>
+
+                            </div>
+
+
+
+                            <div class="form-group full">
+
+                                <button
+                                    type="submit"
+                                    class="save-product"
+                                >
+                                    ✓ Product Save করুন
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     ORDERS
+                ================================================== -->
+
+                <div
+                    class="dashboard-section"
+                    id="orders"
+                >
+
+                    <div class="dashboard-heading">
+
+                        <div>
+
+                            <h2>
+                                Orders
+                            </h2>
+
+                            <p>
+                                Customer orders-এর overview
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="stats-grid">
+
+                        <div class="stat-card">
+
+                            <div class="stat-icon">
+                                🆕
+                            </div>
+
+                            <strong>
+                                12
+                            </strong>
+
+                            <span>
+                                New Orders
+                            </span>
+
+                        </div>
+
+
+                        <div class="stat-card">
+
+                            <div class="stat-icon">
+                                🚚
+                            </div>
+
+                            <strong>
+                                8
+                            </strong>
+
+                            <span>
+                                Processing
+                            </span>
+
+                        </div>
+
+
+                        <div class="stat-card">
+
+                            <div class="stat-icon">
+                                ✅
+                            </div>
+
+                            <strong>
+                                96
+                            </strong>
+
+                            <span>
+                                Completed
+                            </span>
+
+                        </div>
+
+
+                        <div class="stat-card">
+
+                            <div class="stat-icon">
+                                ↩️
+                            </div>
+
+                            <strong>
+                                3
+                            </strong>
+
+                            <span>
+                                Returned
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="dashboard-card">
+
+                        <h3>
+                            Recent Orders
+                        </h3>
+
+                        <p
+                            style="
+                                color:#6b7280;
+                                font-size:14px;
+                            "
+                        >
+                            Real order management system
+                            backend যুক্ত করার পর এখানে
+                            customer orders automatically দেখা যাবে।
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     PROFILE
+                ================================================== -->
+
+                <div
+                    class="dashboard-section"
+                    id="profile"
+                >
+
+                    <div class="dashboard-heading">
+
+                        <div>
+
+                            <h2>
+                                Business Profile
+                            </h2>
+
+                            <p>
+                                Public profile-এর information update করুন
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="dashboard-card">
+
+                        <div class="profile-edit">
+
+
+                            <div class="edit-logo">
+                                👗
+                            </div>
+
+
+                            <div class="edit-fields">
+
+
+                                <div class="form-group">
+
+                                    <label>
+                                        Business Name
+                                    </label>
+
+                                    <input
+                                        id="businessName"
+                                        value="Anjona Ladies Tailors"
+                                    >
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <label>
+                                        Category
+                                    </label>
+
+                                    <input
+                                        value="Fashion & Tailoring"
+                                    >
+
+                                </div>
+
+
+                                <div class="form-group">
+
+                                    <label>
+                                        Business Description
+                                    </label>
+
+                                    <textarea>আমাদের এখানে ladies three-piece, custom dress, tailoring এবং alteration service পাওয়া যায়।</textarea>
+
+                                </div>
+
+
+                                <button
+                                    class="save-product"
+                                    onclick="saveProfile()"
+                                >
+                                    ✓ Profile Save করুন
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     VERIFICATION
+                ================================================== -->
+
+                <div
+                    class="dashboard-section"
+                    id="verification"
+                >
+
+                    <div class="dashboard-heading">
+
+                        <div>
+
+                            <h2>
+                                Business Verification
+                            </h2>
+
+                            <p>
+                                আপনার blue verified badge status
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="dashboard-card">
+
+                        <div class="verification-box">
+
+                            <div class="verification-left">
+
+                                <div class="blue-check">
+                                    ✓
+                                </div>
+
+                                <div>
+
+                                    <strong>
+                                        Verified Business
+                                    </strong>
+
+                                    <span>
+                                        Anjona Ladies Tailors
+                                        verification complete.
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="verification-status">
+                                VERIFIED
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="dashboard-card">
+
+                        <h3>
+                            Verification Information
+                        </h3>
+
+                        <p
+                            style="
+                                color:#6b7280;
+                                line-height:1.8;
+                                font-size:14px;
+                            "
+                        >
+
+                            Verified badge Shopping Mela-এর
+                            business verification system-এর
+                            মাধ্যমে দেওয়া হবে। ভবিষ্যতে Admin
+                            panel থেকে verification approve,
+                            reject বা suspend করা যাবে।
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     ADVERTISE
+                ================================================== -->
+
+                <div
+                    class="dashboard-section"
+                    id="advertise"
+                >
+
+                    <div class="dashboard-heading">
+
+                        <div>
+
+                            <h2>
+                                Advertise Your Business
+                            </h2>
+
+                            <p>
+                                Shopping Mela-তে আপনার business promote করুন
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="ad-plan-grid">
+
+
+                        <div class="ad-plan">
+
+                            <h3>
+                                Local Boost
+                            </h3>
+
+                            <div class="ad-price">
+                                ৳325
+                            </div>
+
+                            <p>
+                                Local area promotion,
+                                business listing এবং
+                                basic visibility।
+                            </p>
+
+                            <button
+                                onclick="selectAd('Local Boost')"
+                            >
+                                Select Plan
+                            </button>
+
+                        </div>
+
+
+
+                        <div class="ad-plan featured">
+
+                            <h3>
+                                Featured
+                            </h3>
+
+                            <div class="ad-price">
+                                ৳650
+                            </div>
+
+                            <p>
+                                Homepage featured placement,
+                                brand promotion এবং
+                                product spotlight।
+                            </p>
+
+                            <button
+                                onclick="selectAd('Featured')"
+                            >
+                                Select Plan
+                            </button>
+
+                        </div>
+
+
+
+                        <div class="ad-plan">
+
+                            <h3>
+                                Premium
+                            </h3>
+
+                            <div class="ad-price">
+                                ৳1,200
+                            </div>
+
+                            <p>
+                                Hero banner, premium placement
+                                এবং maximum local visibility।
+                            </p>
+
+                            <button
+                                onclick="selectAd('Premium')"
+                            >
+                                Select Plan
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-main">
+
+
+            <div class="footer-brand">
+
+                <a
+                    href="index.html"
+                    class="logo"
+                >
+
+                    <div class="logo-icon">
+                        🛍️
+                    </div>
+
+                    <span>
+                        Shopping Mela
+                    </span>
+
+                </a>
+
+
+                <p>
+
+                    Local brands, businesses,
+                    products এবং community content-এর
+                    modern online platform।
+
+                </p>
+
+            </div>
+
+
+
+            <div>
+
+                <h3>
+                    Shopping
+                </h3>
+
+                <a href="index.html#categories">
+                    Categories
+                </a>
+
+                <a href="brands.html">
+                    Local Brands
+                </a>
+
+                <a href="products.html">
+                    Products
+                </a>
+
+                <a href="index.html#offers">
+                    Offers
+                </a>
+
+            </div>
+
+
+
+            <div>
+
+                <h3>
+                    Seller
+                </h3>
+
+                <a href="seller.html">
+                    Seller Center
+                </a>
+
+                <a href="seller.html">
+                    Add Product
+                </a>
+
+                <a href="seller.html">
+                    Advertise
+                </a>
+
+            </div>
+
+
+
+            <div>
+
+                <h3>
+                    Support
+                </h3>
+
+                <a href="#">
+                    About Us
+                </a>
+
+                <a href="#">
+                    Contact
+                </a>
+
+                <a href="#">
+                    Privacy Policy
+                </a>
+
+                <a href="#">
+                    Terms
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            © 2026 Shopping Mela.
+            All Rights Reserved.
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     TOAST
+====================================================== -->
+
+<div
+    class="seller-toast"
+    id="sellerToast"
+>
+    Done!
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script>
+
+    /* =================================================
+       TOAST
+    ================================================= */
+
+    function showToast(message) {
+
+        const toast =
+            document.getElementById(
+                "sellerToast"
+            );
+
+
+        toast.textContent =
+            message;
+
+
+        toast.classList.add(
+            "show"
+        );
+
+
+        setTimeout(
+            function() {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2500
+        );
+
+    }
+
+
+
+    /* =================================================
+       SECTION SWITCH
+    ================================================= */
+
+    function showSection(
+        sectionId,
+        clickedButton
+    ) {
+
+        document
+            .querySelectorAll(
+                ".dashboard-section"
+            )
+            .forEach(
+                function(section) {
+
+                    section.classList.remove(
+                        "active"
+                    );
+
+                }
+            );
+
+
+        const target =
+            document.getElementById(
+                sectionId
+            );
+
+
+        if (target) {
+
+            target.classList.add(
+                "active"
+            );
+
+        }
+
+
+        document
+            .querySelectorAll(
+                ".seller-menu-btn"
+            )
+            .forEach(
+                function(button) {
+
+                    button.classList.remove(
+                        "active"
+                    );
+
+                }
+            );
+
+
+        if (clickedButton) {
+
+            clickedButton.classList.add(
+                "active"
+            );
+
+        } else {
+
+            const matchingButton =
+                Array.from(
+                    document.querySelectorAll(
+                        ".seller-menu-btn"
+                    )
+                ).find(
+                    function(button) {
+
+                        return button
+                            .getAttribute(
+                                "onclick"
+                            )
+                            ?.includes(
+                                "'" +
+                                sectionId +
+                                "'"
+                            );
+
+                    }
+                );
+
+
+            if (matchingButton) {
+
+                matchingButton.classList.add(
+                    "active"
+                );
+
+            }
+
+        }
+
+
+        window.scrollTo({
+
+            top: 0,
+
+            behavior: "smooth"
+
+        });
+
+    }
+
+
+
+    /* =================================================
+       ADD PRODUCT
+    ================================================= */
+
+    function addProduct(event) {
+
+        event.preventDefault();
+
+
+        const name =
+            document
+                .getElementById(
+                    "productName"
+                )
+                .value
+                .trim();
+
+
+        const category =
+            document
+                .getElementById(
+                    "productCategory"
+                )
+                .value;
+
+
+        const price =
+            document
+                .getElementById(
+                    "productPrice"
+                )
+                .value;
+
+
+        if (
+            !name ||
+            !category ||
+            !price
+        ) {
+
+            showToast(
+                "সব প্রয়োজনীয় তথ্য দিন"
+            );
+
+            return;
+
+        }
+
+
+        showToast(
+            "Product save হয়েছে ✅"
+        );
+
+
+        document
+            .getElementById(
+                "productForm"
+            )
+            .reset();
+
+
+        setTimeout(
+            function() {
+
+                showSection(
+                    "products"
+                );
+
+            },
+            700
+        );
+
+    }
+
+
+
+    /* =================================================
+       SAVE PROFILE
+    ================================================= */
+
+    function saveProfile() {
+
+        const name =
+            document
+                .getElementById(
+                    "businessName"
+                )
+                .value
+                .trim();
+
+
+        if (!name) {
+
+            showToast(
+                "Business name দিন"
+            );
+
+            return;
+
+        }
+
+
+        showToast(
+            "Business profile update হয়েছে ✅"
+        );
+
+    }
+
+
+
+    /* =================================================
+       VIEW PUBLIC PROFILE
+    ================================================= */
+
+    function viewPublicProfile() {
+
+        window.location.href =
+            "profile.html";
+
+    }
+
+
+
+    /* =================================================
+       AD PLAN
+    ================================================= */
+
+    function selectAd(
+        plan
+    ) {
+
+        showToast(
+            plan +
+            " plan selected 📢"
+        );
+
+    }
+
+
+
+    /* =================================================
+       SEARCH
+    ================================================= */
+
+    function sellerSearch() {
+
+        const input =
+            document.getElementById(
+                "sellerSearch"
+            );
+
+
+        const value =
+            input.value.trim();
+
+
+        if (!value) {
+
+            input.focus();
+
+            return;
+
+        }
+
+
+        window.location.href =
+            "products.html?search=" +
+            encodeURIComponent(
+                value
+            );
+
+    }
+
+
+    document
+        .getElementById(
+            "sellerSearch"
+        )
+        .addEventListener(
+            "keydown",
+            function(event) {
+
+                if (
+                    event.key === "Enter"
+                ) {
+
+                    sellerSearch();
+
+                }
+
+            }
+        );
+
+
+
+    /* =================================================
+       LOGOUT
+    ================================================= */
+
+    function logoutSeller() {
+
+        const confirmed =
+            confirm(
+                "আপনি কি Seller Dashboard থেকে বের হতে চান?"
+            );
+
+
+        if (confirmed) {
+
+            window.location.href =
+                "index.html";
+
+        }
+
+    }
+
+</script>
+
+
+
+</body>
+
+</html>
+```
