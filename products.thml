@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="bn">
 
@@ -16,7 +17,7 @@
 
     <meta
         name="description"
-        content="Shopping Mela Products — Local sellers, verified brands, offers and products."
+        content="Shopping Mela Products — local sellers-এর products, offers এবং verified businesses."
     >
 
     <link
@@ -24,10 +25,389 @@
         href="style.css"
     >
 
+    <style>
+
+        /* =================================================
+           PRODUCTS PAGE EXTRA CSS
+        ================================================= */
+
+        .products-page-hero {
+
+            padding: 50px 0 30px;
+
+        }
+
+
+        .products-hero-box {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #111827,
+                    #374151
+                );
+
+            border-radius: 24px;
+
+            padding: 45px;
+
+            color: white;
+
+            position: relative;
+
+            overflow: hidden;
+
+        }
+
+
+        .products-hero-box::after {
+
+            content: "";
+
+            position: absolute;
+
+            width: 320px;
+            height: 320px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,0.06);
+
+            right: -90px;
+            top: -120px;
+
+        }
+
+
+        .page-label {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding: 7px 14px;
+
+            border-radius: 50px;
+
+            background:
+                rgba(255,255,255,0.12);
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+        }
+
+
+        .products-hero-box h1 {
+
+            font-size:
+                clamp(30px,5vw,50px);
+
+            margin:
+                12px 0;
+
+        }
+
+
+        .products-hero-box p {
+
+            max-width: 700px;
+
+            color: #d1d5db;
+
+            line-height: 1.8;
+
+        }
+
+
+        .products-toolbar {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            flex-wrap: wrap;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .product-search {
+
+            display: flex;
+
+            width:
+                min(100%,430px);
+
+            background: white;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 12px;
+
+            overflow: hidden;
+
+        }
+
+
+        .product-search input {
+
+            flex: 1;
+
+            border: none;
+
+            outline: none;
+
+            padding: 14px;
+
+            font-size: 15px;
+
+        }
+
+
+        .product-search button {
+
+            border: none;
+
+            background: #111827;
+
+            color: white;
+
+            padding:
+                0 18px;
+
+            cursor: pointer;
+
+            font-size: 16px;
+
+        }
+
+
+        .product-filters {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+
+        }
+
+
+        .product-filter {
+
+            background: white;
+
+            border:
+                1px solid #e5e7eb;
+
+            border-radius: 50px;
+
+            padding:
+                9px 15px;
+
+            cursor: pointer;
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+        }
+
+
+        .product-filter.active {
+
+            background: #111827;
+
+            color: white;
+
+            border-color: #111827;
+
+        }
+
+
+        .products-count {
+
+            font-size: 14px;
+
+            color: #6b7280;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .product-card.hidden {
+
+            display: none;
+
+        }
+
+
+        .product-seller {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 5px;
+
+            font-size: 13px;
+
+            color: #6b7280;
+
+            margin:
+                7px 0;
+
+        }
+
+
+        .verified-badge {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            width: 18px;
+
+            height: 18px;
+
+            border-radius: 50%;
+
+            background: #1877f2;
+
+            color: white;
+
+            font-size: 11px;
+
+            font-weight: 900;
+
+            box-shadow:
+                0 1px 4px
+                rgba(24,119,242,.35);
+
+        }
+
+
+        .product-view-btn {
+
+            width: 100%;
+
+            border: none;
+
+            border-radius: 10px;
+
+            padding: 11px;
+
+            background: #111827;
+
+            color: white;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            margin-top: 12px;
+
+            transition:
+                .2s ease;
+
+        }
+
+
+        .product-view-btn:hover {
+
+            transform:
+                translateY(-1px);
+
+            opacity: .92;
+
+        }
+
+
+        .empty-products {
+
+            display: none;
+
+            text-align: center;
+
+            padding: 60px 20px;
+
+            background: white;
+
+            border:
+                1px solid #eee;
+
+            border-radius: 18px;
+
+        }
+
+
+        .empty-products.show {
+
+            display: block;
+
+        }
+
+
+        .empty-products-icon {
+
+            font-size: 45px;
+
+            margin-bottom: 10px;
+
+        }
+
+
+        .back-home {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            text-decoration: none;
+
+            color: #6b7280;
+
+            font-weight: 600;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        @media(max-width:700px) {
+
+            .products-hero-box {
+
+                padding: 30px 22px;
+
+            }
+
+        }
+
+    </style>
+
 </head>
 
 
+
 <body>
+
 
 
 <!-- =====================================================
@@ -42,7 +422,7 @@
         Shopping Mela
     </span>
 
-    — Local Products & Verified Sellers
+    — Local Products Marketplace
 
 </div>
 
@@ -58,8 +438,6 @@
 
         <div class="header-main">
 
-
-            <!-- LOGO -->
 
             <a
                 href="index.html"
@@ -78,21 +456,17 @@
 
 
 
-            <!-- SEARCH -->
-
             <div class="header-search">
 
                 <input
                     type="search"
-                    id="productSearch"
-                    placeholder="পণ্য, brand বা category খুঁজুন..."
-                    aria-label="Search products"
+                    id="globalProductSearch"
+                    placeholder="পণ্য খুঁজুন..."
                 >
 
                 <button
                     type="button"
-                    onclick="searchProducts()"
-                    aria-label="Search"
+                    onclick="globalProductSearch()"
                 >
                     🔍
                 </button>
@@ -101,66 +475,31 @@
 
 
 
-            <!-- HEADER ACTIONS -->
-
             <div class="header-actions">
 
-
-                <button
+                <a
+                    href="index.html"
                     class="header-action"
-                    type="button"
-                    onclick="openWishlist()"
+                    style="text-decoration:none;"
                 >
 
-                    <span class="header-action-icon">
-                        ♡
+                    <span
+                        class="header-action-icon"
+                    >
+                        🏠
                     </span>
 
                     <span>
-                        Wishlist
+                        Home
                     </span>
 
-                    <b
-                        class="header-count"
-                        id="wishlistCount"
-                    >
-                        0
-                    </b>
-
-                </button>
-
-
-
-                <button
-                    class="header-action"
-                    type="button"
-                    onclick="openCart()"
-                >
-
-                    <span class="header-action-icon">
-                        🛒
-                    </span>
-
-                    <span>
-                        Cart
-                    </span>
-
-                    <b
-                        class="header-count"
-                        id="cartCount"
-                    >
-                        0
-                    </b>
-
-                </button>
+                </a>
 
             </div>
 
         </div>
 
 
-
-        <!-- NAVIGATION -->
 
         <nav class="navigation">
 
@@ -185,7 +524,7 @@
                     Products
                 </a>
 
-                <a href="offers.html">
+                <a href="index.html#offers">
                     Offers
                 </a>
 
@@ -207,52 +546,43 @@
 
 
 
-<main>
-
-
 <!-- =====================================================
-     PRODUCTS HERO
+     HERO
 ====================================================== -->
 
-<section class="products-hero">
+<section class="products-page-hero">
 
     <div class="container">
 
-        <div class="products-hero-content">
+        <a
+            href="index.html"
+            class="back-home"
+        >
+            ← Home-এ ফিরে যান
+        </a>
 
-            <span class="page-label">
+
+        <div class="products-hero-box">
+
+            <div class="page-label">
                 🛒 SHOPPING MELA MARKETPLACE
-            </span>
+            </div>
 
 
             <h1>
-                Local Products,
-                Easy Shopping
+                Local Products
             </h1>
 
 
             <p>
-                আপনার এলাকার seller ও
-                verified local brand-এর
-                products এক জায়গায় খুঁজে নিন।
+
+                আপনার এলাকার local seller এবং
+                verified business-এর products
+                এক জায়গায় খুঁজে নিন।
+                নতুন products, discounts এবং
+                popular items দেখুন।
+
             </p>
-
-
-            <div class="marketplace-points">
-
-                <span>
-                    🔵 Verified Sellers
-                </span>
-
-                <span>
-                    💰 Local Offers
-                </span>
-
-                <span>
-                    🛍️ Easy Shopping
-                </span>
-
-            </div>
 
         </div>
 
@@ -271,168 +601,82 @@
     <div class="container">
 
 
-        <!-- HEADING -->
+        <!-- TOOLBAR -->
 
-        <div class="section-heading">
+        <div class="products-toolbar">
 
-            <div>
 
-                <h2>
-                    All Products
-                </h2>
+            <div class="product-search">
 
-                <p id="productResultText">
-                    Local sellers-এর products
-                </p>
+                <input
+                    type="search"
+                    id="productSearch"
+                    placeholder="Product, seller বা category..."
+                >
+
+                <button
+                    type="button"
+                    onclick="filterProducts()"
+                >
+                    🔍
+                </button>
 
             </div>
 
 
-            <button
-                class="sort-button"
-                onclick="toggleSortMenu()"
-            >
-                ↕ Sort
-            </button>
+
+            <div class="product-filters">
+
+                <button
+                    class="product-filter active"
+                    onclick="setProductFilter('all',this)"
+                >
+                    সব
+                </button>
+
+
+                <button
+                    class="product-filter"
+                    onclick="setProductFilter('fashion',this)"
+                >
+                    Fashion
+                </button>
+
+
+                <button
+                    class="product-filter"
+                    onclick="setProductFilter('beauty',this)"
+                >
+                    Beauty
+                </button>
+
+
+                <button
+                    class="product-filter"
+                    onclick="setProductFilter('food',this)"
+                >
+                    Food
+                </button>
+
+
+                <button
+                    class="product-filter"
+                    onclick="setProductFilter('home',this)"
+                >
+                    Home
+                </button>
+
+            </div>
 
         </div>
 
 
-
-        <!-- =================================================
-             CATEGORY FILTER
-        ================================================== -->
-
-        <div class="product-filters">
-
-
-            <button
-                class="product-filter active"
-                onclick="
-                    filterProducts(
-                        'all',
-                        this
-                    )
-                "
-            >
-                All
-            </button>
-
-
-            <button
-                class="product-filter"
-                onclick="
-                    filterProducts(
-                        'Fashion',
-                        this
-                    )
-                "
-            >
-                👗 Fashion
-            </button>
-
-
-            <button
-                class="product-filter"
-                onclick="
-                    filterProducts(
-                        'Beauty',
-                        this
-                    )
-                "
-            >
-                💄 Beauty
-            </button>
-
-
-            <button
-                class="product-filter"
-                onclick="
-                    filterProducts(
-                        'Food',
-                        this
-                    )
-                "
-            >
-                🍔 Food
-            </button>
-
-
-            <button
-                class="product-filter"
-                onclick="
-                    filterProducts(
-                        'Electronics',
-                        this
-                    )
-                "
-            >
-                📱 Electronics
-            </button>
-
-
-            <button
-                class="product-filter"
-                onclick="
-                    filterProducts(
-                        'Home',
-                        this
-                    )
-                "
-            >
-                🏠 Home
-            </button>
-
-
-            <button
-                class="product-filter"
-                onclick="
-                    filterProducts(
-                        'Handmade',
-                        this
-                    )
-                "
-            >
-                ✨ Handmade
-            </button>
-
-        </div>
-
-
-
-        <!-- =================================================
-             SORT MENU
-        ================================================== -->
 
         <div
-            class="sort-menu"
-            id="sortMenu"
+            class="products-count"
+            id="productsCount"
         >
-
-            <button
-                onclick="sortProducts('default')"
-            >
-                Recommended
-            </button>
-
-            <button
-                onclick="sortProducts('low')"
-            >
-                Price: Low to High
-            </button>
-
-            <button
-                onclick="sortProducts('high')"
-            >
-                Price: High to Low
-            </button>
-
-            <button
-                onclick="sortProducts('discount')"
-            >
-                Highest Discount
-            </button>
-
+            8টি Product দেখানো হচ্ছে
         </div>
 
 
@@ -442,51 +686,37 @@
         ================================================== -->
 
         <div
-            class="market-product-grid"
-            id="productGrid"
+            class="product-grid"
+            id="productsGrid"
         >
 
 
 
-            <!-- =================================================
-                 PRODUCT 1
-            ================================================== -->
+            <!-- PRODUCT 1 -->
 
             <article
-                class="market-product-card"
-                data-category="Fashion"
-                data-name="
-                    Ladies Three Piece
-                "
-                data-search="
-                    ladies three piece
-                    fashion anjona local
-                "
-                data-price="1250"
-                data-discount="20"
+                class="product-card"
+                data-name="Ladies Three Piece"
+                data-category="fashion"
+                data-seller="Anjona Ladies Tailors"
             >
 
                 <div
-                    class="market-product-image"
+                    class="product-image"
                     style="
                         background-image:
-                        url('https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=800&q=85');
+                        url('https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=700&q=80');
                     "
                 >
 
-                    <span class="product-discount">
+                    <span class="discount">
                         -20%
                     </span>
 
 
                     <button
-                        class="market-wishlist"
-                        onclick="
-                            toggleWishlist(
-                                this,
-                                'Ladies Three Piece'
-                            )
-                        "
+                        class="product-heart"
+                        onclick="addWishlist(this)"
                     >
                         ♡
                     </button>
@@ -494,44 +724,20 @@
                 </div>
 
 
+                <div class="product-info">
 
-                <div class="market-product-info">
-
-
-                    <div class="product-label-row">
-
-                        <span class="product-tag">
-                            BEST SELLER
-                        </span>
-
-                    </div>
+                    <h3>
+                        Ladies Three Piece
+                    </h3>
 
 
+                    <div class="product-seller">
 
-                    <div class="market-product-title-row">
-
-                        <h3>
-                            Ladies Three Piece
-                        </h3>
-
-                    </div>
-
-
-
-                    <div class="seller-line">
-
-                        <span>
-                            Anjona Ladies Tailors
-                        </span>
+                        Anjona Ladies Tailors
 
                         <span
-                            class="seller-verified"
-                            title="Shopping Mela Verified"
-                            onclick="
-                                showSellerVerification(
-                                    'Anjona Ladies Tailors'
-                                )
-                            "
+                            class="verified-badge"
+                            title="Verified Seller"
                         >
                             ✓
                         </span>
@@ -539,43 +745,29 @@
                     </div>
 
 
-
-                    <div class="rating">
-
-                        ⭐ 4.8
-
-                        <small>
-                            (24 reviews)
-                        </small>
-
+                    <div class="product-brand">
+                        Fashion
                     </div>
 
 
+                    <div class="product-price">
 
-                    <div class="market-price">
-
-                        <strong>
+                        <span class="current-price">
                             ৳1,250
-                        </strong>
+                        </span>
 
-                        <del>
+                        <span class="old-price">
                             ৳1,550
-                        </del>
+                        </span>
 
                     </div>
-
 
 
                     <button
-                        class="add-cart-btn"
-                        onclick="
-                            addToCart(
-                                'Ladies Three Piece',
-                                1250
-                            )
-                        "
+                        class="product-view-btn"
+                        onclick="viewProduct('Ladies Three Piece')"
                     >
-                        🛒 Add to Cart
+                        Product দেখুন →
                     </button>
 
                 </div>
@@ -584,45 +776,31 @@
 
 
 
-            <!-- =================================================
-                 PRODUCT 2
-            ================================================== -->
+            <!-- PRODUCT 2 -->
 
             <article
-                class="market-product-card"
-                data-category="Beauty"
-                data-name="
-                    Premium Attar
-                "
-                data-search="
-                    premium attar perfume fragrance
-                    beauty local attar shop
-                "
-                data-price="650"
-                data-discount="15"
+                class="product-card"
+                data-name="Premium Attar"
+                data-category="beauty"
+                data-seller="Local Attar Shop"
             >
 
                 <div
-                    class="market-product-image"
+                    class="product-image"
                     style="
                         background-image:
-                        url('https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=800&q=85');
+                        url('https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=700&q=80');
                     "
                 >
 
-                    <span class="product-discount">
+                    <span class="discount">
                         -15%
                     </span>
 
 
                     <button
-                        class="market-wishlist"
-                        onclick="
-                            toggleWishlist(
-                                this,
-                                'Premium Attar'
-                            )
-                        "
+                        class="product-heart"
+                        onclick="addWishlist(this)"
                     >
                         ♡
                     </button>
@@ -630,38 +808,19 @@
                 </div>
 
 
-
-                <div class="market-product-info">
-
-
-                    <div class="product-label-row">
-
-                        <span class="product-tag">
-                            POPULAR
-                        </span>
-
-                    </div>
-
+                <div class="product-info">
 
                     <h3>
                         Premium Attar
                     </h3>
 
 
-                    <div class="seller-line">
+                    <div class="product-seller">
 
-                        <span>
-                            Local Attar Shop
-                        </span>
+                        Local Attar Shop
 
                         <span
-                            class="seller-verified"
-                            title="Shopping Mela Verified"
-                            onclick="
-                                showSellerVerification(
-                                    'Local Attar Shop'
-                                )
-                            "
+                            class="verified-badge"
                         >
                             ✓
                         </span>
@@ -669,40 +828,29 @@
                     </div>
 
 
-                    <div class="rating">
-
-                        ⭐ 4.7
-
-                        <small>
-                            (18 reviews)
-                        </small>
-
+                    <div class="product-brand">
+                        Beauty
                     </div>
 
 
-                    <div class="market-price">
+                    <div class="product-price">
 
-                        <strong>
+                        <span class="current-price">
                             ৳650
-                        </strong>
+                        </span>
 
-                        <del>
+                        <span class="old-price">
                             ৳750
-                        </del>
+                        </span>
 
                     </div>
 
 
                     <button
-                        class="add-cart-btn"
-                        onclick="
-                            addToCart(
-                                'Premium Attar',
-                                650
-                            )
-                        "
+                        class="product-view-btn"
+                        onclick="viewProduct('Premium Attar')"
                     >
-                        🛒 Add to Cart
+                        Product দেখুন →
                     </button>
 
                 </div>
@@ -711,45 +859,31 @@
 
 
 
-            <!-- =================================================
-                 PRODUCT 3
-            ================================================== -->
+            <!-- PRODUCT 3 -->
 
             <article
-                class="market-product-card"
-                data-category="Handmade"
-                data-name="
-                    Handmade Bag
-                "
-                data-search="
-                    handmade bag local craft
-                    fashion accessories
-                "
-                data-price="890"
-                data-discount="0"
+                class="product-card"
+                data-name="Handmade Bag"
+                data-category="fashion"
+                data-seller="Local Handmade Brand"
             >
 
                 <div
-                    class="market-product-image"
+                    class="product-image"
                     style="
                         background-image:
-                        url('https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=85');
+                        url('https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=700&q=80');
                     "
                 >
 
-                    <span class="product-new">
+                    <span class="discount">
                         NEW
                     </span>
 
 
                     <button
-                        class="market-wishlist"
-                        onclick="
-                            toggleWishlist(
-                                this,
-                                'Handmade Bag'
-                            )
-                        "
+                        class="product-heart"
+                        onclick="addWishlist(this)"
                     >
                         ♡
                     </button>
@@ -757,37 +891,19 @@
                 </div>
 
 
-
-                <div class="market-product-info">
-
-                    <div class="product-label-row">
-
-                        <span class="product-tag">
-                            HANDMADE
-                        </span>
-
-                    </div>
-
+                <div class="product-info">
 
                     <h3>
                         Handmade Bag
                     </h3>
 
 
-                    <div class="seller-line">
+                    <div class="product-seller">
 
-                        <span>
-                            Local Handmade Brand
-                        </span>
+                        Local Handmade Brand
 
                         <span
-                            class="seller-verified"
-                            title="Shopping Mela Verified"
-                            onclick="
-                                showSellerVerification(
-                                    'Local Handmade Brand'
-                                )
-                            "
+                            class="verified-badge"
                         >
                             ✓
                         </span>
@@ -795,36 +911,25 @@
                     </div>
 
 
-                    <div class="rating">
-
-                        ⭐ 4.9
-
-                        <small>
-                            (12 reviews)
-                        </small>
-
+                    <div class="product-brand">
+                        Fashion
                     </div>
 
 
-                    <div class="market-price">
+                    <div class="product-price">
 
-                        <strong>
+                        <span class="current-price">
                             ৳890
-                        </strong>
+                        </span>
 
                     </div>
 
 
                     <button
-                        class="add-cart-btn"
-                        onclick="
-                            addToCart(
-                                'Handmade Bag',
-                                890
-                            )
-                        "
+                        class="product-view-btn"
+                        onclick="viewProduct('Handmade Bag')"
                     >
-                        🛒 Add to Cart
+                        Product দেখুন →
                     </button>
 
                 </div>
@@ -833,45 +938,31 @@
 
 
 
-            <!-- =================================================
-                 PRODUCT 4
-            ================================================== -->
+            <!-- PRODUCT 4 -->
 
             <article
-                class="market-product-card"
-                data-category="Food"
-                data-name="
-                    Homemade Food
-                "
-                data-search="
-                    homemade food snacks
-                    local food
-                "
-                data-price="350"
-                data-discount="0"
+                class="product-card"
+                data-name="Homemade Food"
+                data-category="food"
+                data-seller="Local Food House"
             >
 
                 <div
-                    class="market-product-image"
+                    class="product-image"
                     style="
                         background-image:
-                        url('https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=85');
+                        url('https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=700&q=80');
                     "
                 >
 
-                    <span class="product-hot">
+                    <span class="discount">
                         HOT
                     </span>
 
 
                     <button
-                        class="market-wishlist"
-                        onclick="
-                            toggleWishlist(
-                                this,
-                                'Homemade Food'
-                            )
-                        "
+                        class="product-heart"
+                        onclick="addWishlist(this)"
                     >
                         ♡
                     </button>
@@ -879,37 +970,19 @@
                 </div>
 
 
-
-                <div class="market-product-info">
-
-                    <div class="product-label-row">
-
-                        <span class="product-tag">
-                            LOCAL FOOD
-                        </span>
-
-                    </div>
-
+                <div class="product-info">
 
                     <h3>
                         Homemade Food
                     </h3>
 
 
-                    <div class="seller-line">
+                    <div class="product-seller">
 
-                        <span>
-                            Local Food House
-                        </span>
+                        Local Food House
 
                         <span
-                            class="seller-verified"
-                            title="Shopping Mela Verified"
-                            onclick="
-                                showSellerVerification(
-                                    'Local Food House'
-                                )
-                            "
+                            class="verified-badge"
                         >
                             ✓
                         </span>
@@ -917,36 +990,25 @@
                     </div>
 
 
-                    <div class="rating">
-
-                        ⭐ 4.6
-
-                        <small>
-                            (31 reviews)
-                        </small>
-
+                    <div class="product-brand">
+                        Food
                     </div>
 
 
-                    <div class="market-price">
+                    <div class="product-price">
 
-                        <strong>
+                        <span class="current-price">
                             ৳350
-                        </strong>
+                        </span>
 
                     </div>
 
 
                     <button
-                        class="add-cart-btn"
-                        onclick="
-                            addToCart(
-                                'Homemade Food',
-                                350
-                            )
-                        "
+                        class="product-view-btn"
+                        onclick="viewProduct('Homemade Food')"
                     >
-                        🛒 Add to Cart
+                        Product দেখুন →
                     </button>
 
                 </div>
@@ -955,45 +1017,31 @@
 
 
 
-            <!-- =================================================
-                 PRODUCT 5
-            ================================================== -->
+            <!-- PRODUCT 5 -->
 
             <article
-                class="market-product-card"
-                data-category="Electronics"
-                data-name="
-                    Mobile Accessories
-                "
-                data-search="
-                    mobile accessories charger
-                    electronics gadgets
-                "
-                data-price="450"
-                data-discount="10"
+                class="product-card"
+                data-name="Cotton Kurti"
+                data-category="fashion"
+                data-seller="Anjona Ladies Tailors"
             >
 
                 <div
-                    class="market-product-image"
+                    class="product-image"
                     style="
                         background-image:
-                        url('https://images.unsplash.com/photo-1609592424213-1a8b4a0f6a3c?auto=format&fit=crop&w=800&q=85');
+                        url('https://images.unsplash.com/photo-1583391733956-6c78276477e9?auto=format&fit=crop&w=700&q=80');
                     "
                 >
 
-                    <span class="product-discount">
+                    <span class="discount">
                         -10%
                     </span>
 
 
                     <button
-                        class="market-wishlist"
-                        onclick="
-                            toggleWishlist(
-                                this,
-                                'Mobile Accessories'
-                            )
-                        "
+                        class="product-heart"
+                        onclick="addWishlist(this)"
                     >
                         ♡
                     </button>
@@ -1001,37 +1049,19 @@
                 </div>
 
 
-
-                <div class="market-product-info">
-
-                    <div class="product-label-row">
-
-                        <span class="product-tag">
-                            DEAL
-                        </span>
-
-                    </div>
-
+                <div class="product-info">
 
                     <h3>
-                        Mobile Accessories
+                        Cotton Kurti
                     </h3>
 
 
-                    <div class="seller-line">
+                    <div class="product-seller">
 
-                        <span>
-                            Local Electronics Store
-                        </span>
+                        Anjona Ladies Tailors
 
                         <span
-                            class="seller-verified"
-                            title="Shopping Mela Verified"
-                            onclick="
-                                showSellerVerification(
-                                    'Local Electronics Store'
-                                )
-                            "
+                            class="verified-badge"
                         >
                             ✓
                         </span>
@@ -1039,40 +1069,29 @@
                     </div>
 
 
-                    <div class="rating">
-
-                        ⭐ 4.5
-
-                        <small>
-                            (16 reviews)
-                        </small>
-
+                    <div class="product-brand">
+                        Fashion
                     </div>
 
 
-                    <div class="market-price">
+                    <div class="product-price">
 
-                        <strong>
-                            ৳450
-                        </strong>
+                        <span class="current-price">
+                            ৳780
+                        </span>
 
-                        <del>
-                            ৳500
-                        </del>
+                        <span class="old-price">
+                            ৳870
+                        </span>
 
                     </div>
 
 
                     <button
-                        class="add-cart-btn"
-                        onclick="
-                            addToCart(
-                                'Mobile Accessories',
-                                450
-                            )
-                        "
+                        class="product-view-btn"
+                        onclick="viewProduct('Cotton Kurti')"
                     >
-                        🛒 Add to Cart
+                        Product দেখুন →
                     </button>
 
                 </div>
@@ -1081,45 +1100,189 @@
 
 
 
-            <!-- =================================================
-                 PRODUCT 6
-            ================================================== -->
+            <!-- PRODUCT 6 -->
 
             <article
-                class="market-product-card"
-                data-category="Home"
-                data-name="
-                    Home Decor
-                "
-                data-search="
-                    home decor decoration
-                    local home products
-                "
-                data-price="780"
-                data-discount="12"
+                class="product-card"
+                data-name="Rose Fragrance"
+                data-category="beauty"
+                data-seller="Local Attar Shop"
             >
 
                 <div
-                    class="market-product-image"
+                    class="product-image"
                     style="
                         background-image:
-                        url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=85');
+                        url('https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=700&q=80');
                     "
                 >
 
-                    <span class="product-discount">
+                    <span class="discount">
+                        NEW
+                    </span>
+
+
+                    <button
+                        class="product-heart"
+                        onclick="addWishlist(this)"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <h3>
+                        Rose Fragrance
+                    </h3>
+
+
+                    <div class="product-seller">
+
+                        Local Attar Shop
+
+                        <span
+                            class="verified-badge"
+                        >
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <div class="product-brand">
+                        Beauty
+                    </div>
+
+
+                    <div class="product-price">
+
+                        <span class="current-price">
+                            ৳520
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="product-view-btn"
+                        onclick="viewProduct('Rose Fragrance')"
+                    >
+                        Product দেখুন →
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PRODUCT 7 -->
+
+            <article
+                class="product-card"
+                data-name="Homemade Cake"
+                data-category="food"
+                data-seller="Local Food House"
+            >
+
+                <div
+                    class="product-image"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=700&q=80');
+                    "
+                >
+
+                    <span class="discount">
+                        HOT
+                    </span>
+
+
+                    <button
+                        class="product-heart"
+                        onclick="addWishlist(this)"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <h3>
+                        Homemade Cake
+                    </h3>
+
+
+                    <div class="product-seller">
+
+                        Local Food House
+
+                        <span
+                            class="verified-badge"
+                        >
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <div class="product-brand">
+                        Food
+                    </div>
+
+
+                    <div class="product-price">
+
+                        <span class="current-price">
+                            ৳700
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="product-view-btn"
+                        onclick="viewProduct('Homemade Cake')"
+                    >
+                        Product দেখুন →
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PRODUCT 8 -->
+
+            <article
+                class="product-card"
+                data-name="Home Decoration"
+                data-category="home"
+                data-seller="Local Home Store"
+            >
+
+                <div
+                    class="product-image"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=700&q=80');
+                    "
+                >
+
+                    <span class="discount">
                         -12%
                     </span>
 
 
                     <button
-                        class="market-wishlist"
-                        onclick="
-                            toggleWishlist(
-                                this,
-                                'Home Decor'
-                            )
-                        "
+                        class="product-heart"
+                        onclick="addWishlist(this)"
                     >
                         ♡
                     </button>
@@ -1127,37 +1290,19 @@
                 </div>
 
 
-
-                <div class="market-product-info">
-
-                    <div class="product-label-row">
-
-                        <span class="product-tag">
-                            FEATURED
-                        </span>
-
-                    </div>
-
+                <div class="product-info">
 
                     <h3>
-                        Home Decor
+                        Home Decoration
                     </h3>
 
 
-                    <div class="seller-line">
+                    <div class="product-seller">
 
-                        <span>
-                            Local Home Brand
-                        </span>
+                        Local Home Store
 
                         <span
-                            class="seller-verified"
-                            title="Shopping Mela Verified"
-                            onclick="
-                                showSellerVerification(
-                                    'Local Home Brand'
-                                )
-                            "
+                            class="verified-badge"
                         >
                             ✓
                         </span>
@@ -1165,59 +1310,47 @@
                     </div>
 
 
-                    <div class="rating">
-
-                        ⭐ 4.7
-
-                        <small>
-                            (9 reviews)
-                        </small>
-
+                    <div class="product-brand">
+                        Home
                     </div>
 
 
-                    <div class="market-price">
+                    <div class="product-price">
 
-                        <strong>
-                            ৳780
-                        </strong>
+                        <span class="current-price">
+                            ৳1,150
+                        </span>
 
-                        <del>
-                            ৳890
-                        </del>
+                        <span class="old-price">
+                            ৳1,300
+                        </span>
 
                     </div>
 
 
                     <button
-                        class="add-cart-btn"
-                        onclick="
-                            addToCart(
-                                'Home Decor',
-                                780
-                            )
-                        "
+                        class="product-view-btn"
+                        onclick="viewProduct('Home Decoration')"
                     >
-                        🛒 Add to Cart
+                        Product দেখুন →
                     </button>
 
                 </div>
 
             </article>
 
-
         </div>
 
 
 
-        <!-- NO RESULT -->
+        <!-- EMPTY -->
 
         <div
-            class="no-product-result"
-            id="noProductResult"
+            class="empty-products"
+            id="emptyProducts"
         >
 
-            <div>
+            <div class="empty-products-icon">
                 🔎
             </div>
 
@@ -1226,16 +1359,9 @@
             </h3>
 
             <p>
-                অন্য keyword বা category
-                দিয়ে চেষ্টা করুন।
+                অন্য Product name বা category
+                দিয়ে আবার search করুন।
             </p>
-
-            <button
-                class="secondary-btn"
-                onclick="resetProducts()"
-            >
-                সব Products দেখুন
-            </button>
 
         </div>
 
@@ -1246,53 +1372,45 @@
 
 
 <!-- =====================================================
-     SELLER CTA
+     ADVERTISE CTA
 ====================================================== -->
 
 <section class="container">
 
-    <div class="seller-cta">
+    <div class="advertise-section">
 
-        <div class="seller-cta-icon">
-            🏪
-        </div>
-
-
-        <div>
+        <div class="advertise-text">
 
             <small>
-                FOR LOCAL SELLERS
+                📢 SELLER / BUSINESS?
             </small>
 
             <h2>
-                আপনার Product Shopping Mela-তে দিন
+                আপনার Product এখানে বিক্রি করুন
             </h2>
 
             <p>
-                আপনার local product ও brand
-                হাজারো potential customer-এর
-                সামনে তুলে ধরুন।
+
+                Shopping Mela-তে আপনার
+                products showcase করুন এবং
+                local customers-এর কাছে পৌঁছান।
+
             </p>
 
         </div>
 
 
-        <button
-            class="primary-btn"
-            onclick="
-                showToast(
-                    'Seller registration শীঘ্রই আসছে!'
-                )
-            "
+        <a
+            href="index.html#advertise"
+            class="advertise-button"
+            style="text-decoration:none;"
         >
-            Become a Seller →
-        </button>
+            Seller হিসেবে যুক্ত হন →
+        </a>
 
     </div>
 
 </section>
-
-</main>
 
 
 
@@ -1326,9 +1444,11 @@
 
 
                 <p>
-                    Local brands, products,
-                    businesses, offers এবং
-                    community এক জায়গায়।
+
+                    Local brands, businesses,
+                    products এবং community content-এর
+                    modern online platform।
+
                 </p>
 
             </div>
@@ -1353,7 +1473,7 @@
                     Products
                 </a>
 
-                <a href="offers.html">
+                <a href="index.html#offers">
                     Offers
                 </a>
 
@@ -1371,7 +1491,7 @@
                     Blog
                 </a>
 
-                <a href="blog.html#writePost">
+                <a href="blog.html">
                     Write a Post
                 </a>
 
@@ -1424,254 +1544,25 @@
 
 
 <!-- =====================================================
-     SELLER VERIFICATION MODAL
-====================================================== -->
-
-<div
-    class="verification-modal"
-    id="sellerVerificationModal"
-    onclick="closeSellerVerificationOutside(event)"
->
-
-    <div class="verification-modal-content">
-
-
-        <button
-            class="modal-close"
-            onclick="closeSellerVerification()"
-        >
-            ×
-        </button>
-
-
-        <div class="verification-modal-badge">
-            ✓
-        </div>
-
-
-        <h2>
-            Verified Seller
-        </h2>
-
-
-        <h3 id="sellerVerificationName">
-            Seller Name
-        </h3>
-
-
-        <p>
-            এই seller-এর profile
-            <strong>
-                Shopping Mela
-            </strong>
-            দ্বারা Verified।
-        </p>
-
-
-        <div class="verification-check-list">
-
-            <div>
-                ✓ Seller profile reviewed
-            </div>
-
-            <div>
-                ✓ Basic business information checked
-            </div>
-
-            <div>
-                ✓ Verified seller badge
-            </div>
-
-        </div>
-
-
-        <button
-            class="primary-btn"
-            onclick="closeSellerVerification()"
-        >
-            Done ✓
-        </button>
-
-    </div>
-
-</div>
-
-
-
-<!-- =====================================================
-     CART MODAL
-====================================================== -->
-
-<div
-    class="cart-modal"
-    id="cartModal"
-    onclick="closeCartOutside(event)"
->
-
-    <div class="cart-modal-content">
-
-
-        <button
-            class="modal-close"
-            onclick="closeCart()"
-        >
-            ×
-        </button>
-
-
-        <h2>
-            🛒 Your Cart
-        </h2>
-
-
-        <div
-            class="cart-items"
-            id="cartItems"
-        >
-        </div>
-
-
-        <div class="cart-total">
-
-            <span>
-                Total
-            </span>
-
-            <strong id="cartTotal">
-                ৳0
-            </strong>
-
-        </div>
-
-
-        <button
-            class="primary-btn checkout-btn"
-            onclick="
-                showToast(
-                    'Checkout system শীঘ্রই আসছে!'
-                )
-            "
-        >
-            Proceed to Checkout →
-        </button>
-
-    </div>
-
-</div>
-
-
-
-<!-- =====================================================
-     WISHLIST MODAL
-====================================================== -->
-
-<div
-    class="wishlist-modal"
-    id="wishlistModal"
-    onclick="closeWishlistOutside(event)"
->
-
-    <div class="wishlist-modal-content">
-
-
-        <button
-            class="modal-close"
-            onclick="closeWishlist()"
-        >
-            ×
-        </button>
-
-
-        <h2>
-            ❤️ Wishlist
-        </h2>
-
-
-        <div
-            id="wishlistItems"
-            class="wishlist-items"
-        >
-        </div>
-
-    </div>
-
-</div>
-
-
-
-<!-- =====================================================
-     TOAST
-====================================================== -->
-
-<div
-    class="toast"
-    id="toast"
->
-    Done!
-</div>
-
-
-
-<!-- =====================================================
      JAVASCRIPT
 ====================================================== -->
 
+<script src="script.js"></script>
+
+
 <script>
 
-
-/* =====================================================
-   DATA
-====================================================== */
-
-let cart = [];
-
-let wishlist = [];
+let activeProductFilter = "all";
 
 
 
 /* =====================================================
-   TOAST
+   PRODUCT FILTER
 ====================================================== */
 
-function showToast(message) {
+function filterProducts() {
 
-    const toast =
-        document.getElementById(
-            "toast"
-        );
-
-
-    toast.textContent =
-        message;
-
-
-    toast.classList.add(
-        "show"
-    );
-
-
-    setTimeout(
-        function() {
-
-            toast.classList.remove(
-                "show"
-            );
-
-        },
-        2500
-    );
-
-}
-
-
-
-/* =====================================================
-   PRODUCT SEARCH
-====================================================== */
-
-function searchProducts() {
-
-    const query =
+    const search =
         document
             .getElementById(
                 "productSearch"
@@ -1681,55 +1572,81 @@ function searchProducts() {
             .toLowerCase();
 
 
-    if (!query) {
-
-        resetProducts();
-
-        return;
-
-    }
-
-
-    const products =
+    const cards =
         document.querySelectorAll(
-            ".market-product-card"
+            "#productsGrid .product-card"
         );
 
 
-    let count = 0;
+    const empty =
+        document.getElementById(
+            "emptyProducts"
+        );
 
 
-    products.forEach(
-        function(product) {
+    const count =
+        document.getElementById(
+            "productsCount"
+        );
 
-            const searchable =
-                (
-                    product.dataset.search ||
-                    ""
-                ).toLowerCase();
 
+    let visible = 0;
+
+
+    cards.forEach(
+        function(card) {
 
             const name =
                 (
-                    product.dataset.name ||
+                    card.dataset.name ||
                     ""
                 ).toLowerCase();
 
 
+            const category =
+                (
+                    card.dataset.category ||
+                    ""
+                ).toLowerCase();
+
+
+            const seller =
+                (
+                    card.dataset.seller ||
+                    ""
+                ).toLowerCase();
+
+
+            const matchesSearch =
+                !search ||
+                name.includes(search) ||
+                category.includes(search) ||
+                seller.includes(search);
+
+
+            const matchesFilter =
+                activeProductFilter === "all" ||
+                category.includes(
+                    activeProductFilter
+                );
+
+
             if (
-                searchable.includes(query) ||
-                name.includes(query)
+                matchesSearch &&
+                matchesFilter
             ) {
 
-                product.style.display =
-                    "";
+                card.classList.remove(
+                    "hidden"
+                );
 
-                count++;
+                visible++;
 
             } else {
 
-                product.style.display =
-                    "none";
+                card.classList.add(
+                    "hidden"
+                );
 
             }
 
@@ -1737,27 +1654,21 @@ function searchProducts() {
     );
 
 
-    updateProductCount(
-        count
-    );
+    count.textContent =
+        visible +
+        "টি Product দেখানো হচ্ছে";
 
 
-    showNoProduct(
-        count
-    );
+    if (visible === 0) {
 
-
-    if (count > 0) {
-
-        showToast(
-            count +
-            "টি product পাওয়া গেছে 🔎"
+        empty.classList.add(
+            "show"
         );
 
     } else {
 
-        showToast(
-            "কোনো product পাওয়া যায়নি"
+        empty.classList.remove(
+            "show"
         );
 
     }
@@ -1767,7 +1678,46 @@ function searchProducts() {
 
 
 /* =====================================================
-   ENTER SEARCH
+   CATEGORY FILTER
+====================================================== */
+
+function setProductFilter(
+    filter,
+    button
+) {
+
+    activeProductFilter =
+        filter;
+
+
+    document
+        .querySelectorAll(
+            ".product-filter"
+        )
+        .forEach(
+            function(item) {
+
+                item.classList.remove(
+                    "active"
+                );
+
+            }
+        );
+
+
+    button.classList.add(
+        "active"
+    );
+
+
+    filterProducts();
+
+}
+
+
+
+/* =====================================================
+   SEARCH ENTER
 ====================================================== */
 
 document
@@ -1779,11 +1729,10 @@ document
         function(event) {
 
             if (
-                event.key ===
-                "Enter"
+                event.key === "Enter"
             ) {
 
-                searchProducts();
+                filterProducts();
 
             }
 
@@ -1793,342 +1742,50 @@ document
 
 
 /* =====================================================
-   FILTER
+   GLOBAL SEARCH
 ====================================================== */
 
-function filterProducts(
-    category,
-    button
-) {
+function globalProductSearch() {
 
-    const products =
-        document.querySelectorAll(
-            ".market-product-card"
+    const input =
+        document.getElementById(
+            "globalProductSearch"
         );
 
 
-    document
-        .querySelectorAll(
-            ".product-filter"
-        )
-        .forEach(
-            function(btn) {
-
-                btn.classList.remove(
-                    "active"
-                );
-
-            }
-        );
+    const value =
+        input.value.trim();
 
 
-    if (button) {
+    if (!value) {
 
-        button.classList.add(
-            "active"
-        );
+        input.focus();
+
+        return;
 
     }
 
 
-    let count = 0;
-
-
-    products.forEach(
-        function(product) {
-
-            if (
-                category === "all" ||
-                product.dataset.category ===
-                category
-            ) {
-
-                product.style.display =
-                    "";
-
-                count++;
-
-            } else {
-
-                product.style.display =
-                    "none";
-
-            }
-
-        }
-    );
-
-
-    updateProductCount(
-        count
-    );
-
-
-    showNoProduct(
-        count
-    );
-
-}
-
-
-
-/* =====================================================
-   RESET PRODUCTS
-====================================================== */
-
-function resetProducts() {
-
-    const products =
-        document.querySelectorAll(
-            ".market-product-card"
-        );
-
-
-    products.forEach(
-        function(product) {
-
-            product.style.display =
-                "";
-
-        }
-    );
-
-
-    document
-        .getElementById(
+    const productSearch =
+        document.getElementById(
             "productSearch"
-        )
-        .value = "";
-
-
-    document
-        .querySelectorAll(
-            ".product-filter"
-        )
-        .forEach(
-            function(button) {
-
-                button.classList.remove(
-                    "active"
-                );
-
-            }
         );
 
 
-    const first =
-        document.querySelector(
-            ".product-filter"
-        );
+    productSearch.value =
+        value;
 
 
-    if (first) {
-
-        first.classList.add(
-            "active"
-        );
-
-    }
-
-
-    updateProductCount(
-        products.length
-    );
-
-
-    showNoProduct(
-        products.length
-    );
-
-}
-
-
-
-/* =====================================================
-   PRODUCT COUNT
-====================================================== */
-
-function updateProductCount(
-    count
-) {
-
-    document
-        .getElementById(
-            "productResultText"
-        )
-        .textContent =
-        count +
-        "টি product পাওয়া গেছে";
-
-}
-
-
-
-/* =====================================================
-   NO PRODUCT
-====================================================== */
-
-function showNoProduct(
-    count
-) {
-
-    const box =
-        document.getElementById(
-            "noProductResult"
-        );
-
-
-    if (
-        count === 0
-    ) {
-
-        box.classList.add(
-            "show"
-        );
-
-    } else {
-
-        box.classList.remove(
-            "show"
-        );
-
-    }
-
-}
-
-
-
-/* =====================================================
-   SORT MENU
-====================================================== */
-
-function toggleSortMenu() {
-
-    const menu =
-        document.getElementById(
-            "sortMenu"
-        );
-
-
-    menu.classList.toggle(
-        "show"
-    );
-
-}
-
-
-
-/* =====================================================
-   SORT PRODUCTS
-====================================================== */
-
-function sortProducts(
-    type
-) {
-
-    const grid =
-        document.getElementById(
-            "productGrid"
-        );
-
-
-    const products =
-        Array.from(
-            grid.querySelectorAll(
-                ".market-product-card"
-            )
-        );
-
-
-    if (
-        type === "low"
-    ) {
-
-        products.sort(
-            function(a, b) {
-
-                return (
-                    Number(
-                        a.dataset.price
-                    ) -
-                    Number(
-                        b.dataset.price
-                    )
-                );
-
-            }
-        );
-
-    }
-
-
-    if (
-        type === "high"
-    ) {
-
-        products.sort(
-            function(a, b) {
-
-                return (
-                    Number(
-                        b.dataset.price
-                    ) -
-                    Number(
-                        a.dataset.price
-                    )
-                );
-
-            }
-        );
-
-    }
-
-
-    if (
-        type === "discount"
-    ) {
-
-        products.sort(
-            function(a, b) {
-
-                return (
-                    Number(
-                        b.dataset.discount
-                    ) -
-                    Number(
-                        a.dataset.discount
-                    )
-                );
-
-            }
-        );
-
-    }
-
-
-    products.forEach(
-        function(product) {
-
-            grid.appendChild(
-                product
-            );
-
-        }
-    );
+    filterProducts();
 
 
     document
         .getElementById(
-            "sortMenu"
+            "productsGrid"
         )
-        .classList.remove(
-            "show"
-        );
-
-
-    showToast(
-        "Products sorted ✓"
-    );
+        .scrollIntoView({
+            behavior: "smooth"
+        });
 
 }
 
@@ -2138,632 +1795,97 @@ function sortProducts(
    WISHLIST
 ====================================================== */
 
-function toggleWishlist(
-    button,
-    productName
-) {
-
-    const index =
-        wishlist.indexOf(
-            productName
-        );
-
+function addWishlist(button) {
 
     if (
-        index === -1
-    ) {
-
-        wishlist.push(
-            productName
-        );
-
-
-        button.classList.add(
+        button.classList.contains(
             "liked"
-        );
-
-
-        button.textContent =
-            "♥";
-
-
-        showToast(
-            productName +
-            " Wishlist-এ যোগ হয়েছে ❤️"
-        );
-
-    } else {
-
-        wishlist.splice(
-            index,
-            1
-        );
-
+        )
+    ) {
 
         button.classList.remove(
             "liked"
         );
 
-
-        button.textContent =
-            "♡";
-
-
-        showToast(
-            "Wishlist থেকে সরানো হয়েছে"
-        );
-
-    }
-
-
-    updateWishlistCount();
-
-}
-
-
-
-/* =====================================================
-   WISHLIST COUNT
-====================================================== */
-
-function updateWishlistCount() {
-
-    document
-        .getElementById(
-            "wishlistCount"
-        )
-        .textContent =
-        wishlist.length;
-
-}
-
-
-
-/* =====================================================
-   OPEN WISHLIST
-====================================================== */
-
-function openWishlist() {
-
-    const box =
-        document.getElementById(
-            "wishlistItems"
-        );
-
-
-    if (
-        wishlist.length === 0
-    ) {
-
-        box.innerHTML = `
-            <div class="empty-state">
-                <div>♡</div>
-                <h3>Wishlist খালি</h3>
-                <p>আপনার পছন্দের product এখানে save করুন।</p>
-            </div>
-        `;
-
-    } else {
-
-        box.innerHTML =
-            wishlist
-                .map(
-                    function(item) {
-
-                        return `
-                            <div class="wishlist-item">
-                                <span>❤️ ${item}</span>
-                                <button
-                                    onclick="
-                                        removeWishlist(
-                                            '${item.replace(
-                                                /'/g,
-                                                "\\'"
-                                            )}'
-                                        )
-                                    "
-                                >
-                                    Remove
-                                </button>
-                            </div>
-                        `;
-
-                    }
-                )
-                .join("");
-
-    }
-
-
-    document
-        .getElementById(
-            "wishlistModal"
-        )
-        .classList.add(
-            "show"
-        );
-
-}
-
-
-
-/* =====================================================
-   REMOVE WISHLIST
-====================================================== */
-
-function removeWishlist(
-    productName
-) {
-
-    wishlist =
-        wishlist.filter(
-            function(item) {
-
-                return item !==
-                    productName;
-
-            }
-        );
-
-
-    document
-        .querySelectorAll(
-            ".market-wishlist"
-        )
-        .forEach(
-            function(button) {
-
-                if (
-                    button.parentElement
-                        .parentElement
-                        .querySelector("h3")
-                        ?.textContent
-                        .trim() ===
-                    productName
-                ) {
-
-                    button.classList.remove(
-                        "liked"
-                    );
-
-                    button.textContent =
-                        "♡";
-
-                }
-
-            }
-        );
-
-
-    updateWishlistCount();
-
-    openWishlist();
-
-}
-
-
-
-/* =====================================================
-   CLOSE WISHLIST
-====================================================== */
-
-function closeWishlist() {
-
-    document
-        .getElementById(
-            "wishlistModal"
-        )
-        .classList.remove(
-            "show"
-        );
-
-}
-
-
-
-function closeWishlistOutside(
-    event
-) {
-
-    if (
-        event.target.id ===
-        "wishlistModal"
-    ) {
-
-        closeWishlist();
-
-    }
-
-}
-
-
-
-/* =====================================================
-   CART
-====================================================== */
-
-function addToCart(
-    productName,
-    price
-) {
-
-    const existing =
-        cart.find(
-            function(item) {
-
-                return item.name ===
-                    productName;
-
-            }
-        );
-
-
-    if (existing) {
-
-        existing.quantity++;
-
-    } else {
-
-        cart.push({
-
-            name:
-                productName,
-
-            price:
-                price,
-
-            quantity:
-                1
-
-        });
-
-    }
-
-
-    updateCartCount();
-
-    showToast(
-        productName +
-        " Cart-এ যোগ হয়েছে 🛒"
-    );
-
-}
-
-
-
-/* =====================================================
-   CART COUNT
-====================================================== */
-
-function updateCartCount() {
-
-    const count =
-        cart.reduce(
-            function(total, item) {
-
-                return (
-                    total +
-                    item.quantity
-                );
-
-            },
-            0
-        );
-
-
-    document
-        .getElementById(
-            "cartCount"
-        )
-        .textContent =
-        count;
-
-}
-
-
-
-/* =====================================================
-   OPEN CART
-====================================================== */
-
-function openCart() {
-
-    const box =
-        document.getElementById(
-            "cartItems"
-        );
-
-
-    if (
-        cart.length === 0
-    ) {
-
-        box.innerHTML = `
-            <div class="empty-state">
-                <div>🛒</div>
-                <h3>Cart খালি</h3>
-                <p>Product add করলে এখানে দেখা যাবে।</p>
-            </div>
-        `;
-
-    } else {
-
-        box.innerHTML =
-            cart
-                .map(
-                    function(item, index) {
-
-                        return `
-                            <div class="cart-item">
-
-                                <div>
-                                    <strong>
-                                        ${item.name}
-                                    </strong>
-
-                                    <small>
-                                        ৳${item.price}
-                                        ×
-                                        ${item.quantity}
-                                    </small>
-                                </div>
-
-                                <div>
-
-                                    <strong>
-                                        ৳${(
-                                            item.price *
-                                            item.quantity
-                                        ).toLocaleString()}
-                                    </strong>
-
-                                    <button
-                                        onclick="
-                                            removeCartItem(
-                                                ${index}
-                                            )
-                                        "
-                                    >
-                                        ×
-                                    </button>
-
-                                </div>
-
-                            </div>
-                        `;
-
-                    }
-                )
-                .join("");
-
-    }
-
-
-    updateCartTotal();
-
-
-    document
-        .getElementById(
-            "cartModal"
-        )
-        .classList.add(
-            "show"
-        );
-
-}
-
-
-
-/* =====================================================
-   CART TOTAL
-====================================================== */
-
-function updateCartTotal() {
-
-    const total =
-        cart.reduce(
-            function(sum, item) {
-
-                return (
-                    sum +
-                    (
-                        item.price *
-                        item.quantity
-                    )
-                );
-
-            },
-            0
-        );
-
-
-    document
-        .getElementById(
-            "cartTotal"
-        )
-        .textContent =
-        "৳" +
-        total.toLocaleString();
-
-}
-
-
-
-/* =====================================================
-   REMOVE CART ITEM
-====================================================== */
-
-function removeCartItem(
-    index
-) {
-
-    cart.splice(
-        index,
-        1
-    );
-
-
-    updateCartCount();
-
-    openCart();
-
-}
-
-
-
-/* =====================================================
-   CLOSE CART
-====================================================== */
-
-function closeCart() {
-
-    document
-        .getElementById(
-            "cartModal"
-        )
-        .classList.remove(
-            "show"
-        );
-
-}
-
-
-
-function closeCartOutside(
-    event
-) {
-
-    if (
-        event.target.id ===
-        "cartModal"
-    ) {
-
-        closeCart();
-
-    }
-
-}
-
-
-
-/* =====================================================
-   SELLER VERIFICATION
-====================================================== */
-
-function showSellerVerification(
-    sellerName
-) {
-
-    document
-        .getElementById(
-            "sellerVerificationName"
-        )
-        .textContent =
-        sellerName;
-
-
-    document
-        .getElementById(
-            "sellerVerificationModal"
-        )
-        .classList.add(
-            "show"
-        );
-
-}
-
-
-
-function closeSellerVerification() {
-
-    document
-        .getElementById(
-            "sellerVerificationModal"
-        )
-        .classList.remove(
-            "show"
-        );
-
-}
-
-
-
-function closeSellerVerificationOutside(
-    event
-) {
-
-    if (
-        event.target.id ===
-        "sellerVerificationModal"
-    ) {
-
-        closeSellerVerification();
-
-    }
-
-}
-
-
-
-/* =====================================================
-   ESCAPE KEY
-====================================================== */
-
-document.addEventListener(
-    "keydown",
-    function(event) {
+        button.textContent = "♡";
 
         if (
-            event.key ===
-            "Escape"
+            typeof showToast ===
+            "function"
         ) {
 
-            closeCart();
-
-            closeWishlist();
-
-            closeSellerVerification();
+            showToast(
+                "Wishlist থেকে সরানো হয়েছে"
+            );
 
         }
 
+        return;
+
     }
-);
+
+
+    button.classList.add(
+        "liked"
+    );
+
+    button.textContent = "♥";
+
+
+    if (
+        typeof showToast ===
+        "function"
+    ) {
+
+        showToast(
+            "Wishlist-এ যোগ করা হয়েছে ❤️"
+        );
+
+    }
+
+}
 
 
 
 /* =====================================================
-   INITIALIZE
+   PRODUCT VIEW
 ====================================================== */
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function() {
+function viewProduct(
+    productName
+) {
 
-        const products =
-            document.querySelectorAll(
-                ".market-product-card"
-            );
+    if (
+        typeof showToast ===
+        "function"
+    ) {
 
-
-        updateProductCount(
-            products.length
+        showToast(
+            productName +
+            " details শীঘ্রই আসছে!"
         );
 
+    } else {
 
-        showNoProduct(
-            products.length
+        alert(
+            productName +
+            " details শীঘ্রই আসছে!"
         );
-
-
-        updateCartCount();
-
-        updateWishlistCount();
 
     }
-);
 
+}
+
+
+
+/* =====================================================
+   INITIAL LOAD
+====================================================== */
+
+filterProducts();
 
 </script>
+
 
 
 </body>
