@@ -1,485 +1,815 @@
 <!DOCTYPE html>
-
 <html lang="bn">
 
 <head>
 
-```
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-<title>
-    Admin Password Recovery — Shopping Mela
-</title>
+    <title>
+        Admin Recovery — Shopping Mela
+    </title>
 
 
-<style>
+    <style>
 
-    * {
-        box-sizing: border-box;
-    }
+        * {
+            box-sizing: border-box;
+        }
 
 
-    body {
+        body {
 
-        margin: 0;
+            margin: 0;
 
-        min-height: 100vh;
+            min-height: 100vh;
 
-        display: flex;
+            display: flex;
 
-        align-items: center;
+            align-items: center;
 
-        justify-content: center;
+            justify-content: center;
 
-        padding: 20px;
+            padding: 20px;
 
-        font-family:
-            Arial,
-            "Noto Sans Bengali",
-            sans-serif;
+            font-family:
+                Arial,
+                "Noto Sans Bengali",
+                sans-serif;
 
-        background:
-            linear-gradient(
-                135deg,
-                #f5f7fb,
-                #eaf2ff
-            );
+            background:
+                linear-gradient(
+                    135deg,
+                    #f5f7fb,
+                    #eaf2ff
+                );
 
-        color: #101828;
+            color: #101828;
 
-    }
+        }
 
-
-    .recovery-card {
-
-        width: 100%;
-
-        max-width: 420px;
-
-        background: #ffffff;
-
-        border:
-            1px solid #e4e7ec;
-
-        border-radius: 18px;
-
-        padding: 30px;
-
-        box-shadow:
-            0 15px 45px
-            rgba(16,24,40,.10);
-
-    }
-
-
-    .logo {
-
-        width: 52px;
-
-        height: 52px;
-
-        margin: 0 auto 15px;
-
-        border-radius: 14px;
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: center;
-
-        background: #1877f2;
-
-        color: #ffffff;
-
-        font-size: 25px;
-
-    }
-
-
-    h1 {
-
-        margin: 0;
-
-        text-align: center;
-
-        font-size: 22px;
-
-    }
-
-
-    .subtitle {
-
-        margin:
-            8px 0 25px;
-
-        text-align: center;
-
-        color: #667085;
-
-        font-size: 11px;
-
-        line-height: 1.6;
-
-    }
-
-
-    .info-box {
-
-        padding: 12px;
-
-        margin-bottom: 18px;
-
-        border-radius: 9px;
-
-        background: #eff6ff;
-
-        color: #175cd3;
-
-        font-size: 10px;
-
-        line-height: 1.6;
-
-    }
-
-
-    label {
-
-        display: block;
-
-        margin-bottom: 6px;
-
-        color: #344054;
-
-        font-size: 10px;
-
-        font-weight: 700;
-
-    }
-
-
-    input {
-
-        width: 100%;
-
-        padding: 12px;
-
-        border:
-            1px solid #d0d5dd;
-
-        border-radius: 8px;
-
-        outline: none;
-
-        font-size: 11px;
-
-    }
-
-
-    input:focus {
-
-        border-color: #1877f2;
-
-        box-shadow:
-            0 0 0 3px
-            rgba(24,119,242,.10);
-
-    }
-
-
-    .form-group {
-
-        margin-bottom: 15px;
-
-    }
-
-
-    .submit-btn {
-
-        width: 100%;
-
-        border: 0;
-
-        border-radius: 8px;
-
-        padding: 12px;
-
-        background: #1877f2;
-
-        color: #ffffff;
-
-        cursor: pointer;
-
-        font-size: 11px;
-
-        font-weight: 800;
-
-    }
-
-
-    .submit-btn:hover {
-
-        background: #1265d1;
-
-    }
-
-
-    .back-btn {
-
-        display: block;
-
-        margin-top: 15px;
-
-        text-align: center;
-
-        color: #667085;
-
-        text-decoration: none;
-
-        font-size: 10px;
-
-    }
-
-
-    .back-btn:hover {
-
-        color: #1877f2;
-
-    }
-
-
-    .message {
-
-        display: none;
-
-        margin-top: 15px;
-
-        padding: 11px;
-
-        border-radius: 8px;
-
-        font-size: 10px;
-
-        line-height: 1.5;
-
-    }
-
-
-    .message.show {
-
-        display: block;
-
-    }
-
-
-    .message.success {
-
-        background: #ecfdf3;
-
-        color: #027a48;
-
-    }
-
-
-    .message.error {
-
-        background: #fef3f2;
-
-        color: #b42318;
-
-    }
-
-
-    .footer {
-
-        margin-top: 22px;
-
-        text-align: center;
-
-        color: #98a2b3;
-
-        font-size: 8px;
-
-    }
-
-
-    @media (max-width: 480px) {
 
         .recovery-card {
 
-            padding: 23px;
+            width: 100%;
+
+            max-width: 430px;
+
+            background: #ffffff;
+
+            border:
+                1px solid #e4e7ec;
+
+            border-radius: 18px;
+
+            padding: 30px;
+
+            box-shadow:
+                0 15px 45px
+                rgba(16,24,40,.10);
 
         }
+
+
+        .logo {
+
+            width: 58px;
+
+            height: 58px;
+
+            margin:
+                0 auto 16px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 15px;
+
+            background: #1877f2;
+
+            color: #ffffff;
+
+            font-size: 27px;
+
+            box-shadow:
+                0 7px 18px
+                rgba(24,119,242,.22);
+
+        }
+
 
         h1 {
 
-            font-size: 20px;
+            margin: 0;
+
+            text-align: center;
+
+            font-size: 23px;
 
         }
 
-    }
 
-</style>
-```
+        .subtitle {
+
+            margin:
+                8px 0 24px;
+
+            text-align: center;
+
+            color: #667085;
+
+            font-size: 11px;
+
+            line-height: 1.6;
+
+        }
+
+
+        .recovery-badge {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 6px;
+
+            margin-bottom: 20px;
+
+            color: #1877f2;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+        }
+
+
+        .recovery-icon {
+
+            width: 15px;
+
+            height: 15px;
+
+            border-radius: 50%;
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            background: #1877f2;
+
+            color: #ffffff;
+
+            font-size: 9px;
+
+        }
+
+
+        .message {
+
+            display: none;
+
+            margin-bottom: 15px;
+
+            padding: 11px;
+
+            border-radius: 8px;
+
+            font-size: 10px;
+
+            line-height: 1.6;
+
+        }
+
+
+        .message.show {
+
+            display: block;
+
+        }
+
+
+        .message.error {
+
+            background: #fef3f2;
+
+            color: #b42318;
+
+        }
+
+
+        .message.success {
+
+            background: #ecfdf3;
+
+            color: #027a48;
+
+        }
+
+
+        .message.info {
+
+            background: #eff8ff;
+
+            color: #175cd3;
+
+        }
+
+
+        .form-group {
+
+            margin-bottom: 16px;
+
+        }
+
+
+        label {
+
+            display: block;
+
+            margin-bottom: 6px;
+
+            color: #344054;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+        }
+
+
+        input {
+
+            width: 100%;
+
+            padding: 12px;
+
+            border:
+                1px solid #d0d5dd;
+
+            border-radius: 8px;
+
+            outline: none;
+
+            font-size: 11px;
+
+            transition: .2s;
+
+        }
+
+
+        input:focus {
+
+            border-color: #1877f2;
+
+            box-shadow:
+                0 0 0 3px
+                rgba(24,119,242,.10);
+
+        }
+
+
+        .password-wrap {
+
+            position: relative;
+
+        }
+
+
+        .password-wrap input {
+
+            padding-right: 42px;
+
+        }
+
+
+        .toggle-password {
+
+            position: absolute;
+
+            top: 50%;
+
+            right: 7px;
+
+            transform:
+                translateY(-50%);
+
+            width: 31px;
+
+            height: 31px;
+
+            border: 0;
+
+            background: transparent;
+
+            cursor: pointer;
+
+            font-size: 15px;
+
+        }
+
+
+        .hint {
+
+            margin-top: 6px;
+
+            color: #98a2b3;
+
+            font-size: 8px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .password-strength {
+
+            height: 5px;
+
+            margin-top: 8px;
+
+            border-radius: 5px;
+
+            background: #eaecf0;
+
+            overflow: hidden;
+
+        }
+
+
+        .strength-bar {
+
+            width: 0%;
+
+            height: 100%;
+
+            border-radius: 5px;
+
+            transition: .25s;
+
+        }
+
+
+        .strength-text {
+
+            margin-top: 5px;
+
+            color: #98a2b3;
+
+            font-size: 8px;
+
+        }
+
+
+        .recovery-btn {
+
+            width: 100%;
+
+            border: 0;
+
+            border-radius: 8px;
+
+            padding: 12px;
+
+            background: #1877f2;
+
+            color: #ffffff;
+
+            cursor: pointer;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            transition: .2s;
+
+        }
+
+
+        .recovery-btn:hover {
+
+            background: #1265d1;
+
+        }
+
+
+        .recovery-btn:disabled {
+
+            opacity: .65;
+
+            cursor: not-allowed;
+
+        }
+
+
+        .back-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 10px;
+
+            margin-top: 16px;
+
+        }
+
+
+        .back-link {
+
+            flex: 1;
+
+            text-align: center;
+
+            text-decoration: none;
+
+            padding: 9px;
+
+            border:
+                1px solid #d0d5dd;
+
+            border-radius: 7px;
+
+            color: #344054;
+
+            font-size: 9px;
+
+            font-weight: 700;
+
+        }
+
+
+        .back-link:hover {
+
+            border-color: #1877f2;
+
+            color: #1877f2;
+
+        }
+
+
+        .security {
+
+            margin-top: 20px;
+
+            padding-top: 18px;
+
+            border-top:
+                1px solid #eaecf0;
+
+            text-align: center;
+
+            color: #98a2b3;
+
+            font-size: 8px;
+
+            line-height: 1.7;
+
+        }
+
+
+        @media (max-width: 480px) {
+
+            .recovery-card {
+
+                padding: 23px;
+
+            }
+
+
+            h1 {
+
+                font-size: 20px;
+
+            }
+
+
+            .back-row {
+
+                flex-direction: column;
+
+            }
+
+        }
+
+    </style>
 
 </head>
 
+
 <body>
+
 
 <div class="recovery-card">
 
-```
-<div class="logo">
-    🔐
-</div>
+
+    <div class="logo">
+        🔐
+    </div>
 
 
-<h1>
-    Password Recovery
-</h1>
+    <h1>
+        Password Recovery
+    </h1>
 
 
-<p class="subtitle">
+    <p class="subtitle">
 
-    Shopping Mela Admin Panel-এর
-    password recovery করতে নিচের
-    তথ্য দিন।
+        Shopping Mela Admin password
+        পরিবর্তন করতে নিচের তথ্য দিন।
 
-</p>
-
-
-<div class="info-box">
-
-    💡 <strong>Demo Recovery System:</strong>
-
-    এই version-এ আপনার
-    recovery email হিসেবে
-    system-এর সংরক্ষিত admin email
-    ব্যবহার করা হবে।
-
-</div>
+    </p>
 
 
-<form
-    id="recoveryForm"
->
+    <div class="recovery-badge">
 
+        <span class="recovery-icon">
+            ✓
+        </span>
 
-    <div class="form-group">
-
-        <label for="adminUsername">
-            Admin Username
-        </label>
-
-        <input
-            type="text"
-            id="adminUsername"
-            placeholder="admin"
-            autocomplete="username"
-            required
-        >
+        Admin Account Recovery
 
     </div>
 
 
-    <div class="form-group">
-
-        <label for="recoveryEmail">
-            Recovery Email
-        </label>
-
-        <input
-            type="email"
-            id="recoveryEmail"
-            placeholder="Recovery email"
-            autocomplete="email"
-            required
-        >
-
-    </div>
+    <div
+        class="message"
+        id="message"
+    ></div>
 
 
-    <button
-        type="submit"
-        class="submit-btn"
+    <form
+        id="recoveryForm"
+        autocomplete="off"
     >
-        Continue Recovery
-    </button>
 
 
-</form>
+        <!-- USERNAME -->
+
+        <div class="form-group">
+
+            <label for="username">
+                Admin Username
+            </label>
+
+            <input
+                type="text"
+                id="username"
+                name="username"
+                placeholder="admin"
+                autocomplete="username"
+                required
+            >
+
+        </div>
 
 
-<div
-    id="message"
-    class="message"
-></div>
+        <!-- CURRENT PASSWORD -->
+
+        <div class="form-group">
+
+            <label for="currentPassword">
+                Current Password
+            </label>
 
 
-<a
-    href="admin-login.html"
-    class="back-btn"
->
-    ← Back to Admin Login
-</a>
+            <div class="password-wrap">
+
+                <input
+                    type="password"
+                    id="currentPassword"
+                    placeholder="Current admin password"
+                    autocomplete="current-password"
+                    required
+                >
 
 
-<div class="footer">
+                <button
+                    type="button"
+                    class="toggle-password"
+                    onclick="
+                        togglePassword(
+                            'currentPassword',
+                            this
+                        )
+                    "
+                >
+                    👁️
+                </button>
 
-    Shopping Mela Admin System
+            </div>
+
+
+            <div class="hint">
+
+                নিরাপত্তার জন্য বর্তমান password
+                verify করা হবে।
+
+            </div>
+
+        </div>
+
+
+        <!-- NEW PASSWORD -->
+
+        <div class="form-group">
+
+            <label for="newPassword">
+                New Password
+            </label>
+
+
+            <div class="password-wrap">
+
+                <input
+                    type="password"
+                    id="newPassword"
+                    placeholder="New admin password"
+                    autocomplete="new-password"
+                    minlength="6"
+                    required
+                >
+
+
+                <button
+                    type="button"
+                    class="toggle-password"
+                    onclick="
+                        togglePassword(
+                            'newPassword',
+                            this
+                        )
+                    "
+                >
+                    👁️
+                </button>
+
+            </div>
+
+
+            <div class="password-strength">
+
+                <div
+                    class="strength-bar"
+                    id="strengthBar"
+                ></div>
+
+            </div>
+
+
+            <div
+                class="strength-text"
+                id="strengthText"
+            >
+                Password strength: — 
+            </div>
+
+        </div>
+
+
+        <!-- CONFIRM -->
+
+        <div class="form-group">
+
+            <label for="confirmPassword">
+                Confirm New Password
+            </label>
+
+
+            <div class="password-wrap">
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    placeholder="Confirm new password"
+                    autocomplete="new-password"
+                    minlength="6"
+                    required
+                >
+
+
+                <button
+                    type="button"
+                    class="toggle-password"
+                    onclick="
+                        togglePassword(
+                            'confirmPassword',
+                            this
+                        )
+                    "
+                >
+                    👁️
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="recovery-btn"
+            id="recoveryBtn"
+        >
+            🔄 Change Admin Password
+        </button>
+
+
+    </form>
+
+
+    <div class="back-row">
+
+        <a
+            href="admin-login.html"
+            class="back-link"
+        >
+            ← Back to Login
+        </a>
+
+
+        <a
+            href="index.html"
+            class="back-link"
+        >
+            🏠 Website
+        </a>
+
+    </div>
+
+
+    <div class="security">
+
+        🔒 Password recovery is handled
+        locally in this demo system.
+
+        <br>
+
+        নতুন password অন্তত ৬ characters হতে হবে।
+
+    </div>
+
 
 </div>
-```
 
-</div>
+
 
 <script>
 
 
 /* =====================================================
-   1.41.1 ADMIN RECOVERY
+   1.42 ADMIN RECOVERY SYSTEM
 ===================================================== */
 
 
-const form =
-    document.getElementById(
-        "recoveryForm"
-    );
+/* =====================================================
+   DEFAULT ADMIN DATA
+===================================================== */
+
+const DEFAULT_USERNAME =
+    "admin";
+
+const DEFAULT_PASSWORD =
+    "123456";
 
 
-const message =
-    document.getElementById(
-        "message"
-    );
+const ADMIN_USERNAME_KEY =
+    "shoppingMelaAdminUsername";
+
+const ADMIN_PASSWORD_KEY =
+    "shoppingMelaAdminPassword";
 
 
 
-/*
-   Recovery email setup
-
-   যদি আগে email save করা থাকে
-   তাহলে সেটি ব্যবহার হবে।
-
-   না থাকলে এই demo email ব্যবহার হবে।
-*/
-
-const DEFAULT_RECOVERY_EMAIL =
-    "iamsnkbd@protonmail.com";
-
-
+/* =====================================================
+   MESSAGE
+===================================================== */
 
 function showMessage(
     text,
     type
 ) {
 
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+
     message.textContent =
         text;
+
 
     message.className =
         "message show " +
@@ -489,35 +819,269 @@ function showMessage(
 
 
 
-form.addEventListener(
+/* =====================================================
+   PASSWORD TOGGLE
+===================================================== */
+
+function togglePassword(
+    inputId,
+    button
+) {
+
+    const input =
+        document.getElementById(
+            inputId
+        );
+
+
+    if (
+        input.type ===
+        "password"
+    ) {
+
+        input.type =
+            "text";
+
+        button.textContent =
+            "🙈";
+
+    } else {
+
+        input.type =
+            "password";
+
+        button.textContent =
+            "👁️";
+
+    }
+
+}
+
+
+
+/* =====================================================
+   GET SAVED ADMIN USERNAME
+===================================================== */
+
+function getAdminUsername() {
+
+    return (
+        localStorage.getItem(
+            ADMIN_USERNAME_KEY
+        ) ||
+        DEFAULT_USERNAME
+    );
+
+}
+
+
+
+/* =====================================================
+   GET SAVED ADMIN PASSWORD
+===================================================== */
+
+function getAdminPassword() {
+
+    return (
+        localStorage.getItem(
+            ADMIN_PASSWORD_KEY
+        ) ||
+        DEFAULT_PASSWORD
+    );
+
+}
+
+
+
+/* =====================================================
+   PASSWORD STRENGTH
+===================================================== */
+
+function checkPasswordStrength(
+    password
+) {
+
+    const bar =
+        document.getElementById(
+            "strengthBar"
+        );
+
+
+    const text =
+        document.getElementById(
+            "strengthText"
+        );
+
+
+    if (!password) {
+
+        bar.style.width =
+            "0%";
+
+        text.textContent =
+            "Password strength: —";
+
+        return;
+
+    }
+
+
+    let score =
+        0;
+
+
+    if (
+        password.length >= 6
+    ) {
+
+        score++;
+
+    }
+
+
+    if (
+        password.length >= 10
+    ) {
+
+        score++;
+
+    }
+
+
+    if (
+        /[A-Z]/.test(
+            password
+        )
+    ) {
+
+        score++;
+
+    }
+
+
+    if (
+        /[0-9]/.test(
+            password
+        )
+    ) {
+
+        score++;
+
+    }
+
+
+    if (
+        /[^A-Za-z0-9]/.test(
+            password
+        )
+    ) {
+
+        score++;
+
+    }
+
+
+    const percentage =
+        score * 20;
+
+
+    bar.style.width =
+        percentage + "%";
+
+
+    if (
+        score <= 1
+    ) {
+
+        text.textContent =
+            "Password strength: Weak";
+
+    } else if (
+        score <= 3
+    ) {
+
+        text.textContent =
+            "Password strength: Medium";
+
+    } else {
+
+        text.textContent =
+            "Password strength: Strong";
+
+    }
+
+}
+
+
+
+/* =====================================================
+   NEW PASSWORD INPUT
+===================================================== */
+
+document.getElementById(
+    "newPassword"
+).addEventListener(
+    "input",
+    function () {
+
+        checkPasswordStrength(
+            this.value
+        );
+
+    }
+);
+
+
+
+/* =====================================================
+   RECOVERY FORM
+===================================================== */
+
+document.getElementById(
+    "recoveryForm"
+).addEventListener(
     "submit",
-    function(event) {
+    function (event) {
 
         event.preventDefault();
 
 
+        const button =
+            document.getElementById(
+                "recoveryBtn"
+            );
+
+
         const username =
-            document
-                .getElementById(
-                    "adminUsername"
-                )
-                .value
-                .trim();
+            document.getElementById(
+                "username"
+            ).value.trim();
 
 
-        const email =
-            document
-                .getElementById(
-                    "recoveryEmail"
-                )
-                .value
-                .trim()
-                .toLowerCase();
+        const currentPassword =
+            document.getElementById(
+                "currentPassword"
+            ).value;
 
 
+        const newPassword =
+            document.getElementById(
+                "newPassword"
+            ).value;
+
+
+        const confirmPassword =
+            document.getElementById(
+                "confirmPassword"
+            ).value;
+
+
+
+        /* USERNAME CHECK */
 
         if (
-            username !== "admin"
+            username !==
+            getAdminUsername()
         ) {
 
             showMessage(
@@ -531,21 +1095,15 @@ form.addEventListener(
 
 
 
-        const savedEmail =
-            localStorage.getItem(
-                "shoppingMelaAdminRecoveryEmail"
-            ) ||
-            DEFAULT_RECOVERY_EMAIL;
-
-
+        /* CURRENT PASSWORD CHECK */
 
         if (
-            email !==
-            savedEmail.toLowerCase()
+            currentPassword !==
+            getAdminPassword()
         ) {
 
             showMessage(
-                "Recovery email সঠিক নয়।",
+                "Current password সঠিক নয়।",
                 "error"
             );
 
@@ -555,32 +1113,177 @@ form.addEventListener(
 
 
 
-        /*
-           Recovery verification সফল হলে
-           পরবর্তী password page-এ পাঠানো হবে।
-        */
+        /* PASSWORD LENGTH */
+
+        if (
+            newPassword.length < 6
+        ) {
+
+            showMessage(
+                "নতুন password অন্তত ৬ characters হতে হবে।",
+                "error"
+            );
+
+            return;
+
+        }
 
 
-        sessionStorage.setItem(
-            "shoppingMelaRecoveryVerified",
-            "true"
+
+        /* SAME PASSWORD */
+
+        if (
+            newPassword ===
+            currentPassword
+        ) {
+
+            showMessage(
+                "নতুন password পুরোনো password-এর মতো হতে পারবে না।",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+
+        /* CONFIRM */
+
+        if (
+            newPassword !==
+            confirmPassword
+        ) {
+
+            showMessage(
+                "New password এবং Confirm password মিলছে না।",
+                "error"
+            );
+
+            return;
+
+        }
+
+
+
+        /* BUTTON */
+
+        button.disabled =
+            true;
+
+        button.textContent =
+            "⏳ Updating...";
+
+
+
+        setTimeout(
+            function () {
+
+
+                /* SAVE NEW PASSWORD */
+
+                localStorage.setItem(
+                    ADMIN_PASSWORD_KEY,
+                    newPassword
+                );
+
+
+                /* CLEAR LOGIN SESSION */
+
+                sessionStorage.removeItem(
+                    "shoppingMelaAdminLoggedIn"
+                );
+
+
+                sessionStorage.removeItem(
+                    "shoppingMelaAdminLoginTime"
+                );
+
+
+
+                showMessage(
+                    "Password successfully changed ✓ এখন নতুন password দিয়ে Login করুন।",
+                    "success"
+                );
+
+
+                button.disabled =
+                    false;
+
+                button.textContent =
+                    "🔄 Change Admin Password";
+
+
+
+                document.getElementById(
+                    "currentPassword"
+                ).value =
+                    "";
+
+
+                document.getElementById(
+                    "newPassword"
+                ).value =
+                    "";
+
+
+                document.getElementById(
+                    "confirmPassword"
+                ).value =
+                    "";
+
+
+                checkPasswordStrength(
+                    ""
+                );
+
+
+
+                /* REDIRECT */
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            "admin-login.html";
+
+                    },
+                    1800
+                );
+
+
+            },
+            500
         );
-
-
-        sessionStorage.setItem(
-            "shoppingMelaRecoveryTime",
-            Date.now().toString()
-        );
-
-
-        window.location.href =
-            "admin-password.html";
 
     }
 );
 
 
+
+/* =====================================================
+   PAGE LOAD
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const username =
+            document.getElementById(
+                "username"
+            );
+
+
+        username.value =
+            getAdminUsername();
+
+
+    }
+);
+
 </script>
+
 
 </body>
 
