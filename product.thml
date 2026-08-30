@@ -1,0 +1,1759 @@
+```html
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Products — Shopping Mela
+    </title>
+
+    <meta
+        name="description"
+        content="Shopping Mela products — local sellers, verified brands and trending products."
+    >
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     TOP BAR
+====================================================== -->
+
+<div class="top-bar">
+
+    🛍️
+
+    <span>
+        Shopping Mela
+    </span>
+
+    — Local Brands & Products
+
+</div>
+
+
+
+<!-- =====================================================
+     HEADER
+====================================================== -->
+
+<header class="header">
+
+    <div class="container">
+
+        <div class="header-main">
+
+
+            <!-- LOGO -->
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+
+                <div class="logo-icon">
+                    🛍️
+                </div>
+
+                <span>
+                    Shopping Mela
+                </span>
+
+            </a>
+
+
+
+            <!-- SEARCH -->
+
+            <div class="header-search">
+
+                <input
+                    type="search"
+                    id="productSearch"
+                    placeholder="পণ্য, brand বা category খুঁজুন..."
+                    aria-label="Search products"
+                >
+
+                <button
+                    type="button"
+                    onclick="searchProducts()"
+                    aria-label="Search"
+                >
+                    🔍
+                </button>
+
+            </div>
+
+
+
+            <!-- HEADER ACTIONS -->
+
+            <div class="header-actions">
+
+                <button
+                    class="header-action"
+                    onclick="showToast('Wishlist শীঘ্রই আসছে ❤️')"
+                >
+
+                    <span class="header-action-icon">
+                        ♡
+                    </span>
+
+                    <span>
+                        Wishlist
+                    </span>
+
+                </button>
+
+
+                <button
+                    class="header-action"
+                    onclick="showToast('Cart শীঘ্রই আসছে 🛒')"
+                >
+
+                    <span class="header-action-icon">
+                        🛒
+                    </span>
+
+                    <span>
+                        Cart
+                    </span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             NAVIGATION
+        ================================================== -->
+
+        <nav class="navigation">
+
+            <div class="navigation-inner">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="index.html#categories">
+                    Categories
+                </a>
+
+                <a href="brands.html">
+                    Local Brands
+                </a>
+
+                <a
+                    href="products.html"
+                    class="active"
+                >
+                    Products
+                </a>
+
+                <a href="index.html#offers">
+                    Offers
+                </a>
+
+                <a href="blog.html">
+                    Blog
+                </a>
+
+                <a href="index.html#advertise">
+                    Advertise With Us
+                </a>
+
+            </div>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+
+<main>
+
+
+<!-- =====================================================
+     PRODUCTS HERO
+====================================================== -->
+
+<section class="products-page-hero">
+
+    <div class="container">
+
+        <div class="products-hero-content">
+
+            <span class="page-label">
+                🛒 SHOPPING MELA MARKETPLACE
+            </span>
+
+            <h1>
+                Discover Local Products
+            </h1>
+
+            <p>
+                Local seller ও verified brand-এর
+                products এক জায়গায় খুঁজে নিন।
+            </p>
+
+
+            <div class="product-page-stats">
+
+                <div>
+
+                    <strong>
+                        500+
+                    </strong>
+
+                    <span>
+                        Products
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        100+
+                    </strong>
+
+                    <span>
+                        Sellers
+                    </span>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        🔵
+                    </strong>
+
+                    <span>
+                        Verified Sellers
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PRODUCT AREA
+====================================================== -->
+
+<section class="products-section">
+
+    <div class="container">
+
+
+        <!-- =================================================
+             TOOLBAR
+        ================================================== -->
+
+        <div class="products-toolbar">
+
+
+            <div>
+
+                <h2>
+                    Trending Products
+                </h2>
+
+                <p id="productCount">
+                    Showing all products
+                </p>
+
+            </div>
+
+
+            <!-- SORT -->
+
+            <div class="product-sort">
+
+                <label for="sortProducts">
+                    Sort:
+                </label>
+
+                <select
+                    id="sortProducts"
+                    onchange="sortProducts()"
+                >
+
+                    <option value="default">
+                        Recommended
+                    </option>
+
+                    <option value="low">
+                        Price: Low to High
+                    </option>
+
+                    <option value="high">
+                        Price: High to Low
+                    </option>
+
+                    <option value="rating">
+                        Highest Rated
+                    </option>
+
+                </select>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             CATEGORY FILTERS
+        ================================================== -->
+
+        <div class="product-filters">
+
+            <button
+                class="product-filter active"
+                data-filter="all"
+                onclick="filterProducts('all', this)"
+            >
+                All
+            </button>
+
+
+            <button
+                class="product-filter"
+                data-filter="fashion"
+                onclick="filterProducts('fashion', this)"
+            >
+                👗 Fashion
+            </button>
+
+
+            <button
+                class="product-filter"
+                data-filter="beauty"
+                onclick="filterProducts('beauty', this)"
+            >
+                💄 Beauty
+            </button>
+
+
+            <button
+                class="product-filter"
+                data-filter="food"
+                onclick="filterProducts('food', this)"
+            >
+                🍔 Food
+            </button>
+
+
+            <button
+                class="product-filter"
+                data-filter="electronics"
+                onclick="filterProducts('electronics', this)"
+            >
+                📱 Electronics
+            </button>
+
+
+            <button
+                class="product-filter"
+                data-filter="home"
+                onclick="filterProducts('home', this)"
+            >
+                🏠 Home
+            </button>
+
+
+            <button
+                class="product-filter"
+                data-filter="others"
+                onclick="filterProducts('others', this)"
+            >
+                ✨ Others
+            </button>
+
+        </div>
+
+
+
+        <!-- =================================================
+             PRODUCT GRID
+        ================================================== -->
+
+        <div
+            class="product-grid products-page-grid"
+            id="productGrid"
+        >
+
+
+
+            <!-- =================================================
+                 PRODUCT 1
+            ================================================== -->
+
+            <article
+                class="product-card product-item"
+                data-category="fashion"
+                data-name="ladies three piece"
+                data-price="1250"
+                data-rating="4.9"
+            >
+
+                <div
+                    class="product-image"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=800&q=85');
+                    "
+                >
+
+                    <span class="discount">
+                        -20%
+                    </span>
+
+
+                    <button
+                        class="product-heart"
+                        onclick="addWishlist(this)"
+                        aria-label="Add to wishlist"
+                    >
+                        ♡
+                    </button>
+
+
+                    <span class="product-badge">
+                        🔥 Popular
+                    </span>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <div class="product-title-row">
+
+                        <h3>
+                            Ladies Three Piece
+                        </h3>
+
+                        <span
+                            class="product-verified"
+                            title="Verified Seller"
+                        >
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <div class="product-brand">
+                        Anjona Ladies Tailors
+                    </div>
+
+
+                    <div class="seller-line">
+                        🔵 Verified Seller
+                    </div>
+
+
+                    <div class="product-rating">
+                        ⭐ 4.9
+                        <span>
+                            (28)
+                        </span>
+                    </div>
+
+
+                    <div class="product-price">
+
+                        <span class="current-price">
+                            ৳1,250
+                        </span>
+
+                        <span class="old-price">
+                            ৳1,550
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="product-view-btn"
+                        onclick="viewProduct('Ladies Three Piece')"
+                    >
+                        View Product →
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 PRODUCT 2
+            ================================================== -->
+
+            <article
+                class="product-card product-item"
+                data-category="beauty"
+                data-name="premium attar"
+                data-price="650"
+                data-rating="4.8"
+            >
+
+                <div
+                    class="product-image"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=800&q=85');
+                    "
+                >
+
+                    <span class="discount">
+                        -15%
+                    </span>
+
+
+                    <button
+                        class="product-heart"
+                        onclick="addWishlist(this)"
+                        aria-label="Add to wishlist"
+                    >
+                        ♡
+                    </button>
+
+
+                    <span class="product-badge">
+                        ✨ Featured
+                    </span>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <div class="product-title-row">
+
+                        <h3>
+                            Premium Attar
+                        </h3>
+
+                        <span
+                            class="product-verified"
+                            title="Verified Seller"
+                        >
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <div class="product-brand">
+                        Local Attar Shop
+                    </div>
+
+
+                    <div class="seller-line">
+                        🔵 Verified Seller
+                    </div>
+
+
+                    <div class="product-rating">
+                        ⭐ 4.8
+                        <span>
+                            (41)
+                        </span>
+                    </div>
+
+
+                    <div class="product-price">
+
+                        <span class="current-price">
+                            ৳650
+                        </span>
+
+                        <span class="old-price">
+                            ৳750
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="product-view-btn"
+                        onclick="viewProduct('Premium Attar')"
+                    >
+                        View Product →
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 PRODUCT 3
+            ================================================== -->
+
+            <article
+                class="product-card product-item"
+                data-category="fashion"
+                data-name="handmade bag"
+                data-price="890"
+                data-rating="4.7"
+            >
+
+                <div
+                    class="product-image"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=800&q=85');
+                    "
+                >
+
+                    <span class="discount">
+                        NEW
+                    </span>
+
+
+                    <button
+                        class="product-heart"
+                        onclick="addWishlist(this)"
+                        aria-label="Add to wishlist"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <div class="product-title-row">
+
+                        <h3>
+                            Handmade Bag
+                        </h3>
+
+                        <span
+                            class="product-verified"
+                            title="Verified Seller"
+                        >
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <div class="product-brand">
+                        Local Handmade Brand
+                    </div>
+
+
+                    <div class="seller-line">
+                        🔵 Verified Seller
+                    </div>
+
+
+                    <div class="product-rating">
+                        ⭐ 4.7
+                        <span>
+                            (17)
+                        </span>
+                    </div>
+
+
+                    <div class="product-price">
+
+                        <span class="current-price">
+                            ৳890
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="product-view-btn"
+                        onclick="viewProduct('Handmade Bag')"
+                    >
+                        View Product →
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 PRODUCT 4
+            ================================================== -->
+
+            <article
+                class="product-card product-item"
+                data-category="food"
+                data-name="homemade food"
+                data-price="350"
+                data-rating="4.9"
+            >
+
+                <div
+                    class="product-image"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=85');
+                    "
+                >
+
+                    <span class="discount">
+                        HOT
+                    </span>
+
+
+                    <button
+                        class="product-heart"
+                        onclick="addWishlist(this)"
+                        aria-label="Add to wishlist"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <div class="product-title-row">
+
+                        <h3>
+                            Homemade Food
+                        </h3>
+
+                        <span
+                            class="product-verified"
+                            title="Verified Seller"
+                        >
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <div class="product-brand">
+                        Local Food House
+                    </div>
+
+
+                    <div class="seller-line">
+                        🔵 Verified Seller
+                    </div>
+
+
+                    <div class="product-rating">
+                        ⭐ 4.9
+                        <span>
+                            (63)
+                        </span>
+                    </div>
+
+
+                    <div class="product-price">
+
+                        <span class="current-price">
+                            ৳350
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="product-view-btn"
+                        onclick="viewProduct('Homemade Food')"
+                    >
+                        View Product →
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 PRODUCT 5
+            ================================================== -->
+
+            <article
+                class="product-card product-item"
+                data-category="electronics"
+                data-name="wireless earbuds"
+                data-price="1450"
+                data-rating="4.6"
+            >
+
+                <div
+                    class="product-image"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1606220945770-b5b6c2c55bf1?auto=format&fit=crop&w=800&q=85');
+                    "
+                >
+
+                    <span class="discount">
+                        -10%
+                    </span>
+
+
+                    <button
+                        class="product-heart"
+                        onclick="addWishlist(this)"
+                        aria-label="Add to wishlist"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <div class="product-title-row">
+
+                        <h3>
+                            Wireless Earbuds
+                        </h3>
+
+                        <span
+                            class="product-verified"
+                            title="Verified Seller"
+                        >
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <div class="product-brand">
+                        Local Tech Store
+                    </div>
+
+
+                    <div class="seller-line">
+                        🔵 Verified Seller
+                    </div>
+
+
+                    <div class="product-rating">
+                        ⭐ 4.6
+                        <span>
+                            (35)
+                        </span>
+                    </div>
+
+
+                    <div class="product-price">
+
+                        <span class="current-price">
+                            ৳1,450
+                        </span>
+
+                        <span class="old-price">
+                            ৳1,600
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="product-view-btn"
+                        onclick="viewProduct('Wireless Earbuds')"
+                    >
+                        View Product →
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 PRODUCT 6
+            ================================================== -->
+
+            <article
+                class="product-card product-item"
+                data-category="home"
+                data-name="handmade home decor"
+                data-price="750"
+                data-rating="4.8"
+            >
+
+                <div
+                    class="product-image"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=85');
+                    "
+                >
+
+                    <span class="discount">
+                        NEW
+                    </span>
+
+
+                    <button
+                        class="product-heart"
+                        onclick="addWishlist(this)"
+                        aria-label="Add to wishlist"
+                    >
+                        ♡
+                    </button>
+
+                </div>
+
+
+                <div class="product-info">
+
+                    <div class="product-title-row">
+
+                        <h3>
+                            Handmade Home Decor
+                        </h3>
+
+                        <span
+                            class="product-verified"
+                            title="Verified Seller"
+                        >
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <div class="product-brand">
+                        Local Home Brand
+                    </div>
+
+
+                    <div class="seller-line">
+                        🔵 Verified Seller
+                    </div>
+
+
+                    <div class="product-rating">
+                        ⭐ 4.8
+                        <span>
+                            (21)
+                        </span>
+                    </div>
+
+
+                    <div class="product-price">
+
+                        <span class="current-price">
+                            ৳750
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="product-view-btn"
+                        onclick="viewProduct('Handmade Home Decor')"
+                    >
+                        View Product →
+                    </button>
+
+                </div>
+
+            </article>
+
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             NO RESULTS
+        ================================================== -->
+
+        <div
+            class="no-product-result"
+            id="noProductResult"
+        >
+
+            <div>
+                🔎
+            </div>
+
+            <h3>
+                কোনো Product পাওয়া যায়নি
+            </h3>
+
+            <p>
+                অন্য product name বা category দিয়ে
+                search করুন।
+            </p>
+
+            <button
+                class="secondary-btn"
+                onclick="resetProducts()"
+            >
+                সব Products দেখুন
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SELLER CTA
+====================================================== -->
+
+<section class="container">
+
+    <div class="seller-cta">
+
+        <div class="seller-cta-icon">
+            🏪
+        </div>
+
+
+        <div>
+
+            <small>
+                FOR LOCAL SELLERS
+            </small>
+
+            <h2>
+                আপনার Product Shopping Mela-তে দিন
+            </h2>
+
+            <p>
+                আপনার product local customers-এর
+                সামনে তুলে ধরুন এবং verified seller
+                profile তৈরি করুন।
+            </p>
+
+        </div>
+
+
+        <a
+            href="index.html#advertise"
+            class="light-btn"
+        >
+            Sell With Us →
+        </a>
+
+    </div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-main">
+
+
+            <div class="footer-brand">
+
+                <a
+                    href="index.html"
+                    class="logo"
+                >
+
+                    <div class="logo-icon">
+                        🛍️
+                    </div>
+
+                    <span>
+                        Shopping Mela
+                    </span>
+
+                </a>
+
+
+                <p>
+                    Local brands, businesses,
+                    products এবং community
+                    এক জায়গায়।
+                </p>
+
+            </div>
+
+
+
+            <div>
+
+                <h3>
+                    Shopping
+                </h3>
+
+                <a href="index.html#categories">
+                    Categories
+                </a>
+
+                <a href="brands.html">
+                    Local Brands
+                </a>
+
+                <a href="products.html">
+                    Products
+                </a>
+
+                <a href="index.html#offers">
+                    Offers
+                </a>
+
+            </div>
+
+
+
+            <div>
+
+                <h3>
+                    Community
+                </h3>
+
+                <a href="blog.html">
+                    Blog
+                </a>
+
+                <a href="blog.html">
+                    Write a Post
+                </a>
+
+                <a href="index.html#advertise">
+                    Advertise
+                </a>
+
+            </div>
+
+
+
+            <div>
+
+                <h3>
+                    Support
+                </h3>
+
+                <a href="#">
+                    About Us
+                </a>
+
+                <a href="#">
+                    Contact
+                </a>
+
+                <a href="#">
+                    Privacy Policy
+                </a>
+
+                <a href="#">
+                    Terms
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            © 2026 Shopping Mela.
+            All Rights Reserved.
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     TOAST
+====================================================== -->
+
+<div
+    class="toast"
+    id="toast"
+>
+    Done!
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+====================================================== -->
+
+<script>
+
+
+/* =====================================================
+   TOAST
+====================================================== */
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent =
+        message;
+
+    toast.classList.add("show");
+
+
+    setTimeout(function() {
+
+        toast.classList.remove("show");
+
+    }, 2500);
+
+}
+
+
+
+/* =====================================================
+   FILTER PRODUCTS
+====================================================== */
+
+function filterProducts(category, button) {
+
+    const products =
+        document.querySelectorAll(
+            ".product-item"
+        );
+
+    const buttons =
+        document.querySelectorAll(
+            ".product-filter"
+        );
+
+    let count = 0;
+
+
+    buttons.forEach(function(btn) {
+
+        btn.classList.remove("active");
+
+    });
+
+
+    if (button) {
+
+        button.classList.add("active");
+
+    }
+
+
+    products.forEach(function(product) {
+
+        const productCategory =
+            product.dataset.category;
+
+
+        if (
+            category === "all" ||
+            productCategory === category
+        ) {
+
+            product.style.display = "";
+
+            count++;
+
+        } else {
+
+            product.style.display = "none";
+
+        }
+
+    });
+
+
+    updateProductCount(count);
+
+
+    const noResult =
+        document.getElementById(
+            "noProductResult"
+        );
+
+
+    if (count === 0) {
+
+        noResult.classList.add("show");
+
+    } else {
+
+        noResult.classList.remove("show");
+
+    }
+
+}
+
+
+
+/* =====================================================
+   SEARCH PRODUCTS
+====================================================== */
+
+function searchProducts() {
+
+    const input =
+        document.getElementById(
+            "productSearch"
+        );
+
+
+    const query =
+        input.value
+            .trim()
+            .toLowerCase();
+
+
+    const products =
+        document.querySelectorAll(
+            ".product-item"
+        );
+
+
+    if (!query) {
+
+        resetProducts();
+
+        return;
+
+    }
+
+
+    let count = 0;
+
+
+    document
+        .querySelectorAll(".product-filter")
+        .forEach(function(button) {
+
+            button.classList.remove(
+                "active"
+            );
+
+        });
+
+
+    products.forEach(function(product) {
+
+        const name =
+            product.dataset.name
+                .toLowerCase();
+
+
+        const category =
+            product.dataset.category
+                .toLowerCase();
+
+
+        const text =
+            product.innerText
+                .toLowerCase();
+
+
+        if (
+            name.includes(query) ||
+            category.includes(query) ||
+            text.includes(query)
+        ) {
+
+            product.style.display = "";
+
+            count++;
+
+        } else {
+
+            product.style.display = "none";
+
+        }
+
+    });
+
+
+    updateProductCount(count);
+
+
+    const noResult =
+        document.getElementById(
+            "noProductResult"
+        );
+
+
+    if (count === 0) {
+
+        noResult.classList.add("show");
+
+        showToast(
+            "কোনো Product পাওয়া যায়নি"
+        );
+
+    } else {
+
+        noResult.classList.remove("show");
+
+        showToast(
+            count +
+            "টি Product পাওয়া গেছে 🔎"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   ENTER KEY
+====================================================== */
+
+document
+    .getElementById("productSearch")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                searchProducts();
+
+            }
+
+        }
+    );
+
+
+
+/* =====================================================
+   UPDATE PRODUCT COUNT
+====================================================== */
+
+function updateProductCount(count) {
+
+    const counter =
+        document.getElementById(
+            "productCount"
+        );
+
+
+    if (count === 0) {
+
+        counter.textContent =
+            "No products found";
+
+    } else {
+
+        counter.textContent =
+            "Showing " +
+            count +
+            " product" +
+            (count > 1 ? "s" : "");
+
+    }
+
+}
+
+
+
+/* =====================================================
+   SORT PRODUCTS
+====================================================== */
+
+function sortProducts() {
+
+    const select =
+        document.getElementById(
+            "sortProducts"
+        );
+
+
+    const value =
+        select.value;
+
+
+    const grid =
+        document.getElementById(
+            "productGrid"
+        );
+
+
+    const products =
+        Array.from(
+            grid.querySelectorAll(
+                ".product-item"
+            )
+        );
+
+
+    if (value === "low") {
+
+        products.sort(function(a, b) {
+
+            return (
+                Number(a.dataset.price) -
+                Number(b.dataset.price)
+            );
+
+        });
+
+    }
+
+
+    else if (value === "high") {
+
+        products.sort(function(a, b) {
+
+            return (
+                Number(b.dataset.price) -
+                Number(a.dataset.price)
+            );
+
+        });
+
+    }
+
+
+    else if (value === "rating") {
+
+        products.sort(function(a, b) {
+
+            return (
+                Number(b.dataset.rating) -
+                Number(a.dataset.rating)
+            );
+
+        });
+
+    }
+
+
+    products.forEach(function(product) {
+
+        grid.appendChild(product);
+
+    });
+
+
+    showToast(
+        "Products sorted successfully"
+    );
+
+}
+
+
+
+/* =====================================================
+   WISHLIST
+====================================================== */
+
+function addWishlist(button) {
+
+    button.classList.toggle(
+        "liked"
+    );
+
+
+    if (
+        button.classList.contains(
+            "liked"
+        )
+    ) {
+
+        button.textContent =
+            "♥";
+
+        showToast(
+            "Wishlist-এ যোগ করা হয়েছে ❤️"
+        );
+
+    } else {
+
+        button.textContent =
+            "♡";
+
+        showToast(
+            "Wishlist থেকে সরানো হয়েছে"
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   VIEW PRODUCT
+====================================================== */
+
+function viewProduct(productName) {
+
+    showToast(
+        productName +
+        " details শীঘ্রই আসছে!"
+    );
+
+}
+
+
+
+/* =====================================================
+   RESET
+====================================================== */
+
+function resetProducts() {
+
+    const products =
+        document.querySelectorAll(
+            ".product-item"
+        );
+
+
+    const buttons =
+        document.querySelectorAll(
+            ".product-filter"
+        );
+
+
+    products.forEach(function(product) {
+
+        product.style.display = "";
+
+    });
+
+
+    buttons.forEach(function(button) {
+
+        button.classList.remove(
+            "active"
+        );
+
+    });
+
+
+    const allButton =
+        document.querySelector(
+            '[data-filter="all"]'
+        );
+
+
+    if (allButton) {
+
+        allButton.classList.add(
+            "active"
+        );
+
+    }
+
+
+    document
+        .getElementById(
+            "productSearch"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "noProductResult"
+        )
+        .classList.remove(
+            "show"
+        );
+
+
+    updateProductCount(
+        products.length
+    );
+
+}
+
+
+
+/* =====================================================
+   INITIAL COUNT
+====================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        const products =
+            document.querySelectorAll(
+                ".product-item"
+            );
+
+        updateProductCount(
+            products.length
+        );
+
+    }
+);
+
+
+</script>
+
+
+</body>
+
+</html>
+```
