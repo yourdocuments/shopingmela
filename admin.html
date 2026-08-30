@@ -16,7 +16,7 @@
 
 
     <!-- =====================================================
-         1.32 — ADMIN LOGIN PROTECTION
+         1.39 — ADMIN LOGIN PROTECTION
     ====================================================== -->
 
     <script>
@@ -364,10 +364,6 @@
 
         }
 
-
-        /* =====================================================
-           1.34 — ADMIN VERIFIED PROFILE
-        ====================================================== */
 
         .admin-user-info {
 
@@ -1057,11 +1053,13 @@
 
             color: #1877f2;
 
+            cursor: pointer;
+
         }
 
 
         /* =====================================================
-           PRODUCTS
+           PRODUCTS FORM
         ====================================================== */
 
         .product-form {
@@ -1131,6 +1129,186 @@
 
             font-size: 10px;
 
+            background: #ffffff;
+
+        }
+
+
+        .form-group input:focus,
+        .form-group select:focus {
+
+            border-color: #1877f2;
+
+            box-shadow:
+                0 0 0 2px
+                rgba(24,119,242,.08);
+
+        }
+
+
+        /* =====================================================
+           1.39 IMAGE UPLOAD
+        ====================================================== */
+
+        .image-upload-box {
+
+            border:
+                1px dashed #b8c0cc;
+
+            border-radius: 10px;
+
+            padding: 14px;
+
+            background: #f9fafb;
+
+        }
+
+
+        .image-upload-row {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+
+        }
+
+
+        .file-button {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 6px;
+
+            background: #1877f2;
+
+            color: #ffffff;
+
+            border-radius: 7px;
+
+            padding:
+                9px 12px;
+
+            cursor: pointer;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+        }
+
+
+        .file-button:hover {
+
+            background: #1265d1;
+
+        }
+
+
+        #productImageFile {
+
+            display: none;
+
+        }
+
+
+        .image-file-name {
+
+            color: #667085;
+
+            font-size: 8px;
+
+        }
+
+
+        .image-preview {
+
+            display: none;
+
+            margin-top: 12px;
+
+            position: relative;
+
+            width: 120px;
+
+            height: 120px;
+
+            border-radius: 10px;
+
+            overflow: hidden;
+
+            border:
+                1px solid #eaecf0;
+
+            background: #ffffff;
+
+        }
+
+
+        .image-preview.show {
+
+            display: block;
+
+        }
+
+
+        .image-preview img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+        }
+
+
+        .remove-image {
+
+            position: absolute;
+
+            top: 5px;
+
+            right: 5px;
+
+            width: 25px;
+
+            height: 25px;
+
+            border: 0;
+
+            border-radius: 50%;
+
+            background: #f04438;
+
+            color: #ffffff;
+
+            cursor: pointer;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+        }
+
+
+        .image-url-help {
+
+            margin-top: 7px;
+
+            color: #98a2b3;
+
+            font-size: 8px;
+
+            line-height: 1.5;
+
         }
 
 
@@ -1154,6 +1332,173 @@
             font-size: 10px;
 
             font-weight: 800;
+
+        }
+
+
+        .form-submit:hover {
+
+            background: #1265d1;
+
+        }
+
+
+        /* =====================================================
+           PRODUCT LIST
+        ====================================================== */
+
+        .product-list {
+
+            padding: 18px;
+
+        }
+
+
+        .product-item {
+
+            display: grid;
+
+            grid-template-columns:
+                65px
+                1fr
+                auto;
+
+            gap: 13px;
+
+            align-items: center;
+
+            padding:
+                12px 0;
+
+            border-bottom:
+                1px solid #f2f4f7;
+
+        }
+
+
+        .product-item:last-child {
+
+            border-bottom: none;
+
+        }
+
+
+        .product-image {
+
+            width: 65px;
+
+            height: 65px;
+
+            border-radius: 9px;
+
+            background:
+                #f2f4f7;
+
+            overflow: hidden;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            color: #98a2b3;
+
+            font-size: 18px;
+
+        }
+
+
+        .product-image img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: cover;
+
+            display: block;
+
+        }
+
+
+        .product-name {
+
+            display: block;
+
+            color: #101828;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+        }
+
+
+        .product-category {
+
+            display: block;
+
+            color: #98a2b3;
+
+            font-size: 8px;
+
+            margin-top: 4px;
+
+        }
+
+
+        .product-price {
+
+            display: block;
+
+            color: #101828;
+
+            font-size: 11px;
+
+            font-weight: 800;
+
+            margin-top: 5px;
+
+        }
+
+
+        .product-actions {
+
+            display: flex;
+
+            gap: 6px;
+
+            align-items: center;
+
+        }
+
+
+        .delete-product {
+
+            border: 0;
+
+            background: #fff1f0;
+
+            color: #f04438;
+
+            padding:
+                7px 9px;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            font-size: 8px;
+
+            font-weight: 800;
+
+        }
+
+
+        .delete-product:hover {
+
+            background: #ffe4e1;
 
         }
 
@@ -1222,6 +1567,8 @@
             z-index: 9999;
 
             transition: .25s;
+
+            white-space: nowrap;
 
         }
 
@@ -1388,6 +1735,40 @@
 
             }
 
+
+            .product-item {
+
+                grid-template-columns:
+                    55px
+                    1fr;
+
+            }
+
+
+            .product-image {
+
+                width: 55px;
+
+                height: 55px;
+
+            }
+
+
+            .product-actions {
+
+                grid-column: 2;
+
+            }
+
+
+            .image-preview {
+
+                width: 105px;
+
+                height: 105px;
+
+            }
+
         }
 
     </style>
@@ -1543,10 +1924,6 @@
         </button>
 
 
-        <!-- =================================================
-             1.33 — LOGOUT BUTTON
-        ================================================== -->
-
         <button
             class="nav-item"
             onclick="adminLogout()"
@@ -1609,10 +1986,6 @@
                     A
                 </div>
 
-
-                <!-- =================================================
-                     1.34 — VERIFIED ADMIN PROFILE
-                ================================================== -->
 
                 <div class="admin-user-info">
 
@@ -1686,9 +2059,7 @@
                             📦
                         </div>
 
-                        <span
-                            class="stat-change"
-                        >
+                        <span class="stat-change">
                             Live
                         </span>
 
@@ -1717,9 +2088,7 @@
                             💰
                         </div>
 
-                        <span
-                            class="stat-change"
-                        >
+                        <span class="stat-change">
                             Sales
                         </span>
 
@@ -1748,9 +2117,7 @@
                             🚚
                         </div>
 
-                        <span
-                            class="stat-change"
-                        >
+                        <span class="stat-change">
                             Active
                         </span>
 
@@ -1779,9 +2146,7 @@
                             👥
                         </div>
 
-                        <span
-                            class="stat-change"
-                        >
+                        <span class="stat-change">
                             Users
                         </span>
 
@@ -1864,9 +2229,7 @@
                             "
                         >
 
-                            <div
-                                class="quick-action-icon"
-                            >
+                            <div class="quick-action-icon">
                                 📦
                             </div>
 
@@ -1890,9 +2253,7 @@
                             "
                         >
 
-                            <div
-                                class="quick-action-icon"
-                            >
+                            <div class="quick-action-icon">
                                 ➕
                             </div>
 
@@ -1916,9 +2277,7 @@
                             "
                         >
 
-                            <div
-                                class="quick-action-icon"
-                            >
+                            <div class="quick-action-icon">
                                 👥
                             </div>
 
@@ -1940,9 +2299,7 @@
                             "
                         >
 
-                            <div
-                                class="quick-action-icon"
-                            >
+                            <div class="quick-action-icon">
                                 🌐
                             </div>
 
@@ -2140,7 +2497,7 @@
                 </h1>
 
                 <p>
-                    নতুন product যোগ করার
+                    নতুন product যোগ এবং manage করার
                     management area।
                 </p>
 
@@ -2183,6 +2540,8 @@
                             type="number"
                             id="productPrice"
                             placeholder="৳"
+                            min="0"
+                            step="1"
                         >
 
                     </div>
@@ -2238,6 +2597,92 @@
                     </div>
 
 
+                    <!-- =================================================
+                         1.39 IMAGE UPLOAD
+                    ================================================== -->
+
+                    <div
+                        class="form-group"
+                        style="grid-column:1/-1;"
+                    >
+
+                        <label>
+                            Upload Product Image
+                        </label>
+
+
+                        <div class="image-upload-box">
+
+
+                            <div class="image-upload-row">
+
+
+                                <label
+                                    for="productImageFile"
+                                    class="file-button"
+                                >
+                                    🖼️ Choose Image
+                                </label>
+
+
+                                <input
+                                    type="file"
+                                    id="productImageFile"
+                                    accept="image/*"
+                                >
+
+
+                                <span
+                                    class="image-file-name"
+                                    id="imageFileName"
+                                >
+                                    কোনো image select করা হয়নি
+                                </span>
+
+
+                            </div>
+
+
+                            <div
+                                class="image-preview"
+                                id="imagePreview"
+                            >
+
+                                <img
+                                    id="previewImage"
+                                    src=""
+                                    alt="Product Preview"
+                                >
+
+
+                                <button
+                                    type="button"
+                                    class="remove-image"
+                                    onclick="removeImage()"
+                                    title="Remove Image"
+                                >
+                                    ×
+                                </button>
+
+                            </div>
+
+
+                            <div class="image-url-help">
+
+                                আপনি চাইলে উপরের
+                                <b>Image URL</b>
+                                ব্যবহার করতে পারেন,
+                                অথবা এখান থেকে image upload করতে পারেন।
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
                 </div>
 
 
@@ -2252,6 +2697,7 @@
             </div>
 
 
+
             <div class="panel">
 
 
@@ -2261,12 +2707,18 @@
                         Saved Products
                     </h2>
 
+                    <button
+                        onclick="renderProducts()"
+                    >
+                        Refresh
+                    </button>
+
                 </div>
 
 
                 <div
+                    class="product-list"
                     id="productsList"
-                    style="padding:18px;"
                 >
                 </div>
 
@@ -2346,6 +2798,8 @@ let orders = [];
 let products = [];
 
 let users = [];
+
+let uploadedImageData = "";
 
 
 const STATUS_NAMES = [
@@ -3239,6 +3693,281 @@ function syncLastOrder(
 
 
 /* =====================================================
+   1.39 IMAGE FILE SELECT
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const fileInput =
+            document.getElementById(
+                "productImageFile"
+            );
+
+
+        if (!fileInput) {
+
+            return;
+
+        }
+
+
+        fileInput.addEventListener(
+            "change",
+            handleImageUpload
+        );
+
+    }
+);
+
+
+
+function handleImageUpload(
+    event
+) {
+
+    const file =
+        event.target.files &&
+        event.target.files[0];
+
+
+    if (!file) {
+
+        return;
+
+    }
+
+
+    if (
+        !file.type.startsWith(
+            "image/"
+        )
+    ) {
+
+        showToast(
+            "শুধু image file নির্বাচন করুন"
+        );
+
+        removeImage();
+
+        return;
+
+    }
+
+
+    const maxSize =
+        2 * 1024 * 1024;
+
+
+    if (
+        file.size > maxSize
+    ) {
+
+        showToast(
+            "Image size 2MB-এর মধ্যে রাখুন"
+        );
+
+        removeImage();
+
+        return;
+
+    }
+
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload =
+        function () {
+
+            uploadedImageData =
+                reader.result;
+
+
+            document.getElementById(
+                "previewImage"
+            ).src =
+                uploadedImageData;
+
+
+            document.getElementById(
+                "imagePreview"
+            ).classList.add(
+                "show"
+            );
+
+
+            document.getElementById(
+                "imageFileName"
+            ).textContent =
+                file.name;
+
+        };
+
+
+    reader.readAsDataURL(
+        file
+    );
+
+}
+
+
+
+/* =====================================================
+   REMOVE UPLOADED IMAGE
+===================================================== */
+
+function removeImage() {
+
+    uploadedImageData =
+        "";
+
+
+    const fileInput =
+        document.getElementById(
+            "productImageFile"
+        );
+
+
+    const preview =
+        document.getElementById(
+            "imagePreview"
+        );
+
+
+    const previewImage =
+        document.getElementById(
+            "previewImage"
+        );
+
+
+    const fileName =
+        document.getElementById(
+            "imageFileName"
+        );
+
+
+    if (fileInput) {
+
+        fileInput.value =
+            "";
+
+    }
+
+
+    if (preview) {
+
+        preview.classList.remove(
+            "show"
+        );
+
+    }
+
+
+    if (previewImage) {
+
+        previewImage.src =
+            "";
+
+    }
+
+
+    if (fileName) {
+
+        fileName.textContent =
+            "কোনো image select করা হয়নি";
+
+    }
+
+}
+
+
+
+/* =====================================================
+   IMAGE URL PREVIEW
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const urlInput =
+            document.getElementById(
+                "productImage"
+            );
+
+
+        if (!urlInput) {
+
+            return;
+
+        }
+
+
+        urlInput.addEventListener(
+            "input",
+            function () {
+
+                const url =
+                    this.value.trim();
+
+
+                if (
+                    !url ||
+                    uploadedImageData
+                ) {
+
+                    return;
+
+                }
+
+
+                const previewImage =
+                    document.getElementById(
+                        "previewImage"
+                    );
+
+
+                const preview =
+                    document.getElementById(
+                        "imagePreview"
+                    );
+
+
+                previewImage.onload =
+                    function () {
+
+                        preview.classList.add(
+                            "show"
+                        );
+
+                    };
+
+
+                previewImage.onerror =
+                    function () {
+
+                        preview.classList.remove(
+                            "show"
+                        );
+
+                    };
+
+
+                previewImage.src =
+                    url;
+
+            }
+        );
+
+    }
+);
+
+
+
+/* =====================================================
    ADD PRODUCT
 ===================================================== */
 
@@ -3264,19 +3993,16 @@ function addProduct() {
         ).value;
 
 
-    const image =
+    const imageURL =
         document.getElementById(
             "productImage"
         ).value.trim();
 
 
-    if (
-        !name ||
-        !price
-    ) {
+    if (!name) {
 
         showToast(
-            "Product name ও price দিন"
+            "Product name দিন"
         );
 
         return;
@@ -3284,7 +4010,32 @@ function addProduct() {
     }
 
 
-    products.push({
+    if (
+        !price ||
+        price <= 0
+    ) {
+
+        showToast(
+            "সঠিক product price দিন"
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Uploaded image থাকলে সেটি priority পাবে।
+       না থাকলে Image URL ব্যবহার হবে।
+    */
+
+    const finalImage =
+        uploadedImageData ||
+        imageURL ||
+        "";
+
+
+    const newProduct = {
 
         id:
             "P" +
@@ -3296,39 +4047,68 @@ function addProduct() {
 
         category,
 
-        image,
+        image:
+            finalImage,
+
+        imageType:
+            uploadedImageData
+                ? "upload"
+                : "url",
 
         createdAt:
             new Date()
                 .toISOString()
 
-    });
+    };
+
+
+    products.push(
+        newProduct
+    );
 
 
     saveProducts();
 
 
-    document.getElementById(
-        "productName"
-    ).value = "";
-
-
-    document.getElementById(
-        "productPrice"
-    ).value = "";
-
-
-    document.getElementById(
-        "productImage"
-    ).value = "";
+    clearProductForm();
 
 
     renderProducts();
 
 
     showToast(
-        "Product added ✓"
+        "Product added successfully ✓"
     );
+
+}
+
+
+
+/* =====================================================
+   CLEAR PRODUCT FORM
+===================================================== */
+
+function clearProductForm() {
+
+    document.getElementById(
+        "productName"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "productPrice"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "productImage"
+    ).value =
+        "";
+
+
+    removeImage();
 
 }
 
@@ -3371,94 +4151,190 @@ function renderProducts() {
     }
 
 
-    products.forEach(
-        product => {
+    products
+        .slice()
+        .reverse()
+        .forEach(
+            product => {
 
-            const row =
-                document.createElement(
-                    "div"
+                const row =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                row.className =
+                    "product-item";
+
+
+                const safeImage =
+                    product.image ||
+                    "";
+
+
+                let imageHTML =
+                    "🛍️";
+
+
+                if (
+                    safeImage
+                ) {
+
+                    imageHTML = `
+
+                        <img
+                            src="${escapeHTML(
+                                safeImage
+                            )}"
+                            alt="${escapeHTML(
+                                product.name
+                            )}"
+                            onerror="
+                                this.style.display='none';
+                                this.parentElement.innerHTML='🛍️';
+                            "
+                        >
+
+                    `;
+
+                }
+
+
+                row.innerHTML = `
+
+                    <div
+                        class="product-image"
+                    >
+                        ${imageHTML}
+                    </div>
+
+
+                    <div>
+
+                        <span
+                            class="product-name"
+                        >
+                            ${escapeHTML(
+                                product.name
+                            )}
+                        </span>
+
+
+                        <span
+                            class="product-category"
+                        >
+                            ${escapeHTML(
+                                product.category
+                            )}
+                        </span>
+
+
+                        <span
+                            class="product-price"
+                        >
+                            ${money(
+                                product.price
+                            )}
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        class="product-actions"
+                    >
+
+                        <button
+                            class="delete-product"
+                            onclick="
+                                deleteProduct(
+                                    '${escapeHTML(
+                                        product.id
+                                    )}'
+                                )
+                            "
+                        >
+                            🗑️ Delete
+                        </button>
+
+                    </div>
+
+                `;
+
+
+                box.appendChild(
+                    row
                 );
 
+            }
+        );
 
-            row.style.cssText = `
-
-                display:grid;
-                grid-template-columns:
-                    50px 1fr auto;
-                gap:12px;
-                align-items:center;
-                padding:10px 0;
-                border-bottom:
-                    1px solid #f2f4f7;
-
-            `;
+}
 
 
-            row.innerHTML = `
 
-                <div
-                    style="
-                        width:50px;
-                        height:50px;
-                        border-radius:8px;
-                        background:#f2f4f7
-                        center/cover no-repeat;
-                        background-image:
-                        url('${escapeHTML(
-                            product.image
-                        )}');
-                    "
-                ></div>
+/* =====================================================
+   DELETE PRODUCT
+===================================================== */
 
+function deleteProduct(
+    productId
+) {
 
-                <div>
-
-                    <strong
-                        style="
-                            display:block;
-                            font-size:11px;
-                        "
-                    >
-                        ${escapeHTML(
-                            product.name
-                        )}
-                    </strong>
+    const product =
+        products.find(
+            item =>
+                String(
+                    item.id
+                ) ===
+                String(
+                    productId
+                )
+        );
 
 
-                    <span
-                        style="
-                            display:block;
-                            color:#98a2b3;
-                            font-size:8px;
-                            margin-top:3px;
-                        "
-                    >
-                        ${escapeHTML(
-                            product.category
-                        )}
-                    </span>
+    if (!product) {
 
-                </div>
+        return;
+
+    }
 
 
-                <strong
-                    style="
-                        font-size:11px;
-                    "
-                >
-                    ${money(
-                        product.price
-                    )}
-                </strong>
-
-            `;
+    const confirmed =
+        confirm(
+            `"${product.name}" productটি delete করতে চান?`
+        );
 
 
-            box.appendChild(
-                row
-            );
+    if (
+        !confirmed
+    ) {
 
-        }
+        return;
+
+    }
+
+
+    products =
+        products.filter(
+            item =>
+                String(
+                    item.id
+                ) !==
+                String(
+                    productId
+                )
+        );
+
+
+    saveProducts();
+
+
+    renderProducts();
+
+
+    showToast(
+        "Product deleted ✓"
     );
 
 }
@@ -3785,7 +4661,7 @@ function showToast(
 
 
 /* =====================================================
-   1.33 — ADMIN LOGOUT
+   ADMIN LOGOUT
 ===================================================== */
 
 function adminLogout() {
@@ -3831,6 +4707,8 @@ document.addEventListener(
     "DOMContentLoaded",
     function () {
 
+        loadData();
+
         renderAll();
 
     }
@@ -3842,4 +4720,3 @@ document.addEventListener(
 </body>
 
 </html>
-```
