@@ -1,771 +1,642 @@
 <!DOCTYPE html>
+
 <html lang="bn">
 
 <head>
 
-    <meta charset="UTF-8">
+```
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    <title>Admin Login — Shopping Mela</title>
-
-
-    <style>
-
-        * {
-            box-sizing: border-box;
-        }
+<title>
+    Admin Login — Shopping Mela
+</title>
 
 
-        body {
+<style>
 
-            margin: 0;
-
-            min-height: 100vh;
-
-            font-family:
-                Arial,
-                "Noto Sans Bengali",
-                sans-serif;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #eef5ff,
-                    #f8fafc
-                );
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            color: #101828;
-
-            padding: 20px;
-
-        }
+    * {
+        box-sizing: border-box;
+    }
 
 
-        .login-wrapper {
+    body {
 
-            width: 100%;
+        margin: 0;
 
-            max-width: 410px;
+        min-height: 100vh;
 
-        }
+        display: flex;
 
+        align-items: center;
 
-        /* LOGO */
+        justify-content: center;
 
-        .brand {
+        padding: 20px;
 
-            text-align: center;
+        font-family:
+            Arial,
+            "Noto Sans Bengali",
+            sans-serif;
 
-            margin-bottom: 22px;
+        background:
+            linear-gradient(
+                135deg,
+                #f5f7fb,
+                #eaf2ff
+            );
 
-        }
+        color: #101828;
 
-
-        .brand-icon {
-
-            width: 55px;
-
-            height: 55px;
-
-            margin: 0 auto 10px;
-
-            border-radius: 14px;
-
-            background: #1877f2;
-
-            color: #ffffff;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-size: 26px;
-
-            box-shadow:
-                0 8px 25px
-                rgba(24,119,242,.20);
-
-        }
+    }
 
 
-        .brand h1 {
+    .login-card {
 
-            margin: 0;
+        width: 100%;
 
-            font-size: 22px;
+        max-width: 410px;
 
-            font-weight: 800;
+        background: #ffffff;
 
-        }
+        border:
+            1px solid #e4e7ec;
+
+        border-radius: 18px;
+
+        padding: 30px;
+
+        box-shadow:
+            0 15px 45px
+            rgba(16,24,40,.10);
+
+    }
 
 
-        .brand p {
+    .logo {
 
-            margin: 6px 0 0;
+        width: 58px;
 
-            color: #667085;
+        height: 58px;
 
-            font-size: 10px;
+        margin: 0 auto 16px;
 
-        }
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        border-radius: 15px;
+
+        background: #1877f2;
+
+        color: #ffffff;
+
+        font-size: 27px;
+
+        box-shadow:
+            0 7px 18px
+            rgba(24,119,242,.22);
+
+    }
 
 
-        /* CARD */
+    h1 {
+
+        margin: 0;
+
+        text-align: center;
+
+        font-size: 23px;
+
+    }
+
+
+    .subtitle {
+
+        margin:
+            8px 0 24px;
+
+        text-align: center;
+
+        color: #667085;
+
+        font-size: 11px;
+
+        line-height: 1.6;
+
+    }
+
+
+    .admin-badge {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        gap: 6px;
+
+        margin-bottom: 20px;
+
+        color: #1877f2;
+
+        font-size: 9px;
+
+        font-weight: 800;
+
+    }
+
+
+    .verified {
+
+        width: 15px;
+
+        height: 15px;
+
+        border-radius: 50%;
+
+        display: inline-flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        background: #1877f2;
+
+        color: #ffffff;
+
+        font-size: 9px;
+
+    }
+
+
+    .form-group {
+
+        margin-bottom: 16px;
+
+    }
+
+
+    label {
+
+        display: block;
+
+        margin-bottom: 6px;
+
+        color: #344054;
+
+        font-size: 10px;
+
+        font-weight: 700;
+
+    }
+
+
+    .input-wrap {
+
+        position: relative;
+
+    }
+
+
+    input {
+
+        width: 100%;
+
+        padding:
+            12px;
+
+        border:
+            1px solid #d0d5dd;
+
+        border-radius: 8px;
+
+        outline: none;
+
+        font-size: 11px;
+
+        transition: .2s;
+
+    }
+
+
+    .input-wrap input {
+
+        padding-right: 42px;
+
+    }
+
+
+    input:focus {
+
+        border-color: #1877f2;
+
+        box-shadow:
+            0 0 0 3px
+            rgba(24,119,242,.10);
+
+    }
+
+
+    .toggle-password {
+
+        position: absolute;
+
+        top: 50%;
+
+        right: 7px;
+
+        transform:
+            translateY(-50%);
+
+        width: 31px;
+
+        height: 31px;
+
+        border: 0;
+
+        background: transparent;
+
+        cursor: pointer;
+
+        font-size: 15px;
+
+    }
+
+
+    .login-btn {
+
+        width: 100%;
+
+        border: 0;
+
+        border-radius: 8px;
+
+        padding: 12px;
+
+        background: #1877f2;
+
+        color: #ffffff;
+
+        cursor: pointer;
+
+        font-size: 11px;
+
+        font-weight: 800;
+
+        transition: .2s;
+
+    }
+
+
+    .login-btn:hover {
+
+        background: #1265d1;
+
+    }
+
+
+    .login-btn:disabled {
+
+        opacity: .65;
+
+        cursor: not-allowed;
+
+    }
+
+
+    .forgot-row {
+
+        display: flex;
+
+        justify-content: flex-end;
+
+        margin-top: 9px;
+
+        margin-bottom: 17px;
+
+    }
+
+
+    .forgot-link {
+
+        border: 0;
+
+        padding: 0;
+
+        background: transparent;
+
+        color: #1877f2;
+
+        cursor: pointer;
+
+        font-size: 9px;
+
+        font-weight: 700;
+
+        text-decoration: none;
+
+    }
+
+
+    .forgot-link:hover {
+
+        text-decoration: underline;
+
+    }
+
+
+    .message {
+
+        display: none;
+
+        margin-bottom: 15px;
+
+        padding: 11px;
+
+        border-radius: 8px;
+
+        font-size: 10px;
+
+        line-height: 1.5;
+
+    }
+
+
+    .message.show {
+
+        display: block;
+
+    }
+
+
+    .message.error {
+
+        background: #fef3f2;
+
+        color: #b42318;
+
+    }
+
+
+    .message.success {
+
+        background: #ecfdf3;
+
+        color: #027a48;
+
+    }
+
+
+    .message.info {
+
+        background: #eff8ff;
+
+        color: #175cd3;
+
+    }
+
+
+    .security {
+
+        margin-top: 20px;
+
+        padding-top: 18px;
+
+        border-top:
+            1px solid #eaecf0;
+
+        text-align: center;
+
+        color: #98a2b3;
+
+        font-size: 8px;
+
+        line-height: 1.6;
+
+    }
+
+
+    .back-site {
+
+        display: block;
+
+        margin-top: 15px;
+
+        text-align: center;
+
+        color: #667085;
+
+        text-decoration: none;
+
+        font-size: 9px;
+
+    }
+
+
+    .back-site:hover {
+
+        color: #1877f2;
+
+    }
+
+
+    @media (max-width: 480px) {
 
         .login-card {
 
-            background: #ffffff;
-
-            border:
-                1px solid #e4e7ec;
-
-            border-radius: 16px;
-
-            padding: 28px;
-
-            box-shadow:
-                0 15px 45px
-                rgba(16,24,40,.08);
+            padding: 23px;
 
         }
 
 
-        .login-title {
+        h1 {
 
-            margin-bottom: 22px;
-
-        }
-
-
-        .login-title h2 {
-
-            margin: 0;
-
-            font-size: 18px;
+            font-size: 20px;
 
         }
 
+    }
 
-        .login-title p {
-
-            margin: 6px 0 0;
-
-            color: #98a2b3;
-
-            font-size: 9px;
-
-        }
-
-
-        /* FORM */
-
-        .form-group {
-
-            margin-bottom: 16px;
-
-        }
-
-
-        .form-group label {
-
-            display: block;
-
-            margin-bottom: 6px;
-
-            color: #344054;
-
-            font-size: 9px;
-
-            font-weight: 700;
-
-        }
-
-
-        .input-wrap {
-
-            position: relative;
-
-        }
-
-
-        .input-icon {
-
-            position: absolute;
-
-            left: 12px;
-
-            top: 50%;
-
-            transform:
-                translateY(-50%);
-
-            font-size: 14px;
-
-            opacity: .65;
-
-        }
-
-
-        .form-group input {
-
-            width: 100%;
-
-            height: 43px;
-
-            padding:
-                0 40px;
-
-            border:
-                1px solid #d0d5dd;
-
-            border-radius: 8px;
-
-            outline: none;
-
-            font-size: 11px;
-
-            color: #101828;
-
-            transition: .2s;
-
-        }
-
-
-        .form-group input:focus {
-
-            border-color: #1877f2;
-
-            box-shadow:
-                0 0 0 3px
-                rgba(24,119,242,.10);
-
-        }
-
-
-        .password-toggle {
-
-            position: absolute;
-
-            right: 11px;
-
-            top: 50%;
-
-            transform:
-                translateY(-50%);
-
-            border: 0;
-
-            background: transparent;
-
-            cursor: pointer;
-
-            font-size: 14px;
-
-            opacity: .65;
-
-        }
-
-
-        /* REMEMBER */
-
-        .login-options {
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            margin-bottom: 18px;
-
-        }
-
-
-        .remember {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 6px;
-
-            color: #667085;
-
-            font-size: 9px;
-
-        }
-
-
-        .remember input {
-
-            accent-color: #1877f2;
-
-        }
-
-
-        /* BUTTON */
-
-        .login-btn {
-
-            width: 100%;
-
-            height: 44px;
-
-            border: 0;
-
-            border-radius: 8px;
-
-            background: #1877f2;
-
-            color: #ffffff;
-
-            cursor: pointer;
-
-            font-size: 11px;
-
-            font-weight: 800;
-
-            transition: .2s;
-
-        }
-
-
-        .login-btn:hover {
-
-            background: #0f6ae8;
-
-        }
-
-
-        .login-btn:active {
-
-            transform: scale(.99);
-
-        }
-
-
-        .login-btn.loading {
-
-            opacity: .7;
-
-            pointer-events: none;
-
-        }
-
-
-        /* ERROR */
-
-        .error-box {
-
-            display: none;
-
-            margin-bottom: 15px;
-
-            padding: 10px;
-
-            border-radius: 7px;
-
-            background: #fef3f2;
-
-            border:
-                1px solid #fecdca;
-
-            color: #b42318;
-
-            font-size: 9px;
-
-            line-height: 1.5;
-
-        }
-
-
-        .error-box.show {
-
-            display: block;
-
-        }
-
-
-        /* SUCCESS */
-
-        .success-box {
-
-            display: none;
-
-            margin-bottom: 15px;
-
-            padding: 10px;
-
-            border-radius: 7px;
-
-            background: #ecfdf3;
-
-            border:
-                1px solid #abefc6;
-
-            color: #067647;
-
-            font-size: 9px;
-
-            line-height: 1.5;
-
-        }
-
-
-        .success-box.show {
-
-            display: block;
-
-        }
-
-
-        /* BACK */
-
-        .back-site {
-
-            display: block;
-
-            text-align: center;
-
-            margin-top: 20px;
-
-            color: #667085;
-
-            text-decoration: none;
-
-            font-size: 9px;
-
-        }
-
-
-        .back-site:hover {
-
-            color: #1877f2;
-
-        }
-
-
-        /* SECURITY */
-
-        .security-note {
-
-            margin-top: 18px;
-
-            padding: 10px;
-
-            border-radius: 8px;
-
-            background: #f9fafb;
-
-            color: #98a2b3;
-
-            text-align: center;
-
-            font-size: 8px;
-
-            line-height: 1.5;
-
-        }
-
-
-        /* FOOTER */
-
-        .footer {
-
-            text-align: center;
-
-            margin-top: 20px;
-
-            color: #98a2b3;
-
-            font-size: 8px;
-
-        }
-
-
-        /* MOBILE */
-
-        @media (max-width: 480px) {
-
-            body {
-
-                padding: 14px;
-
-            }
-
-
-            .login-card {
-
-                padding: 22px;
-
-            }
-
-
-            .brand h1 {
-
-                font-size: 20px;
-
-            }
-
-        }
-
-    </style>
+</style>
+```
 
 </head>
 
-
 <body>
 
+<div class="login-card">
 
-<div class="login-wrapper">
+```
+<div class="logo">
+    🛍️
+</div>
 
 
-    <!-- BRAND -->
+<h1>
+    Admin Login
+</h1>
 
-    <div class="brand">
 
-        <div class="brand-icon">
-            🛍️
-        </div>
+<p class="subtitle">
 
-        <h1>
-            Shopping Mela
-        </h1>
+    Shopping Mela Admin Dashboard-এ
+    প্রবেশ করতে Login করুন।
 
-        <p>
-            Admin Management System
-        </p>
+</p>
 
-    </div>
 
+<div class="admin-badge">
 
+    <span class="verified">
+        ✓
+    </span>
 
-    <!-- LOGIN CARD -->
-
-    <div class="login-card">
-
-
-        <div class="login-title">
-
-            <h2>
-                Admin Login
-            </h2>
-
-            <p>
-                Continue to your admin dashboard
-            </p>
-
-        </div>
-
-
-
-        <!-- ERROR -->
-
-        <div
-            class="error-box"
-            id="errorBox"
-        >
-        </div>
-
-
-
-        <!-- SUCCESS -->
-
-        <div
-            class="success-box"
-            id="successBox"
-        >
-            Login successful। Dashboard
-            খুলছে...
-        </div>
-
-
-
-        <!-- FORM -->
-
-        <form
-            id="loginForm"
-            autocomplete="off"
-        >
-
-
-            <!-- USERNAME -->
-
-            <div class="form-group">
-
-                <label>
-                    Admin Username
-                </label>
-
-
-                <div class="input-wrap">
-
-                    <span class="input-icon">
-                        👤
-                    </span>
-
-                    <input
-                        type="text"
-                        id="username"
-                        placeholder="Enter admin username"
-                        autocomplete="username"
-                        required
-                    >
-
-                </div>
-
-            </div>
-
-
-
-            <!-- PASSWORD -->
-
-            <div class="form-group">
-
-                <label>
-                    Password
-                </label>
-
-
-                <div class="input-wrap">
-
-                    <span class="input-icon">
-                        🔒
-                    </span>
-
-
-                    <input
-                        type="password"
-                        id="password"
-                        placeholder="Enter password"
-                        autocomplete="current-password"
-                        required
-                    >
-
-
-                    <button
-                        type="button"
-                        class="password-toggle"
-                        id="togglePassword"
-                        aria-label="Show password"
-                    >
-                        👁️
-                    </button>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- OPTIONS -->
-
-            <div class="login-options">
-
-                <label class="remember">
-
-                    <input
-                        type="checkbox"
-                        id="rememberMe"
-                    >
-
-                    Remember me
-
-                </label>
-
-            </div>
-
-
-
-            <!-- LOGIN -->
-
-            <button
-                type="submit"
-                class="login-btn"
-                id="loginBtn"
-            >
-                Login to Dashboard
-            </button>
-
-
-        </form>
-
-
-
-        <!-- SECURITY -->
-
-        <div class="security-note">
-
-            🔐 Admin area protected by
-            Shopping Mela authentication.
-
-        </div>
-
-
-    </div>
-
-
-
-    <!-- BACK -->
-
-    <a
-        href="index.html"
-        class="back-site"
-    >
-        ← Back to Shopping Mela
-    </a>
-
-
-    <div class="footer">
-
-        © 2026 Shopping Mela.
-        Admin Panel.
-
-    </div>
-
+    Verified Admin Access
 
 </div>
 
 
+<div
+    class="message"
+    id="message"
+></div>
+
+
+<form
+    id="loginForm"
+    autocomplete="on"
+>
+
+
+    <div class="form-group">
+
+        <label for="username">
+            Username
+        </label>
+
+        <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Admin username"
+            autocomplete="username"
+            required
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="password">
+            Password
+        </label>
+
+
+        <div class="input-wrap">
+
+            <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Admin password"
+                autocomplete="current-password"
+                required
+            >
+
+
+            <button
+                type="button"
+                class="toggle-password"
+                id="togglePassword"
+                aria-label="Show password"
+            >
+                👁️
+            </button>
+
+        </div>
+
+
+        <div class="forgot-row">
+
+            <a
+                href="admin-recovery.html"
+                class="forgot-link"
+            >
+                Forgot Password?
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <button
+        type="submit"
+        class="login-btn"
+        id="loginBtn"
+    >
+        🔐 Login to Admin
+    </button>
+
+
+</form>
+
+
+<div class="security">
+
+    🔒 আপনার Admin panel protected।
+
+    <br>
+
+    শুধুমাত্র authorized administrator
+    access করার জন্য এই login system।
+
+</div>
+
+
+<a
+    href="index.html"
+    class="back-site"
+>
+    ← Back to Shopping Mela
+</a>
+```
+
+</div>
 
 <script>
 
 
 /* =====================================================
-   ADMIN LOGIN CONFIG
+   1.41.3 — ADMIN LOGIN
 ===================================================== */
 
+
 /*
-   DEMO LOGIN
+   Default credentials:
 
-   Username:
-   admin
+   Username: admin
+   Password: 123456
 
-   Password:
-   123456
-
-   পরে চাইলে এগুলো আপনার নিজের
-   username/password দিয়ে পরিবর্তন করবেন।
+   Password reset হলে localStorage-এর
+   updated password ব্যবহার হবে।
 */
 
 
-const ADMIN_USERNAME =
+const DEFAULT_USERNAME =
     "admin";
 
 
-const ADMIN_PASSWORD =
+const DEFAULT_PASSWORD =
     "123456";
 
 
@@ -792,31 +663,19 @@ const passwordInput =
     );
 
 
-const rememberMe =
-    document.getElementById(
-        "rememberMe"
-    );
-
-
 const loginBtn =
     document.getElementById(
         "loginBtn"
     );
 
 
-const errorBox =
+const messageBox =
     document.getElementById(
-        "errorBox"
+        "message"
     );
 
 
-const successBox =
-    document.getElementById(
-        "successBox"
-    );
-
-
-const togglePassword =
+const togglePasswordBtn =
     document.getElementById(
         "togglePassword"
     );
@@ -824,12 +683,48 @@ const togglePassword =
 
 
 /* =====================================================
-   PASSWORD SHOW / HIDE
+   SHOW MESSAGE
 ===================================================== */
 
-togglePassword.addEventListener(
+function showMessage(
+    text,
+    type
+) {
+
+    messageBox.textContent =
+        text;
+
+    messageBox.className =
+        "message show " +
+        type;
+
+}
+
+
+
+/* =====================================================
+   HIDE MESSAGE
+===================================================== */
+
+function hideMessage() {
+
+    messageBox.textContent =
+        "";
+
+    messageBox.className =
+        "message";
+
+}
+
+
+
+/* =====================================================
+   PASSWORD TOGGLE
+===================================================== */
+
+togglePasswordBtn.addEventListener(
     "click",
-    function () {
+    function() {
 
         if (
             passwordInput.type ===
@@ -839,46 +734,27 @@ togglePassword.addEventListener(
             passwordInput.type =
                 "text";
 
-            togglePassword.textContent =
+            this.textContent =
                 "🙈";
+
+            this.setAttribute(
+                "aria-label",
+                "Hide password"
+            );
 
         } else {
 
             passwordInput.type =
                 "password";
 
-            togglePassword.textContent =
+            this.textContent =
                 "👁️";
 
-        }
-
-    }
-);
-
-
-
-/* =====================================================
-   REMEMBERED USERNAME
-===================================================== */
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-
-        const savedUsername =
-            localStorage.getItem(
-                "shoppingMelaAdminUsername"
+            this.setAttribute(
+                "aria-label",
+                "Show password"
             );
 
-
-        if (savedUsername) {
-
-            usernameInput.value =
-                savedUsername;
-
-            rememberMe.checked =
-                true;
-
         }
 
     }
@@ -887,25 +763,39 @@ document.addEventListener(
 
 
 /* =====================================================
-   ERROR
+   GET SAVED PASSWORD
 ===================================================== */
 
-function showError(
-    message
-) {
+function getAdminPassword() {
 
-    successBox.classList.remove(
-        "show"
-    );
-
-
-    errorBox.textContent =
-        message;
+    const savedPassword =
+        localStorage.getItem(
+            "shoppingMelaAdminPassword"
+        );
 
 
-    errorBox.classList.add(
-        "show"
-    );
+    /*
+       যদি নতুন password save করা থাকে,
+       সেটি ব্যবহার হবে।
+    */
+
+
+    if (
+        savedPassword !== null &&
+        savedPassword !== ""
+    ) {
+
+        return savedPassword;
+
+    }
+
+
+    /*
+       প্রথমবার login-এর জন্য
+       default password।
+    */
+
+    return DEFAULT_PASSWORD;
 
 }
 
@@ -917,14 +807,12 @@ function showError(
 
 loginForm.addEventListener(
     "submit",
-    function (event) {
+    function(event) {
 
         event.preventDefault();
 
 
-        errorBox.classList.remove(
-            "show"
-        );
+        hideMessage();
 
 
         const username =
@@ -935,10 +823,12 @@ loginForm.addEventListener(
             passwordInput.value;
 
 
+
         if (!username) {
 
-            showError(
-                "Admin username দিন।"
+            showMessage(
+                "Username দিন।",
+                "error"
             );
 
             usernameInput.focus();
@@ -950,8 +840,9 @@ loginForm.addEventListener(
 
         if (!password) {
 
-            showError(
-                "Password দিন।"
+            showMessage(
+                "Password দিন।",
+                "error"
             );
 
             passwordInput.focus();
@@ -961,132 +852,156 @@ loginForm.addEventListener(
         }
 
 
-        loginBtn.classList.add(
-            "loading"
-        );
 
+        const savedPassword =
+            getAdminPassword();
 
-        loginBtn.textContent =
-            "Checking...";
 
 
         /*
-            ছোট delay,
-            যাতে login process natural লাগে।
+           Username + password check
         */
 
+        if (
+            username !==
+            DEFAULT_USERNAME
+        ) {
+
+            showMessage(
+                "Username অথবা password সঠিক নয়।",
+                "error"
+            );
+
+            passwordInput.value =
+                "";
+
+            return;
+
+        }
+
+
+
+        if (
+            password !==
+            savedPassword
+        ) {
+
+            showMessage(
+                "Username অথবা password সঠিক নয়।",
+                "error"
+            );
+
+            passwordInput.value =
+                "";
+
+            passwordInput.focus();
+
+            return;
+
+        }
+
+
+
+        /*
+           Login successful
+        */
+
+        sessionStorage.setItem(
+            "shoppingMelaAdminLoggedIn",
+            "true"
+        );
+
+
+        sessionStorage.setItem(
+            "shoppingMelaAdminLoginTime",
+            new Date().toISOString()
+        );
+
+
+
+        loginBtn.disabled =
+            true;
+
+
+        loginBtn.textContent =
+            "✓ Login Successful";
+
+
+        showMessage(
+            "Admin login সফল হয়েছে। Dashboard-এ নেওয়া হচ্ছে...",
+            "success"
+        );
+
+
+
         setTimeout(
-            function () {
+            function() {
 
-                if (
-                    username ===
-                        ADMIN_USERNAME
-                    &&
-                    password ===
-                        ADMIN_PASSWORD
-                ) {
-
-                    /*
-                       Remember username
-                    */
-
-                    if (
-                        rememberMe.checked
-                    ) {
-
-                        localStorage.setItem(
-                            "shoppingMelaAdminUsername",
-                            username
-                        );
-
-                    } else {
-
-                        localStorage.removeItem(
-                            "shoppingMelaAdminUsername"
-                        );
-
-                    }
-
-
-                    /*
-                       Admin session
-                    */
-
-                    sessionStorage.setItem(
-                        "shoppingMelaAdminLoggedIn",
-                        "true"
-                    );
-
-
-                    sessionStorage.setItem(
-                        "shoppingMelaAdminLoginTime",
-                        Date.now()
-                    );
-
-
-                    /*
-                       Success
-                    */
-
-                    successBox.classList.add(
-                        "show"
-                    );
-
-
-                    loginBtn.textContent =
-                        "Login Successful ✓";
-
-
-                    /*
-                       Dashboard
-                    */
-
-                    setTimeout(
-                        function () {
-
-                            window.location.href =
-                                "admin.html";
-
-                        },
-                        700
-                    );
-
-
-                } else {
-
-                    loginBtn.classList.remove(
-                        "loading"
-                    );
-
-
-                    loginBtn.textContent =
-                        "Login to Dashboard";
-
-
-                    showError(
-                        "Username অথবা password সঠিক নয়।"
-                    );
-
-
-                    passwordInput.value =
-                        "";
-
-
-                    passwordInput.focus();
-
-                }
+                window.location.replace(
+                    "admin.html"
+                );
 
             },
-            500
+            700
         );
 
     }
 );
 
-</script>
 
+
+/* =====================================================
+   ALREADY LOGGED IN
+===================================================== */
+
+const alreadyLoggedIn =
+    sessionStorage.getItem(
+        "shoppingMelaAdminLoggedIn"
+    );
+
+
+if (
+    alreadyLoggedIn ===
+    "true"
+) {
+
+    showMessage(
+        "আপনি ইতিমধ্যে Admin হিসেবে login করা আছেন।",
+        "info"
+    );
+
+
+    /*
+       চাইলে এখানে সরাসরি dashboard-এ
+       পাঠানো যায়।
+    */
+
+}
+
+
+
+/* =====================================================
+   ENTER KEY SUPPORT
+===================================================== */
+
+usernameInput.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Enter"
+        ) {
+
+            passwordInput.focus();
+
+        }
+
+    }
+);
+
+
+</script>
 
 </body>
 
 </html>
-```
