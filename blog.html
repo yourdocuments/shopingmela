@@ -1,0 +1,2155 @@
+<!DOCTYPE html>
+
+<html lang="bn">
+
+<head>
+
+```
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>Shopping Mela — Blog</title>
+
+<meta
+    name="description"
+    content="Shopping Mela Blog — Local business, shopping tips, community stories and local brands."
+>
+
+<link
+    rel="stylesheet"
+    href="style.css"
+>
+
+<style>
+
+    /* =====================================================
+       BLOG PAGE ONLY
+    ===================================================== */
+
+    .blog-page {
+        padding: 45px 0 70px;
+    }
+
+
+    .blog-hero {
+        background:
+            linear-gradient(
+                135deg,
+                #111827,
+                #263244
+            );
+
+        color: #ffffff;
+
+        border-radius: 22px;
+
+        padding: 55px;
+
+        margin-bottom: 45px;
+
+        position: relative;
+
+        overflow: hidden;
+    }
+
+
+    .blog-hero::after {
+        content: "✍️";
+
+        position: absolute;
+
+        right: 8%;
+        top: 50%;
+
+        transform: translateY(-50%);
+
+        font-size: 150px;
+
+        opacity: 0.08;
+    }
+
+
+    .blog-hero-content {
+        position: relative;
+
+        z-index: 2;
+
+        max-width: 680px;
+    }
+
+
+    .blog-hero-label {
+        display: inline-block;
+
+        color: #ff9a4d;
+
+        font-size: 12px;
+
+        font-weight: 900;
+
+        letter-spacing: 1.5px;
+
+        margin-bottom: 10px;
+    }
+
+
+    .blog-hero h1 {
+        font-size: clamp(32px, 5vw, 50px);
+
+        line-height: 1.1;
+
+        margin-bottom: 14px;
+    }
+
+
+    .blog-hero p {
+        color: #c5ccd6;
+
+        font-size: 15px;
+
+        max-width: 620px;
+
+        margin-bottom: 24px;
+    }
+
+
+    .write-post-btn {
+        border: 0;
+
+        background: #ff6b00;
+
+        color: #ffffff;
+
+        padding: 13px 20px;
+
+        border-radius: 10px;
+
+        font-weight: 900;
+
+        box-shadow:
+            0 8px 20px
+            rgba(255,107,0,0.25);
+
+        transition: 0.2s ease;
+    }
+
+
+    .write-post-btn:hover {
+        background: #e85e00;
+
+        transform: translateY(-2px);
+    }
+
+
+    /* =====================================================
+       BLOG TOOLBAR
+    ===================================================== */
+
+    .blog-toolbar {
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 15px;
+
+        margin-bottom: 25px;
+    }
+
+
+    .blog-search {
+        flex: 1;
+
+        display: flex;
+
+        max-width: 500px;
+
+        border:
+            1px solid #e2e6eb;
+
+        border-radius: 10px;
+
+        overflow: hidden;
+
+        background: #ffffff;
+    }
+
+
+    .blog-search input {
+        flex: 1;
+
+        border: 0;
+
+        outline: 0;
+
+        padding: 12px 14px;
+
+        background: transparent;
+    }
+
+
+    .blog-search button {
+        width: 48px;
+
+        border: 0;
+
+        background: #ff6b00;
+
+        color: #ffffff;
+    }
+
+
+    .blog-filter {
+        display: flex;
+
+        gap: 7px;
+
+        overflow-x: auto;
+
+        scrollbar-width: none;
+    }
+
+
+    .blog-filter::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    .blog-filter button {
+        border:
+            1px solid #e1e5ea;
+
+        background: #ffffff;
+
+        color: #667085;
+
+        padding: 9px 13px;
+
+        border-radius: 8px;
+
+        font-size: 12px;
+
+        font-weight: 700;
+
+        white-space: nowrap;
+    }
+
+
+    .blog-filter button:hover,
+    .blog-filter button.active {
+        background: #ff6b00;
+
+        color: #ffffff;
+
+        border-color: #ff6b00;
+    }
+
+
+    /* =====================================================
+       POSTS
+    ===================================================== */
+
+    .blog-post-grid {
+        display: grid;
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+        gap: 20px;
+    }
+
+
+    .blog-post-card {
+        background: #ffffff;
+
+        border:
+            1px solid #e6e9ee;
+
+        border-radius: 17px;
+
+        overflow: hidden;
+
+        transition:
+            transform 0.25s ease,
+            box-shadow 0.25s ease;
+    }
+
+
+    .blog-post-card:hover {
+        transform: translateY(-5px);
+
+        box-shadow:
+            0 16px 32px
+            rgba(17,24,39,0.09);
+    }
+
+
+    .blog-post-image {
+        height: 210px;
+
+        background-size: cover;
+
+        background-position: center;
+
+        position: relative;
+    }
+
+
+    .blog-post-category {
+        position: absolute;
+
+        top: 12px;
+
+        left: 12px;
+
+        background:
+            rgba(17,24,39,0.84);
+
+        color: #ffffff;
+
+        padding: 5px 9px;
+
+        border-radius: 5px;
+
+        font-size: 9px;
+
+        font-weight: 900;
+    }
+
+
+    .blog-post-content {
+        padding: 19px;
+    }
+
+
+    .blog-post-meta {
+        display: flex;
+
+        justify-content: space-between;
+
+        gap: 10px;
+
+        color: #8a93a2;
+
+        font-size: 10px;
+
+        margin-bottom: 9px;
+    }
+
+
+    .blog-author {
+        color: #ff6b00;
+
+        font-weight: 800;
+    }
+
+
+    .blog-post-content h2 {
+        font-size: 18px;
+
+        line-height: 1.35;
+
+        margin-bottom: 9px;
+    }
+
+
+    .blog-post-content p {
+        color: #727c8b;
+
+        font-size: 12px;
+
+        margin-bottom: 15px;
+    }
+
+
+    .read-more {
+        border: 0;
+
+        background: transparent;
+
+        padding: 0;
+
+        color: #ff6b00;
+
+        font-size: 12px;
+
+        font-weight: 900;
+    }
+
+
+    .read-more:hover {
+        text-decoration: underline;
+    }
+
+
+    /* =====================================================
+       WRITE POST MODAL
+    ===================================================== */
+
+    .post-modal {
+        position: fixed;
+
+        inset: 0;
+
+        z-index: 9999;
+
+        display: none;
+
+        align-items: center;
+
+        justify-content: center;
+
+        padding: 20px;
+
+        background:
+            rgba(8,12,20,0.72);
+
+        backdrop-filter: blur(5px);
+    }
+
+
+    .post-modal.show {
+        display: flex;
+    }
+
+
+    .post-modal-box {
+        width: min(
+            650px,
+            100%
+        );
+
+        max-height: 90vh;
+
+        overflow-y: auto;
+
+        background: #ffffff;
+
+        border-radius: 18px;
+
+        padding: 28px;
+
+        box-shadow:
+            0 25px 70px
+            rgba(0,0,0,0.25);
+    }
+
+
+    .modal-header {
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 15px;
+
+        margin-bottom: 22px;
+    }
+
+
+    .modal-header h2 {
+        font-size: 24px;
+    }
+
+
+    .close-modal {
+        width: 36px;
+
+        height: 36px;
+
+        border: 0;
+
+        border-radius: 50%;
+
+        background: #f1f3f5;
+
+        color: #4b5563;
+
+        font-size: 20px;
+    }
+
+
+    .close-modal:hover {
+        background: #ff6b00;
+
+        color: #ffffff;
+    }
+
+
+    .post-form-group {
+        margin-bottom: 16px;
+    }
+
+
+    .post-form-group label {
+        display: block;
+
+        font-size: 12px;
+
+        font-weight: 800;
+
+        margin-bottom: 6px;
+
+        color: #344054;
+    }
+
+
+    .post-form-group input,
+    .post-form-group select,
+    .post-form-group textarea {
+        width: 100%;
+
+        border:
+            1px solid #dfe3e8;
+
+        border-radius: 9px;
+
+        padding: 11px 12px;
+
+        outline: 0;
+
+        background: #ffffff;
+
+        color: #172033;
+
+        font-size: 13px;
+    }
+
+
+    .post-form-group input:focus,
+    .post-form-group select:focus,
+    .post-form-group textarea:focus {
+        border-color: #ff6b00;
+
+        box-shadow:
+            0 0 0 3px
+            rgba(255,107,0,0.08);
+    }
+
+
+    .post-form-group textarea {
+        min-height: 150px;
+
+        resize: vertical;
+    }
+
+
+    .image-preview {
+        width: 100%;
+
+        height: 180px;
+
+        border:
+            1px dashed #d7dce2;
+
+        border-radius: 10px;
+
+        display: none;
+
+        align-items: center;
+
+        justify-content: center;
+
+        overflow: hidden;
+
+        margin-top: 10px;
+
+        background: #f7f8fa;
+    }
+
+
+    .image-preview.show {
+        display: flex;
+    }
+
+
+    .image-preview img {
+        width: 100%;
+
+        height: 100%;
+
+        object-fit: cover;
+    }
+
+
+    .form-actions {
+        display: flex;
+
+        justify-content: flex-end;
+
+        gap: 10px;
+
+        margin-top: 22px;
+    }
+
+
+    .cancel-btn {
+        border: 1px solid #dfe3e8;
+
+        background: #ffffff;
+
+        color: #475467;
+
+        padding: 11px 18px;
+
+        border-radius: 9px;
+
+        font-weight: 800;
+    }
+
+
+    .publish-btn {
+        border: 0;
+
+        background: #ff6b00;
+
+        color: #ffffff;
+
+        padding: 11px 20px;
+
+        border-radius: 9px;
+
+        font-weight: 900;
+    }
+
+
+    .publish-btn:hover {
+        background: #e85e00;
+    }
+
+
+    /* =====================================================
+       EMPTY RESULT
+    ===================================================== */
+
+    .empty-blog {
+        display: none;
+
+        text-align: center;
+
+        background: #ffffff;
+
+        border:
+            1px solid #e6e9ee;
+
+        border-radius: 15px;
+
+        padding: 45px 20px;
+
+        color: #7b8492;
+    }
+
+
+    .empty-blog.show {
+        display: block;
+    }
+
+
+    .empty-blog-icon {
+        font-size: 42px;
+
+        margin-bottom: 10px;
+    }
+
+
+    .empty-blog h3 {
+        color: #344054;
+
+        margin-bottom: 5px;
+    }
+
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+
+    @media (max-width: 900px) {
+
+        .blog-post-grid {
+            grid-template-columns:
+                repeat(2, 1fr);
+        }
+
+        .blog-toolbar {
+            flex-direction: column;
+
+            align-items: stretch;
+        }
+
+        .blog-search {
+            max-width: none;
+        }
+
+    }
+
+
+    @media (max-width: 600px) {
+
+        .blog-page {
+            padding-top: 25px;
+        }
+
+
+        .blog-hero {
+            padding: 35px 25px;
+
+            border-radius: 17px;
+        }
+
+
+        .blog-hero h1 {
+            font-size: 32px;
+        }
+
+
+        .blog-hero p {
+            font-size: 13px;
+        }
+
+
+        .blog-hero::after {
+            font-size: 100px;
+
+            right: 5%;
+        }
+
+
+        .blog-post-grid {
+            grid-template-columns: 1fr;
+        }
+
+
+        .post-modal-box {
+            padding: 22px;
+
+            border-radius: 15px;
+        }
+
+
+        .form-actions {
+            flex-direction: column;
+        }
+
+
+        .cancel-btn,
+        .publish-btn {
+            width: 100%;
+        }
+
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+<!-- =====================================================
+     TOP BAR
+====================================================== -->
+
+<div class="top-bar">
+
+```
+🛍️ <span>Shopping Mela</span>
+— Local Brands & Community Platform
+```
+
+</div>
+
+<!-- =====================================================
+     HEADER
+====================================================== -->
+
+<header class="header">
+
+```
+<div class="container">
+
+    <div class="header-main">
+
+        <a
+            href="index.html"
+            class="logo"
+        >
+
+            <div class="logo-icon">
+                🛍️
+            </div>
+
+            <span>
+                Shopping Mela
+            </span>
+
+        </a>
+
+
+        <div class="header-search">
+
+            <input
+                type="search"
+                id="headerSearch"
+                placeholder="Blog বা topic খুঁজুন..."
+            >
+
+            <button
+                type="button"
+                id="headerSearchBtn"
+            >
+                🔍
+            </button>
+
+        </div>
+
+
+        <div class="header-actions">
+
+            <button
+                class="header-action"
+                type="button"
+                onclick="showBlogToast('Wishlist শীঘ্রই আসছে ❤️')"
+            >
+
+                <span class="header-action-icon">
+                    ♡
+                </span>
+
+                <span>
+                    Wishlist
+                </span>
+
+            </button>
+
+
+            <button
+                class="header-action"
+                type="button"
+                onclick="showBlogToast('Cart শীঘ্রই আসছে 🛒')"
+            >
+
+                <span class="header-action-icon">
+                    🛒
+                </span>
+
+                <span>
+                    Cart
+                </span>
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <nav class="navigation">
+
+        <div class="navigation-inner">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="index.html#categories">
+                Categories
+            </a>
+
+            <a href="index.html#brands">
+                Local Brands
+            </a>
+
+            <a href="index.html#products">
+                Products
+            </a>
+
+            <a href="index.html#offers">
+                Offers
+            </a>
+
+            <a
+                href="blog.html"
+                class="active"
+            >
+                Blog
+            </a>
+
+            <a href="index.html#advertise">
+                Advertise With Us
+            </a>
+
+        </div>
+
+    </nav>
+
+</div>
+```
+
+</header>
+
+<!-- =====================================================
+     MAIN
+====================================================== -->
+
+<main class="blog-page">
+
+```
+<div class="container">
+
+
+    <!-- BLOG HERO -->
+
+    <section class="blog-hero">
+
+        <div class="blog-hero-content">
+
+            <span class="blog-hero-label">
+                ✍️ SHOPPING MELA COMMUNITY
+            </span>
+
+            <h1>
+                আপনার গল্প,
+                আপনার Post
+            </h1>
+
+            <p>
+                Local business, shopping tips,
+                product experience, উদ্যোক্তার গল্প
+                অথবা নিজের এলাকার যেকোনো useful
+                information সবার সঙ্গে share করুন।
+            </p>
+
+            <button
+                class="write-post-btn"
+                id="openPostModal"
+                type="button"
+            >
+                ✍️ Write a Post
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- BLOG TOOLBAR -->
+
+    <div class="blog-toolbar">
+
+        <div class="blog-search">
+
+            <input
+                type="search"
+                id="blogSearch"
+                placeholder="Blog search করুন..."
+            >
+
+            <button
+                type="button"
+                id="blogSearchBtn"
+            >
+                🔍
+            </button>
+
+        </div>
+
+
+        <div class="blog-filter">
+
+            <button
+                class="active"
+                data-filter="All"
+                type="button"
+            >
+                All
+            </button>
+
+            <button
+                data-filter="Local Business"
+                type="button"
+            >
+                Local Business
+            </button>
+
+            <button
+                data-filter="Shopping Tips"
+                type="button"
+            >
+                Shopping Tips
+            </button>
+
+            <button
+                data-filter="Community"
+                type="button"
+            >
+                Community
+            </button>
+
+            <button
+                data-filter="Lifestyle"
+                type="button"
+            >
+                Lifestyle
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- BLOG POSTS -->
+
+    <div
+        class="blog-post-grid"
+        id="blogPostGrid"
+    >
+
+
+        <!-- POST 1 -->
+
+        <article
+            class="blog-post-card"
+            data-category="Local Business"
+            data-title="Local Brand কীভাবে নিজের Business বড় করতে পারে"
+        >
+
+            <div
+                class="blog-post-image"
+                style="
+                    background-image:
+                    url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=1000&q=85');
+                "
+            >
+
+                <span class="blog-post-category">
+                    Local Business
+                </span>
+
+            </div>
+
+
+            <div class="blog-post-content">
+
+                <div class="blog-post-meta">
+
+                    <span class="blog-author">
+                        Shopping Mela Team
+                    </span>
+
+                    <span>
+                        5 min read
+                    </span>
+
+                </div>
+
+                <h2>
+                    Local Brand কীভাবে
+                    নিজের Business বড় করতে পারে?
+                </h2>
+
+                <p>
+                    Local customers-এর কাছে
+                    আপনার business পৌঁছে দেওয়ার
+                    কিছু সহজ এবং practical উপায়।
+                </p>
+
+                <button
+                    class="read-more"
+                    type="button"
+                    onclick="showBlogToast('Full article শীঘ্রই আসছে!')"
+                >
+                    পুরো Post পড়ুন →
+                </button>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- POST 2 -->
+
+        <article
+            class="blog-post-card"
+            data-category="Shopping Tips"
+            data-title="Online Shopping করার সময় কী কী বিষয় দেখবেন"
+        >
+
+            <div
+                class="blog-post-image"
+                style="
+                    background-image:
+                    url('https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1000&q=85');
+                "
+            >
+
+                <span class="blog-post-category">
+                    Shopping Tips
+                </span>
+
+            </div>
+
+
+            <div class="blog-post-content">
+
+                <div class="blog-post-meta">
+
+                    <span class="blog-author">
+                        Shopping Mela Team
+                    </span>
+
+                    <span>
+                        4 min read
+                    </span>
+
+                </div>
+
+                <h2>
+                    Online Shopping করার সময়
+                    কী কী বিষয় দেখবেন?
+                </h2>
+
+                <p>
+                    ভালো seller, product information,
+                    price এবং delivery সম্পর্কে
+                    কীভাবে সচেতন থাকবেন।
+                </p>
+
+                <button
+                    class="read-more"
+                    type="button"
+                    onclick="showBlogToast('Full article শীঘ্রই আসছে!')"
+                >
+                    পুরো Post পড়ুন →
+                </button>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- POST 3 -->
+
+        <article
+            class="blog-post-card"
+            data-category="Community"
+            data-title="Local Business কেন আমাদের জন্য গুরুত্বপূর্ণ"
+        >
+
+            <div
+                class="blog-post-image"
+                style="
+                    background-image:
+                    url('https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=1000&q=85');
+                "
+            >
+
+                <span class="blog-post-category">
+                    Community
+                </span>
+
+            </div>
+
+
+            <div class="blog-post-content">
+
+                <div class="blog-post-meta">
+
+                    <span class="blog-author">
+                        Community
+                    </span>
+
+                    <span>
+                        3 min read
+                    </span>
+
+                </div>
+
+                <h2>
+                    Local Business কেন
+                    আমাদের জন্য গুরুত্বপূর্ণ?
+                </h2>
+
+                <p>
+                    নিজের এলাকার উদ্যোক্তা,
+                    ছোট business এবং local brand
+                    support করার গুরুত্ব।
+                </p>
+
+                <button
+                    class="read-more"
+                    type="button"
+                    onclick="showBlogToast('Full article শীঘ্রই আসছে!')"
+                >
+                    পুরো Post পড়ুন →
+                </button>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- POST 4 -->
+
+        <article
+            class="blog-post-card"
+            data-category="Lifestyle"
+            data-title="Local products কেনার কিছু সুবিধা"
+        >
+
+            <div
+                class="blog-post-image"
+                style="
+                    background-image:
+                    url('https://images.unsplash.com/photo-1472851294608-062f824d29cc?auto=format&fit=crop&w=1000&q=85');
+                "
+            >
+
+                <span class="blog-post-category">
+                    Lifestyle
+                </span>
+
+            </div>
+
+
+            <div class="blog-post-content">
+
+                <div class="blog-post-meta">
+
+                    <span class="blog-author">
+                        Shopping Mela Team
+                    </span>
+
+                    <span>
+                        4 min read
+                    </span>
+
+                </div>
+
+                <h2>
+                    Local Products কেনার
+                    কিছু গুরুত্বপূর্ণ সুবিধা
+                </h2>
+
+                <p>
+                    Local products ব্যবহার করলে
+                    customer এবং local entrepreneur
+                    দুজনেরই কীভাবে উপকার হতে পারে।
+                </p>
+
+                <button
+                    class="read-more"
+                    type="button"
+                    onclick="showBlogToast('Full article শীঘ্রই আসছে!')"
+                >
+                    পুরো Post পড়ুন →
+                </button>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+
+
+    <!-- EMPTY RESULT -->
+
+    <div
+        class="empty-blog"
+        id="emptyBlog"
+    >
+
+        <div class="empty-blog-icon">
+            🔎
+        </div>
+
+        <h3>
+            কোনো Blog পাওয়া যায়নি
+        </h3>
+
+        <p>
+            অন্য keyword বা category দিয়ে
+            আবার চেষ্টা করুন।
+        </p>
+
+    </div>
+
+</div>
+```
+
+</main>
+
+<!-- =====================================================
+     WRITE POST MODAL
+====================================================== -->
+
+<div
+    class="post-modal"
+    id="postModal"
+>
+
+```
+<div class="post-modal-box">
+
+
+    <div class="modal-header">
+
+        <h2>
+            ✍️ Write a Post
+        </h2>
+
+        <button
+            class="close-modal"
+            id="closePostModal"
+            type="button"
+            aria-label="Close"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+
+    <form id="postForm">
+
+
+        <div class="post-form-group">
+
+            <label for="postAuthor">
+                আপনার নাম
+            </label>
+
+            <input
+                type="text"
+                id="postAuthor"
+                placeholder="আপনার নাম লিখুন"
+                required
+            >
+
+        </div>
+
+
+
+        <div class="post-form-group">
+
+            <label for="postTitle">
+                Post Title
+            </label>
+
+            <input
+                type="text"
+                id="postTitle"
+                placeholder="আপনার Post-এর title লিখুন"
+                required
+            >
+
+        </div>
+
+
+
+        <div class="post-form-group">
+
+            <label for="postCategory">
+                Category
+            </label>
+
+            <select
+                id="postCategory"
+                required
+            >
+
+                <option value="">
+                    Category নির্বাচন করুন
+                </option>
+
+                <option value="Local Business">
+                    Local Business
+                </option>
+
+                <option value="Shopping Tips">
+                    Shopping Tips
+                </option>
+
+                <option value="Community">
+                    Community
+                </option>
+
+                <option value="Lifestyle">
+                    Lifestyle
+                </option>
+
+                <option value="Others">
+                    Others
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <div class="post-form-group">
+
+            <label for="postImage">
+                Post Image
+            </label>
+
+            <input
+                type="file"
+                id="postImage"
+                accept="image/*"
+            >
+
+            <div
+                class="image-preview"
+                id="imagePreview"
+            >
+
+                <img
+                    id="previewImage"
+                    src=""
+                    alt="Image Preview"
+                >
+
+            </div>
+
+        </div>
+
+
+
+        <div class="post-form-group">
+
+            <label for="postContent">
+                আপনার Post
+            </label>
+
+            <textarea
+                id="postContent"
+                placeholder="আপনার গল্প, তথ্য বা experience লিখুন..."
+                required
+            ></textarea>
+
+        </div>
+
+
+
+        <div class="form-actions">
+
+            <button
+                type="button"
+                class="cancel-btn"
+                id="cancelPost"
+            >
+                Cancel
+            </button>
+
+            <button
+                type="submit"
+                class="publish-btn"
+            >
+                Publish Post
+            </button>
+
+        </div>
+
+
+    </form>
+
+</div>
+```
+
+</div>
+
+<!-- =====================================================
+     FOOTER
+====================================================== -->
+
+<footer class="footer">
+
+```
+<div class="container">
+
+    <div class="footer-main">
+
+
+        <div class="footer-brand">
+
+            <a
+                href="index.html"
+                class="logo"
+            >
+
+                <div class="logo-icon">
+                    🛍️
+                </div>
+
+                <span>
+                    Shopping Mela
+                </span>
+
+            </a>
+
+            <p>
+                Shopping Mela হলো local brands,
+                businesses, products এবং
+                community content-এর একটি
+                modern online platform।
+            </p>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Shopping
+            </h3>
+
+            <a href="index.html#categories">
+                Categories
+            </a>
+
+            <a href="index.html#brands">
+                Local Brands
+            </a>
+
+            <a href="index.html#products">
+                Products
+            </a>
+
+            <a href="index.html#offers">
+                Offers
+            </a>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Community
+            </h3>
+
+            <a href="blog.html">
+                Blog
+            </a>
+
+            <a href="#"
+               onclick="openPostModal(); return false;">
+                Write a Post
+            </a>
+
+            <a href="index.html#advertise">
+                Advertise
+            </a>
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                Support
+            </h3>
+
+            <a href="#">
+                About Us
+            </a>
+
+            <a href="#">
+                Contact
+            </a>
+
+            <a href="#">
+                Privacy Policy
+            </a>
+
+            <a href="#">
+                Terms
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 Shopping Mela.
+        All Rights Reserved.
+
+    </div>
+
+</div>
+```
+
+</footer>
+
+<!-- =====================================================
+     TOAST
+====================================================== -->
+
+<div
+    class="toast"
+    id="blogToast"
+>
+    Done!
+</div>
+
+<!-- =====================================================
+     BLOG PAGE JAVASCRIPT
+     Temporary functionality
+     Will move to 1.5 blog.js
+====================================================== -->
+
+<script>
+
+    /* =====================================================
+       TOAST
+    ===================================================== */
+
+    function showBlogToast(message) {
+
+        const toast =
+            document.getElementById("blogToast");
+
+        toast.textContent = message;
+
+        toast.classList.add("show");
+
+        setTimeout(() => {
+
+            toast.classList.remove("show");
+
+        }, 2500);
+
+    }
+
+
+
+    /* =====================================================
+       MODAL
+    ===================================================== */
+
+    const postModal =
+        document.getElementById("postModal");
+
+    const openPostButton =
+        document.getElementById("openPostModal");
+
+    const closePostButton =
+        document.getElementById("closePostModal");
+
+    const cancelPostButton =
+        document.getElementById("cancelPost");
+
+
+    function openPostModal() {
+
+        postModal.classList.add("show");
+
+        document.body.style.overflow = "hidden";
+
+    }
+
+
+    function closePostModal() {
+
+        postModal.classList.remove("show");
+
+        document.body.style.overflow = "";
+
+    }
+
+
+    openPostButton.addEventListener(
+        "click",
+        openPostModal
+    );
+
+
+    closePostButton.addEventListener(
+        "click",
+        closePostModal
+    );
+
+
+    cancelPostButton.addEventListener(
+        "click",
+        closePostModal
+    );
+
+
+    postModal.addEventListener(
+        "click",
+        function(event) {
+
+            if (
+                event.target === postModal
+            ) {
+
+                closePostModal();
+
+            }
+
+        }
+    );
+
+
+    document.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Escape"
+            ) {
+
+                closePostModal();
+
+            }
+
+        }
+    );
+
+
+
+    /* =====================================================
+       IMAGE PREVIEW
+    ===================================================== */
+
+    const postImage =
+        document.getElementById("postImage");
+
+    const imagePreview =
+        document.getElementById("imagePreview");
+
+    const previewImage =
+        document.getElementById("previewImage");
+
+
+    postImage.addEventListener(
+        "change",
+        function() {
+
+            const file =
+                this.files[0];
+
+            if (!file) {
+
+                imagePreview.classList.remove(
+                    "show"
+                );
+
+                previewImage.src = "";
+
+                return;
+
+            }
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function(event) {
+
+                    previewImage.src =
+                        event.target.result;
+
+                    imagePreview.classList.add(
+                        "show"
+                    );
+
+                };
+
+
+            reader.readAsDataURL(file);
+
+        }
+    );
+
+
+
+    /* =====================================================
+       BLOG FILTER
+    ===================================================== */
+
+    const filterButtons =
+        document.querySelectorAll(
+            ".blog-filter button"
+        );
+
+
+    filterButtons.forEach(
+        button => {
+
+            button.addEventListener(
+                "click",
+                function() {
+
+                    filterButtons.forEach(
+                        btn =>
+                            btn.classList.remove(
+                                "active"
+                            )
+                    );
+
+
+                    this.classList.add(
+                        "active"
+                    );
+
+
+                    const category =
+                        this.dataset.filter;
+
+
+                    filterBlogs(
+                        category,
+                        document.getElementById(
+                            "blogSearch"
+                        ).value
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+
+    /* =====================================================
+       BLOG SEARCH
+    ===================================================== */
+
+    const blogSearch =
+        document.getElementById(
+            "blogSearch"
+        );
+
+    const blogSearchButton =
+        document.getElementById(
+            "blogSearchBtn"
+        );
+
+
+    function searchBlogs() {
+
+        const activeFilter =
+            document.querySelector(
+                ".blog-filter button.active"
+            );
+
+
+        const category =
+            activeFilter
+                ? activeFilter.dataset.filter
+                : "All";
+
+
+        filterBlogs(
+            category,
+            blogSearch.value
+        );
+
+    }
+
+
+    blogSearchButton.addEventListener(
+        "click",
+        searchBlogs
+    );
+
+
+    blogSearch.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                searchBlogs();
+
+            }
+
+        }
+    );
+
+
+
+    function filterBlogs(
+        category,
+        searchText
+    ) {
+
+        const posts =
+            document.querySelectorAll(
+                ".blog-post-card"
+            );
+
+        const query =
+            searchText
+                .trim()
+                .toLowerCase();
+
+
+        let found = false;
+
+
+        posts.forEach(
+            post => {
+
+                const postCategory =
+                    post.dataset.category
+                        .toLowerCase();
+
+                const postTitle =
+                    post.dataset.title
+                        .toLowerCase();
+
+
+                const categoryMatch =
+                    category === "All"
+                    ||
+                    postCategory ===
+                        category.toLowerCase();
+
+
+                const searchMatch =
+                    !query
+                    ||
+                    postTitle.includes(query)
+                    ||
+                    postCategory.includes(query);
+
+
+                if (
+                    categoryMatch
+                    &&
+                    searchMatch
+                ) {
+
+                    post.style.display = "";
+
+                    found = true;
+
+                } else {
+
+                    post.style.display = "none";
+
+                }
+
+            }
+        );
+
+
+        const emptyBlog =
+            document.getElementById(
+                "emptyBlog"
+            );
+
+
+        if (found) {
+
+            emptyBlog.classList.remove(
+                "show"
+            );
+
+        } else {
+
+            emptyBlog.classList.add(
+                "show"
+            );
+
+        }
+
+    }
+
+
+
+    /* =====================================================
+       PUBLISH POST — DEMO
+    ===================================================== */
+
+    const postForm =
+        document.getElementById(
+            "postForm"
+        );
+
+
+    postForm.addEventListener(
+        "submit",
+        function(event) {
+
+            event.preventDefault();
+
+
+            const author =
+                document.getElementById(
+                    "postAuthor"
+                ).value.trim();
+
+
+            const title =
+                document.getElementById(
+                    "postTitle"
+                ).value.trim();
+
+
+            const category =
+                document.getElementById(
+                    "postCategory"
+                ).value;
+
+
+            const content =
+                document.getElementById(
+                    "postContent"
+                ).value.trim();
+
+
+            if (
+                !author
+                ||
+                !title
+                ||
+                !category
+                ||
+                !content
+            ) {
+
+                showBlogToast(
+                    "সব তথ্য পূরণ করুন ⚠️"
+                );
+
+                return;
+
+            }
+
+
+            /*
+                বর্তমানে এটি DEMO MODE।
+
+                পরবর্তী 1.5 blog.js ধাপে
+                LocalStorage + real post rendering
+                যোগ করা হবে।
+            */
+
+
+            showBlogToast(
+                "Post submitted successfully! ✨"
+            );
+
+
+            postForm.reset();
+
+            imagePreview.classList.remove(
+                "show"
+            );
+
+            previewImage.src = "";
+
+            closePostModal();
+
+        }
+    );
+
+
+
+    /* =====================================================
+       HEADER SEARCH
+    ===================================================== */
+
+    const headerSearch =
+        document.getElementById(
+            "headerSearch"
+        );
+
+    const headerSearchBtn =
+        document.getElementById(
+            "headerSearchBtn"
+        );
+
+
+    function performHeaderSearch() {
+
+        const query =
+            headerSearch.value.trim();
+
+
+        if (!query) {
+
+            showBlogToast(
+                "কিছু search করুন 🔍"
+            );
+
+            return;
+
+        }
+
+
+        blogSearch.value = query;
+
+        searchBlogs();
+
+
+        document
+            .getElementById("blogPostGrid")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+    }
+
+
+    headerSearchBtn.addEventListener(
+        "click",
+        performHeaderSearch
+    );
+
+
+    headerSearch.addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                performHeaderSearch();
+
+            }
+
+        }
+    );
+
+
+
+    /* =====================================================
+       PAGE LOADED
+    ===================================================== */
+
+    document.body.classList.add(
+        "shopping-mela-loaded"
+    );
+
+</script>
+
+</body>
+</html>
