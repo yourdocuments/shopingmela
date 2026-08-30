@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="bn">
 
@@ -5,19 +6,16 @@
 
 <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Admin Dashboard — Shopping Mela</title>
 
 
-<!-- =====================================================
-     1.44 — ADMIN SESSION PROTECTION
-====================================================== -->
-
 <script>
+
+/* =====================================================
+   1.43 — ADMIN SESSION PROTECTION
+===================================================== */
 
 (function () {
 
@@ -36,9 +34,7 @@
 
     const loginTime =
         Number(
-            sessionStorage.getItem(
-                LOGIN_TIME_KEY
-            ) || 0
+            sessionStorage.getItem(LOGIN_TIME_KEY) || 0
         );
 
 
@@ -47,13 +43,9 @@
         !loginTime
     ) {
 
-        sessionStorage.removeItem(
-            SESSION_KEY
-        );
+        sessionStorage.removeItem(SESSION_KEY);
 
-        sessionStorage.removeItem(
-            LOGIN_TIME_KEY
-        );
+        sessionStorage.removeItem(LOGIN_TIME_KEY);
 
         window.location.replace(
             "admin-login.html"
@@ -69,13 +61,9 @@
         SESSION_DURATION
     ) {
 
-        sessionStorage.removeItem(
-            SESSION_KEY
-        );
+        sessionStorage.removeItem(SESSION_KEY);
 
-        sessionStorage.removeItem(
-            LOGIN_TIME_KEY
-        );
+        sessionStorage.removeItem(LOGIN_TIME_KEY);
 
         window.location.replace(
             "admin-login.html"
@@ -97,11 +85,6 @@
 }
 
 
-html {
-    scroll-behavior: smooth;
-}
-
-
 body {
 
     margin: 0;
@@ -120,18 +103,9 @@ body {
 
 button,
 input,
-select,
-textarea {
+select {
 
     font-family: inherit;
-
-}
-
-
-button {
-
-    -webkit-tap-highlight-color:
-        transparent;
 
 }
 
@@ -160,8 +134,6 @@ button {
 
     overflow-y: auto;
 
-    transition: .25s;
-
 }
 
 
@@ -173,8 +145,7 @@ button {
 
     gap: 10px;
 
-    padding:
-        0 8px 25px;
+    padding: 0 8px 25px;
 
     font-size: 17px;
 
@@ -224,8 +195,7 @@ button {
 
     letter-spacing: .8px;
 
-    padding:
-        0 10px 8px;
+    padding: 0 10px 8px;
 
 }
 
@@ -322,8 +292,6 @@ button {
 
     min-height: 100vh;
 
-    transition: .25s;
-
 }
 
 
@@ -397,26 +365,6 @@ button {
 }
 
 
-.refresh-header {
-
-    border: 0;
-
-    background: #eef5ff;
-
-    color: #1877f2;
-
-    width: 32px;
-    height: 32px;
-
-    border-radius: 7px;
-
-    cursor: pointer;
-
-    font-size: 13px;
-
-}
-
-
 .admin-user {
 
     display: flex;
@@ -468,10 +416,6 @@ button {
     gap: 5px;
 
     line-height: 1.2;
-
-    font-size: 10px;
-
-    font-weight: 800;
 
 }
 
@@ -558,8 +502,7 @@ button {
 
 .welcome p {
 
-    margin:
-        6px 0 0;
+    margin: 6px 0 0;
 
     color: #667085;
 
@@ -878,16 +821,12 @@ button {
 
     text-align: center;
 
-    transition: .2s;
-
 }
 
 
 .quick-action:hover {
 
     border-color: #1877f2;
-
-    transform: translateY(-1px);
 
 }
 
@@ -1030,98 +969,6 @@ button {
 
 
 /* =====================================================
-   TOOLBAR
-===================================================== */
-
-.toolbar {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 10px;
-
-    padding: 13px 15px;
-
-    background: #ffffff;
-
-    border-bottom:
-        1px solid #eaecf0;
-
-}
-
-
-.search-box {
-
-    position: relative;
-
-    flex: 1;
-
-    max-width: 330px;
-
-}
-
-
-.search-box input {
-
-    width: 100%;
-
-    padding:
-        9px 10px 9px 32px;
-
-    border:
-        1px solid #d0d5dd;
-
-    border-radius: 7px;
-
-    outline: none;
-
-    font-size: 9px;
-
-}
-
-
-.search-box span {
-
-    position: absolute;
-
-    left: 10px;
-
-    top: 50%;
-
-    transform:
-        translateY(-50%);
-
-    color: #98a2b3;
-
-    font-size: 12px;
-
-}
-
-
-.filter-select {
-
-    border:
-        1px solid #d0d5dd;
-
-    border-radius: 7px;
-
-    padding: 9px;
-
-    background: #ffffff;
-
-    outline: none;
-
-    font-size: 9px;
-
-    color: #344054;
-
-}
-
-
-/* =====================================================
    TABLE
 ===================================================== */
 
@@ -1152,7 +999,7 @@ table {
 
     border-collapse: collapse;
 
-    min-width: 760px;
+    min-width: 700px;
 
 }
 
@@ -1217,36 +1064,8 @@ td strong {
 }
 
 
-.details-btn {
-
-    border: 0;
-
-    background: #f2f4f7;
-
-    color: #344054;
-
-    border-radius: 6px;
-
-    padding: 6px 8px;
-
-    cursor: pointer;
-
-    font-size: 8px;
-
-    font-weight: 700;
-
-}
-
-
-.details-btn:hover {
-
-    background: #e4e7ec;
-
-}
-
-
 /* =====================================================
-   PRODUCTS FORM
+   PRODUCT FORM
 ===================================================== */
 
 .product-form {
@@ -1300,8 +1119,7 @@ td strong {
 
 
 .form-group input,
-.form-group select,
-.form-group textarea {
+.form-group select {
 
     width: 100%;
 
@@ -1321,18 +1139,8 @@ td strong {
 }
 
 
-.form-group textarea {
-
-    min-height: 70px;
-
-    resize: vertical;
-
-}
-
-
 .form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
+.form-group select:focus {
 
     border-color: #1877f2;
 
@@ -1524,13 +1332,148 @@ td strong {
 }
 
 
-.form-submit.secondary {
+.form-cancel {
 
-    background: #f2f4f7;
+    margin-top: 14px;
+
+    margin-left: 7px;
+
+    border:
+        1px solid #d0d5dd;
+
+    background: #ffffff;
 
     color: #344054;
 
-    margin-left: 7px;
+    padding: 9px 15px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    display: none;
+
+}
+
+
+.form-cancel.show {
+
+    display: inline-block;
+
+}
+
+
+/* =====================================================
+   1.45 — PRODUCT TOOLBAR
+===================================================== */
+
+.product-toolbar {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 190px;
+
+    gap: 10px;
+
+    padding: 18px;
+
+    border-bottom:
+        1px solid #eaecf0;
+
+}
+
+
+.product-search {
+
+    position: relative;
+
+}
+
+
+.product-search input {
+
+    width: 100%;
+
+    border:
+        1px solid #d0d5dd;
+
+    border-radius: 8px;
+
+    padding: 11px 12px 11px 35px;
+
+    outline: none;
+
+    font-size: 10px;
+
+}
+
+
+.product-search input:focus {
+
+    border-color: #1877f2;
+
+    box-shadow:
+        0 0 0 2px
+        rgba(24,119,242,.08);
+
+}
+
+
+.product-search-icon {
+
+    position: absolute;
+
+    left: 12px;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    color: #98a2b3;
+
+    font-size: 13px;
+
+    pointer-events: none;
+
+}
+
+
+.product-filter {
+
+    width: 100%;
+
+    border:
+        1px solid #d0d5dd;
+
+    border-radius: 8px;
+
+    padding: 11px;
+
+    outline: none;
+
+    background: #ffffff;
+
+    color: #344054;
+
+    font-size: 10px;
+
+}
+
+
+.product-count {
+
+    padding:
+        0 18px 15px;
+
+    color: #98a2b3;
+
+    font-size: 9px;
 
 }
 
@@ -1569,7 +1512,7 @@ td strong {
 
 .product-item:last-child {
 
-    border-bottom: 0;
+    border-bottom: none;
 
 }
 
@@ -1651,28 +1594,6 @@ td strong {
 }
 
 
-.product-stock {
-
-    display: inline-block;
-
-    margin-top: 5px;
-
-    color: #12b76a;
-
-    font-size: 8px;
-
-    font-weight: 700;
-
-}
-
-
-.product-stock.out {
-
-    color: #f04438;
-
-}
-
-
 .product-actions {
 
     display: flex;
@@ -1726,6 +1647,19 @@ td strong {
 }
 
 
+.no-products {
+
+    padding: 45px 20px;
+
+    text-align: center;
+
+    color: #98a2b3;
+
+    font-size: 10px;
+
+}
+
+
 /* =====================================================
    USERS
 ===================================================== */
@@ -1753,237 +1687,6 @@ td strong {
     color: #98a2b3;
 
     font-size: 11px;
-
-}
-
-
-.user-row {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    padding: 13px 0;
-
-    border-bottom:
-        1px solid #f2f4f7;
-
-}
-
-
-.user-row:last-child {
-
-    border-bottom: 0;
-
-}
-
-
-.user-avatar {
-
-    width: 38px;
-    height: 38px;
-
-    min-width: 38px;
-
-    border-radius: 50%;
-
-    background: #eef5ff;
-
-    color: #1877f2;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-weight: 800;
-
-    font-size: 11px;
-
-}
-
-
-.user-info strong {
-
-    display: block;
-
-    font-size: 10px;
-
-}
-
-
-.user-info span {
-
-    display: block;
-
-    margin-top: 3px;
-
-    color: #667085;
-
-    font-size: 8px;
-
-}
-
-
-/* =====================================================
-   MODAL
-===================================================== */
-
-.modal-overlay {
-
-    position: fixed;
-
-    inset: 0;
-
-    background:
-        rgba(16,24,40,.55);
-
-    display: none;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 20px;
-
-    z-index: 5000;
-
-}
-
-
-.modal-overlay.show {
-
-    display: flex;
-
-}
-
-
-.modal {
-
-    width: 100%;
-
-    max-width: 500px;
-
-    max-height: 90vh;
-
-    overflow-y: auto;
-
-    background: #ffffff;
-
-    border-radius: 14px;
-
-    box-shadow:
-        0 20px 60px
-        rgba(16,24,40,.20);
-
-}
-
-
-.modal-header {
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    padding: 16px 18px;
-
-    border-bottom:
-        1px solid #eaecf0;
-
-}
-
-
-.modal-header h2 {
-
-    margin: 0;
-
-    font-size: 14px;
-
-}
-
-
-.modal-close {
-
-    width: 30px;
-    height: 30px;
-
-    border: 0;
-
-    background: #f2f4f7;
-
-    border-radius: 7px;
-
-    cursor: pointer;
-
-    font-size: 15px;
-
-}
-
-
-.modal-body {
-
-    padding: 18px;
-
-}
-
-
-.detail-grid {
-
-    display: grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap: 10px;
-
-}
-
-
-.detail-box {
-
-    padding: 11px;
-
-    background: #f9fafb;
-
-    border-radius: 8px;
-
-}
-
-
-.detail-box.full {
-
-    grid-column: 1/-1;
-
-}
-
-
-.detail-box small {
-
-    display: block;
-
-    color: #98a2b3;
-
-    font-size: 8px;
-
-}
-
-
-.detail-box strong {
-
-    display: block;
-
-    margin-top: 4px;
-
-    color: #101828;
-
-    font-size: 10px;
-
-    word-break: break-word;
 
 }
 
@@ -2035,37 +1738,6 @@ td strong {
 
 
 /* =====================================================
-   MOBILE MENU BUTTON
-===================================================== */
-
-.mobile-menu {
-
-    display: none;
-
-    border: 0;
-
-    background: #f2f4f7;
-
-    width: 32px;
-    height: 32px;
-
-    border-radius: 7px;
-
-    cursor: pointer;
-
-    font-size: 15px;
-
-}
-
-
-.sidebar-overlay {
-
-    display: none;
-
-}
-
-
-/* =====================================================
    MOBILE
 ===================================================== */
 
@@ -2103,8 +1775,7 @@ td strong {
 
         justify-content: center;
 
-        padding:
-            0 0 18px;
+        padding: 0 0 18px;
 
     }
 
@@ -2174,8 +1845,7 @@ td strong {
 
     .content {
 
-        padding:
-            15px 12px;
+        padding: 15px 12px;
 
     }
 
@@ -2215,6 +1885,13 @@ td strong {
     }
 
 
+    .product-toolbar {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
     .product-item {
 
         grid-template-columns:
@@ -2238,163 +1915,6 @@ td strong {
 
     }
 
-
-    .toolbar {
-
-        align-items: stretch;
-
-        flex-direction: column;
-
-    }
-
-
-    .search-box {
-
-        max-width: none;
-
-    }
-
-
-    .filter-select {
-
-        width: 100%;
-
-    }
-
-
-    .detail-grid {
-
-        grid-template-columns: 1fr;
-
-    }
-
-
-    .detail-box.full {
-
-        grid-column: auto;
-
-    }
-
-
-    .mobile-menu {
-
-        display: block;
-
-    }
-
-}
-
-
-/* =====================================================
-   SMALL MOBILE
-===================================================== */
-
-@media (max-width: 450px) {
-
-    .sidebar {
-
-        transform:
-            translateX(-100%);
-
-        width: 235px;
-
-        box-shadow:
-            10px 0 30px
-            rgba(0,0,0,.15);
-
-    }
-
-
-    .sidebar.open {
-
-        transform:
-            translateX(0);
-
-    }
-
-
-    .admin-logo {
-
-        justify-content: flex-start;
-
-        padding:
-            0 8px 25px;
-
-    }
-
-
-    .admin-logo span {
-
-        display: block;
-
-    }
-
-
-    .nav-title {
-
-        display: block;
-
-    }
-
-
-    .nav-item {
-
-        justify-content: flex-start;
-
-        padding:
-            11px 10px;
-
-    }
-
-
-    .nav-item span {
-
-        display: inline;
-
-    }
-
-
-    .nav-badge {
-
-        display: block;
-
-    }
-
-
-    .main {
-
-        margin-left: 0;
-
-    }
-
-
-    .sidebar-overlay {
-
-        position: fixed;
-
-        inset: 0;
-
-        background:
-            rgba(16,24,40,.45);
-
-        z-index: 900;
-
-    }
-
-
-    .sidebar-overlay.show {
-
-        display: block;
-
-    }
-
-
-    .header-right {
-
-        gap: 5px;
-
-    }
-
 }
 
 </style>
@@ -2409,10 +1929,7 @@ td strong {
      SIDEBAR
 ===================================================== -->
 
-<aside
-    class="sidebar"
-    id="sidebar"
->
+<aside class="sidebar">
 
     <div class="admin-logo">
 
@@ -2428,7 +1945,6 @@ td strong {
 
 
     <nav class="admin-nav">
-
 
         <div class="nav-title">
             Dashboard
@@ -2530,13 +2046,6 @@ td strong {
 </aside>
 
 
-<div
-    class="sidebar-overlay"
-    id="sidebarOverlay"
-    onclick="closeMobileSidebar()"
-></div>
-
-
 
 <!-- =====================================================
      MAIN
@@ -2547,45 +2056,15 @@ td strong {
 
 <header class="top-header">
 
-
     <div
-        style="
-            display:flex;
-            align-items:center;
-            gap:9px;
-        "
+        class="page-title"
+        id="pageTitle"
     >
-
-        <button
-            class="mobile-menu"
-            onclick="toggleMobileSidebar()"
-            aria-label="Menu"
-        >
-            ☰
-        </button>
-
-
-        <div
-            class="page-title"
-            id="pageTitle"
-        >
-            Dashboard
-        </div>
-
+        Dashboard
     </div>
 
 
     <div class="header-right">
-
-
-        <button
-            class="refresh-header"
-            onclick="renderAll()"
-            title="Refresh Dashboard"
-        >
-            ↻
-        </button>
-
 
         <a
             href="index.html"
@@ -2979,82 +2458,17 @@ Orders
 
 <div class="table-panel">
 
+<div class="panel-header">
 
-<div class="toolbar">
+<h2>
+All Orders
+</h2>
 
-
-<div class="search-box">
-
-<span>
-🔎
-</span>
-
-<input
-    type="search"
-    id="orderSearch"
-    placeholder="Order ID, customer বা mobile search করুন..."
-    oninput="renderOrdersTable()"
->
-
-</div>
-
-
-<select
-    class="filter-select"
-    id="orderFilter"
-    onchange="renderOrdersTable()"
->
-
-<option value="all">
-All Status
-</option>
-
-<option value="0">
-Order Placed
-</option>
-
-<option value="1">
-Order Confirmed
-</option>
-
-<option value="2">
-Processing
-</option>
-
-<option value="3">
-Shipped
-</option>
-
-<option value="4">
-Out for Delivery
-</option>
-
-<option value="5">
-Delivered
-</option>
-
-</select>
-
-
-<button
-    onclick="renderAll()"
-    style="
-        border:0;
-        background:#eef5ff;
-        color:#1877f2;
-        border-radius:7px;
-        padding:9px 12px;
-        cursor:pointer;
-        font-size:9px;
-        font-weight:800;
-    "
->
-    Refresh
+<button onclick="renderAll()">
+Refresh
 </button>
 
-
 </div>
-
 
 
 <div class="table-wrap">
@@ -3077,8 +2491,6 @@ Delivered
 
 <th>Status</th>
 
-<th>Details</th>
-
 </tr>
 
 </thead>
@@ -3098,7 +2510,7 @@ Delivered
 
 
 <!-- =====================================================
-     PRODUCTS
+     PRODUCTS — 1.45
 ===================================================== -->
 
 <section
@@ -3114,14 +2526,17 @@ Products
 </h1>
 
 <p>
-নতুন product যোগ এবং manage করার management area।
+নতুন product যোগ, edit, search এবং category filter করুন।
 </p>
 
 </div>
 
 
 
-<div class="product-form">
+<div
+class="product-form"
+id="productFormBox"
+>
 
 <h2 id="productFormTitle">
 ➕ Add New Product
@@ -3189,24 +2604,6 @@ Category
 <div class="form-group">
 
 <label>
-Stock
-</label>
-
-<input
-    type="number"
-    id="productStock"
-    placeholder="Stock quantity"
-    min="0"
-    step="1"
-    value="10"
->
-
-</div>
-
-
-<div class="form-group">
-
-<label>
 Image URL
 </label>
 
@@ -3215,20 +2612,6 @@ Image URL
     id="productImage"
     placeholder="https://..."
 >
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Product Description
-</label>
-
-<textarea
-    id="productDescription"
-    placeholder="Short product description..."
-></textarea>
 
 </div>
 
@@ -3257,9 +2640,9 @@ class="file-button"
 
 
 <input
-type="file"
-id="productImageFile"
-accept="image/*"
+    type="file"
+    id="productImageFile"
+    accept="image/*"
 >
 
 
@@ -3298,10 +2681,8 @@ onclick="removeImage()"
 
 <div class="image-url-help">
 
-আপনি চাইলে উপরের
-<b>Image URL</b>
-ব্যবহার করতে পারেন,
-অথবা এখান থেকে image upload করতে পারেন।
+আপনি চাইলে <b>Image URL</b> ব্যবহার করতে পারেন,
+অথবা image upload করতে পারেন।
 
 </div>
 
@@ -3324,13 +2705,13 @@ Add Product
 
 
 <button
-class="form-submit secondary"
-id="cancelEditBtn"
-onclick="cancelProductEdit()"
-style="display:none;"
+class="form-cancel"
+id="productCancelBtn"
+onclick="cancelEdit()"
 >
 Cancel Edit
 </button>
+
 
 </div>
 
@@ -3351,61 +2732,77 @@ Refresh
 </div>
 
 
-<div class="product-list">
+<!-- =====================================================
+     1.45 — SEARCH + FILTER
+===================================================== -->
+
+<div class="product-toolbar">
 
 
-<div
-class="toolbar"
-style="
-    padding:0 0 15px;
-    border-bottom:1px solid #eaecf0;
-"
->
+<div class="product-search">
 
-<div class="search-box">
-
-<span>
-🔎
+<span class="product-search-icon">
+🔍
 </span>
 
 <input
     type="search"
     id="productSearch"
-    placeholder="Product search করুন..."
-    oninput="renderProducts()"
+    placeholder="Product name search করুন..."
+    autocomplete="off"
 >
 
 </div>
 
 
 <select
-    class="filter-select"
-    id="productFilter"
-    onchange="renderProducts()"
+    class="product-filter"
+    id="productCategoryFilter"
 >
 
 <option value="all">
-All Category
+All Categories
 </option>
 
-<option>Fashion</option>
+<option value="Fashion">
+Fashion
+</option>
 
-<option>Beauty</option>
+<option value="Beauty">
+Beauty
+</option>
 
-<option>Electronics</option>
+<option value="Electronics">
+Electronics
+</option>
 
-<option>Food</option>
+<option value="Food">
+Food
+</option>
 
-<option>Home</option>
+<option value="Home">
+Home
+</option>
 
 </select>
 
+
+</div>
+
+
+<div
+class="product-count"
+id="productCount"
+>
+0 products
 </div>
 
 
-<div id="productsList"></div>
+<div
+class="product-list"
+id="productsList"
+></div>
 
-</div>
 
 </div>
 
@@ -3439,33 +2836,7 @@ Registered customer information overview।
 
 <div class="user-card">
 
-
-<div class="toolbar"
-style="
-    padding:0 0 15px;
-"
->
-
-<div class="search-box">
-
-<span>
-🔎
-</span>
-
-<input
-    type="search"
-    id="userSearch"
-    placeholder="User search করুন..."
-    oninput="renderUsers()"
->
-
-</div>
-
-</div>
-
-
 <div id="usersList"></div>
-
 
 </div>
 
@@ -3479,52 +2850,9 @@ style="
 
 
 
-<!-- =====================================================
-     ORDER DETAILS MODAL
-===================================================== -->
-
 <div
-    class="modal-overlay"
-    id="orderModal"
-    onclick="closeModalOutside(event)"
->
-
-
-<div class="modal">
-
-
-<div class="modal-header">
-
-<h2>
-Order Details
-</h2>
-
-<button
-    class="modal-close"
-    onclick="closeOrderModal()"
->
-×
-</button>
-
-</div>
-
-
-<div
-    class="modal-body"
-    id="orderModalBody"
->
-</div>
-
-
-</div>
-
-</div>
-
-
-
-<div
-    class="toast"
-    id="toast"
+class="toast"
+id="toast"
 ></div>
 
 
@@ -3666,7 +2994,7 @@ function money(amount) {
 
 function escapeHTML(value) {
 
-    return String(value ?? "")
+    return String(value || "")
         .replace(/&/g,"&amp;")
         .replace(/</g,"&lt;")
         .replace(/>/g,"&gt;")
@@ -3929,35 +3257,6 @@ function renderRecentOrders() {
         `;
 
 
-        row.style.cursor =
-            "pointer";
-
-
-        row.title =
-            "Click to view order details";
-
-
-        row.addEventListener(
-            "click",
-            function () {
-
-                const originalIndex =
-                    orders.indexOf(order);
-
-                if (
-                    originalIndex >= 0
-                ) {
-
-                    openOrderDetails(
-                        originalIndex
-                    );
-
-                }
-
-            }
-        );
-
-
         box.appendChild(row);
 
     });
@@ -4104,42 +3403,7 @@ function renderOrdersTable() {
         );
 
 
-    if (!tbody) {
-
-        return;
-
-    }
-
-
     tbody.innerHTML = "";
-
-
-    const searchInput =
-        document.getElementById(
-            "orderSearch"
-        );
-
-
-    const filterInput =
-        document.getElementById(
-            "orderFilter"
-        );
-
-
-    const search =
-        (
-            searchInput
-            ? searchInput.value
-            : ""
-        )
-        .trim()
-        .toLowerCase();
-
-
-    const filter =
-        filterInput
-        ? filterInput.value
-        : "all";
 
 
     const list =
@@ -4153,51 +3417,7 @@ function renderOrdersTable() {
                 index
             })
         )
-        .reverse()
-        .filter(
-            item => {
-
-                const order =
-                    item.order;
-
-                const customer =
-                    order.customer ||
-                    {};
-
-
-                const searchable =
-                    [
-                        order.orderId,
-                        customer.name,
-                        customer.phone,
-                        customer.email
-                    ]
-                    .join(" ")
-                    .toLowerCase();
-
-
-                const matchesSearch =
-                    !search ||
-                    searchable.includes(
-                        search
-                    );
-
-
-                const matchesFilter =
-                    filter === "all" ||
-                    String(
-                        getStep(order)
-                    ) ===
-                    String(filter);
-
-
-                return (
-                    matchesSearch &&
-                    matchesFilter
-                );
-
-            }
-        );
+        .reverse();
 
 
     if (!list.length) {
@@ -4207,7 +3427,7 @@ function renderOrdersTable() {
             <tr>
 
                 <td
-                    colspan="7"
+                    colspan="6"
                     style="
                         text-align:center;
                         padding:45px;
@@ -4248,16 +3468,13 @@ function renderOrdersTable() {
         tr.innerHTML = `
 
             <td>
-
                 <strong>
                     #${escapeHTML(
                         order.orderId ||
                         "SM000000"
                     )}
                 </strong>
-
             </td>
-
 
             <td>
                 ${escapeHTML(
@@ -4266,7 +3483,6 @@ function renderOrdersTable() {
                 )}
             </td>
 
-
             <td>
                 ${escapeHTML(
                     customer.phone ||
@@ -4274,18 +3490,15 @@ function renderOrdersTable() {
                 )}
             </td>
 
-
             <td>
                 ${money(order.total)}
             </td>
-
 
             <td>
                 ${formatDate(
                     order.createdAt
                 )}
             </td>
-
 
             <td>
 
@@ -4324,22 +3537,6 @@ function renderOrdersTable() {
                     }
 
                 </select>
-
-            </td>
-
-
-            <td>
-
-                <button
-                    class="details-btn"
-                    onclick="
-                        openOrderDetails(
-                            ${index}
-                        )
-                    "
-                >
-                    View
-                </button>
 
             </td>
 
@@ -4437,303 +3634,6 @@ function syncLastOrder(order) {
     } catch {
 
         /* ignore */
-
-    }
-
-}
-
-
-
-/* =====================================================
-   ORDER DETAILS
-===================================================== */
-
-function openOrderDetails(index) {
-
-    const order =
-        orders[index];
-
-
-    if (!order) {
-
-        return;
-
-    }
-
-
-    const customer =
-        order.customer || {};
-
-
-    const items =
-        Array.isArray(order.items)
-        ? order.items
-        : [];
-
-
-    const step =
-        getStep(order);
-
-
-    const itemHTML =
-        items.length
-        ? items
-            .map(
-                item => `
-
-                    <div
-                        style="
-                            display:flex;
-                            justify-content:space-between;
-                            gap:10px;
-                            padding:9px 0;
-                            border-bottom:
-                            1px solid #f2f4f7;
-                            font-size:9px;
-                        "
-                    >
-
-                        <span>
-                            ${escapeHTML(
-                                item.name ||
-                                "Product"
-                            )}
-                            ×
-                            ${escapeHTML(
-                                item.quantity ||
-                                1
-                            )}
-                        </span>
-
-                        <strong>
-                            ${money(
-                                Number(
-                                    item.price ||
-                                    0
-                                ) *
-                                Number(
-                                    item.quantity ||
-                                    1
-                                )
-                            )}
-                        </strong>
-
-                    </div>
-
-                `
-            )
-            .join("")
-        : `
-
-            <div
-                style="
-                    color:#98a2b3;
-                    font-size:9px;
-                    padding:10px 0;
-                "
-            >
-                Item information পাওয়া যায়নি।
-            </div>
-
-        `;
-
-
-    const body =
-        document.getElementById(
-            "orderModalBody"
-        );
-
-
-    body.innerHTML = `
-
-        <div class="detail-grid">
-
-
-            <div class="detail-box">
-
-                <small>
-                    Order ID
-                </small>
-
-                <strong>
-                    #${escapeHTML(
-                        order.orderId ||
-                        "SM000000"
-                    )}
-                </strong>
-
-            </div>
-
-
-            <div class="detail-box">
-
-                <small>
-                    Status
-                </small>
-
-                <strong>
-                    ${STATUS_NAMES[step]}
-                </strong>
-
-            </div>
-
-
-            <div class="detail-box">
-
-                <small>
-                    Customer
-                </small>
-
-                <strong>
-                    ${escapeHTML(
-                        customer.name ||
-                        "—"
-                    )}
-                </strong>
-
-            </div>
-
-
-            <div class="detail-box">
-
-                <small>
-                    Mobile
-                </small>
-
-                <strong>
-                    ${escapeHTML(
-                        customer.phone ||
-                        "—"
-                    )}
-                </strong>
-
-            </div>
-
-
-            <div class="detail-box">
-
-                <small>
-                    Email
-                </small>
-
-                <strong>
-                    ${escapeHTML(
-                        customer.email ||
-                        "—"
-                    )}
-                </strong>
-
-            </div>
-
-
-            <div class="detail-box">
-
-                <small>
-                    Order Date
-                </small>
-
-                <strong>
-                    ${formatDate(
-                        order.createdAt
-                    )}
-                </strong>
-
-            </div>
-
-
-            <div class="detail-box full">
-
-                <small>
-                    Delivery Address
-                </small>
-
-                <strong>
-                    ${escapeHTML(
-                        customer.address ||
-                        order.address ||
-                        "—"
-                    )}
-                </strong>
-
-            </div>
-
-
-            <div class="detail-box full">
-
-                <small>
-                    Products
-                </small>
-
-                <div
-                    style="
-                        margin-top:7px;
-                    "
-                >
-                    ${itemHTML}
-                </div>
-
-            </div>
-
-
-            <div
-                class="detail-box full"
-                style="
-                    background:#eef5ff;
-                "
-            >
-
-                <small>
-                    Total
-                </small>
-
-                <strong
-                    style="
-                        color:#1877f2;
-                        font-size:15px;
-                    "
-                >
-                    ${money(
-                        order.total
-                    )}
-                </strong>
-
-            </div>
-
-
-        </div>
-
-    `;
-
-
-    document.getElementById(
-        "orderModal"
-    ).classList.add("show");
-
-}
-
-
-
-/* =====================================================
-   CLOSE MODAL
-===================================================== */
-
-function closeOrderModal() {
-
-    document.getElementById(
-        "orderModal"
-    ).classList.remove("show");
-
-}
-
-
-function closeModalOutside(event) {
-
-    if (
-        event.target.id ===
-        "orderModal"
-    ) {
-
-        closeOrderModal();
 
     }
 
@@ -4869,9 +3769,7 @@ function removeImage() {
 
     if (preview) {
 
-        preview.classList.remove(
-            "show"
-        );
+        preview.classList.remove("show");
 
     }
 
@@ -4974,7 +3872,7 @@ function setupImageURLPreview() {
 
 
 /* =====================================================
-   SAVE PRODUCT
+   1.45 — SAVE PRODUCT
 ===================================================== */
 
 function saveProduct() {
@@ -4999,26 +3897,9 @@ function saveProduct() {
         ).value;
 
 
-    const stock =
-        Math.max(
-            0,
-            Number(
-                document.getElementById(
-                    "productStock"
-                ).value || 0
-            )
-        );
-
-
     const imageURL =
         document.getElementById(
             "productImage"
-        ).value.trim();
-
-
-    const description =
-        document.getElementById(
-            "productDescription"
         ).value.trim();
 
 
@@ -5044,68 +3925,89 @@ function saveProduct() {
     }
 
 
-    const finalImage =
-        uploadedImageData ||
-        imageURL ||
-        "";
-
+    /* =================================================
+       EDIT PRODUCT
+    ================================================= */
 
     if (editingProductId) {
 
-        const product =
-            products.find(
-                item =>
-                    String(item.id) ===
+        const index =
+            products.findIndex(
+                product =>
+                    String(product.id) ===
                     String(editingProductId)
             );
 
 
-        if (!product) {
+        if (index === -1) {
 
-            cancelProductEdit();
+            showToast(
+                "Product পাওয়া যায়নি"
+            );
+
+            cancelEdit();
 
             return;
 
         }
 
 
-        product.name =
-            name;
-
-        product.price =
-            price;
-
-        product.category =
-            category;
-
-        product.stock =
-            stock;
-
-        product.description =
-            description;
+        const oldProduct =
+            products[index];
 
 
-        if (finalImage) {
+        let finalImage =
+            oldProduct.image || "";
 
-            product.image =
-                finalImage;
 
-            product.imageType =
-                uploadedImageData
-                ? "upload"
-                : "url";
+        let imageType =
+            oldProduct.imageType || "url";
+
+
+        if (uploadedImageData) {
+
+            finalImage =
+                uploadedImageData;
+
+            imageType =
+                "upload";
+
+        } else if (imageURL) {
+
+            finalImage =
+                imageURL;
+
+            imageType =
+                "url";
 
         }
 
 
-        product.updatedAt =
-            new Date().toISOString();
+        products[index] = {
+
+            ...oldProduct,
+
+            name,
+
+            price,
+
+            category,
+
+            image:
+                finalImage,
+
+            imageType,
+
+            updatedAt:
+                new Date().toISOString()
+
+        };
 
 
         saveProducts();
 
 
-        cancelProductEdit();
+        cancelEdit();
 
 
         renderProducts();
@@ -5121,6 +4023,17 @@ function saveProduct() {
     }
 
 
+
+    /* =================================================
+       ADD NEW PRODUCT
+    ================================================= */
+
+    const finalImage =
+        uploadedImageData ||
+        imageURL ||
+        "";
+
+
     const newProduct = {
 
         id:
@@ -5131,10 +4044,6 @@ function saveProduct() {
         price,
 
         category,
-
-        stock,
-
-        description,
 
         image:
             finalImage,
@@ -5173,7 +4082,7 @@ function saveProduct() {
 
 
 /* =====================================================
-   EDIT PRODUCT
+   1.45 — EDIT PRODUCT
 ===================================================== */
 
 function editProduct(productId) {
@@ -5187,6 +4096,10 @@ function editProduct(productId) {
 
 
     if (!product) {
+
+        showToast(
+            "Product পাওয়া যায়নি"
+        );
 
         return;
 
@@ -5212,14 +4125,7 @@ function editProduct(productId) {
     document.getElementById(
         "productCategory"
     ).value =
-        product.category ||
-        "Fashion";
-
-
-    document.getElementById(
-        "productStock"
-    ).value =
-        product.stock ?? 0;
+        product.category || "Fashion";
 
 
     document.getElementById(
@@ -5230,10 +4136,50 @@ function editProduct(productId) {
         : "";
 
 
-    document.getElementById(
-        "productDescription"
-    ).value =
-        product.description || "";
+    uploadedImageData =
+        product.imageType === "upload"
+        ? product.image || ""
+        : "";
+
+
+    const preview =
+        document.getElementById(
+            "imagePreview"
+        );
+
+
+    const previewImage =
+        document.getElementById(
+            "previewImage"
+        );
+
+
+    const fileName =
+        document.getElementById(
+            "imageFileName"
+        );
+
+
+    if (product.image) {
+
+        previewImage.src =
+            product.image;
+
+        preview.classList.add(
+            "show"
+        );
+
+
+        fileName.textContent =
+            product.imageType === "upload"
+            ? "Saved uploaded image"
+            : "Saved image URL";
+
+    } else {
+
+        removeImage();
+
+    }
 
 
     document.getElementById(
@@ -5249,55 +4195,32 @@ function editProduct(productId) {
 
 
     document.getElementById(
-        "cancelEditBtn"
-    ).style.display =
-        "inline-block";
-
-
-    if (product.image) {
-
-        document.getElementById(
-            "previewImage"
-        ).src =
-            product.image;
-
-
-        document.getElementById(
-            "imagePreview"
-        ).classList.add("show");
-
-
-        document.getElementById(
-            "imageFileName"
-        ).textContent =
-            product.imageType === "upload"
-            ? "Saved uploaded image"
-            : "Image URL preview";
-
-    }
-
-
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
-
-
-    showToast(
-        "Product edit mode চালু হয়েছে"
+        "productCancelBtn"
+    ).classList.add(
+        "show"
     );
+
+
+    document.getElementById(
+        "productFormBox"
+    ).scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
 
 }
 
 
 
 /* =====================================================
-   CANCEL PRODUCT EDIT
+   1.45 — CANCEL EDIT
 ===================================================== */
 
-function cancelProductEdit() {
+function cancelEdit() {
 
     editingProductId = null;
+
+    clearProductForm();
 
 
     document.getElementById(
@@ -5313,12 +4236,10 @@ function cancelProductEdit() {
 
 
     document.getElementById(
-        "cancelEditBtn"
-    ).style.display =
-        "none";
-
-
-    clearProductForm();
+        "productCancelBtn"
+    ).classList.remove(
+        "show"
+    );
 
 }
 
@@ -5341,28 +4262,87 @@ function clearProductForm() {
 
 
     document.getElementById(
-        "productCategory"
-    ).value =
-        "Fashion";
-
-
-    document.getElementById(
-        "productStock"
-    ).value =
-        "10";
-
-
-    document.getElementById(
         "productImage"
     ).value = "";
 
 
     document.getElementById(
-        "productDescription"
-    ).value = "";
+        "productCategory"
+    ).value =
+        "Fashion";
 
 
     removeImage();
+
+}
+
+
+
+/* =====================================================
+   1.45 — PRODUCT SEARCH + CATEGORY FILTER
+===================================================== */
+
+function getFilteredProducts() {
+
+    const searchInput =
+        document.getElementById(
+            "productSearch"
+        );
+
+
+    const categoryInput =
+        document.getElementById(
+            "productCategoryFilter"
+        );
+
+
+    const search =
+        searchInput
+        ? searchInput.value
+            .trim()
+            .toLowerCase()
+        : "";
+
+
+    const category =
+        categoryInput
+        ? categoryInput.value
+        : "all";
+
+
+    return products.filter(
+        product => {
+
+            const name =
+                String(
+                    product.name || ""
+                ).toLowerCase();
+
+
+            const productCategory =
+                String(
+                    product.category || ""
+                );
+
+
+            const matchesSearch =
+                !search ||
+                name.includes(search);
+
+
+            const matchesCategory =
+                category === "all" ||
+                productCategory ===
+                category;
+
+
+            return (
+                matchesSearch &&
+                matchesCategory
+            );
+
+        }
+    );
 
 }
 
@@ -5380,80 +4360,25 @@ function renderProducts() {
         );
 
 
-    if (!box) {
-
-        return;
-
-    }
+    const count =
+        document.getElementById(
+            "productCount"
+        );
 
 
     box.innerHTML = "";
 
 
-    const searchInput =
-        document.getElementById(
-            "productSearch"
-        );
-
-
-    const filterInput =
-        document.getElementById(
-            "productFilter"
-        );
-
-
-    const search =
-        (
-            searchInput
-            ? searchInput.value
-            : ""
-        )
-        .trim()
-        .toLowerCase();
-
-
-    const filter =
-        filterInput
-        ? filterInput.value
-        : "all";
-
-
     const filtered =
-        products
-        .slice()
-        .reverse()
-        .filter(
-            product => {
-
-                const searchable =
-                    [
-                        product.name,
-                        product.category,
-                        product.description
-                    ]
-                    .join(" ")
-                    .toLowerCase();
+        getFilteredProducts();
 
 
-                const searchMatch =
-                    !search ||
-                    searchable.includes(
-                        search
-                    );
-
-
-                const categoryMatch =
-                    filter === "all" ||
-                    product.category ===
-                    filter;
-
-
-                return (
-                    searchMatch &&
-                    categoryMatch
-                );
-
-            }
+    count.textContent =
+        filtered.length +
+        (
+            filtered.length === 1
+            ? " product"
+            : " products"
         );
 
 
@@ -5461,15 +4386,18 @@ function renderProducts() {
 
         box.innerHTML = `
 
-            <div
-                style="
-                    padding:35px;
-                    text-align:center;
-                    color:#98a2b3;
-                    font-size:10px;
-                "
-            >
-                কোনো product পাওয়া যায়নি।
+            <div class="no-products">
+
+                🔍
+
+                <br><br>
+
+                ${
+                    products.length
+                    ? "এই search/filter অনুযায়ী কোনো product পাওয়া যায়নি।"
+                    : "এখনো কোনো product add করা হয়নি।"
+                }
+
             </div>
 
         `;
@@ -5479,7 +4407,10 @@ function renderProducts() {
     }
 
 
-    filtered.forEach(product => {
+    filtered
+    .slice()
+    .reverse()
+    .forEach(product => {
 
         const row =
             document.createElement(
@@ -5521,12 +4452,6 @@ function renderProducts() {
         }
 
 
-        const stock =
-            Number(
-                product.stock ?? 0
-            );
-
-
         row.innerHTML = `
 
             <div class="product-image">
@@ -5550,7 +4475,8 @@ function renderProducts() {
                 <span class="product-category">
 
                     ${escapeHTML(
-                        product.category
+                        product.category ||
+                        "Uncategorized"
                     )}
 
                 </span>
@@ -5564,22 +4490,6 @@ function renderProducts() {
 
                 </span>
 
-
-                <span
-                    class="
-                        product-stock
-                        ${stock <= 0 ? "out" : ""}
-                    "
-                >
-
-                    ${
-                        stock > 0
-                        ? "Stock: " + stock
-                        : "Out of Stock"
-                    }
-
-                </span>
-
             </div>
 
 
@@ -5588,13 +4498,10 @@ function renderProducts() {
 
                 <button
                     class="edit-product"
-                    onclick="
-                        editProduct(
-                            '${escapeHTML(
-                                product.id
-                            )}'
-                        )
-                    "
+                    data-product-id="${escapeHTML(
+                        product.id
+                    )}"
+                    type="button"
                 >
                     ✏️ Edit
                 </button>
@@ -5602,13 +4509,10 @@ function renderProducts() {
 
                 <button
                     class="delete-product"
-                    onclick="
-                        deleteProduct(
-                            '${escapeHTML(
-                                product.id
-                            )}'
-                        )
-                    "
+                    data-product-id="${escapeHTML(
+                        product.id
+                    )}"
+                    type="button"
                 >
                     🗑️ Delete
                 </button>
@@ -5617,6 +4521,42 @@ function renderProducts() {
             </div>
 
         `;
+
+
+        const editButton =
+            row.querySelector(
+                ".edit-product"
+            );
+
+
+        const deleteButton =
+            row.querySelector(
+                ".delete-product"
+            );
+
+
+        editButton.addEventListener(
+            "click",
+            function () {
+
+                editProduct(
+                    this.dataset.productId
+                );
+
+            }
+        );
+
+
+        deleteButton.addEventListener(
+            "click",
+            function () {
+
+                deleteProduct(
+                    this.dataset.productId
+                );
+
+            }
+        );
 
 
         box.appendChild(row);
@@ -5669,17 +4609,17 @@ function deleteProduct(productId) {
         );
 
 
-    saveProducts();
-
-
     if (
         String(editingProductId) ===
         String(productId)
     ) {
 
-        cancelProductEdit();
+        cancelEdit();
 
     }
+
+
+    saveProducts();
 
 
     renderProducts();
@@ -5705,55 +4645,7 @@ function renderUsers() {
         );
 
 
-    if (!box) {
-
-        return;
-
-    }
-
-
-    const searchInput =
-        document.getElementById(
-            "userSearch"
-        );
-
-
-    const search =
-        (
-            searchInput
-            ? searchInput.value
-            : ""
-        )
-        .trim()
-        .toLowerCase();
-
-
-    const filtered =
-        users.filter(
-            user => {
-
-                const searchable =
-                    [
-                        user.name,
-                        user.email,
-                        user.phone
-                    ]
-                    .join(" ")
-                    .toLowerCase();
-
-
-                return (
-                    !search ||
-                    searchable.includes(
-                        search
-                    )
-                );
-
-            }
-        );
-
-
-    if (!filtered.length) {
+    if (!users.length) {
 
         box.innerHTML = `
 
@@ -5763,11 +4655,8 @@ function renderUsers() {
 
                 <br><br>
 
-                ${
-                    users.length
-                    ? "Search অনুযায়ী কোনো user পাওয়া যায়নি।"
-                    : "এখনো কোনো registered user data পাওয়া যায়নি।"
-                }
+                এখনো কোনো registered
+                user data পাওয়া যায়নি।
 
             </div>
 
@@ -5779,63 +4668,47 @@ function renderUsers() {
 
 
     box.innerHTML =
-        filtered
+        users
         .map(
-            user => {
+            user => `
 
-                const name =
-                    user.name ||
-                    "User";
+                <div
+                    style="
+                        padding:12px 0;
+                        border-bottom:
+                        1px solid #f2f4f7;
+                    "
+                >
 
-
-                const first =
-                    name
-                    .trim()
-                    .charAt(0)
-                    .toUpperCase();
-
-
-                return `
-
-                    <div class="user-row">
-
-
-                        <div class="user-avatar">
-
-                            ${escapeHTML(
-                                first
-                            )}
-
-                        </div>
+                    <strong
+                        style="
+                            font-size:11px;
+                        "
+                    >
+                        ${escapeHTML(
+                            user.name ||
+                            "User"
+                        )}
+                    </strong>
 
 
-                        <div class="user-info">
-
-                            <strong>
-                                ${escapeHTML(
-                                    name
-                                )}
-                            </strong>
-
-
-                            <span>
-
-                                ${escapeHTML(
-                                    user.email ||
-                                    user.phone ||
-                                    "No contact"
-                                )}
-
-                            </span>
-
-                        </div>
-
-
+                    <div
+                        style="
+                            color:#667085;
+                            font-size:9px;
+                            margin-top:4px;
+                        "
+                    >
+                        ${escapeHTML(
+                            user.email ||
+                            user.phone ||
+                            "No contact"
+                        )}
                     </div>
 
-                `;
+                </div>
 
-            }
+            `
         )
         .join("");
 
@@ -5856,9 +4729,7 @@ function showSection(
     .querySelectorAll(".section")
     .forEach(
         section =>
-            section.classList.remove(
-                "active"
-            )
+            section.classList.remove("active")
     );
 
 
@@ -5875,26 +4746,20 @@ function showSection(
     }
 
 
-    target.classList.add(
-        "active"
-    );
+    target.classList.add("active");
 
 
     document
     .querySelectorAll(".nav-item")
     .forEach(
         item =>
-            item.classList.remove(
-                "active"
-            )
+            item.classList.remove("active")
     );
 
 
     if (button) {
 
-        button.classList.add(
-            "active"
-        );
+        button.classList.add("active");
 
     }
 
@@ -5943,9 +4808,6 @@ function showSection(
 
     }
 
-
-    closeMobileSidebar();
-
 }
 
 
@@ -5962,8 +4824,7 @@ function showSectionById(id) {
         );
 
 
-    let targetButton =
-        null;
+    let targetButton = null;
 
 
     buttons.forEach(button => {
@@ -6036,9 +4897,7 @@ function showToast(message) {
         message;
 
 
-    toast.classList.add(
-        "show"
-    );
+    toast.classList.add("show");
 
 
     clearTimeout(
@@ -6063,65 +4922,7 @@ function showToast(message) {
 
 
 /* =====================================================
-   MOBILE SIDEBAR
-===================================================== */
-
-function toggleMobileSidebar() {
-
-    const sidebar =
-        document.getElementById(
-            "sidebar"
-        );
-
-
-    const overlay =
-        document.getElementById(
-            "sidebarOverlay"
-        );
-
-
-    sidebar.classList.toggle(
-        "open"
-    );
-
-
-    overlay.classList.toggle(
-        "show"
-    );
-
-}
-
-
-
-function closeMobileSidebar() {
-
-    const sidebar =
-        document.getElementById(
-            "sidebar"
-        );
-
-
-    const overlay =
-        document.getElementById(
-            "sidebarOverlay"
-        );
-
-
-    sidebar.classList.remove(
-        "open"
-    );
-
-
-    overlay.classList.remove(
-        "show"
-    );
-
-}
-
-
-
-/* =====================================================
-   1.44 — ADMIN LOGOUT
+   1.43 — ADMIN LOGOUT
 ===================================================== */
 
 function adminLogout() {
@@ -6158,7 +4959,7 @@ function adminLogout() {
 
 
 /* =====================================================
-   1.44 — AUTO SESSION CHECK
+   1.43 — AUTO SESSION CHECK
 ===================================================== */
 
 function checkAdminSession() {
@@ -6225,6 +5026,47 @@ function checkAdminSession() {
 
 
 /* =====================================================
+   1.45 — PRODUCT SEARCH EVENTS
+===================================================== */
+
+function setupProductFilters() {
+
+    const search =
+        document.getElementById(
+            "productSearch"
+        );
+
+
+    const category =
+        document.getElementById(
+            "productCategoryFilter"
+        );
+
+
+    if (search) {
+
+        search.addEventListener(
+            "input",
+            renderProducts
+        );
+
+    }
+
+
+    if (category) {
+
+        category.addEventListener(
+            "change",
+            renderProducts
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
    PAGE LOAD
 ===================================================== */
 
@@ -6262,6 +5104,7 @@ document.addEventListener(
 
         setupImageURLPreview();
 
+        setupProductFilters();
 
         renderAll();
 
@@ -6271,7 +5114,7 @@ document.addEventListener(
 
 
 /* =====================================================
-   1.44 — PERIODIC SESSION CHECK
+   1.43 — PERIODIC SESSION CHECK
 ===================================================== */
 
 setInterval(
@@ -6283,32 +5126,10 @@ setInterval(
     60 * 1000
 );
 
-
-
-/* =====================================================
-   1.44 — ESC KEY
-===================================================== */
-
-document.addEventListener(
-    "keydown",
-    function(event) {
-
-        if (
-            event.key === "Escape"
-        ) {
-
-            closeOrderModal();
-
-            closeMobileSidebar();
-
-        }
-
-    }
-);
-
 </script>
 
 
 </body>
 
 </html>
+```
