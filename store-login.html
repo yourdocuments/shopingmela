@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Shopping Mela — Store Login</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,"Noto Sans Bengali",sans-serif;
+  background:#f5f7fb;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#101828;
+}
+
+.login-wrapper{
+  width:100%;
+  max-width:420px;
+  padding:20px;
+}
+
+.logo{
+  text-align:center;
+  margin-bottom:22px;
+}
+
+.logo-icon{
+  width:65px;
+  height:65px;
+  margin:auto;
+  border-radius:18px;
+  background:#1877f2;
+  color:white;
+  display:grid;
+  place-items:center;
+  font-size:30px;
+  box-shadow:0 10px 30px rgba(24,119,242,.20);
+}
+
+.logo h1{
+  margin:12px 0 3px;
+  font-size:23px;
+}
+
+.logo p{
+  margin:0;
+  color:#667085;
+  font-size:11px;
+}
+
+.login-card{
+  background:#fff;
+  border:1px solid #e4e7ec;
+  border-radius:18px;
+  padding:28px;
+  box-shadow:0 15px 45px rgba(16,24,40,.08);
+}
+
+.login-card h2{
+  margin:0;
+  font-size:19px;
+}
+
+.subtitle{
+  margin:7px 0 22px;
+  color:#667085;
+  font-size:11px;
+  line-height:1.6;
+}
+
+label{
+  display:block;
+  margin:14px 0 6px;
+  color:#344054;
+  font-size:10px;
+  font-weight:700;
+}
+
+input{
+  width:100%;
+  height:43px;
+  padding:0 12px;
+  border:1px solid #d0d5dd;
+  border-radius:8px;
+  outline:none;
+  font-size:12px;
+  transition:.2s;
+}
+
+input:focus{
+  border-color:#1877f2;
+  box-shadow:0 0 0 3px rgba(24,119,242,.08);
+}
+
+.password-wrap{
+  position:relative;
+}
+
+.password-wrap input{
+  padding-right:65px;
+}
+
+.show-password{
+  position:absolute;
+  right:7px;
+  top:6px;
+  height:31px;
+  border:0;
+  background:#f2f4f7;
+  color:#475467;
+  border-radius:6px;
+  padding:0 9px;
+  font-size:9px;
+  cursor:pointer;
+}
+
+.login-btn{
+  width:100%;
+  height:44px;
+  margin-top:20px;
+  border:0;
+  border-radius:8px;
+  background:#1877f2;
+  color:#fff;
+  font-size:11px;
+  font-weight:800;
+  cursor:pointer;
+  transition:.2s;
+}
+
+.login-btn:hover{
+  background:#1266d6;
+}
+
+.login-btn:disabled{
+  opacity:.7;
+  cursor:not-allowed;
+}
+
+.message{
+  display:none;
+  padding:10px 12px;
+  margin-top:14px;
+  border-radius:8px;
+  font-size:10px;
+  line-height:1.5;
+}
+
+.message.show{
+  display:block;
+}
+
+.message.error{
+  background:#fff1f0;
+  color:#d92d20;
+  border:1px solid #fecdca;
+}
+
+.message.success{
+  background:#ecfdf3;
+  color:#027a48;
+  border:1px solid #abefc6;
+}
+
+.info-box{
+  margin-top:18px;
+  padding:12px;
+  background:#f8f9fc;
+  border:1px solid #eaecf0;
+  border-radius:9px;
+  font-size:9px;
+  color:#667085;
+  line-height:1.7;
+}
+
+.back{
+  display:block;
+  text-align:center;
+  margin-top:17px;
+  color:#1877f2;
+  text-decoration:none;
+  font-size:10px;
+}
+
+.back:hover{
+  text-decoration:underline;
+}
+
+.footer{
+  text-align:center;
+  margin-top:18px;
+  color:#98a2b3;
+  font-size:8px;
+}
+
+@media(max-width:480px){
+  .login-wrapper{
+    padding:14px;
+  }
+
+  .login-card{
+    padding:22px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="login-wrapper">
+
+  <div class="logo">
+    <div class="logo-icon">🛍️</div>
+    <h1>Shopping Mela</h1>
+    <p>Store Owner Portal</p>
+  </div>
+
+  <div class="login-card">
+
+    <h2>Store Owner Login</h2>
+
+    <div class="subtitle">
+      আপনার দোকান পরিচালনা করতে Customer ID এবং Password দিয়ে Login করুন।
+    </div>
+
+    <form id="loginForm">
+
+      <label for="customerId">
+        Customer ID / Store ID
+      </label>
+
+      <input
+        id="customerId"
+        type="text"
+        placeholder="আপনার Customer ID দিন"
+        autocomplete="username"
+        required
+      >
+
+      <label for="password">
+        Password
+      </label>
+
+      <div class="password-wrap">
+
+        <input
+          id="password"
+          type="password"
+          placeholder="আপনার Password দিন"
+          autocomplete="current-password"
+          required
+        >
+
+        <button
+          type="button"
+          class="show-password"
+          onclick="togglePassword()"
+        >
+          Show
+        </button>
+
+      </div>
+
+      <button
+        type="submit"
+        class="login-btn"
+        id="loginBtn"
+      >
+        Login to My Store
+      </button>
+
+    </form>
+
+    <div
+      id="message"
+      class="message"
+    ></div>
+
+    <div class="info-box">
+      <strong>🏪 Store Owner Access</strong><br>
+      Login করার পরে আপনি আপনার নিজের Store,
+      Profile, Products এবং Orders পরিচালনা করতে পারবেন।
+    </div>
+
+    <a
+      href="index.html"
+      class="back"
+    >
+      ← Back to Shopping Mela
+    </a>
+
+  </div>
+
+  <div class="footer">
+    © 2026 Shopping Mela — Store Owner Portal
+  </div>
+
+</div>
+
+
+<script>
+"use strict";
+
+/* ==========================================
+   SHOPPING MELA
+   STORE OWNER LOGIN
+   ========================================== */
+
+const STORE_KEYS = {
+  accounts: "shoppingMelaStoreAccounts",
+  logged: "shoppingMelaStoreLoggedIn",
+  loginTime: "shoppingMelaStoreLoginTime",
+  currentId: "shoppingMelaCurrentStoreId"
+};
+
+
+/* ==========================================
+   READ LOCAL STORAGE
+   ========================================== */
+
+function readAccounts(){
+
+  try{
+
+    const data =
+      JSON.parse(
+        localStorage.getItem(STORE_KEYS.accounts)
+      );
+
+    return Array.isArray(data) ? data : [];
+
+  }catch(error){
+
+    return [];
+
+  }
+
+}
+
+
+/* ==========================================
+   SAVE ACCOUNTS
+   ========================================== */
+
+function saveAccounts(accounts){
+
+  localStorage.setItem(
+    STORE_KEYS.accounts,
+    JSON.stringify(accounts)
+  );
+
+}
+
+
+/* ==========================================
+   CREATE DEMO STORE ACCOUNT
+   ==========================================
+
+   শুধুমাত্র testing-এর জন্য।
+
+   পরে Firebase এ গেলে
+   এই system পরিবর্তন করা হবে।
+*/
+
+function createDemoAccount(){
+
+  const accounts = readAccounts();
+
+  /*
+     যদি আগে থেকেই account থাকে,
+     তাহলে নতুন account বানাবে না।
+  */
+
+  if(accounts.length > 0){
+    return;
+  }
+
+  const demoAccount = {
+
+    id: "SM1001",
+
+    customerId: "SM1001",
+
+    password: "123456",
+
+    storeName: "Demo Shopping Store",
+
+    ownerName: "Store Owner",
+
+    phone: "01700000000",
+
+    email: "store@example.com",
+
+    category: "General",
+
+    status: "active",
+
+    createdAt: new Date().toISOString()
+
+  };
+
+  accounts.push(demoAccount);
+
+  saveAccounts(accounts);
+
+}
+
+
+/* ==========================================
+   SHOW MESSAGE
+   ========================================== */
+
+function showMessage(text,type){
+
+  const box =
+    document.getElementById("message");
+
+  box.textContent = text;
+
+  box.className =
+    "message show " + type;
+
+}
+
+
+/* ==========================================
+   HIDE MESSAGE
+   ========================================== */
+
+function hideMessage(){
+
+  const box =
+    document.getElementById("message");
+
+  box.className = "message";
+
+  box.textContent = "";
+
+}
+
+
+/* ==========================================
+   PASSWORD SHOW / HIDE
+   ========================================== */
+
+function togglePassword(){
+
+  const input =
+    document.getElementById("password");
+
+  const button =
+    document.querySelector(".show-password");
+
+  if(input.type === "password"){
+
+    input.type = "text";
+
+    button.textContent = "Hide";
+
+  }else{
+
+    input.type = "password";
+
+    button.textContent = "Show";
+
+  }
+
+}
+
+
+/* ==========================================
+   CHECK EXISTING LOGIN
+   ========================================== */
+
+function checkExistingLogin(){
+
+  const logged =
+    sessionStorage.getItem(
+      STORE_KEYS.logged
+    );
+
+  const currentId =
+    sessionStorage.getItem(
+      STORE_KEYS.currentId
+    );
+
+  const loginTime =
+    Number(
+      sessionStorage.getItem(
+        STORE_KEYS.loginTime
+      ) || 0
+    );
+
+
+  /*
+     Login session 24 hours valid
+  */
+
+  const validTime =
+    loginTime &&
+    (Date.now() - loginTime < 86400000);
+
+
+  if(
+    logged === "true" &&
+    currentId &&
+    validTime
+  ){
+
+    /*
+       Already logged in.
+       সরাসরি dashboard।
+    */
+
+    window.location.replace(
+      "store-dashboard.html"
+    );
+
+    return true;
+
+  }
+
+
+  /*
+     Old / invalid session পরিষ্কার
+  */
+
+  sessionStorage.removeItem(
+    STORE_KEYS.logged
+  );
+
+  sessionStorage.removeItem(
+    STORE_KEYS.loginTime
+  );
+
+  sessionStorage.removeItem(
+    STORE_KEYS.currentId
+  );
+
+  return false;
+
+}
+
+
+/* ==========================================
+   LOGIN
+   ========================================== */
+
+function loginStore(customerId,password){
+
+  const accounts =
+    readAccounts();
+
+
+  const id =
+    String(customerId)
+      .trim()
+      .toLowerCase();
+
+
+  const pass =
+    String(password);
+
+
+  const account =
+    accounts.find(function(store){
+
+      return String(
+        store.customerId || store.id || ""
+      )
+      .trim()
+      .toLowerCase() === id
+
+      &&
+      String(
+        store.password || ""
+      ) === pass;
+
+    });
+
+
+  /*
+     Account পাওয়া যায়নি
+  */
+
+  if(!account){
+
+    showMessage(
+      "Customer ID অথবা Password সঠিক নয়।",
+      "error"
+    );
+
+    return false;
+
+  }
+
+
+  /*
+     Store inactive হলে login বন্ধ
+  */
+
+  if(
+    account.status &&
+    account.status !== "active"
+  ){
+
+    showMessage(
+      "এই Store বর্তমানে Active নয়। Admin-এর সাথে যোগাযোগ করুন।",
+      "error"
+    );
+
+    return false;
+
+  }
+
+
+  /*
+     Session তৈরি
+  */
+
+  sessionStorage.setItem(
+    STORE_KEYS.logged,
+    "true"
+  );
+
+  sessionStorage.setItem(
+    STORE_KEYS.currentId,
+    String(
+      account.customerId || account.id
+    )
+  );
+
+  sessionStorage.setItem(
+    STORE_KEYS.loginTime,
+    String(Date.now())
+  );
+
+
+  /*
+     Login success
+  */
+
+  showMessage(
+    "Login successful! Dashboard খুলছে...",
+    "success"
+  );
+
+
+  document.getElementById(
+    "loginBtn"
+  ).disabled = true;
+
+
+  /*
+     Dashboard-এ পাঠানো
+  */
+
+  setTimeout(function(){
+
+    window.location.replace(
+      "store-dashboard.html"
+    );
+
+  },700);
+
+
+  return true;
+
+}
+
+
+/* ==========================================
+   FORM SUBMIT
+   ========================================== */
+
+document
+  .getElementById("loginForm")
+  .addEventListener("submit",function(event){
+
+    event.preventDefault();
+
+    hideMessage();
+
+    const customerId =
+      document
+        .getElementById("customerId")
+        .value;
+
+    const password =
+      document
+        .getElementById("password")
+        .value;
+
+
+    if(!customerId.trim()){
+
+      showMessage(
+        "Customer ID দিন।",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    if(!password){
+
+      showMessage(
+        "Password দিন।",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    const button =
+      document.getElementById("loginBtn");
+
+    button.disabled = true;
+
+    button.textContent = "Checking...";
+
+
+    /*
+       ছোট delay —
+       Login UI একটু natural করার জন্য।
+    */
+
+    setTimeout(function(){
+
+      const success =
+        loginStore(
+          customerId,
+          password
+        );
+
+
+      if(!success){
+
+        button.disabled = false;
+
+        button.textContent =
+          "Login to My Store";
+
+      }
+
+    },300);
+
+});
+
+
+/* ==========================================
+   ENTER KEY SUPPORT
+   ========================================== */
+
+document
+  .getElementById("customerId")
+  .addEventListener("keydown",function(){
+
+    hideMessage();
+
+  });
+
+
+document
+  .getElementById("password")
+  .addEventListener("keydown",function(){
+
+    hideMessage();
+
+  });
+
+
+/* ==========================================
+   START
+   ========================================== */
+
+createDemoAccount();
+
+checkExistingLogin();
+
+</script>
+
+</body>
+</html>
