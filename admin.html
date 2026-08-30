@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -5,28 +6,31 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Admin Dashboard — Shopping Mela</title>
+<title>Shopping Mela — Admin Dashboard</title>
 
 <script>
-(function () {
+(function(){
 
-    const SESSION_KEY = "shoppingMelaAdminLoggedIn";
-    const LOGIN_TIME_KEY = "shoppingMelaAdminLoginTime";
+    const LOGIN_KEY = "shoppingMelaAdminLoggedIn";
+    const TIME_KEY = "shoppingMelaAdminLoginTime";
     const SESSION_DURATION = 24 * 60 * 60 * 1000;
 
-    const loggedIn = sessionStorage.getItem(SESSION_KEY);
+    const loggedIn = sessionStorage.getItem(LOGIN_KEY);
     const loginTime = Number(
-        sessionStorage.getItem(LOGIN_TIME_KEY) || 0
+        sessionStorage.getItem(TIME_KEY) || 0
     );
 
-    if (
+    if(
         loggedIn !== "true" ||
         !loginTime ||
         Date.now() - loginTime >= SESSION_DURATION
-    ) {
-        sessionStorage.removeItem(SESSION_KEY);
-        sessionStorage.removeItem(LOGIN_TIME_KEY);
+    ){
+
+        sessionStorage.removeItem(LOGIN_KEY);
+        sessionStorage.removeItem(TIME_KEY);
+
         window.location.replace("admin-login.html");
+
     }
 
 })();
@@ -38,6 +42,10 @@
     box-sizing:border-box;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     margin:0;
     font-family:Arial,"Noto Sans Bengali",sans-serif;
@@ -45,8 +53,14 @@ body{
     color:#101828;
 }
 
-button,input,select{
+button,
+input,
+select{
     font-family:inherit;
+}
+
+button{
+    -webkit-tap-highlight-color:transparent;
 }
 
 .sidebar{
@@ -81,6 +95,7 @@ button,input,select{
     border-radius:9px;
     background:#1877f2;
     font-size:18px;
+    flex-shrink:0;
 }
 
 .admin-nav{
@@ -109,6 +124,7 @@ button,input,select{
     text-align:left;
     font-size:11px;
     margin-bottom:3px;
+    transition:.2s;
 }
 
 .nav-item:hover{
@@ -175,6 +191,10 @@ button,input,select{
     border-radius:7px;
     font-size:10px;
     font-weight:700;
+}
+
+.view-site:hover{
+    background:#f9fafb;
 }
 
 .admin-user{
@@ -254,6 +274,8 @@ button,input,select{
     font-size:11px;
 }
 
+/* STATS */
+
 .stats{
     display:grid;
     grid-template-columns:repeat(4,1fr);
@@ -303,6 +325,8 @@ button,input,select{
     font-size:23px;
     font-weight:800;
 }
+
+/* DASHBOARD */
 
 .dashboard-grid{
     display:grid;
@@ -405,10 +429,12 @@ button,input,select{
     padding:15px 10px;
     cursor:pointer;
     text-align:center;
+    transition:.2s;
 }
 
 .quick-action:hover{
     border-color:#1877f2;
+    transform:translateY(-1px);
 }
 
 .quick-action-icon{
@@ -469,6 +495,7 @@ button,input,select{
     min-height:4px;
     background:#1877f2;
     border-radius:5px 5px 0 0;
+    transition:.3s;
 }
 
 .bar-label{
@@ -477,25 +504,33 @@ button,input,select{
     margin-bottom:-18px;
 }
 
-/* ORDER CONTROLS */
+/* TOOLS */
 
-.order-tools{
+.order-tools,
+.product-tools{
     padding:16px 18px;
     background:#fff;
     border-bottom:1px solid #eaecf0;
 }
 
-.order-tools-row{
+.order-tools-row,
+.product-tools-row{
     display:grid;
     grid-template-columns:1fr 180px;
     gap:10px;
 }
 
-.order-search{
+.product-tools-row{
+    grid-template-columns:1fr 190px;
+}
+
+.order-search,
+.product-search{
     position:relative;
 }
 
-.order-search input{
+.order-search input,
+.product-search input{
     width:100%;
     padding:11px 12px 11px 35px;
     border:1px solid #d0d5dd;
@@ -504,11 +539,22 @@ button,input,select{
     font-size:10px;
 }
 
-.order-search input:focus{
+.order-search input:focus,
+.product-search input:focus{
     border-color:#1877f2;
 }
 
-.order-filter{
+.search-icon{
+    position:absolute;
+    left:11px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#98a2b3;
+    pointer-events:none;
+}
+
+.order-filter,
+.category-filter{
     width:100%;
     padding:10px 12px;
     border:1px solid #d0d5dd;
@@ -518,7 +564,8 @@ button,input,select{
     font-size:10px;
 }
 
-.order-result-count{
+.order-result-count,
+.product-result-count{
     margin-top:9px;
     color:#98a2b3;
     font-size:8px;
@@ -587,7 +634,7 @@ td strong{
     color:#f04438;
 }
 
-/* PRODUCT FORM */
+/* PRODUCT */
 
 .product-form{
     padding:20px;
@@ -737,58 +784,6 @@ td strong{
     display:inline-block;
 }
 
-/* PRODUCT SEARCH */
-
-.product-tools{
-    padding:16px 18px;
-    background:#fff;
-    border-bottom:1px solid #eaecf0;
-}
-
-.product-tools-row{
-    display:grid;
-    grid-template-columns:1fr 190px;
-    gap:10px;
-}
-
-.product-search{
-    position:relative;
-}
-
-.product-search input{
-    width:100%;
-    padding:11px 12px 11px 35px;
-    border:1px solid #d0d5dd;
-    border-radius:8px;
-    outline:none;
-    font-size:10px;
-}
-
-.search-icon{
-    position:absolute;
-    left:11px;
-    top:50%;
-    transform:translateY(-50%);
-    color:#98a2b3;
-    pointer-events:none;
-}
-
-.category-filter{
-    width:100%;
-    padding:10px 12px;
-    border:1px solid #d0d5dd;
-    border-radius:8px;
-    outline:none;
-    background:#fff;
-    font-size:10px;
-}
-
-.product-result-count{
-    margin-top:9px;
-    color:#98a2b3;
-    font-size:8px;
-}
-
 .product-list{
     padding:18px;
 }
@@ -815,6 +810,7 @@ td strong{
     display:flex;
     align-items:center;
     justify-content:center;
+    font-size:22px;
 }
 
 .product-image img{
@@ -877,6 +873,51 @@ td strong{
 
 .user-card{
     padding:18px;
+}
+
+.user-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:13px 0;
+    border-bottom:1px solid #f2f4f7;
+}
+
+.user-row:last-child{
+    border-bottom:none;
+}
+
+.user-avatar{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    background:#eef5ff;
+    color:#1877f2;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:13px;
+    font-weight:800;
+    flex-shrink:0;
+}
+
+.user-main{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    min-width:0;
+}
+
+.user-name{
+    font-size:11px;
+    font-weight:800;
+}
+
+.user-contact{
+    color:#667085;
+    font-size:9px;
+    margin-top:3px;
 }
 
 .user-empty{
@@ -1019,6 +1060,8 @@ td strong{
     font-size:10px;
     z-index:9999;
     transition:.25s;
+    white-space:nowrap;
+    max-width:90vw;
 }
 
 .toast.show{
@@ -1128,6 +1171,10 @@ td strong{
         grid-column:auto;
     }
 
+    .user-row{
+        align-items:flex-start;
+    }
+
 }
 
 @media(max-width:420px){
@@ -1144,6 +1191,15 @@ td strong{
         padding:13px;
     }
 
+    .quick-actions{
+        grid-template-columns:1fr;
+    }
+
+    .toast{
+        white-space:normal;
+        text-align:center;
+    }
+
 }
 
 </style>
@@ -1151,92 +1207,196 @@ td strong{
 
 <body>
 
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
 <aside class="sidebar">
 
     <div class="admin-logo">
-        <div class="admin-logo-icon">🛍️</div>
-        <span>Shopping Mela</span>
+
+        <div class="admin-logo-icon">
+            🛍️
+        </div>
+
+        <span>
+            Shopping Mela
+        </span>
+
     </div>
+
 
     <nav class="admin-nav">
 
-        <div class="nav-title">Dashboard</div>
+        <div class="nav-title">
+            Dashboard
+        </div>
 
-        <button class="nav-item active"
-            onclick="showSection('dashboard',this)">
-            <span class="nav-icon">📊</span>
-            <span>Dashboard</span>
+
+        <button
+            class="nav-item active"
+            onclick="showSection('dashboard',this)"
+        >
+
+            <span class="nav-icon">
+                📊
+            </span>
+
+            <span>
+                Dashboard
+            </span>
+
         </button>
 
-        <button class="nav-item"
-            onclick="showSection('orders',this)">
-            <span class="nav-icon">📦</span>
-            <span>Orders</span>
-            <span class="nav-badge" id="sidebarOrderCount">0</span>
+
+        <button
+            class="nav-item"
+            onclick="showSection('orders',this)"
+        >
+
+            <span class="nav-icon">
+                📦
+            </span>
+
+            <span>
+                Orders
+            </span>
+
+            <span
+                class="nav-badge"
+                id="sidebarOrderCount"
+            >
+                0
+            </span>
+
         </button>
 
-        <button class="nav-item"
-            onclick="showSection('products',this)">
-            <span class="nav-icon">🛍️</span>
-            <span>Products</span>
+
+        <button
+            class="nav-item"
+            onclick="showSection('products',this)"
+        >
+
+            <span class="nav-icon">
+                🛍️
+            </span>
+
+            <span>
+                Products
+            </span>
+
         </button>
 
-        <button class="nav-item"
-            onclick="showSection('users',this)">
-            <span class="nav-icon">👥</span>
-            <span>Users</span>
+
+        <button
+            class="nav-item"
+            onclick="showSection('users',this)"
+        >
+
+            <span class="nav-icon">
+                👥
+            </span>
+
+            <span>
+                Users
+            </span>
+
         </button>
 
-        <div class="nav-title" style="margin-top:18px;">
+
+        <div
+            class="nav-title"
+            style="margin-top:18px;"
+        >
             Website
         </div>
 
-        <button class="nav-item"
-            onclick="window.location.href='index.html'">
-            <span class="nav-icon">🏠</span>
-            <span>Visit Website</span>
+
+        <button
+            class="nav-item"
+            onclick="window.location.href='index.html'"
+        >
+
+            <span class="nav-icon">
+                🏠
+            </span>
+
+            <span>
+                Visit Website
+            </span>
+
         </button>
 
-        <button class="nav-item"
+
+        <button
+            class="nav-item"
             onclick="adminLogout()"
-            style="margin-top:25px;color:#ffb4ab;">
-            <span class="nav-icon">🚪</span>
-            <span>Logout</span>
+            style="margin-top:25px;color:#ffb4ab;"
+        >
+
+            <span class="nav-icon">
+                🚪
+            </span>
+
+            <span>
+                Logout
+            </span>
+
         </button>
 
     </nav>
+
 </aside>
 
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
 
 <div class="main">
 
 <header class="top-header">
 
-    <div class="page-title" id="pageTitle">
+    <div
+        class="page-title"
+        id="pageTitle"
+    >
         Dashboard
     </div>
 
+
     <div class="header-right">
 
-        <a href="index.html" class="view-site">
+        <a
+            href="index.html"
+            class="view-site"
+        >
             View Website ↗
         </a>
 
+
         <div class="admin-user">
 
-            <div class="admin-avatar">A</div>
+            <div class="admin-avatar">
+                A
+            </div>
+
 
             <div class="admin-user-info">
 
                 <span class="admin-name">
+
                     Administrator
 
                     <span class="verified-badge">
                         ✓
                     </span>
+
                 </span>
 
-                <small>Super Admin</small>
+                <small>
+                    Super Admin
+                </small>
 
             </div>
 
@@ -1249,9 +1409,15 @@ td strong{
 
 <main class="content">
 
-<!-- DASHBOARD -->
 
-<section class="section active" id="dashboard">
+<!-- =====================================================
+     DASHBOARD SECTION
+===================================================== -->
+
+<section
+    class="section active"
+    id="dashboard"
+>
 
     <div class="welcome">
 
@@ -1271,15 +1437,25 @@ td strong{
         <div class="stat">
 
             <div class="stat-top">
-                <div class="stat-icon">📦</div>
-                <span class="stat-change">Live</span>
+
+                <div class="stat-icon">
+                    📦
+                </div>
+
+                <span class="stat-change">
+                    Live
+                </span>
+
             </div>
 
             <div class="stat-label">
                 Total Orders
             </div>
 
-            <div class="stat-value" id="dashOrders">
+            <div
+                class="stat-value"
+                id="dashOrders"
+            >
                 0
             </div>
 
@@ -1289,15 +1465,25 @@ td strong{
         <div class="stat">
 
             <div class="stat-top">
-                <div class="stat-icon">💰</div>
-                <span class="stat-change">Sales</span>
+
+                <div class="stat-icon">
+                    💰
+                </div>
+
+                <span class="stat-change">
+                    Sales
+                </span>
+
             </div>
 
             <div class="stat-label">
                 Total Sales
             </div>
 
-            <div class="stat-value" id="dashSales">
+            <div
+                class="stat-value"
+                id="dashSales"
+            >
                 ৳0
             </div>
 
@@ -1307,15 +1493,25 @@ td strong{
         <div class="stat">
 
             <div class="stat-top">
-                <div class="stat-icon">🚚</div>
-                <span class="stat-change">Active</span>
+
+                <div class="stat-icon">
+                    🚚
+                </div>
+
+                <span class="stat-change">
+                    Active
+                </span>
+
             </div>
 
             <div class="stat-label">
                 Active Delivery
             </div>
 
-            <div class="stat-value" id="dashDelivery">
+            <div
+                class="stat-value"
+                id="dashDelivery"
+            >
                 0
             </div>
 
@@ -1325,15 +1521,25 @@ td strong{
         <div class="stat">
 
             <div class="stat-top">
-                <div class="stat-icon">👥</div>
-                <span class="stat-change">Users</span>
+
+                <div class="stat-icon">
+                    👥
+                </div>
+
+                <span class="stat-change">
+                    Users
+                </span>
+
             </div>
 
             <div class="stat-label">
                 Registered Users
             </div>
 
-            <div class="stat-value" id="dashUsers">
+            <div
+                class="stat-value"
+                id="dashUsers"
+            >
                 0
             </div>
 
@@ -1348,9 +1554,13 @@ td strong{
 
             <div class="panel-header">
 
-                <h2>Recent Orders</h2>
+                <h2>
+                    Recent Orders
+                </h2>
 
-                <button onclick="showSectionById('orders')">
+                <button
+                    onclick="showSectionById('orders')"
+                >
                     View All
                 </button>
 
@@ -1365,38 +1575,92 @@ td strong{
 
             <div class="panel-header">
 
-                <h2>Quick Actions</h2>
+                <h2>
+                    Quick Actions
+                </h2>
 
             </div>
 
+
             <div class="quick-actions">
 
-                <button class="quick-action"
-                    onclick="showSectionById('orders')">
-                    <div class="quick-action-icon">📦</div>
-                    <strong>Manage Orders</strong>
-                    <span>Order manage করুন</span>
+                <button
+                    class="quick-action"
+                    onclick="showSectionById('orders')"
+                >
+
+                    <div class="quick-action-icon">
+                        📦
+                    </div>
+
+                    <strong>
+                        Manage Orders
+                    </strong>
+
+                    <span>
+                        Order manage করুন
+                    </span>
+
                 </button>
 
-                <button class="quick-action"
-                    onclick="showSectionById('products')">
-                    <div class="quick-action-icon">➕</div>
-                    <strong>Add Product</strong>
-                    <span>নতুন product যোগ করুন</span>
+
+                <button
+                    class="quick-action"
+                    onclick="openAddProduct()"
+                >
+
+                    <div class="quick-action-icon">
+                        ➕
+                    </div>
+
+                    <strong>
+                        Add Product
+                    </strong>
+
+                    <span>
+                        নতুন product যোগ করুন
+                    </span>
+
                 </button>
 
-                <button class="quick-action"
-                    onclick="showSectionById('users')">
-                    <div class="quick-action-icon">👥</div>
-                    <strong>Users</strong>
-                    <span>User overview</span>
+
+                <button
+                    class="quick-action"
+                    onclick="showSectionById('users')"
+                >
+
+                    <div class="quick-action-icon">
+                        👥
+                    </div>
+
+                    <strong>
+                        Users
+                    </strong>
+
+                    <span>
+                        User overview
+                    </span>
+
                 </button>
 
-                <button class="quick-action"
-                    onclick="window.location.href='index.html'">
-                    <div class="quick-action-icon">🌐</div>
-                    <strong>Website</strong>
-                    <span>Live website</span>
+
+                <button
+                    class="quick-action"
+                    onclick="window.location.href='index.html'"
+                >
+
+                    <div class="quick-action-icon">
+                        🌐
+                    </div>
+
+                    <strong>
+                        Website
+                    </strong>
+
+                    <span>
+                        Live website
+                    </span>
+
                 </button>
 
             </div>
@@ -1410,19 +1674,26 @@ td strong{
 
         <div class="panel-header">
 
-            <h2>Sales Overview</h2>
+            <h2>
+                Sales Overview
+            </h2>
 
-            <span style="color:#98a2b3;font-size:9px;">
+            <span
+                style="color:#98a2b3;font-size:9px;"
+            >
                 Last 7 Orders
             </span>
 
         </div>
 
+
         <div class="sales-panel">
 
             <div class="sales-total">
 
-                <span>Total Order Value</span>
+                <span>
+                    Total Order Value
+                </span>
 
                 <strong id="salesOverviewTotal">
                     ৳0
@@ -1430,7 +1701,11 @@ td strong{
 
             </div>
 
-            <div class="sales-bars" id="salesBars"></div>
+
+            <div
+                class="sales-bars"
+                id="salesBars"
+            ></div>
 
         </div>
 
@@ -1439,13 +1714,20 @@ td strong{
 </section>
 
 
-<!-- ORDERS -->
+<!-- =====================================================
+     ORDERS SECTION
+===================================================== -->
 
-<section class="section" id="orders">
+<section
+    class="section"
+    id="orders"
+>
 
     <div class="welcome">
 
-        <h1>Orders</h1>
+        <h1>
+            Orders
+        </h1>
 
         <p>
             সব customer orders এখান থেকে manage করুন।
@@ -1458,7 +1740,9 @@ td strong{
 
         <div class="panel-header">
 
-            <h2>All Orders</h2>
+            <h2>
+                All Orders
+            </h2>
 
             <button onclick="renderOrdersTable()">
                 Refresh
@@ -1543,17 +1827,38 @@ td strong{
 
                     <tr>
 
-                        <th>Order ID</th>
-                        <th>Customer</th>
-                        <th>Mobile</th>
-                        <th>Total</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        <th>
+                            Order ID
+                        </th>
+
+                        <th>
+                            Customer
+                        </th>
+
+                        <th>
+                            Mobile
+                        </th>
+
+                        <th>
+                            Total
+                        </th>
+
+                        <th>
+                            Date
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Action
+                        </th>
 
                     </tr>
 
                 </thead>
+
 
                 <tbody id="ordersTable"></tbody>
 
@@ -1566,13 +1871,20 @@ td strong{
 </section>
 
 
-<!-- PRODUCTS -->
+<!-- =====================================================
+     PRODUCTS SECTION
+===================================================== -->
 
-<section class="section" id="products">
+<section
+    class="section"
+    id="products"
+>
 
     <div class="welcome">
 
-        <h1>Products</h1>
+        <h1>
+            Products
+        </h1>
 
         <p>
             Product add, edit, delete, search এবং category filter করুন।
@@ -1592,7 +1904,9 @@ td strong{
 
             <div class="form-group">
 
-                <label>Product Name</label>
+                <label>
+                    Product Name
+                </label>
 
                 <input
                     type="text"
@@ -1605,7 +1919,9 @@ td strong{
 
             <div class="form-group">
 
-                <label>Price</label>
+                <label>
+                    Price
+                </label>
 
                 <input
                     type="number"
@@ -1620,15 +1936,31 @@ td strong{
 
             <div class="form-group">
 
-                <label>Category</label>
+                <label>
+                    Category
+                </label>
 
                 <select id="productCategory">
 
-                    <option>Fashion</option>
-                    <option>Beauty</option>
-                    <option>Electronics</option>
-                    <option>Food</option>
-                    <option>Home</option>
+                    <option>
+                        Fashion
+                    </option>
+
+                    <option>
+                        Beauty
+                    </option>
+
+                    <option>
+                        Electronics
+                    </option>
+
+                    <option>
+                        Food
+                    </option>
+
+                    <option>
+                        Home
+                    </option>
 
                 </select>
 
@@ -1637,7 +1969,9 @@ td strong{
 
             <div class="form-group">
 
-                <label>Image URL</label>
+                <label>
+                    Image URL
+                </label>
 
                 <input
                     type="text"
@@ -1669,11 +2003,13 @@ td strong{
                             🖼️ Choose Image
                         </label>
 
+
                         <input
                             type="file"
                             id="productImageFile"
                             accept="image/*"
                         >
+
 
                         <span
                             class="image-file-name"
@@ -1696,6 +2032,7 @@ td strong{
                             alt="Product Preview"
                         >
 
+
                         <button
                             type="button"
                             class="remove-image"
@@ -1712,6 +2049,10 @@ td strong{
                         আপনি চাইলে
                         <b>Image URL</b>
                         অথবা upload image ব্যবহার করতে পারেন।
+
+                        <br>
+
+                        Upload image সর্বোচ্চ 2MB।
 
                     </div>
 
@@ -1747,7 +2088,9 @@ td strong{
 
         <div class="panel-header">
 
-            <h2>Saved Products</h2>
+            <h2>
+                Saved Products
+            </h2>
 
             <button onclick="renderProducts()">
                 Refresh
@@ -1830,13 +2173,20 @@ td strong{
 </section>
 
 
-<!-- USERS -->
+<!-- =====================================================
+     USERS SECTION
+===================================================== -->
 
-<section class="section" id="users">
+<section
+    class="section"
+    id="users"
+>
 
     <div class="welcome">
 
-        <h1>Users</h1>
+        <h1>
+            Users
+        </h1>
 
         <p>
             Registered customer information overview।
@@ -1858,7 +2208,9 @@ td strong{
 </div>
 
 
-<!-- ORDER DETAILS MODAL -->
+<!-- =====================================================
+     ORDER MODAL
+===================================================== -->
 
 <div
     class="modal"
@@ -1906,6 +2258,10 @@ td strong{
 </div>
 
 
+<!-- =====================================================
+     TOAST
+===================================================== -->
+
 <div
     class="toast"
     id="toast"
@@ -1915,7 +2271,7 @@ td strong{
 <script>
 
 /* =====================================================
-   GLOBAL DATA
+   GLOBAL
 ===================================================== */
 
 let orders = [];
@@ -1943,14 +2299,26 @@ function loadData(){
 
     try{
 
-        orders =
-            JSON.parse(
-                localStorage.getItem(
-                    "shoppingMelaOrders"
-                )
-            ) || [];
+        const savedOrders =
+            localStorage.getItem(
+                "shoppingMelaOrders"
+            );
 
-    }catch{
+        orders =
+            savedOrders
+            ? JSON.parse(savedOrders)
+            : [];
+
+        if(!Array.isArray(orders)){
+            orders = [];
+        }
+
+    }catch(error){
+
+        console.warn(
+            "Orders load error:",
+            error
+        );
 
         orders = [];
 
@@ -1959,14 +2327,26 @@ function loadData(){
 
     try{
 
-        products =
-            JSON.parse(
-                localStorage.getItem(
-                    "shoppingMelaProducts"
-                )
-            ) || [];
+        const savedProducts =
+            localStorage.getItem(
+                "shoppingMelaProducts"
+            );
 
-    }catch{
+        products =
+            savedProducts
+            ? JSON.parse(savedProducts)
+            : [];
+
+        if(!Array.isArray(products)){
+            products = [];
+        }
+
+    }catch(error){
+
+        console.warn(
+            "Products load error:",
+            error
+        );
 
         products = [];
 
@@ -1975,14 +2355,26 @@ function loadData(){
 
     try{
 
-        users =
-            JSON.parse(
-                localStorage.getItem(
-                    "shoppingMelaUsers"
-                )
-            ) || [];
+        const savedUsers =
+            localStorage.getItem(
+                "shoppingMelaUsers"
+            );
 
-    }catch{
+        users =
+            savedUsers
+            ? JSON.parse(savedUsers)
+            : [];
+
+        if(!Array.isArray(users)){
+            users = [];
+        }
+
+    }catch(error){
+
+        console.warn(
+            "Users load error:",
+            error
+        );
 
         users = [];
 
@@ -1992,7 +2384,7 @@ function loadData(){
 
 
 /* =====================================================
-   SAVE DATA
+   SAVE
 ===================================================== */
 
 function saveOrders(){
@@ -2021,15 +2413,17 @@ function saveProducts(){
 
 function money(amount){
 
+    const number =
+        Number(amount || 0);
+
     return "৳" +
-        Number(amount || 0)
-        .toLocaleString("en-BD");
+        number.toLocaleString("en-BD");
 
 }
 
 
 /* =====================================================
-   ESCAPE
+   ESCAPE HTML
 ===================================================== */
 
 function escapeHTML(value){
@@ -2045,6 +2439,19 @@ function escapeHTML(value){
 
 
 /* =====================================================
+   SAFE ATTRIBUTE
+===================================================== */
+
+function safeId(value){
+
+    return String(value ?? "")
+        .replace(/\\/g,"\\\\")
+        .replace(/'/g,"\\'");
+
+}
+
+
+/* =====================================================
    DATE
 ===================================================== */
 
@@ -2054,10 +2461,17 @@ function formatDate(value){
         return "—";
     }
 
-    const date = new Date(value);
+    const date =
+        new Date(value);
 
-    if(Number.isNaN(date.getTime())){
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+
         return "—";
+
     }
 
     return date.toLocaleDateString(
@@ -2078,11 +2492,18 @@ function formatDate(value){
 
 function getStep(order){
 
+    const step =
+        Number(
+            order?.trackingStep ?? 0
+        );
+
     return Math.max(
         0,
         Math.min(
             5,
-            Number(order.trackingStep ?? 0)
+            Number.isFinite(step)
+            ? step
+            : 0
         )
     );
 
@@ -2116,50 +2537,63 @@ function renderStats(){
 
     const totalSales =
         orders.reduce(
-            (sum,order) =>
-                sum + Number(order.total || 0),
+            (sum,order)=>
+                sum +
+                Number(
+                    order.total || 0
+                ),
             0
         );
 
 
     const activeDelivery =
-        orders.filter(order => {
+        orders.filter(order=>{
 
-            const step = getStep(order);
+            const step =
+                getStep(order);
 
-            return step >= 3 && step < 5;
+            return (
+                step >= 3 &&
+                step < 5
+            );
 
         }).length;
 
 
     document.getElementById(
         "dashOrders"
-    ).textContent = orders.length;
+    ).textContent =
+        orders.length;
 
 
     document.getElementById(
         "dashSales"
-    ).textContent = money(totalSales);
+    ).textContent =
+        money(totalSales);
 
 
     document.getElementById(
         "dashDelivery"
-    ).textContent = activeDelivery;
+    ).textContent =
+        activeDelivery;
 
 
     document.getElementById(
         "dashUsers"
-    ).textContent = users.length;
+    ).textContent =
+        users.length;
 
 
     document.getElementById(
         "sidebarOrderCount"
-    ).textContent = orders.length;
+    ).textContent =
+        orders.length;
 
 
     document.getElementById(
         "salesOverviewTotal"
-    ).textContent = money(totalSales);
+    ).textContent =
+        money(totalSales);
 
 }
 
@@ -2175,17 +2609,31 @@ function renderRecentOrders(){
             "recentOrders"
         );
 
+    if(!box){
+        return;
+    }
+
     box.innerHTML = "";
+
 
     const recent =
         [...orders]
-        .reverse()
+        .sort(
+            (a,b)=>
+                new Date(
+                    b.createdAt || 0
+                ) -
+                new Date(
+                    a.createdAt || 0
+                )
+        )
         .slice(0,6);
 
 
     if(!recent.length){
 
         box.innerHTML = `
+
             <div style="
                 padding:35px;
                 text-align:center;
@@ -2194,6 +2642,7 @@ function renderRecentOrders(){
             ">
                 এখনো কোনো order নেই।
             </div>
+
         `;
 
         return;
@@ -2201,7 +2650,7 @@ function renderRecentOrders(){
     }
 
 
-    recent.forEach(order => {
+    recent.forEach(order=>{
 
         const customer =
             order.customer || {};
@@ -2211,22 +2660,27 @@ function renderRecentOrders(){
 
 
         const row =
-            document.createElement("div");
+            document.createElement(
+                "div"
+            );
 
-        row.className = "order-row";
+        row.className =
+            "order-row";
 
 
         row.innerHTML = `
 
             <div class="order-id">
                 #${escapeHTML(
-                    order.orderId || "SM000000"
+                    order.orderId ||
+                    "SM000000"
                 )}
             </div>
 
             <div class="order-customer">
                 ${escapeHTML(
-                    customer.name || "Customer"
+                    customer.name ||
+                    "Customer"
                 )}
             </div>
 
@@ -2236,11 +2690,14 @@ function renderRecentOrders(){
 
             <div>
                 <span class="status ${statusClass(step)}">
-                    ${STATUS_NAMES[step]}
+                    ${escapeHTML(
+                        STATUS_NAMES[step]
+                    )}
                 </span>
             </div>
 
         `;
+
 
         box.appendChild(row);
 
@@ -2250,7 +2707,7 @@ function renderRecentOrders(){
 
 
 /* =====================================================
-   SALES
+   SALES BARS
 ===================================================== */
 
 function renderSalesBars(){
@@ -2260,18 +2717,35 @@ function renderSalesBars(){
             "salesBars"
         );
 
+    if(!box){
+        return;
+    }
+
     box.innerHTML = "";
 
 
     const data =
         [...orders]
-        .reverse()
-        .slice(0,7);
+        .sort(
+            (a,b)=>
+                new Date(
+                    b.createdAt || 0
+                ) -
+                new Date(
+                    a.createdAt || 0
+                )
+        )
+        .slice(0,7)
+        .reverse();
 
 
     if(!data.length){
 
-        for(let i=0;i<7;i++){
+        for(
+            let i = 0;
+            i < 7;
+            i++
+        ){
 
             createBar(
                 box,
@@ -2289,55 +2763,75 @@ function renderSalesBars(){
     const values =
         data.map(
             order =>
-                Number(order.total || 0)
+                Number(
+                    order.total || 0
+                )
         );
 
 
     const max =
-        Math.max(...values,1);
-
-
-    data.forEach((order,index)=>{
-
-        const value =
-            Number(order.total || 0);
-
-
-        const height =
-            Math.max(
-                5,
-                (value / max) * 120
-            );
-
-
-        createBar(
-            box,
-            height,
-            index + 1
+        Math.max(
+            ...values,
+            1
         );
 
-    });
+
+    data.forEach(
+        (order,index)=>{
+
+            const value =
+                Number(
+                    order.total || 0
+                );
+
+
+            const height =
+                Math.max(
+                    5,
+                    (value / max) * 120
+                );
+
+
+            createBar(
+                box,
+                height,
+                index + 1
+            );
+
+        }
+    );
 
 }
 
 
-function createBar(parent,height,label){
+/* =====================================================
+   CREATE BAR
+===================================================== */
+
+function createBar(
+    parent,
+    height,
+    label
+){
 
     const wrap =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
-    wrap.className = "bar-wrap";
+    wrap.className =
+        "bar-wrap";
 
 
     wrap.innerHTML = `
 
         <div
             class="bar"
-            style="height:${height}px;"
+            style="height:${Number(height) || 0}px;"
         ></div>
 
         <span class="bar-label">
-            ${label}
+            ${escapeHTML(label)}
         </span>
 
     `;
@@ -2367,10 +2861,11 @@ function getFilteredOrders(){
     const status =
         document.getElementById(
             "orderStatusFilter"
-        )?.value || "all";
+        )?.value ||
+        "all";
 
 
-    return orders.filter(order => {
+    return orders.filter(order=>{
 
         const customer =
             order.customer || {};
@@ -2403,7 +2898,9 @@ function getFilteredOrders(){
 
         const matchesStatus =
             status === "all" ||
-            String(getStep(order)) === status;
+            String(
+                getStep(order)
+            ) === status;
 
 
         return (
@@ -2435,20 +2932,38 @@ function renderOrdersTable(){
     tbody.innerHTML = "";
 
 
-    const list =
-        getFilteredOrders()
-        .map((order,index)=>{
+    const filtered =
+        getFilteredOrders();
 
-            const originalIndex =
-                orders.indexOf(order);
+
+    const list =
+        filtered
+        .map(order=>{
 
             return {
                 order,
-                originalIndex
+                originalIndex:
+                    orders.indexOf(order)
             };
 
         })
-        .reverse();
+        .sort(
+            (a,b)=>{
+
+                const da =
+                    new Date(
+                        a.order.createdAt || 0
+                    );
+
+                const db =
+                    new Date(
+                        b.order.createdAt || 0
+                    );
+
+                return db - da;
+
+            }
+        );
 
 
     const count =
@@ -2496,7 +3011,7 @@ function renderOrdersTable(){
     }
 
 
-    list.forEach(item => {
+    list.forEach(item=>{
 
         const order =
             item.order;
@@ -2512,7 +3027,30 @@ function renderOrdersTable(){
 
 
         const tr =
-            document.createElement("tr");
+            document.createElement(
+                "tr"
+            );
+
+
+        const statusOptions =
+            STATUS_NAMES
+            .map(
+                (name,statusIndex)=>`
+
+                    <option
+                        value="${statusIndex}"
+                        ${
+                            statusIndex === step
+                            ? "selected"
+                            : ""
+                        }
+                    >
+                        ${escapeHTML(name)}
+                    </option>
+
+                `
+            )
+            .join("");
 
 
         tr.innerHTML = `
@@ -2520,20 +3058,23 @@ function renderOrdersTable(){
             <td>
                 <strong>
                     #${escapeHTML(
-                        order.orderId || "SM000000"
+                        order.orderId ||
+                        "SM000000"
                     )}
                 </strong>
             </td>
 
             <td>
                 ${escapeHTML(
-                    customer.name || "—"
+                    customer.name ||
+                    "—"
                 )}
             </td>
 
             <td>
                 ${escapeHTML(
-                    customer.phone || "—"
+                    customer.phone ||
+                    "—"
                 )}
             </td>
 
@@ -2542,42 +3083,19 @@ function renderOrdersTable(){
             </td>
 
             <td>
-                ${formatDate(order.createdAt)}
+                ${formatDate(
+                    order.createdAt
+                )}
             </td>
 
             <td>
 
                 <select
                     class="table-status"
-                    onchange="
-                        changeStatus(
-                            ${index},
-                            this.value
-                        )
-                    "
+                    data-order-index="${index}"
+                    onchange="changeStatusFromElement(this)"
                 >
-
-                    ${
-                        STATUS_NAMES
-                        .map(
-                            (name,statusIndex)=>`
-
-                                <option
-                                    value="${statusIndex}"
-                                    ${
-                                        statusIndex === step
-                                        ? "selected"
-                                        : ""
-                                    }
-                                >
-                                    ${name}
-                                </option>
-
-                            `
-                        )
-                        .join("")
-                    }
-
+                    ${statusOptions}
                 </select>
 
             </td>
@@ -2586,11 +3104,8 @@ function renderOrdersTable(){
 
                 <button
                     class="action-btn view-order"
-                    onclick="
-                        viewOrder(
-                            ${index}
-                        )
-                    "
+                    data-order-index="${index}"
+                    onclick="viewOrderFromElement(this)"
                 >
                     👁 View
                 </button>
@@ -2598,11 +3113,8 @@ function renderOrdersTable(){
 
                 <button
                     class="action-btn delete-order"
-                    onclick="
-                        deleteOrder(
-                            ${index}
-                        )
-                    "
+                    data-order-index="${index}"
+                    onclick="deleteOrderFromElement(this)"
                 >
                     🗑 Delete
                 </button>
@@ -2620,10 +3132,32 @@ function renderOrdersTable(){
 
 
 /* =====================================================
+   STATUS FROM ELEMENT
+===================================================== */
+
+function changeStatusFromElement(element){
+
+    const index =
+        Number(
+            element.dataset.orderIndex
+        );
+
+    changeStatus(
+        index,
+        element.value
+    );
+
+}
+
+
+/* =====================================================
    CHANGE STATUS
 ===================================================== */
 
-function changeStatus(index,value){
+function changeStatus(
+    index,
+    value
+){
 
     if(!orders[index]){
         return;
@@ -2641,7 +3175,7 @@ function changeStatus(index,value){
     saveOrders();
 
 
-    syncLastOrder(
+    syncOrderEverywhere(
         orders[index]
     );
 
@@ -2657,18 +3191,27 @@ function changeStatus(index,value){
 
 
 /* =====================================================
-   SYNC LAST ORDER
+   SYNC ORDER
 ===================================================== */
 
-function syncLastOrder(order){
+function syncOrderEverywhere(order){
 
     try{
 
+        const lastRaw =
+            localStorage.getItem(
+                "shoppingMelaLastOrder"
+            );
+
+
+        if(!lastRaw){
+            return;
+        }
+
+
         const last =
             JSON.parse(
-                localStorage.getItem(
-                    "shoppingMelaLastOrder"
-                )
+                lastRaw
             );
 
 
@@ -2692,9 +3235,12 @@ function syncLastOrder(order){
 
         }
 
-    }catch{
+    }catch(error){
 
-        /* ignore */
+        console.warn(
+            "Order sync error:",
+            error
+        );
 
     }
 
@@ -2704,6 +3250,18 @@ function syncLastOrder(order){
 /* =====================================================
    VIEW ORDER
 ===================================================== */
+
+function viewOrderFromElement(element){
+
+    const index =
+        Number(
+            element.dataset.orderIndex
+        );
+
+    viewOrder(index);
+
+}
+
 
 function viewOrder(index){
 
@@ -2749,7 +3307,10 @@ function viewOrder(index){
 
     title.textContent =
         "Order #" +
-        (order.orderId || "SM000000");
+        (
+            order.orderId ||
+            "SM000000"
+        );
 
 
     let itemsHTML = "";
@@ -2778,35 +3339,50 @@ function viewOrder(index){
                 </strong>
 
                 ${
-                    items.map(item=>`
+                    items
+                    .map(item=>{
 
-                        <div class="item-row">
+                        const itemName =
+                            item.name ||
+                            item.title ||
+                            "Product";
 
-                            <div>
-                                ${escapeHTML(
-                                    item.name ||
-                                    item.title ||
-                                    "Product"
-                                )}
+                        const quantity =
+                            item.quantity;
 
-                                ${
-                                    item.quantity
-                                    ? ` × ${escapeHTML(item.quantity)}`
-                                    : ""
-                                }
+                        const itemPrice =
+                            item.price ??
+                            item.total ??
+                            0;
+
+                        return `
+
+                            <div class="item-row">
+
+                                <div>
+                                    ${escapeHTML(
+                                        itemName
+                                    )}
+
+                                    ${
+                                        quantity
+                                        ? ` × ${escapeHTML(quantity)}`
+                                        : ""
+                                    }
+                                </div>
+
+                                <strong>
+                                    ${money(
+                                        itemPrice
+                                    )}
+                                </strong>
+
                             </div>
 
-                            <strong>
-                                ${money(
-                                    item.price ||
-                                    item.total ||
-                                    0
-                                )}
-                            </strong>
+                        `;
 
-                        </div>
-
-                    `).join("")
+                    })
+                    .join("")
                 }
 
             </div>
@@ -2828,7 +3404,8 @@ function viewOrder(index){
 
                 <div class="detail-value">
                     ${escapeHTML(
-                        customer.name || "—"
+                        customer.name ||
+                        "—"
                     )}
                 </div>
 
@@ -2843,7 +3420,8 @@ function viewOrder(index){
 
                 <div class="detail-value">
                     ${escapeHTML(
-                        customer.phone || "—"
+                        customer.phone ||
+                        "—"
                     )}
                 </div>
 
@@ -2858,7 +3436,8 @@ function viewOrder(index){
 
                 <div class="detail-value">
                     ${escapeHTML(
-                        customer.email || "—"
+                        customer.email ||
+                        "—"
                     )}
                 </div>
 
@@ -2887,7 +3466,9 @@ function viewOrder(index){
                 </span>
 
                 <div class="detail-value">
-                    ${STATUS_NAMES[step]}
+                    ${escapeHTML(
+                        STATUS_NAMES[step]
+                    )}
                 </div>
 
             </div>
@@ -2900,7 +3481,9 @@ function viewOrder(index){
                 </span>
 
                 <div class="detail-value">
-                    ${money(order.total)}
+                    ${money(
+                        order.total
+                    )}
                 </div>
 
             </div>
@@ -2929,13 +3512,15 @@ function viewOrder(index){
     `;
 
 
-    modal.classList.add("show");
+    modal.classList.add(
+        "show"
+    );
 
 }
 
 
 /* =====================================================
-   CLOSE ORDER MODAL
+   CLOSE MODAL
 ===================================================== */
 
 function closeOrderModal(event){
@@ -2947,13 +3532,33 @@ function closeOrderModal(event){
             "orderModal"
         )
     ){
+
         return;
+
     }
 
 
     document.getElementById(
         "orderModal"
-    ).classList.remove("show");
+    ).classList.remove(
+        "show"
+    );
+
+}
+
+
+/* =====================================================
+   DELETE ORDER FROM ELEMENT
+===================================================== */
+
+function deleteOrderFromElement(element){
+
+    const index =
+        Number(
+            element.dataset.orderIndex
+        );
+
+    deleteOrder(index);
 
 }
 
@@ -2997,7 +3602,9 @@ function deleteOrder(index){
 
     saveOrders();
 
+
     renderAll();
+
 
     showToast(
         "Order deleted ✓"
@@ -3023,7 +3630,9 @@ function handleImageUpload(event){
 
 
     if(
-        !file.type.startsWith("image/")
+        !file.type.startsWith(
+            "image/"
+        )
     ){
 
         showToast(
@@ -3064,21 +3673,47 @@ function handleImageUpload(event){
                 reader.result;
 
 
-            document.getElementById(
-                "previewImage"
-            ).src =
+            const previewImage =
+                document.getElementById(
+                    "previewImage"
+                );
+
+
+            const preview =
+                document.getElementById(
+                    "imagePreview"
+                );
+
+
+            const fileName =
+                document.getElementById(
+                    "imageFileName"
+                );
+
+
+            previewImage.src =
                 uploadedImageData;
 
 
-            document.getElementById(
-                "imagePreview"
-            ).classList.add("show");
+            preview.classList.add(
+                "show"
+            );
 
 
-            document.getElementById(
-                "imageFileName"
-            ).textContent =
+            fileName.textContent =
                 file.name;
+
+        };
+
+
+    reader.onerror =
+        function(){
+
+            showToast(
+                "Image read করা যায়নি"
+            );
+
+            removeImage();
 
         };
 
@@ -3125,13 +3760,18 @@ function removeImage(){
         fileInput.value = "";
     }
 
+
     if(preview){
-        preview.classList.remove("show");
+        preview.classList.remove(
+            "show"
+        );
     }
+
 
     if(previewImage){
         previewImage.src = "";
     }
+
 
     if(fileName){
 
@@ -3172,7 +3812,22 @@ function setupImageURLPreview(){
                 !url ||
                 uploadedImageData
             ){
+
+                if(!url){
+
+                    const preview =
+                        document.getElementById(
+                            "imagePreview"
+                        );
+
+                    preview.classList.remove(
+                        "show"
+                    );
+
+                }
+
                 return;
+
             }
 
 
@@ -3208,7 +3863,8 @@ function setupImageURLPreview(){
                 };
 
 
-            previewImage.src = url;
+            previewImage.src =
+                url;
 
         }
     );
@@ -3259,7 +3915,10 @@ function saveProduct(){
     }
 
 
-    if(!price || price <= 0){
+    if(
+        !Number.isFinite(price) ||
+        price <= 0
+    ){
 
         showToast(
             "সঠিক product price দিন"
@@ -3278,7 +3937,7 @@ function saveProduct(){
 
     /* EDIT */
 
-    if(editingProductId){
+    if(editingProductId !== null){
 
         const product =
             products.find(
@@ -3330,9 +3989,19 @@ function saveProduct(){
 
         saveProducts();
 
-        cancelProductEdit();
+
+        editingProductId =
+            null;
+
+
+        clearProductForm();
+
+
+        resetProductFormUI();
+
 
         renderProducts();
+
 
         showToast(
             "Product updated successfully ✓"
@@ -3348,7 +4017,11 @@ function saveProduct(){
     const newProduct = {
 
         id:
-            "P" + Date.now(),
+            "P" +
+            Date.now() +
+            Math.random()
+                .toString(36)
+                .slice(2,7),
 
         name,
 
@@ -3377,12 +4050,45 @@ function saveProduct(){
 
     saveProducts();
 
+
     clearProductForm();
+
 
     renderProducts();
 
+
     showToast(
         "Product added successfully ✓"
+    );
+
+}
+
+
+/* =====================================================
+   OPEN ADD PRODUCT
+===================================================== */
+
+function openAddProduct(){
+
+    showSectionById(
+        "products"
+    );
+
+
+    cancelProductEdit();
+
+
+    setTimeout(
+        function(){
+
+            document
+                .getElementById(
+                    "productName"
+                )
+                ?.focus();
+
+        },
+        250
     );
 
 }
@@ -3432,7 +4138,8 @@ function editProduct(productId){
     document.getElementById(
         "productCategory"
     ).value =
-        product.category || "Fashion";
+        product.category ||
+        "Fashion";
 
 
     document.getElementById(
@@ -3446,6 +4153,17 @@ function editProduct(productId){
     uploadedImageData = "";
 
 
+    const fileInput =
+        document.getElementById(
+            "productImageFile"
+        );
+
+
+    if(fileInput){
+        fileInput.value = "";
+    }
+
+
     if(product.image){
 
         const previewImage =
@@ -3453,14 +4171,11 @@ function editProduct(productId){
                 "previewImage"
             );
 
+
         const preview =
             document.getElementById(
                 "imagePreview"
             );
-
-
-        previewImage.src =
-            product.image;
 
 
         previewImage.onload =
@@ -3471,6 +4186,20 @@ function editProduct(productId){
                 );
 
             };
+
+
+        previewImage.onerror =
+            function(){
+
+                preview.classList.remove(
+                    "show"
+                );
+
+            };
+
+
+        previewImage.src =
+            product.image;
 
 
         document.getElementById(
@@ -3501,15 +4230,31 @@ function editProduct(productId){
 
     document.getElementById(
         "cancelEditBtn"
-    ).classList.add("show");
+    ).classList.add(
+        "show"
+    );
 
 
-    document
-        .getElementById("products")
-        .scrollIntoView({
-            behavior:"smooth",
-            block:"start"
-        });
+    showSectionById(
+        "products"
+    );
+
+
+    setTimeout(
+        function(){
+
+            document
+                .getElementById(
+                    "productFormTitle"
+                )
+                ?.scrollIntoView({
+                    behavior:"smooth",
+                    block:"start"
+                });
+
+        },
+        100
+    );
 
 
     showToast(
@@ -3520,31 +4265,70 @@ function editProduct(productId){
 
 
 /* =====================================================
-   CANCEL PRODUCT EDIT
+   CANCEL EDIT
 ===================================================== */
 
 function cancelProductEdit(){
 
-    editingProductId = null;
+    editingProductId =
+        null;
+
 
     clearProductForm();
 
 
-    document.getElementById(
-        "productFormTitle"
-    ).textContent =
-        "➕ Add New Product";
+    resetProductFormUI();
+
+}
 
 
-    document.getElementById(
-        "productSubmitBtn"
-    ).textContent =
-        "Add Product";
+/* =====================================================
+   RESET PRODUCT UI
+===================================================== */
+
+function resetProductFormUI(){
+
+    const title =
+        document.getElementById(
+            "productFormTitle"
+        );
 
 
-    document.getElementById(
-        "cancelEditBtn"
-    ).classList.remove("show");
+    const button =
+        document.getElementById(
+            "productSubmitBtn"
+        );
+
+
+    const cancel =
+        document.getElementById(
+            "cancelEditBtn"
+        );
+
+
+    if(title){
+
+        title.textContent =
+            "➕ Add New Product";
+
+    }
+
+
+    if(button){
+
+        button.textContent =
+            "Add Product";
+
+    }
+
+
+    if(cancel){
+
+        cancel.classList.remove(
+            "show"
+        );
+
+    }
 
 }
 
@@ -3555,25 +4339,49 @@ function cancelProductEdit(){
 
 function clearProductForm(){
 
-    document.getElementById(
-        "productName"
-    ).value = "";
+    const name =
+        document.getElementById(
+            "productName"
+        );
 
 
-    document.getElementById(
-        "productPrice"
-    ).value = "";
+    const price =
+        document.getElementById(
+            "productPrice"
+        );
 
 
-    document.getElementById(
-        "productImage"
-    ).value = "";
+    const image =
+        document.getElementById(
+            "productImage"
+        );
 
 
-    document.getElementById(
-        "productCategory"
-    ).value =
-        "Fashion";
+    const category =
+        document.getElementById(
+            "productCategory"
+        );
+
+
+    if(name){
+        name.value = "";
+    }
+
+
+    if(price){
+        price.value = "";
+    }
+
+
+    if(image){
+        image.value = "";
+    }
+
+
+    if(category){
+        category.value =
+            "Fashion";
+    }
 
 
     removeImage();
@@ -3600,41 +4408,47 @@ function getFilteredProducts(){
     const category =
         document.getElementById(
             "categoryFilter"
-        )?.value || "all";
+        )?.value ||
+        "all";
 
 
-    return products.filter(product => {
+    return products.filter(
+        product=>{
 
-        const name =
-            String(
-                product.name || ""
-            ).toLowerCase();
-
-
-        const productCategory =
-            String(
-                product.category || ""
-            ).toLowerCase();
+            const name =
+                String(
+                    product.name || ""
+                ).toLowerCase();
 
 
-        const matchesSearch =
-            !search ||
-            name.includes(search) ||
-            productCategory.includes(search);
+            const productCategory =
+                String(
+                    product.category || ""
+                ).toLowerCase();
 
 
-        const matchesCategory =
-            category === "all" ||
-            String(product.category || "") ===
-            category;
+            const matchesSearch =
+                !search ||
+                name.includes(search) ||
+                productCategory.includes(
+                    search
+                );
 
 
-        return (
-            matchesSearch &&
-            matchesCategory
-        );
+            const matchesCategory =
+                category === "all" ||
+                String(
+                    product.category || ""
+                ) === category;
 
-    });
+
+            return (
+                matchesSearch &&
+                matchesCategory
+            );
+
+        }
+    );
 
 }
 
@@ -3715,7 +4529,7 @@ function renderProducts(){
     filtered
     .slice()
     .reverse()
-    .forEach(product => {
+    .forEach(product=>{
 
         const row =
             document.createElement(
@@ -3753,6 +4567,12 @@ function renderProducts(){
         }
 
 
+        const productId =
+            safeId(
+                product.id
+            );
+
+
         row.innerHTML = `
 
             <div class="product-image">
@@ -3778,7 +4598,9 @@ function renderProducts(){
 
 
                 <span class="product-price">
-                    ${money(product.price)}
+                    ${money(
+                        product.price
+                    )}
                 </span>
 
             </div>
@@ -3788,13 +4610,7 @@ function renderProducts(){
 
                 <button
                     class="edit-product"
-                    onclick="
-                        editProduct(
-                            '${escapeHTML(
-                                product.id
-                            )}'
-                        )
-                    "
+                    onclick="editProduct('${productId}')"
                 >
                     ✏️ Edit
                 </button>
@@ -3802,13 +4618,7 @@ function renderProducts(){
 
                 <button
                     class="delete-product"
-                    onclick="
-                        deleteProduct(
-                            '${escapeHTML(
-                                product.id
-                            )}'
-                        )
-                    "
+                    onclick="deleteProduct('${productId}')"
                 >
                     🗑️ Delete
                 </button>
@@ -3864,6 +4674,7 @@ function deleteProduct(productId){
 
 
     if(
+        editingProductId !== null &&
         String(editingProductId) ===
         String(productId)
     ){
@@ -3875,7 +4686,9 @@ function deleteProduct(productId){
 
     saveProducts();
 
+
     renderProducts();
+
 
     showToast(
         "Product deleted ✓"
@@ -3924,37 +4737,66 @@ function renderUsers(){
 
 
     box.innerHTML =
-        users.map(user=>`
+        users
+        .map(
+            user=>{
 
-            <div style="
-                padding:12px 0;
-                border-bottom:1px solid #f2f4f7;
-            ">
-
-                <strong style="
-                    font-size:11px;
-                ">
-                    ${escapeHTML(
-                        user.name || "User"
-                    )}
-                </strong>
+                const name =
+                    user.name ||
+                    "User";
 
 
-                <div style="
-                    color:#667085;
-                    font-size:9px;
-                    margin-top:4px;
-                ">
-                    ${escapeHTML(
-                        user.email ||
-                        user.phone ||
-                        "No contact"
-                    )}
-                </div>
+                const contact =
+                    user.email ||
+                    user.phone ||
+                    "No contact";
 
-            </div>
 
-        `).join("");
+                const initial =
+                    String(name)
+                    .trim()
+                    .charAt(0)
+                    .toUpperCase() ||
+                    "U";
+
+
+                return `
+
+                    <div class="user-row">
+
+                        <div class="user-main">
+
+                            <div class="user-avatar">
+                                ${escapeHTML(
+                                    initial
+                                )}
+                            </div>
+
+                            <div>
+
+                                <div class="user-name">
+                                    ${escapeHTML(
+                                        name
+                                    )}
+                                </div>
+
+                                <div class="user-contact">
+                                    ${escapeHTML(
+                                        contact
+                                    )}
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+        )
+        .join("");
 
 }
 
@@ -3969,11 +4811,14 @@ function showSection(
 ){
 
     document
-        .querySelectorAll(".section")
-        .forEach(section =>
-            section.classList.remove(
-                "active"
-            )
+        .querySelectorAll(
+            ".section"
+        )
+        .forEach(
+            section =>
+                section.classList.remove(
+                    "active"
+                )
         );
 
 
@@ -3988,29 +4833,43 @@ function showSection(
     }
 
 
-    target.classList.add("active");
+    target.classList.add(
+        "active"
+    );
 
 
     document
-        .querySelectorAll(".nav-item")
-        .forEach(item =>
-            item.classList.remove(
-                "active"
-            )
+        .querySelectorAll(
+            ".nav-item"
+        )
+        .forEach(
+            item =>
+                item.classList.remove(
+                    "active"
+                )
         );
 
 
     if(button){
-        button.classList.add("active");
+        button.classList.add(
+            "active"
+        );
     }
 
 
     const titles = {
 
-        dashboard:"Dashboard",
-        orders:"Orders",
-        products:"Products",
-        users:"Users"
+        dashboard:
+            "Dashboard",
+
+        orders:
+            "Orders",
+
+        products:
+            "Products",
+
+        users:
+            "Users"
 
     };
 
@@ -4018,21 +4877,34 @@ function showSection(
     document.getElementById(
         "pageTitle"
     ).textContent =
-        titles[sectionId] || "Admin";
+        titles[sectionId] ||
+        "Admin";
 
 
-    if(sectionId === "orders"){
+    if(
+        sectionId === "orders"
+    ){
+
         renderOrdersTable();
+
     }
 
 
-    if(sectionId === "products"){
+    if(
+        sectionId === "products"
+    ){
+
         renderProducts();
+
     }
 
 
-    if(sectionId === "users"){
+    if(
+        sectionId === "users"
+    ){
+
         renderUsers();
+
     }
 
 }
@@ -4050,10 +4922,11 @@ function showSectionById(id){
         );
 
 
-    let targetButton = null;
+    let targetButton =
+        null;
 
 
-    buttons.forEach(button => {
+    buttons.forEach(button=>{
 
         const text =
             button.innerText
@@ -4117,11 +4990,18 @@ function showToast(message){
         );
 
 
+    if(!toast){
+        return;
+    }
+
+
     toast.textContent =
         message;
 
 
-    toast.classList.add("show");
+    toast.classList.add(
+        "show"
+    );
 
 
     clearTimeout(
@@ -4132,9 +5012,11 @@ function showToast(message){
     window.toastTimer =
         setTimeout(
             ()=>{
+
                 toast.classList.remove(
                     "show"
                 );
+
             },
             2300
         );
@@ -4215,7 +5097,8 @@ function checkAdminSession(){
 
 
     if(
-        Date.now() - loginTime >=
+        Date.now() -
+        loginTime >=
         duration
     ){
 
@@ -4243,6 +5126,54 @@ function checkAdminSession(){
 
 
 /* =====================================================
+   ESC KEY
+===================================================== */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(
+            event.key ===
+            "Escape"
+        ){
+
+            closeOrderModal();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   STORAGE SYNC
+===================================================== */
+
+window.addEventListener(
+    "storage",
+    function(event){
+
+        if(
+            [
+                "shoppingMelaOrders",
+                "shoppingMelaProducts",
+                "shoppingMelaUsers",
+                "shoppingMelaLastOrder"
+            ].includes(
+                event.key
+            )
+        ){
+
+            renderAll();
+
+        }
+
+    }
+);
+
+
+/* =====================================================
    EVENT SETUP
 ===================================================== */
 
@@ -4250,8 +5181,12 @@ document.addEventListener(
     "DOMContentLoaded",
     function(){
 
-        if(!checkAdminSession()){
+        if(
+            !checkAdminSession()
+        ){
+
             return;
+
         }
 
 
@@ -4339,6 +5274,7 @@ document.addEventListener(
 
 
         setupImageURLPreview();
+
 
         renderAll();
 
