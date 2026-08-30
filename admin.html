@@ -1,20 +1,3802 @@
 ```html
-<script>
-    /* =====================================================
-       1.32 — ADMIN LOGIN PROTECTION
-    ====================================================== */
+<!DOCTYPE html>
+<html lang="bn">
 
-    const adminLoggedIn =
-        sessionStorage.getItem(
-            "shoppingMelaAdminLoggedIn"
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Admin Dashboard — Shopping Mela
+    </title>
+
+
+    <!-- =====================================================
+         1.32 — ADMIN LOGIN PROTECTION
+    ====================================================== -->
+
+    <script>
+
+        const adminLoggedIn =
+            sessionStorage.getItem(
+                "shoppingMelaAdminLoggedIn"
+            );
+
+
+        if (adminLoggedIn !== "true") {
+
+            window.location.replace(
+                "admin-login.html"
+            );
+
+        }
+
+    </script>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            margin: 0;
+
+            font-family:
+                Arial,
+                "Noto Sans Bengali",
+                sans-serif;
+
+            background: #f5f6f8;
+
+            color: #101828;
+
+        }
+
+
+        button,
+        input,
+        select {
+
+            font-family: inherit;
+
+        }
+
+
+        /* =====================================================
+           SIDEBAR
+        ====================================================== */
+
+        .sidebar {
+
+            position: fixed;
+
+            left: 0;
+            top: 0;
+            bottom: 0;
+
+            width: 235px;
+
+            background: #101828;
+
+            color: #ffffff;
+
+            padding: 22px 14px;
+
+            z-index: 1000;
+
+            overflow-y: auto;
+
+        }
+
+
+        .admin-logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            padding:
+                0 8px 25px;
+
+            font-size: 17px;
+
+            font-weight: 800;
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,.08);
+
+        }
+
+
+        .admin-logo-icon {
+
+            width: 36px;
+            height: 36px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 9px;
+
+            background: #1877f2;
+
+            font-size: 18px;
+
+        }
+
+
+        .admin-nav {
+
+            margin-top: 20px;
+
+        }
+
+
+        .nav-title {
+
+            color: #98a2b3;
+
+            font-size: 9px;
+
+            text-transform: uppercase;
+
+            letter-spacing: .8px;
+
+            padding:
+                0 10px 8px;
+
+        }
+
+
+        .nav-item {
+
+            width: 100%;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+
+            border: 0;
+
+            background: transparent;
+
+            color: #d0d5dd;
+
+            padding:
+                11px 10px;
+
+            border-radius: 8px;
+
+            cursor: pointer;
+
+            text-align: left;
+
+            font-size: 11px;
+
+            margin-bottom: 3px;
+
+        }
+
+
+        .nav-item:hover {
+
+            background:
+                rgba(255,255,255,.07);
+
+            color: #ffffff;
+
+        }
+
+
+        .nav-item.active {
+
+            background: #1877f2;
+
+            color: #ffffff;
+
+        }
+
+
+        .nav-icon {
+
+            width: 20px;
+
+            text-align: center;
+
+            font-size: 14px;
+
+        }
+
+
+        .nav-badge {
+
+            margin-left: auto;
+
+            min-width: 20px;
+
+            padding: 3px 5px;
+
+            border-radius: 10px;
+
+            background: #f04438;
+
+            color: #ffffff;
+
+            font-size: 8px;
+
+            text-align: center;
+
+        }
+
+
+        /* =====================================================
+           MAIN
+        ====================================================== */
+
+        .main {
+
+            margin-left: 235px;
+
+            min-height: 100vh;
+
+        }
+
+
+        /* =====================================================
+           HEADER
+        ====================================================== */
+
+        .top-header {
+
+            height: 65px;
+
+            background: #ffffff;
+
+            border-bottom:
+                1px solid #eaecf0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding:
+                0 25px;
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 500;
+
+        }
+
+
+        .page-title {
+
+            font-size: 17px;
+
+            font-weight: 800;
+
+        }
+
+
+        .header-right {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+        }
+
+
+        .view-site {
+
+            text-decoration: none;
+
+            color: #344054;
+
+            border:
+                1px solid #d0d5dd;
+
+            padding:
+                8px 12px;
+
+            border-radius: 7px;
+
+            font-size: 10px;
+
+            font-weight: 700;
+
+        }
+
+
+        .admin-user {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+        }
+
+
+        .admin-avatar {
+
+            width: 34px;
+            height: 34px;
+
+            border-radius: 50%;
+
+            background: #1877f2;
+
+            color: #ffffff;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-weight: 800;
+
+            font-size: 12px;
+
+        }
+
+
+        .admin-user-info span {
+
+            display: block;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+            color: #344054;
+
+        }
+
+
+        .admin-user-info small {
+
+            color: #98a2b3;
+
+            font-size: 8px;
+
+        }
+
+
+        /* =====================================================
+           CONTENT
+        ====================================================== */
+
+        .content {
+
+            padding: 25px;
+
+        }
+
+
+        .section {
+
+            display: none;
+
+        }
+
+
+        .section.active {
+
+            display: block;
+
+        }
+
+
+        .welcome {
+
+            margin-bottom: 22px;
+
+        }
+
+
+        .welcome h1 {
+
+            margin: 0;
+
+            font-size: 25px;
+
+        }
+
+
+        .welcome p {
+
+            margin: 6px 0 0;
+
+            color: #667085;
+
+            font-size: 11px;
+
+        }
+
+
+        /* =====================================================
+           STATS
+        ====================================================== */
+
+        .stats {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 15px;
+
+            margin-bottom: 22px;
+
+        }
+
+
+        .stat {
+
+            background: #ffffff;
+
+            border:
+                1px solid #e7eaf0;
+
+            border-radius: 13px;
+
+            padding: 18px;
+
+            box-shadow:
+                0 3px 12px
+                rgba(16,24,40,.03);
+
+        }
+
+
+        .stat-top {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+        }
+
+
+        .stat-icon {
+
+            width: 39px;
+            height: 39px;
+
+            border-radius: 9px;
+
+            background: #eef5ff;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 17px;
+
+        }
+
+
+        .stat-change {
+
+            color: #12b76a;
+
+            font-size: 8px;
+
+            font-weight: 800;
+
+        }
+
+
+        .stat-label {
+
+            margin-top: 13px;
+
+            color: #667085;
+
+            font-size: 10px;
+
+        }
+
+
+        .stat-value {
+
+            margin-top: 4px;
+
+            color: #101828;
+
+            font-size: 23px;
+
+            font-weight: 800;
+
+        }
+
+
+        /* =====================================================
+           DASHBOARD GRID
+        ====================================================== */
+
+        .dashboard-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1.5fr 1fr;
+
+            gap: 18px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .panel {
+
+            background: #ffffff;
+
+            border:
+                1px solid #e7eaf0;
+
+            border-radius: 13px;
+
+            overflow: hidden;
+
+        }
+
+
+        .panel-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            padding:
+                16px 18px;
+
+            border-bottom:
+                1px solid #eaecf0;
+
+        }
+
+
+        .panel-header h2 {
+
+            margin: 0;
+
+            font-size: 13px;
+
+        }
+
+
+        .panel-header button {
+
+            border: 0;
+
+            background: transparent;
+
+            color: #1877f2;
+
+            cursor: pointer;
+
+            font-size: 9px;
+
+            font-weight: 800;
+
+        }
+
+
+        /* =====================================================
+           ORDERS
+        ====================================================== */
+
+        .order-row {
+
+            display: grid;
+
+            grid-template-columns:
+                1.2fr
+                1fr
+                .8fr
+                .8fr;
+
+            gap: 10px;
+
+            align-items: center;
+
+            padding:
+                13px 18px;
+
+            border-bottom:
+                1px solid #f2f4f7;
+
+        }
+
+
+        .order-row:last-child {
+
+            border-bottom: none;
+
+        }
+
+
+        .order-id {
+
+            color: #101828;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+        }
+
+
+        .order-customer {
+
+            color: #667085;
+
+            font-size: 9px;
+
+        }
+
+
+        .order-price {
+
+            color: #101828;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+        }
+
+
+        .status {
+
+            display: inline-block;
+
+            padding:
+                5px 7px;
+
+            border-radius: 15px;
+
+            font-size: 7px;
+
+            font-weight: 800;
+
+            background: #eef5ff;
+
+            color: #1877f2;
+
+        }
+
+
+        .status.delivered {
+
+            background: #ecfdf3;
+
+            color: #12b76a;
+
+        }
+
+
+        .status.processing {
+
+            background: #fffaeb;
+
+            color: #b54708;
+
+        }
+
+
+        /* =====================================================
+           QUICK ACTIONS
+        ====================================================== */
+
+        .quick-actions {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 10px;
+
+            padding: 18px;
+
+        }
+
+
+        .quick-action {
+
+            border:
+                1px solid #eaecf0;
+
+            background: #ffffff;
+
+            border-radius: 9px;
+
+            padding: 15px 10px;
+
+            cursor: pointer;
+
+            text-align: center;
+
+        }
+
+
+        .quick-action:hover {
+
+            border-color: #1877f2;
+
+        }
+
+
+        .quick-action-icon {
+
+            font-size: 20px;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .quick-action strong {
+
+            display: block;
+
+            font-size: 10px;
+
+            color: #344054;
+
+        }
+
+
+        .quick-action span {
+
+            display: block;
+
+            margin-top: 3px;
+
+            color: #98a2b3;
+
+            font-size: 8px;
+
+        }
+
+
+        /* =====================================================
+           SALES
+        ====================================================== */
+
+        .sales-panel {
+
+            padding: 18px;
+
+        }
+
+
+        .sales-total {
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .sales-total span {
+
+            display: block;
+
+            color: #667085;
+
+            font-size: 9px;
+
+        }
+
+
+        .sales-total strong {
+
+            display: block;
+
+            margin-top: 4px;
+
+            font-size: 25px;
+
+        }
+
+
+        .sales-bars {
+
+            height: 150px;
+
+            display: flex;
+
+            align-items: flex-end;
+
+            gap: 9px;
+
+            border-bottom:
+                1px solid #eaecf0;
+
+            padding:
+                0 5px;
+
+        }
+
+
+        .bar-wrap {
+
+            flex: 1;
+
+            height: 100%;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: flex-end;
+
+            align-items: center;
+
+            gap: 5px;
+
+        }
+
+
+        .bar {
+
+            width: 100%;
+
+            max-width: 32px;
+
+            min-height: 4px;
+
+            background: #1877f2;
+
+            border-radius:
+                5px 5px 0 0;
+
+        }
+
+
+        .bar-label {
+
+            color: #98a2b3;
+
+            font-size: 7px;
+
+            margin-bottom: -18px;
+
+        }
+
+
+        /* =====================================================
+           TABLE
+        ====================================================== */
+
+        .table-panel {
+
+            background: #ffffff;
+
+            border:
+                1px solid #e7eaf0;
+
+            border-radius: 13px;
+
+            overflow: hidden;
+
+        }
+
+
+        .table-wrap {
+
+            overflow-x: auto;
+
+        }
+
+
+        table {
+
+            width: 100%;
+
+            border-collapse:
+                collapse;
+
+            min-width: 700px;
+
+        }
+
+
+        th {
+
+            background: #f9fafb;
+
+            color: #667085;
+
+            text-align: left;
+
+            font-size: 9px;
+
+            padding:
+                11px 14px;
+
+            border-bottom:
+                1px solid #eaecf0;
+
+        }
+
+
+        td {
+
+            padding:
+                13px 14px;
+
+            border-bottom:
+                1px solid #f2f4f7;
+
+            color: #344054;
+
+            font-size: 9px;
+
+        }
+
+
+        td strong {
+
+            color: #101828;
+
+        }
+
+
+        .table-status {
+
+            border: 0;
+
+            border-radius: 15px;
+
+            padding:
+                6px 8px;
+
+            font-size: 8px;
+
+            font-weight: 800;
+
+            background: #eef5ff;
+
+            color: #1877f2;
+
+        }
+
+
+        /* =====================================================
+           PRODUCTS
+        ====================================================== */
+
+        .product-form {
+
+            background: #ffffff;
+
+            border:
+                1px solid #e7eaf0;
+
+            border-radius: 13px;
+
+            padding: 20px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .product-form h2 {
+
+            margin:
+                0 0 15px;
+
+            font-size: 14px;
+
+        }
+
+
+        .form-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 12px;
+
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            color: #667085;
+
+            font-size: 9px;
+
+            margin-bottom: 5px;
+
+        }
+
+
+        .form-group input,
+        .form-group select {
+
+            width: 100%;
+
+            border:
+                1px solid #d0d5dd;
+
+            border-radius: 7px;
+
+            padding: 10px;
+
+            outline: none;
+
+            font-size: 10px;
+
+        }
+
+
+        .form-submit {
+
+            margin-top: 14px;
+
+            border: 0;
+
+            background: #1877f2;
+
+            color: #ffffff;
+
+            padding:
+                10px 16px;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            font-size: 10px;
+
+            font-weight: 800;
+
+        }
+
+
+        /* =====================================================
+           USERS
+        ====================================================== */
+
+        .user-card {
+
+            background: #ffffff;
+
+            border:
+                1px solid #e7eaf0;
+
+            border-radius: 13px;
+
+            padding: 18px;
+
+        }
+
+
+        .user-empty {
+
+            padding: 50px;
+
+            text-align: center;
+
+            color: #98a2b3;
+
+            font-size: 11px;
+
+        }
+
+
+        /* =====================================================
+           TOAST
+        ====================================================== */
+
+        .toast {
+
+            position: fixed;
+
+            left: 50%;
+
+            bottom: 25px;
+
+            transform:
+                translate(-50%, 20px);
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            background: #101828;
+
+            color: #ffffff;
+
+            padding:
+                11px 15px;
+
+            border-radius: 8px;
+
+            font-size: 10px;
+
+            z-index: 9999;
+
+            transition: .25s;
+
+        }
+
+
+        .toast.show {
+
+            opacity: 1;
+
+            transform:
+                translate(-50%, 0);
+
+        }
+
+
+        /* =====================================================
+           MOBILE
+        ====================================================== */
+
+        @media (max-width: 950px) {
+
+            .stats {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+
+            .dashboard-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .sidebar {
+
+                width: 68px;
+
+                padding:
+                    15px 8px;
+
+            }
+
+
+            .admin-logo {
+
+                justify-content: center;
+
+                padding:
+                    0 0 18px;
+
+            }
+
+
+            .admin-logo span {
+
+                display: none;
+
+            }
+
+
+            .nav-title,
+            .nav-item span,
+            .nav-badge {
+
+                display: none;
+
+            }
+
+
+            .nav-item {
+
+                justify-content: center;
+
+                padding:
+                    12px 5px;
+
+            }
+
+
+            .nav-icon {
+
+                width: auto;
+
+                font-size: 17px;
+
+            }
+
+
+            .main {
+
+                margin-left: 68px;
+
+            }
+
+
+            .top-header {
+
+                padding:
+                    0 12px;
+
+            }
+
+
+            .page-title {
+
+                font-size: 14px;
+
+            }
+
+
+            .admin-user-info,
+            .view-site {
+
+                display: none;
+
+            }
+
+
+            .content {
+
+                padding:
+                    15px 12px;
+
+            }
+
+
+            .welcome h1 {
+
+                font-size: 21px;
+
+            }
+
+
+            .stats {
+
+                gap: 9px;
+
+            }
+
+
+            .stat {
+
+                padding: 13px;
+
+            }
+
+
+            .stat-value {
+
+                font-size: 19px;
+
+            }
+
+
+            .form-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+====================================================== -->
+
+<aside class="sidebar">
+
+
+    <div class="admin-logo">
+
+        <div class="admin-logo-icon">
+            🛍️
+        </div>
+
+        <span>
+            Shopping Mela
+        </span>
+
+    </div>
+
+
+    <nav class="admin-nav">
+
+
+        <div class="nav-title">
+            Dashboard
+        </div>
+
+
+        <!-- DASHBOARD -->
+
+        <button
+            class="nav-item active"
+            onclick="
+                showSection(
+                    'dashboard',
+                    this
+                )
+            "
+        >
+
+            <span class="nav-icon">
+                📊
+            </span>
+
+            <span>
+                Dashboard
+            </span>
+
+        </button>
+
+
+        <!-- ORDERS -->
+
+        <button
+            class="nav-item"
+            onclick="
+                showSection(
+                    'orders',
+                    this
+                )
+            "
+        >
+
+            <span class="nav-icon">
+                📦
+            </span>
+
+            <span>
+                Orders
+            </span>
+
+            <span
+                class="nav-badge"
+                id="sidebarOrderCount"
+            >
+                0
+            </span>
+
+        </button>
+
+
+        <!-- PRODUCTS -->
+
+        <button
+            class="nav-item"
+            onclick="
+                showSection(
+                    'products',
+                    this
+                )
+            "
+        >
+
+            <span class="nav-icon">
+                🛍️
+            </span>
+
+            <span>
+                Products
+            </span>
+
+        </button>
+
+
+        <!-- USERS -->
+
+        <button
+            class="nav-item"
+            onclick="
+                showSection(
+                    'users',
+                    this
+                )
+            "
+        >
+
+            <span class="nav-icon">
+                👥
+            </span>
+
+            <span>
+                Users
+            </span>
+
+        </button>
+
+
+        <div
+            class="nav-title"
+            style="margin-top:18px;"
+        >
+            Website
+        </div>
+
+
+        <!-- WEBSITE -->
+
+        <button
+            class="nav-item"
+            onclick="
+                window.location.href='index.html'
+            "
+        >
+
+            <span class="nav-icon">
+                🏠
+            </span>
+
+            <span>
+                Visit Website
+            </span>
+
+        </button>
+
+
+        <!-- =================================================
+             1.33 — LOGOUT BUTTON
+        ================================================== -->
+
+        <button
+            class="nav-item"
+            onclick="adminLogout()"
+            style="
+                margin-top:25px;
+                color:#ffb4ab;
+            "
+        >
+
+            <span class="nav-icon">
+                🚪
+            </span>
+
+            <span>
+                Logout
+            </span>
+
+        </button>
+
+
+    </nav>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN
+====================================================== -->
+
+<div class="main">
+
+
+    <!-- HEADER -->
+
+    <header class="top-header">
+
+
+        <div
+            class="page-title"
+            id="pageTitle"
+        >
+            Dashboard
+        </div>
+
+
+        <div class="header-right">
+
+
+            <a
+                href="index.html"
+                class="view-site"
+            >
+                View Website ↗
+            </a>
+
+
+            <div class="admin-user">
+
+
+                <div class="admin-avatar">
+                    A
+                </div>
+
+
+                <div class="admin-user-info">
+
+                    <span>
+                        Administrator
+                    </span>
+
+                    <small>
+                        Super Admin
+                    </small>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </header>
+
+
+
+    <!-- CONTENT -->
+
+    <main class="content">
+
+
+        <!-- =================================================
+             DASHBOARD
+        ================================================== -->
+
+        <section
+            class="section active"
+            id="dashboard"
+        >
+
+
+            <div class="welcome">
+
+                <h1>
+                    Welcome back, Admin 👋
+                </h1>
+
+                <p>
+                    Shopping Mela-এর আজকের
+                    overview এখানে দেখতে পারবেন।
+                </p>
+
+            </div>
+
+
+
+            <!-- STATS -->
+
+            <div class="stats">
+
+
+                <div class="stat">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon">
+                            📦
+                        </div>
+
+                        <span
+                            class="stat-change"
+                        >
+                            Live
+                        </span>
+
+                    </div>
+
+                    <div class="stat-label">
+                        Total Orders
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="dashOrders"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon">
+                            💰
+                        </div>
+
+                        <span
+                            class="stat-change"
+                        >
+                            Sales
+                        </span>
+
+                    </div>
+
+                    <div class="stat-label">
+                        Total Sales
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="dashSales"
+                    >
+                        ৳0
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon">
+                            🚚
+                        </div>
+
+                        <span
+                            class="stat-change"
+                        >
+                            Active
+                        </span>
+
+                    </div>
+
+                    <div class="stat-label">
+                        Active Delivery
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="dashDelivery"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+
+
+                <div class="stat">
+
+                    <div class="stat-top">
+
+                        <div class="stat-icon">
+                            👥
+                        </div>
+
+                        <span
+                            class="stat-change"
+                        >
+                            Users
+                        </span>
+
+                    </div>
+
+                    <div class="stat-label">
+                        Registered Users
+                    </div>
+
+                    <div
+                        class="stat-value"
+                        id="dashUsers"
+                    >
+                        0
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- DASHBOARD GRID -->
+
+            <div class="dashboard-grid">
+
+
+                <!-- RECENT ORDERS -->
+
+                <div class="panel">
+
+
+                    <div class="panel-header">
+
+                        <h2>
+                            Recent Orders
+                        </h2>
+
+                        <button
+                            onclick="
+                                showSectionById(
+                                    'orders'
+                                )
+                            "
+                        >
+                            View All
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="recentOrders"
+                    >
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- QUICK ACTIONS -->
+
+                <div class="panel">
+
+
+                    <div class="panel-header">
+
+                        <h2>
+                            Quick Actions
+                        </h2>
+
+                    </div>
+
+
+                    <div class="quick-actions">
+
+
+                        <button
+                            class="quick-action"
+                            onclick="
+                                showSectionById(
+                                    'orders'
+                                )
+                            "
+                        >
+
+                            <div
+                                class="quick-action-icon"
+                            >
+                                📦
+                            </div>
+
+                            <strong>
+                                Manage Orders
+                            </strong>
+
+                            <span>
+                                Status update করুন
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            class="quick-action"
+                            onclick="
+                                showSectionById(
+                                    'products'
+                                )
+                            "
+                        >
+
+                            <div
+                                class="quick-action-icon"
+                            >
+                                ➕
+                            </div>
+
+                            <strong>
+                                Add Product
+                            </strong>
+
+                            <span>
+                                নতুন product যোগ করুন
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            class="quick-action"
+                            onclick="
+                                showSectionById(
+                                    'users'
+                                )
+                            "
+                        >
+
+                            <div
+                                class="quick-action-icon"
+                            >
+                                👥
+                            </div>
+
+                            <strong>
+                                Users
+                            </strong>
+
+                            <span>
+                                User overview
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            class="quick-action"
+                            onclick="
+                                window.location.href='index.html'
+                            "
+                        >
+
+                            <div
+                                class="quick-action-icon"
+                            >
+                                🌐
+                            </div>
+
+                            <strong>
+                                Website
+                            </strong>
+
+                            <span>
+                                Live website
+                            </span>
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- SALES -->
+
+            <div class="panel">
+
+
+                <div class="panel-header">
+
+                    <h2>
+                        Sales Overview
+                    </h2>
+
+                    <span
+                        style="
+                            color:#98a2b3;
+                            font-size:9px;
+                        "
+                    >
+                        Last 7 Orders
+                    </span>
+
+                </div>
+
+
+                <div class="sales-panel">
+
+
+                    <div class="sales-total">
+
+                        <span>
+                            Total Order Value
+                        </span>
+
+                        <strong
+                            id="salesOverviewTotal"
+                        >
+                            ৳0
+                        </strong>
+
+                    </div>
+
+
+                    <div
+                        class="sales-bars"
+                        id="salesBars"
+                    >
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             ORDERS
+        ================================================== -->
+
+        <section
+            class="section"
+            id="orders"
+        >
+
+
+            <div class="welcome">
+
+                <h1>
+                    Orders
+                </h1>
+
+                <p>
+                    সব customer orders এখান থেকে
+                    manage করুন।
+                </p>
+
+            </div>
+
+
+            <div class="table-panel">
+
+
+                <div class="panel-header">
+
+                    <h2>
+                        All Orders
+                    </h2>
+
+                    <button
+                        onclick="renderAll()"
+                    >
+                        Refresh
+                    </button>
+
+                </div>
+
+
+                <div class="table-wrap">
+
+
+                    <table>
+
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    Order ID
+                                </th>
+
+                                <th>
+                                    Customer
+                                </th>
+
+                                <th>
+                                    Mobile
+                                </th>
+
+                                <th>
+                                    Total
+                                </th>
+
+                                <th>
+                                    Date
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody
+                            id="ordersTable"
+                        >
+                        </tbody>
+
+
+                    </table>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             PRODUCTS
+        ================================================== -->
+
+        <section
+            class="section"
+            id="products"
+        >
+
+
+            <div class="welcome">
+
+                <h1>
+                    Products
+                </h1>
+
+                <p>
+                    নতুন product যোগ করার
+                    management area।
+                </p>
+
+            </div>
+
+
+            <div class="product-form">
+
+
+                <h2>
+                    ➕ Add New Product
+                </h2>
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Product Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="productName"
+                            placeholder="Product name"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Price
+                        </label>
+
+                        <input
+                            type="number"
+                            id="productPrice"
+                            placeholder="৳"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Category
+                        </label>
+
+                        <select
+                            id="productCategory"
+                        >
+
+                            <option>
+                                Fashion
+                            </option>
+
+                            <option>
+                                Beauty
+                            </option>
+
+                            <option>
+                                Electronics
+                            </option>
+
+                            <option>
+                                Food
+                            </option>
+
+                            <option>
+                                Home
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Image URL
+                        </label>
+
+                        <input
+                            type="text"
+                            id="productImage"
+                            placeholder="https://..."
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+                <button
+                    class="form-submit"
+                    onclick="addProduct()"
+                >
+                    Add Product
+                </button>
+
+
+            </div>
+
+
+            <div class="panel">
+
+
+                <div class="panel-header">
+
+                    <h2>
+                        Saved Products
+                    </h2>
+
+                </div>
+
+
+                <div
+                    id="productsList"
+                    style="padding:18px;"
+                >
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             USERS
+        ================================================== -->
+
+        <section
+            class="section"
+            id="users"
+        >
+
+
+            <div class="welcome">
+
+                <h1>
+                    Users
+                </h1>
+
+                <p>
+                    Registered customer information
+                    overview।
+                </p>
+
+            </div>
+
+
+            <div class="user-card">
+
+
+                <div
+                    id="usersList"
+                >
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- TOAST -->
+
+<div
+    class="toast"
+    id="toast"
+>
+</div>
+
+
+
+<script>
+
+
+/* =====================================================
+   GLOBAL DATA
+===================================================== */
+
+let orders = [];
+
+let products = [];
+
+let users = [];
+
+
+const STATUS_NAMES = [
+
+    "Order Placed",
+
+    "Order Confirmed",
+
+    "Processing",
+
+    "Shipped",
+
+    "Out for Delivery",
+
+    "Delivered"
+
+];
+
+
+
+/* =====================================================
+   LOAD DATA
+===================================================== */
+
+function loadData() {
+
+    try {
+
+        orders =
+            JSON.parse(
+                localStorage.getItem(
+                    "shoppingMelaOrders"
+                )
+            ) || [];
+
+    } catch {
+
+        orders = [];
+
+    }
+
+
+    try {
+
+        products =
+            JSON.parse(
+                localStorage.getItem(
+                    "shoppingMelaProducts"
+                )
+            ) || [];
+
+    } catch {
+
+        products = [];
+
+    }
+
+
+    try {
+
+        users =
+            JSON.parse(
+                localStorage.getItem(
+                    "shoppingMelaUsers"
+                )
+            ) || [];
+
+    } catch {
+
+        users = [];
+
+    }
+
+}
+
+
+
+/* =====================================================
+   SAVE
+===================================================== */
+
+function saveOrders() {
+
+    localStorage.setItem(
+        "shoppingMelaOrders",
+        JSON.stringify(
+            orders
+        )
+    );
+
+}
+
+
+function saveProducts() {
+
+    localStorage.setItem(
+        "shoppingMelaProducts",
+        JSON.stringify(
+            products
+        )
+    );
+
+}
+
+
+
+/* =====================================================
+   MONEY
+===================================================== */
+
+function money(
+    amount
+) {
+
+    return "৳" +
+        Number(
+            amount || 0
+        ).toLocaleString(
+            "en-BD"
         );
 
-    if (adminLoggedIn !== "true") {
+}
 
-        window.location.replace(
-            "admin-login.html"
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(
+    value
+) {
+
+    return String(
+        value || ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+
+/* =====================================================
+   DATE
+===================================================== */
+
+function formatDate(
+    value
+) {
+
+    if (!value) {
+
+        return "—";
+
+    }
+
+
+    const date =
+        new Date(
+            value
+        );
+
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return "—";
+
+    }
+
+
+    return date.toLocaleDateString(
+        "en-BD",
+        {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   ORDER STEP
+===================================================== */
+
+function getStep(
+    order
+) {
+
+    return Math.max(
+        0,
+        Math.min(
+            5,
+            Number(
+                order.trackingStep ?? 0
+            )
+        )
+    );
+
+}
+
+
+
+/* =====================================================
+   STATUS CLASS
+===================================================== */
+
+function statusClass(
+    step
+) {
+
+    if (
+        step === 5
+    ) {
+
+        return "delivered";
+
+    }
+
+
+    if (
+        step === 2 ||
+        step === 3 ||
+        step === 4
+    ) {
+
+        return "processing";
+
+    }
+
+
+    return "";
+
+}
+
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+function renderStats() {
+
+    const totalSales =
+        orders.reduce(
+            (
+                sum,
+                order
+            ) =>
+                sum +
+                Number(
+                    order.total || 0
+                ),
+            0
+        );
+
+
+    const activeDelivery =
+        orders.filter(
+            order =>
+                getStep(order) >= 3 &&
+                getStep(order) < 5
+        ).length;
+
+
+    document.getElementById(
+        "dashOrders"
+    ).textContent =
+        orders.length;
+
+
+    document.getElementById(
+        "dashSales"
+    ).textContent =
+        money(
+            totalSales
+        );
+
+
+    document.getElementById(
+        "dashDelivery"
+    ).textContent =
+        activeDelivery;
+
+
+    document.getElementById(
+        "dashUsers"
+    ).textContent =
+        users.length;
+
+
+    document.getElementById(
+        "sidebarOrderCount"
+    ).textContent =
+        orders.length;
+
+
+    document.getElementById(
+        "salesOverviewTotal"
+    ).textContent =
+        money(
+            totalSales
+        );
+
+}
+
+
+
+/* =====================================================
+   RECENT ORDERS
+===================================================== */
+
+function renderRecentOrders() {
+
+    const box =
+        document.getElementById(
+            "recentOrders"
+        );
+
+
+    box.innerHTML = "";
+
+
+    const recent =
+        [...orders]
+            .reverse()
+            .slice(
+                0,
+                6
+            );
+
+
+    if (!recent.length) {
+
+        box.innerHTML = `
+
+            <div
+                style="
+                    padding:35px;
+                    text-align:center;
+                    color:#98a2b3;
+                    font-size:10px;
+                "
+            >
+                এখনো কোনো order নেই।
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    recent.forEach(
+        order => {
+
+            const customer =
+                order.customer ||
+                {};
+
+
+            const step =
+                getStep(
+                    order
+                );
+
+
+            const row =
+                document.createElement(
+                    "div"
+                );
+
+
+            row.className =
+                "order-row";
+
+
+            row.innerHTML = `
+
+                <div class="order-id">
+
+                    #${escapeHTML(
+                        order.orderId ||
+                        "SM000000"
+                    )}
+
+                </div>
+
+
+                <div class="order-customer">
+
+                    ${escapeHTML(
+                        customer.name ||
+                        "Customer"
+                    )}
+
+                </div>
+
+
+                <div class="order-price">
+
+                    ${money(
+                        order.total
+                    )}
+
+                </div>
+
+
+                <div>
+
+                    <span
+                        class="
+                            status
+                            ${statusClass(
+                                step
+                            )}
+                        "
+                    >
+                        ${STATUS_NAMES[step]}
+                    </span>
+
+                </div>
+
+            `;
+
+
+            box.appendChild(
+                row
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   SALES BARS
+===================================================== */
+
+function renderSalesBars() {
+
+    const box =
+        document.getElementById(
+            "salesBars"
+        );
+
+
+    box.innerHTML = "";
+
+
+    const data =
+        [...orders]
+            .reverse()
+            .slice(
+                0,
+                7
+            );
+
+
+    if (!data.length) {
+
+        for (
+            let i = 0;
+            i < 7;
+            i++
+        ) {
+
+            createBar(
+                box,
+                0,
+                i + 1
+            );
+
+        }
+
+        return;
+
+    }
+
+
+    const values =
+        data.map(
+            order =>
+                Number(
+                    order.total || 0
+                )
+        );
+
+
+    const max =
+        Math.max(
+            ...values,
+            1
+        );
+
+
+    data.forEach(
+        (
+            order,
+            index
+        ) => {
+
+            const value =
+                Number(
+                    order.total || 0
+                );
+
+
+            const height =
+                Math.max(
+                    5,
+                    (
+                        value /
+                        max
+                    ) *
+                    120
+                );
+
+
+            createBar(
+                box,
+                height,
+                index + 1
+            );
+
+        }
+    );
+
+}
+
+
+
+function createBar(
+    parent,
+    height,
+    label
+) {
+
+    const wrap =
+        document.createElement(
+            "div"
+        );
+
+
+    wrap.className =
+        "bar-wrap";
+
+
+    wrap.innerHTML = `
+
+        <div
+            class="bar"
+            style="
+                height:${height}px;
+            "
+        ></div>
+
+        <span class="bar-label">
+            ${label}
+        </span>
+
+    `;
+
+
+    parent.appendChild(
+        wrap
+    );
+
+}
+
+
+
+/* =====================================================
+   ORDERS TABLE
+===================================================== */
+
+function renderOrdersTable() {
+
+    const tbody =
+        document.getElementById(
+            "ordersTable"
+        );
+
+
+    tbody.innerHTML = "";
+
+
+    const list =
+        [...orders]
+            .map(
+                (
+                    order,
+                    index
+                ) => ({
+                    order,
+                    index
+                })
+            )
+            .reverse();
+
+
+    if (!list.length) {
+
+        tbody.innerHTML = `
+
+            <tr>
+
+                <td
+                    colspan="6"
+                    style="
+                        text-align:center;
+                        padding:45px;
+                        color:#98a2b3;
+                    "
+                >
+                    কোনো order পাওয়া যায়নি।
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
+
+
+    list.forEach(
+        item => {
+
+            const order =
+                item.order;
+
+
+            const index =
+                item.index;
+
+
+            const customer =
+                order.customer ||
+                {};
+
+
+            const step =
+                getStep(
+                    order
+                );
+
+
+            const tr =
+                document.createElement(
+                    "tr"
+                );
+
+
+            tr.innerHTML = `
+
+                <td>
+
+                    <strong>
+                        #${escapeHTML(
+                            order.orderId ||
+                            "SM000000"
+                        )}
+                    </strong>
+
+                </td>
+
+
+                <td>
+
+                    ${escapeHTML(
+                        customer.name ||
+                        "—"
+                    )}
+
+                </td>
+
+
+                <td>
+
+                    ${escapeHTML(
+                        customer.phone ||
+                        "—"
+                    )}
+
+                </td>
+
+
+                <td>
+
+                    ${money(
+                        order.total
+                    )}
+
+                </td>
+
+
+                <td>
+
+                    ${formatDate(
+                        order.createdAt
+                    )}
+
+                </td>
+
+
+                <td>
+
+                    <select
+                        class="table-status"
+                        onchange="
+                            changeStatus(
+                                ${index},
+                                this.value
+                            )
+                        "
+                    >
+
+                        ${
+                            STATUS_NAMES
+                                .map(
+                                    (
+                                        name,
+                                        statusIndex
+                                    ) => `
+
+                                        <option
+                                            value="${statusIndex}"
+                                            ${
+                                                statusIndex === step
+                                                ? "selected"
+                                                : ""
+                                            }
+                                        >
+                                            ${name}
+                                        </option>
+
+                                    `
+                                )
+                                .join("")
+                        }
+
+                    </select>
+
+                </td>
+
+            `;
+
+
+            tbody.appendChild(
+                tr
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   CHANGE ORDER STATUS
+===================================================== */
+
+function changeStatus(
+    index,
+    value
+) {
+
+    if (
+        !orders[index]
+    ) {
+
+        return;
+
+    }
+
+
+    orders[index].trackingStep =
+        Number(
+            value
+        );
+
+
+    orders[index].updatedAt =
+        new Date()
+            .toISOString();
+
+
+    saveOrders();
+
+
+    syncLastOrder(
+        orders[index]
+    );
+
+
+    renderAll();
+
+
+    showToast(
+        "Order status updated ✓"
+    );
+
+}
+
+
+
+/* =====================================================
+   SYNC LAST ORDER
+===================================================== */
+
+function syncLastOrder(
+    order
+) {
+
+    try {
+
+        const last =
+            JSON.parse(
+                localStorage.getItem(
+                    "shoppingMelaLastOrder"
+                )
+            );
+
+
+        if (
+            last &&
+            String(
+                last.orderId
+            ) ===
+            String(
+                order.orderId
+            )
+        ) {
+
+            last.trackingStep =
+                order.trackingStep;
+
+
+            last.updatedAt =
+                order.updatedAt;
+
+
+            localStorage.setItem(
+                "shoppingMelaLastOrder",
+                JSON.stringify(
+                    last
+                )
+            );
+
+        }
+
+    } catch {
+
+        /* ignore */
+
+    }
+
+}
+
+
+
+/* =====================================================
+   ADD PRODUCT
+===================================================== */
+
+function addProduct() {
+
+    const name =
+        document.getElementById(
+            "productName"
+        ).value.trim();
+
+
+    const price =
+        Number(
+            document.getElementById(
+                "productPrice"
+            ).value
+        );
+
+
+    const category =
+        document.getElementById(
+            "productCategory"
+        ).value;
+
+
+    const image =
+        document.getElementById(
+            "productImage"
+        ).value.trim();
+
+
+    if (
+        !name ||
+        !price
+    ) {
+
+        showToast(
+            "Product name ও price দিন"
+        );
+
+        return;
+
+    }
+
+
+    products.push({
+
+        id:
+            "P" +
+            Date.now(),
+
+        name,
+
+        price,
+
+        category,
+
+        image,
+
+        createdAt:
+            new Date()
+                .toISOString()
+
+    });
+
+
+    saveProducts();
+
+
+    document.getElementById(
+        "productName"
+    ).value = "";
+
+
+    document.getElementById(
+        "productPrice"
+    ).value = "";
+
+
+    document.getElementById(
+        "productImage"
+    ).value = "";
+
+
+    renderProducts();
+
+
+    showToast(
+        "Product added ✓"
+    );
+
+}
+
+
+
+/* =====================================================
+   PRODUCTS
+===================================================== */
+
+function renderProducts() {
+
+    const box =
+        document.getElementById(
+            "productsList"
+        );
+
+
+    box.innerHTML = "";
+
+
+    if (!products.length) {
+
+        box.innerHTML = `
+
+            <div
+                style="
+                    padding:35px;
+                    text-align:center;
+                    color:#98a2b3;
+                    font-size:10px;
+                "
+            >
+                এখনো কোনো product add করা হয়নি।
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    products.forEach(
+        product => {
+
+            const row =
+                document.createElement(
+                    "div"
+                );
+
+
+            row.style.cssText = `
+
+                display:grid;
+                grid-template-columns:
+                    50px 1fr auto;
+                gap:12px;
+                align-items:center;
+                padding:10px 0;
+                border-bottom:
+                    1px solid #f2f4f7;
+
+            `;
+
+
+            row.innerHTML = `
+
+                <div
+                    style="
+                        width:50px;
+                        height:50px;
+                        border-radius:8px;
+                        background:#f2f4f7
+                        center/cover no-repeat;
+                        background-image:
+                        url('${escapeHTML(
+                            product.image
+                        )}');
+                    "
+                ></div>
+
+
+                <div>
+
+                    <strong
+                        style="
+                            display:block;
+                            font-size:11px;
+                        "
+                    >
+                        ${escapeHTML(
+                            product.name
+                        )}
+                    </strong>
+
+
+                    <span
+                        style="
+                            display:block;
+                            color:#98a2b3;
+                            font-size:8px;
+                            margin-top:3px;
+                        "
+                    >
+                        ${escapeHTML(
+                            product.category
+                        )}
+                    </span>
+
+                </div>
+
+
+                <strong
+                    style="
+                        font-size:11px;
+                    "
+                >
+                    ${money(
+                        product.price
+                    )}
+                </strong>
+
+            `;
+
+
+            box.appendChild(
+                row
+            );
+
+        }
+    );
+
+}
+
+
+
+/* =====================================================
+   USERS
+===================================================== */
+
+function renderUsers() {
+
+    const box =
+        document.getElementById(
+            "usersList"
+        );
+
+
+    if (!users.length) {
+
+        box.innerHTML = `
+
+            <div class="user-empty">
+
+                👥
+
+                <br><br>
+
+                এখনো কোনো registered
+                user data পাওয়া যায়নি।
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    box.innerHTML =
+        users
+            .map(
+                user => `
+
+                    <div
+                        style="
+                            padding:12px 0;
+                            border-bottom:
+                            1px solid #f2f4f7;
+                        "
+                    >
+
+                        <strong
+                            style="
+                                font-size:11px;
+                            "
+                        >
+                            ${escapeHTML(
+                                user.name ||
+                                "User"
+                            )}
+                        </strong>
+
+
+                        <div
+                            style="
+                                color:#667085;
+                                font-size:9px;
+                                margin-top:4px;
+                            "
+                        >
+                            ${escapeHTML(
+                                user.email ||
+                                user.phone ||
+                                "No contact"
+                            )}
+                        </div>
+
+                    </div>
+
+                `
+            )
+            .join("");
+
+}
+
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
+
+function showSection(
+    sectionId,
+    button
+) {
+
+    document
+        .querySelectorAll(
+            ".section"
+        )
+        .forEach(
+            section =>
+                section.classList.remove(
+                    "active"
+                )
+        );
+
+
+    const target =
+        document.getElementById(
+            sectionId
+        );
+
+
+    if (!target) {
+
+        return;
+
+    }
+
+
+    target.classList.add(
+        "active"
+    );
+
+
+    document
+        .querySelectorAll(
+            ".nav-item"
+        )
+        .forEach(
+            item =>
+                item.classList.remove(
+                    "active"
+                )
+        );
+
+
+    if (button) {
+
+        button.classList.add(
+            "active"
         );
 
     }
+
+
+    const titles = {
+
+        dashboard:
+            "Dashboard",
+
+        orders:
+            "Orders",
+
+        products:
+            "Products",
+
+        users:
+            "Users"
+
+    };
+
+
+    document.getElementById(
+        "pageTitle"
+    ).textContent =
+        titles[sectionId] ||
+        "Admin";
+
+
+    if (
+        sectionId ===
+        "orders"
+    ) {
+
+        renderOrdersTable();
+
+    }
+
+
+    if (
+        sectionId ===
+        "products"
+    ) {
+
+        renderProducts();
+
+    }
+
+
+    if (
+        sectionId ===
+        "users"
+    ) {
+
+        renderUsers();
+
+    }
+
+}
+
+
+
+/* =====================================================
+   QUICK NAVIGATION
+===================================================== */
+
+function showSectionById(
+    id
+) {
+
+    const buttons =
+        document.querySelectorAll(
+            ".nav-item"
+        );
+
+
+    let targetButton =
+        null;
+
+
+    buttons.forEach(
+        button => {
+
+            const text =
+                button
+                    .innerText
+                    .trim()
+                    .toLowerCase();
+
+
+            if (
+                text ===
+                id.toLowerCase()
+            ) {
+
+                targetButton =
+                    button;
+
+            }
+
+        }
+    );
+
+
+    showSection(
+        id,
+        targetButton
+    );
+
+}
+
+
+
+/* =====================================================
+   RENDER ALL
+===================================================== */
+
+function renderAll() {
+
+    loadData();
+
+    renderStats();
+
+    renderRecentOrders();
+
+    renderSalesBars();
+
+    renderOrdersTable();
+
+    renderProducts();
+
+    renderUsers();
+
+}
+
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(
+    message
+) {
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        window.toastTimer
+    );
+
+
+    window.toastTimer =
+        setTimeout(
+            function () {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2300
+        );
+
+}
+
+
+
+/* =====================================================
+   1.33 — ADMIN LOGOUT
+===================================================== */
+
+function adminLogout() {
+
+    const confirmLogout =
+        confirm(
+            "আপনি কি Admin Panel থেকে Logout করতে চান?"
+        );
+
+
+    if (
+        !confirmLogout
+    ) {
+
+        return;
+
+    }
+
+
+    /* ================================================
+       ADMIN SESSION DELETE
+    ================================================= */
+
+    sessionStorage.removeItem(
+        "shoppingMelaAdminLoggedIn"
+    );
+
+
+    sessionStorage.removeItem(
+        "shoppingMelaAdminLoginTime"
+    );
+
+
+    /* ================================================
+       GO TO LOGIN PAGE
+    ================================================= */
+
+    window.location.replace(
+        "admin-login.html"
+    );
+
+}
+
+
+
+/* =====================================================
+   PAGE LOAD
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        renderAll();
+
+    }
+);
+
 </script>
+
+
+</body>
+
+</html>
 ```
