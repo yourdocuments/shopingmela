@@ -5,19 +5,32 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-<title>Admin Dashboard — Shopping Mela</title>
+<title>
+    Admin Dashboard — Shopping Mela
+</title>
 
+
+<!-- =====================================================
+     1.32 — ADMIN LOGIN PROTECTION
+====================================================== -->
 
 <script>
 
 const adminLoggedIn =
-sessionStorage.getItem("shoppingMelaAdminLoggedIn");
+    sessionStorage.getItem(
+        "shoppingMelaAdminLoggedIn"
+    );
 
 if (adminLoggedIn !== "true") {
 
-    window.location.replace("admin-login.html");
+    window.location.replace(
+        "admin-login.html"
+    );
 
 }
 
@@ -26,1546 +39,1495 @@ if (adminLoggedIn !== "true") {
 
 <style>
 
-*{
-    box-sizing:border-box;
+* {
+    box-sizing: border-box;
 }
 
-body{
+body {
 
-    margin:0;
+    margin: 0;
 
     font-family:
-    Arial,
-    "Noto Sans Bengali",
-    sans-serif;
+        Arial,
+        "Noto Sans Bengali",
+        sans-serif;
 
-    background:#f5f6f8;
+    background: #f5f6f8;
 
-    color:#101828;
+    color: #101828;
 
 }
 
 button,
 input,
-select{
+select {
 
-    font-family:inherit;
-
-}
-
-
-/* =========================
-SIDEBAR
-========================= */
-
-.sidebar{
-
-    position:fixed;
-
-    left:0;
-    top:0;
-    bottom:0;
-
-    width:235px;
-
-    background:#101828;
-
-    color:#fff;
-
-    padding:22px 14px;
-
-    z-index:1000;
-
-    overflow-y:auto;
+    font-family: inherit;
 
 }
 
-.admin-logo{
 
-    display:flex;
+/* =====================================================
+   SIDEBAR
+====================================================== */
 
-    align-items:center;
+.sidebar {
 
-    gap:10px;
+    position: fixed;
 
-    padding:0 8px 25px;
+    left: 0;
+    top: 0;
+    bottom: 0;
 
-    font-size:17px;
+    width: 235px;
 
-    font-weight:800;
+    background: #101828;
+
+    color: #ffffff;
+
+    padding: 22px 14px;
+
+    z-index: 1000;
+
+    overflow-y: auto;
+
+}
+
+.admin-logo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding:
+        0 8px 25px;
+
+    font-size: 17px;
+
+    font-weight: 800;
 
     border-bottom:
-    1px solid rgba(255,255,255,.08);
+        1px solid
+        rgba(255,255,255,.08);
 
 }
 
-.admin-logo-icon{
+.admin-logo-icon {
 
-    width:36px;
-    height:36px;
+    width: 36px;
+    height: 36px;
 
-    display:flex;
+    display: flex;
 
-    align-items:center;
-    justify-content:center;
+    align-items: center;
 
-    border-radius:9px;
+    justify-content: center;
 
-    background:#1877f2;
+    border-radius: 9px;
 
-    font-size:18px;
+    background: #1877f2;
 
-}
-
-.admin-nav{
-
-    margin-top:20px;
+    font-size: 18px;
 
 }
 
-.nav-title{
+.admin-nav {
 
-    color:#98a2b3;
-
-    font-size:9px;
-
-    text-transform:uppercase;
-
-    letter-spacing:.8px;
-
-    padding:0 10px 8px;
+    margin-top: 20px;
 
 }
 
-.nav-item{
+.nav-title {
 
-    width:100%;
+    color: #98a2b3;
 
-    display:flex;
+    font-size: 9px;
 
-    align-items:center;
+    text-transform: uppercase;
 
-    gap:10px;
+    letter-spacing: .8px;
 
-    border:0;
-
-    background:transparent;
-
-    color:#d0d5dd;
-
-    padding:11px 10px;
-
-    border-radius:8px;
-
-    cursor:pointer;
-
-    text-align:left;
-
-    font-size:11px;
-
-    margin-bottom:3px;
+    padding:
+        0 10px 8px;
 
 }
 
-.nav-item:hover{
+.nav-item {
 
-    background:rgba(255,255,255,.07);
+    width: 100%;
 
-    color:#fff;
+    display: flex;
 
-}
+    align-items: center;
 
-.nav-item.active{
+    gap: 10px;
 
-    background:#1877f2;
+    border: 0;
 
-    color:#fff;
+    background: transparent;
 
-}
+    color: #d0d5dd;
 
-.nav-icon{
+    padding:
+        11px 10px;
 
-    width:20px;
+    border-radius: 8px;
 
-    text-align:center;
+    cursor: pointer;
 
-    font-size:14px;
+    text-align: left;
 
-}
+    font-size: 11px;
 
-.nav-badge{
-
-    margin-left:auto;
-
-    min-width:20px;
-
-    padding:3px 5px;
-
-    border-radius:10px;
-
-    background:#f04438;
-
-    color:#fff;
-
-    font-size:8px;
-
-    text-align:center;
+    margin-bottom: 3px;
 
 }
 
+.nav-item:hover {
 
-/* =========================
-MAIN
-========================= */
+    background:
+        rgba(255,255,255,.07);
 
-.main{
-
-    margin-left:235px;
-
-    min-height:100vh;
+    color: #ffffff;
 
 }
 
-.top-header{
+.nav-item.active {
 
-    height:65px;
+    background: #1877f2;
 
-    background:#fff;
-
-    border-bottom:1px solid #eaecf0;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    padding:0 25px;
-
-    position:sticky;
-
-    top:0;
-
-    z-index:500;
+    color: #ffffff;
 
 }
 
-.page-title{
+.nav-icon {
 
-    font-size:17px;
+    width: 20px;
 
-    font-weight:800;
+    text-align: center;
 
-}
-
-.header-right{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
+    font-size: 14px;
 
 }
 
-.view-site{
+.nav-badge {
 
-    text-decoration:none;
+    margin-left: auto;
 
-    color:#344054;
+    min-width: 20px;
 
-    border:1px solid #d0d5dd;
+    padding: 3px 5px;
 
-    padding:8px 12px;
+    border-radius: 10px;
 
-    border-radius:7px;
+    background: #f04438;
 
-    font-size:10px;
+    color: #ffffff;
 
-    font-weight:700;
+    font-size: 8px;
 
-}
-
-.admin-user{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:8px;
-
-}
-
-.admin-avatar{
-
-    width:34px;
-    height:34px;
-
-    border-radius:50%;
-
-    background:#1877f2;
-
-    color:#fff;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    font-weight:800;
-
-    font-size:12px;
-
-}
-
-.admin-user-info{
-
-    min-width:105px;
-
-}
-
-.admin-name{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:5px;
-
-    line-height:1.2;
-
-}
-
-.verified-badge{
-
-    width:15px;
-    height:15px;
-
-    min-width:15px;
-
-    border-radius:50%;
-
-    background:#1877f2;
-
-    color:#fff;
-
-    display:inline-flex;
-
-    align-items:center;
-    justify-content:center;
-
-    font-size:9px;
-
-    font-weight:900;
-
-    box-shadow:0 0 0 1.5px #fff;
-
-}
-
-.admin-user-info small{
-
-    display:block;
-
-    color:#98a2b3;
-
-    font-size:8px;
-
-    margin-top:3px;
+    text-align: center;
 
 }
 
 
-/* =========================
-CONTENT
-========================= */
+/* =====================================================
+   MAIN
+====================================================== */
 
-.content{
+.main {
 
-    padding:25px;
+    margin-left: 235px;
 
-}
-
-.section{
-
-    display:none;
-
-}
-
-.section.active{
-
-    display:block;
-
-}
-
-.welcome{
-
-    margin-bottom:22px;
-
-}
-
-.welcome h1{
-
-    margin:0;
-
-    font-size:25px;
-
-}
-
-.welcome p{
-
-    margin:6px 0 0;
-
-    color:#667085;
-
-    font-size:11px;
+    min-height: 100vh;
 
 }
 
 
-/* =========================
-STATS
-========================= */
+/* =====================================================
+   HEADER
+====================================================== */
 
-.stats{
+.top-header {
 
-    display:grid;
+    height: 65px;
 
-    grid-template-columns:
-    repeat(4,1fr);
+    background: #ffffff;
 
-    gap:15px;
+    border-bottom:
+        1px solid #eaecf0;
 
-    margin-bottom:22px;
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        0 25px;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 500;
 
 }
 
-.stat{
+.page-title {
 
-    background:#fff;
+    font-size: 17px;
 
-    border:1px solid #e7eaf0;
+    font-weight: 800;
 
-    border-radius:13px;
+}
 
-    padding:18px;
+.header-right {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+.view-site {
+
+    text-decoration: none;
+
+    color: #344054;
+
+    border:
+        1px solid #d0d5dd;
+
+    padding:
+        8px 12px;
+
+    border-radius: 7px;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+}
+
+.admin-user {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+}
+
+.admin-avatar {
+
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    background: #1877f2;
+
+    color: #ffffff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-weight: 800;
+
+    font-size: 12px;
+
+}
+
+
+/* =====================================================
+   1.34 — VERIFIED ADMIN PROFILE
+====================================================== */
+
+.admin-user-info {
+
+    min-width: 105px;
+
+}
+
+.admin-name {
+
+    display: flex !important;
+
+    align-items: center;
+
+    gap: 5px;
+
+    line-height: 1.2;
+
+}
+
+.verified-badge {
+
+    width: 15px;
+
+    height: 15px;
+
+    min-width: 15px;
+
+    border-radius: 50%;
+
+    background: #1877f2;
+
+    color: #ffffff;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 9px;
+
+    font-weight: 900;
+
+    line-height: 1;
 
     box-shadow:
-    0 3px 12px rgba(16,24,40,.03);
+        0 0 0 1.5px #ffffff;
+
+    cursor: help;
+
+    user-select: none;
+
+    transition:
+        transform .18s ease;
 
 }
 
-.stat-top{
+.verified-badge:hover {
 
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
+    transform:
+        scale(1.12);
 
 }
 
-.stat-icon{
+.admin-user-info small {
 
-    width:39px;
-    height:39px;
+    display: block;
 
-    border-radius:9px;
+    color: #98a2b3;
 
-    background:#eef5ff;
+    font-size: 8px;
 
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    font-size:17px;
-
-}
-
-.stat-change{
-
-    color:#12b76a;
-
-    font-size:8px;
-
-    font-weight:800;
-
-}
-
-.stat-label{
-
-    margin-top:13px;
-
-    color:#667085;
-
-    font-size:10px;
-
-}
-
-.stat-value{
-
-    margin-top:4px;
-
-    color:#101828;
-
-    font-size:23px;
-
-    font-weight:800;
+    margin-top: 3px;
 
 }
 
 
-/* =========================
-PANELS
-========================= */
+/* =====================================================
+   CONTENT
+====================================================== */
 
-.dashboard-grid{
+.content {
 
-    display:grid;
-
-    grid-template-columns:1.5fr 1fr;
-
-    gap:18px;
-
-    margin-bottom:18px;
+    padding: 25px;
 
 }
 
-.panel{
+.section {
 
-    background:#fff;
-
-    border:1px solid #e7eaf0;
-
-    border-radius:13px;
-
-    overflow:hidden;
+    display: none;
 
 }
 
-.panel-header{
+.section.active {
 
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    padding:16px 18px;
-
-    border-bottom:1px solid #eaecf0;
+    display: block;
 
 }
 
-.panel-header h2{
+.welcome {
 
-    margin:0;
-
-    font-size:13px;
+    margin-bottom: 22px;
 
 }
 
-.panel-header button{
+.welcome h1 {
 
-    border:0;
+    margin: 0;
 
-    background:transparent;
+    font-size: 25px;
 
-    color:#1877f2;
+}
 
-    cursor:pointer;
+.welcome p {
 
-    font-size:9px;
+    margin: 6px 0 0;
 
-    font-weight:800;
+    color: #667085;
+
+    font-size: 11px;
 
 }
 
 
-/* =========================
-ORDERS
-========================= */
+/* =====================================================
+   STATS
+====================================================== */
 
-.order-row{
+.stats {
 
-    display:grid;
+    display: grid;
 
     grid-template-columns:
-    1.2fr 1fr .8fr .8fr;
+        repeat(4, 1fr);
 
-    gap:10px;
+    gap: 15px;
 
-    align-items:center;
-
-    padding:13px 18px;
-
-    border-bottom:1px solid #f2f4f7;
+    margin-bottom: 22px;
 
 }
 
-.order-id{
+.stat {
 
-    color:#101828;
+    background: #ffffff;
 
-    font-size:10px;
+    border:
+        1px solid #e7eaf0;
 
-    font-weight:800;
+    border-radius: 13px;
 
-}
+    padding: 18px;
 
-.order-customer{
-
-    color:#667085;
-
-    font-size:9px;
-
-}
-
-.order-price{
-
-    color:#101828;
-
-    font-size:10px;
-
-    font-weight:800;
+    box-shadow:
+        0 3px 12px
+        rgba(16,24,40,.03);
 
 }
 
-.status{
+.stat-top {
 
-    display:inline-block;
+    display: flex;
 
-    padding:5px 7px;
+    align-items: center;
 
-    border-radius:15px;
-
-    font-size:7px;
-
-    font-weight:800;
-
-    background:#eef5ff;
-
-    color:#1877f2;
+    justify-content: space-between;
 
 }
 
-.status.delivered{
+.stat-icon {
 
-    background:#ecfdf3;
+    width: 39px;
+    height: 39px;
 
-    color:#12b76a;
+    border-radius: 9px;
 
-}
+    background: #eef5ff;
 
-.status.processing{
+    display: flex;
 
-    background:#fffaeb;
+    align-items: center;
 
-    color:#b54708;
+    justify-content: center;
 
-}
-
-
-/* =========================
-QUICK ACTIONS
-========================= */
-
-.quick-actions{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    gap:10px;
-
-    padding:18px;
+    font-size: 17px;
 
 }
 
-.quick-action{
+.stat-change {
 
-    border:1px solid #eaecf0;
+    color: #12b76a;
 
-    background:#fff;
+    font-size: 8px;
 
-    border-radius:9px;
-
-    padding:15px 10px;
-
-    cursor:pointer;
-
-    text-align:center;
+    font-weight: 800;
 
 }
 
-.quick-action:hover{
+.stat-label {
 
-    border-color:#1877f2;
+    margin-top: 13px;
 
-}
+    color: #667085;
 
-.quick-action-icon{
-
-    font-size:20px;
-
-    margin-bottom:7px;
+    font-size: 10px;
 
 }
 
-.quick-action strong{
+.stat-value {
 
-    display:block;
+    margin-top: 4px;
 
-    font-size:10px;
+    color: #101828;
 
-    color:#344054;
+    font-size: 23px;
 
-}
-
-.quick-action span{
-
-    display:block;
-
-    margin-top:3px;
-
-    color:#98a2b3;
-
-    font-size:8px;
+    font-weight: 800;
 
 }
 
 
-/* =========================
-SALES
-========================= */
+/* =====================================================
+   DASHBOARD GRID
+====================================================== */
 
-.sales-panel{
+.dashboard-grid {
 
-    padding:18px;
+    display: grid;
 
-}
+    grid-template-columns:
+        1.5fr 1fr;
 
-.sales-total{
+    gap: 18px;
 
-    margin-bottom:15px;
-
-}
-
-.sales-total span{
-
-    display:block;
-
-    color:#667085;
-
-    font-size:9px;
+    margin-bottom: 18px;
 
 }
 
-.sales-total strong{
+.panel {
 
-    display:block;
+    background: #ffffff;
 
-    margin-top:4px;
+    border:
+        1px solid #e7eaf0;
 
-    font-size:25px;
+    border-radius: 13px;
 
-}
-
-.sales-bars{
-
-    height:150px;
-
-    display:flex;
-
-    align-items:flex-end;
-
-    gap:9px;
-
-    border-bottom:1px solid #eaecf0;
-
-    padding:0 5px;
+    overflow: hidden;
 
 }
 
-.bar-wrap{
+.panel-header {
 
-    flex:1;
+    display: flex;
 
-    height:100%;
+    align-items: center;
 
-    display:flex;
+    justify-content: space-between;
 
-    flex-direction:column;
+    padding:
+        16px 18px;
 
-    justify-content:flex-end;
-
-    align-items:center;
-
-    gap:5px;
+    border-bottom:
+        1px solid #eaecf0;
 
 }
 
-.bar{
+.panel-header h2 {
 
-    width:100%;
+    margin: 0;
 
-    max-width:32px;
-
-    min-height:4px;
-
-    background:#1877f2;
-
-    border-radius:5px 5px 0 0;
+    font-size: 13px;
 
 }
 
-.bar-label{
+.panel-header button {
 
-    color:#98a2b3;
+    border: 0;
 
-    font-size:7px;
+    background: transparent;
 
-    margin-bottom:-18px;
+    color: #1877f2;
+
+    cursor: pointer;
+
+    font-size: 9px;
+
+    font-weight: 800;
 
 }
 
 
-/* =========================
-TABLE
-========================= */
+/* =====================================================
+   ORDERS
+====================================================== */
 
-.table-panel{
+.order-row {
 
-    background:#fff;
+    display: grid;
 
-    border:1px solid #e7eaf0;
+    grid-template-columns:
+        1.2fr
+        1fr
+        .8fr
+        .8fr;
 
-    border-radius:13px;
+    gap: 10px;
 
-    overflow:hidden;
+    align-items: center;
 
-}
+    padding:
+        13px 18px;
 
-.table-wrap{
-
-    overflow-x:auto;
-
-}
-
-table{
-
-    width:100%;
-
-    border-collapse:collapse;
-
-    min-width:700px;
+    border-bottom:
+        1px solid #f2f4f7;
 
 }
 
-th{
+.order-row:last-child {
 
-    background:#f9fafb;
-
-    color:#667085;
-
-    text-align:left;
-
-    font-size:9px;
-
-    padding:11px 14px;
-
-    border-bottom:1px solid #eaecf0;
+    border-bottom: none;
 
 }
 
-td{
+.order-id {
 
-    padding:13px 14px;
+    color: #101828;
 
-    border-bottom:1px solid #f2f4f7;
+    font-size: 10px;
 
-    color:#344054;
-
-    font-size:9px;
+    font-weight: 800;
 
 }
 
-td strong{
+.order-customer {
 
-    color:#101828;
+    color: #667085;
 
-}
-
-.table-status{
-
-    border:0;
-
-    border-radius:15px;
-
-    padding:6px 8px;
-
-    font-size:8px;
-
-    font-weight:800;
-
-    background:#eef5ff;
-
-    color:#1877f2;
+    font-size: 9px;
 
 }
 
+.order-price {
 
-/* =========================
-PRODUCT FORM
-========================= */
+    color: #101828;
 
-.product-form{
+    font-size: 10px;
 
-    background:#fff;
-
-    border:1px solid #e7eaf0;
-
-    border-radius:13px;
-
-    padding:20px;
-
-    margin-bottom:18px;
+    font-weight: 800;
 
 }
 
-.product-form h2{
+.status {
 
-    margin:0 0 15px;
+    display: inline-block;
 
-    font-size:14px;
+    padding:
+        5px 7px;
+
+    border-radius: 15px;
+
+    font-size: 7px;
+
+    font-weight: 800;
+
+    background: #eef5ff;
+
+    color: #1877f2;
 
 }
 
-.form-grid{
+.status.delivered {
 
-    display:grid;
+    background: #ecfdf3;
 
-    grid-template-columns:repeat(2,1fr);
-
-    gap:12px;
+    color: #12b76a;
 
 }
 
-.form-group label{
+.status.processing {
 
-    display:block;
+    background: #fffaeb;
 
-    color:#667085;
+    color: #b54708;
 
-    font-size:9px;
+}
 
-    margin-bottom:5px;
+
+/* =====================================================
+   QUICK ACTIONS
+====================================================== */
+
+.quick-actions {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 10px;
+
+    padding: 18px;
+
+}
+
+.quick-action {
+
+    border:
+        1px solid #eaecf0;
+
+    background: #ffffff;
+
+    border-radius: 9px;
+
+    padding: 15px 10px;
+
+    cursor: pointer;
+
+    text-align: center;
+
+}
+
+.quick-action:hover {
+
+    border-color: #1877f2;
+
+}
+
+.quick-action-icon {
+
+    font-size: 20px;
+
+    margin-bottom: 7px;
+
+}
+
+.quick-action strong {
+
+    display: block;
+
+    font-size: 10px;
+
+    color: #344054;
+
+}
+
+.quick-action span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: #98a2b3;
+
+    font-size: 8px;
+
+}
+
+
+/* =====================================================
+   SALES
+====================================================== */
+
+.sales-panel {
+
+    padding: 18px;
+
+}
+
+.sales-total {
+
+    margin-bottom: 15px;
+
+}
+
+.sales-total span {
+
+    display: block;
+
+    color: #667085;
+
+    font-size: 9px;
+
+}
+
+.sales-total strong {
+
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 25px;
+
+}
+
+.sales-bars {
+
+    height: 150px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    gap: 9px;
+
+    border-bottom:
+        1px solid #eaecf0;
+
+    padding:
+        0 5px;
+
+}
+
+.bar-wrap {
+
+    flex: 1;
+
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-end;
+
+    align-items: center;
+
+    gap: 5px;
+
+}
+
+.bar {
+
+    width: 100%;
+
+    max-width: 32px;
+
+    min-height: 4px;
+
+    background: #1877f2;
+
+    border-radius:
+        5px 5px 0 0;
+
+}
+
+.bar-label {
+
+    color: #98a2b3;
+
+    font-size: 7px;
+
+    margin-bottom: -18px;
+
+}
+
+
+/* =====================================================
+   TABLE
+====================================================== */
+
+.table-panel {
+
+    background: #ffffff;
+
+    border:
+        1px solid #e7eaf0;
+
+    border-radius: 13px;
+
+    overflow: hidden;
+
+}
+
+.table-wrap {
+
+    overflow-x: auto;
+
+}
+
+table {
+
+    width: 100%;
+
+    border-collapse:
+        collapse;
+
+    min-width: 700px;
+
+}
+
+th {
+
+    background: #f9fafb;
+
+    color: #667085;
+
+    text-align: left;
+
+    font-size: 9px;
+
+    padding:
+        11px 14px;
+
+    border-bottom:
+        1px solid #eaecf0;
+
+}
+
+td {
+
+    padding:
+        13px 14px;
+
+    border-bottom:
+        1px solid #f2f4f7;
+
+    color: #344054;
+
+    font-size: 9px;
+
+}
+
+td strong {
+
+    color: #101828;
+
+}
+
+.table-status {
+
+    border: 0;
+
+    border-radius: 15px;
+
+    padding:
+        6px 8px;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    background: #eef5ff;
+
+    color: #1877f2;
+
+}
+
+
+/* =====================================================
+   PRODUCTS
+====================================================== */
+
+.product-form {
+
+    background: #ffffff;
+
+    border:
+        1px solid #e7eaf0;
+
+    border-radius: 13px;
+
+    padding: 20px;
+
+    margin-bottom: 18px;
+
+}
+
+.product-form h2 {
+
+    margin:
+        0 0 15px;
+
+    font-size: 14px;
+
+}
+
+.form-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 12px;
+
+}
+
+.form-group label {
+
+    display: block;
+
+    color: #667085;
+
+    font-size: 9px;
+
+    margin-bottom: 5px;
 
 }
 
 .form-group input,
-.form-group select{
+.form-group select {
 
-    width:100%;
+    width: 100%;
 
-    border:1px solid #d0d5dd;
+    border:
+        1px solid #d0d5dd;
 
-    border-radius:7px;
+    border-radius: 7px;
 
-    padding:10px;
+    padding: 10px;
 
-    outline:none;
+    outline: none;
 
-    font-size:10px;
+    font-size: 10px;
 
 }
 
 .form-group input:focus,
-.form-group select:focus{
+.form-group select:focus {
 
-    border-color:#1877f2;
-
-}
-
-.form-submit{
-
-    margin-top:14px;
-
-    border:0;
-
-    background:#1877f2;
-
-    color:#fff;
-
-    padding:10px 16px;
-
-    border-radius:7px;
-
-    cursor:pointer;
-
-    font-size:10px;
-
-    font-weight:800;
+    border-color: #1877f2;
 
 }
 
+.form-submit {
 
-/* =========================
-1.35 PRODUCT TOOLBAR
-========================= */
+    margin-top: 14px;
 
-.product-toolbar{
+    border: 0;
 
-    display:flex;
+    background: #1877f2;
 
-    gap:10px;
+    color: #ffffff;
 
-    padding:16px 18px;
+    padding:
+        10px 16px;
 
-    border-bottom:1px solid #eaecf0;
+    border-radius: 7px;
 
-    background:#fff;
+    cursor: pointer;
 
-}
+    font-size: 10px;
 
-.product-search{
-
-    flex:1;
-
-    border:1px solid #d0d5dd;
-
-    border-radius:7px;
-
-    padding:10px 12px;
-
-    font-size:10px;
-
-    outline:none;
+    font-weight: 800;
 
 }
 
-.product-search:focus{
+.form-submit:hover {
 
-    border-color:#1877f2;
-
-}
-
-.product-filter{
-
-    width:150px;
-
-    border:1px solid #d0d5dd;
-
-    border-radius:7px;
-
-    padding:10px;
-
-    font-size:10px;
-
-    outline:none;
+    opacity: .92;
 
 }
 
 
-/* =========================
-PRODUCT CARDS
-========================= */
+/* =====================================================
+   1.36 — PRODUCT LIST
+====================================================== */
 
-.products-grid{
+.product-row {
 
-    display:grid;
+    display: grid;
 
     grid-template-columns:
-    repeat(3,1fr);
+        60px
+        1fr
+        auto;
 
-    gap:15px;
+    gap: 14px;
 
-    padding:18px;
+    align-items: center;
 
-}
+    padding: 12px 0;
 
-.product-card{
-
-    border:1px solid #eaecf0;
-
-    border-radius:11px;
-
-    overflow:hidden;
-
-    background:#fff;
-
-    transition:.2s;
+    border-bottom:
+        1px solid #f2f4f7;
 
 }
 
-.product-card:hover{
+.product-row:last-child {
 
-    border-color:#1877f2;
-
-    transform:translateY(-2px);
+    border-bottom: none;
 
 }
 
-.product-image{
+.product-image {
 
-    width:100%;
+    width: 60px;
 
-    height:150px;
+    height: 60px;
 
-    background:#f2f4f7;
+    border-radius: 9px;
 
-    background-size:cover;
+    background:
+        #f2f4f7
+        center/cover
+        no-repeat;
 
-    background-position:center;
-
-}
-
-.product-info{
-
-    padding:13px;
+    border:
+        1px solid #eaecf0;
 
 }
 
-.product-name{
+.product-info strong {
 
-    font-size:12px;
+    display: block;
 
-    font-weight:800;
+    font-size: 11px;
 
-    color:#101828;
-
-    margin-bottom:5px;
+    color: #101828;
 
 }
 
-.product-category{
+.product-info span {
 
-    color:#98a2b3;
+    display: block;
 
-    font-size:8px;
+    color: #98a2b3;
 
-    margin-bottom:7px;
+    font-size: 8px;
 
-}
-
-.product-price{
-
-    font-size:13px;
-
-    font-weight:800;
-
-    margin-bottom:11px;
+    margin-top: 4px;
 
 }
 
-.product-actions{
+.product-price {
 
-    display:flex;
+    margin-top: 5px;
 
-    gap:6px;
+    font-size: 10px;
 
-}
+    font-weight: 800;
 
-.product-btn{
-
-    flex:1;
-
-    border:1px solid #d0d5dd;
-
-    background:#fff;
-
-    border-radius:6px;
-
-    padding:7px 5px;
-
-    font-size:8px;
-
-    font-weight:700;
-
-    cursor:pointer;
+    color: #1877f2;
 
 }
 
-.product-btn:hover{
+.product-actions {
 
-    border-color:#1877f2;
+    display: flex;
 
-    color:#1877f2;
+    align-items: center;
+
+    gap: 6px;
 
 }
 
-.product-btn.delete:hover{
+.product-btn {
 
-    border-color:#f04438;
+    border: 0;
 
-    color:#f04438;
+    border-radius: 7px;
+
+    padding: 7px 9px;
+
+    cursor: pointer;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+}
+
+.product-edit {
+
+    background: #eef5ff;
+
+    color: #1877f2;
+
+}
+
+.product-delete {
+
+    background: #fef3f2;
+
+    color: #f04438;
+
+}
+
+.product-btn:hover {
+
+    opacity: .82;
 
 }
 
 
-/* =========================
-MODAL
-========================= */
+/* =====================================================
+   1.36 — EDIT MODE
+====================================================== */
 
-.modal{
+.edit-mode {
 
-    position:fixed;
-
-    inset:0;
-
-    background:rgba(16,24,40,.55);
-
-    display:none;
-
-    align-items:center;
-
-    justify-content:center;
-
-    z-index:5000;
-
-    padding:20px;
-
-}
-
-.modal.show{
-
-    display:flex;
-
-}
-
-.modal-box{
-
-    width:100%;
-
-    max-width:480px;
-
-    background:#fff;
-
-    border-radius:14px;
-
-    overflow:hidden;
+    border-color: #1877f2;
 
     box-shadow:
-    0 20px 60px rgba(0,0,0,.2);
+        0 0 0 2px
+        rgba(24,119,242,.08);
 
 }
 
-.modal-header{
+.edit-badge {
 
-    display:flex;
+    display: inline-block;
 
-    align-items:center;
+    margin-left: 7px;
 
-    justify-content:space-between;
+    padding: 4px 7px;
 
-    padding:16px 18px;
+    border-radius: 12px;
 
-    border-bottom:1px solid #eaecf0;
+    background: #eef5ff;
 
-}
+    color: #1877f2;
 
-.modal-header h3{
+    font-size: 8px;
 
-    margin:0;
-
-    font-size:14px;
+    font-weight: 800;
 
 }
 
-.modal-close{
+.cancel-edit {
 
-    border:0;
+    margin-top: 14px;
 
-    background:#f2f4f7;
+    margin-left: 7px;
 
-    width:30px;
-    height:30px;
+    border:
+        1px solid #d0d5dd;
 
-    border-radius:50%;
+    background: #ffffff;
 
-    cursor:pointer;
+    color: #344054;
 
-}
+    padding:
+        9px 14px;
 
-.modal-body{
+    border-radius: 7px;
 
-    padding:18px;
+    cursor: pointer;
 
-}
+    font-size: 10px;
 
-.preview-image{
-
-    width:100%;
-
-    height:220px;
-
-    background:#f2f4f7;
-
-    background-size:cover;
-
-    background-position:center;
-
-    border-radius:10px;
-
-    margin-bottom:15px;
-
-}
-
-.preview-name{
-
-    font-size:18px;
-
-    font-weight:800;
-
-}
-
-.preview-category{
-
-    color:#667085;
-
-    font-size:10px;
-
-    margin-top:5px;
-
-}
-
-.preview-price{
-
-    font-size:20px;
-
-    font-weight:800;
-
-    margin-top:10px;
+    font-weight: 800;
 
 }
 
 
-/* =========================
-USERS
-========================= */
+/* =====================================================
+   USERS
+====================================================== */
 
-.user-card{
+.user-card {
 
-    background:#fff;
+    background: #ffffff;
 
-    border:1px solid #e7eaf0;
+    border:
+        1px solid #e7eaf0;
 
-    border-radius:13px;
+    border-radius: 13px;
 
-    padding:18px;
-
-}
-
-.user-empty{
-
-    padding:50px;
-
-    text-align:center;
-
-    color:#98a2b3;
-
-    font-size:11px;
+    padding: 18px;
 
 }
 
+.user-empty {
 
-/* =========================
-TOAST
-========================= */
+    padding: 50px;
 
-.toast{
+    text-align: center;
 
-    position:fixed;
+    color: #98a2b3;
 
-    left:50%;
-
-    bottom:25px;
-
-    transform:translate(-50%,20px);
-
-    opacity:0;
-
-    pointer-events:none;
-
-    background:#101828;
-
-    color:#fff;
-
-    padding:11px 15px;
-
-    border-radius:8px;
-
-    font-size:10px;
-
-    z-index:9999;
-
-    transition:.25s;
-
-}
-
-.toast.show{
-
-    opacity:1;
-
-    transform:translate(-50%,0);
+    font-size: 11px;
 
 }
 
 
-/* =========================
-MOBILE
-========================= */
+/* =====================================================
+   TOAST
+====================================================== */
 
-@media(max-width:950px){
+.toast {
 
-    .stats{
+    position: fixed;
+
+    left: 50%;
+
+    bottom: 25px;
+
+    transform:
+        translate(-50%, 20px);
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    background: #101828;
+
+    color: #ffffff;
+
+    padding:
+        11px 15px;
+
+    border-radius: 8px;
+
+    font-size: 10px;
+
+    z-index: 9999;
+
+    transition: .25s;
+
+}
+
+.toast.show {
+
+    opacity: 1;
+
+    transform:
+        translate(-50%, 0);
+
+}
+
+
+/* =====================================================
+   MOBILE
+====================================================== */
+
+@media (max-width: 950px) {
+
+    .stats {
 
         grid-template-columns:
-        repeat(2,1fr);
+            repeat(2, 1fr);
 
     }
 
-    .dashboard-grid{
+    .dashboard-grid {
 
-        grid-template-columns:1fr;
-
-    }
-
-    .products-grid{
-
-        grid-template-columns:
-        repeat(2,1fr);
+        grid-template-columns: 1fr;
 
     }
 
 }
 
-@media(max-width:700px){
+@media (max-width: 700px) {
 
-    .sidebar{
+    .sidebar {
 
-        width:68px;
+        width: 68px;
 
-        padding:15px 8px;
-
-    }
-
-    .admin-logo{
-
-        justify-content:center;
-
-        padding:0 0 18px;
+        padding:
+            15px 8px;
 
     }
 
-    .admin-logo span{
+    .admin-logo {
 
-        display:none;
+        justify-content: center;
+
+        padding:
+            0 0 18px;
+
+    }
+
+    .admin-logo span {
+
+        display: none;
 
     }
 
     .nav-title,
     .nav-item span,
-    .nav-badge{
+    .nav-badge {
 
-        display:none;
-
-    }
-
-    .nav-item{
-
-        justify-content:center;
-
-        padding:12px 5px;
+        display: none;
 
     }
 
-    .nav-icon{
+    .nav-item {
 
-        width:auto;
+        justify-content: center;
 
-        font-size:17px;
-
-    }
-
-    .main{
-
-        margin-left:68px;
+        padding:
+            12px 5px;
 
     }
 
-    .top-header{
+    .nav-icon {
 
-        padding:0 12px;
+        width: auto;
+
+        font-size: 17px;
 
     }
 
-    .page-title{
+    .main {
 
-        font-size:14px;
+        margin-left: 68px;
+
+    }
+
+    .top-header {
+
+        padding:
+            0 12px;
+
+    }
+
+    .page-title {
+
+        font-size: 14px;
 
     }
 
     .admin-user-info,
-    .view-site{
+    .view-site {
 
-        display:none;
-
-    }
-
-    .content{
-
-        padding:15px 12px;
+        display: none;
 
     }
 
-    .welcome h1{
+    .content {
 
-        font-size:21px;
-
-    }
-
-    .stats{
-
-        gap:9px;
+        padding:
+            15px 12px;
 
     }
 
-    .stat{
+    .welcome h1 {
 
-        padding:13px;
-
-    }
-
-    .stat-value{
-
-        font-size:19px;
+        font-size: 21px;
 
     }
 
-    .form-grid{
+    .stats {
 
-        grid-template-columns:1fr;
-
-    }
-
-    .product-toolbar{
-
-        flex-direction:column;
+        gap: 9px;
 
     }
 
-    .product-filter{
+    .stat {
 
-        width:100%;
+        padding: 13px;
 
     }
 
-    .products-grid{
+    .stat-value {
 
-        grid-template-columns:1fr;
+        font-size: 19px;
 
-        padding:12px;
+    }
+
+    .form-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+    .product-row {
+
+        grid-template-columns:
+            50px 1fr;
+
+    }
+
+    .product-image {
+
+        width: 50px;
+
+        height: 50px;
+
+    }
+
+    .product-actions {
+
+        grid-column: 1 / -1;
+
+        justify-content: flex-end;
 
     }
 
@@ -1579,17 +1541,21 @@ MOBILE
 <body>
 
 
-<!-- =========================
-SIDEBAR
-========================= -->
+<!-- =====================================================
+     SIDEBAR
+====================================================== -->
 
 <aside class="sidebar">
 
 <div class="admin-logo">
 
-<div class="admin-logo-icon">🛍️</div>
+    <div class="admin-logo-icon">
+        🛍️
+    </div>
 
-<span>Shopping Mela</span>
+    <span>
+        Shopping Mela
+    </span>
 
 </div>
 
@@ -1597,94 +1563,121 @@ SIDEBAR
 <nav class="admin-nav">
 
 <div class="nav-title">
-Dashboard
+    Dashboard
 </div>
 
 
 <button
-class="nav-item active"
-onclick="showSection('dashboard',this)"
+    class="nav-item active"
+    onclick="showSection('dashboard',this)"
 >
 
-<span class="nav-icon">📊</span>
+    <span class="nav-icon">
+        📊
+    </span>
 
-<span>Dashboard</span>
+    <span>
+        Dashboard
+    </span>
 
 </button>
 
 
 <button
-class="nav-item"
-onclick="showSection('orders',this)"
+    class="nav-item"
+    onclick="showSection('orders',this)"
 >
 
-<span class="nav-icon">📦</span>
+    <span class="nav-icon">
+        📦
+    </span>
 
-<span>Orders</span>
+    <span>
+        Orders
+    </span>
 
-<span
-class="nav-badge"
-id="sidebarOrderCount"
->
-0
-</span>
+    <span
+        class="nav-badge"
+        id="sidebarOrderCount"
+    >
+        0
+    </span>
 
 </button>
 
 
 <button
-class="nav-item"
-onclick="showSection('products',this)"
+    class="nav-item"
+    onclick="showSection('products',this)"
 >
 
-<span class="nav-icon">🛍️</span>
+    <span class="nav-icon">
+        🛍️
+    </span>
 
-<span>Products</span>
+    <span>
+        Products
+    </span>
 
 </button>
 
 
 <button
-class="nav-item"
-onclick="showSection('users',this)"
+    class="nav-item"
+    onclick="showSection('users',this)"
 >
 
-<span class="nav-icon">👥</span>
+    <span class="nav-icon">
+        👥
+    </span>
 
-<span>Users</span>
+    <span>
+        Users
+    </span>
 
 </button>
 
 
 <div
-class="nav-title"
-style="margin-top:18px;"
+    class="nav-title"
+    style="margin-top:18px;"
 >
-Website
+    Website
 </div>
 
 
 <button
-class="nav-item"
-onclick="window.location.href='index.html'"
+    class="nav-item"
+    onclick="window.location.href='index.html'"
 >
 
-<span class="nav-icon">🏠</span>
+    <span class="nav-icon">
+        🏠
+    </span>
 
-<span>Visit Website</span>
+    <span>
+        Visit Website
+    </span>
 
 </button>
 
 
 <button
-class="nav-item"
-onclick="adminLogout()"
-style="margin-top:25px;color:#ffb4ab;"
+    class="nav-item"
+    onclick="adminLogout()"
+    style="
+        margin-top:25px;
+        color:#ffb4ab;
+    "
 >
 
-<span class="nav-icon">🚪</span>
+    <span class="nav-icon">
+        🚪
+    </span>
 
-<span>Logout</span>
+    <span>
+        Logout
+    </span>
 
 </button>
 
@@ -1694,9 +1687,9 @@ style="margin-top:25px;color:#ffb4ab;"
 
 
 
-<!-- =========================
-MAIN
-========================= -->
+<!-- =====================================================
+     MAIN
+====================================================== -->
 
 <div class="main">
 
@@ -1704,27 +1697,27 @@ MAIN
 <header class="top-header">
 
 <div
-class="page-title"
-id="pageTitle"
+    class="page-title"
+    id="pageTitle"
 >
-Dashboard
+    Dashboard
 </div>
 
 
 <div class="header-right">
 
 <a
-href="index.html"
-class="view-site"
+    href="index.html"
+    class="view-site"
 >
-View Website ↗
+    View Website ↗
 </a>
 
 
 <div class="admin-user">
 
 <div class="admin-avatar">
-A
+    A
 </div>
 
 
@@ -1732,19 +1725,20 @@ A
 
 <span class="admin-name">
 
-Administrator
+    Administrator
 
-<span
-class="verified-badge"
-title="Verified Admin"
->
-✓
-</span>
+    <span
+        class="verified-badge"
+        title="Verified Admin"
+        aria-label="Verified Admin"
+    >
+        ✓
+    </span>
 
 </span>
 
 <small>
-Super Admin
+    Super Admin
 </small>
 
 </div>
@@ -1760,23 +1754,24 @@ Super Admin
 <main class="content">
 
 
-<!-- =========================
-DASHBOARD
-========================= -->
+<!-- =====================================================
+     DASHBOARD
+====================================================== -->
 
 <section
-class="section active"
-id="dashboard"
+    class="section active"
+    id="dashboard"
 >
 
 <div class="welcome">
 
 <h1>
-Welcome back, Admin 👋
+    Welcome back, Admin 👋
 </h1>
 
 <p>
-Shopping Mela-এর আজকের overview এখানে দেখতে পারবেন।
+    Shopping Mela-এর আজকের
+    overview এখানে দেখতে পারবেন।
 </p>
 
 </div>
@@ -1790,24 +1785,24 @@ Shopping Mela-এর আজকের overview এখানে দেখতে �
 <div class="stat-top">
 
 <div class="stat-icon">
-📦
+    📦
 </div>
 
 <span class="stat-change">
-Live
+    Live
 </span>
 
 </div>
 
 <div class="stat-label">
-Total Orders
+    Total Orders
 </div>
 
 <div
-class="stat-value"
-id="dashOrders"
+    class="stat-value"
+    id="dashOrders"
 >
-0
+    0
 </div>
 
 </div>
@@ -1818,24 +1813,24 @@ id="dashOrders"
 <div class="stat-top">
 
 <div class="stat-icon">
-💰
+    💰
 </div>
 
 <span class="stat-change">
-Sales
+    Sales
 </span>
 
 </div>
 
 <div class="stat-label">
-Total Sales
+    Total Sales
 </div>
 
 <div
-class="stat-value"
-id="dashSales"
+    class="stat-value"
+    id="dashSales"
 >
-৳0
+    ৳0
 </div>
 
 </div>
@@ -1846,24 +1841,24 @@ id="dashSales"
 <div class="stat-top">
 
 <div class="stat-icon">
-🚚
+    🚚
 </div>
 
 <span class="stat-change">
-Active
+    Active
 </span>
 
 </div>
 
 <div class="stat-label">
-Active Delivery
+    Active Delivery
 </div>
 
 <div
-class="stat-value"
-id="dashDelivery"
+    class="stat-value"
+    id="dashDelivery"
 >
-0
+    0
 </div>
 
 </div>
@@ -1874,24 +1869,24 @@ id="dashDelivery"
 <div class="stat-top">
 
 <div class="stat-icon">
-👥
+    👥
 </div>
 
 <span class="stat-change">
-Users
+    Users
 </span>
 
 </div>
 
 <div class="stat-label">
-Registered Users
+    Registered Users
 </div>
 
 <div
-class="stat-value"
-id="dashUsers"
+    class="stat-value"
+    id="dashUsers"
 >
-0
+    0
 </div>
 
 </div>
@@ -1908,22 +1903,20 @@ id="dashUsers"
 <div class="panel-header">
 
 <h2>
-Recent Orders
+    Recent Orders
 </h2>
 
 <button
-onclick="showSectionById('orders')"
+    onclick="showSectionById('orders')"
 >
-View All
+    View All
 </button>
 
 </div>
 
-
 <div id="recentOrders"></div>
 
 </div>
-
 
 
 <div class="panel">
@@ -1931,7 +1924,7 @@ View All
 <div class="panel-header">
 
 <h2>
-Quick Actions
+    Quick Actions
 </h2>
 
 </div>
@@ -1941,80 +1934,80 @@ Quick Actions
 
 
 <button
-class="quick-action"
-onclick="showSectionById('orders')"
+    class="quick-action"
+    onclick="showSectionById('orders')"
 >
 
 <div class="quick-action-icon">
-📦
+    📦
 </div>
 
 <strong>
-Manage Orders
+    Manage Orders
 </strong>
 
 <span>
-Status update করুন
+    Status update করুন
 </span>
 
 </button>
 
 
 <button
-class="quick-action"
-onclick="showSectionById('products')"
+    class="quick-action"
+    onclick="showSectionById('products')"
 >
 
 <div class="quick-action-icon">
-➕
+    ➕
 </div>
 
 <strong>
-Add Product
+    Add Product
 </strong>
 
 <span>
-নতুন product যোগ করুন
+    নতুন product যোগ করুন
 </span>
 
 </button>
 
 
 <button
-class="quick-action"
-onclick="showSectionById('users')"
+    class="quick-action"
+    onclick="showSectionById('users')"
 >
 
 <div class="quick-action-icon">
-👥
+    👥
 </div>
 
 <strong>
-Users
+    Users
 </strong>
 
 <span>
-User overview
+    User overview
 </span>
 
 </button>
 
 
 <button
-class="quick-action"
-onclick="window.location.href='index.html'"
+    class="quick-action"
+    onclick="window.location.href='index.html'"
 >
 
 <div class="quick-action-icon">
-🌐
+    🌐
 </div>
 
 <strong>
-Website
+    Website
 </strong>
 
 <span>
-Live website
+    Live website
 </span>
 
 </button>
@@ -2032,13 +2025,16 @@ Live website
 <div class="panel-header">
 
 <h2>
-Sales Overview
+    Sales Overview
 </h2>
 
 <span
-style="color:#98a2b3;font-size:9px;"
+    style="
+        color:#98a2b3;
+        font-size:9px;
+    "
 >
-Last 7 Orders
+    Last 7 Orders
 </span>
 
 </div>
@@ -2049,21 +2045,19 @@ Last 7 Orders
 <div class="sales-total">
 
 <span>
-Total Order Value
+    Total Order Value
 </span>
 
-<strong
-id="salesOverviewTotal"
->
-৳0
+<strong id="salesOverviewTotal">
+    ৳0
 </strong>
 
 </div>
 
 
 <div
-class="sales-bars"
-id="salesBars"
+    class="sales-bars"
+    id="salesBars"
 >
 </div>
 
@@ -2075,23 +2069,24 @@ id="salesBars"
 
 
 
-<!-- =========================
-ORDERS
-========================= -->
+<!-- =====================================================
+     ORDERS
+====================================================== -->
 
 <section
-class="section"
-id="orders"
+    class="section"
+    id="orders"
 >
 
 <div class="welcome">
 
 <h1>
-Orders
+    Orders
 </h1>
 
 <p>
-সব customer orders এখান থেকে manage করুন।
+    সব customer orders এখান থেকে
+    manage করুন।
 </p>
 
 </div>
@@ -2102,11 +2097,11 @@ Orders
 <div class="panel-header">
 
 <h2>
-All Orders
+    All Orders
 </h2>
 
 <button onclick="renderAll()">
-Refresh
+    Refresh
 </button>
 
 </div>
@@ -2120,26 +2115,36 @@ Refresh
 
 <tr>
 
-<th>Order ID</th>
+<th>
+    Order ID
+</th>
 
-<th>Customer</th>
+<th>
+    Customer
+</th>
 
-<th>Mobile</th>
+<th>
+    Mobile
+</th>
 
-<th>Total</th>
+<th>
+    Total
+</th>
 
-<th>Date</th>
+<th>
+    Date
+</th>
 
-<th>Status</th>
+<th>
+    Status
+</th>
 
 </tr>
 
 </thead>
 
 
-<tbody
-id="ordersTable"
->
+<tbody id="ordersTable">
 </tbody>
 
 </table>
@@ -2152,34 +2157,49 @@ id="ordersTable"
 
 
 
-<!-- =========================
-PRODUCTS
-========================= -->
+<!-- =====================================================
+     PRODUCTS
+====================================================== -->
 
 <section
-class="section"
-id="products"
+    class="section"
+    id="products"
 >
 
 <div class="welcome">
 
 <h1>
-Products
+    Products
 </h1>
 
 <p>
-Product add, edit, delete, search এবং preview করুন।
+    Product add, edit এবং delete
+    এখান থেকে manage করুন।
 </p>
 
 </div>
 
 
-<!-- ADD PRODUCT -->
-
-<div class="product-form">
+<div
+    class="product-form"
+    id="productFormBox"
+>
 
 <h2>
-➕ Add New Product
+
+    ➕
+    <span id="productFormTitle">
+        Add New Product
+    </span>
+
+    <span
+        id="editBadge"
+        class="edit-badge"
+        style="display:none;"
+    >
+        Editing
+    </span>
+
 </h2>
 
 
@@ -2189,13 +2209,13 @@ Product add, edit, delete, search এবং preview করুন।
 <div class="form-group">
 
 <label>
-Product Name
+    Product Name
 </label>
 
 <input
-type="text"
-id="productName"
-placeholder="Product name"
+    type="text"
+    id="productName"
+    placeholder="Product name"
 >
 
 </div>
@@ -2204,13 +2224,13 @@ placeholder="Product name"
 <div class="form-group">
 
 <label>
-Price
+    Price
 </label>
 
 <input
-type="number"
-id="productPrice"
-placeholder="৳"
+    type="number"
+    id="productPrice"
+    placeholder="৳"
 >
 
 </div>
@@ -2219,20 +2239,30 @@ placeholder="৳"
 <div class="form-group">
 
 <label>
-Category
+    Category
 </label>
 
 <select id="productCategory">
 
-<option>Fashion</option>
+<option>
+    Fashion
+</option>
 
-<option>Beauty</option>
+<option>
+    Beauty
+</option>
 
-<option>Electronics</option>
+<option>
+    Electronics
+</option>
 
-<option>Food</option>
+<option>
+    Food
+</option>
 
-<option>Home</option>
+<option>
+    Home
+</option>
 
 </select>
 
@@ -2242,13 +2272,13 @@ Category
 <div class="form-group">
 
 <label>
-Image URL
+    Image URL
 </label>
 
 <input
-type="text"
-id="productImage"
-placeholder="https://..."
+    type="text"
+    id="productImage"
+    placeholder="https://..."
 >
 
 </div>
@@ -2257,85 +2287,51 @@ placeholder="https://..."
 
 
 <button
-class="form-submit"
-onclick="addProduct()"
+    class="form-submit"
+    id="productSubmitButton"
+    onclick="addProduct()"
 >
-Add Product
+    Add Product
+</button>
+
+
+<button
+    class="cancel-edit"
+    id="cancelEditButton"
+    onclick="cancelProductEdit()"
+    style="display:none;"
+>
+    Cancel Edit
 </button>
 
 </div>
 
 
 
-<!-- PRODUCT LIST -->
-
 <div class="panel">
 
 <div class="panel-header">
 
 <h2>
-Saved Products
+    Saved Products
 </h2>
 
 <span
-style="font-size:9px;color:#98a2b3;"
-id="productCount"
+    style="
+        color:#98a2b3;
+        font-size:9px;
+    "
+    id="productCountLabel"
 >
-0 Products
+    0 Products
 </span>
 
 </div>
 
 
-<div class="product-toolbar">
-
-<input
-class="product-search"
-id="productSearch"
-type="text"
-placeholder="🔍 Product search..."
-oninput="renderProducts()"
->
-
-
-<select
-class="product-filter"
-id="productFilter"
-onchange="renderProducts()"
->
-
-<option value="all">
-All Categories
-</option>
-
-<option value="Fashion">
-Fashion
-</option>
-
-<option value="Beauty">
-Beauty
-</option>
-
-<option value="Electronics">
-Electronics
-</option>
-
-<option value="Food">
-Food
-</option>
-
-<option value="Home">
-Home
-</option>
-
-</select>
-
-</div>
-
-
 <div
-id="productsList"
-class="products-grid"
+    id="productsList"
+    style="padding:18px;"
 >
 </div>
 
@@ -2345,23 +2341,24 @@ class="products-grid"
 
 
 
-<!-- =========================
-USERS
-========================= -->
+<!-- =====================================================
+     USERS
+====================================================== -->
 
 <section
-class="section"
-id="users"
+    class="section"
+    id="users"
 >
 
 <div class="welcome">
 
 <h1>
-Users
+    Users
 </h1>
 
 <p>
-Registered customer information overview।
+    Registered customer information
+    overview।
 </p>
 
 </div>
@@ -2382,84 +2379,11 @@ Registered customer information overview।
 
 
 
-<!-- =========================
-PRODUCT PREVIEW MODAL
-========================= -->
+<!-- TOAST -->
 
 <div
-class="modal"
-id="productPreviewModal"
-onclick="closePreview(event)"
->
-
-<div
-class="modal-box"
-onclick="event.stopPropagation()"
->
-
-<div class="modal-header">
-
-<h3>
-Product Preview
-</h3>
-
-<button
-class="modal-close"
-onclick="closePreview()"
->
-✕
-</button>
-
-</div>
-
-
-<div class="modal-body">
-
-<div
-class="preview-image"
-id="previewImage"
->
-</div>
-
-
-<div
-class="preview-name"
-id="previewName"
->
-Product
-</div>
-
-
-<div
-class="preview-category"
-id="previewCategory"
->
-Category
-</div>
-
-
-<div
-class="preview-price"
-id="previewPrice"
->
-৳0
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-
-
-<!-- =========================
-TOAST
-========================= -->
-
-<div
-class="toast"
-id="toast"
+    class="toast"
+    id="toast"
 >
 </div>
 
@@ -2468,9 +2392,9 @@ id="toast"
 <script>
 
 
-/* =========================
-GLOBAL DATA
-========================= */
+/* =====================================================
+   GLOBAL DATA
+===================================================== */
 
 let orders = [];
 
@@ -2478,1629 +2402,1717 @@ let products = [];
 
 let users = [];
 
+let editingProductId = null;
+
 
 const STATUS_NAMES = [
 
-"Order Placed",
+    "Order Placed",
 
-"Order Confirmed",
+    "Order Confirmed",
 
-"Processing",
+    "Processing",
 
-"Shipped",
+    "Shipped",
 
-"Out for Delivery",
+    "Out for Delivery",
 
-"Delivered"
+    "Delivered"
 
 ];
 
 
-/* =========================
-LOAD DATA
-========================= */
 
-function loadData(){
+/* =====================================================
+   LOAD DATA
+===================================================== */
 
-try{
+function loadData() {
 
-orders =
-JSON.parse(
-localStorage.getItem(
-"shoppingMelaOrders"
-)
-) || [];
+    try {
 
-}catch{
+        orders =
+            JSON.parse(
+                localStorage.getItem(
+                    "shoppingMelaOrders"
+                )
+            ) || [];
 
-orders=[];
+    } catch {
 
-}
+        orders = [];
 
-
-try{
-
-products =
-JSON.parse(
-localStorage.getItem(
-"shoppingMelaProducts"
-)
-) || [];
-
-}catch{
-
-products=[];
-
-}
+    }
 
 
-try{
+    try {
 
-users =
-JSON.parse(
-localStorage.getItem(
-"shoppingMelaUsers"
-)
-) || [];
+        products =
+            JSON.parse(
+                localStorage.getItem(
+                    "shoppingMelaProducts"
+                )
+            ) || [];
 
-}catch{
+    } catch {
 
-users=[];
+        products = [];
 
-}
-
-}
+    }
 
 
-/* =========================
-SAVE
-========================= */
+    try {
 
-function saveOrders(){
+        users =
+            JSON.parse(
+                localStorage.getItem(
+                    "shoppingMelaUsers"
+                )
+            ) || [];
 
-localStorage.setItem(
-"shoppingMelaOrders",
-JSON.stringify(orders)
-);
+    } catch {
 
-}
+        users = [];
 
-function saveProducts(){
-
-localStorage.setItem(
-"shoppingMelaProducts",
-JSON.stringify(products)
-);
+    }
 
 }
 
 
-/* =========================
-MONEY
-========================= */
 
-function money(amount){
+/* =====================================================
+   SAVE
+===================================================== */
 
-return "৳" +
-Number(amount || 0)
-.toLocaleString("en-BD");
+function saveOrders() {
 
-}
-
-
-/* =========================
-ESCAPE
-========================= */
-
-function escapeHTML(value){
-
-return String(value || "")
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+    localStorage.setItem(
+        "shoppingMelaOrders",
+        JSON.stringify(orders)
+    );
 
 }
 
 
-/* =========================
-DATE
-========================= */
+function saveProducts() {
 
-function formatDate(value){
-
-if(!value){
-
-return "—";
-
-}
-
-const date = new Date(value);
-
-if(Number.isNaN(date.getTime())){
-
-return "—";
-
-}
-
-return date.toLocaleDateString(
-"en-BD",
-{
-day:"2-digit",
-month:"short",
-year:"numeric"
-}
-);
+    localStorage.setItem(
+        "shoppingMelaProducts",
+        JSON.stringify(products)
+    );
 
 }
 
 
-/* =========================
-STEP
-========================= */
 
-function getStep(order){
+/* =====================================================
+   MONEY
+===================================================== */
 
-return Math.max(
-0,
-Math.min(
-5,
-Number(order.trackingStep ?? 0)
-)
-);
+function money(amount) {
 
-}
-
-
-/* =========================
-STATUS CLASS
-========================= */
-
-function statusClass(step){
-
-if(step === 5){
-
-return "delivered";
-
-}
-
-if(
-step === 2 ||
-step === 3 ||
-step === 4
-){
-
-return "processing";
-
-}
-
-return "";
+    return "৳" +
+        Number(
+            amount || 0
+        ).toLocaleString(
+            "en-BD"
+        );
 
 }
 
 
-/* =========================
-STATS
-========================= */
 
-function renderStats(){
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
 
-const totalSales =
-orders.reduce(
-(sum,order)=>
-sum + Number(order.total || 0),
-0
-);
+function escapeHTML(value) {
 
-
-const activeDelivery =
-orders.filter(
-order =>
-getStep(order) >= 3 &&
-getStep(order) < 5
-).length;
-
-
-document.getElementById(
-"dashOrders"
-).textContent =
-orders.length;
-
-
-document.getElementById(
-"dashSales"
-).textContent =
-money(totalSales);
-
-
-document.getElementById(
-"dashDelivery"
-).textContent =
-activeDelivery;
-
-
-document.getElementById(
-"dashUsers"
-).textContent =
-users.length;
-
-
-document.getElementById(
-"sidebarOrderCount"
-).textContent =
-orders.length;
-
-
-document.getElementById(
-"salesOverviewTotal"
-).textContent =
-money(totalSales);
+    return String(
+        value || ""
+    )
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
 
-/* =========================
-RECENT ORDERS
-========================= */
 
-function renderRecentOrders(){
+/* =====================================================
+   DATE
+===================================================== */
 
-const box =
-document.getElementById(
-"recentOrders"
-);
+function formatDate(value) {
 
-box.innerHTML="";
+    if (!value) {
 
+        return "—";
 
-const recent =
-[...orders]
-.reverse()
-.slice(0,6);
+    }
 
 
-if(!recent.length){
-
-box.innerHTML=`
-
-<div style="
-padding:35px;
-text-align:center;
-color:#98a2b3;
-font-size:10px;
-">
-
-এখনো কোনো order নেই।
-
-</div>
-
-`;
-
-return;
-
-}
+    const date =
+        new Date(value);
 
 
-recent.forEach(order=>{
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
 
-const customer =
-order.customer || {};
+        return "—";
 
-const step =
-getStep(order);
-
-
-const row =
-document.createElement("div");
-
-row.className="order-row";
+    }
 
 
-row.innerHTML=`
-
-<div class="order-id">
-
-#${escapeHTML(
-order.orderId ||
-"SM000000"
-)}
-
-</div>
-
-
-<div class="order-customer">
-
-${escapeHTML(
-customer.name ||
-"Customer"
-)}
-
-</div>
-
-
-<div class="order-price">
-
-${money(order.total)}
-
-</div>
-
-
-<div>
-
-<span class="
-status
-${statusClass(step)}
-">
-
-${STATUS_NAMES[step]}
-
-</span>
-
-</div>
-
-`;
-
-
-box.appendChild(row);
-
-});
+    return date.toLocaleDateString(
+        "en-BD",
+        {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        }
+    );
 
 }
 
 
-/* =========================
-SALES BARS
-========================= */
 
-function renderSalesBars(){
+/* =====================================================
+   ORDER STEP
+===================================================== */
 
-const box =
-document.getElementById(
-"salesBars"
-);
+function getStep(order) {
 
-box.innerHTML="";
-
-
-const data =
-[...orders]
-.reverse()
-.slice(0,7);
-
-
-if(!data.length){
-
-for(let i=0;i<7;i++){
-
-createBar(
-box,
-0,
-i+1
-);
-
-}
-
-return;
+    return Math.max(
+        0,
+        Math.min(
+            5,
+            Number(
+                order.trackingStep ?? 0
+            )
+        )
+    );
 
 }
 
 
-const values =
-data.map(
-order =>
-Number(order.total || 0)
-);
 
+/* =====================================================
+   STATUS CLASS
+===================================================== */
 
-const max =
-Math.max(...values,1);
+function statusClass(step) {
 
+    if (step === 5) {
 
-data.forEach(
-(order,index)=>{
+        return "delivered";
 
-const value =
-Number(order.total || 0);
+    }
 
+    if (
+        step === 2 ||
+        step === 3 ||
+        step === 4
+    ) {
 
-const height =
-Math.max(
-5,
-(value/max)*120
-);
+        return "processing";
 
+    }
 
-createBar(
-box,
-height,
-index+1
-);
+    return "";
 
 }
-);
+
+
+
+/* =====================================================
+   STATS
+===================================================== */
+
+function renderStats() {
+
+    const totalSales =
+        orders.reduce(
+            (
+                sum,
+                order
+            ) =>
+                sum +
+                Number(
+                    order.total || 0
+                ),
+            0
+        );
+
+
+    const activeDelivery =
+        orders.filter(
+            order =>
+                getStep(order) >= 3 &&
+                getStep(order) < 5
+        ).length;
+
+
+    document.getElementById(
+        "dashOrders"
+    ).textContent =
+        orders.length;
+
+
+    document.getElementById(
+        "dashSales"
+    ).textContent =
+        money(totalSales);
+
+
+    document.getElementById(
+        "dashDelivery"
+    ).textContent =
+        activeDelivery;
+
+
+    document.getElementById(
+        "dashUsers"
+    ).textContent =
+        users.length;
+
+
+    document.getElementById(
+        "sidebarOrderCount"
+    ).textContent =
+        orders.length;
+
+
+    document.getElementById(
+        "salesOverviewTotal"
+    ).textContent =
+        money(totalSales);
 
 }
+
+
+
+/* =====================================================
+   RECENT ORDERS
+===================================================== */
+
+function renderRecentOrders() {
+
+    const box =
+        document.getElementById(
+            "recentOrders"
+        );
+
+
+    box.innerHTML = "";
+
+
+    const recent =
+        [...orders]
+            .reverse()
+            .slice(0,6);
+
+
+    if (!recent.length) {
+
+        box.innerHTML = `
+
+            <div
+                style="
+                    padding:35px;
+                    text-align:center;
+                    color:#98a2b3;
+                    font-size:10px;
+                "
+            >
+                এখনো কোনো order নেই।
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    recent.forEach(order => {
+
+        const customer =
+            order.customer || {};
+
+
+        const step =
+            getStep(order);
+
+
+        const row =
+            document.createElement(
+                "div"
+            );
+
+
+        row.className =
+            "order-row";
+
+
+        row.innerHTML = `
+
+            <div class="order-id">
+                #${escapeHTML(
+                    order.orderId ||
+                    "SM000000"
+                )}
+            </div>
+
+            <div class="order-customer">
+                ${escapeHTML(
+                    customer.name ||
+                    "Customer"
+                )}
+            </div>
+
+            <div class="order-price">
+                ${money(order.total)}
+            </div>
+
+            <div>
+                <span
+                    class="
+                        status
+                        ${statusClass(step)}
+                    "
+                >
+                    ${STATUS_NAMES[step]}
+                </span>
+            </div>
+
+        `;
+
+
+        box.appendChild(row);
+
+    });
+
+}
+
+
+
+/* =====================================================
+   SALES BARS
+===================================================== */
+
+function renderSalesBars() {
+
+    const box =
+        document.getElementById(
+            "salesBars"
+        );
+
+
+    box.innerHTML = "";
+
+
+    const data =
+        [...orders]
+            .reverse()
+            .slice(0,7);
+
+
+    if (!data.length) {
+
+        for (
+            let i = 0;
+            i < 7;
+            i++
+        ) {
+
+            createBar(
+                box,
+                0,
+                i + 1
+            );
+
+        }
+
+        return;
+
+    }
+
+
+    const values =
+        data.map(
+            order =>
+                Number(
+                    order.total || 0
+                )
+        );
+
+
+    const max =
+        Math.max(
+            ...values,
+            1
+        );
+
+
+    data.forEach(
+        (
+            order,
+            index
+        ) => {
+
+            const value =
+                Number(
+                    order.total || 0
+                );
+
+
+            const height =
+                Math.max(
+                    5,
+                    (
+                        value /
+                        max
+                    ) *
+                    120
+                );
+
+
+            createBar(
+                box,
+                height,
+                index + 1
+            );
+
+        }
+    );
+
+}
+
 
 
 function createBar(
-parent,
-height,
-label
-){
+    parent,
+    height,
+    label
+) {
 
-const wrap =
-document.createElement("div");
-
-wrap.className="bar-wrap";
-
-
-wrap.innerHTML=`
-
-<div
-class="bar"
-style="height:${height}px;"
-></div>
-
-<span class="bar-label">
-${label}
-</span>
-
-`;
+    const wrap =
+        document.createElement(
+            "div"
+        );
 
 
-parent.appendChild(wrap);
-
-}
-
-
-/* =========================
-ORDERS TABLE
-========================= */
-
-function renderOrdersTable(){
-
-const tbody =
-document.getElementById(
-"ordersTable"
-);
-
-tbody.innerHTML="";
+    wrap.className =
+        "bar-wrap";
 
 
-const list =
-[...orders]
-.map(
-(order,index)=>({
-order,
-index
-})
-)
-.reverse();
+    wrap.innerHTML = `
+
+        <div
+            class="bar"
+            style="
+                height:${height}px;
+            "
+        ></div>
+
+        <span class="bar-label">
+            ${label}
+        </span>
+
+    `;
 
 
-if(!list.length){
-
-tbody.innerHTML=`
-
-<tr>
-
-<td
-colspan="6"
-style="
-text-align:center;
-padding:45px;
-color:#98a2b3;
-"
->
-
-কোনো order পাওয়া যায়নি।
-
-</td>
-
-</tr>
-
-`;
-
-return;
+    parent.appendChild(wrap);
 
 }
 
 
-list.forEach(item=>{
 
-const order =
-item.order;
+/* =====================================================
+   ORDERS TABLE
+===================================================== */
 
-const index =
-item.index;
+function renderOrdersTable() {
 
-const customer =
-order.customer || {};
-
-const step =
-getStep(order);
+    const tbody =
+        document.getElementById(
+            "ordersTable"
+        );
 
 
-const tr =
-document.createElement("tr");
+    tbody.innerHTML = "";
 
 
-tr.innerHTML=`
-
-<td>
-
-<strong>
-#${escapeHTML(
-order.orderId ||
-"SM000000"
-)}
-</strong>
-
-</td>
-
-
-<td>
-
-${escapeHTML(
-customer.name || "—"
-)}
-
-</td>
+    const list =
+        [...orders]
+            .map(
+                (
+                    order,
+                    index
+                ) => ({
+                    order,
+                    index
+                })
+            )
+            .reverse();
 
 
-<td>
+    if (!list.length) {
 
-${escapeHTML(
-customer.phone || "—"
-)}
+        tbody.innerHTML = `
 
-</td>
+            <tr>
+
+                <td
+                    colspan="6"
+                    style="
+                        text-align:center;
+                        padding:45px;
+                        color:#98a2b3;
+                    "
+                >
+                    কোনো order পাওয়া যায়নি।
+                </td>
+
+            </tr>
+
+        `;
+
+        return;
+
+    }
 
 
-<td>
+    list.forEach(item => {
 
-${money(order.total)}
-
-</td>
-
-
-<td>
-
-${formatDate(
-order.createdAt
-)}
-
-</td>
+        const order =
+            item.order;
 
 
-<td>
+        const index =
+            item.index;
 
-<select
-class="table-status"
-onchange="
-changeStatus(
-${index},
-this.value
-)
-"
->
 
-${
-STATUS_NAMES
-.map(
-(name,statusIndex)=>`
+        const customer =
+            order.customer || {};
 
-<option
-value="${statusIndex}"
-${
-statusIndex === step
-? "selected"
-: ""
+
+        const step =
+            getStep(order);
+
+
+        const tr =
+            document.createElement(
+                "tr"
+            );
+
+
+        tr.innerHTML = `
+
+            <td>
+
+                <strong>
+                    #${escapeHTML(
+                        order.orderId ||
+                        "SM000000"
+                    )}
+                </strong>
+
+            </td>
+
+
+            <td>
+                ${escapeHTML(
+                    customer.name ||
+                    "—"
+                )}
+            </td>
+
+
+            <td>
+                ${escapeHTML(
+                    customer.phone ||
+                    "—"
+                )}
+            </td>
+
+
+            <td>
+                ${money(
+                    order.total
+                )}
+            </td>
+
+
+            <td>
+                ${formatDate(
+                    order.createdAt
+                )}
+            </td>
+
+
+            <td>
+
+                <select
+                    class="table-status"
+                    onchange="
+                        changeStatus(
+                            ${index},
+                            this.value
+                        )
+                    "
+                >
+
+                    ${
+                        STATUS_NAMES
+                            .map(
+                                (
+                                    name,
+                                    statusIndex
+                                ) => `
+
+                                    <option
+                                        value="${statusIndex}"
+                                        ${
+                                            statusIndex === step
+                                            ? "selected"
+                                            : ""
+                                        }
+                                    >
+                                        ${name}
+                                    </option>
+
+                                `
+                            )
+                            .join("")
+                    }
+
+                </select>
+
+            </td>
+
+        `;
+
+
+        tbody.appendChild(tr);
+
+    });
+
 }
->
-
-${name}
-
-</option>
-
-`
-)
-.join("")
-}
-
-</select>
-
-</td>
-
-`;
 
 
-tbody.appendChild(tr);
 
-});
-
-}
-
-
-/* =========================
-CHANGE STATUS
-========================= */
+/* =====================================================
+   CHANGE ORDER STATUS
+===================================================== */
 
 function changeStatus(
-index,
-value
-){
+    index,
+    value
+) {
 
-if(!orders[index]){
+    if (!orders[index]) {
 
-return;
+        return;
 
-}
-
-
-orders[index].trackingStep =
-Number(value);
+    }
 
 
-orders[index].updatedAt =
-new Date().toISOString();
+    orders[index].trackingStep =
+        Number(value);
 
 
-saveOrders();
+    orders[index].updatedAt =
+        new Date().toISOString();
 
 
-syncLastOrder(
-orders[index]
-);
+    saveOrders();
 
 
-renderAll();
+    syncLastOrder(
+        orders[index]
+    );
 
 
-showToast(
-"Order status updated ✓"
-);
-
-}
+    renderAll();
 
 
-/* =========================
-SYNC LAST ORDER
-========================= */
-
-function syncLastOrder(order){
-
-try{
-
-const last =
-JSON.parse(
-localStorage.getItem(
-"shoppingMelaLastOrder"
-)
-);
-
-
-if(
-last &&
-String(last.orderId) ===
-String(order.orderId)
-){
-
-last.trackingStep =
-order.trackingStep;
-
-last.updatedAt =
-order.updatedAt;
-
-
-localStorage.setItem(
-"shoppingMelaLastOrder",
-JSON.stringify(last)
-);
+    showToast(
+        "Order status updated ✓"
+    );
 
 }
 
-}catch{
-
-}
-
-}
 
 
 /* =====================================================
-1.35 ADD PRODUCT
+   SYNC LAST ORDER
 ===================================================== */
 
-function addProduct(){
+function syncLastOrder(order) {
 
-const name =
-document.getElementById(
-"productName"
-).value.trim();
+    try {
 
-
-const price =
-Number(
-document.getElementById(
-"productPrice"
-).value
-);
+        const last =
+            JSON.parse(
+                localStorage.getItem(
+                    "shoppingMelaLastOrder"
+                )
+            );
 
 
-const category =
-document.getElementById(
-"productCategory"
-).value;
+        if (
+            last &&
+            String(last.orderId) ===
+            String(order.orderId)
+        ) {
+
+            last.trackingStep =
+                order.trackingStep;
 
 
-const image =
-document.getElementById(
-"productImage"
-).value.trim();
+            last.updatedAt =
+                order.updatedAt;
 
 
-if(!name){
+            localStorage.setItem(
+                "shoppingMelaLastOrder",
+                JSON.stringify(last)
+            );
 
-showToast(
-"Product name দিন"
-);
+        }
 
-return;
+    } catch {
 
-}
+        /* ignore */
 
-
-if(!price || price <= 0){
-
-showToast(
-"Valid product price দিন"
-);
-
-return;
+    }
 
 }
 
-
-const product={
-
-id:"P"+Date.now(),
-
-name:name,
-
-price:price,
-
-category:category,
-
-image:image,
-
-createdAt:
-new Date().toISOString()
-
-};
-
-
-products.push(product);
-
-
-saveProducts();
-
-
-document.getElementById(
-"productName"
-).value="";
-
-
-document.getElementById(
-"productPrice"
-).value="";
-
-
-document.getElementById(
-"productImage"
-).value="";
-
-
-renderProducts();
-
-
-showToast(
-"Product added successfully ✓"
-);
-
-}
 
 
 /* =====================================================
-1.35 RENDER PRODUCTS
+   1.36 — ADD / UPDATE PRODUCT
 ===================================================== */
 
-function renderProducts(){
+function addProduct() {
 
-const box =
-document.getElementById(
-"productsList"
-);
-
-
-const search =
-(
-document.getElementById(
-"productSearch"
-)?.value || ""
-)
-.toLowerCase()
-.trim();
+    const name =
+        document.getElementById(
+            "productName"
+        ).value.trim();
 
 
-const filter =
-document.getElementById(
-"productFilter"
-)?.value || "all";
+    const price =
+        Number(
+            document.getElementById(
+                "productPrice"
+            ).value
+        );
 
 
-const filtered =
-products.filter(product=>{
-
-const matchesSearch =
-String(product.name || "")
-.toLowerCase()
-.includes(search);
+    const category =
+        document.getElementById(
+            "productCategory"
+        ).value;
 
 
-const matchesCategory =
-filter === "all" ||
-String(product.category || "") === filter;
+    const image =
+        document.getElementById(
+            "productImage"
+        ).value.trim();
 
 
-return (
-matchesSearch &&
-matchesCategory
-);
+    if (!name) {
 
-});
+        showToast(
+            "Product name দিন"
+        );
 
+        return;
 
-document.getElementById(
-"productCount"
-).textContent =
-filtered.length +
-" Product" +
-(filtered.length !== 1 ? "s" : "");
+    }
 
 
-box.innerHTML="";
+    if (
+        !price ||
+        price <= 0
+    ) {
+
+        showToast(
+            "সঠিক price দিন"
+        );
+
+        return;
+
+    }
 
 
-if(!filtered.length){
+    /* =================================================
+       UPDATE EXISTING PRODUCT
+    ================================================= */
 
-box.innerHTML=`
+    if (
+        editingProductId !== null
+    ) {
 
-<div style="
-grid-column:1/-1;
-padding:45px;
-text-align:center;
-color:#98a2b3;
-font-size:10px;
-">
-
-${
-products.length
-?
-"কোনো matching product পাওয়া যায়নি।"
-:
-"এখনো কোনো product add করা হয়নি।"
-}
-
-</div>
-
-`;
-
-return;
-
-}
+        const index =
+            products.findIndex(
+                product =>
+                    String(product.id) ===
+                    String(editingProductId)
+            );
 
 
-filtered.forEach(product=>{
+        if (index !== -1) {
 
-const card =
-document.createElement("div");
+            products[index].name =
+                name;
 
-card.className="product-card";
+            products[index].price =
+                price;
 
+            products[index].category =
+                category;
 
-const safeImage =
-String(product.image || "")
-.replace(/'/g,"\\'");
+            products[index].image =
+                image;
 
-
-card.innerHTML=`
-
-<div
-class="product-image"
-style="
-background-image:url('${safeImage}');
-"
-></div>
+            products[index].updatedAt =
+                new Date()
+                    .toISOString();
 
 
-<div class="product-info">
+            saveProducts();
 
-<div class="product-name">
+            renderProducts();
 
-${escapeHTML(
-product.name
-)}
+            cancelProductEdit();
 
-</div>
+            showToast(
+                "Product updated ✓"
+            );
 
+            return;
 
-<div class="product-category">
+        }
 
-${escapeHTML(
-product.category ||
-"Uncategorized"
-)}
-
-</div>
+    }
 
 
-<div class="product-price">
+    /* =================================================
+       ADD NEW PRODUCT
+    ================================================= */
 
-${money(
-product.price
-)}
+    products.push({
 
-</div>
+        id:
+            "P" +
+            Date.now(),
 
+        name,
 
-<div class="product-actions">
+        price,
 
-<button
-class="product-btn"
-onclick="
-previewProduct('${escapeHTML(product.id)}')
-"
->
-👁️ Preview
-</button>
+        category,
 
+        image,
 
-<button
-class="product-btn"
-onclick="
-editProduct('${escapeHTML(product.id)}')
-"
->
-✏️ Edit
-</button>
+        createdAt:
+            new Date()
+                .toISOString()
+
+    });
 
 
-<button
-class="product-btn delete"
-onclick="
-deleteProduct('${escapeHTML(product.id)}')
-"
->
-🗑️ Delete
-</button>
-
-</div>
-
-</div>
-
-`;
+    saveProducts();
 
 
-box.appendChild(card);
+    clearProductForm();
 
-});
+
+    renderProducts();
+
+
+    showToast(
+        "Product added ✓"
+    );
 
 }
+
 
 
 /* =====================================================
-1.35 PREVIEW PRODUCT
+   1.36 — EDIT PRODUCT
 ===================================================== */
 
-function previewProduct(id){
+function editProduct(id) {
 
-const product =
-products.find(
-item =>
-String(item.id) === String(id)
-);
+    const product =
+        products.find(
+            item =>
+                String(item.id) ===
+                String(id)
+        );
 
 
-if(!product){
+    if (!product) {
 
-return;
+        showToast(
+            "Product পাওয়া যায়নি"
+        );
+
+        return;
+
+    }
+
+
+    editingProductId =
+        product.id;
+
+
+    document.getElementById(
+        "productName"
+    ).value =
+        product.name || "";
+
+
+    document.getElementById(
+        "productPrice"
+    ).value =
+        product.price || "";
+
+
+    document.getElementById(
+        "productCategory"
+    ).value =
+        product.category ||
+        "Fashion";
+
+
+    document.getElementById(
+        "productImage"
+    ).value =
+        product.image || "";
+
+
+    document.getElementById(
+        "productFormTitle"
+    ).textContent =
+        "Edit Product";
+
+
+    document.getElementById(
+        "editBadge"
+    ).style.display =
+        "inline-block";
+
+
+    document.getElementById(
+        "productSubmitButton"
+    ).textContent =
+        "Update Product";
+
+
+    document.getElementById(
+        "cancelEditButton"
+    ).style.display =
+        "inline-block";
+
+
+    document.getElementById(
+        "productFormBox"
+    ).classList.add(
+        "edit-mode"
+    );
+
+
+    document.getElementById(
+        "productFormBox"
+    ).scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+    });
+
+
+    showToast(
+        "Product edit mode চালু হয়েছে"
+    );
 
 }
 
-
-document.getElementById(
-"previewImage"
-).style.backgroundImage =
-product.image
-? `url('${String(product.image).replace(/'/g,"\\'")}')`
-: "none";
-
-
-document.getElementById(
-"previewName"
-).textContent =
-product.name || "Product";
-
-
-document.getElementById(
-"previewCategory"
-).textContent =
-product.category || "Uncategorized";
-
-
-document.getElementById(
-"previewPrice"
-).textContent =
-money(product.price);
-
-
-document.getElementById(
-"productPreviewModal"
-).classList.add(
-"show"
-);
-
-}
-
-
-/* =========================
-CLOSE PREVIEW
-========================= */
-
-function closePreview(event){
-
-if(
-event &&
-event.target !==
-document.getElementById(
-"productPreviewModal"
-)
-){
-
-return;
-
-}
-
-
-document.getElementById(
-"productPreviewModal"
-).classList.remove(
-"show"
-);
-
-}
 
 
 /* =====================================================
-1.35 EDIT PRODUCT
+   1.36 — DELETE PRODUCT
 ===================================================== */
 
-function editProduct(id){
+function deleteProduct(id) {
 
-const product =
-products.find(
-item =>
-String(item.id) === String(id)
-);
-
-
-if(!product){
-
-return;
-
-}
+    const product =
+        products.find(
+            item =>
+                String(item.id) ===
+                String(id)
+        );
 
 
-const newName =
-prompt(
-"Product name:",
-product.name || ""
-);
+    if (!product) {
+
+        showToast(
+            "Product পাওয়া যায়নি"
+        );
+
+        return;
+
+    }
 
 
-if(newName === null){
-
-return;
-
-}
-
-
-const cleanName =
-newName.trim();
+    const confirmed =
+        confirm(
+            `"${product.name}" product টি delete করতে চান?`
+        );
 
 
-if(!cleanName){
+    if (!confirmed) {
 
-showToast(
-"Product name empty রাখা যাবে না"
-);
+        return;
 
-return;
-
-}
+    }
 
 
-const newPrice =
-prompt(
-"Product price:",
-product.price || 0
-);
+    products =
+        products.filter(
+            item =>
+                String(item.id) !==
+                String(id)
+        );
 
 
-if(newPrice === null){
-
-return;
-
-}
+    saveProducts();
 
 
-const price =
-Number(newPrice);
+    if (
+        String(editingProductId) ===
+        String(id)
+    ) {
+
+        cancelProductEdit();
+
+    }
 
 
-if(!price || price <= 0){
+    renderProducts();
 
-showToast(
-"Valid price দিন"
-);
 
-return;
+    showToast(
+        "Product deleted ✓"
+    );
 
 }
 
-
-const newCategory =
-prompt(
-"Category:",
-product.category || "Fashion"
-);
-
-
-if(newCategory === null){
-
-return;
-
-}
-
-
-const cleanCategory =
-newCategory.trim() ||
-product.category ||
-"Fashion";
-
-
-const newImage =
-prompt(
-"Image URL:",
-product.image || ""
-);
-
-
-if(newImage === null){
-
-return;
-
-}
-
-
-product.name =
-cleanName;
-
-product.price =
-price;
-
-product.category =
-cleanCategory;
-
-product.image =
-newImage.trim();
-
-product.updatedAt =
-new Date().toISOString();
-
-
-saveProducts();
-
-
-renderProducts();
-
-
-showToast(
-"Product updated ✓"
-);
-
-}
 
 
 /* =====================================================
-1.35 DELETE PRODUCT
+   CANCEL EDIT
 ===================================================== */
 
-function deleteProduct(id){
+function cancelProductEdit() {
 
-const index =
-products.findIndex(
-product =>
-String(product.id) === String(id)
-);
+    editingProductId = null;
 
 
-if(index === -1){
-
-return;
-
-}
+    clearProductForm();
 
 
-const product =
-products[index];
+    document.getElementById(
+        "productFormTitle"
+    ).textContent =
+        "Add New Product";
 
 
-const confirmed =
-confirm(
-`"${product.name}" product টি delete করতে চান?`
-);
+    document.getElementById(
+        "editBadge"
+    ).style.display =
+        "none";
 
 
-if(!confirmed){
-
-return;
-
-}
-
-
-products.splice(
-index,
-1
-);
+    document.getElementById(
+        "productSubmitButton"
+    ).textContent =
+        "Add Product";
 
 
-saveProducts();
+    document.getElementById(
+        "cancelEditButton"
+    ).style.display =
+        "none";
 
 
-renderProducts();
-
-
-showToast(
-"Product deleted ✓"
-);
+    document.getElementById(
+        "productFormBox"
+    ).classList.remove(
+        "edit-mode"
+    );
 
 }
 
 
-/* =========================
-USERS
-========================= */
 
-function renderUsers(){
+/* =====================================================
+   CLEAR PRODUCT FORM
+===================================================== */
 
-const box =
-document.getElementById(
-"usersList"
-);
+function clearProductForm() {
+
+    document.getElementById(
+        "productName"
+    ).value = "";
 
 
-if(!users.length){
+    document.getElementById(
+        "productPrice"
+    ).value = "";
 
-box.innerHTML=`
 
-<div class="user-empty">
+    document.getElementById(
+        "productImage"
+    ).value = "";
 
-👥
 
-<br><br>
-
-এখনো কোনো registered
-user data পাওয়া যায়নি।
-
-</div>
-
-`;
-
-return;
+    document.getElementById(
+        "productCategory"
+    ).selectedIndex = 0;
 
 }
 
 
-box.innerHTML =
-users
-.map(
-user=>`
 
-<div style="
-padding:12px 0;
-border-bottom:1px solid #f2f4f7;
-">
+/* =====================================================
+   PRODUCTS
+===================================================== */
 
-<strong style="
-font-size:11px;
-">
+function renderProducts() {
 
-${escapeHTML(
-user.name || "User"
-)}
-
-</strong>
+    const box =
+        document.getElementById(
+            "productsList"
+        );
 
 
-<div style="
-color:#667085;
-font-size:9px;
-margin-top:4px;
-">
+    const countLabel =
+        document.getElementById(
+            "productCountLabel"
+        );
 
-${escapeHTML(
-user.email ||
-user.phone ||
-"No contact"
-)}
 
-</div>
+    box.innerHTML = "";
 
-</div>
 
-`
-)
-.join("");
+    countLabel.textContent =
+        products.length +
+        (
+            products.length === 1
+            ? " Product"
+            : " Products"
+        );
+
+
+    if (!products.length) {
+
+        box.innerHTML = `
+
+            <div
+                style="
+                    padding:35px;
+                    text-align:center;
+                    color:#98a2b3;
+                    font-size:10px;
+                "
+            >
+                এখনো কোনো product add করা হয়নি।
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    products.forEach(
+        product => {
+
+            const row =
+                document.createElement(
+                    "div"
+                );
+
+
+            row.className =
+                "product-row";
+
+
+            const image =
+                product.image || "";
+
+
+            row.innerHTML = `
+
+                <div
+                    class="product-image"
+                    style="
+                        background-image:
+                        url('${escapeHTML(
+                            image
+                        )}');
+                    "
+                ></div>
+
+
+                <div class="product-info">
+
+                    <strong>
+                        ${escapeHTML(
+                            product.name
+                        )}
+                    </strong>
+
+                    <span>
+                        ${escapeHTML(
+                            product.category ||
+                            "Uncategorized"
+                        )}
+                    </span>
+
+                    <div class="product-price">
+                        ${money(
+                            product.price
+                        )}
+                    </div>
+
+                </div>
+
+
+                <div class="product-actions">
+
+                    <button
+                        class="
+                            product-btn
+                            product-edit
+                        "
+                        onclick="
+                            editProduct(
+                                '${escapeHTML(
+                                    product.id
+                                )}'
+                            )
+                        "
+                    >
+                        ✏️ Edit
+                    </button>
+
+
+                    <button
+                        class="
+                            product-btn
+                            product-delete
+                        "
+                        onclick="
+                            deleteProduct(
+                                '${escapeHTML(
+                                    product.id
+                                )}'
+                            )
+                        "
+                    >
+                        🗑️ Delete
+                    </button>
+
+                </div>
+
+            `;
+
+
+            box.appendChild(row);
+
+        }
+    );
 
 }
 
 
-/* =========================
-NAVIGATION
-========================= */
+
+/* =====================================================
+   USERS
+===================================================== */
+
+function renderUsers() {
+
+    const box =
+        document.getElementById(
+            "usersList"
+        );
+
+
+    if (!users.length) {
+
+        box.innerHTML = `
+
+            <div class="user-empty">
+
+                👥
+
+                <br><br>
+
+                এখনো কোনো registered
+                user data পাওয়া যায়নি।
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    box.innerHTML =
+        users
+            .map(
+                user => `
+
+                    <div
+                        style="
+                            padding:12px 0;
+                            border-bottom:
+                            1px solid #f2f4f7;
+                        "
+                    >
+
+                        <strong
+                            style="
+                                font-size:11px;
+                            "
+                        >
+                            ${escapeHTML(
+                                user.name ||
+                                "User"
+                            )}
+                        </strong>
+
+
+                        <div
+                            style="
+                                color:#667085;
+                                font-size:9px;
+                                margin-top:4px;
+                            "
+                        >
+                            ${escapeHTML(
+                                user.email ||
+                                user.phone ||
+                                "No contact"
+                            )}
+                        </div>
+
+                    </div>
+
+                `
+            )
+            .join("");
+
+}
+
+
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
 
 function showSection(
-sectionId,
-button
-){
+    sectionId,
+    button
+) {
 
-document
-.querySelectorAll(".section")
-.forEach(
-section =>
-section.classList.remove("active")
-);
-
-
-const target =
-document.getElementById(
-sectionId
-);
+    document
+        .querySelectorAll(
+            ".section"
+        )
+        .forEach(
+            section =>
+                section.classList.remove(
+                    "active"
+                )
+        );
 
 
-if(!target){
-
-return;
-
-}
-
-
-target.classList.add("active");
+    const target =
+        document.getElementById(
+            sectionId
+        );
 
 
-document
-.querySelectorAll(".nav-item")
-.forEach(
-item =>
-item.classList.remove("active")
-);
+    if (!target) {
+
+        return;
+
+    }
 
 
-if(button){
-
-button.classList.add("active");
-
-}
+    target.classList.add(
+        "active"
+    );
 
 
-const titles={
-
-dashboard:"Dashboard",
-
-orders:"Orders",
-
-products:"Products",
-
-users:"Users"
-
-};
-
-
-document.getElementById(
-"pageTitle"
-).textContent =
-titles[sectionId] ||
-"Admin";
+    document
+        .querySelectorAll(
+            ".nav-item"
+        )
+        .forEach(
+            item =>
+                item.classList.remove(
+                    "active"
+                )
+        );
 
 
-if(sectionId==="orders"){
+    if (button) {
 
-renderOrdersTable();
+        button.classList.add(
+            "active"
+        );
 
-}
-
-
-if(sectionId==="products"){
-
-renderProducts();
-
-}
+    }
 
 
-if(sectionId==="users"){
+    const titles = {
 
-renderUsers();
+        dashboard:
+            "Dashboard",
 
-}
+        orders:
+            "Orders",
 
-}
+        products:
+            "Products",
 
+        users:
+            "Users"
 
-/* =========================
-QUICK NAVIGATION
-========================= */
-
-function showSectionById(id){
-
-const buttons =
-document.querySelectorAll(
-".nav-item"
-);
+    };
 
 
-let targetButton=null;
+    document.getElementById(
+        "pageTitle"
+    ).textContent =
+        titles[sectionId] ||
+        "Admin";
 
 
-buttons.forEach(button=>{
+    if (
+        sectionId ===
+        "orders"
+    ) {
 
-const text =
-button.innerText
-.trim()
-.toLowerCase();
+        renderOrdersTable();
 
-
-if(
-text ===
-id.toLowerCase()
-){
-
-targetButton =
-button;
-
-}
-
-});
+    }
 
 
-showSection(
-id,
-targetButton
-);
+    if (
+        sectionId ===
+        "products"
+    ) {
+
+        renderProducts();
+
+    }
+
+
+    if (
+        sectionId ===
+        "users"
+    ) {
+
+        renderUsers();
+
+    }
 
 }
 
 
-/* =========================
-RENDER ALL
-========================= */
 
-function renderAll(){
+/* =====================================================
+   QUICK NAVIGATION
+===================================================== */
 
-loadData();
+function showSectionById(id) {
 
-renderStats();
-
-renderRecentOrders();
-
-renderSalesBars();
-
-renderOrdersTable();
-
-renderProducts();
-
-renderUsers();
-
-}
+    const buttons =
+        document.querySelectorAll(
+            ".nav-item"
+        );
 
 
-/* =========================
-TOAST
-========================= */
-
-function showToast(message){
-
-const toast =
-document.getElementById(
-"toast"
-);
+    let targetButton =
+        null;
 
 
-toast.textContent =
-message;
+    buttons.forEach(
+        button => {
+
+            const text =
+                button
+                    .innerText
+                    .trim()
+                    .toLowerCase();
 
 
-toast.classList.add("show");
+            if (
+                text ===
+                id.toLowerCase()
+            ) {
+
+                targetButton =
+                    button;
+
+            }
+
+        }
+    );
 
 
-clearTimeout(
-window.toastTimer
-);
-
-
-window.toastTimer =
-setTimeout(
-()=>{
-
-toast.classList.remove(
-"show"
-);
-
-},
-2300
-);
+    showSection(
+        id,
+        targetButton
+    );
 
 }
 
 
-/* =========================
-LOGOUT
-========================= */
 
-function adminLogout(){
+/* =====================================================
+   RENDER ALL
+===================================================== */
 
-const confirmLogout =
-confirm(
-"আপনি কি Admin Panel থেকে Logout করতে চান?"
-);
+function renderAll() {
 
+    loadData();
 
-if(!confirmLogout){
+    renderStats();
 
-return;
+    renderRecentOrders();
 
-}
+    renderSalesBars();
 
+    renderOrdersTable();
 
-sessionStorage.removeItem(
-"shoppingMelaAdminLoggedIn"
-);
+    renderProducts();
 
-
-sessionStorage.removeItem(
-"shoppingMelaAdminLoginTime"
-);
-
-
-window.location.replace(
-"admin-login.html"
-);
+    renderUsers();
 
 }
 
 
-/* =========================
-PAGE LOAD
-========================= */
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        window.toastTimer
+    );
+
+
+    window.toastTimer =
+        setTimeout(
+            function () {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2300
+        );
+
+}
+
+
+
+/* =====================================================
+   1.33 — ADMIN LOGOUT
+===================================================== */
+
+function adminLogout() {
+
+    const confirmLogout =
+        confirm(
+            "আপনি কি Admin Panel থেকে Logout করতে চান?"
+        );
+
+
+    if (!confirmLogout) {
+
+        return;
+
+    }
+
+
+    sessionStorage.removeItem(
+        "shoppingMelaAdminLoggedIn"
+    );
+
+
+    sessionStorage.removeItem(
+        "shoppingMelaAdminLoginTime"
+    );
+
+
+    window.location.replace(
+        "admin-login.html"
+    );
+
+}
+
+
+
+/* =====================================================
+   PAGE LOAD
+===================================================== */
 
 document.addEventListener(
-"DOMContentLoaded",
-function(){
+    "DOMContentLoaded",
+    function () {
 
-renderAll();
+        renderAll();
 
-}
+    }
 );
 
 </script>
