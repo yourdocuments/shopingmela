@@ -1,6 +1,7 @@
 ```html
 <!DOCTYPE html>
 <html lang="bn">
+
 <head>
 
     <meta charset="UTF-8">
@@ -11,12 +12,12 @@
     >
 
     <title>
-        Business Profile — Shopping Mela
+        Local Brands — Shopping Mela
     </title>
 
     <meta
         name="description"
-        content="Shopping Mela verified local business profile."
+        content="Shopping Mela Local Brands — Discover verified local businesses and brands."
     >
 
     <link
@@ -84,13 +85,14 @@
 
                 <input
                     type="search"
-                    id="searchInput"
-                    placeholder="পণ্য, ব্র্যান্ড বা দোকান খুঁজুন..."
+                    id="brandSearch"
+                    placeholder="Brand, shop বা category খুঁজুন..."
                 >
 
                 <button
                     type="button"
-                    onclick="profileSearch()"
+                    onclick="searchBrands()"
+                    aria-label="Search brands"
                 >
                     🔍
                 </button>
@@ -99,7 +101,7 @@
 
 
 
-            <!-- ACTIONS -->
+            <!-- HEADER ACTIONS -->
 
             <div class="header-actions">
 
@@ -139,7 +141,10 @@
         </div>
 
 
-        <!-- NAVIGATION -->
+
+        <!-- =================================================
+             NAVIGATION
+        ================================================== -->
 
         <nav class="navigation">
 
@@ -190,625 +195,70 @@
 
 
 <!-- =====================================================
-     PROFILE HERO
+     PAGE HERO
 ====================================================== -->
 
-<section class="profile-hero">
-
-    <div class="profile-cover">
-
-        <div
-            class="profile-cover-image"
-            style="
-                background-image:
-                url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=1800&q=85');
-            "
-        ></div>
-
-
-        <div class="profile-cover-overlay"></div>
-
-
-        <div class="container">
-
-            <div class="profile-header">
-
-
-                <!-- LOGO -->
-
-                <div class="profile-logo">
-
-                    👗
-
-                </div>
-
-
-
-                <!-- PROFILE INFORMATION -->
-
-                <div class="profile-main-info">
-
-                    <div class="profile-title-row">
-
-                        <h1>
-                            Anjona Ladies Tailors
-                        </h1>
-
-
-                        <!-- VERIFIED BADGE -->
-
-                        <span
-                            class="profile-verified-badge"
-                            title="Shopping Mela Verified Business"
-                        >
-
-                            <span class="verified-check">
-                                ✓
-                            </span>
-
-                            Verified
-
-                        </span>
-
-                    </div>
-
-
-                    <p class="profile-tagline">
-
-                        Ladies Fashion • Tailoring • Custom Dress
-
-                    </p>
-
-
-                    <div class="profile-meta">
-
-                        <span>
-                            📍 Local Business
-                        </span>
-
-                        <span>
-                            👗 Fashion & Tailoring
-                        </span>
-
-                        <span>
-                            ⭐ 4.9
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- ACTION -->
-
-                <div class="profile-header-action">
-
-                    <button
-                        class="primary-btn"
-                        onclick="showToast('Contact option শীঘ্রই আসছে!')"
-                    >
-                        Contact Business
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =====================================================
-     PROFILE CONTENT
-====================================================== -->
-
-<section class="section">
+<section class="brands-page-hero">
 
     <div class="container">
 
-        <div class="profile-layout">
+        <div class="brands-hero-content">
 
+            <span class="page-label">
+                🏪 SHOPPING MELA
+            </span>
 
-            <!-- =================================================
-                 MAIN PROFILE
-            ================================================== -->
+            <h1>
+                Discover Local Brands
+            </h1>
 
-            <div class="profile-content">
+            <p>
+                আপনার এলাকার trusted, featured ও
+                verified business এক জায়গায় খুঁজে নিন।
+            </p>
 
 
-                <!-- ABOUT -->
+            <div class="brands-stats">
 
-                <div class="profile-card">
+                <div>
 
-                    <div class="profile-card-heading">
+                    <strong>
+                        100+
+                    </strong>
 
-                        <h2>
-                            About Business
-                        </h2>
-
-                    </div>
-
-
-                    <p>
-
-                        Anjona Ladies Tailors একটি local
-                        fashion ও tailoring business।
-                        এখানে ladies three-piece, custom
-                        dress, tailoring এবং বিভিন্ন
-                        fashion service পাওয়া যায়।
-
-                    </p>
-
-
-                    <p>
-
-                        Shopping Mela-তে এই Business-এর
-                        profile verified করা হয়েছে যাতে
-                        customers সহজে verified local
-                        business চিনতে পারেন।
-
-                    </p>
-
-                </div>
-
-
-
-                <!-- VERIFIED INFORMATION -->
-
-                <div class="profile-card verified-card">
-
-                    <div class="verified-card-icon">
-                        🔵✓
-                    </div>
-
-
-                    <div>
-
-                        <h2>
-                            Shopping Mela Verified
-                        </h2>
-
-                        <p>
-                            এই Business-এর basic business
-                            information Shopping Mela
-                            verification process-এর মাধ্যমে
-                            যাচাই করা হয়েছে।
-                        </p>
-
-
-                        <div class="verification-details">
-
-                            <div>
-                                <strong>
-                                    Verification Status
-                                </strong>
-
-                                <span>
-                                    ✓ Verified
-                                </span>
-                            </div>
-
-
-                            <div>
-                                <strong>
-                                    Verified On
-                                </strong>
-
-                                <span>
-                                    August 2026
-                                </span>
-                            </div>
-
-
-                            <div>
-                                <strong>
-                                    Profile Type
-                                </strong>
-
-                                <span>
-                                    Local Business
-                                </span>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- PRODUCTS -->
-
-                <div class="profile-card">
-
-                    <div class="profile-card-heading">
-
-                        <div>
-
-                            <h2>
-                                Products & Services
-                            </h2>
-
-                            <p>
-                                এই Business-এর featured items
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="profile-products">
-
-
-                        <!-- PRODUCT -->
-
-                        <article class="profile-product">
-
-                            <div
-                                class="profile-product-image"
-                                style="
-                                    background-image:
-                                    url('https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?auto=format&fit=crop&w=600&q=80');
-                                "
-                            ></div>
-
-
-                            <div>
-
-                                <h3>
-                                    Ladies Three Piece
-                                </h3>
-
-                                <span>
-                                    Fashion
-                                </span>
-
-                                <strong>
-                                    ৳1,250
-                                </strong>
-
-                            </div>
-
-                        </article>
-
-
-
-                        <!-- PRODUCT -->
-
-                        <article class="profile-product">
-
-                            <div
-                                class="profile-product-image"
-                                style="
-                                    background-image:
-                                    url('https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&w=600&q=80');
-                                "
-                            ></div>
-
-
-                            <div>
-
-                                <h3>
-                                    Custom Dress
-                                </h3>
-
-                                <span>
-                                    Tailoring
-                                </span>
-
-                                <strong>
-                                    Price on Request
-                                </strong>
-
-                            </div>
-
-                        </article>
-
-
-
-                        <!-- PRODUCT -->
-
-                        <article class="profile-product">
-
-                            <div
-                                class="profile-product-image"
-                                style="
-                                    background-image:
-                                    url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=600&q=80');
-                                "
-                            ></div>
-
-
-                            <div>
-
-                                <h3>
-                                    Ladies Fashion
-                                </h3>
-
-                                <span>
-                                    Fashion
-                                </span>
-
-                                <strong>
-                                    ৳1,500+
-                                </strong>
-
-                            </div>
-
-                        </article>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- REVIEWS -->
-
-                <div class="profile-card">
-
-                    <div class="profile-card-heading">
-
-                        <div>
-
-                            <h2>
-                                Customer Reviews
-                            </h2>
-
-                            <p>
-                                Shopping Mela community reviews
-                            </p>
-
-                        </div>
-
-                        <div class="profile-rating">
-                            ⭐ 4.9
-                        </div>
-
-                    </div>
-
-
-                    <div class="review">
-
-                        <div class="review-avatar">
-                            U
-                        </div>
-
-                        <div>
-
-                            <strong>
-                                Local Customer
-                            </strong>
-
-                            <div>
-                                ⭐⭐⭐⭐⭐
-                            </div>
-
-                            <p>
-                                ভালো service এবং সুন্দর
-                                tailoring কাজ।
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="review">
-
-                        <div class="review-avatar">
-                            R
-                        </div>
-
-                        <div>
-
-                            <strong>
-                                Shopping Mela User
-                            </strong>
-
-                            <div>
-                                ⭐⭐⭐⭐⭐
-                            </div>
-
-                            <p>
-                                Local business হিসেবে
-                                ভালো একটি option।
-                            </p>
-
-                        </div>
-
-                    </div>
-
-
-                    <button
-                        class="secondary-btn"
-                        onclick="showToast('Review system শীঘ্রই আসছে!')"
-                    >
-                        Write a Review
-                    </button>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- =================================================
-                 SIDEBAR
-            ================================================== -->
-
-            <aside class="profile-sidebar">
-
-
-                <!-- BUSINESS CARD -->
-
-                <div class="profile-side-card">
-
-                    <h3>
-                        Business Information
-                    </h3>
-
-
-                    <div class="side-info">
-
-                        <span>
-                            🏪
-                        </span>
-
-                        <div>
-
-                            <small>
-                                Business Type
-                            </small>
-
-                            <strong>
-                                Local Business
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="side-info">
-
-                        <span>
-                            📂
-                        </span>
-
-                        <div>
-
-                            <small>
-                                Category
-                            </small>
-
-                            <strong>
-                                Fashion & Tailoring
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="side-info">
-
-                        <span>
-                            📍
-                        </span>
-
-                        <div>
-
-                            <small>
-                                Location
-                            </small>
-
-                            <strong>
-                                Bangladesh
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="side-info">
-
-                        <span>
-                            🕒
-                        </span>
-
-                        <div>
-
-                            <small>
-                                Business Hours
-                            </small>
-
-                            <strong>
-                                Open Today
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-
-                    <button
-                        class="full-btn"
-                        onclick="showToast('Contact Business শীঘ্রই আসছে!')"
-                    >
-                        Contact Business
-                    </button>
-
-                </div>
-
-
-
-                <!-- VERIFIED CARD -->
-
-                <div class="profile-side-card verified-side-card">
-
-                    <div class="side-verified-icon">
-                        🔵
-                    </div>
-
-                    <h3>
-                        Verified Profile
-                    </h3>
-
-                    <p>
-                        This business has a
-                        Shopping Mela verified profile.
-                    </p>
-
-                    <span class="verified-small">
-                        ✓ Verified by Shopping Mela
+                    <span>
+                        Local Brands
                     </span>
 
                 </div>
 
 
+                <div>
 
-                <!-- SHARE -->
+                    <strong>
+                        50+
+                    </strong>
 
-                <div class="profile-side-card">
-
-                    <h3>
-                        Share Profile
-                    </h3>
-
-                    <div class="share-buttons">
-
-                        <button
-                            onclick="shareProfile('Facebook')"
-                        >
-                            Facebook
-                        </button>
-
-                        <button
-                            onclick="shareProfile('WhatsApp')"
-                        >
-                            WhatsApp
-                        </button>
-
-                        <button
-                            onclick="copyProfileLink()"
-                        >
-                            Copy Link
-                        </button>
-
-                    </div>
+                    <span>
+                        Verified
+                    </span>
 
                 </div>
 
-            </aside>
+
+                <div>
+
+                    <strong>
+                        20+
+                    </strong>
+
+                    <span>
+                        Categories
+                    </span>
+
+                </div>
+
+            </div>
 
         </div>
 
@@ -819,38 +269,725 @@
 
 
 <!-- =====================================================
-     CTA
+     FILTER BAR
+====================================================== -->
+
+<section class="brands-section">
+
+    <div class="container">
+
+
+        <div class="brands-toolbar">
+
+
+            <div>
+
+                <h2>
+                    Local Brands
+                </h2>
+
+                <p id="brandCount">
+                    Showing all brands
+                </p>
+
+            </div>
+
+
+
+            <!-- CATEGORY FILTER -->
+
+            <div class="brand-filters">
+
+                <button
+                    class="brand-filter active"
+                    data-filter="all"
+                    onclick="filterBrands('all', this)"
+                >
+                    All
+                </button>
+
+                <button
+                    class="brand-filter"
+                    data-filter="fashion"
+                    onclick="filterBrands('fashion', this)"
+                >
+                    Fashion
+                </button>
+
+                <button
+                    class="brand-filter"
+                    data-filter="beauty"
+                    onclick="filterBrands('beauty', this)"
+                >
+                    Beauty
+                </button>
+
+                <button
+                    class="brand-filter"
+                    data-filter="food"
+                    onclick="filterBrands('food', this)"
+                >
+                    Food
+                </button>
+
+                <button
+                    class="brand-filter"
+                    data-filter="electronics"
+                    onclick="filterBrands('electronics', this)"
+                >
+                    Electronics
+                </button>
+
+                <button
+                    class="brand-filter"
+                    data-filter="services"
+                    onclick="filterBrands('services', this)"
+                >
+                    Services
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             BRAND GRID
+        ================================================== -->
+
+        <div
+            class="brand-grid brands-page-grid"
+            id="brandsGrid"
+        >
+
+
+
+            <!-- =================================================
+                 BRAND 1
+            ================================================== -->
+
+            <article
+                class="brand-card brand-item"
+                data-category="fashion"
+                data-name="anjona ladies tailors"
+            >
+
+                <div
+                    class="brand-cover"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?auto=format&fit=crop&w=900&q=85');
+                    "
+                >
+
+                    <span class="sponsored">
+                        SPONSORED
+                    </span>
+
+                    <div class="brand-logo">
+                        👗
+                    </div>
+
+                </div>
+
+
+                <div class="brand-info">
+
+                    <div class="brand-title-row">
+
+                        <h3>
+                            Anjona Ladies Tailors
+                        </h3>
+
+                        <span
+                            class="verified-mini"
+                            title="Verified by Shopping Mela"
+                        >
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <div class="brand-category">
+                        Fashion & Tailoring
+                    </div>
+
+
+                    <div class="brand-location">
+                        📍 Local Business
+                    </div>
+
+
+                    <p class="brand-description">
+
+                        Ladies three-piece,
+                        custom dress, tailoring
+                        ও fashion services।
+
+                    </p>
+
+
+                    <div class="brand-bottom">
+
+                        <span class="brand-rating">
+                            ⭐ 4.9
+                        </span>
+
+                        <span class="verified-text">
+                            🔵 Verified
+                        </span>
+
+                    </div>
+
+
+                    <a
+                        href="profile.html"
+                        class="brand-btn"
+                    >
+                        View Profile →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 BRAND 2
+            ================================================== -->
+
+            <article
+                class="brand-card brand-item"
+                data-category="beauty"
+                data-name="local attar shop"
+            >
+
+                <div
+                    class="brand-cover"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?auto=format&fit=crop&w=900&q=85');
+                    "
+                >
+
+                    <span class="sponsored">
+                        FEATURED
+                    </span>
+
+                    <div class="brand-logo">
+                        🌿
+                    </div>
+
+                </div>
+
+
+                <div class="brand-info">
+
+                    <div class="brand-title-row">
+
+                        <h3>
+                            Local Attar Shop
+                        </h3>
+
+                        <span
+                            class="verified-mini"
+                            title="Verified by Shopping Mela"
+                        >
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <div class="brand-category">
+                        Perfume & Attar
+                    </div>
+
+
+                    <div class="brand-location">
+                        📍 Local Business
+                    </div>
+
+
+                    <p class="brand-description">
+
+                        Premium attar, perfume
+                        ও fragrance collection।
+
+                    </p>
+
+
+                    <div class="brand-bottom">
+
+                        <span class="brand-rating">
+                            ⭐ 4.8
+                        </span>
+
+                        <span class="verified-text">
+                            🔵 Verified
+                        </span>
+
+                    </div>
+
+
+                    <a
+                        href="profile.html"
+                        class="brand-btn"
+                    >
+                        View Profile →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 BRAND 3
+            ================================================== -->
+
+            <article
+                class="brand-card brand-item"
+                data-category="food"
+                data-name="local food house"
+            >
+
+                <div
+                    class="brand-cover"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=85');
+                    "
+                >
+
+                    <span class="sponsored">
+                        SPONSORED
+                    </span>
+
+                    <div class="brand-logo">
+                        🍽️
+                    </div>
+
+                </div>
+
+
+                <div class="brand-info">
+
+                    <div class="brand-title-row">
+
+                        <h3>
+                            Local Food House
+                        </h3>
+
+                        <span
+                            class="verified-mini"
+                            title="Verified by Shopping Mela"
+                        >
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <div class="brand-category">
+                        Restaurant & Food
+                    </div>
+
+
+                    <div class="brand-location">
+                        📍 Local Business
+                    </div>
+
+
+                    <p class="brand-description">
+
+                        Homemade food,
+                        snacks এবং local food delivery।
+
+                    </p>
+
+
+                    <div class="brand-bottom">
+
+                        <span class="brand-rating">
+                            ⭐ 4.7
+                        </span>
+
+                        <span class="verified-text">
+                            🔵 Verified
+                        </span>
+
+                    </div>
+
+
+                    <a
+                        href="profile.html"
+                        class="brand-btn"
+                    >
+                        View Profile →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 BRAND 4
+            ================================================== -->
+
+            <article
+                class="brand-card brand-item"
+                data-category="services"
+                data-name="snk local services"
+            >
+
+                <div
+                    class="brand-cover"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=85');
+                    "
+                >
+
+                    <span class="sponsored">
+                        FEATURED
+                    </span>
+
+                    <div class="brand-logo">
+                        💼
+                    </div>
+
+                </div>
+
+
+                <div class="brand-info">
+
+                    <div class="brand-title-row">
+
+                        <h3>
+                            SNK Local Services
+                        </h3>
+
+                        <span
+                            class="verified-mini"
+                            title="Verified by Shopping Mela"
+                        >
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <div class="brand-category">
+                        IT & Services
+                    </div>
+
+
+                    <div class="brand-location">
+                        📍 Local Business
+                    </div>
+
+
+                    <p class="brand-description">
+
+                        Website, printing,
+                        digital services ও
+                        local business solutions।
+
+                    </p>
+
+
+                    <div class="brand-bottom">
+
+                        <span class="brand-rating">
+                            ⭐ 4.9
+                        </span>
+
+                        <span class="verified-text">
+                            🔵 Verified
+                        </span>
+
+                    </div>
+
+
+                    <a
+                        href="profile.html"
+                        class="brand-btn"
+                    >
+                        View Profile →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 BRAND 5
+            ================================================== -->
+
+            <article
+                class="brand-card brand-item"
+                data-category="fashion"
+                data-name="local fashion house"
+            >
+
+                <div
+                    class="brand-cover"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=900&q=85');
+                    "
+                >
+
+                    <span class="sponsored">
+                        NEW
+                    </span>
+
+                    <div class="brand-logo">
+                        👚
+                    </div>
+
+                </div>
+
+
+                <div class="brand-info">
+
+                    <div class="brand-title-row">
+
+                        <h3>
+                            Local Fashion House
+                        </h3>
+
+                        <span
+                            class="verified-mini"
+                            title="Verified by Shopping Mela"
+                        >
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <div class="brand-category">
+                        Fashion
+                    </div>
+
+
+                    <div class="brand-location">
+                        📍 Local Business
+                    </div>
+
+
+                    <p class="brand-description">
+
+                        Local fashion,
+                        ladies wear এবং
+                        seasonal collection।
+
+                    </p>
+
+
+                    <div class="brand-bottom">
+
+                        <span class="brand-rating">
+                            ⭐ 4.6
+                        </span>
+
+                        <span class="verified-text">
+                            🔵 Verified
+                        </span>
+
+                    </div>
+
+
+                    <a
+                        href="profile.html"
+                        class="brand-btn"
+                    >
+                        View Profile →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 BRAND 6
+            ================================================== -->
+
+            <article
+                class="brand-card brand-item"
+                data-category="electronics"
+                data-name="local tech store"
+            >
+
+                <div
+                    class="brand-cover"
+                    style="
+                        background-image:
+                        url('https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=900&q=85');
+                    "
+                >
+
+                    <span class="sponsored">
+                        FEATURED
+                    </span>
+
+                    <div class="brand-logo">
+                        💻
+                    </div>
+
+                </div>
+
+
+                <div class="brand-info">
+
+                    <div class="brand-title-row">
+
+                        <h3>
+                            Local Tech Store
+                        </h3>
+
+                        <span
+                            class="verified-mini"
+                            title="Verified by Shopping Mela"
+                        >
+                            ✓
+                        </span>
+
+                    </div>
+
+
+                    <div class="brand-category">
+                        Electronics
+                    </div>
+
+
+                    <div class="brand-location">
+                        📍 Local Business
+                    </div>
+
+
+                    <p class="brand-description">
+
+                        Laptop, mobile accessories,
+                        computer products ও tech service।
+
+                    </p>
+
+
+                    <div class="brand-bottom">
+
+                        <span class="brand-rating">
+                            ⭐ 4.8
+                        </span>
+
+                        <span class="verified-text">
+                            🔵 Verified
+                        </span>
+
+                    </div>
+
+
+                    <a
+                        href="profile.html"
+                        class="brand-btn"
+                    >
+                        View Profile →
+                    </a>
+
+                </div>
+
+            </article>
+
+
+
+        </div>
+
+
+
+        <!-- NO RESULT -->
+
+        <div
+            class="no-brand-result"
+            id="noBrandResult"
+        >
+
+            <div>
+                🔎
+            </div>
+
+            <h3>
+                কোনো Brand পাওয়া যায়নি
+            </h3>
+
+            <p>
+                অন্য নাম বা category দিয়ে search করুন।
+            </p>
+
+            <button
+                class="secondary-btn"
+                onclick="resetBrands()"
+            >
+                সব Brands দেখুন
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     VERIFIED CTA
 ====================================================== -->
 
 <section class="container">
 
-    <div class="profile-cta">
+    <div class="brands-cta">
+
+        <div class="brands-cta-icon">
+            🔵✓
+        </div>
+
 
         <div>
 
             <small>
-                📢 FOR LOCAL BUSINESS
+                FOR LOCAL BUSINESS
             </small>
 
             <h2>
-                আপনার Business-ও Verified Profile
-                তৈরি করুন
+                আপনার Business-ও Verified করুন
             </h2>
 
             <p>
-                Shopping Mela-তে আপনার business,
-                products ও services তুলে ধরুন।
+                Shopping Mela-তে verified profile তৈরি
+                করে customers-এর কাছে আপনার business
+                তুলে ধরুন।
             </p>
 
         </div>
 
 
-        <button
+        <a
+            href="index.html#advertise"
             class="light-btn"
-            onclick="window.location.href='index.html#advertise'"
         >
-            Get Started →
-        </button>
+            Get Verified →
+        </a>
 
     </div>
 
@@ -889,13 +1026,17 @@
 
                 </a>
 
+
                 <p>
+
                     Local brands, businesses,
-                    products and community
+                    products এবং community
                     এক জায়গায়।
+
                 </p>
 
             </div>
+
 
 
             <div>
@@ -923,6 +1064,7 @@
             </div>
 
 
+
             <div>
 
                 <h3>
@@ -942,6 +1084,7 @@
                 </a>
 
             </div>
+
 
 
             <div>
@@ -967,6 +1110,7 @@
                 </a>
 
             </div>
+
 
         </div>
 
@@ -1003,6 +1147,11 @@
 
 <script>
 
+
+/* =====================================================
+   TOAST
+====================================================== */
+
 function showToast(message) {
 
     const toast =
@@ -1024,101 +1173,341 @@ function showToast(message) {
 
 
 
-function profileSearch() {
+/* =====================================================
+   FILTER BRANDS
+====================================================== */
+
+function filterBrands(category, button) {
+
+    const brands =
+        document.querySelectorAll(".brand-item");
+
+    const buttons =
+        document.querySelectorAll(".brand-filter");
+
+    let visibleCount = 0;
+
+
+    buttons.forEach(function(btn) {
+
+        btn.classList.remove("active");
+
+    });
+
+
+    if (button) {
+
+        button.classList.add("active");
+
+    }
+
+
+    brands.forEach(function(brand) {
+
+        const brandCategory =
+            brand.dataset.category;
+
+
+        if (
+            category === "all" ||
+            brandCategory === category
+        ) {
+
+            brand.style.display = "";
+
+            visibleCount++;
+
+        } else {
+
+            brand.style.display = "none";
+
+        }
+
+    });
+
+
+    updateBrandCount(
+        visibleCount
+    );
+
+
+    const noResult =
+        document.getElementById(
+            "noBrandResult"
+        );
+
+
+    if (visibleCount === 0) {
+
+        noResult.classList.add("show");
+
+    } else {
+
+        noResult.classList.remove("show");
+
+    }
+
+}
+
+
+
+/* =====================================================
+   SEARCH BRANDS
+====================================================== */
+
+function searchBrands() {
 
     const input =
-        document.getElementById("searchInput");
+        document.getElementById(
+            "brandSearch"
+        );
+
 
     const query =
-        input.value.trim();
+        input.value
+            .trim()
+            .toLowerCase();
+
+
+    const brands =
+        document.querySelectorAll(
+            ".brand-item"
+        );
+
+
+    let visibleCount = 0;
 
 
     if (!query) {
 
-        showToast(
-            "কিছু search করুন 🔍"
-        );
+        resetBrands();
 
         return;
 
     }
 
 
-    showToast(
-        "Search: " + query
-    );
+    document
+        .querySelectorAll(".brand-filter")
+        .forEach(function(button) {
 
-}
-
-
-
-function shareProfile(platform) {
-
-    if (platform === "WhatsApp") {
-
-        const text =
-            "Check this verified business on Shopping Mela";
-
-        const url =
-            encodeURIComponent(
-                window.location.href
+            button.classList.remove(
+                "active"
             );
 
-        window.open(
-            "https://wa.me/?text=" +
-            encodeURIComponent(text + " " + window.location.href),
-            "_blank"
-        );
-
-        return;
-
-    }
+        });
 
 
-    showToast(
-        platform + " share option শীঘ্রই আসছে!"
+    brands.forEach(function(brand) {
+
+        const name =
+            brand.dataset.name
+                .toLowerCase();
+
+
+        const category =
+            brand.dataset.category
+                .toLowerCase();
+
+
+        const text =
+            brand.innerText
+                .toLowerCase();
+
+
+        if (
+            name.includes(query) ||
+            category.includes(query) ||
+            text.includes(query)
+        ) {
+
+            brand.style.display = "";
+
+            visibleCount++;
+
+        } else {
+
+            brand.style.display = "none";
+
+        }
+
+    });
+
+
+    updateBrandCount(
+        visibleCount
     );
 
-}
+
+    const noResult =
+        document.getElementById(
+            "noBrandResult"
+        );
 
 
+    if (visibleCount === 0) {
 
-function copyProfileLink() {
+        noResult.classList.add("show");
 
-    const url =
-        window.location.href;
-
-
-    if (
-        navigator.clipboard &&
-        navigator.clipboard.writeText
-    ) {
-
-        navigator.clipboard.writeText(url)
-            .then(function() {
-
-                showToast(
-                    "Profile link copy হয়েছে 🔗"
-                );
-
-            })
-            .catch(function() {
-
-                showToast(
-                    "Link copy করা যায়নি"
-                );
-
-            });
+        showToast(
+            "কোনো Brand পাওয়া যায়নি"
+        );
 
     } else {
 
+        noResult.classList.remove("show");
+
         showToast(
-            "Browser clipboard support করছে না"
+            visibleCount +
+            "টি Brand পাওয়া গেছে 🔎"
         );
 
     }
 
 }
+
+
+
+/* =====================================================
+   ENTER KEY SEARCH
+====================================================== */
+
+document
+    .getElementById("brandSearch")
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                searchBrands();
+
+            }
+
+        }
+    );
+
+
+
+/* =====================================================
+   UPDATE COUNT
+====================================================== */
+
+function updateBrandCount(count) {
+
+    const counter =
+        document.getElementById(
+            "brandCount"
+        );
+
+
+    if (count === 0) {
+
+        counter.textContent =
+            "No brands found";
+
+    } else {
+
+        counter.textContent =
+            "Showing " +
+            count +
+            " local brand" +
+            (count > 1 ? "s" : "");
+
+    }
+
+}
+
+
+
+/* =====================================================
+   RESET
+====================================================== */
+
+function resetBrands() {
+
+    const brands =
+        document.querySelectorAll(
+            ".brand-item"
+        );
+
+
+    const buttons =
+        document.querySelectorAll(
+            ".brand-filter"
+        );
+
+
+    brands.forEach(function(brand) {
+
+        brand.style.display = "";
+
+    });
+
+
+    buttons.forEach(function(button) {
+
+        button.classList.remove(
+            "active"
+        );
+
+    });
+
+
+    const allButton =
+        document.querySelector(
+            '[data-filter="all"]'
+        );
+
+
+    if (allButton) {
+
+        allButton.classList.add(
+            "active"
+        );
+
+    }
+
+
+    document
+        .getElementById("brandSearch")
+        .value = "";
+
+
+    document
+        .getElementById("noBrandResult")
+        .classList.remove("show");
+
+
+    updateBrandCount(
+        brands.length
+    );
+
+}
+
+
+
+/* =====================================================
+   INITIAL COUNT
+====================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        const brands =
+            document.querySelectorAll(
+                ".brand-item"
+            );
+
+        updateBrandCount(
+            brands.length
+        );
+
+    }
+);
 
 </script>
 
