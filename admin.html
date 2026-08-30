@@ -46,7 +46,6 @@
     ) {
 
         sessionStorage.removeItem(SESSION_KEY);
-
         sessionStorage.removeItem(LOGIN_TIME_KEY);
 
         window.location.replace(
@@ -64,7 +63,6 @@
     ) {
 
         sessionStorage.removeItem(SESSION_KEY);
-
         sessionStorage.removeItem(LOGIN_TIME_KEY);
 
         window.location.replace(
@@ -81,10 +79,6 @@
 
 
 <style>
-
-/* =====================================================
-   GLOBAL
-===================================================== */
 
 * {
     box-sizing: border-box;
@@ -1315,20 +1309,9 @@ td strong {
 }
 
 
-.form-buttons {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 8px;
+.form-submit {
 
     margin-top: 14px;
-
-}
-
-
-.form-submit {
 
     border: 0;
 
@@ -1349,9 +1332,18 @@ td strong {
 }
 
 
-.cancel-edit {
+.form-submit:hover {
 
-    display: none;
+    background: #1265d1;
+
+}
+
+
+.cancel-edit-btn {
+
+    margin-top: 14px;
+
+    margin-left: 7px;
 
     border:
         1px solid #d0d5dd;
@@ -1360,7 +1352,7 @@ td strong {
 
     color: #344054;
 
-    padding: 10px 16px;
+    padding: 9px 15px;
 
     border-radius: 7px;
 
@@ -1370,10 +1362,12 @@ td strong {
 
     font-weight: 800;
 
+    display: none;
+
 }
 
 
-.cancel-edit.show {
+.cancel-edit-btn.show {
 
     display: inline-block;
 
@@ -1381,34 +1375,17 @@ td strong {
 
 
 /* =====================================================
-   1.45 — PRODUCT SEARCH + FILTER
+   PRODUCT SEARCH + FILTER
 ===================================================== */
 
 .product-tools {
 
+    padding: 16px 18px;
+
     background: #ffffff;
 
-    border:
-        1px solid #e7eaf0;
-
-    border-radius: 13px;
-
-    padding: 15px;
-
-    margin-bottom: 18px;
-
-}
-
-
-.product-tools-title {
-
-    font-size: 11px;
-
-    font-weight: 800;
-
-    margin-bottom: 10px;
-
-    color: #344054;
+    border-bottom:
+        1px solid #eaecf0;
 
 }
 
@@ -1425,19 +1402,19 @@ td strong {
 }
 
 
-.product-search-wrap {
+.product-search {
 
     position: relative;
 
 }
 
 
-.product-search {
+.product-search input {
 
     width: 100%;
 
     padding:
-        11px 12px 11px 36px;
+        11px 12px 11px 35px;
 
     border:
         1px solid #d0d5dd;
@@ -1451,12 +1428,12 @@ td strong {
 }
 
 
-.product-search:focus {
+.product-search input:focus {
 
     border-color: #1877f2;
 
     box-shadow:
-        0 0 0 3px
+        0 0 0 2px
         rgba(24,119,242,.08);
 
 }
@@ -1466,27 +1443,27 @@ td strong {
 
     position: absolute;
 
-    left: 12px;
+    left: 11px;
 
     top: 50%;
 
     transform:
         translateY(-50%);
 
-    font-size: 13px;
-
     color: #98a2b3;
+
+    font-size: 13px;
 
     pointer-events: none;
 
 }
 
 
-.product-filter {
+.category-filter {
 
     width: 100%;
 
-    padding: 11px;
+    padding: 10px 12px;
 
     border:
         1px solid #d0d5dd;
@@ -1497,12 +1474,14 @@ td strong {
 
     background: #ffffff;
 
+    color: #344054;
+
     font-size: 10px;
 
 }
 
 
-.product-filter:focus {
+.category-filter:focus {
 
     border-color: #1877f2;
 
@@ -1616,9 +1595,9 @@ td strong {
 
     background: #eef5ff;
 
-    padding: 3px 6px;
+    border-radius: 12px;
 
-    border-radius: 10px;
+    padding: 3px 6px;
 
     font-size: 7px;
 
@@ -1648,7 +1627,9 @@ td strong {
 
     gap: 6px;
 
-    align-items: center;
+    flex-wrap: wrap;
+
+    justify-content: flex-end;
 
 }
 
@@ -1674,6 +1655,13 @@ td strong {
 }
 
 
+.edit-product:hover {
+
+    background: #dceaff;
+
+}
+
+
 .delete-product {
 
     border: 0;
@@ -1695,29 +1683,9 @@ td strong {
 }
 
 
-.edit-product:hover {
-
-    background: #dbeaff;
-
-}
-
-
 .delete-product:hover {
 
-    background: #ffe2df;
-
-}
-
-
-.no-products {
-
-    padding: 45px 20px;
-
-    text-align: center;
-
-    color: #98a2b3;
-
-    font-size: 10px;
+    background: #ffe4e1;
 
 }
 
@@ -1814,6 +1782,13 @@ td strong {
 
 
     .dashboard-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .product-tools-row {
 
         grid-template-columns: 1fr;
 
@@ -1947,13 +1922,6 @@ td strong {
     }
 
 
-    .product-tools-row {
-
-        grid-template-columns: 1fr;
-
-    }
-
-
     .product-item {
 
         grid-template-columns:
@@ -1974,6 +1942,33 @@ td strong {
     .product-actions {
 
         grid-column: 2;
+
+        justify-content: flex-start;
+
+    }
+
+}
+
+
+@media (max-width: 420px) {
+
+    .stats {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .product-form {
+
+        padding: 14px;
+
+    }
+
+
+    .product-list {
+
+        padding: 13px;
 
     }
 
@@ -2649,25 +2644,15 @@ Category
 
 <select id="productCategory">
 
-<option value="Fashion">
-Fashion
-</option>
+<option>Fashion</option>
 
-<option value="Beauty">
-Beauty
-</option>
+<option>Beauty</option>
 
-<option value="Electronics">
-Electronics
-</option>
+<option>Electronics</option>
 
-<option value="Food">
-Food
-</option>
+<option>Food</option>
 
-<option value="Home">
-Home
-</option>
+<option>Home</option>
 
 </select>
 
@@ -2754,10 +2739,10 @@ onclick="removeImage()"
 
 <div class="image-url-help">
 
-আপনি চাইলে
+আপনি চাইলে উপরের
 <b>Image URL</b>
 ব্যবহার করতে পারেন,
-অথবা image upload করতে পারেন।
+অথবা এখান থেকে image upload করতে পারেন।
 
 </div>
 
@@ -2769,8 +2754,6 @@ onclick="removeImage()"
 
 </div>
 
-
-<div class="form-buttons">
 
 <button
 class="form-submit"
@@ -2783,36 +2766,42 @@ Add Product
 
 <button
 type="button"
-class="cancel-edit"
+class="cancel-edit-btn"
 id="cancelEditBtn"
-onclick="cancelEdit()"
+onclick="cancelProductEdit()"
 >
 Cancel Edit
 </button>
 
 </div>
 
-</div>
-
 
 
 <!-- =====================================================
-     PRODUCT SEARCH + FILTER
+     PRODUCT LIST
 ===================================================== -->
 
-<div class="product-tools">
+<div class="panel">
 
-<div class="product-tools-title">
+<div class="panel-header">
 
-🔎 Search & Filter Products
+<h2>
+Saved Products
+</h2>
+
+<button onclick="renderProducts()">
+Refresh
+</button>
 
 </div>
 
+
+<div class="product-tools">
 
 <div class="product-tools-row">
 
 
-<div class="product-search-wrap">
+<div class="product-search">
 
 <span class="search-icon">
 🔎
@@ -2821,7 +2810,6 @@ Cancel Edit
 <input
 type="search"
 id="productSearch"
-class="product-search"
 placeholder="Product name বা category দিয়ে search করুন..."
 autocomplete="off"
 >
@@ -2830,8 +2818,8 @@ autocomplete="off"
 
 
 <select
-id="productFilter"
-class="product-filter"
+id="categoryFilter"
+class="category-filter"
 >
 
 <option value="all">
@@ -2870,26 +2858,6 @@ id="productResultCount"
 >
 0 product
 </div>
-
-</div>
-
-
-
-<!-- =====================================================
-     SAVED PRODUCTS
-===================================================== -->
-
-<div class="panel">
-
-<div class="panel-header">
-
-<h2>
-Saved Products
-</h2>
-
-<button onclick="renderProducts()">
-Refresh
-</button>
 
 </div>
 
@@ -2944,10 +2912,6 @@ Registered customer information overview।
 </div>
 
 
-
-<!-- =====================================================
-     TOAST
-===================================================== -->
 
 <div
 class="toast"
@@ -3049,7 +3013,7 @@ function loadData() {
 
 
 /* =====================================================
-   SAVE DATA
+   SAVE
 ===================================================== */
 
 function saveOrders() {
@@ -4032,77 +3996,66 @@ function saveProduct() {
 
 
     /* =================================================
-       EDIT EXISTING PRODUCT
+       EDIT PRODUCT
     ================================================= */
 
     if (editingProductId) {
 
-        const index =
-            products.findIndex(
-                product =>
-                    String(product.id) ===
+        const product =
+            products.find(
+                item =>
+                    String(item.id) ===
                     String(editingProductId)
             );
 
 
-        if (index === -1) {
+        if (!product) {
 
             showToast(
                 "Product পাওয়া যায়নি"
             );
 
-            cancelEdit();
+            cancelProductEdit();
 
             return;
 
         }
 
 
-        const oldProduct =
-            products[index];
+        product.name =
+            name;
+
+        product.price =
+            price;
+
+        product.category =
+            category;
 
 
-        products[index] = {
+        if (finalImage) {
 
-            ...oldProduct,
+            product.image =
+                finalImage;
 
-            name,
-
-            price,
-
-            category,
-
-            image:
-                finalImage,
-
-            imageType:
+            product.imageType =
                 uploadedImageData
                 ? "upload"
-                : (
-                    imageURL
-                    ? "url"
-                    : (
-                        oldProduct.imageType ||
-                        "url"
-                    )
-                ),
+                : "url";
 
-            updatedAt:
-                new Date().toISOString()
+        }
 
-        };
+
+        product.updatedAt =
+            new Date().toISOString();
 
 
         saveProducts();
 
 
+        cancelProductEdit();
+
+
         renderProducts();
-
-
-        clearProductForm();
-
-
-        cancelEdit();
 
 
         showToast(
@@ -4113,7 +4066,6 @@ function saveProduct() {
         return;
 
     }
-
 
 
     /* =================================================
@@ -4224,56 +4176,57 @@ function editProduct(productId) {
         );
 
 
-    uploadedImageData =
-        product.imageType === "upload"
-        ? product.image || ""
-        : "";
-
-
-    const preview =
-        document.getElementById(
-            "imagePreview"
-        );
-
-
-    const previewImage =
-        document.getElementById(
-            "previewImage"
-        );
-
-
-    const fileName =
-        document.getElementById(
-            "imageFileName"
-        );
+    uploadedImageData = "";
 
 
     if (product.image) {
+
+        const previewImage =
+            document.getElementById(
+                "previewImage"
+            );
+
+
+        const preview =
+            document.getElementById(
+                "imagePreview"
+            );
+
 
         previewImage.src =
             product.image;
 
 
-        preview.classList.add(
-            "show"
-        );
+        previewImage.onload =
+            function () {
+
+                preview.classList.add(
+                    "show"
+                );
+
+            };
 
 
-        fileName.textContent =
+        previewImage.onerror =
+            function () {
+
+                preview.classList.remove(
+                    "show"
+                );
+
+            };
+
+
+        document.getElementById(
+            "imageFileName"
+        ).textContent =
             product.imageType === "upload"
             ? "Saved uploaded image"
             : "Saved image URL";
 
     } else {
 
-        preview.classList.remove(
-            "show"
-        );
-
-        previewImage.src = "";
-
-        fileName.textContent =
-            "কোনো image select করা হয়নি";
+        removeImage();
 
     }
 
@@ -4292,22 +4245,15 @@ function editProduct(productId) {
 
     document.getElementById(
         "cancelEditBtn"
-    ).classList.add(
-        "show"
-    );
+    ).classList.add("show");
 
 
-    document.getElementById(
-        "products"
-    ).scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
-
-
-    document.getElementById(
-        "productName"
-    ).focus();
+    document
+        .getElementById("products")
+        .scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
 
 
     showToast(
@@ -4319,12 +4265,16 @@ function editProduct(productId) {
 
 
 /* =====================================================
-   1.45 — CANCEL EDIT
+   1.45 — CANCEL PRODUCT EDIT
 ===================================================== */
 
-function cancelEdit() {
+function cancelProductEdit() {
 
-    editingProductId = null;
+    editingProductId =
+        null;
+
+
+    clearProductForm();
 
 
     document.getElementById(
@@ -4341,12 +4291,7 @@ function cancelEdit() {
 
     document.getElementById(
         "cancelEditBtn"
-    ).classList.remove(
-        "show"
-    );
-
-
-    clearProductForm();
+    ).classList.remove("show");
 
 }
 
@@ -4386,10 +4331,10 @@ function clearProductForm() {
 
 
 /* =====================================================
-   1.45 — PRODUCT SEARCH
+   1.45 — PRODUCT SEARCH + CATEGORY FILTER
 ===================================================== */
 
-function setupProductSearch() {
+function setupProductTools() {
 
     const searchInput =
         document.getElementById(
@@ -4397,9 +4342,9 @@ function setupProductSearch() {
         );
 
 
-    const filterInput =
+    const categoryFilter =
         document.getElementById(
-            "productFilter"
+            "categoryFilter"
         );
 
 
@@ -4413,9 +4358,9 @@ function setupProductSearch() {
     }
 
 
-    if (filterInput) {
+    if (categoryFilter) {
 
-        filterInput.addEventListener(
+        categoryFilter.addEventListener(
             "change",
             renderProducts
         );
@@ -4427,7 +4372,7 @@ function setupProductSearch() {
 
 
 /* =====================================================
-   1.45 — FILTERED PRODUCTS
+   1.45 — FILTER PRODUCTS
 ===================================================== */
 
 function getFilteredProducts() {
@@ -4444,7 +4389,7 @@ function getFilteredProducts() {
 
     const category =
         document.getElementById(
-            "productFilter"
+            "categoryFilter"
         )?.value ||
         "all";
 
@@ -4503,10 +4448,11 @@ function renderProducts() {
         );
 
 
-    const resultCount =
-        document.getElementById(
-            "productResultCount"
-        );
+    if (!box) {
+
+        return;
+
+    }
 
 
     box.innerHTML = "";
@@ -4516,9 +4462,15 @@ function renderProducts() {
         getFilteredProducts();
 
 
-    if (resultCount) {
+    const count =
+        document.getElementById(
+            "productResultCount"
+        );
 
-        resultCount.textContent =
+
+    if (count) {
+
+        count.textContent =
             filtered.length +
             (
                 filtered.length === 1
@@ -4533,9 +4485,16 @@ function renderProducts() {
 
         box.innerHTML = `
 
-            <div class="no-products">
+            <div
+                style="
+                    padding:40px;
+                    text-align:center;
+                    color:#98a2b3;
+                    font-size:10px;
+                "
+            >
 
-                🛍️
+                🔎
 
                 <br><br>
 
@@ -4724,17 +4683,17 @@ function deleteProduct(productId) {
         );
 
 
-    saveProducts();
-
-
     if (
         String(editingProductId) ===
         String(productId)
     ) {
 
-        cancelEdit();
+        cancelProductEdit();
 
     }
+
+
+    saveProducts();
 
 
     renderProducts();
@@ -4758,6 +4717,13 @@ function renderUsers() {
         document.getElementById(
             "usersList"
         );
+
+
+    if (!box) {
+
+        return;
+
+    }
 
 
     if (!users.length) {
@@ -5178,7 +5144,7 @@ document.addEventListener(
 
         setupImageURLPreview();
 
-        setupProductSearch();
+        setupProductTools();
 
 
         renderAll();
