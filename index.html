@@ -2,373 +2,226 @@
 <html lang="bn">
 
 <head>
-
     <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <!-- PWA -->
-    <link
-        rel="manifest"
-        href="./manifest.json"
-    >
+    <link rel="manifest" href="./manifest.json">
 
-    <meta
-        name="theme-color"
-        content="#ff6b00"
-    >
+    <meta name="theme-color" content="#ff6b00">
 
-    <meta
-        name="mobile-web-app-capable"
-        content="yes"
-    >
+    <meta name="mobile-web-app-capable"
+          content="yes">
 
-    <meta
-        name="apple-mobile-web-app-capable"
-        content="yes"
-    >
+    <meta name="apple-mobile-web-app-capable"
+          content="yes">
 
-    <meta
-        name="apple-mobile-web-app-status-bar-style"
-        content="default"
-    >
+    <meta name="apple-mobile-web-app-status-bar-style"
+          content="default">
 
-    <meta
-        name="apple-mobile-web-app-title"
-        content="Shopping Mela"
-    >
+    <meta name="apple-mobile-web-app-title"
+          content="Shopping Mela">
 
-    <meta
-        name="description"
-        content="Shopping Mela - Modern Smart Shopping Platform"
-    >
+    <meta name="application-name"
+          content="Shopping Mela">
 
-    <meta
-        name="application-name"
-        content="Shopping Mela"
-    >
+    <meta name="description"
+          content="Shopping Mela - Modern Smart Shopping Platform">
+
+    <meta name="robots"
+          content="index, follow">
 
     <title>Shopping Mela | Smart Shopping</title>
 
 
     <style>
 
-        /* =========================================
-           1. RESET
-        ========================================= */
-
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
+        :root {
+            --primary: #ff6b00;
+            --primary-dark: #e85c00;
+            --dark: #111827;
+            --text: #1f2937;
+            --muted: #6b7280;
+            --bg: #f5f6f8;
+            --white: #ffffff;
+            --border: #e5e7eb;
+            --success: #16a34a;
+            --danger: #dc2626;
+            --shadow: 0 8px 25px rgba(0,0,0,.08);
         }
 
 
-        html{
-            scroll-behavior:smooth;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
 
-        body{
+        html {
+            scroll-behavior: smooth;
+        }
 
+
+        body {
             font-family:
                 Arial,
                 "Noto Sans Bengali",
                 sans-serif;
 
-            background:#f5f6f8;
-
-            color:#1f2937;
-
-            padding-bottom:80px;
-
+            background: var(--bg);
+            color: var(--text);
+            padding-bottom: 80px;
         }
 
 
         button,
-        input{
-            font:inherit;
+        input {
+            font: inherit;
         }
 
 
-        button{
-            cursor:pointer;
+        button {
+            cursor: pointer;
         }
 
 
-        /* =========================================
-           2. ROOT
-        ========================================= */
+        /* HEADER */
 
-        :root{
-
-            --primary:#ff6b00;
-
-            --primary-dark:#e85c00;
-
-            --dark:#111827;
-
-            --text:#1f2937;
-
-            --muted:#6b7280;
-
-            --bg:#f5f6f8;
-
-            --white:#ffffff;
-
-            --border:#e5e7eb;
-
-            --success:#16a34a;
-
-            --danger:#dc2626;
-
-            --shadow:
-                0 8px 25px rgba(0,0,0,.08);
-
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
         }
 
 
-        /* =========================================
-           3. HEADER
-        ========================================= */
-
-        .header{
-
-            position:sticky;
-
-            top:0;
-
-            z-index:1000;
-
-            background:
-                var(--white);
-
-            border-bottom:
-                1px solid var(--border);
-
+        .topbar {
+            max-width: 1200px;
+            margin: auto;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
 
-        .topbar{
-
-            max-width:1200px;
-
-            margin:auto;
-
-            padding:14px 20px;
-
-            display:flex;
-
-            align-items:center;
-
-            gap:15px;
-
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--primary);
+            white-space: nowrap;
         }
 
 
-        .logo{
-
-            font-size:24px;
-
-            font-weight:900;
-
-            color:
-                var(--primary);
-
-            white-space:nowrap;
-
+        .logo span {
+            color: var(--dark);
         }
 
 
-        .logo span{
+        /* SEARCH */
 
-            color:
-                var(--dark);
-
+        .search-box {
+            flex: 1;
+            position: relative;
         }
 
 
-        /* =========================================
-           4. SEARCH
-        ========================================= */
-
-        .search-box{
-
-            flex:1;
-
-            position:relative;
-
+        .search-box input {
+            width: 100%;
+            border: 1px solid var(--border);
+            background: #f9fafb;
+            padding: 13px 50px 13px 18px;
+            border-radius: 30px;
+            outline: none;
         }
 
 
-        .search-box input{
-
-            width:100%;
-
-            border:
-                1px solid var(--border);
-
-            background:#f9fafb;
-
-            padding:
-                13px 50px 13px 18px;
-
-            border-radius:30px;
-
-            outline:none;
-
+        .search-box input:focus {
+            border-color: var(--primary);
+            background: var(--white);
         }
 
 
-        .search-box input:focus{
-
-            border-color:
-                var(--primary);
-
-            background:
-                var(--white);
-
+        .search-btn {
+            position: absolute;
+            right: 7px;
+            top: 6px;
+            width: 38px;
+            height: 38px;
+            border: none;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
         }
 
 
-        .search-btn{
+        /* ACTIONS */
 
-            position:absolute;
-
-            right:7px;
-
-            top:6px;
-
-            width:38px;
-
-            height:38px;
-
-            border:none;
-
-            border-radius:50%;
-
-            background:
-                var(--primary);
-
-            color:white;
-
+        .header-actions {
+            display: flex;
+            gap: 8px;
         }
 
 
-        /* =========================================
-           5. HEADER ACTIONS
-        ========================================= */
-
-        .header-actions{
-
-            display:flex;
-
-            gap:8px;
-
+        .icon-btn {
+            border: 1px solid var(--border);
+            background: var(--white);
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            position: relative;
         }
 
 
-        .icon-btn{
-
-            border:
-                1px solid var(--border);
-
-            background:
-                var(--white);
-
-            width:42px;
-
-            height:42px;
-
-            border-radius:50%;
-
-            position:relative;
-
+        .badge {
+            position: absolute;
+            top: -4px;
+            right: -3px;
+            background: var(--danger);
+            color: white;
+            width: 19px;
+            height: 19px;
+            border-radius: 50%;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
 
-        .badge{
+        /* OFFLINE */
 
-            position:absolute;
-
-            top:-4px;
-
-            right:-3px;
-
-            background:
-                var(--danger);
-
-            color:white;
-
-            width:19px;
-
-            height:19px;
-
-            border-radius:50%;
-
-            font-size:11px;
-
-            display:flex;
-
-            align-items:center;
-
-            justify-content:center;
-
+        .offline {
+            display: none;
+            background: #fff3cd;
+            color: #856404;
+            text-align: center;
+            padding: 8px;
+            font-size: 13px;
         }
 
 
-        /* =========================================
-           6. OFFLINE BAR
-        ========================================= */
-
-        .offline{
-
-            display:none;
-
-            background:#fff3cd;
-
-            color:#856404;
-
-            text-align:center;
-
-            padding:8px;
-
-            font-size:13px;
-
+        .offline.show {
+            display: block;
         }
 
 
-        .offline.show{
+        /* MAIN */
 
-            display:block;
-
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
         }
 
 
-        /* =========================================
-           7. MAIN
-        ========================================= */
+        /* HERO */
 
-        .container{
-
-            max-width:1200px;
-
-            margin:auto;
-
-            padding:20px;
-
-        }
-
-
-        /* =========================================
-           8. HERO
-        ========================================= */
-
-        .hero{
-
+        .hero {
             background:
                 linear-gradient(
                     135deg,
@@ -376,229 +229,140 @@
                     #ff9d42
                 );
 
-            color:white;
+            color: white;
+            border-radius: 22px;
+            padding: 40px;
+            min-height: 260px;
 
-            border-radius:22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-            padding:40px;
-
-            min-height:260px;
-
-            display:flex;
-
-            align-items:center;
-
-            justify-content:space-between;
-
-            overflow:hidden;
-
-            box-shadow:
-                var(--shadow);
-
+            overflow: hidden;
+            box-shadow: var(--shadow);
         }
 
 
-        .hero-content{
-
-            max-width:600px;
-
+        .hero-content {
+            max-width: 600px;
         }
 
 
-        .hero h1{
-
-            font-size:42px;
-
-            margin-bottom:12px;
-
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 12px;
         }
 
 
-        .hero p{
-
-            font-size:17px;
-
-            opacity:.95;
-
-            margin-bottom:20px;
-
-            line-height:1.6;
-
+        .hero p {
+            font-size: 17px;
+            opacity: .95;
+            margin-bottom: 20px;
+            line-height: 1.6;
         }
 
 
-        .hero-btn{
-
-            border:none;
-
-            background:white;
-
-            color:
-                var(--primary);
-
-            padding:
-                13px 22px;
-
-            border-radius:10px;
-
-            font-weight:700;
-
+        .hero-btn {
+            border: none;
+            background: white;
+            color: var(--primary);
+            padding: 13px 22px;
+            border-radius: 10px;
+            font-weight: 700;
         }
 
 
-        .hero-icon{
-
-            font-size:120px;
-
-            opacity:.25;
-
+        .hero-icon {
+            font-size: 120px;
+            opacity: .25;
         }
 
 
-        /* =========================================
-           9. SECTION
-        ========================================= */
+        /* SECTION */
 
-        .section{
-
-            margin-top:30px;
-
+        .section {
+            margin-top: 30px;
         }
 
 
-        .section-head{
-
-            display:flex;
-
-            align-items:center;
-
-            justify-content:space-between;
-
-            margin-bottom:15px;
-
+        .section-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
         }
 
 
-        .section-head h2{
-
-            font-size:24px;
-
+        .section-head h2 {
+            font-size: 24px;
         }
 
 
-        .view-all{
-
-            color:
-                var(--primary);
-
-            font-weight:700;
-
-            background:none;
-
-            border:none;
-
+        .view-all {
+            color: var(--primary);
+            font-weight: 700;
+            background: none;
+            border: none;
         }
 
 
-        /* =========================================
-           10. CATEGORIES
-        ========================================= */
+        /* CATEGORIES */
 
-        .categories{
-
-            display:grid;
-
-            grid-template-columns:
-                repeat(8,1fr);
-
-            gap:12px;
-
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(8,1fr);
+            gap: 12px;
         }
 
 
-        .category{
-
-            background:white;
-
-            border:
-                1px solid var(--border);
-
-            border-radius:15px;
-
-            padding:15px 8px;
-
-            text-align:center;
-
-            transition:.2s;
-
+        .category {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            padding: 15px 8px;
+            text-align: center;
+            transition: .2s;
         }
 
 
-        .category:hover{
-
-            transform:
-                translateY(-3px);
-
-            box-shadow:
-                var(--shadow);
-
+        .category:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
         }
 
 
-        .category-icon{
-
-            font-size:30px;
-
-            margin-bottom:8px;
-
+        .category-icon {
+            font-size: 30px;
+            margin-bottom: 8px;
         }
 
 
-        .category-name{
-
-            font-size:13px;
-
-            font-weight:700;
-
+        .category-name {
+            font-size: 13px;
+            font-weight: 700;
         }
 
 
-        /* =========================================
-           11. PRODUCTS
-        ========================================= */
+        /* PRODUCTS */
 
-        .products{
-
-            display:grid;
-
-            grid-template-columns:
-                repeat(5,1fr);
-
-            gap:16px;
-
+        .products {
+            display: grid;
+            grid-template-columns: repeat(5,1fr);
+            gap: 16px;
         }
 
 
-        .product{
-
-            background:white;
-
-            border-radius:16px;
-
-            overflow:hidden;
-
-            box-shadow:
-                0 4px 15px rgba(0,0,0,.05);
-
-            position:relative;
-
+        .product {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,.05);
+            position: relative;
         }
 
 
-        .product-img{
-
-            height:180px;
-
+        .product-img {
+            height: 180px;
             background:
                 linear-gradient(
                     135deg,
@@ -606,925 +370,590 @@
                     #e5e7eb
                 );
 
-            display:flex;
-
-            align-items:center;
-
-            justify-content:center;
-
-            font-size:70px;
-
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 70px;
         }
 
 
-        .product-body{
-
-            padding:14px;
-
+        .product-body {
+            padding: 14px;
         }
 
 
-        .product-title{
-
-            font-size:15px;
-
-            font-weight:700;
-
-            line-height:1.4;
-
-            min-height:42px;
-
+        .product-title {
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 1.4;
+            min-height: 42px;
         }
 
 
-        .rating{
-
-            margin:8px 0;
-
-            color:#f59e0b;
-
-            font-size:13px;
-
+        .rating {
+            margin: 8px 0;
+            color: #f59e0b;
+            font-size: 13px;
         }
 
 
-        .price{
-
-            font-size:19px;
-
-            font-weight:900;
-
-            color:
-                var(--primary);
-
+        .price {
+            font-size: 19px;
+            font-weight: 900;
+            color: var(--primary);
         }
 
 
-        .old-price{
-
-            color:#9ca3af;
-
-            text-decoration:
-                line-through;
-
-            font-size:12px;
-
-            margin-left:5px;
-
+        .old-price {
+            color: #9ca3af;
+            text-decoration: line-through;
+            font-size: 12px;
+            margin-left: 5px;
         }
 
 
-        .product-actions{
-
-            display:flex;
-
-            gap:7px;
-
-            margin-top:12px;
-
+        .product-actions {
+            display: flex;
+            gap: 7px;
+            margin-top: 12px;
         }
 
 
-        .add-cart{
-
-            flex:1;
-
-            border:none;
-
-            background:
-                var(--primary);
-
-            color:white;
-
-            padding:9px;
-
-            border-radius:8px;
-
-            font-weight:700;
-
+        .add-cart {
+            flex: 1;
+            border: none;
+            background: var(--primary);
+            color: white;
+            padding: 9px;
+            border-radius: 8px;
+            font-weight: 700;
         }
 
 
-        .wish{
-
-            width:40px;
-
-            border:
-                1px solid var(--border);
-
-            background:white;
-
-            border-radius:8px;
-
+        .wish {
+            width: 40px;
+            border: 1px solid var(--border);
+            background: white;
+            border-radius: 8px;
         }
 
 
-        .discount{
-
-            position:absolute;
-
-            top:10px;
-
-            left:10px;
-
-            background:
-                var(--danger);
-
-            color:white;
-
-            padding:
-                5px 8px;
-
-            border-radius:7px;
-
-            font-size:11px;
-
-            font-weight:700;
-
+        .discount {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: var(--danger);
+            color: white;
+            padding: 5px 8px;
+            border-radius: 7px;
+            font-size: 11px;
+            font-weight: 700;
         }
 
 
-        /* =========================================
-           12. AI CARD
-        ========================================= */
+        /* AI CARD */
 
-        .ai-card{
+        .ai-card {
+            background: var(--dark);
+            color: white;
+            border-radius: 20px;
+            padding: 25px;
 
-            background:
-                var(--dark);
-
-            color:white;
-
-            border-radius:20px;
-
-            padding:25px;
-
-            display:flex;
-
-            align-items:center;
-
-            justify-content:space-between;
-
-            gap:20px;
-
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
         }
 
 
-        .ai-card h2{
-
-            margin-bottom:8px;
-
+        .ai-card h2 {
+            margin-bottom: 8px;
         }
 
 
-        .ai-card p{
-
-            color:#d1d5db;
-
-            line-height:1.5;
-
+        .ai-card p {
+            color: #d1d5db;
+            line-height: 1.5;
         }
 
 
-        .ai-btn{
-
-            border:none;
-
-            background:
-                var(--primary);
-
-            color:white;
-
-            padding:
-                13px 20px;
-
-            border-radius:10px;
-
-            font-weight:700;
-
-            white-space:nowrap;
-
+        .ai-btn {
+            border: none;
+            background: var(--primary);
+            color: white;
+            padding: 13px 20px;
+            border-radius: 10px;
+            font-weight: 700;
+            white-space: nowrap;
         }
 
 
-        /* =========================================
-           13. BOTTOM NAV
-        ========================================= */
+        /* BOTTOM NAV */
 
-        .bottom-nav{
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 65px;
 
-            position:fixed;
+            background: white;
+            border-top: 1px solid var(--border);
 
-            bottom:0;
+            display: none;
+            z-index: 2000;
 
-            left:0;
-
-            right:0;
-
-            height:65px;
-
-            background:white;
-
-            border-top:
-                1px solid var(--border);
-
-            display:none;
-
-            z-index:2000;
-
-            justify-content:
-                space-around;
-
-            align-items:center;
-
+            justify-content: space-around;
+            align-items: center;
         }
 
 
-        .nav-item{
-
-            background:none;
-
-            border:none;
-
-            color:#6b7280;
-
-            font-size:11px;
-
-            text-align:center;
-
+        .nav-item {
+            background: none;
+            border: none;
+            color: #6b7280;
+            font-size: 11px;
+            text-align: center;
         }
 
 
-        .nav-item.active{
-
-            color:
-                var(--primary);
-
-            font-weight:700;
-
+        .nav-item.active {
+            color: var(--primary);
+            font-weight: 700;
         }
 
 
-        .nav-icon{
-
-            display:block;
-
-            font-size:21px;
-
-            margin-bottom:2px;
-
+        .nav-icon {
+            display: block;
+            font-size: 21px;
+            margin-bottom: 2px;
         }
 
 
-        /* =========================================
-           14. MODAL
-        ========================================= */
+        /* MODAL */
 
-        .modal{
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.55);
+            z-index: 3000;
 
-            display:none;
-
-            position:fixed;
-
-            inset:0;
-
-            background:
-                rgba(0,0,0,.55);
-
-            z-index:3000;
-
-            align-items:flex-end;
-
-            justify-content:center;
-
+            align-items: flex-end;
+            justify-content: center;
         }
 
 
-        .modal.show{
-
-            display:flex;
-
+        .modal.show {
+            display: flex;
         }
 
 
-        .modal-box{
+        .modal-box {
+            background: white;
+            width: min(600px,100%);
+            max-height: 90vh;
+            overflow: auto;
 
-            background:white;
+            border-radius: 22px 22px 0 0;
+            padding: 25px;
 
-            width:
-                min(600px,100%);
-
-            max-height:90vh;
-
-            overflow:auto;
-
-            border-radius:
-                22px 22px 0 0;
-
-            padding:25px;
-
-            animation:
-                slideUp .25s ease;
-
+            animation: slideUp .25s ease;
         }
 
 
-        @keyframes slideUp{
+        @keyframes slideUp {
 
-            from{
-
-                transform:
-                    translateY(100%);
-
+            from {
+                transform: translateY(100%);
             }
 
-            to{
-
-                transform:
-                    translateY(0);
-
+            to {
+                transform: translateY(0);
             }
 
         }
 
 
-        .modal-head{
-
-            display:flex;
-
-            justify-content:
-                space-between;
-
-            align-items:center;
-
-            margin-bottom:20px;
-
+        .modal-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
         }
 
 
-        .close{
-
-            border:none;
-
-            background:#f3f4f6;
-
-            width:36px;
-
-            height:36px;
-
-            border-radius:50%;
-
+        .close {
+            border: none;
+            background: #f3f4f6;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
         }
 
 
-        /* =========================================
-           15. CART
-        ========================================= */
+        /* CART */
 
-        .cart-item{
-
-            display:flex;
-
-            align-items:center;
-
-            gap:12px;
-
-            padding:12px 0;
-
-            border-bottom:
-                1px solid var(--border);
-
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
         }
 
 
-        .cart-img{
+        .cart-img {
+            width: 55px;
+            height: 55px;
+            background: #f3f4f6;
+            border-radius: 10px;
 
-            width:55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-            height:55px;
-
-            background:#f3f4f6;
-
-            border-radius:10px;
-
-            display:flex;
-
-            align-items:center;
-
-            justify-content:center;
-
-            font-size:28px;
-
+            font-size: 28px;
         }
 
 
-        .cart-info{
-
-            flex:1;
-
+        .cart-info {
+            flex: 1;
         }
 
 
-        .cart-total{
+        .cart-total {
+            margin-top: 18px;
+            padding-top: 15px;
+            border-top: 2px solid var(--dark);
 
-            margin-top:18px;
+            display: flex;
+            justify-content: space-between;
 
-            padding-top:15px;
-
-            border-top:
-                2px solid var(--dark);
-
-            display:flex;
-
-            justify-content:
-                space-between;
-
-            font-weight:900;
-
-            font-size:20px;
-
+            font-weight: 900;
+            font-size: 20px;
         }
 
 
-        .checkout-btn{
+        .checkout-btn {
+            width: 100%;
+            margin-top: 15px;
+            padding: 14px;
 
-            width:100%;
+            border: none;
+            background: var(--primary);
+            color: white;
 
-            margin-top:15px;
-
-            padding:14px;
-
-            border:none;
-
-            background:
-                var(--primary);
-
-            color:white;
-
-            border-radius:10px;
-
-            font-weight:800;
-
+            border-radius: 10px;
+            font-weight: 800;
         }
 
 
-        /* =========================================
-           16. AI CHAT
-        ========================================= */
+        /* CHAT */
 
-        .chat{
-
-            position:fixed;
-
-            right:20px;
-
-            bottom:85px;
-
-            z-index:1800;
-
+        .chat {
+            position: fixed;
+            right: 20px;
+            bottom: 85px;
+            z-index: 1800;
         }
 
 
-        .chat-button{
+        .chat-button {
+            width: 60px;
+            height: 60px;
 
-            width:60px;
+            border: none;
+            border-radius: 50%;
 
-            height:60px;
+            background: var(--primary);
+            color: white;
 
-            border:none;
-
-            border-radius:50%;
-
-            background:
-                var(--primary);
-
-            color:white;
-
-            font-size:26px;
+            font-size: 26px;
 
             box-shadow:
                 0 8px 25px rgba(0,0,0,.25);
-
         }
 
 
-        .chat-box{
+        .chat-box {
+            display: none;
 
-            display:none;
+            position: absolute;
+            right: 0;
+            bottom: 72px;
 
-            position:absolute;
+            width: 330px;
+            height: 460px;
 
-            right:0;
-
-            bottom:72px;
-
-            width:330px;
-
-            height:460px;
-
-            background:white;
-
-            border-radius:18px;
+            background: white;
+            border-radius: 18px;
 
             box-shadow:
                 0 15px 50px rgba(0,0,0,.2);
 
-            overflow:hidden;
-
+            overflow: hidden;
         }
 
 
-        .chat-box.show{
-
-            display:flex;
-
-            flex-direction:column;
-
+        .chat-box.show {
+            display: flex;
+            flex-direction: column;
         }
 
 
-        .chat-head{
+        .chat-head {
+            background: var(--dark);
+            color: white;
+            padding: 15px;
 
-            background:
-                var(--dark);
-
-            color:white;
-
-            padding:15px;
-
-            display:flex;
-
-            justify-content:
-                space-between;
-
+            display: flex;
+            justify-content: space-between;
         }
 
 
-        .chat-messages{
-
-            flex:1;
-
-            padding:15px;
-
-            overflow:auto;
-
-            background:#f8fafc;
-
+        .chat-messages {
+            flex: 1;
+            padding: 15px;
+            overflow: auto;
+            background: #f8fafc;
         }
 
 
-        .message{
+        .message {
+            max-width: 85%;
+            padding: 10px 12px;
+            border-radius: 12px;
+            margin-bottom: 10px;
 
-            max-width:85%;
-
-            padding:10px 12px;
-
-            border-radius:12px;
-
-            margin-bottom:10px;
-
-            font-size:14px;
-
-            line-height:1.5;
-
+            font-size: 14px;
+            line-height: 1.5;
         }
 
 
-        .bot{
-
-            background:white;
-
+        .bot {
+            background: white;
         }
 
 
-        .user{
-
-            background:
-                var(--primary);
-
-            color:white;
-
-            margin-left:auto;
-
+        .user {
+            background: var(--primary);
+            color: white;
+            margin-left: auto;
         }
 
 
-        .chat-input{
-
-            display:flex;
-
-            border-top:
-                1px solid var(--border);
-
+        .chat-input {
+            display: flex;
+            border-top: 1px solid var(--border);
         }
 
 
-        .chat-input input{
-
-            flex:1;
-
-            border:none;
-
-            outline:none;
-
-            padding:12px;
-
+        .chat-input input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 12px;
         }
 
 
-        .chat-input button{
-
-            width:50px;
-
-            border:none;
-
-            background:
-                var(--primary);
-
-            color:white;
-
+        .chat-input button {
+            width: 50px;
+            border: none;
+            background: var(--primary);
+            color: white;
         }
 
 
-        /* =========================================
-           17. EMPTY
-        ========================================= */
+        /* EMPTY */
 
-        .empty{
-
-            text-align:center;
-
-            padding:40px;
-
-            color:
-                var(--muted);
-
+        .empty {
+            text-align: center;
+            padding: 40px;
+            color: var(--muted);
         }
 
 
-        /* =========================================
-           18. TOAST
-        ========================================= */
+        /* TOAST */
 
-        .toast{
-
-            position:fixed;
-
-            left:50%;
-
-            bottom:90px;
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 90px;
 
             transform:
                 translateX(-50%)
                 translateY(20px);
 
-            background:
-                var(--dark);
+            background: var(--dark);
+            color: white;
 
-            color:white;
+            padding: 12px 18px;
+            border-radius: 10px;
 
-            padding:
-                12px 18px;
+            opacity: 0;
+            pointer-events: none;
 
-            border-radius:10px;
+            transition: .3s;
 
-            opacity:0;
-
-            pointer-events:none;
-
-            transition:.3s;
-
-            z-index:5000;
-
+            z-index: 5000;
         }
 
 
-        .toast.show{
-
-            opacity:1;
+        .toast.show {
+            opacity: 1;
 
             transform:
                 translateX(-50%)
                 translateY(0);
-
         }
 
 
-        /* =========================================
-           19. TABLET
-        ========================================= */
+        /* TABLET */
 
-        @media(max-width:900px){
+        @media(max-width:900px) {
 
-            .categories{
-
-                grid-template-columns:
-                    repeat(4,1fr);
-
+            .categories {
+                grid-template-columns: repeat(4,1fr);
             }
 
 
-            .products{
-
-                grid-template-columns:
-                    repeat(3,1fr);
-
+            .products {
+                grid-template-columns: repeat(3,1fr);
             }
 
 
-            .hero h1{
-
-                font-size:32px;
-
+            .hero h1 {
+                font-size: 32px;
             }
 
         }
 
 
-        /* =========================================
-           20. MOBILE
-        ========================================= */
+        /* MOBILE */
 
-        @media(max-width:600px){
+        @media(max-width:600px) {
 
-            body{
-
-                padding-bottom:75px;
-
+            body {
+                padding-bottom: 75px;
             }
 
 
-            .topbar{
-
-                padding:10px;
-
-                gap:8px;
-
+            .topbar {
+                padding: 10px;
+                gap: 8px;
             }
 
 
-            .logo{
-
-                font-size:19px;
-
+            .logo {
+                font-size: 19px;
             }
 
 
-            .header-actions
-            .icon-btn:nth-child(1){
-
-                display:none;
-
+            .header-actions .icon-btn:first-child {
+                display: none;
             }
 
 
-            .container{
-
-                padding:12px;
-
+            .container {
+                padding: 12px;
             }
 
 
-            .hero{
-
-                padding:25px 20px;
-
-                min-height:220px;
-
+            .hero {
+                padding: 25px 20px;
+                min-height: 220px;
             }
 
 
-            .hero h1{
-
-                font-size:28px;
-
+            .hero h1 {
+                font-size: 28px;
             }
 
 
-            .hero p{
-
-                font-size:14px;
-
+            .hero p {
+                font-size: 14px;
             }
 
 
-            .hero-icon{
-
-                font-size:70px;
-
+            .hero-icon {
+                font-size: 70px;
             }
 
 
-            .categories{
-
-                grid-template-columns:
-                    repeat(4,1fr);
-
-                gap:8px;
-
+            .categories {
+                grid-template-columns: repeat(4,1fr);
+                gap: 8px;
             }
 
 
-            .category{
-
-                padding:10px 4px;
-
+            .category {
+                padding: 10px 4px;
             }
 
 
-            .category-icon{
-
-                font-size:25px;
-
+            .category-icon {
+                font-size: 25px;
             }
 
 
-            .category-name{
-
-                font-size:11px;
-
+            .category-name {
+                font-size: 11px;
             }
 
 
-            .products{
-
-                grid-template-columns:
-                    repeat(2,1fr);
-
-                gap:10px;
-
+            .products {
+                grid-template-columns: repeat(2,1fr);
+                gap: 10px;
             }
 
 
-            .product-img{
-
-                height:145px;
-
-                font-size:55px;
-
+            .product-img {
+                height: 145px;
+                font-size: 55px;
             }
 
 
-            .product-body{
-
-                padding:10px;
-
+            .product-body {
+                padding: 10px;
             }
 
 
-            .product-title{
-
-                font-size:13px;
-
+            .product-title {
+                font-size: 13px;
             }
 
 
-            .price{
-
-                font-size:17px;
-
+            .price {
+                font-size: 17px;
             }
 
 
-            .ai-card{
-
-                display:block;
-
+            .ai-card {
+                display: block;
             }
 
 
-            .ai-btn{
-
-                margin-top:15px;
-
-                width:100%;
-
+            .ai-btn {
+                margin-top: 15px;
+                width: 100%;
             }
 
 
-            .bottom-nav{
-
-                display:flex;
-
+            .bottom-nav {
+                display: flex;
             }
 
 
-            .chat{
-
-                bottom:85px;
-
-                right:12px;
-
+            .chat {
+                bottom: 85px;
+                right: 12px;
             }
 
 
-            .chat-box{
-
-                width:
-                    calc(100vw - 24px);
-
-                right:-5px;
-
+            .chat-box {
+                width: calc(100vw - 24px);
+                right: -5px;
             }
 
         }
@@ -1537,18 +966,12 @@
 <body>
 
 
-<!-- =========================================
-     HEADER
-========================================= -->
-
 <header class="header">
 
     <div class="topbar">
 
         <div class="logo">
-
             Shopping <span>Mela</span>
-
         </div>
 
 
@@ -1561,11 +984,9 @@
                 autocomplete="off"
             >
 
-
             <button
                 class="search-btn"
                 onclick="searchProducts()"
-                aria-label="Search"
             >
                 🔎
             </button>
@@ -1578,7 +999,6 @@
             <button
                 class="icon-btn"
                 onclick="startVoiceSearch()"
-                title="Voice Search"
             >
                 🎙️
             </button>
@@ -1587,7 +1007,6 @@
             <button
                 class="icon-btn"
                 onclick="openWishlist()"
-                title="Wishlist"
             >
 
                 ❤️
@@ -1605,7 +1024,6 @@
             <button
                 class="icon-btn"
                 onclick="openCart()"
-                title="Cart"
             >
 
                 🛒
@@ -1628,19 +1046,12 @@
         class="offline"
         id="offlineBar"
     >
-
         🟠 আপনি Offline আছেন —
         কিছু feature সাময়িকভাবে unavailable।
-
     </div>
 
 </header>
 
-
-
-<!-- =========================================
-     MAIN
-========================================= -->
 
 <main class="container">
 
@@ -1655,13 +1066,11 @@
                 আপনার Smart Shopping শুরু করুন 🛍️
             </h1>
 
-
             <p>
                 AI Search, Voice Search,
                 Personalized Recommendation
                 এবং সহজ Shopping Experience।
             </p>
-
 
             <button
                 class="hero-btn"
@@ -1680,7 +1089,6 @@
     </section>
 
 
-
     <!-- CATEGORIES -->
 
     <section class="section">
@@ -1690,7 +1098,6 @@
             <h2>
                 ক্যাটাগরি
             </h2>
-
 
             <button
                 class="view-all"
@@ -1709,15 +1116,8 @@
                 class="category"
                 onclick="filterCategory('fashion')"
             >
-
-                <div class="category-icon">
-                    👕
-                </div>
-
-                <div class="category-name">
-                    Fashion
-                </div>
-
+                <div class="category-icon">👕</div>
+                <div class="category-name">Fashion</div>
             </div>
 
 
@@ -1725,15 +1125,8 @@
                 class="category"
                 onclick="filterCategory('electronics')"
             >
-
-                <div class="category-icon">
-                    📱
-                </div>
-
-                <div class="category-name">
-                    Electronics
-                </div>
-
+                <div class="category-icon">📱</div>
+                <div class="category-name">Electronics</div>
             </div>
 
 
@@ -1741,15 +1134,8 @@
                 class="category"
                 onclick="filterCategory('beauty')"
             >
-
-                <div class="category-icon">
-                    💄
-                </div>
-
-                <div class="category-name">
-                    Beauty
-                </div>
-
+                <div class="category-icon">💄</div>
+                <div class="category-name">Beauty</div>
             </div>
 
 
@@ -1757,15 +1143,8 @@
                 class="category"
                 onclick="filterCategory('home')"
             >
-
-                <div class="category-icon">
-                    🏠
-                </div>
-
-                <div class="category-name">
-                    Home
-                </div>
-
+                <div class="category-icon">🏠</div>
+                <div class="category-name">Home</div>
             </div>
 
 
@@ -1773,15 +1152,8 @@
                 class="category"
                 onclick="filterCategory('shoes')"
             >
-
-                <div class="category-icon">
-                    👟
-                </div>
-
-                <div class="category-name">
-                    Shoes
-                </div>
-
+                <div class="category-icon">👟</div>
+                <div class="category-name">Shoes</div>
             </div>
 
 
@@ -1789,15 +1161,8 @@
                 class="category"
                 onclick="filterCategory('bags')"
             >
-
-                <div class="category-icon">
-                    👜
-                </div>
-
-                <div class="category-name">
-                    Bags
-                </div>
-
+                <div class="category-icon">👜</div>
+                <div class="category-name">Bags</div>
             </div>
 
 
@@ -1805,15 +1170,8 @@
                 class="category"
                 onclick="filterCategory('kids')"
             >
-
-                <div class="category-icon">
-                    🧸
-                </div>
-
-                <div class="category-name">
-                    Kids
-                </div>
-
+                <div class="category-icon">🧸</div>
+                <div class="category-name">Kids</div>
             </div>
 
 
@@ -1821,21 +1179,13 @@
                 class="category"
                 onclick="filterCategory('gift')"
             >
-
-                <div class="category-icon">
-                    🎁
-                </div>
-
-                <div class="category-name">
-                    Gift
-                </div>
-
+                <div class="category-icon">🎁</div>
+                <div class="category-name">Gift</div>
             </div>
 
         </div>
 
     </section>
-
 
 
     <!-- AI -->
@@ -1849,7 +1199,6 @@
                 <h2>
                     🤖 AI Shopping Assistant
                 </h2>
-
 
                 <p>
                     আপনার budget, পছন্দ ও প্রয়োজন
@@ -1869,7 +1218,6 @@
         </div>
 
     </section>
-
 
 
     <!-- PRODUCTS -->
@@ -1906,10 +1254,7 @@
 </main>
 
 
-
-<!-- =========================================
-     BOTTOM NAV
-========================================= -->
+<!-- BOTTOM NAV -->
 
 <nav class="bottom-nav">
 
@@ -1917,13 +1262,8 @@
         class="nav-item active"
         onclick="goHome()"
     >
-
-        <span class="nav-icon">
-            🏠
-        </span>
-
+        <span class="nav-icon">🏠</span>
         Home
-
     </button>
 
 
@@ -1931,13 +1271,8 @@
         class="nav-item"
         onclick="focusSearch()"
     >
-
-        <span class="nav-icon">
-            🔎
-        </span>
-
+        <span class="nav-icon">🔎</span>
         Search
-
     </button>
 
 
@@ -1945,13 +1280,8 @@
         class="nav-item"
         onclick="openCart()"
     >
-
-        <span class="nav-icon">
-            🛒
-        </span>
-
+        <span class="nav-icon">🛒</span>
         Cart
-
     </button>
 
 
@@ -1959,13 +1289,8 @@
         class="nav-item"
         onclick="openWishlist()"
     >
-
-        <span class="nav-icon">
-            ❤️
-        </span>
-
+        <span class="nav-icon">❤️</span>
         Wishlist
-
     </button>
 
 
@@ -1973,22 +1298,14 @@
         class="nav-item"
         onclick="showAccount()"
     >
-
-        <span class="nav-icon">
-            👤
-        </span>
-
+        <span class="nav-icon">👤</span>
         Account
-
     </button>
 
 </nav>
 
 
-
-<!-- =========================================
-     CART MODAL
-========================================= -->
+<!-- CART MODAL -->
 
 <div
     class="modal"
@@ -2002,7 +1319,6 @@
             <h2>
                 🛒 My Cart
             </h2>
-
 
             <button
                 class="close"
@@ -2019,10 +1335,7 @@
 
         <div class="cart-total">
 
-            <span>
-                Total
-            </span>
-
+            <span>Total</span>
 
             <span id="cartTotal">
                 ৳0
@@ -2043,10 +1356,7 @@
 </div>
 
 
-
-<!-- =========================================
-     WISHLIST MODAL
-========================================= -->
+<!-- WISHLIST -->
 
 <div
     class="modal"
@@ -2060,7 +1370,6 @@
             <h2>
                 ❤️ Wishlist
             </h2>
-
 
             <button
                 class="close"
@@ -2079,10 +1388,7 @@
 </div>
 
 
-
-<!-- =========================================
-     ACCOUNT MODAL
-========================================= -->
+<!-- ACCOUNT -->
 
 <div
     class="modal"
@@ -2096,7 +1402,6 @@
             <h2>
                 👤 My Account
             </h2>
-
 
             <button
                 class="close"
@@ -2114,11 +1419,9 @@
                 👤
             </div>
 
-
             <h3>
                 Shopping Mela Account
             </h3>
-
 
             <p style="margin-top:10px">
 
@@ -2142,10 +1445,7 @@
 </div>
 
 
-
-<!-- =========================================
-     AI CHAT
-========================================= -->
+<!-- AI CHAT -->
 
 <div class="chat">
 
@@ -2159,7 +1459,6 @@
             <strong>
                 🤖 Shopping AI
             </strong>
-
 
             <button
                 style="
@@ -2195,8 +1494,7 @@
 
                 <br>
 
-                "২০০০ টাকার মধ্যে
-                একটা ভালো ব্যাগ চাই"
+                "২০০০ টাকার মধ্যে একটা ভালো ব্যাগ চাই"
 
             </div>
 
@@ -2211,10 +1509,7 @@
                 onkeydown="handleChatKey(event)"
             >
 
-
-            <button
-                onclick="sendChat()"
-            >
+            <button onclick="sendChat()">
                 ➤
             </button>
 
@@ -2226,7 +1521,6 @@
     <button
         class="chat-button"
         onclick="toggleChat()"
-        aria-label="AI Assistant"
     >
         🤖
     </button>
@@ -2234,10 +1528,7 @@
 </div>
 
 
-
-<!-- =========================================
-     TOAST
-========================================= -->
+<!-- TOAST -->
 
 <div
     class="toast"
@@ -2245,131 +1536,128 @@
 ></div>
 
 
-
 <script>
 
 /* =========================================
-   1. PRODUCT DATABASE
+   PRODUCTS
 ========================================= */
 
 const products = [
 
     {
-        id:1,
-        title:"Premium Black Casual Shirt",
-        category:"fashion",
-        price:1290,
-        oldPrice:1690,
-        rating:4.7,
-        icon:"👕",
-        discount:"24%"
+        id: 1,
+        title: "Premium Black Casual Shirt",
+        category: "fashion",
+        price: 1290,
+        oldPrice: 1690,
+        rating: 4.7,
+        icon: "👕",
+        discount: "24%"
     },
 
     {
-        id:2,
-        title:"Smart Watch Series X",
-        category:"electronics",
-        price:2499,
-        oldPrice:3299,
-        rating:4.6,
-        icon:"⌚",
-        discount:"24%"
+        id: 2,
+        title: "Smart Watch Series X",
+        category: "electronics",
+        price: 2499,
+        oldPrice: 3299,
+        rating: 4.6,
+        icon: "⌚",
+        discount: "24%"
     },
 
     {
-        id:3,
-        title:"Ladies Premium Handbag",
-        category:"bags",
-        price:1490,
-        oldPrice:1990,
-        rating:4.8,
-        icon:"👜",
-        discount:"25%"
+        id: 3,
+        title: "Ladies Premium Handbag",
+        category: "bags",
+        price: 1490,
+        oldPrice: 1990,
+        rating: 4.8,
+        icon: "👜",
+        discount: "25%"
     },
 
     {
-        id:4,
-        title:"Wireless Bluetooth Earbuds",
-        category:"electronics",
-        price:1890,
-        oldPrice:2390,
-        rating:4.5,
-        icon:"🎧",
-        discount:"21%"
+        id: 4,
+        title: "Wireless Bluetooth Earbuds",
+        category: "electronics",
+        price: 1890,
+        oldPrice: 2390,
+        rating: 4.5,
+        icon: "🎧",
+        discount: "21%"
     },
 
     {
-        id:5,
-        title:"Elegant Three Piece",
-        category:"fashion",
-        price:2190,
-        oldPrice:2890,
-        rating:4.8,
-        icon:"👗",
-        discount:"24%"
+        id: 5,
+        title: "Elegant Three Piece",
+        category: "fashion",
+        price: 2190,
+        oldPrice: 2890,
+        rating: 4.8,
+        icon: "👗",
+        discount: "24%"
     },
 
     {
-        id:6,
-        title:"Running Sports Shoes",
-        category:"shoes",
-        price:2390,
-        oldPrice:2990,
-        rating:4.7,
-        icon:"👟",
-        discount:"20%"
+        id: 6,
+        title: "Running Sports Shoes",
+        category: "shoes",
+        price: 2390,
+        oldPrice: 2990,
+        rating: 4.7,
+        icon: "👟",
+        discount: "20%"
     },
 
     {
-        id:7,
-        title:"Premium Beauty Care Set",
-        category:"beauty",
-        price:990,
-        oldPrice:1290,
-        rating:4.4,
-        icon:"💄",
-        discount:"23%"
+        id: 7,
+        title: "Premium Beauty Care Set",
+        category: "beauty",
+        price: 990,
+        oldPrice: 1290,
+        rating: 4.4,
+        icon: "💄",
+        discount: "23%"
     },
 
     {
-        id:8,
-        title:"Modern Home Decor Lamp",
-        category:"home",
-        price:1590,
-        oldPrice:1990,
-        rating:4.6,
-        icon:"💡",
-        discount:"20%"
+        id: 8,
+        title: "Modern Home Decor Lamp",
+        category: "home",
+        price: 1590,
+        oldPrice: 1990,
+        rating: 4.6,
+        icon: "💡",
+        discount: "20%"
     },
 
     {
-        id:9,
-        title:"Kids Educational Toy",
-        category:"kids",
-        price:790,
-        oldPrice:990,
-        rating:4.5,
-        icon:"🧸",
-        discount:"20%"
+        id: 9,
+        title: "Kids Educational Toy",
+        category: "kids",
+        price: 790,
+        oldPrice: 990,
+        rating: 4.5,
+        icon: "🧸",
+        discount: "20%"
     },
 
     {
-        id:10,
-        title:"Special Gift Box",
-        category:"gift",
-        price:1190,
-        oldPrice:1490,
-        rating:4.9,
-        icon:"🎁",
-        discount:"20%"
+        id: 10,
+        title: "Special Gift Box",
+        category: "gift",
+        price: 1190,
+        oldPrice: 1490,
+        rating: 4.9,
+        icon: "🎁",
+        discount: "20%"
     }
 
 ];
 
 
-/* =========================================
-   2. APPLICATION STATE
-========================================= */
+/* STATE */
 
 let cart =
     JSON.parse(
@@ -2383,48 +1671,38 @@ let wishlist =
     );
 
 
-let currentProducts =
-    [...products];
+let currentProducts = [...products];
 
 
-/* =========================================
-   3. SAVE STATE
-========================================= */
+/* SAVE */
 
-function saveState(){
+function saveState() {
 
     localStorage.setItem(
         "sm_cart",
         JSON.stringify(cart)
     );
 
-
     localStorage.setItem(
         "sm_wishlist",
         JSON.stringify(wishlist)
     );
 
-
     updateBadges();
-
 }
 
 
-/* =========================================
-   4. RENDER PRODUCTS
-========================================= */
+/* RENDER */
 
 function renderProducts(
     list = currentProducts
-){
+) {
 
     const container =
-        document.getElementById(
-            "products"
-        );
+        document.getElementById("products");
 
 
-    if(!list.length){
+    if (!list.length) {
 
         container.innerHTML = `
 
@@ -2433,17 +1711,13 @@ function renderProducts(
                 style="grid-column:1/-1"
             >
 
-                <div
-                    style="font-size:50px"
-                >
+                <div style="font-size:50px">
                     🔎
                 </div>
-
 
                 <h3>
                     কোনো product পাওয়া যায়নি
                 </h3>
-
 
                 <p>
                     অন্য কিছু search করে দেখুন।
@@ -2453,9 +1727,7 @@ function renderProducts(
 
         `;
 
-
         return;
-
     }
 
 
@@ -2464,9 +1736,7 @@ function renderProducts(
         list.map(product => {
 
             const wished =
-                wishlist.includes(
-                    product.id
-                );
+                wishlist.includes(product.id);
 
 
             return `
@@ -2477,11 +1747,9 @@ function renderProducts(
                         -${product.discount}
                     </div>
 
-
                     <div class="product-img">
                         ${product.icon}
                     </div>
-
 
                     <div class="product-body">
 
@@ -2489,11 +1757,9 @@ function renderProducts(
                             ${product.title}
                         </div>
 
-
                         <div class="rating">
                             ⭐ ${product.rating}
                         </div>
-
 
                         <div>
 
@@ -2501,13 +1767,11 @@ function renderProducts(
                                 ৳${product.price.toLocaleString()}
                             </span>
 
-
                             <span class="old-price">
                                 ৳${product.oldPrice.toLocaleString()}
                             </span>
 
                         </div>
-
 
                         <div class="product-actions">
 
@@ -2517,7 +1781,6 @@ function renderProducts(
                             >
                                 🛒 Add
                             </button>
-
 
                             <button
                                 class="wish"
@@ -2539,11 +1802,9 @@ function renderProducts(
 }
 
 
-/* =========================================
-   5. CART
-========================================= */
+/* CART */
 
-function addToCart(id){
+function addToCart(id) {
 
     const product =
         products.find(
@@ -2551,37 +1812,30 @@ function addToCart(id){
         );
 
 
-    if(!product){
-
-        return;
-
-    }
+    if (!product) return;
 
 
     cart.push(product);
 
     saveState();
 
-
     showToast(
         "🛒 Cart-এ product যোগ হয়েছে"
     );
-
 }
 
 
-function removeCart(index){
+function removeCart(index) {
 
-    cart.splice(index,1);
+    cart.splice(index, 1);
 
     saveState();
 
     renderCart();
-
 }
 
 
-function renderCart(){
+function renderCart() {
 
     const container =
         document.getElementById(
@@ -2589,23 +1843,19 @@ function renderCart(){
         );
 
 
-    if(!cart.length){
+    if (!cart.length) {
 
         container.innerHTML = `
 
             <div class="empty">
 
-                <div
-                    style="font-size:55px"
-                >
+                <div style="font-size:55px">
                     🛒
                 </div>
-
 
                 <h3>
                     Cart খালি
                 </h3>
-
 
                 <p>
                     Shopping শুরু করুন।
@@ -2618,12 +1868,10 @@ function renderCart(){
 
         document.getElementById(
             "cartTotal"
-        ).textContent =
-            "৳0";
+        ).textContent = "৳0";
 
 
         return;
-
     }
 
 
@@ -2633,7 +1881,7 @@ function renderCart(){
     container.innerHTML =
 
         cart.map(
-            (item,index) => {
+            (item, index) => {
 
                 total += item.price;
 
@@ -2646,13 +1894,11 @@ function renderCart(){
                             ${item.icon}
                         </div>
 
-
                         <div class="cart-info">
 
                             <strong>
                                 ${item.title}
                             </strong>
-
 
                             <div
                                 style="
@@ -2664,7 +1910,6 @@ function renderCart(){
                             </div>
 
                         </div>
-
 
                         <button
                             onclick="removeCart(${index})"
@@ -2684,7 +1929,6 @@ function renderCart(){
                 `;
 
             }
-
         ).join("");
 
 
@@ -2696,48 +1940,39 @@ function renderCart(){
 }
 
 
-function openCart(){
+function openCart() {
 
     renderCart();
-
 
     document
         .getElementById("cartModal")
         .classList.add("show");
-
 }
 
 
-function checkout(){
+function checkout() {
 
-    if(!cart.length){
+    if (!cart.length) {
 
         showToast(
             "আগে Cart-এ product যোগ করুন"
         );
 
-
         return;
-
     }
 
 
     showToast(
         "Checkout demo — backend/payment পরে connect করা হবে"
     );
-
 }
 
 
-/* =========================================
-   6. WISHLIST
-========================================= */
+/* WISHLIST */
 
-function toggleWishlist(id){
+function toggleWishlist(id) {
 
-    if(
-        wishlist.includes(id)
-    ){
+    if (wishlist.includes(id)) {
 
         wishlist =
             wishlist.filter(
@@ -2749,26 +1984,23 @@ function toggleWishlist(id){
             "Wishlist থেকে সরানো হয়েছে"
         );
 
-    }else{
+    } else {
 
         wishlist.push(id);
-
 
         showToast(
             "❤️ Wishlist-এ যোগ হয়েছে"
         );
-
     }
 
 
     saveState();
 
     renderProducts();
-
 }
 
 
-function openWishlist(){
+function openWishlist() {
 
     const container =
         document.getElementById(
@@ -2778,25 +2010,19 @@ function openWishlist(){
 
     const items =
         products.filter(
-            p =>
-                wishlist.includes(
-                    p.id
-                )
+            p => wishlist.includes(p.id)
         );
 
 
-    if(!items.length){
+    if (!items.length) {
 
         container.innerHTML = `
 
             <div class="empty">
 
-                <div
-                    style="font-size:55px"
-                >
+                <div style="font-size:55px">
                     ❤️
                 </div>
-
 
                 <h3>
                     Wishlist খালি
@@ -2806,7 +2032,7 @@ function openWishlist(){
 
         `;
 
-    }else{
+    } else {
 
         container.innerHTML =
 
@@ -2819,13 +2045,11 @@ function openWishlist(){
                             ${item.icon}
                         </div>
 
-
                         <div class="cart-info">
 
                             <strong>
                                 ${item.title}
                             </strong>
-
 
                             <div
                                 style="
@@ -2837,7 +2061,6 @@ function openWishlist(){
                             </div>
 
                         </div>
-
 
                         <button
                             class="add-cart"
@@ -2857,70 +2080,27 @@ function openWishlist(){
     document
         .getElementById("wishModal")
         .classList.add("show");
-
 }
 
 
-/* =========================================
-   7. SEARCH
-========================================= */
+/* SEARCH */
 
-function searchProducts(){
+function searchProducts() {
 
     const query =
         document
-            .getElementById(
-                "searchInput"
-            )
+            .getElementById("searchInput")
             .value
             .trim()
             .toLowerCase();
 
 
-    if(!query){
+    if (!query) {
 
         resetProducts();
 
         return;
-
     }
-
-
-    const banglaMap = {
-
-        "জামা":"shirt",
-        "শার্ট":"shirt",
-        "ব্যাগ":"bag",
-        "জুতা":"shoes",
-        "ঘড়ি":"watch",
-        "ঘড়ি":"watch",
-        "ফোন":"phone",
-        "উপহার":"gift",
-        "বাচ্চা":"kids"
-
-    };
-
-
-    let normalized = query;
-
-
-    Object.keys(banglaMap)
-        .forEach(key => {
-
-            normalized =
-                normalized.replace(
-                    new RegExp(
-                        key,
-                        "gi"
-                    ),
-                    banglaMap[key]
-                );
-
-        });
-
-
-    const words =
-        normalized.split(/\s+/);
 
 
     const results =
@@ -2935,17 +2115,12 @@ function searchProducts(){
                     ).toLowerCase();
 
 
-                return words.some(
-                    word =>
-                        text.includes(word)
-                );
-
+                return text.includes(query);
             }
         );
 
 
-    currentProducts =
-        results;
+    currentProducts = results;
 
 
     document.getElementById(
@@ -2956,9 +2131,7 @@ function searchProducts(){
 
     renderProducts(results);
 
-
     scrollToProducts();
-
 }
 
 
@@ -2966,61 +2139,46 @@ document
     .getElementById("searchInput")
     .addEventListener(
         "keydown",
-        function(event){
+        function(event) {
 
-            if(
-                event.key === "Enter"
-            ){
-
+            if (event.key === "Enter") {
                 searchProducts();
-
             }
 
         }
     );
 
 
-/* =========================================
-   8. CATEGORY
-========================================= */
+/* CATEGORY */
 
-function filterCategory(category){
+function filterCategory(category) {
 
     const results =
         products.filter(
-            p =>
-                p.category === category
+            p => p.category === category
         );
 
 
-    currentProducts =
-        results;
+    currentProducts = results;
 
 
     document.getElementById(
         "productHeading"
     ).textContent =
-        "📂 " +
-        category.toUpperCase();
+        "📂 " + category.toUpperCase();
 
 
     renderProducts(results);
 
-
     scrollToProducts();
-
 }
 
 
-/* =========================================
-   9. RESET
-========================================= */
+/* RESET */
 
-function resetProducts(){
+function resetProducts() {
 
-    currentProducts =
-        [...products];
-
+    currentProducts = [...products];
 
     document.getElementById(
         "searchInput"
@@ -3034,30 +2192,25 @@ function resetProducts(){
 
 
     renderProducts();
-
 }
 
 
-/* =========================================
-   10. VOICE SEARCH
-========================================= */
+/* VOICE SEARCH */
 
-function startVoiceSearch(){
+function startVoiceSearch() {
 
     const SpeechRecognition =
         window.SpeechRecognition ||
         window.webkitSpeechRecognition;
 
 
-    if(!SpeechRecognition){
+    if (!SpeechRecognition) {
 
         showToast(
             "এই browser-এ Voice Search support নেই"
         );
 
-
         return;
-
     }
 
 
@@ -3065,16 +2218,13 @@ function startVoiceSearch(){
         new SpeechRecognition();
 
 
-    recognition.lang =
-        "bn-BD";
+    recognition.lang = "bn-BD";
 
-
-    recognition.interimResults =
-        false;
+    recognition.interimResults = false;
 
 
     recognition.onstart =
-        function(){
+        function() {
 
             showToast(
                 "🎙️ বলুন, কী খুঁজছেন?"
@@ -3084,7 +2234,7 @@ function startVoiceSearch(){
 
 
     recognition.onresult =
-        function(event){
+        function(event) {
 
             const text =
                 event.results[0][0]
@@ -3093,17 +2243,15 @@ function startVoiceSearch(){
 
             document.getElementById(
                 "searchInput"
-            ).value =
-                text;
+            ).value = text;
 
 
             searchProducts();
-
         };
 
 
     recognition.onerror =
-        function(){
+        function() {
 
             showToast(
                 "Voice Search ব্যবহার করা যায়নি"
@@ -3113,37 +2261,28 @@ function startVoiceSearch(){
 
 
     recognition.start();
-
 }
 
 
-/* =========================================
-   11. AI CHAT
-========================================= */
+/* CHAT */
 
-function toggleChat(){
+function toggleChat() {
 
     document
         .getElementById("chatBox")
         .classList.toggle("show");
-
 }
 
 
-function handleChatKey(event){
+function handleChatKey(event) {
 
-    if(
-        event.key === "Enter"
-    ){
-
+    if (event.key === "Enter") {
         sendChat();
-
     }
-
 }
 
 
-function sendChat(){
+function sendChat() {
 
     const input =
         document.getElementById(
@@ -3155,11 +2294,7 @@ function sendChat(){
         input.value.trim();
 
 
-    if(!text){
-
-        return;
-
-    }
+    if (!text) return;
 
 
     addChatMessage(
@@ -3172,28 +2307,23 @@ function sendChat(){
 
 
     setTimeout(
-        function(){
-
-            const response =
-                aiDemoResponse(text);
-
+        function() {
 
             addChatMessage(
-                response,
+                aiDemoResponse(text),
                 "bot"
             );
 
         },
         500
     );
-
 }
 
 
 function addChatMessage(
     text,
     type
-){
+) {
 
     const messages =
         document.getElementById(
@@ -3211,8 +2341,7 @@ function addChatMessage(
         "message " + type;
 
 
-    div.innerHTML =
-        text;
+    div.innerHTML = text;
 
 
     messages.appendChild(div);
@@ -3220,20 +2349,19 @@ function addChatMessage(
 
     messages.scrollTop =
         messages.scrollHeight;
-
 }
 
 
-function aiDemoResponse(text){
+function aiDemoResponse(text) {
 
     const lower =
         text.toLowerCase();
 
 
-    if(
+    if (
         lower.includes("ব্যাগ") ||
         lower.includes("bag")
-    ){
+    ) {
 
         return `
             👜 আপনার জন্য কয়েকটি
@@ -3241,80 +2369,34 @@ function aiDemoResponse(text){
 
             <br><br>
 
-            Budget বললে আমি
-            matching option দেখাতে পারি।
+            Budget বললে matching
+            option দেখানো যাবে।
         `;
-
     }
 
 
-    if(
+    if (
         lower.includes("ঘড়ি") ||
         lower.includes("ঘড়ি") ||
         lower.includes("watch")
-    ){
+    ) {
 
         return `
             ⌚ Smart Watch-এর
             কয়েকটি option আছে।
-
-            <br><br>
-
-            Budget অনুযায়ী
-            filter করা যাবে।
         `;
-
     }
 
 
-    if(
+    if (
         lower.includes("জুতা") ||
         lower.includes("shoes")
-    ){
+    ) {
 
         return `
-            👟 Shoes-এর জন্য
-            Running, Casual এবং
-            Sports options আছে।
+            👟 Shoes-এর কয়েকটি
+            option আছে।
         `;
-
-    }
-
-
-    if(
-        lower.includes("order") ||
-        lower.includes("অর্ডার")
-    ){
-
-        return `
-            📦 Order tracking demo
-            এখানে আছে।
-
-            <br><br>
-
-            Production version-এ
-            authenticated order data
-            থেকে status দেখানো হবে।
-        `;
-
-    }
-
-
-    if(
-        lower.includes("২০০০") ||
-        lower.includes("2000")
-    ){
-
-        return `
-            💰 ৳2,000 budget বুঝেছি।
-
-            <br><br>
-
-            Budget অনুযায়ী
-            relevant products
-            সাজানো যাবে।
-        `;
-
     }
 
 
@@ -3323,37 +2405,29 @@ function aiDemoResponse(text){
 
         <br><br>
 
-        Product-এর <b>নাম</b>,
-        <b>budget</b> অথবা
-        <b>category</b> লিখুন।
+        Product-এর নাম,
+        budget অথবা category লিখুন।
     `;
-
 }
 
 
-/* =========================================
-   12. ACCOUNT
-========================================= */
+/* ACCOUNT */
 
-function showAccount(){
+function showAccount() {
 
     document
         .getElementById("accountModal")
         .classList.add("show");
-
 }
 
 
-/* =========================================
-   13. MODAL
-========================================= */
+/* MODAL */
 
-function closeModal(id){
+function closeModal(id) {
 
     document
         .getElementById(id)
         .classList.remove("show");
-
 }
 
 
@@ -3364,11 +2438,11 @@ document
 
             modal.addEventListener(
                 "click",
-                function(event){
+                function(event) {
 
-                    if(
+                    if (
                         event.target === modal
-                    ){
+                    ) {
 
                         modal.classList.remove(
                             "show"
@@ -3383,14 +2457,12 @@ document
     );
 
 
-/* =========================================
-   14. TOAST
-========================================= */
+/* TOAST */
 
 let toastTimer;
 
 
-function showToast(message){
+function showToast(message) {
 
     const toast =
         document.getElementById(
@@ -3398,23 +2470,18 @@ function showToast(message){
         );
 
 
-    toast.textContent =
-        message;
+    toast.textContent = message;
 
 
-    toast.classList.add(
-        "show"
-    );
+    toast.classList.add("show");
 
 
-    clearTimeout(
-        toastTimer
-    );
+    clearTimeout(toastTimer);
 
 
     toastTimer =
         setTimeout(
-            function(){
+            function() {
 
                 toast.classList.remove(
                     "show"
@@ -3423,15 +2490,12 @@ function showToast(message){
             },
             2500
         );
-
 }
 
 
-/* =========================================
-   15. BADGES
-========================================= */
+/* BADGES */
 
-function updateBadges(){
+function updateBadges() {
 
     document.getElementById(
         "cartBadge"
@@ -3443,15 +2507,12 @@ function updateBadges(){
         "wishBadge"
     ).textContent =
         wishlist.length;
-
 }
 
 
-/* =========================================
-   16. NETWORK STATUS
-========================================= */
+/* NETWORK */
 
-function updateNetworkStatus(){
+function updateNetworkStatus() {
 
     const bar =
         document.getElementById(
@@ -3459,28 +2520,20 @@ function updateNetworkStatus(){
         );
 
 
-    if(
-        navigator.onLine
-    ){
+    if (navigator.onLine) {
 
-        bar.classList.remove(
-            "show"
-        );
+        bar.classList.remove("show");
 
-    }else{
+    } else {
 
-        bar.classList.add(
-            "show"
-        );
-
+        bar.classList.add("show");
     }
-
 }
 
 
 window.addEventListener(
     "online",
-    function(){
+    function() {
 
         updateNetworkStatus();
 
@@ -3494,7 +2547,7 @@ window.addEventListener(
 
 window.addEventListener(
     "offline",
-    function(){
+    function() {
 
         updateNetworkStatus();
 
@@ -3506,24 +2559,21 @@ window.addEventListener(
 );
 
 
-/* =========================================
-   17. NAVIGATION
-========================================= */
+/* NAVIGATION */
 
-function scrollToProducts(){
+function scrollToProducts() {
 
     document
         .getElementById(
             "productSection"
         )
         .scrollIntoView({
-            behavior:"smooth"
+            behavior: "smooth"
         });
-
 }
 
 
-function focusSearch(){
+function focusSearch() {
 
     document
         .getElementById(
@@ -3533,107 +2583,59 @@ function focusSearch(){
 
 
     window.scrollTo({
-        top:0,
-        behavior:"smooth"
+        top: 0,
+        behavior: "smooth"
     });
-
 }
 
 
-function goHome(){
+function goHome() {
 
     window.scrollTo({
-        top:0,
-        behavior:"smooth"
+        top: 0,
+        behavior: "smooth"
     });
-
 }
 
 
 /* =========================================
-   18. DEEP LINK
+   SERVICE WORKER
+   9.1.9
 ========================================= */
 
-function handleDeepLink(){
-
-    const params =
-        new URLSearchParams(
-            window.location.search
-        );
-
-
-    const productId =
-        Number(
-            params.get("product")
-        );
-
-
-    if(!productId){
-
-        return;
-
-    }
-
-
-    const product =
-        products.find(
-            p =>
-                p.id === productId
-        );
-
-
-    if(!product){
-
-        return;
-
-    }
-
-
-    currentProducts =
-        [product];
-
-
-    document.getElementById(
-        "productHeading"
-    ).textContent =
-        "🔗 Product";
-
-
-    renderProducts(
-        [product]
-    );
-
-
-    setTimeout(
-        scrollToProducts,
-        300
-    );
-
-}
-
-
-/* =========================================
-   19. PWA SERVICE WORKER CHECK
-========================================= */
-
-if(
-    "serviceWorker" in navigator
-){
+if ("serviceWorker" in navigator) {
 
     window.addEventListener(
         "load",
-        function(){
+        () => {
 
-            /*
-             * Service Worker আমরা
-             * 9.1.6 ধাপে তৈরি করব।
-             *
-             * এখন registration করা হচ্ছে না।
-             */
+            navigator.serviceWorker
+                .register(
+                    "./sw.js",
+                    {
+                        scope: "./"
+                    }
+                )
+                .then(
+                    registration => {
 
-            console.log(
-                "Shopping Mela PWA support ready."
-            );
+                        console.log(
+                            "Shopping Mela Service Worker registered:",
+                            registration.scope
+                        );
+
+                    }
+                )
+                .catch(
+                    error => {
+
+                        console.error(
+                            "Shopping Mela Service Worker error:",
+                            error
+                        );
+
+                    }
+                );
 
         }
     );
@@ -3641,9 +2643,7 @@ if(
 }
 
 
-/* =========================================
-   20. INITIALIZE
-========================================= */
+/* INITIALIZE */
 
 renderProducts();
 
@@ -3651,10 +2651,12 @@ updateBadges();
 
 updateNetworkStatus();
 
-handleDeepLink();
-
-
 </script>
+
+
+<!-- =========================================
+     END OF BODY
+========================================= -->
 
 </body>
 
