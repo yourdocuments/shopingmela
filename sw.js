@@ -1,10 +1,11 @@
 ```javascript
-const CACHE_NAME = "shopping-mela-v9.1.6";
+const CACHE_NAME = "shopping-mela-v9.1.9";
 
 const CORE_FILES = [
     "./",
     "./index.html",
     "./manifest.json",
+
     "./assets/icon/192MILONMELA.svg.svg",
     "./assets/icon/MILKONMELA512.SVG.svg"
 ];
@@ -41,21 +42,19 @@ self.addEventListener("activate", event => {
     event.waitUntil(
 
         caches.keys()
-            .then(cacheNames => {
+            .then(names => {
 
                 return Promise.all(
 
-                    cacheNames
-                        .filter(
-                            name =>
-                                name.startsWith(
-                                    "shopping-mela-"
-                                ) &&
-                                name !== CACHE_NAME
+                    names
+                        .filter(name =>
+                            name.startsWith(
+                                "shopping-mela-"
+                            ) &&
+                            name !== CACHE_NAME
                         )
-                        .map(
-                            name =>
-                                caches.delete(name)
+                        .map(name =>
+                            caches.delete(name)
                         )
 
                 );
@@ -75,41 +74,40 @@ self.addEventListener("activate", event => {
 
 self.addEventListener("fetch", event => {
 
-    if (event.request.method !== "GET") {
-
+    if (
+        event.request.method !== "GET"
+    ) {
         return;
-
     }
 
 
     event.respondWith(
 
         caches.match(event.request)
-            .then(cachedResponse => {
+            .then(cached => {
 
-                if (cachedResponse) {
+                if (cached) {
 
-                    return cachedResponse;
+                    return cached;
 
                 }
 
 
                 return fetch(event.request)
-                    .then(networkResponse => {
+                    .then(response => {
 
                         if (
-                            !networkResponse ||
-                            networkResponse.status !== 200 ||
-                            networkResponse.type === "opaque"
+                            !response ||
+                            response.status !== 200
                         ) {
 
-                            return networkResponse;
+                            return response;
 
                         }
 
 
-                        const responseClone =
-                            networkResponse.clone();
+                        const copy =
+                            response.clone();
 
 
                         caches.open(CACHE_NAME)
@@ -117,13 +115,13 @@ self.addEventListener("fetch", event => {
 
                                 cache.put(
                                     event.request,
-                                    responseClone
+                                    copy
                                 );
 
                             });
 
 
-                        return networkResponse;
+                        return response;
 
                     })
                     .catch(() => {
