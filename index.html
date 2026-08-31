@@ -1,4428 +1,1632 @@
 <!DOCTYPE html>
 <html lang="bn">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>
-        Admin Dashboard — Shopping Mela
-    </title>
-
-
-    <!-- =====================================================
-         1.38 — ADMIN DASHBOARD
-         Product Edit + Delete Management
-    ====================================================== -->
-
-
-    <!-- =====================================================
-         1.32 — ADMIN LOGIN PROTECTION
-    ====================================================== -->
-
-    <script>
-
-        const adminLoggedIn =
-            sessionStorage.getItem(
-                "shoppingMelaAdminLoggedIn"
-            );
-
-
-        if (
-            adminLoggedIn !== "true"
-        ) {
-
-            window.location.replace(
-                "admin-login.html"
-            );
-
-        }
-
-    </script>
-
-
-    <style>
-
-        * {
-            box-sizing: border-box;
-        }
-
-
-        body {
-
-            margin: 0;
-
-            font-family:
-                Arial,
-                "Noto Sans Bengali",
-                sans-serif;
-
-            background: #f5f6f8;
-
-            color: #101828;
-
-        }
-
-
-        button,
-        input,
-        select {
-
-            font-family: inherit;
-
-        }
-
-
-        button {
-
-            -webkit-tap-highlight-color:
-                transparent;
-
-        }
-
-
-        /* =====================================================
-           SIDEBAR
-        ====================================================== */
-
-        .sidebar {
-
-            position: fixed;
-
-            left: 0;
-            top: 0;
-            bottom: 0;
-
-            width: 235px;
-
-            background: #101828;
-
-            color: #ffffff;
-
-            padding: 22px 14px;
-
-            z-index: 1000;
-
-            overflow-y: auto;
-
-        }
-
-
-        .admin-logo {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 10px;
-
-            padding:
-                0 8px 25px;
-
-            font-size: 17px;
-
-            font-weight: 800;
-
-            border-bottom:
-                1px solid
-                rgba(255,255,255,.08);
-
-        }
-
-
-        .admin-logo-icon {
-
-            width: 36px;
-            height: 36px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            border-radius: 9px;
-
-            background: #1877f2;
-
-            font-size: 18px;
-
-        }
-
-
-        .admin-nav {
-
-            margin-top: 20px;
-
-        }
-
-
-        .nav-title {
-
-            color: #98a2b3;
-
-            font-size: 9px;
-
-            text-transform: uppercase;
-
-            letter-spacing: .8px;
-
-            padding:
-                0 10px 8px;
-
-        }
-
-
-        .nav-item {
-
-            width: 100%;
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 10px;
-
-            border: 0;
-
-            background: transparent;
-
-            color: #d0d5dd;
-
-            padding:
-                11px 10px;
-
-            border-radius: 8px;
-
-            cursor: pointer;
-
-            text-align: left;
-
-            font-size: 11px;
-
-            margin-bottom: 3px;
-
-        }
-
-
-        .nav-item:hover {
-
-            background:
-                rgba(255,255,255,.07);
-
-            color: #ffffff;
-
-        }
-
-
-        .nav-item.active {
-
-            background: #1877f2;
-
-            color: #ffffff;
-
-        }
-
-
-        .nav-icon {
-
-            width: 20px;
-
-            text-align: center;
-
-            font-size: 14px;
-
-        }
-
-
-        .nav-badge {
-
-            margin-left: auto;
-
-            min-width: 20px;
-
-            padding: 3px 5px;
-
-            border-radius: 10px;
-
-            background: #f04438;
-
-            color: #ffffff;
-
-            font-size: 8px;
-
-            text-align: center;
-
-        }
-
-
-        /* =====================================================
-           MAIN
-        ====================================================== */
-
-        .main {
-
-            margin-left: 235px;
-
-            min-height: 100vh;
-
-        }
-
-
-        /* =====================================================
-           HEADER
-        ====================================================== */
-
-        .top-header {
-
-            height: 65px;
-
-            background: #ffffff;
-
-            border-bottom:
-                1px solid #eaecf0;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            padding:
-                0 25px;
-
-            position: sticky;
-
-            top: 0;
-
-            z-index: 500;
-
-        }
-
-
-        .page-title {
-
-            font-size: 17px;
-
-            font-weight: 800;
-
-        }
-
-
-        .header-right {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 12px;
-
-        }
-
-
-        .view-site {
-
-            text-decoration: none;
-
-            color: #344054;
-
-            border:
-                1px solid #d0d5dd;
-
-            padding:
-                8px 12px;
-
-            border-radius: 7px;
-
-            font-size: 10px;
-
-            font-weight: 700;
-
-        }
-
-
-        .admin-user {
-
-            display: flex;
-
-            align-items: center;
-
-            gap: 8px;
-
-        }
-
-
-        .admin-avatar {
-
-            width: 34px;
-            height: 34px;
-
-            border-radius: 50%;
-
-            background: #1877f2;
-
-            color: #ffffff;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-weight: 800;
-
-            font-size: 12px;
-
-        }
-
-
-        /* =====================================================
-           1.34 — VERIFIED ADMIN PROFILE
-        ====================================================== */
-
-        .admin-user-info {
-
-            min-width: 105px;
-
-        }
-
-
-        .admin-name {
-
-            display: flex !important;
-
-            align-items: center;
-
-            gap: 5px;
-
-            line-height: 1.2;
-
-        }
-
-
-        .verified-badge {
-
-            width: 15px;
-
-            height: 15px;
-
-            min-width: 15px;
-
-            border-radius: 50%;
-
-            background: #1877f2;
-
-            color: #ffffff;
-
-            display: inline-flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-size: 9px;
-
-            font-weight: 900;
-
-            line-height: 1;
-
-            box-shadow:
-                0 0 0 1.5px #ffffff;
-
-            cursor: help;
-
-            user-select: none;
-
-            transition:
-                transform .18s ease;
-
-        }
-
-
-        .verified-badge:hover {
-
-            transform:
-                scale(1.12);
-
-        }
-
-
-        .admin-user-info small {
-
-            display: block;
-
-            color: #98a2b3;
-
-            font-size: 8px;
-
-            margin-top: 3px;
-
-        }
-
-
-        /* =====================================================
-           CONTENT
-        ====================================================== */
-
-        .content {
-
-            padding: 25px;
-
-        }
-
-
-        .section {
-
-            display: none;
-
-        }
-
-
-        .section.active {
-
-            display: block;
-
-        }
-
-
-        .welcome {
-
-            margin-bottom: 22px;
-
-        }
-
-
-        .welcome h1 {
-
-            margin: 0;
-
-            font-size: 25px;
-
-        }
-
-
-        .welcome p {
-
-            margin: 6px 0 0;
-
-            color: #667085;
-
-            font-size: 11px;
-
-        }
-
-
-        /* =====================================================
-           STATS
-        ====================================================== */
-
-        .stats {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(4, 1fr);
-
-            gap: 15px;
-
-            margin-bottom: 22px;
-
-        }
-
-
-        .stat {
-
-            background: #ffffff;
-
-            border:
-                1px solid #e7eaf0;
-
-            border-radius: 13px;
-
-            padding: 18px;
-
-            box-shadow:
-                0 3px 12px
-                rgba(16,24,40,.03);
-
-        }
-
-
-        .stat-top {
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-        }
-
-
-        .stat-icon {
-
-            width: 39px;
-            height: 39px;
-
-            border-radius: 9px;
-
-            background: #eef5ff;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            font-size: 17px;
-
-        }
-
-
-        .stat-change {
-
-            color: #12b76a;
-
-            font-size: 8px;
-
-            font-weight: 800;
-
-        }
-
-
-        .stat-label {
-
-            margin-top: 13px;
-
-            color: #667085;
-
-            font-size: 10px;
-
-        }
-
-
-        .stat-value {
-
-            margin-top: 4px;
-
-            color: #101828;
-
-            font-size: 23px;
-
-            font-weight: 800;
-
-        }
-
-
-        /* =====================================================
-           DASHBOARD GRID
-        ====================================================== */
-
-        .dashboard-grid {
-
-            display: grid;
-
-            grid-template-columns:
-                1.5fr 1fr;
-
-            gap: 18px;
-
-            margin-bottom: 18px;
-
-        }
-
-
-        .panel {
-
-            background: #ffffff;
-
-            border:
-                1px solid #e7eaf0;
-
-            border-radius: 13px;
-
-            overflow: hidden;
-
-        }
-
-
-        .panel-header {
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: space-between;
-
-            padding:
-                16px 18px;
-
-            border-bottom:
-                1px solid #eaecf0;
-
-        }
-
-
-        .panel-header h2 {
-
-            margin: 0;
-
-            font-size: 13px;
-
-        }
-
-
-        .panel-header button {
-
-            border: 0;
-
-            background: transparent;
-
-            color: #1877f2;
-
-            cursor: pointer;
-
-            font-size: 9px;
-
-            font-weight: 800;
-
-        }
-
-
-        /* =====================================================
-           ORDERS
-        ====================================================== */
-
-        .order-row {
-
-            display: grid;
-
-            grid-template-columns:
-                1.2fr
-                1fr
-                .8fr
-                .8fr;
-
-            gap: 10px;
-
-            align-items: center;
-
-            padding:
-                13px 18px;
-
-            border-bottom:
-                1px solid #f2f4f7;
-
-        }
-
-
-        .order-row:last-child {
-
-            border-bottom: none;
-
-        }
-
-
-        .order-id {
-
-            color: #101828;
-
-            font-size: 10px;
-
-            font-weight: 800;
-
-        }
-
-
-        .order-customer {
-
-            color: #667085;
-
-            font-size: 9px;
-
-        }
-
-
-        .order-price {
-
-            color: #101828;
-
-            font-size: 10px;
-
-            font-weight: 800;
-
-        }
-
-
-        .status {
-
-            display: inline-block;
-
-            padding:
-                5px 7px;
-
-            border-radius: 15px;
-
-            font-size: 7px;
-
-            font-weight: 800;
-
-            background: #eef5ff;
-
-            color: #1877f2;
-
-        }
-
-
-        .status.delivered {
-
-            background: #ecfdf3;
-
-            color: #12b76a;
-
-        }
-
-
-        .status.processing {
-
-            background: #fffaeb;
-
-            color: #b54708;
-
-        }
-
-
-        /* =====================================================
-           QUICK ACTIONS
-        ====================================================== */
-
-        .quick-actions {
-
-            display: grid;
-
-            grid-template-columns:
-                1fr 1fr;
-
-            gap: 10px;
-
-            padding: 18px;
-
-        }
-
-
-        .quick-action {
-
-            border:
-                1px solid #eaecf0;
-
-            background: #ffffff;
-
-            border-radius: 9px;
-
-            padding: 15px 10px;
-
-            cursor: pointer;
-
-            text-align: center;
-
-        }
-
-
-        .quick-action:hover {
-
-            border-color: #1877f2;
-
-        }
-
-
-        .quick-action-icon {
-
-            font-size: 20px;
-
-            margin-bottom: 7px;
-
-        }
-
-
-        .quick-action strong {
-
-            display: block;
-
-            font-size: 10px;
-
-            color: #344054;
-
-        }
-
-
-        .quick-action span {
-
-            display: block;
-
-            margin-top: 3px;
-
-            color: #98a2b3;
-
-            font-size: 8px;
-
-        }
-
-
-        /* =====================================================
-           SALES
-        ====================================================== */
-
-        .sales-panel {
-
-            padding: 18px;
-
-        }
-
-
-        .sales-total {
-
-            margin-bottom: 15px;
-
-        }
-
-
-        .sales-total span {
-
-            display: block;
-
-            color: #667085;
-
-            font-size: 9px;
-
-        }
-
-
-        .sales-total strong {
-
-            display: block;
-
-            margin-top: 4px;
-
-            font-size: 25px;
-
-        }
-
-
-        .sales-bars {
-
-            height: 150px;
-
-            display: flex;
-
-            align-items: flex-end;
-
-            gap: 9px;
-
-            border-bottom:
-                1px solid #eaecf0;
-
-            padding:
-                0 5px;
-
-        }
-
-
-        .bar-wrap {
-
-            flex: 1;
-
-            height: 100%;
-
-            display: flex;
-
-            flex-direction: column;
-
-            justify-content: flex-end;
-
-            align-items: center;
-
-            gap: 5px;
-
-        }
-
-
-        .bar {
-
-            width: 100%;
-
-            max-width: 32px;
-
-            min-height: 4px;
-
-            background: #1877f2;
-
-            border-radius:
-                5px 5px 0 0;
-
-        }
-
-
-        .bar-label {
-
-            color: #98a2b3;
-
-            font-size: 7px;
-
-            margin-bottom: -18px;
-
-        }
-
-
-        /* =====================================================
-           TABLE
-        ====================================================== */
-
-        .table-panel {
-
-            background: #ffffff;
-
-            border:
-                1px solid #e7eaf0;
-
-            border-radius: 13px;
-
-            overflow: hidden;
-
-        }
-
-
-        .table-wrap {
-
-            overflow-x: auto;
-
-        }
-
-
-        table {
-
-            width: 100%;
-
-            border-collapse:
-                collapse;
-
-            min-width: 700px;
-
-        }
-
-
-        th {
-
-            background: #f9fafb;
-
-            color: #667085;
-
-            text-align: left;
-
-            font-size: 9px;
-
-            padding:
-                11px 14px;
-
-            border-bottom:
-                1px solid #eaecf0;
-
-        }
-
-
-        td {
-
-            padding:
-                13px 14px;
-
-            border-bottom:
-                1px solid #f2f4f7;
-
-            color: #344054;
-
-            font-size: 9px;
-
-        }
-
-
-        td strong {
-
-            color: #101828;
-
-        }
-
-
-        .table-status {
-
-            border: 0;
-
-            border-radius: 15px;
-
-            padding:
-                6px 8px;
-
-            font-size: 8px;
-
-            font-weight: 800;
-
-            background: #eef5ff;
-
-            color: #1877f2;
-
-            cursor: pointer;
-
-        }
-
-
-        /* =====================================================
-           PRODUCTS
-        ====================================================== */
-
-        .product-form {
-
-            background: #ffffff;
-
-            border:
-                1px solid #e7eaf0;
-
-            border-radius: 13px;
-
-            padding: 20px;
-
-            margin-bottom: 18px;
-
-        }
-
-
-        .product-form h2 {
-
-            margin:
-                0 0 15px;
-
-            font-size: 14px;
-
-        }
-
-
-        .form-grid {
-
-            display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
-            gap: 12px;
-
-        }
-
-
-        .form-group label {
-
-            display: block;
-
-            color: #667085;
-
-            font-size: 9px;
-
-            margin-bottom: 5px;
-
-        }
-
-
-        .form-group input,
-        .form-group select {
-
-            width: 100%;
-
-            border:
-                1px solid #d0d5dd;
-
-            border-radius: 7px;
-
-            padding: 10px;
-
-            outline: none;
-
-            font-size: 10px;
-
-        }
-
-
-        .form-group input:focus,
-        .form-group select:focus {
-
-            border-color:
-                #1877f2;
-
-            box-shadow:
-                0 0 0 3px
-                rgba(24,119,242,.08);
-
-        }
-
-
-        .form-submit {
-
-            margin-top: 14px;
-
-            border: 0;
-
-            background: #1877f2;
-
-            color: #ffffff;
-
-            padding:
-                10px 16px;
-
-            border-radius: 7px;
-
-            cursor: pointer;
-
-            font-size: 10px;
-
-            font-weight: 800;
-
-        }
-
-
-        .form-submit:hover {
-
-            opacity: .92;
-
-        }
-
-
-        .cancel-edit {
-
-            margin-top: 14px;
-
-            margin-left: 7px;
-
-            border:
-                1px solid #d0d5dd;
-
-            background: #ffffff;
-
-            color: #344054;
-
-            padding:
-                10px 16px;
-
-            border-radius: 7px;
-
-            cursor: pointer;
-
-            font-size: 10px;
-
-            font-weight: 800;
-
-        }
-
-
-        /* =====================================================
-           PRODUCT LIST
-        ====================================================== */
-
-        .product-list {
-
-            padding: 18px;
-
-        }
-
-
-        .product-row {
-
-            display: grid;
-
-            grid-template-columns:
-                55px
-                1fr
-                auto
-                auto;
-
-            gap: 12px;
-
-            align-items: center;
-
-            padding:
-                12px 0;
-
-            border-bottom:
-                1px solid #f2f4f7;
-
-        }
-
-
-        .product-row:last-child {
-
-            border-bottom: none;
-
-        }
-
-
-        .product-image {
-
-            width: 55px;
-
-            height: 55px;
-
-            border-radius: 9px;
-
-            background:
-                #f2f4f7
-                center/cover
-                no-repeat;
-
-            border:
-                1px solid #eaecf0;
-
-        }
-
-
-        .product-name {
-
-            display: block;
-
-            font-size: 11px;
-
-            font-weight: 800;
-
-            color: #101828;
-
-        }
-
-
-        .product-category {
-
-            display: block;
-
-            color: #98a2b3;
-
-            font-size: 8px;
-
-            margin-top: 4px;
-
-        }
-
-
-        .product-price {
-
-            font-size: 11px;
-
-            font-weight: 800;
-
-            color: #101828;
-
-            white-space: nowrap;
-
-        }
-
-
-        .product-actions {
-
-            display: flex;
-
-            gap: 6px;
-
-        }
-
-
-        .edit-btn,
-        .delete-btn {
-
-            border-radius: 6px;
-
-            padding:
-                7px 9px;
-
-            cursor: pointer;
-
-            font-size: 8px;
-
-            font-weight: 800;
-
-        }
-
-
-        .edit-btn {
-
-            border:
-                1px solid #d0d5dd;
-
-            background: #ffffff;
-
-            color: #344054;
-
-        }
-
-
-        .edit-btn:hover {
-
-            border-color:
-                #1877f2;
-
-            color:
-                #1877f2;
-
-        }
-
-
-        .delete-btn {
-
-            border:
-                1px solid #fecdca;
-
-            background: #fff5f4;
-
-            color: #d92d20;
-
-        }
-
-
-        .delete-btn:hover {
-
-            background:
-                #fee4e2;
-
-        }
-
-
-        .editing-banner {
-
-            display: none;
-
-            margin-bottom: 14px;
-
-            padding:
-                10px 12px;
-
-            border-radius: 8px;
-
-            background:
-                #ecfdf3;
-
-            border:
-                1px solid #abefc6;
-
-            color: #067647;
-
-            font-size: 9px;
-
-            font-weight: 700;
-
-        }
-
-
-        .editing-banner.show {
-
-            display: block;
-
-        }
-
-
-        /* =====================================================
-           USERS
-        ====================================================== */
-
-        .user-card {
-
-            background: #ffffff;
-
-            border:
-                1px solid #e7eaf0;
-
-            border-radius: 13px;
-
-            padding: 18px;
-
-        }
-
-
-        .user-empty {
-
-            padding: 50px;
-
-            text-align: center;
-
-            color: #98a2b3;
-
-            font-size: 11px;
-
-        }
-
-
-        /* =====================================================
-           TOAST
-        ====================================================== */
-
-        .toast {
-
-            position: fixed;
-
-            left: 50%;
-
-            bottom: 25px;
-
-            transform:
-                translate(-50%, 20px);
-
-            opacity: 0;
-
-            pointer-events: none;
-
-            background: #101828;
-
-            color: #ffffff;
-
-            padding:
-                11px 15px;
-
-            border-radius: 8px;
-
-            font-size: 10px;
-
-            z-index: 9999;
-
-            transition: .25s;
-
-        }
-
-
-        .toast.show {
-
-            opacity: 1;
-
-            transform:
-                translate(-50%, 0);
-
-        }
-
-
-        /* =====================================================
-           MOBILE
-        ====================================================== */
-
-        @media (max-width: 950px) {
-
-            .stats {
-
-                grid-template-columns:
-                    repeat(2, 1fr);
-
-            }
-
-
-            .dashboard-grid {
-
-                grid-template-columns: 1fr;
-
-            }
-
-        }
-
-
-        @media (max-width: 700px) {
-
-            .sidebar {
-
-                width: 68px;
-
-                padding:
-                    15px 8px;
-
-            }
-
-
-            .admin-logo {
-
-                justify-content: center;
-
-                padding:
-                    0 0 18px;
-
-            }
-
-
-            .admin-logo span {
-
-                display: none;
-
-            }
-
-
-            .nav-title,
-            .nav-item span,
-            .nav-badge {
-
-                display: none;
-
-            }
-
-
-            .nav-item {
-
-                justify-content: center;
-
-                padding:
-                    12px 5px;
-
-            }
-
-
-            .nav-icon {
-
-                width: auto;
-
-                font-size: 17px;
-
-            }
-
-
-            .main {
-
-                margin-left: 68px;
-
-            }
-
-
-            .top-header {
-
-                padding:
-                    0 12px;
-
-            }
-
-
-            .page-title {
-
-                font-size: 14px;
-
-            }
-
-
-            .admin-user-info,
-            .view-site {
-
-                display: none;
-
-            }
-
-
-            .content {
-
-                padding:
-                    15px 12px;
-
-            }
-
-
-            .welcome h1 {
-
-                font-size: 21px;
-
-            }
-
-
-            .stats {
-
-                gap: 9px;
-
-            }
-
-
-            .stat {
-
-                padding: 13px;
-
-            }
-
-
-            .stat-value {
-
-                font-size: 19px;
-
-            }
-
-
-            .form-grid {
-
-                grid-template-columns: 1fr;
-
-            }
-
-
-            .product-row {
-
-                grid-template-columns:
-                    45px
-                    1fr;
-
-                gap: 10px;
-
-            }
-
-
-            .product-image {
-
-                width: 45px;
-
-                height: 45px;
-
-            }
-
-
-            .product-price {
-
-                grid-column: 2;
-
-            }
-
-
-            .product-actions {
-
-                grid-column: 2;
-
-            }
-
-
-            .cancel-edit {
-
-                margin-left: 0;
-
-            }
-
-        }
-
-    </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#ff6b00">
+<meta name="description" content="Shopping Mela - Modern AI Shopping Platform">
+<title>Shopping Mela | AI Shopping</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --primary:#ff6b00;
+    --primary-dark:#e85c00;
+    --dark:#111827;
+    --text:#1f2937;
+    --muted:#6b7280;
+    --bg:#f5f6f8;
+    --white:#fff;
+    --border:#e5e7eb;
+    --success:#16a34a;
+    --danger:#dc2626;
+    --shadow:0 8px 25px rgba(0,0,0,.08);
+}
+
+body{
+    font-family:Arial,"Noto Sans Bengali",sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    padding-bottom:80px;
+}
+
+button,input{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:var(--white);
+    border-bottom:1px solid var(--border);
+}
+
+.topbar{
+    max-width:1200px;
+    margin:auto;
+    padding:14px 20px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:900;
+    color:var(--primary);
+    white-space:nowrap;
+}
+
+.logo span{
+    color:var(--dark);
+}
+
+.search-box{
+    flex:1;
+    position:relative;
+}
+
+.search-box input{
+    width:100%;
+    border:1px solid var(--border);
+    background:#f9fafb;
+    padding:13px 48px 13px 18px;
+    border-radius:30px;
+    outline:none;
+}
+
+.search-box input:focus{
+    border-color:var(--primary);
+}
+
+.search-btn{
+    position:absolute;
+    right:7px;
+    top:6px;
+    width:38px;
+    height:38px;
+    border:none;
+    border-radius:50%;
+    background:var(--primary);
+    color:white;
+}
+
+.header-actions{
+    display:flex;
+    gap:8px;
+}
+
+.icon-btn{
+    border:1px solid var(--border);
+    background:white;
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    position:relative;
+}
+
+.badge{
+    position:absolute;
+    top:-4px;
+    right:-3px;
+    background:var(--danger);
+    color:white;
+    width:19px;
+    height:19px;
+    border-radius:50%;
+    font-size:11px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.offline{
+    display:none;
+    background:#fff3cd;
+    color:#856404;
+    text-align:center;
+    padding:8px;
+    font-size:13px;
+}
+
+.offline.show{
+    display:block;
+}
+
+.container{
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+
+.hero{
+    background:linear-gradient(135deg,#ff6b00,#ff9d42);
+    color:white;
+    border-radius:22px;
+    padding:40px;
+    min-height:260px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+}
+
+.hero-content{
+    max-width:600px;
+}
+
+.hero h1{
+    font-size:42px;
+    margin-bottom:12px;
+}
+
+.hero p{
+    font-size:17px;
+    opacity:.95;
+    margin-bottom:20px;
+}
+
+.hero-btn{
+    border:none;
+    background:white;
+    color:var(--primary);
+    padding:13px 22px;
+    border-radius:10px;
+    font-weight:700;
+}
+
+.hero-icon{
+    font-size:120px;
+    opacity:.25;
+}
+
+.section{
+    margin-top:30px;
+}
+
+.section-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:15px;
+}
+
+.section-head h2{
+    font-size:24px;
+}
+
+.view-all{
+    color:var(--primary);
+    font-weight:700;
+    background:none;
+    border:none;
+}
+
+.categories{
+    display:grid;
+    grid-template-columns:repeat(8,1fr);
+    gap:12px;
+}
+
+.category{
+    background:white;
+    border:1px solid var(--border);
+    border-radius:15px;
+    padding:15px 8px;
+    text-align:center;
+    transition:.2s;
+}
+
+.category:hover{
+    transform:translateY(-3px);
+    box-shadow:var(--shadow);
+}
+
+.category-icon{
+    font-size:30px;
+    margin-bottom:8px;
+}
+
+.category-name{
+    font-size:13px;
+    font-weight:700;
+}
+
+.products{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:16px;
+}
+
+.product{
+    background:white;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 4px 15px rgba(0,0,0,.05);
+    position:relative;
+}
+
+.product-img{
+    height:180px;
+    background:linear-gradient(135deg,#f3f4f6,#e5e7eb);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:70px;
+}
+
+.product-body{
+    padding:14px;
+}
+
+.product-title{
+    font-size:15px;
+    font-weight:700;
+    line-height:1.4;
+    min-height:42px;
+}
+
+.rating{
+    margin:8px 0;
+    color:#f59e0b;
+    font-size:13px;
+}
+
+.price{
+    font-size:19px;
+    font-weight:900;
+    color:var(--primary);
+}
+
+.old-price{
+    color:#9ca3af;
+    text-decoration:line-through;
+    font-size:12px;
+    margin-left:5px;
+}
+
+.product-actions{
+    display:flex;
+    gap:7px;
+    margin-top:12px;
+}
+
+.add-cart{
+    flex:1;
+    border:none;
+    background:var(--primary);
+    color:white;
+    padding:9px;
+    border-radius:8px;
+    font-weight:700;
+}
+
+.wish{
+    width:40px;
+    border:1px solid var(--border);
+    background:white;
+    border-radius:8px;
+}
+
+.discount{
+    position:absolute;
+    top:10px;
+    left:10px;
+    background:var(--danger);
+    color:white;
+    padding:5px 8px;
+    border-radius:7px;
+    font-size:11px;
+    font-weight:700;
+}
+
+.ai-card{
+    background:#111827;
+    color:white;
+    border-radius:20px;
+    padding:25px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+}
+
+.ai-card h2{
+    margin-bottom:8px;
+}
+
+.ai-card p{
+    color:#d1d5db;
+}
+
+.ai-btn{
+    border:none;
+    background:var(--primary);
+    color:white;
+    padding:13px 20px;
+    border-radius:10px;
+    font-weight:700;
+    white-space:nowrap;
+}
+
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    height:65px;
+    background:white;
+    border-top:1px solid var(--border);
+    display:none;
+    z-index:2000;
+    justify-content:space-around;
+    align-items:center;
+}
+
+.nav-item{
+    background:none;
+    border:none;
+    color:#6b7280;
+    font-size:11px;
+    text-align:center;
+}
+
+.nav-item.active{
+    color:var(--primary);
+    font-weight:700;
+}
+
+.nav-icon{
+    display:block;
+    font-size:21px;
+    margin-bottom:2px;
+}
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    z-index:3000;
+    align-items:flex-end;
+    justify-content:center;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    background:white;
+    width:min(600px,100%);
+    max-height:90vh;
+    overflow:auto;
+    border-radius:22px 22px 0 0;
+    padding:25px;
+    animation:slideUp .25s ease;
+}
+
+@keyframes slideUp{
+    from{transform:translateY(100%);}
+    to{transform:translateY(0);}
+}
+
+.modal-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.close{
+    border:none;
+    background:#f3f4f6;
+    width:36px;
+    height:36px;
+    border-radius:50%;
+}
+
+.cart-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.cart-img{
+    width:55px;
+    height:55px;
+    background:#f3f4f6;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:28px;
+}
+
+.cart-info{
+    flex:1;
+}
+
+.cart-total{
+    margin-top:18px;
+    padding-top:15px;
+    border-top:2px solid var(--dark);
+    display:flex;
+    justify-content:space-between;
+    font-weight:900;
+    font-size:20px;
+}
+
+.checkout-btn{
+    width:100%;
+    margin-top:15px;
+    padding:14px;
+    border:none;
+    background:var(--primary);
+    color:white;
+    border-radius:10px;
+    font-weight:800;
+}
+
+.chat{
+    position:fixed;
+    right:20px;
+    bottom:85px;
+    z-index:1800;
+}
+
+.chat-button{
+    width:60px;
+    height:60px;
+    border:none;
+    border-radius:50%;
+    background:var(--primary);
+    color:white;
+    font-size:26px;
+    box-shadow:0 8px 25px rgba(0,0,0,.25);
+}
+
+.chat-box{
+    display:none;
+    position:absolute;
+    right:0;
+    bottom:72px;
+    width:330px;
+    height:460px;
+    background:white;
+    border-radius:18px;
+    box-shadow:0 15px 50px rgba(0,0,0,.2);
+    overflow:hidden;
+}
+
+.chat-box.show{
+    display:flex;
+    flex-direction:column;
+}
+
+.chat-head{
+    background:var(--dark);
+    color:white;
+    padding:15px;
+    display:flex;
+    justify-content:space-between;
+}
+
+.chat-messages{
+    flex:1;
+    padding:15px;
+    overflow:auto;
+    background:#f8fafc;
+}
+
+.message{
+    max-width:85%;
+    padding:10px 12px;
+    border-radius:12px;
+    margin-bottom:10px;
+    font-size:14px;
+}
+
+.bot{
+    background:white;
+}
+
+.user{
+    background:var(--primary);
+    color:white;
+    margin-left:auto;
+}
+
+.chat-input{
+    display:flex;
+    border-top:1px solid var(--border);
+}
+
+.chat-input input{
+    flex:1;
+    border:none;
+    outline:none;
+    padding:12px;
+}
+
+.chat-input button{
+    width:50px;
+    border:none;
+    background:var(--primary);
+    color:white;
+}
+
+.empty{
+    text-align:center;
+    padding:40px;
+    color:var(--muted);
+}
+
+.toast{
+    position:fixed;
+    left:50%;
+    bottom:90px;
+    transform:translateX(-50%) translateY(20px);
+    background:#111827;
+    color:white;
+    padding:12px 18px;
+    border-radius:10px;
+    opacity:0;
+    pointer-events:none;
+    transition:.3s;
+    z-index:5000;
+}
+
+.toast.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+}
+
+@media(max-width:900px){
+    .categories{
+        grid-template-columns:repeat(4,1fr);
+    }
+
+    .products{
+        grid-template-columns:repeat(3,1fr);
+    }
+
+    .hero h1{
+        font-size:32px;
+    }
+}
+
+@media(max-width:600px){
+    body{
+        padding-bottom:75px;
+    }
+
+    .topbar{
+        padding:10px;
+        gap:8px;
+    }
+
+    .logo{
+        font-size:19px;
+    }
+
+    .header-actions .icon-btn:nth-child(1){
+        display:none;
+    }
+
+    .container{
+        padding:12px;
+    }
+
+    .hero{
+        padding:25px 20px;
+        min-height:220px;
+    }
+
+    .hero h1{
+        font-size:28px;
+    }
+
+    .hero-icon{
+        font-size:70px;
+    }
+
+    .categories{
+        grid-template-columns:repeat(4,1fr);
+        gap:8px;
+    }
+
+    .category{
+        padding:10px 4px;
+    }
+
+    .category-icon{
+        font-size:25px;
+    }
+
+    .products{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
+    }
+
+    .product-img{
+        height:145px;
+        font-size:55px;
+    }
+
+    .product-body{
+        padding:10px;
+    }
+
+    .product-title{
+        font-size:13px;
+    }
+
+    .price{
+        font-size:17px;
+    }
+
+    .ai-card{
+        display:block;
+    }
+
+    .ai-btn{
+        margin-top:15px;
+        width:100%;
+    }
+
+    .bottom-nav{
+        display:flex;
+    }
+
+    .chat{
+        bottom:85px;
+        right:12px;
+    }
+
+    .chat-box{
+        width:calc(100vw - 24px);
+        right:-5px;
+    }
+}
+</style>
 </head>
-
 
 <body>
 
+<header class="header">
 
-<!-- =====================================================
-     SIDEBAR
-====================================================== -->
+    <div class="topbar">
 
-<aside class="sidebar">
-
-
-    <div class="admin-logo">
-
-        <div class="admin-logo-icon">
-            🛍️
+        <div class="logo">
+            Shopping <span>Mela</span>
         </div>
 
-        <span>
-            Shopping Mela
-        </span>
+        <div class="search-box">
+            <input
+                id="searchInput"
+                type="search"
+                placeholder="পণ্য খুঁজুন..."
+                autocomplete="off"
+            >
+            <button class="search-btn" onclick="searchProducts()">🔎</button>
+        </div>
+
+        <div class="header-actions">
+
+            <button class="icon-btn" onclick="startVoiceSearch()" title="Voice Search">
+                🎙️
+            </button>
+
+            <button class="icon-btn" onclick="openWishlist()" title="Wishlist">
+                ❤️
+                <span class="badge" id="wishBadge">0</span>
+            </button>
+
+            <button class="icon-btn" onclick="openCart()" title="Cart">
+                🛒
+                <span class="badge" id="cartBadge">0</span>
+            </button>
+
+        </div>
 
     </div>
 
+    <div class="offline" id="offlineBar">
+        🟠 আপনি Offline আছেন — কিছু feature সাময়িকভাবে unavailable।
+    </div>
 
-    <nav class="admin-nav">
+</header>
 
 
-        <div class="nav-title">
-            Dashboard
-        </div>
+<main class="container">
 
+    <!-- HERO -->
 
-        <button
-            class="nav-item active"
-            onclick="
-                showSection(
-                    'dashboard',
-                    this
-                )
-            "
-        >
+    <section class="hero">
 
-            <span class="nav-icon">
-                📊
-            </span>
+        <div class="hero-content">
 
-            <span>
-                Dashboard
-            </span>
+            <h1>আপনার Smart Shopping শুরু করুন 🛍️</h1>
 
-        </button>
+            <p>
+                AI Search, Voice Search, Personalized Recommendation
+                এবং সহজ Shopping Experience।
+            </p>
 
-
-        <button
-            class="nav-item"
-            onclick="
-                showSection(
-                    'orders',
-                    this
-                )
-            "
-        >
-
-            <span class="nav-icon">
-                📦
-            </span>
-
-            <span>
-                Orders
-            </span>
-
-            <span
-                class="nav-badge"
-                id="sidebarOrderCount"
-            >
-                0
-            </span>
-
-        </button>
-
-
-        <button
-            class="nav-item"
-            onclick="
-                showSection(
-                    'products',
-                    this
-                )
-            "
-        >
-
-            <span class="nav-icon">
-                🛍️
-            </span>
-
-            <span>
-                Products
-            </span>
-
-        </button>
-
-
-        <button
-            class="nav-item"
-            onclick="
-                showSection(
-                    'users',
-                    this
-                )
-            "
-        >
-
-            <span class="nav-icon">
-                👥
-            </span>
-
-            <span>
-                Users
-            </span>
-
-        </button>
-
-
-        <div
-            class="nav-title"
-            style="margin-top:18px;"
-        >
-            Website
-        </div>
-
-
-        <button
-            class="nav-item"
-            onclick="
-                window.location.href='index.html'
-            "
-        >
-
-            <span class="nav-icon">
-                🏠
-            </span>
-
-            <span>
-                Visit Website
-            </span>
-
-        </button>
-
-
-        <!-- =================================================
-             1.33 — LOGOUT
-        ================================================== -->
-
-        <button
-            class="nav-item"
-            onclick="adminLogout()"
-            style="
-                margin-top:25px;
-                color:#ffb4ab;
-            "
-        >
-
-            <span class="nav-icon">
-                🚪
-            </span>
-
-            <span>
-                Logout
-            </span>
-
-        </button>
-
-
-    </nav>
-
-</aside>
-
-
-
-<!-- =====================================================
-     MAIN
-====================================================== -->
-
-<div class="main">
-
-
-    <header class="top-header">
-
-
-        <div
-            class="page-title"
-            id="pageTitle"
-        >
-            Dashboard
-        </div>
-
-
-        <div class="header-right">
-
-
-            <a
-                href="index.html"
-                class="view-site"
-            >
-                View Website ↗
-            </a>
-
-
-            <div class="admin-user">
-
-
-                <div class="admin-avatar">
-                    A
-                </div>
-
-
-                <!-- =================================================
-                     1.34 — VERIFIED ADMIN
-                ================================================== -->
-
-                <div class="admin-user-info">
-
-                    <span class="admin-name">
-
-                        Administrator
-
-                        <span
-                            class="verified-badge"
-                            title="Verified Admin"
-                            aria-label="Verified Admin"
-                        >
-                            ✓
-                        </span>
-
-                    </span>
-
-                    <small>
-                        Super Admin
-                    </small>
-
-                </div>
-
-
-            </div>
-
+            <button class="hero-btn" onclick="scrollToProducts()">
+                এখনই Shopping করুন →
+            </button>
 
         </div>
 
+        <div class="hero-icon">
+            🛒
+        </div>
 
-    </header>
-
-
-
-    <main class="content">
-
-
-        <!-- =================================================
-             DASHBOARD
-        ================================================== -->
-
-        <section
-            class="section active"
-            id="dashboard"
-        >
+    </section>
 
 
-            <div class="welcome">
+    <!-- CATEGORIES -->
 
-                <h1>
-                    Welcome back, Admin 👋
-                </h1>
+    <section class="section">
+
+        <div class="section-head">
+            <h2>ক্যাটাগরি</h2>
+            <button class="view-all" onclick="showToast('সব ক্যাটাগরি শীঘ্রই আসছে')">
+                সব দেখুন →
+            </button>
+        </div>
+
+        <div class="categories">
+
+            <div class="category" onclick="filterCategory('fashion')">
+                <div class="category-icon">👕</div>
+                <div class="category-name">Fashion</div>
+            </div>
+
+            <div class="category" onclick="filterCategory('electronics')">
+                <div class="category-icon">📱</div>
+                <div class="category-name">Electronics</div>
+            </div>
+
+            <div class="category" onclick="filterCategory('beauty')">
+                <div class="category-icon">💄</div>
+                <div class="category-name">Beauty</div>
+            </div>
+
+            <div class="category" onclick="filterCategory('home')">
+                <div class="category-icon">🏠</div>
+                <div class="category-name">Home</div>
+            </div>
+
+            <div class="category" onclick="filterCategory('shoes')">
+                <div class="category-icon">👟</div>
+                <div class="category-name">Shoes</div>
+            </div>
+
+            <div class="category" onclick="filterCategory('bags')">
+                <div class="category-icon">👜</div>
+                <div class="category-name">Bags</div>
+            </div>
+
+            <div class="category" onclick="filterCategory('kids')">
+                <div class="category-icon">🧸</div>
+                <div class="category-name">Kids</div>
+            </div>
+
+            <div class="category" onclick="filterCategory('gift')">
+                <div class="category-icon">🎁</div>
+                <div class="category-name">Gift</div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- AI -->
+
+    <section class="section">
+
+        <div class="ai-card">
+
+            <div>
+                <h2>🤖 AI Shopping Assistant</h2>
 
                 <p>
-                    Shopping Mela-এর আজকের
-                    overview এখানে দেখতে পারবেন।
+                    আপনার বাজেট, পছন্দ ও প্রয়োজন লিখে product খুঁজে নিন।
                 </p>
-
             </div>
 
+            <button class="ai-btn" onclick="toggleChat()">
+                AI-এর সাথে কথা বলুন
+            </button>
 
+        </div>
 
-            <div class="stats">
+    </section>
 
 
-                <div class="stat">
+    <!-- PRODUCTS -->
 
-                    <div class="stat-top">
+    <section class="section" id="productSection">
 
-                        <div class="stat-icon">
-                            📦
-                        </div>
+        <div class="section-head">
 
-                        <span class="stat-change">
-                            Live
-                        </span>
+            <h2 id="productHeading">
+                ✨ Recommended For You
+            </h2>
 
-                    </div>
+            <button class="view-all" onclick="resetProducts()">
+                Reset
+            </button>
 
-                    <div class="stat-label">
-                        Total Orders
-                    </div>
+        </div>
 
-                    <div
-                        class="stat-value"
-                        id="dashOrders"
-                    >
-                        0
-                    </div>
+        <div class="products" id="products"></div>
 
-                </div>
+    </section>
 
+</main>
 
 
-                <div class="stat">
+<!-- BOTTOM NAV -->
 
-                    <div class="stat-top">
+<nav class="bottom-nav">
 
-                        <div class="stat-icon">
-                            💰
-                        </div>
+    <button class="nav-item active" onclick="goHome()">
+        <span class="nav-icon">🏠</span>
+        Home
+    </button>
 
-                        <span class="stat-change">
-                            Sales
-                        </span>
+    <button class="nav-item" onclick="focusSearch()">
+        <span class="nav-icon">🔎</span>
+        Search
+    </button>
 
-                    </div>
+    <button class="nav-item" onclick="openCart()">
+        <span class="nav-icon">🛒</span>
+        Cart
+    </button>
 
-                    <div class="stat-label">
-                        Total Sales
-                    </div>
+    <button class="nav-item" onclick="openWishlist()">
+        <span class="nav-icon">❤️</span>
+        Wishlist
+    </button>
 
-                    <div
-                        class="stat-value"
-                        id="dashSales"
-                    >
-                        ৳0
-                    </div>
+    <button class="nav-item" onclick="showAccount()">
+        <span class="nav-icon">👤</span>
+        Account
+    </button>
 
-                </div>
+</nav>
 
 
+<!-- CART MODAL -->
 
-                <div class="stat">
+<div class="modal" id="cartModal">
 
-                    <div class="stat-top">
+    <div class="modal-box">
 
-                        <div class="stat-icon">
-                            🚚
-                        </div>
+        <div class="modal-head">
 
-                        <span class="stat-change">
-                            Active
-                        </span>
+            <h2>🛒 My Cart</h2>
 
-                    </div>
+            <button class="close" onclick="closeModal('cartModal')">
+                ✕
+            </button>
 
-                    <div class="stat-label">
-                        Active Delivery
-                    </div>
+        </div>
 
-                    <div
-                        class="stat-value"
-                        id="dashDelivery"
-                    >
-                        0
-                    </div>
+        <div id="cartItems"></div>
 
-                </div>
+        <div class="cart-total">
 
+            <span>Total</span>
 
+            <span id="cartTotal">
+                ৳0
+            </span>
 
-                <div class="stat">
+        </div>
 
-                    <div class="stat-top">
+        <button class="checkout-btn" onclick="checkout()">
+            Checkout →
+        </button>
 
-                        <div class="stat-icon">
-                            👥
-                        </div>
-
-                        <span class="stat-change">
-                            Users
-                        </span>
-
-                    </div>
-
-                    <div class="stat-label">
-                        Registered Users
-                    </div>
-
-                    <div
-                        class="stat-value"
-                        id="dashUsers"
-                    >
-                        0
-                    </div>
-
-                </div>
-
-
-            </div>
-
-
-
-            <div class="dashboard-grid">
-
-
-                <div class="panel">
-
-
-                    <div class="panel-header">
-
-                        <h2>
-                            Recent Orders
-                        </h2>
-
-                        <button
-                            onclick="
-                                showSectionById(
-                                    'orders'
-                                )
-                            "
-                        >
-                            View All
-                        </button>
-
-                    </div>
-
-
-                    <div id="recentOrders">
-                    </div>
-
-
-                </div>
-
-
-
-                <div class="panel">
-
-
-                    <div class="panel-header">
-
-                        <h2>
-                            Quick Actions
-                        </h2>
-
-                    </div>
-
-
-                    <div class="quick-actions">
-
-
-                        <button
-                            class="quick-action"
-                            onclick="
-                                showSectionById(
-                                    'orders'
-                                )
-                            "
-                        >
-
-                            <div class="quick-action-icon">
-                                📦
-                            </div>
-
-                            <strong>
-                                Manage Orders
-                            </strong>
-
-                            <span>
-                                Status update করুন
-                            </span>
-
-                        </button>
-
-
-                        <button
-                            class="quick-action"
-                            onclick="
-                                showSectionById(
-                                    'products'
-                                )
-                            "
-                        >
-
-                            <div class="quick-action-icon">
-                                ➕
-                            </div>
-
-                            <strong>
-                                Add Product
-                            </strong>
-
-                            <span>
-                                নতুন product যোগ করুন
-                            </span>
-
-                        </button>
-
-
-                        <button
-                            class="quick-action"
-                            onclick="
-                                showSectionById(
-                                    'users'
-                                )
-                            "
-                        >
-
-                            <div class="quick-action-icon">
-                                👥
-                            </div>
-
-                            <strong>
-                                Users
-                            </strong>
-
-                            <span>
-                                User overview
-                            </span>
-
-                        </button>
-
-
-                        <button
-                            class="quick-action"
-                            onclick="
-                                window.location.href='index.html'
-                            "
-                        >
-
-                            <div class="quick-action-icon">
-                                🌐
-                            </div>
-
-                            <strong>
-                                Website
-                            </strong>
-
-                            <span>
-                                Live website
-                            </span>
-
-                        </button>
-
-
-                    </div>
-
-
-                </div>
-
-
-            </div>
-
-
-
-            <div class="panel">
-
-
-                <div class="panel-header">
-
-                    <h2>
-                        Sales Overview
-                    </h2>
-
-                    <span
-                        style="
-                            color:#98a2b3;
-                            font-size:9px;
-                        "
-                    >
-                        Last 7 Orders
-                    </span>
-
-                </div>
-
-
-                <div class="sales-panel">
-
-
-                    <div class="sales-total">
-
-                        <span>
-                            Total Order Value
-                        </span>
-
-                        <strong
-                            id="salesOverviewTotal"
-                        >
-                            ৳0
-                        </strong>
-
-                    </div>
-
-
-                    <div
-                        class="sales-bars"
-                        id="salesBars"
-                    >
-                    </div>
-
-
-                </div>
-
-
-            </div>
-
-
-        </section>
-
-
-
-        <!-- =================================================
-             ORDERS
-        ================================================== -->
-
-        <section
-            class="section"
-            id="orders"
-        >
-
-
-            <div class="welcome">
-
-                <h1>
-                    Orders
-                </h1>
-
-                <p>
-                    সব customer orders এখান থেকে
-                    manage করুন।
-                </p>
-
-            </div>
-
-
-            <div class="table-panel">
-
-
-                <div class="panel-header">
-
-                    <h2>
-                        All Orders
-                    </h2>
-
-                    <button
-                        onclick="renderAll()"
-                    >
-                        Refresh
-                    </button>
-
-                </div>
-
-
-                <div class="table-wrap">
-
-
-                    <table>
-
-
-                        <thead>
-
-                            <tr>
-
-                                <th>
-                                    Order ID
-                                </th>
-
-                                <th>
-                                    Customer
-                                </th>
-
-                                <th>
-                                    Mobile
-                                </th>
-
-                                <th>
-                                    Total
-                                </th>
-
-                                <th>
-                                    Date
-                                </th>
-
-                                <th>
-                                    Status
-                                </th>
-
-                            </tr>
-
-                        </thead>
-
-
-                        <tbody
-                            id="ordersTable"
-                        >
-                        </tbody>
-
-
-                    </table>
-
-
-                </div>
-
-
-            </div>
-
-
-        </section>
-
-
-
-        <!-- =================================================
-             PRODUCTS
-        ================================================== -->
-
-        <section
-            class="section"
-            id="products"
-        >
-
-
-            <div class="welcome">
-
-                <h1>
-                    Products
-                </h1>
-
-                <p>
-                    Product add, edit এবং delete
-                    এখান থেকে manage করুন।
-                </p>
-
-            </div>
-
-
-            <div class="product-form">
-
-
-                <h2 id="productFormTitle">
-                    ➕ Add New Product
-                </h2>
-
-
-                <div
-                    class="editing-banner"
-                    id="editingBanner"
-                >
-                    ✏️ আপনি এখন product edit করছেন।
-                    পরিবর্তন শেষে Update Product চাপুন।
-                </div>
-
-
-                <div class="form-grid">
-
-
-                    <div class="form-group">
-
-                        <label>
-                            Product Name
-                        </label>
-
-                        <input
-                            type="text"
-                            id="productName"
-                            placeholder="Product name"
-                        >
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label>
-                            Price
-                        </label>
-
-                        <input
-                            type="number"
-                            id="productPrice"
-                            placeholder="৳"
-                            min="1"
-                        >
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label>
-                            Category
-                        </label>
-
-                        <select
-                            id="productCategory"
-                        >
-
-                            <option value="Fashion">
-                                Fashion
-                            </option>
-
-                            <option value="Beauty">
-                                Beauty
-                            </option>
-
-                            <option value="Electronics">
-                                Electronics
-                            </option>
-
-                            <option value="Food">
-                                Food
-                            </option>
-
-                            <option value="Home">
-                                Home
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <div class="form-group">
-
-                        <label>
-                            Image URL
-                        </label>
-
-                        <input
-                            type="text"
-                            id="productImage"
-                            placeholder="https://..."
-                        >
-
-                    </div>
-
-
-                </div>
-
-
-                <button
-                    class="form-submit"
-                    id="productSubmitButton"
-                    onclick="addProduct()"
-                >
-                    Add Product
-                </button>
-
-
-                <button
-                    class="cancel-edit"
-                    id="cancelEditButton"
-                    onclick="cancelProductEdit()"
-                    style="display:none;"
-                >
-                    Cancel Edit
-                </button>
-
-
-            </div>
-
-
-
-            <div class="panel">
-
-
-                <div class="panel-header">
-
-                    <h2>
-                        Saved Products
-                    </h2>
-
-                    <span
-                        id="productCountLabel"
-                        style="
-                            color:#98a2b3;
-                            font-size:9px;
-                        "
-                    >
-                        0 Products
-                    </span>
-
-                </div>
-
-
-                <div
-                    class="product-list"
-                    id="productsList"
-                >
-                </div>
-
-
-            </div>
-
-
-        </section>
-
-
-
-        <!-- =================================================
-             USERS
-        ================================================== -->
-
-        <section
-            class="section"
-            id="users"
-        >
-
-
-            <div class="welcome">
-
-                <h1>
-                    Users
-                </h1>
-
-                <p>
-                    Registered customer information
-                    overview।
-                </p>
-
-            </div>
-
-
-            <div class="user-card">
-
-
-                <div id="usersList">
-                </div>
-
-
-            </div>
-
-
-        </section>
-
-
-    </main>
-
+    </div>
 
 </div>
 
 
+<!-- WISHLIST MODAL -->
 
-<!-- =====================================================
-     TOAST
-====================================================== -->
+<div class="modal" id="wishModal">
 
-<div
-    class="toast"
-    id="toast"
->
+    <div class="modal-box">
+
+        <div class="modal-head">
+
+            <h2>❤️ Wishlist</h2>
+
+            <button class="close" onclick="closeModal('wishModal')">
+                ✕
+            </button>
+
+        </div>
+
+        <div id="wishItems"></div>
+
+    </div>
+
 </div>
 
+
+<!-- ACCOUNT MODAL -->
+
+<div class="modal" id="accountModal">
+
+    <div class="modal-box">
+
+        <div class="modal-head">
+
+            <h2>👤 My Account</h2>
+
+            <button class="close" onclick="closeModal('accountModal')">
+                ✕
+            </button>
+
+        </div>
+
+        <div class="empty">
+
+            <div style="font-size:55px">👤</div>
+
+            <h3>Shopping Mela Account</h3>
+
+            <p style="margin-top:10px">
+                Orders, Rewards, Addresses, Payments এবং Settings
+                এখানে থাকবে।
+            </p>
+
+            <button class="checkout-btn" onclick="showToast('Login system backend-এর সাথে connect করতে হবে')">
+                Login / Register
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- AI CHAT -->
+
+<div class="chat">
+
+    <div class="chat-box" id="chatBox">
+
+        <div class="chat-head">
+
+            <strong>🤖 Shopping AI</strong>
+
+            <button
+                style="background:none;border:none;color:white"
+                onclick="toggleChat()">
+                ✕
+            </button>
+
+        </div>
+
+        <div class="chat-messages" id="chatMessages">
+
+            <div class="message bot">
+                👋 আসসালামু আলাইকুম! আমি Shopping Mela AI।
+                <br><br>
+                আপনার budget বা প্রয়োজন লিখুন।
+                যেমন:
+                <br>
+                "২০০০ টাকার মধ্যে একটা ভালো ব্যাগ চাই"
+            </div>
+
+        </div>
+
+        <div class="chat-input">
+
+            <input
+                id="chatInput"
+                placeholder="আপনার প্রশ্ন লিখুন..."
+                onkeydown="handleChatKey(event)"
+            >
+
+            <button onclick="sendChat()">
+                ➤
+            </button>
+
+        </div>
+
+    </div>
+
+    <button class="chat-button" onclick="toggleChat()">
+        🤖
+    </button>
+
+</div>
+
+
+<div class="toast" id="toast"></div>
 
 
 <script>
 
+/* =========================================
+   PRODUCT DATABASE - DEMO
+========================================= */
 
-/* =====================================================
-   1.38 — GLOBAL DATA
-===================================================== */
+const products = [
 
-let orders = [];
+    {
+        id:1,
+        title:"Premium Black Casual Shirt",
+        category:"fashion",
+        price:1290,
+        oldPrice:1690,
+        rating:4.7,
+        icon:"👕",
+        discount:"24%"
+    },
 
-let products = [];
+    {
+        id:2,
+        title:"Smart Watch Series X",
+        category:"electronics",
+        price:2499,
+        oldPrice:3299,
+        rating:4.6,
+        icon:"⌚",
+        discount:"24%"
+    },
 
-let users = [];
+    {
+        id:3,
+        title:"Ladies Premium Handbag",
+        category:"bags",
+        price:1490,
+        oldPrice:1990,
+        rating:4.8,
+        icon:"👜",
+        discount:"25%"
+    },
 
-let editingProductId = null;
+    {
+        id:4,
+        title:"Wireless Bluetooth Earbuds",
+        category:"electronics",
+        price:1890,
+        oldPrice:2390,
+        rating:4.5,
+        icon:"🎧",
+        discount:"21%"
+    },
 
+    {
+        id:5,
+        title:"Elegant Three Piece",
+        category:"fashion",
+        price:2190,
+        oldPrice:2890,
+        rating:4.8,
+        icon:"👗",
+        discount:"24%"
+    },
 
-const STATUS_NAMES = [
+    {
+        id:6,
+        title:"Running Sports Shoes",
+        category:"shoes",
+        price:2390,
+        oldPrice:2990,
+        rating:4.7,
+        icon:"👟",
+        discount:"20%"
+    },
 
-    "Order Placed",
+    {
+        id:7,
+        title:"Premium Beauty Care Set",
+        category:"beauty",
+        price:990,
+        oldPrice:1290,
+        rating:4.4,
+        icon:"💄",
+        discount:"23%"
+    },
 
-    "Order Confirmed",
+    {
+        id:8,
+        title:"Modern Home Decor Lamp",
+        category:"home",
+        price:1590,
+        oldPrice:1990,
+        rating:4.6,
+        icon:"💡",
+        discount:"20%"
+    },
 
-    "Processing",
+    {
+        id:9,
+        title:"Kids Educational Toy",
+        category:"kids",
+        price:790,
+        oldPrice:990,
+        rating:4.5,
+        icon:"🧸",
+        discount:"20%"
+    },
 
-    "Shipped",
-
-    "Out for Delivery",
-
-    "Delivered"
+    {
+        id:10,
+        title:"Special Gift Box",
+        category:"gift",
+        price:1190,
+        oldPrice:1490,
+        rating:4.9,
+        icon:"🎁",
+        discount:"20%"
+    }
 
 ];
 
 
+/* =========================================
+   STATE
+========================================= */
 
-/* =====================================================
-   LOAD DATA
-===================================================== */
+let cart = JSON.parse(localStorage.getItem("sm_cart") || "[]");
 
-function loadData() {
+let wishlist = JSON.parse(localStorage.getItem("sm_wishlist") || "[]");
 
-    try {
-
-        orders =
-            JSON.parse(
-                localStorage.getItem(
-                    "shoppingMelaOrders"
-                )
-            ) || [];
-
-    } catch {
-
-        orders = [];
-
-    }
+let currentProducts = [...products];
 
 
-    try {
+/* =========================================
+   SAVE STATE
+========================================= */
 
-        products =
-            JSON.parse(
-                localStorage.getItem(
-                    "shoppingMelaProducts"
-                )
-            ) || [];
-
-    } catch {
-
-        products = [];
-
-    }
-
-
-    try {
-
-        users =
-            JSON.parse(
-                localStorage.getItem(
-                    "shoppingMelaUsers"
-                )
-            ) || [];
-
-    } catch {
-
-        users = [];
-
-    }
-
-}
-
-
-
-/* =====================================================
-   SAVE DATA
-===================================================== */
-
-function saveOrders() {
+function saveState(){
 
     localStorage.setItem(
-        "shoppingMelaOrders",
-        JSON.stringify(
-            orders
-        )
+        "sm_cart",
+        JSON.stringify(cart)
     );
-
-}
-
-
-function saveProducts() {
 
     localStorage.setItem(
-        "shoppingMelaProducts",
-        JSON.stringify(
-            products
-        )
+        "sm_wishlist",
+        JSON.stringify(wishlist)
     );
 
+    updateBadges();
 }
 
 
+/* =========================================
+   RENDER PRODUCTS
+========================================= */
 
-/* =====================================================
-   MONEY
-===================================================== */
+function renderProducts(list = currentProducts){
 
-function money(
-    amount
-) {
+    const container =
+        document.getElementById("products");
 
-    return "৳" +
-        Number(
-            amount || 0
-        ).toLocaleString(
-            "en-BD"
-        );
+    if(!list.length){
 
-}
-
-
-
-/* =====================================================
-   ESCAPE HTML
-===================================================== */
-
-function escapeHTML(
-    value
-) {
-
-    return String(
-        value ?? ""
-    )
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-    .replace(
-        /</g,
-        "&lt;"
-    )
-    .replace(
-        />/g,
-        "&gt;"
-    )
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-    .replace(
-        /'/g,
-        "&#039;"
-    );
-
-}
-
-
-
-/* =====================================================
-   DATE
-===================================================== */
-
-function formatDate(
-    value
-) {
-
-    if (!value) {
-
-        return "—";
-
-    }
-
-
-    const date =
-        new Date(
-            value
-        );
-
-
-    if (
-        Number.isNaN(
-            date.getTime()
-        )
-    ) {
-
-        return "—";
-
-    }
-
-
-    return date.toLocaleDateString(
-        "en-BD",
-        {
-            day: "2-digit",
-            month: "short",
-            year: "numeric"
-        }
-    );
-
-}
-
-
-
-/* =====================================================
-   ORDER STEP
-===================================================== */
-
-function getStep(
-    order
-) {
-
-    return Math.max(
-        0,
-        Math.min(
-            5,
-            Number(
-                order.trackingStep ?? 0
-            )
-        )
-    );
-
-}
-
-
-
-/* =====================================================
-   STATUS CLASS
-===================================================== */
-
-function statusClass(
-    step
-) {
-
-    if (
-        step === 5
-    ) {
-
-        return "delivered";
-
-    }
-
-
-    if (
-        step === 2 ||
-        step === 3 ||
-        step === 4
-    ) {
-
-        return "processing";
-
-    }
-
-
-    return "";
-
-}
-
-
-
-/* =====================================================
-   STATS
-===================================================== */
-
-function renderStats() {
-
-    const totalSales =
-        orders.reduce(
-            (
-                sum,
-                order
-            ) =>
-                sum +
-                Number(
-                    order.total || 0
-                ),
-            0
-        );
-
-
-    const activeDelivery =
-        orders.filter(
-            order =>
-                getStep(order) >= 3 &&
-                getStep(order) < 5
-        ).length;
-
-
-    document.getElementById(
-        "dashOrders"
-    ).textContent =
-        orders.length;
-
-
-    document.getElementById(
-        "dashSales"
-    ).textContent =
-        money(
-            totalSales
-        );
-
-
-    document.getElementById(
-        "dashDelivery"
-    ).textContent =
-        activeDelivery;
-
-
-    document.getElementById(
-        "dashUsers"
-    ).textContent =
-        users.length;
-
-
-    document.getElementById(
-        "sidebarOrderCount"
-    ).textContent =
-        orders.length;
-
-
-    document.getElementById(
-        "salesOverviewTotal"
-    ).textContent =
-        money(
-            totalSales
-        );
-
-}
-
-
-
-/* =====================================================
-   RECENT ORDERS
-===================================================== */
-
-function renderRecentOrders() {
-
-    const box =
-        document.getElementById(
-            "recentOrders"
-        );
-
-
-    box.innerHTML = "";
-
-
-    const recent =
-        [...orders]
-            .reverse()
-            .slice(
-                0,
-                6
-            );
-
-
-    if (!recent.length) {
-
-        box.innerHTML = `
-
-            <div
-                style="
-                    padding:35px;
-                    text-align:center;
-                    color:#98a2b3;
-                    font-size:10px;
-                "
-            >
-                এখনো কোনো order নেই।
+        container.innerHTML = `
+            <div class="empty" style="grid-column:1/-1">
+                <div style="font-size:50px">🔎</div>
+                <h3>কোনো product পাওয়া যায়নি</h3>
+                <p>অন্য কিছু search করে দেখুন।</p>
             </div>
-
         `;
 
         return;
-
     }
 
+    container.innerHTML = list.map(product => {
 
-    recent.forEach(
-        order => {
+        const wished =
+            wishlist.includes(product.id);
 
-            const customer =
-                order.customer ||
-                {};
+        return `
 
+            <div class="product">
 
-            const step =
-                getStep(
-                    order
-                );
+                <div class="discount">
+                    -${product.discount}
+                </div>
 
+                <div class="product-img">
+                    ${product.icon}
+                </div>
 
-            const row =
-                document.createElement(
-                    "div"
-                );
+                <div class="product-body">
 
+                    <div class="product-title">
+                        ${product.title}
+                    </div>
 
-            row.className =
-                "order-row";
+                    <div class="rating">
+                        ⭐ ${product.rating}
+                    </div>
 
+                    <div>
 
-            row.innerHTML = `
+                        <span class="price">
+                            ৳${product.price.toLocaleString()}
+                        </span>
 
-                <div class="order-id">
+                        <span class="old-price">
+                            ৳${product.oldPrice.toLocaleString()}
+                        </span>
 
-                    #${escapeHTML(
-                        order.orderId ||
-                        "SM000000"
-                    )}
+                    </div>
+
+                    <div class="product-actions">
+
+                        <button
+                            class="add-cart"
+                            onclick="addToCart(${product.id})">
+                            🛒 Add
+                        </button>
+
+                        <button
+                            class="wish"
+                            onclick="toggleWishlist(${product.id})">
+                            ${wished ? "❤️" : "♡"}
+                        </button>
+
+                    </div>
 
                 </div>
 
-
-                <div class="order-customer">
-
-                    ${escapeHTML(
-                        customer.name ||
-                        "Customer"
-                    )}
-
-                </div>
-
-
-                <div class="order-price">
-
-                    ${money(
-                        order.total
-                    )}
-
-                </div>
-
-
-                <div>
-
-                    <span
-                        class="
-                            status
-                            ${statusClass(
-                                step
-                            )}
-                        "
-                    >
-                        ${STATUS_NAMES[step]}
-                    </span>
-
-                </div>
-
-            `;
-
-
-            box.appendChild(
-                row
-            );
-
-        }
-    );
-
-}
-
-
-
-/* =====================================================
-   SALES BARS
-===================================================== */
-
-function renderSalesBars() {
-
-    const box =
-        document.getElementById(
-            "salesBars"
-        );
-
-
-    box.innerHTML = "";
-
-
-    const data =
-        [...orders]
-            .reverse()
-            .slice(
-                0,
-                7
-            );
-
-
-    if (!data.length) {
-
-        for (
-            let i = 0;
-            i < 7;
-            i++
-        ) {
-
-            createBar(
-                box,
-                0,
-                i + 1
-            );
-
-        }
-
-        return;
-
-    }
-
-
-    const values =
-        data.map(
-            order =>
-                Number(
-                    order.total || 0
-                )
-        );
-
-
-    const max =
-        Math.max(
-            ...values,
-            1
-        );
-
-
-    data.forEach(
-        (
-            order,
-            index
-        ) => {
-
-            const value =
-                Number(
-                    order.total || 0
-                );
-
-
-            const height =
-                Math.max(
-                    5,
-                    (
-                        value /
-                        max
-                    ) *
-                    120
-                );
-
-
-            createBar(
-                box,
-                height,
-                index + 1
-            );
-
-        }
-    );
-
-}
-
-
-
-function createBar(
-    parent,
-    height,
-    label
-) {
-
-    const wrap =
-        document.createElement(
-            "div"
-        );
-
-
-    wrap.className =
-        "bar-wrap";
-
-
-    wrap.innerHTML = `
-
-        <div
-            class="bar"
-            style="
-                height:${height}px;
-            "
-        ></div>
-
-        <span class="bar-label">
-            ${label}
-        </span>
-
-    `;
-
-
-    parent.appendChild(
-        wrap
-    );
-
-}
-
-
-
-/* =====================================================
-   ORDERS TABLE
-===================================================== */
-
-function renderOrdersTable() {
-
-    const tbody =
-        document.getElementById(
-            "ordersTable"
-        );
-
-
-    tbody.innerHTML = "";
-
-
-    const list =
-        [...orders]
-            .map(
-                (
-                    order,
-                    index
-                ) => ({
-                    order,
-                    index
-                })
-            )
-            .reverse();
-
-
-    if (!list.length) {
-
-        tbody.innerHTML = `
-
-            <tr>
-
-                <td
-                    colspan="6"
-                    style="
-                        text-align:center;
-                        padding:45px;
-                        color:#98a2b3;
-                    "
-                >
-                    কোনো order পাওয়া যায়নি।
-                </td>
-
-            </tr>
-
+            </div>
         `;
 
-        return;
-
-    }
-
-
-    list.forEach(
-        item => {
-
-            const order =
-                item.order;
-
-
-            const index =
-                item.index;
-
-
-            const customer =
-                order.customer ||
-                {};
-
-
-            const step =
-                getStep(
-                    order
-                );
-
-
-            const tr =
-                document.createElement(
-                    "tr"
-                );
-
-
-            tr.innerHTML = `
-
-                <td>
-
-                    <strong>
-                        #${escapeHTML(
-                            order.orderId ||
-                            "SM000000"
-                        )}
-                    </strong>
-
-                </td>
-
-
-                <td>
-
-                    ${escapeHTML(
-                        customer.name ||
-                        "—"
-                    )}
-
-                </td>
-
-
-                <td>
-
-                    ${escapeHTML(
-                        customer.phone ||
-                        "—"
-                    )}
-
-                </td>
-
-
-                <td>
-
-                    ${money(
-                        order.total
-                    )}
-
-                </td>
-
-
-                <td>
-
-                    ${formatDate(
-                        order.createdAt
-                    )}
-
-                </td>
-
-
-                <td>
-
-                    <select
-                        class="table-status"
-                        onchange="
-                            changeStatus(
-                                ${index},
-                                this.value
-                            )
-                        "
-                    >
-
-                        ${
-                            STATUS_NAMES
-                                .map(
-                                    (
-                                        name,
-                                        statusIndex
-                                    ) => `
-
-                                        <option
-                                            value="${statusIndex}"
-                                            ${
-                                                statusIndex === step
-                                                ? "selected"
-                                                : ""
-                                            }
-                                        >
-                                            ${name}
-                                        </option>
-
-                                    `
-                                )
-                                .join("")
-                        }
-
-                    </select>
-
-                </td>
-
-            `;
-
-
-            tbody.appendChild(
-                tr
-            );
-
-        }
-    );
-
+    }).join("");
 }
 
 
-
-/* =====================================================
-   CHANGE ORDER STATUS
-===================================================== */
-
-function changeStatus(
-    index,
-    value
-) {
-
-    if (
-        !orders[index]
-    ) {
-
-        return;
-
-    }
-
-
-    orders[index].trackingStep =
-        Number(
-            value
-        );
-
-
-    orders[index].updatedAt =
-        new Date()
-            .toISOString();
-
-
-    saveOrders();
-
-
-    syncLastOrder(
-        orders[index]
-    );
-
-
-    renderAll();
-
-
-    showToast(
-        "Order status updated ✓"
-    );
-
-}
-
-
-
-/* =====================================================
-   SYNC LAST ORDER
-===================================================== */
-
-function syncLastOrder(
-    order
-) {
-
-    try {
-
-        const last =
-            JSON.parse(
-                localStorage.getItem(
-                    "shoppingMelaLastOrder"
-                )
-            );
-
-
-        if (
-            last &&
-            String(
-                last.orderId
-            ) ===
-            String(
-                order.orderId
-            )
-        ) {
-
-            last.trackingStep =
-                order.trackingStep;
-
-
-            last.updatedAt =
-                order.updatedAt;
-
-
-            localStorage.setItem(
-                "shoppingMelaLastOrder",
-                JSON.stringify(
-                    last
-                )
-            );
-
-        }
-
-    } catch {
-
-        /* ignore */
-
-    }
-
-}
-
-
-
-/* =====================================================
-   1.38 — ADD / UPDATE PRODUCT
-===================================================== */
-
-function addProduct() {
-
-    const name =
-        document.getElementById(
-            "productName"
-        ).value.trim();
-
-
-    const price =
-        Number(
-            document.getElementById(
-                "productPrice"
-            ).value
-        );
-
-
-    const category =
-        document.getElementById(
-            "productCategory"
-        ).value;
-
-
-    const image =
-        document.getElementById(
-            "productImage"
-        ).value.trim();
-
-
-    if (!name) {
-
-        showToast(
-            "Product name দিন"
-        );
-
-        return;
-
-    }
-
-
-    if (
-        !price ||
-        price <= 0
-    ) {
-
-        showToast(
-            "Valid product price দিন"
-        );
-
-        return;
-
-    }
-
-
-    /* =================================================
-       UPDATE EXISTING PRODUCT
-    ================================================= */
-
-    if (
-        editingProductId !== null
-    ) {
-
-        const index =
-            products.findIndex(
-                product =>
-                    String(
-                        product.id
-                    ) ===
-                    String(
-                        editingProductId
-                    )
-            );
-
-
-        if (
-            index !== -1
-        ) {
-
-            products[index] = {
-
-                ...products[index],
-
-                name,
-
-                price,
-
-                category,
-
-                image,
-
-                updatedAt:
-                    new Date()
-                        .toISOString()
-
-            };
-
-
-            saveProducts();
-
-
-            cancelProductEdit(
-                false
-            );
-
-
-            renderProducts();
-
-
-            showToast(
-                "Product updated ✓"
-            );
-
-
-            return;
-
-        }
-
-    }
-
-
-    /* =================================================
-       ADD NEW PRODUCT
-    ================================================= */
-
-    const newProduct = {
-
-        id:
-            "P" +
-            Date.now(),
-
-        name,
-
-        price,
-
-        category,
-
-        image,
-
-        createdAt:
-            new Date()
-                .toISOString()
-
-    };
-
-
-    products.push(
-        newProduct
-    );
-
-
-    saveProducts();
-
-
-    clearProductForm();
-
-
-    renderProducts();
-
-
-    showToast(
-        "Product added ✓"
-    );
-
-}
-
-
-
-/* =====================================================
-   1.38 — EDIT PRODUCT
-===================================================== */
-
-function editProduct(
-    productId
-) {
+/* =========================================
+   CART
+========================================= */
+
+function addToCart(id){
 
     const product =
-        products.find(
-            item =>
-                String(
-                    item.id
-                ) ===
-                String(
-                    productId
-                )
-        );
+        products.find(p => p.id === id);
 
+    if(!product) return;
 
-    if (!product) {
+    cart.push(product);
 
-        showToast(
-            "Product পাওয়া যায়নি"
-        );
+    saveState();
 
-        return;
-
-    }
-
-
-    editingProductId =
-        product.id;
-
-
-    document.getElementById(
-        "productName"
-    ).value =
-        product.name || "";
-
-
-    document.getElementById(
-        "productPrice"
-    ).value =
-        product.price || "";
-
-
-    document.getElementById(
-        "productCategory"
-    ).value =
-        product.category || "Fashion";
-
-
-    document.getElementById(
-        "productImage"
-    ).value =
-        product.image || "";
-
-
-    document.getElementById(
-        "productFormTitle"
-    ).textContent =
-        "✏️ Edit Product";
-
-
-    const submitButton =
-        document.getElementById(
-            "productSubmitButton"
-        );
-
-
-    submitButton.textContent =
-        "Update Product";
-
-
-    submitButton.style.background =
-        "#12b76a";
-
-
-    document.getElementById(
-        "cancelEditButton"
-    ).style.display =
-        "inline-block";
-
-
-    document.getElementById(
-        "editingBanner"
-    ).classList.add(
-        "show"
-    );
-
-
-    showToast(
-        "Product edit mode চালু হয়েছে ✏️"
-    );
-
-
-    window.scrollTo({
-
-        top: 0,
-
-        behavior: "smooth"
-
-    );
+    showToast("🛒 Cart-এ product যোগ হয়েছে");
 
 }
 
 
+function removeCart(index){
 
-/* =====================================================
-   1.38 — DELETE PRODUCT
-===================================================== */
+    cart.splice(index,1);
 
-function deleteProduct(
-    productId
-) {
+    saveState();
 
-    const product =
-        products.find(
-            item =>
-                String(
-                    item.id
-                ) ===
-                String(
-                    productId
-                )
-        );
-
-
-    if (!product) {
-
-        showToast(
-            "Product পাওয়া যায়নি"
-        );
-
-        return;
-
-    }
-
-
-    const confirmed =
-        confirm(
-            `"${product.name}" product টি delete করতে চান?`
-        );
-
-
-    if (!confirmed) {
-
-        return;
-
-    }
-
-
-    products =
-        products.filter(
-            item =>
-                String(
-                    item.id
-                ) !==
-                String(
-                    productId
-                )
-        );
-
-
-    saveProducts();
-
-
-    if (
-        editingProductId !== null &&
-        String(
-            editingProductId
-        ) ===
-        String(
-            productId
-        )
-    ) {
-
-        cancelProductEdit(
-            false
-        );
-
-    }
-
-
-    renderProducts();
-
-
-    showToast(
-        "Product deleted ✓"
-    );
+    renderCart();
 
 }
 
 
+function renderCart(){
 
-/* =====================================================
-   CLEAR PRODUCT FORM
-===================================================== */
+    const container =
+        document.getElementById("cartItems");
 
-function clearProductForm() {
+    if(!cart.length){
 
-    document.getElementById(
-        "productName"
-    ).value = "";
-
-
-    document.getElementById(
-        "productPrice"
-    ).value = "";
-
-
-    document.getElementById(
-        "productImage"
-    ).value = "";
-
-
-    document.getElementById(
-        "productCategory"
-    ).value =
-        "Fashion";
-
-}
-
-
-
-/* =====================================================
-   CANCEL PRODUCT EDIT
-===================================================== */
-
-function cancelProductEdit(
-    showMessage = true
-) {
-
-    editingProductId =
-        null;
-
-
-    clearProductForm();
-
-
-    document.getElementById(
-        "productFormTitle"
-    ).textContent =
-        "➕ Add New Product";
-
-
-    const submitButton =
-        document.getElementById(
-            "productSubmitButton"
-        );
-
-
-    submitButton.textContent =
-        "Add Product";
-
-
-    submitButton.style.background =
-        "#1877f2";
-
-
-    document.getElementById(
-        "cancelEditButton"
-    ).style.display =
-        "none";
-
-
-    document.getElementById(
-        "editingBanner"
-    ).classList.remove(
-        "show"
-    );
-
-
-    if (
-        showMessage
-    ) {
-
-        showToast(
-            "Edit cancelled"
-        );
-
-    }
-
-}
-
-
-
-/* =====================================================
-   1.38 — RENDER PRODUCTS
-===================================================== */
-
-function renderProducts() {
-
-    const box =
-        document.getElementById(
-            "productsList"
-        );
-
-
-    const countLabel =
-        document.getElementById(
-            "productCountLabel"
-        );
-
-
-    box.innerHTML = "";
-
-
-    countLabel.textContent =
-        products.length +
-        (
-            products.length === 1
-                ? " Product"
-                : " Products"
-        );
-
-
-    if (!products.length) {
-
-        box.innerHTML = `
-
-            <div
-                style="
-                    padding:40px 20px;
-                    text-align:center;
-                    color:#98a2b3;
-                    font-size:10px;
-                "
-            >
-
-                🛍️
-
-                <br><br>
-
-                এখনো কোনো product
-                add করা হয়নি।
-
+        container.innerHTML = `
+            <div class="empty">
+                <div style="font-size:55px">🛒</div>
+                <h3>Cart খালি</h3>
+                <p>Shopping শুরু করুন।</p>
             </div>
-
         `;
 
-        return;
-
-    }
-
-
-    products.forEach(
-        product => {
-
-            const row =
-                document.createElement(
-                    "div"
-                );
-
-
-            row.className =
-                "product-row";
-
-
-            const image =
-                escapeHTML(
-                    product.image ||
-                    ""
-                );
-
-
-            row.innerHTML = `
-
-                <div
-                    class="product-image"
-                    style="
-                        background-image:
-                        url('${image}');
-                    "
-                ></div>
-
-
-                <div>
-
-                    <span
-                        class="product-name"
-                    >
-                        ${escapeHTML(
-                            product.name
-                        )}
-                    </span>
-
-
-                    <span
-                        class="product-category"
-                    >
-                        ${escapeHTML(
-                            product.category ||
-                            "General"
-                        )}
-                    </span>
-
-                </div>
-
-
-                <strong
-                    class="product-price"
-                >
-                    ${money(
-                        product.price
-                    )}
-                </strong>
-
-
-                <div
-                    class="product-actions"
-                >
-
-                    <button
-                        class="edit-btn"
-                        onclick="
-                            editProduct(
-                                '${escapeHTML(
-                                    product.id
-                                )}'
-                            )
-                        "
-                    >
-                        ✏️ Edit
-                    </button>
-
-
-                    <button
-                        class="delete-btn"
-                        onclick="
-                            deleteProduct(
-                                '${escapeHTML(
-                                    product.id
-                                )}'
-                            )
-                        "
-                    >
-                        🗑️ Delete
-                    </button>
-
-                </div>
-
-            `;
-
-
-            box.appendChild(
-                row
-            );
-
-        }
-    );
-
-}
-
-
-
-/* =====================================================
-   USERS
-===================================================== */
-
-function renderUsers() {
-
-    const box =
-        document.getElementById(
-            "usersList"
-        );
-
-
-    if (!users.length) {
-
-        box.innerHTML = `
-
-            <div class="user-empty">
-
-                👥
-
-                <br><br>
-
-                এখনো কোনো registered
-                user data পাওয়া যায়নি।
-
-            </div>
-
-        `;
+        document.getElementById("cartTotal").textContent =
+            "৳0";
 
         return;
-
     }
 
+    let total = 0;
 
-    box.innerHTML =
-        users
-            .map(
-                user => `
+    container.innerHTML =
+        cart.map((item,index) => {
 
-                    <div
-                        style="
-                            padding:12px 0;
-                            border-bottom:
-                            1px solid #f2f4f7;
-                        "
-                    >
+            total += item.price;
 
-                        <strong
-                            style="
-                                font-size:11px;
-                            "
-                        >
-                            ${escapeHTML(
-                                user.name ||
-                                "User"
-                            )}
+            return `
+
+                <div class="cart-item">
+
+                    <div class="cart-img">
+                        ${item.icon}
+                    </div>
+
+                    <div class="cart-info">
+
+                        <strong>
+                            ${item.title}
                         </strong>
 
-
-                        <div
-                            style="
-                                color:#667085;
-                                font-size:9px;
-                                margin-top:4px;
-                            "
-                        >
-                            ${escapeHTML(
-                                user.email ||
-                                user.phone ||
-                                "No contact"
-                            )}
+                        <div style="color:var(--primary);font-weight:700">
+                            ৳${item.price.toLocaleString()}
                         </div>
 
                     </div>
 
-                `
-            )
-            .join("");
+                    <button
+                        onclick="removeCart(${index})"
+                        style="
+                            border:none;
+                            background:#fee2e2;
+                            color:#dc2626;
+                            padding:7px 10px;
+                            border-radius:7px;
+                        ">
+                        Remove
+                    </button>
+
+                </div>
+            `;
+
+        }).join("");
+
+    document.getElementById("cartTotal").textContent =
+        "৳" + total.toLocaleString();
 
 }
 
 
+function openCart(){
 
-/* =====================================================
-   NAVIGATION
-===================================================== */
-
-function showSection(
-    sectionId,
-    button
-) {
+    renderCart();
 
     document
-        .querySelectorAll(
-            ".section"
-        )
-        .forEach(
-            section =>
-                section.classList.remove(
-                    "active"
-                )
-        );
+        .getElementById("cartModal")
+        .classList.add("show");
+
+}
 
 
-    const target =
-        document.getElementById(
-            sectionId
-        );
+function checkout(){
 
+    if(!cart.length){
 
-    if (!target) {
+        showToast("আগে Cart-এ product যোগ করুন");
 
         return;
-
     }
 
-
-    target.classList.add(
-        "active"
+    showToast(
+        "Checkout demo — payment/backend পরে connect করা যাবে"
     );
 
-
-    document
-        .querySelectorAll(
-            ".nav-item"
-        )
-        .forEach(
-            item =>
-                item.classList.remove(
-                    "active"
-                )
-        );
+}
 
 
-    if (button) {
+/* =========================================
+   WISHLIST
+========================================= */
 
-        button.classList.add(
-            "active"
-        );
+function toggleWishlist(id){
+
+    if(wishlist.includes(id)){
+
+        wishlist =
+            wishlist.filter(x => x !== id);
+
+        showToast("Wishlist থেকে সরানো হয়েছে");
+
+    }else{
+
+        wishlist.push(id);
+
+        showToast("❤️ Wishlist-এ যোগ হয়েছে");
 
     }
 
+    saveState();
 
-    const titles = {
+    renderProducts();
 
-        dashboard:
-            "Dashboard",
+}
 
-        orders:
-            "Orders",
 
-        products:
-            "Products",
+function openWishlist(){
 
-        users:
-            "Users"
+    const container =
+        document.getElementById("wishItems");
+
+    const items =
+        products.filter(p =>
+            wishlist.includes(p.id)
+        );
+
+    if(!items.length){
+
+        container.innerHTML = `
+            <div class="empty">
+                <div style="font-size:55px">❤️</div>
+                <h3>Wishlist খালি</h3>
+            </div>
+        `;
+
+    }else{
+
+        container.innerHTML =
+            items.map(item => `
+
+                <div class="cart-item">
+
+                    <div class="cart-img">
+                        ${item.icon}
+                    </div>
+
+                    <div class="cart-info">
+
+                        <strong>
+                            ${item.title}
+                        </strong>
+
+                        <div style="color:var(--primary)">
+                            ৳${item.price.toLocaleString()}
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="add-cart"
+                        onclick="addToCart(${item.id})">
+                        Add
+                    </button>
+
+                </div>
+
+            `).join("");
+
+    }
+
+    document
+        .getElementById("wishModal")
+        .classList.add("show");
+
+}
+
+
+/* =========================================
+   SEARCH
+========================================= */
+
+function searchProducts(){
+
+    const query =
+        document
+            .getElementById("searchInput")
+            .value
+            .trim()
+            .toLowerCase();
+
+    if(!query){
+
+        resetProducts();
+
+        return;
+    }
+
+    const banglaMap = {
+
+        "জামা":"shirt",
+        "শার্ট":"shirt",
+        "ব্যাগ":"bag",
+        "জুতা":"shoes",
+        "ঘড়ি":"watch",
+        "ঘড়ি":"watch",
+        "ফোন":"phone",
+        "উপহার":"gift",
+        "বাচ্চা":"kids"
 
     };
 
+    let normalized = query;
 
-    document.getElementById(
-        "pageTitle"
-    ).textContent =
-        titles[sectionId] ||
-        "Admin";
+    Object.keys(banglaMap).forEach(key => {
 
+        normalized =
+            normalized.replace(
+                new RegExp(key,"gi"),
+                banglaMap[key]
+            );
 
-    if (
-        sectionId ===
-        "orders"
-    ) {
+    });
 
-        renderOrdersTable();
+    const words =
+        normalized.split(/\s+/);
 
-    }
+    const results =
+        products.filter(product => {
 
+            const text =
+                (
+                    product.title +
+                    " " +
+                    product.category
+                ).toLowerCase();
 
-    if (
-        sectionId ===
-        "products"
-    ) {
+            return words.some(word =>
+                text.includes(word)
+            );
 
-        renderProducts();
+        });
 
-    }
+    currentProducts = results;
 
+    document.getElementById("productHeading").textContent =
+        `🔎 Search Results (${results.length})`;
 
-    if (
-        sectionId ===
-        "users"
-    ) {
+    renderProducts(results);
 
-        renderUsers();
-
-    }
+    scrollToProducts();
 
 }
 
 
+function focusSearch(){
 
-/* =====================================================
-   QUICK NAVIGATION
-===================================================== */
+    document
+        .getElementById("searchInput")
+        .focus();
 
-function showSectionById(
-    id
-) {
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 
-    const buttons =
-        document.querySelectorAll(
-            ".nav-item"
-        );
-
-
-    let targetButton =
-        null;
+}
 
 
-    buttons.forEach(
-        button => {
+document
+    .getElementById("searchInput")
+    .addEventListener(
+        "keydown",
+        function(e){
 
-            const text =
-                button
-                    .innerText
-                    .trim()
-                    .toLowerCase();
+            if(e.key === "Enter"){
 
-
-            if (
-                text ===
-                id.toLowerCase()
-            ) {
-
-                targetButton =
-                    button;
+                searchProducts();
 
             }
 
@@ -4430,138 +1634,502 @@ function showSectionById(
     );
 
 
-    showSection(
-        id,
-        targetButton
-    );
+/* =========================================
+   CATEGORY
+========================================= */
+
+function filterCategory(category){
+
+    const results =
+        products.filter(
+            p => p.category === category
+        );
+
+    currentProducts = results;
+
+    document.getElementById("productHeading").textContent =
+        "📂 " + category.toUpperCase();
+
+    renderProducts(results);
+
+    scrollToProducts();
 
 }
 
 
+function resetProducts(){
 
-/* =====================================================
-   RENDER ALL
-===================================================== */
+    currentProducts = [...products];
 
-function renderAll() {
+    document.getElementById("searchInput").value = "";
 
-    loadData();
-
-    renderStats();
-
-    renderRecentOrders();
-
-    renderSalesBars();
-
-    renderOrdersTable();
+    document.getElementById("productHeading").textContent =
+        "✨ Recommended For You";
 
     renderProducts();
 
-    renderUsers();
+}
+
+
+/* =========================================
+   VOICE SEARCH
+========================================= */
+
+function startVoiceSearch(){
+
+    const SpeechRecognition =
+        window.SpeechRecognition ||
+        window.webkitSpeechRecognition;
+
+    if(!SpeechRecognition){
+
+        showToast(
+            "এই browser-এ Voice Search support নেই"
+        );
+
+        return;
+    }
+
+    const recognition =
+        new SpeechRecognition();
+
+    recognition.lang = "bn-BD";
+
+    recognition.interimResults = false;
+
+    recognition.onstart = function(){
+
+        showToast("🎙️ বলুন, কী খুঁজছেন?");
+
+    };
+
+    recognition.onresult = function(event){
+
+        const text =
+            event.results[0][0].transcript;
+
+        document
+            .getElementById("searchInput")
+            .value = text;
+
+        searchProducts();
+
+    };
+
+    recognition.onerror = function(){
+
+        showToast(
+            "Voice Search ব্যবহার করা যায়নি"
+        );
+
+    };
+
+    recognition.start();
 
 }
 
 
+/* =========================================
+   AI CHAT
+========================================= */
 
-/* =====================================================
-   TOAST
-===================================================== */
+function toggleChat(){
 
-function showToast(
-    message
-) {
+    document
+        .getElementById("chatBox")
+        .classList.toggle("show");
 
-    const toast =
-        document.getElementById(
-            "toast"
+}
+
+
+function handleChatKey(event){
+
+    if(event.key === "Enter"){
+
+        sendChat();
+
+    }
+
+}
+
+
+function sendChat(){
+
+    const input =
+        document.getElementById("chatInput");
+
+    const text =
+        input.value.trim();
+
+    if(!text) return;
+
+    addChatMessage(
+        text,
+        "user"
+    );
+
+    input.value = "";
+
+    setTimeout(() => {
+
+        const response =
+            aiDemoResponse(text);
+
+        addChatMessage(
+            response,
+            "bot"
         );
 
+    },500);
+
+}
+
+
+function addChatMessage(text,type){
+
+    const messages =
+        document.getElementById("chatMessages");
+
+    const div =
+        document.createElement("div");
+
+    div.className =
+        "message " + type;
+
+    div.innerHTML =
+        text;
+
+    messages.appendChild(div);
+
+    messages.scrollTop =
+        messages.scrollHeight;
+
+}
+
+
+function aiDemoResponse(text){
+
+    const lower =
+        text.toLowerCase();
+
+    if(
+        lower.includes("ব্যাগ") ||
+        lower.includes("bag")
+    ){
+
+        return `
+            👜 আপনার জন্য কয়েকটি bag আছে।
+            <br><br>
+            Budget বললে আমি matching
+            option দেখাতে পারি।
+            <br><br>
+            যেমন: <b>২০০০ টাকার মধ্যে</b>
+        `;
+
+    }
+
+    if(
+        lower.includes("ঘড়ি") ||
+        lower.includes("ঘড়ি") ||
+        lower.includes("watch")
+    ){
+
+        return `
+            ⌚ Smart Watch-এর কয়েকটি option
+            Shopping Mela-তে আছে।
+            <br><br>
+            আপনি চাইলে আমি
+            budget অনুযায়ী filter করতে পারি।
+        `;
+
+    }
+
+    if(
+        lower.includes("জুতা") ||
+        lower.includes("shoes")
+    ){
+
+        return `
+            👟 Shoes-এর জন্য
+            Running, Casual এবং Sports
+            category দেখতে পারেন।
+        `;
+
+    }
+
+    if(
+        lower.includes("order") ||
+        lower.includes("অর্ডার")
+    ){
+
+        return `
+            📦 Order tracking demo এখানে আছে।
+            <br><br>
+            Production version-এ আপনার
+            authenticated order data
+            থেকে live status দেখানো হবে।
+        `;
+
+    }
+
+    if(
+        lower.includes("২০০০") ||
+        lower.includes("2000")
+    ){
+
+        return `
+            💰 ৳2,000 budget বুঝেছি।
+            <br><br>
+            আমি budget অনুযায়ী
+            relevant products সাজিয়ে দিতে পারি।
+        `;
+
+    }
+
+    return `
+        🤖 বুঝেছি।
+        <br><br>
+        আপনি product-এর <b>নাম</b>,
+        <b>budget</b> অথবা <b>category</b>
+        লিখুন।
+        <br><br>
+        উদাহরণ:
+        <br>
+        "১৫০০ টাকার মধ্যে একটা ব্যাগ চাই"
+    `;
+
+}
+
+
+/* =========================================
+   ACCOUNT
+========================================= */
+
+function showAccount(){
+
+    document
+        .getElementById("accountModal")
+        .classList.add("show");
+
+}
+
+
+/* =========================================
+   MODAL
+========================================= */
+
+function closeModal(id){
+
+    document
+        .getElementById(id)
+        .classList.remove("show");
+
+}
+
+
+document.querySelectorAll(".modal")
+    .forEach(modal => {
+
+        modal.addEventListener(
+            "click",
+            function(e){
+
+                if(e.target === modal){
+
+                    modal.classList.remove("show");
+
+                }
+
+            }
+        );
+
+    });
+
+
+/* =========================================
+   TOAST
+========================================= */
+
+let toastTimer;
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
 
     toast.textContent =
         message;
 
+    toast.classList.add("show");
 
-    toast.classList.add(
-        "show"
-    );
+    clearTimeout(toastTimer);
 
+    toastTimer =
+        setTimeout(() => {
 
-    clearTimeout(
-        window.toastTimer
-    );
+            toast.classList.remove("show");
 
-
-    window.toastTimer =
-        setTimeout(
-            function () {
-
-                toast.classList.remove(
-                    "show"
-                );
-
-            },
-            2300
-        );
+        },2500);
 
 }
 
 
+/* =========================================
+   BADGES
+========================================= */
 
-/* =====================================================
-   1.33 — ADMIN LOGOUT
-===================================================== */
+function updateBadges(){
 
-function adminLogout() {
+    document.getElementById("cartBadge")
+        .textContent = cart.length;
 
-    const confirmLogout =
-        confirm(
-            "আপনি কি Admin Panel থেকে Logout করতে চান?"
-        );
+    document.getElementById("wishBadge")
+        .textContent = wishlist.length;
+
+}
 
 
-    if (
-        !confirmLogout
-    ) {
+/* =========================================
+   OFFLINE / ONLINE
+========================================= */
 
-        return;
+function updateNetworkStatus(){
+
+    const bar =
+        document.getElementById("offlineBar");
+
+    if(navigator.onLine){
+
+        bar.classList.remove("show");
+
+    }else{
+
+        bar.classList.add("show");
 
     }
 
-
-    sessionStorage.removeItem(
-        "shoppingMelaAdminLoggedIn"
-    );
-
-
-    sessionStorage.removeItem(
-        "shoppingMelaAdminLoginTime"
-    );
-
-
-    window.location.replace(
-        "admin-login.html"
-    );
-
 }
 
 
+window.addEventListener(
+    "online",
+    function(){
 
-/* =====================================================
-   PAGE LOAD
-===================================================== */
+        updateNetworkStatus();
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-
-        renderAll();
+        showToast("🟢 Internet connection restored");
 
     }
 );
 
+
+window.addEventListener(
+    "offline",
+    function(){
+
+        updateNetworkStatus();
+
+        showToast("🟠 You are offline");
+
+    }
+);
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+function scrollToProducts(){
+
+    document
+        .getElementById("productSection")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
+
+
+function goHome(){
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* =========================================
+   SIMPLE DEEP LINK DEMO
+========================================= */
+
+function handleDeepLink(){
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    const productId =
+        Number(params.get("product"));
+
+    if(!productId) return;
+
+    const product =
+        products.find(p =>
+            p.id === productId
+        );
+
+    if(!product) return;
+
+    currentProducts = [product];
+
+    document.getElementById("productHeading").textContent =
+        "🔗 Product";
+
+    renderProducts([product]);
+
+    setTimeout(
+        scrollToProducts,
+        300
+    );
+
+}
+
+
+/* =========================================
+   SERVICE WORKER - DEMO REGISTRATION
+========================================= */
+
+if("serviceWorker" in navigator){
+
+    /*
+       Real PWA-তে এখানে আলাদা sw.js file
+       ব্যবহার করা উচিত।
+
+       Single index.html demo-তে browser
+       security policy অনুযায়ী inline
+       service worker রাখা যায় না।
+    */
+
+}
+
+
+/* =========================================
+   INITIALIZE
+========================================= */
+
+renderProducts();
+
+updateBadges();
+
+updateNetworkStatus();
+
+handleDeepLink();
+
 </script>
 
-
 </body>
-
 </html>
+```
