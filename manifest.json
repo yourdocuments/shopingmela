@@ -1,22 +1,16 @@
-```json
 {
   "name": "Shopping Mela",
   "short_name": "Shopping Mela",
   "description": "Shopping Mela - Smart Online Shopping Platform",
-
   "id": "./",
   "start_url": "./",
   "scope": "./",
-
   "display": "standalone",
   "orientation": "portrait-primary",
-
   "background_color": "#f5f6f8",
   "theme_color": "#ff6b00",
-
   "lang": "bn",
   "dir": "ltr",
-
   "icons": [
     {
       "src": "./assets/icon/192MILONMELA.svg.svg",
@@ -32,4 +26,3 @@
     }
   ]
 }
-```
