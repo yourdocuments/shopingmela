@@ -1,711 +1,1495 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#ff6b00">
-<meta name="description" content="Shopping Mela - Modern AI Shopping Platform">
-<title>Shopping Mela | AI Shopping</title>
-
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-:root{
-    --primary:#ff6b00;
-    --primary-dark:#e85c00;
-    --dark:#111827;
-    --text:#1f2937;
-    --muted:#6b7280;
-    --bg:#f5f6f8;
-    --white:#fff;
-    --border:#e5e7eb;
-    --success:#16a34a;
-    --danger:#dc2626;
-    --shadow:0 8px 25px rgba(0,0,0,.08);
-}
-
-body{
-    font-family:Arial,"Noto Sans Bengali",sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    padding-bottom:80px;
-}
-
-button,input{
-    font:inherit;
-}
-
-button{
-    cursor:pointer;
-}
-
-.header{
-    position:sticky;
-    top:0;
-    z-index:1000;
-    background:var(--white);
-    border-bottom:1px solid var(--border);
-}
-
-.topbar{
-    max-width:1200px;
-    margin:auto;
-    padding:14px 20px;
-    display:flex;
-    align-items:center;
-    gap:15px;
-}
-
-.logo{
-    font-size:24px;
-    font-weight:900;
-    color:var(--primary);
-    white-space:nowrap;
-}
-
-.logo span{
-    color:var(--dark);
-}
-
-.search-box{
-    flex:1;
-    position:relative;
-}
-
-.search-box input{
-    width:100%;
-    border:1px solid var(--border);
-    background:#f9fafb;
-    padding:13px 48px 13px 18px;
-    border-radius:30px;
-    outline:none;
-}
-
-.search-box input:focus{
-    border-color:var(--primary);
-}
-
-.search-btn{
-    position:absolute;
-    right:7px;
-    top:6px;
-    width:38px;
-    height:38px;
-    border:none;
-    border-radius:50%;
-    background:var(--primary);
-    color:white;
-}
-
-.header-actions{
-    display:flex;
-    gap:8px;
-}
-
-.icon-btn{
-    border:1px solid var(--border);
-    background:white;
-    width:42px;
-    height:42px;
-    border-radius:50%;
-    position:relative;
-}
-
-.badge{
-    position:absolute;
-    top:-4px;
-    right:-3px;
-    background:var(--danger);
-    color:white;
-    width:19px;
-    height:19px;
-    border-radius:50%;
-    font-size:11px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.offline{
-    display:none;
-    background:#fff3cd;
-    color:#856404;
-    text-align:center;
-    padding:8px;
-    font-size:13px;
-}
-
-.offline.show{
-    display:block;
-}
-
-.container{
-    max-width:1200px;
-    margin:auto;
-    padding:20px;
-}
-
-.hero{
-    background:linear-gradient(135deg,#ff6b00,#ff9d42);
-    color:white;
-    border-radius:22px;
-    padding:40px;
-    min-height:260px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    overflow:hidden;
-    box-shadow:var(--shadow);
-}
-
-.hero-content{
-    max-width:600px;
-}
-
-.hero h1{
-    font-size:42px;
-    margin-bottom:12px;
-}
-
-.hero p{
-    font-size:17px;
-    opacity:.95;
-    margin-bottom:20px;
-}
-
-.hero-btn{
-    border:none;
-    background:white;
-    color:var(--primary);
-    padding:13px 22px;
-    border-radius:10px;
-    font-weight:700;
-}
-
-.hero-icon{
-    font-size:120px;
-    opacity:.25;
-}
-
-.section{
-    margin-top:30px;
-}
-
-.section-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:15px;
-}
-
-.section-head h2{
-    font-size:24px;
-}
-
-.view-all{
-    color:var(--primary);
-    font-weight:700;
-    background:none;
-    border:none;
-}
-
-.categories{
-    display:grid;
-    grid-template-columns:repeat(8,1fr);
-    gap:12px;
-}
-
-.category{
-    background:white;
-    border:1px solid var(--border);
-    border-radius:15px;
-    padding:15px 8px;
-    text-align:center;
-    transition:.2s;
-}
-
-.category:hover{
-    transform:translateY(-3px);
-    box-shadow:var(--shadow);
-}
-
-.category-icon{
-    font-size:30px;
-    margin-bottom:8px;
-}
-
-.category-name{
-    font-size:13px;
-    font-weight:700;
-}
-
-.products{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:16px;
-}
-
-.product{
-    background:white;
-    border-radius:16px;
-    overflow:hidden;
-    box-shadow:0 4px 15px rgba(0,0,0,.05);
-    position:relative;
-}
-
-.product-img{
-    height:180px;
-    background:linear-gradient(135deg,#f3f4f6,#e5e7eb);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:70px;
-}
-
-.product-body{
-    padding:14px;
-}
-
-.product-title{
-    font-size:15px;
-    font-weight:700;
-    line-height:1.4;
-    min-height:42px;
-}
-
-.rating{
-    margin:8px 0;
-    color:#f59e0b;
-    font-size:13px;
-}
-
-.price{
-    font-size:19px;
-    font-weight:900;
-    color:var(--primary);
-}
-
-.old-price{
-    color:#9ca3af;
-    text-decoration:line-through;
-    font-size:12px;
-    margin-left:5px;
-}
-
-.product-actions{
-    display:flex;
-    gap:7px;
-    margin-top:12px;
-}
-
-.add-cart{
-    flex:1;
-    border:none;
-    background:var(--primary);
-    color:white;
-    padding:9px;
-    border-radius:8px;
-    font-weight:700;
-}
-
-.wish{
-    width:40px;
-    border:1px solid var(--border);
-    background:white;
-    border-radius:8px;
-}
-
-.discount{
-    position:absolute;
-    top:10px;
-    left:10px;
-    background:var(--danger);
-    color:white;
-    padding:5px 8px;
-    border-radius:7px;
-    font-size:11px;
-    font-weight:700;
-}
-
-.ai-card{
-    background:#111827;
-    color:white;
-    border-radius:20px;
-    padding:25px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-}
-
-.ai-card h2{
-    margin-bottom:8px;
-}
-
-.ai-card p{
-    color:#d1d5db;
-}
-
-.ai-btn{
-    border:none;
-    background:var(--primary);
-    color:white;
-    padding:13px 20px;
-    border-radius:10px;
-    font-weight:700;
-    white-space:nowrap;
-}
-
-.bottom-nav{
-    position:fixed;
-    bottom:0;
-    left:0;
-    right:0;
-    height:65px;
-    background:white;
-    border-top:1px solid var(--border);
-    display:none;
-    z-index:2000;
-    justify-content:space-around;
-    align-items:center;
-}
-
-.nav-item{
-    background:none;
-    border:none;
-    color:#6b7280;
-    font-size:11px;
-    text-align:center;
-}
-
-.nav-item.active{
-    color:var(--primary);
-    font-weight:700;
-}
-
-.nav-icon{
-    display:block;
-    font-size:21px;
-    margin-bottom:2px;
-}
-
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.55);
-    z-index:3000;
-    align-items:flex-end;
-    justify-content:center;
-}
-
-.modal.show{
-    display:flex;
-}
-
-.modal-box{
-    background:white;
-    width:min(600px,100%);
-    max-height:90vh;
-    overflow:auto;
-    border-radius:22px 22px 0 0;
-    padding:25px;
-    animation:slideUp .25s ease;
-}
-
-@keyframes slideUp{
-    from{transform:translateY(100%);}
-    to{transform:translateY(0);}
-}
-
-.modal-head{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
-}
-
-.close{
-    border:none;
-    background:#f3f4f6;
-    width:36px;
-    height:36px;
-    border-radius:50%;
-}
-
-.cart-item{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:12px 0;
-    border-bottom:1px solid var(--border);
-}
-
-.cart-img{
-    width:55px;
-    height:55px;
-    background:#f3f4f6;
-    border-radius:10px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:28px;
-}
-
-.cart-info{
-    flex:1;
-}
-
-.cart-total{
-    margin-top:18px;
-    padding-top:15px;
-    border-top:2px solid var(--dark);
-    display:flex;
-    justify-content:space-between;
-    font-weight:900;
-    font-size:20px;
-}
-
-.checkout-btn{
-    width:100%;
-    margin-top:15px;
-    padding:14px;
-    border:none;
-    background:var(--primary);
-    color:white;
-    border-radius:10px;
-    font-weight:800;
-}
-
-.chat{
-    position:fixed;
-    right:20px;
-    bottom:85px;
-    z-index:1800;
-}
-
-.chat-button{
-    width:60px;
-    height:60px;
-    border:none;
-    border-radius:50%;
-    background:var(--primary);
-    color:white;
-    font-size:26px;
-    box-shadow:0 8px 25px rgba(0,0,0,.25);
-}
-
-.chat-box{
-    display:none;
-    position:absolute;
-    right:0;
-    bottom:72px;
-    width:330px;
-    height:460px;
-    background:white;
-    border-radius:18px;
-    box-shadow:0 15px 50px rgba(0,0,0,.2);
-    overflow:hidden;
-}
-
-.chat-box.show{
-    display:flex;
-    flex-direction:column;
-}
-
-.chat-head{
-    background:var(--dark);
-    color:white;
-    padding:15px;
-    display:flex;
-    justify-content:space-between;
-}
-
-.chat-messages{
-    flex:1;
-    padding:15px;
-    overflow:auto;
-    background:#f8fafc;
-}
-
-.message{
-    max-width:85%;
-    padding:10px 12px;
-    border-radius:12px;
-    margin-bottom:10px;
-    font-size:14px;
-}
-
-.bot{
-    background:white;
-}
-
-.user{
-    background:var(--primary);
-    color:white;
-    margin-left:auto;
-}
-
-.chat-input{
-    display:flex;
-    border-top:1px solid var(--border);
-}
-
-.chat-input input{
-    flex:1;
-    border:none;
-    outline:none;
-    padding:12px;
-}
-
-.chat-input button{
-    width:50px;
-    border:none;
-    background:var(--primary);
-    color:white;
-}
-
-.empty{
-    text-align:center;
-    padding:40px;
-    color:var(--muted);
-}
-
-.toast{
-    position:fixed;
-    left:50%;
-    bottom:90px;
-    transform:translateX(-50%) translateY(20px);
-    background:#111827;
-    color:white;
-    padding:12px 18px;
-    border-radius:10px;
-    opacity:0;
-    pointer-events:none;
-    transition:.3s;
-    z-index:5000;
-}
-
-.toast.show{
-    opacity:1;
-    transform:translateX(-50%) translateY(0);
-}
-
-@media(max-width:900px){
-    .categories{
-        grid-template-columns:repeat(4,1fr);
-    }
-
-    .products{
-        grid-template-columns:repeat(3,1fr);
-    }
-
-    .hero h1{
-        font-size:32px;
-    }
-}
-
-@media(max-width:600px){
-    body{
-        padding-bottom:75px;
-    }
-
-    .topbar{
-        padding:10px;
-        gap:8px;
-    }
-
-    .logo{
-        font-size:19px;
-    }
-
-    .header-actions .icon-btn:nth-child(1){
-        display:none;
-    }
-
-    .container{
-        padding:12px;
-    }
-
-    .hero{
-        padding:25px 20px;
-        min-height:220px;
-    }
-
-    .hero h1{
-        font-size:28px;
-    }
-
-    .hero-icon{
-        font-size:70px;
-    }
-
-    .categories{
-        grid-template-columns:repeat(4,1fr);
-        gap:8px;
-    }
-
-    .category{
-        padding:10px 4px;
-    }
-
-    .category-icon{
-        font-size:25px;
-    }
-
-    .products{
-        grid-template-columns:repeat(2,1fr);
-        gap:10px;
-    }
-
-    .product-img{
-        height:145px;
-        font-size:55px;
-    }
-
-    .product-body{
-        padding:10px;
-    }
-
-    .product-title{
-        font-size:13px;
-    }
-
-    .price{
-        font-size:17px;
-    }
-
-    .ai-card{
-        display:block;
-    }
-
-    .ai-btn{
-        margin-top:15px;
-        width:100%;
-    }
-
-    .bottom-nav{
-        display:flex;
-    }
-
-    .chat{
-        bottom:85px;
-        right:12px;
-    }
-
-    .chat-box{
-        width:calc(100vw - 24px);
-        right:-5px;
-    }
-}
-</style>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#ff6b00"
+    >
+
+    <meta
+        name="description"
+        content="Shopping Mela - Modern AI Shopping Platform"
+    >
+
+    <title>Shopping Mela | Smart Shopping</title>
+
+    <style>
+
+        /* =========================================
+           1. RESET
+        ========================================= */
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        html{
+            scroll-behavior:smooth;
+        }
+
+        body{
+            font-family:
+                Arial,
+                "Noto Sans Bengali",
+                sans-serif;
+
+            background:#f5f6f8;
+            color:#1f2937;
+
+            padding-bottom:80px;
+        }
+
+        button,
+        input{
+            font:inherit;
+        }
+
+        button{
+            cursor:pointer;
+        }
+
+
+        /* =========================================
+           2. ROOT VARIABLES
+        ========================================= */
+
+        :root{
+
+            --primary:#ff6b00;
+            --primary-dark:#e85c00;
+
+            --dark:#111827;
+
+            --text:#1f2937;
+            --muted:#6b7280;
+
+            --bg:#f5f6f8;
+            --white:#ffffff;
+
+            --border:#e5e7eb;
+
+            --success:#16a34a;
+            --danger:#dc2626;
+
+            --shadow:
+                0 8px 25px rgba(0,0,0,.08);
+
+        }
+
+
+        /* =========================================
+           3. HEADER
+        ========================================= */
+
+        .header{
+
+            position:sticky;
+
+            top:0;
+
+            z-index:1000;
+
+            background:
+                var(--white);
+
+            border-bottom:
+                1px solid var(--border);
+
+        }
+
+
+        .topbar{
+
+            max-width:1200px;
+
+            margin:auto;
+
+            padding:14px 20px;
+
+            display:flex;
+
+            align-items:center;
+
+            gap:15px;
+
+        }
+
+
+        .logo{
+
+            font-size:24px;
+
+            font-weight:900;
+
+            color:
+                var(--primary);
+
+            white-space:nowrap;
+
+        }
+
+
+        .logo span{
+
+            color:
+                var(--dark);
+
+        }
+
+
+        /* =========================================
+           4. SEARCH
+        ========================================= */
+
+        .search-box{
+
+            flex:1;
+
+            position:relative;
+
+        }
+
+
+        .search-box input{
+
+            width:100%;
+
+            border:
+                1px solid var(--border);
+
+            background:#f9fafb;
+
+            padding:
+                13px 50px 13px 18px;
+
+            border-radius:30px;
+
+            outline:none;
+
+        }
+
+
+        .search-box input:focus{
+
+            border-color:
+                var(--primary);
+
+            background:
+                var(--white);
+
+        }
+
+
+        .search-btn{
+
+            position:absolute;
+
+            right:7px;
+
+            top:6px;
+
+            width:38px;
+
+            height:38px;
+
+            border:none;
+
+            border-radius:50%;
+
+            background:
+                var(--primary);
+
+            color:white;
+
+        }
+
+
+        /* =========================================
+           5. HEADER ACTIONS
+        ========================================= */
+
+        .header-actions{
+
+            display:flex;
+
+            gap:8px;
+
+        }
+
+
+        .icon-btn{
+
+            border:
+                1px solid var(--border);
+
+            background:
+                var(--white);
+
+            width:42px;
+
+            height:42px;
+
+            border-radius:50%;
+
+            position:relative;
+
+        }
+
+
+        .badge{
+
+            position:absolute;
+
+            top:-4px;
+
+            right:-3px;
+
+            background:
+                var(--danger);
+
+            color:white;
+
+            width:19px;
+
+            height:19px;
+
+            border-radius:50%;
+
+            font-size:11px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+        }
+
+
+        /* =========================================
+           6. OFFLINE BAR
+        ========================================= */
+
+        .offline{
+
+            display:none;
+
+            background:#fff3cd;
+
+            color:#856404;
+
+            text-align:center;
+
+            padding:8px;
+
+            font-size:13px;
+
+        }
+
+
+        .offline.show{
+
+            display:block;
+
+        }
+
+
+        /* =========================================
+           7. MAIN CONTAINER
+        ========================================= */
+
+        .container{
+
+            max-width:1200px;
+
+            margin:auto;
+
+            padding:20px;
+
+        }
+
+
+        /* =========================================
+           8. HERO
+        ========================================= */
+
+        .hero{
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff6b00,
+                    #ff9d42
+                );
+
+            color:white;
+
+            border-radius:22px;
+
+            padding:40px;
+
+            min-height:260px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:space-between;
+
+            overflow:hidden;
+
+            box-shadow:
+                var(--shadow);
+
+        }
+
+
+        .hero-content{
+
+            max-width:600px;
+
+        }
+
+
+        .hero h1{
+
+            font-size:42px;
+
+            margin-bottom:12px;
+
+        }
+
+
+        .hero p{
+
+            font-size:17px;
+
+            opacity:.95;
+
+            margin-bottom:20px;
+
+            line-height:1.6;
+
+        }
+
+
+        .hero-btn{
+
+            border:none;
+
+            background:white;
+
+            color:
+                var(--primary);
+
+            padding:
+                13px 22px;
+
+            border-radius:10px;
+
+            font-weight:700;
+
+        }
+
+
+        .hero-icon{
+
+            font-size:120px;
+
+            opacity:.25;
+
+        }
+
+
+        /* =========================================
+           9. SECTION
+        ========================================= */
+
+        .section{
+
+            margin-top:30px;
+
+        }
+
+
+        .section-head{
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:space-between;
+
+            margin-bottom:15px;
+
+        }
+
+
+        .section-head h2{
+
+            font-size:24px;
+
+        }
+
+
+        .view-all{
+
+            color:
+                var(--primary);
+
+            font-weight:700;
+
+            background:none;
+
+            border:none;
+
+        }
+
+
+        /* =========================================
+           10. CATEGORIES
+        ========================================= */
+
+        .categories{
+
+            display:grid;
+
+            grid-template-columns:
+                repeat(8,1fr);
+
+            gap:12px;
+
+        }
+
+
+        .category{
+
+            background:white;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:15px;
+
+            padding:15px 8px;
+
+            text-align:center;
+
+            transition:.2s;
+
+        }
+
+
+        .category:hover{
+
+            transform:
+                translateY(-3px);
+
+            box-shadow:
+                var(--shadow);
+
+        }
+
+
+        .category-icon{
+
+            font-size:30px;
+
+            margin-bottom:8px;
+
+        }
+
+
+        .category-name{
+
+            font-size:13px;
+
+            font-weight:700;
+
+        }
+
+
+        /* =========================================
+           11. PRODUCTS
+        ========================================= */
+
+        .products{
+
+            display:grid;
+
+            grid-template-columns:
+                repeat(5,1fr);
+
+            gap:16px;
+
+        }
+
+
+        .product{
+
+            background:white;
+
+            border-radius:16px;
+
+            overflow:hidden;
+
+            box-shadow:
+                0 4px 15px rgba(0,0,0,.05);
+
+            position:relative;
+
+        }
+
+
+        .product-img{
+
+            height:180px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f3f4f6,
+                    #e5e7eb
+                );
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            font-size:70px;
+
+        }
+
+
+        .product-body{
+
+            padding:14px;
+
+        }
+
+
+        .product-title{
+
+            font-size:15px;
+
+            font-weight:700;
+
+            line-height:1.4;
+
+            min-height:42px;
+
+        }
+
+
+        .rating{
+
+            margin:8px 0;
+
+            color:#f59e0b;
+
+            font-size:13px;
+
+        }
+
+
+        .price{
+
+            font-size:19px;
+
+            font-weight:900;
+
+            color:
+                var(--primary);
+
+        }
+
+
+        .old-price{
+
+            color:#9ca3af;
+
+            text-decoration:
+                line-through;
+
+            font-size:12px;
+
+            margin-left:5px;
+
+        }
+
+
+        .product-actions{
+
+            display:flex;
+
+            gap:7px;
+
+            margin-top:12px;
+
+        }
+
+
+        .add-cart{
+
+            flex:1;
+
+            border:none;
+
+            background:
+                var(--primary);
+
+            color:white;
+
+            padding:9px;
+
+            border-radius:8px;
+
+            font-weight:700;
+
+        }
+
+
+        .wish{
+
+            width:40px;
+
+            border:
+                1px solid var(--border);
+
+            background:white;
+
+            border-radius:8px;
+
+        }
+
+
+        .discount{
+
+            position:absolute;
+
+            top:10px;
+
+            left:10px;
+
+            background:
+                var(--danger);
+
+            color:white;
+
+            padding:
+                5px 8px;
+
+            border-radius:7px;
+
+            font-size:11px;
+
+            font-weight:700;
+
+        }
+
+
+        /* =========================================
+           12. AI CARD
+        ========================================= */
+
+        .ai-card{
+
+            background:
+                var(--dark);
+
+            color:white;
+
+            border-radius:20px;
+
+            padding:25px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:space-between;
+
+            gap:20px;
+
+        }
+
+
+        .ai-card h2{
+
+            margin-bottom:8px;
+
+        }
+
+
+        .ai-card p{
+
+            color:#d1d5db;
+
+            line-height:1.5;
+
+        }
+
+
+        .ai-btn{
+
+            border:none;
+
+            background:
+                var(--primary);
+
+            color:white;
+
+            padding:
+                13px 20px;
+
+            border-radius:10px;
+
+            font-weight:700;
+
+            white-space:nowrap;
+
+        }
+
+
+        /* =========================================
+           13. BOTTOM NAV
+        ========================================= */
+
+        .bottom-nav{
+
+            position:fixed;
+
+            bottom:0;
+
+            left:0;
+
+            right:0;
+
+            height:65px;
+
+            background:white;
+
+            border-top:
+                1px solid var(--border);
+
+            display:none;
+
+            z-index:2000;
+
+            justify-content:
+                space-around;
+
+            align-items:center;
+
+        }
+
+
+        .nav-item{
+
+            background:none;
+
+            border:none;
+
+            color:#6b7280;
+
+            font-size:11px;
+
+            text-align:center;
+
+        }
+
+
+        .nav-item.active{
+
+            color:
+                var(--primary);
+
+            font-weight:700;
+
+        }
+
+
+        .nav-icon{
+
+            display:block;
+
+            font-size:21px;
+
+            margin-bottom:2px;
+
+        }
+
+
+        /* =========================================
+           14. MODAL
+        ========================================= */
+
+        .modal{
+
+            display:none;
+
+            position:fixed;
+
+            inset:0;
+
+            background:
+                rgba(0,0,0,.55);
+
+            z-index:3000;
+
+            align-items:flex-end;
+
+            justify-content:center;
+
+        }
+
+
+        .modal.show{
+
+            display:flex;
+
+        }
+
+
+        .modal-box{
+
+            background:white;
+
+            width:
+                min(600px,100%);
+
+            max-height:90vh;
+
+            overflow:auto;
+
+            border-radius:
+                22px 22px 0 0;
+
+            padding:25px;
+
+            animation:
+                slideUp .25s ease;
+
+        }
+
+
+        @keyframes slideUp{
+
+            from{
+                transform:
+                    translateY(100%);
+            }
+
+            to{
+                transform:
+                    translateY(0);
+            }
+
+        }
+
+
+        .modal-head{
+
+            display:flex;
+
+            justify-content:
+                space-between;
+
+            align-items:center;
+
+            margin-bottom:20px;
+
+        }
+
+
+        .close{
+
+            border:none;
+
+            background:#f3f4f6;
+
+            width:36px;
+
+            height:36px;
+
+            border-radius:50%;
+
+        }
+
+
+        /* =========================================
+           15. CART
+        ========================================= */
+
+        .cart-item{
+
+            display:flex;
+
+            align-items:center;
+
+            gap:12px;
+
+            padding:12px 0;
+
+            border-bottom:
+                1px solid var(--border);
+
+        }
+
+
+        .cart-img{
+
+            width:55px;
+
+            height:55px;
+
+            background:#f3f4f6;
+
+            border-radius:10px;
+
+            display:flex;
+
+            align-items:center;
+
+            justify-content:center;
+
+            font-size:28px;
+
+        }
+
+
+        .cart-info{
+
+            flex:1;
+
+        }
+
+
+        .cart-total{
+
+            margin-top:18px;
+
+            padding-top:15px;
+
+            border-top:
+                2px solid var(--dark);
+
+            display:flex;
+
+            justify-content:
+                space-between;
+
+            font-weight:900;
+
+            font-size:20px;
+
+        }
+
+
+        .checkout-btn{
+
+            width:100%;
+
+            margin-top:15px;
+
+            padding:14px;
+
+            border:none;
+
+            background:
+                var(--primary);
+
+            color:white;
+
+            border-radius:10px;
+
+            font-weight:800;
+
+        }
+
+
+        /* =========================================
+           16. AI CHAT
+        ========================================= */
+
+        .chat{
+
+            position:fixed;
+
+            right:20px;
+
+            bottom:85px;
+
+            z-index:1800;
+
+        }
+
+
+        .chat-button{
+
+            width:60px;
+
+            height:60px;
+
+            border:none;
+
+            border-radius:50%;
+
+            background:
+                var(--primary);
+
+            color:white;
+
+            font-size:26px;
+
+            box-shadow:
+                0 8px 25px rgba(0,0,0,.25);
+
+        }
+
+
+        .chat-box{
+
+            display:none;
+
+            position:absolute;
+
+            right:0;
+
+            bottom:72px;
+
+            width:330px;
+
+            height:460px;
+
+            background:white;
+
+            border-radius:18px;
+
+            box-shadow:
+                0 15px 50px rgba(0,0,0,.2);
+
+            overflow:hidden;
+
+        }
+
+
+        .chat-box.show{
+
+            display:flex;
+
+            flex-direction:column;
+
+        }
+
+
+        .chat-head{
+
+            background:
+                var(--dark);
+
+            color:white;
+
+            padding:15px;
+
+            display:flex;
+
+            justify-content:
+                space-between;
+
+        }
+
+
+        .chat-messages{
+
+            flex:1;
+
+            padding:15px;
+
+            overflow:auto;
+
+            background:#f8fafc;
+
+        }
+
+
+        .message{
+
+            max-width:85%;
+
+            padding:10px 12px;
+
+            border-radius:12px;
+
+            margin-bottom:10px;
+
+            font-size:14px;
+
+            line-height:1.5;
+
+        }
+
+
+        .bot{
+
+            background:white;
+
+        }
+
+
+        .user{
+
+            background:
+                var(--primary);
+
+            color:white;
+
+            margin-left:auto;
+
+        }
+
+
+        .chat-input{
+
+            display:flex;
+
+            border-top:
+                1px solid var(--border);
+
+        }
+
+
+        .chat-input input{
+
+            flex:1;
+
+            border:none;
+
+            outline:none;
+
+            padding:12px;
+
+        }
+
+
+        .chat-input button{
+
+            width:50px;
+
+            border:none;
+
+            background:
+                var(--primary);
+
+            color:white;
+
+        }
+
+
+        /* =========================================
+           17. EMPTY STATE
+        ========================================= */
+
+        .empty{
+
+            text-align:center;
+
+            padding:40px;
+
+            color:
+                var(--muted);
+
+        }
+
+
+        /* =========================================
+           18. TOAST
+        ========================================= */
+
+        .toast{
+
+            position:fixed;
+
+            left:50%;
+
+            bottom:90px;
+
+            transform:
+                translateX(-50%)
+                translateY(20px);
+
+            background:
+                var(--dark);
+
+            color:white;
+
+            padding:
+                12px 18px;
+
+            border-radius:10px;
+
+            opacity:0;
+
+            pointer-events:none;
+
+            transition:.3s;
+
+            z-index:5000;
+
+        }
+
+
+        .toast.show{
+
+            opacity:1;
+
+            transform:
+                translateX(-50%)
+                translateY(0);
+
+        }
+
+
+        /* =========================================
+           19. TABLET
+        ========================================= */
+
+        @media(max-width:900px){
+
+            .categories{
+
+                grid-template-columns:
+                    repeat(4,1fr);
+
+            }
+
+
+            .products{
+
+                grid-template-columns:
+                    repeat(3,1fr);
+
+            }
+
+
+            .hero h1{
+
+                font-size:32px;
+
+            }
+
+        }
+
+
+        /* =========================================
+           20. MOBILE
+        ========================================= */
+
+        @media(max-width:600px){
+
+            body{
+
+                padding-bottom:75px;
+
+            }
+
+
+            .topbar{
+
+                padding:10px;
+
+                gap:8px;
+
+            }
+
+
+            .logo{
+
+                font-size:19px;
+
+            }
+
+
+            .header-actions
+            .icon-btn:nth-child(1){
+
+                display:none;
+
+            }
+
+
+            .container{
+
+                padding:12px;
+
+            }
+
+
+            .hero{
+
+                padding:25px 20px;
+
+                min-height:220px;
+
+            }
+
+
+            .hero h1{
+
+                font-size:28px;
+
+            }
+
+
+            .hero p{
+
+                font-size:14px;
+
+            }
+
+
+            .hero-icon{
+
+                font-size:70px;
+
+            }
+
+
+            .categories{
+
+                grid-template-columns:
+                    repeat(4,1fr);
+
+                gap:8px;
+
+            }
+
+
+            .category{
+
+                padding:10px 4px;
+
+            }
+
+
+            .category-icon{
+
+                font-size:25px;
+
+            }
+
+
+            .category-name{
+
+                font-size:11px;
+
+            }
+
+
+            .products{
+
+                grid-template-columns:
+                    repeat(2,1fr);
+
+                gap:10px;
+
+            }
+
+
+            .product-img{
+
+                height:145px;
+
+                font-size:55px;
+
+            }
+
+
+            .product-body{
+
+                padding:10px;
+
+            }
+
+
+            .product-title{
+
+                font-size:13px;
+
+            }
+
+
+            .price{
+
+                font-size:17px;
+
+            }
+
+
+            .ai-card{
+
+                display:block;
+
+            }
+
+
+            .ai-btn{
+
+                margin-top:15px;
+
+                width:100%;
+
+            }
+
+
+            .bottom-nav{
+
+                display:flex;
+
+            }
+
+
+            .chat{
+
+                bottom:85px;
+
+                right:12px;
+
+            }
+
+
+            .chat-box{
+
+                width:
+                    calc(100vw - 24px);
+
+                right:-5px;
+
+            }
+
+        }
+
+    </style>
 </head>
 
+
 <body>
+
+
+<!-- =========================================
+     HEADER
+========================================= -->
 
 <header class="header">
 
@@ -715,44 +1499,94 @@ button{
             Shopping <span>Mela</span>
         </div>
 
+
         <div class="search-box">
+
             <input
                 id="searchInput"
                 type="search"
                 placeholder="পণ্য খুঁজুন..."
                 autocomplete="off"
             >
-            <button class="search-btn" onclick="searchProducts()">🔎</button>
+
+            <button
+                class="search-btn"
+                onclick="searchProducts()"
+                aria-label="Search"
+            >
+                🔎
+            </button>
+
         </div>
+
 
         <div class="header-actions">
 
-            <button class="icon-btn" onclick="startVoiceSearch()" title="Voice Search">
+            <button
+                class="icon-btn"
+                onclick="startVoiceSearch()"
+                title="Voice Search"
+            >
                 🎙️
             </button>
 
-            <button class="icon-btn" onclick="openWishlist()" title="Wishlist">
+
+            <button
+                class="icon-btn"
+                onclick="openWishlist()"
+                title="Wishlist"
+            >
                 ❤️
-                <span class="badge" id="wishBadge">0</span>
+
+                <span
+                    class="badge"
+                    id="wishBadge"
+                >
+                    0
+                </span>
+
             </button>
 
-            <button class="icon-btn" onclick="openCart()" title="Cart">
+
+            <button
+                class="icon-btn"
+                onclick="openCart()"
+                title="Cart"
+            >
                 🛒
-                <span class="badge" id="cartBadge">0</span>
+
+                <span
+                    class="badge"
+                    id="cartBadge"
+                >
+                    0
+                </span>
+
             </button>
 
         </div>
 
     </div>
 
-    <div class="offline" id="offlineBar">
-        🟠 আপনি Offline আছেন — কিছু feature সাময়িকভাবে unavailable।
+
+    <div
+        class="offline"
+        id="offlineBar"
+    >
+        🟠 আপনি Offline আছেন —
+        কিছু feature সাময়িকভাবে unavailable।
     </div>
 
 </header>
 
 
+
+<!-- =========================================
+     MAIN
+========================================= -->
+
 <main class="container">
+
 
     <!-- HERO -->
 
@@ -760,18 +1594,25 @@ button{
 
         <div class="hero-content">
 
-            <h1>আপনার Smart Shopping শুরু করুন 🛍️</h1>
+            <h1>
+                আপনার Smart Shopping শুরু করুন 🛍️
+            </h1>
 
             <p>
-                AI Search, Voice Search, Personalized Recommendation
+                AI Search, Voice Search,
+                Personalized Recommendation
                 এবং সহজ Shopping Experience।
             </p>
 
-            <button class="hero-btn" onclick="scrollToProducts()">
+            <button
+                class="hero-btn"
+                onclick="scrollToProducts()"
+            >
                 এখনই Shopping করুন →
             </button>
 
         </div>
+
 
         <div class="hero-icon">
             🛒
@@ -780,62 +1621,161 @@ button{
     </section>
 
 
+
     <!-- CATEGORIES -->
 
     <section class="section">
 
         <div class="section-head">
-            <h2>ক্যাটাগরি</h2>
-            <button class="view-all" onclick="showToast('সব ক্যাটাগরি শীঘ্রই আসছে')">
+
+            <h2>
+                ক্যাটাগরি
+            </h2>
+
+            <button
+                class="view-all"
+                onclick="showToast('সব ক্যাটাগরি শীঘ্রই আসছে')"
+            >
                 সব দেখুন →
             </button>
+
         </div>
+
 
         <div class="categories">
 
-            <div class="category" onclick="filterCategory('fashion')">
-                <div class="category-icon">👕</div>
-                <div class="category-name">Fashion</div>
+
+            <div
+                class="category"
+                onclick="filterCategory('fashion')"
+            >
+
+                <div class="category-icon">
+                    👕
+                </div>
+
+                <div class="category-name">
+                    Fashion
+                </div>
+
             </div>
 
-            <div class="category" onclick="filterCategory('electronics')">
-                <div class="category-icon">📱</div>
-                <div class="category-name">Electronics</div>
+
+            <div
+                class="category"
+                onclick="filterCategory('electronics')"
+            >
+
+                <div class="category-icon">
+                    📱
+                </div>
+
+                <div class="category-name">
+                    Electronics
+                </div>
+
             </div>
 
-            <div class="category" onclick="filterCategory('beauty')">
-                <div class="category-icon">💄</div>
-                <div class="category-name">Beauty</div>
+
+            <div
+                class="category"
+                onclick="filterCategory('beauty')"
+            >
+
+                <div class="category-icon">
+                    💄
+                </div>
+
+                <div class="category-name">
+                    Beauty
+                </div>
+
             </div>
 
-            <div class="category" onclick="filterCategory('home')">
-                <div class="category-icon">🏠</div>
-                <div class="category-name">Home</div>
+
+            <div
+                class="category"
+                onclick="filterCategory('home')"
+            >
+
+                <div class="category-icon">
+                    🏠
+                </div>
+
+                <div class="category-name">
+                    Home
+                </div>
+
             </div>
 
-            <div class="category" onclick="filterCategory('shoes')">
-                <div class="category-icon">👟</div>
-                <div class="category-name">Shoes</div>
+
+            <div
+                class="category"
+                onclick="filterCategory('shoes')"
+            >
+
+                <div class="category-icon">
+                    👟
+                </div>
+
+                <div class="category-name">
+                    Shoes
+                </div>
+
             </div>
 
-            <div class="category" onclick="filterCategory('bags')">
-                <div class="category-icon">👜</div>
-                <div class="category-name">Bags</div>
+
+            <div
+                class="category"
+                onclick="filterCategory('bags')"
+            >
+
+                <div class="category-icon">
+                    👜
+                </div>
+
+                <div class="category-name">
+                    Bags
+                </div>
+
             </div>
 
-            <div class="category" onclick="filterCategory('kids')">
-                <div class="category-icon">🧸</div>
-                <div class="category-name">Kids</div>
+
+            <div
+                class="category"
+                onclick="filterCategory('kids')"
+            >
+
+                <div class="category-icon">
+                    🧸
+                </div>
+
+                <div class="category-name">
+                    Kids
+                </div>
+
             </div>
 
-            <div class="category" onclick="filterCategory('gift')">
-                <div class="category-icon">🎁</div>
-                <div class="category-name">Gift</div>
+
+            <div
+                class="category"
+                onclick="filterCategory('gift')"
+            >
+
+                <div class="category-icon">
+                    🎁
+                </div>
+
+                <div class="category-name">
+                    Gift
+                </div>
+
             </div>
 
         </div>
 
     </section>
+
 
 
     <!-- AI -->
@@ -845,14 +1785,23 @@ button{
         <div class="ai-card">
 
             <div>
-                <h2>🤖 AI Shopping Assistant</h2>
+
+                <h2>
+                    🤖 AI Shopping Assistant
+                </h2>
 
                 <p>
-                    আপনার বাজেট, পছন্দ ও প্রয়োজন লিখে product খুঁজে নিন।
+                    আপনার budget, পছন্দ ও প্রয়োজন
+                    লিখে product খুঁজে নিন।
                 </p>
+
             </div>
 
-            <button class="ai-btn" onclick="toggleChat()">
+
+            <button
+                class="ai-btn"
+                onclick="toggleChat()"
+            >
                 AI-এর সাথে কথা বলুন
             </button>
 
@@ -861,9 +1810,13 @@ button{
     </section>
 
 
+
     <!-- PRODUCTS -->
 
-    <section class="section" id="productSection">
+    <section
+        class="section"
+        id="productSection"
+    >
 
         <div class="section-head">
 
@@ -871,72 +1824,141 @@ button{
                 ✨ Recommended For You
             </h2>
 
-            <button class="view-all" onclick="resetProducts()">
+            <button
+                class="view-all"
+                onclick="resetProducts()"
+            >
                 Reset
             </button>
 
         </div>
 
-        <div class="products" id="products"></div>
+
+        <div
+            class="products"
+            id="products"
+        ></div>
 
     </section>
 
 </main>
 
 
-<!-- BOTTOM NAV -->
+
+<!-- =========================================
+     BOTTOM NAVIGATION
+========================================= -->
 
 <nav class="bottom-nav">
 
-    <button class="nav-item active" onclick="goHome()">
-        <span class="nav-icon">🏠</span>
+    <button
+        class="nav-item active"
+        onclick="goHome()"
+    >
+
+        <span class="nav-icon">
+            🏠
+        </span>
+
         Home
+
     </button>
 
-    <button class="nav-item" onclick="focusSearch()">
-        <span class="nav-icon">🔎</span>
+
+    <button
+        class="nav-item"
+        onclick="focusSearch()"
+    >
+
+        <span class="nav-icon">
+            🔎
+        </span>
+
         Search
+
     </button>
 
-    <button class="nav-item" onclick="openCart()">
-        <span class="nav-icon">🛒</span>
+
+    <button
+        class="nav-item"
+        onclick="openCart()"
+    >
+
+        <span class="nav-icon">
+            🛒
+        </span>
+
         Cart
+
     </button>
 
-    <button class="nav-item" onclick="openWishlist()">
-        <span class="nav-icon">❤️</span>
+
+    <button
+        class="nav-item"
+        onclick="openWishlist()"
+    >
+
+        <span class="nav-icon">
+            ❤️
+        </span>
+
         Wishlist
+
     </button>
 
-    <button class="nav-item" onclick="showAccount()">
-        <span class="nav-icon">👤</span>
+
+    <button
+        class="nav-item"
+        onclick="showAccount()"
+    >
+
+        <span class="nav-icon">
+            👤
+        </span>
+
         Account
+
     </button>
 
 </nav>
 
 
-<!-- CART MODAL -->
 
-<div class="modal" id="cartModal">
+<!-- =========================================
+     CART MODAL
+========================================= -->
+
+<div
+    class="modal"
+    id="cartModal"
+>
 
     <div class="modal-box">
 
         <div class="modal-head">
 
-            <h2>🛒 My Cart</h2>
+            <h2>
+                🛒 My Cart
+            </h2>
 
-            <button class="close" onclick="closeModal('cartModal')">
+            <button
+                class="close"
+                onclick="closeModal('cartModal')"
+            >
                 ✕
             </button>
 
         </div>
 
+
         <div id="cartItems"></div>
+
 
         <div class="cart-total">
 
-            <span>Total</span>
+            <span>
+                Total
+            </span>
 
             <span id="cartTotal">
                 ৳0
@@ -944,7 +1966,11 @@ button{
 
         </div>
 
-        <button class="checkout-btn" onclick="checkout()">
+
+        <button
+            class="checkout-btn"
+            onclick="checkout()"
+        >
             Checkout →
         </button>
 
@@ -953,21 +1979,33 @@ button{
 </div>
 
 
-<!-- WISHLIST MODAL -->
 
-<div class="modal" id="wishModal">
+<!-- =========================================
+     WISHLIST MODAL
+========================================= -->
+
+<div
+    class="modal"
+    id="wishModal"
+>
 
     <div class="modal-box">
 
         <div class="modal-head">
 
-            <h2>❤️ Wishlist</h2>
+            <h2>
+                ❤️ Wishlist
+            </h2>
 
-            <button class="close" onclick="closeModal('wishModal')">
+            <button
+                class="close"
+                onclick="closeModal('wishModal')"
+            >
                 ✕
             </button>
 
         </div>
+
 
         <div id="wishItems"></div>
 
@@ -976,34 +2014,54 @@ button{
 </div>
 
 
-<!-- ACCOUNT MODAL -->
 
-<div class="modal" id="accountModal">
+<!-- =========================================
+     ACCOUNT MODAL
+========================================= -->
+
+<div
+    class="modal"
+    id="accountModal"
+>
 
     <div class="modal-box">
 
         <div class="modal-head">
 
-            <h2>👤 My Account</h2>
+            <h2>
+                👤 My Account
+            </h2>
 
-            <button class="close" onclick="closeModal('accountModal')">
+            <button
+                class="close"
+                onclick="closeModal('accountModal')"
+            >
                 ✕
             </button>
 
         </div>
 
+
         <div class="empty">
 
-            <div style="font-size:55px">👤</div>
+            <div style="font-size:55px">
+                👤
+            </div>
 
-            <h3>Shopping Mela Account</h3>
+            <h3>
+                Shopping Mela Account
+            </h3>
 
             <p style="margin-top:10px">
-                Orders, Rewards, Addresses, Payments এবং Settings
-                এখানে থাকবে।
+                Orders, Rewards, Addresses,
+                Payments এবং Settings এখানে থাকবে।
             </p>
 
-            <button class="checkout-btn" onclick="showToast('Login system backend-এর সাথে connect করতে হবে')">
+
+            <button
+                class="checkout-btn"
+                onclick="showToast('Login system পরে backend-এর সাথে connect করা হবে')"
+            >
                 Login / Register
             </button>
 
@@ -1014,36 +2072,64 @@ button{
 </div>
 
 
-<!-- AI CHAT -->
+
+<!-- =========================================
+     AI CHAT
+========================================= -->
 
 <div class="chat">
 
-    <div class="chat-box" id="chatBox">
+    <div
+        class="chat-box"
+        id="chatBox"
+    >
 
         <div class="chat-head">
 
-            <strong>🤖 Shopping AI</strong>
+            <strong>
+                🤖 Shopping AI
+            </strong>
 
             <button
-                style="background:none;border:none;color:white"
-                onclick="toggleChat()">
+                style="
+                    background:none;
+                    border:none;
+                    color:white;
+                "
+                onclick="toggleChat()"
+            >
                 ✕
             </button>
 
         </div>
 
-        <div class="chat-messages" id="chatMessages">
+
+        <div
+            class="chat-messages"
+            id="chatMessages"
+        >
 
             <div class="message bot">
-                👋 আসসালামু আলাইকুম! আমি Shopping Mela AI।
+
+                👋 আসসালামু আলাইকুম!
+                আমি Shopping Mela AI।
+
                 <br><br>
+
                 আপনার budget বা প্রয়োজন লিখুন।
+
+                <br><br>
+
                 যেমন:
                 <br>
-                "২০০০ টাকার মধ্যে একটা ভালো ব্যাগ চাই"
+
+                "২০০০ টাকার মধ্যে
+                একটা ভালো ব্যাগ চাই"
+
             </div>
 
         </div>
+
 
         <div class="chat-input">
 
@@ -1053,7 +2139,9 @@ button{
                 onkeydown="handleChatKey(event)"
             >
 
-            <button onclick="sendChat()">
+            <button
+                onclick="sendChat()"
+            >
                 ➤
             </button>
 
@@ -1061,20 +2149,34 @@ button{
 
     </div>
 
-    <button class="chat-button" onclick="toggleChat()">
+
+    <button
+        class="chat-button"
+        onclick="toggleChat()"
+        aria-label="AI Assistant"
+    >
         🤖
     </button>
 
 </div>
 
 
-<div class="toast" id="toast"></div>
+
+<!-- =========================================
+     TOAST
+========================================= -->
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
 
 
 <script>
 
 /* =========================================
-   PRODUCT DATABASE - DEMO
+   1. PRODUCT DATABASE
 ========================================= */
 
 const products = [
@@ -1193,18 +2295,27 @@ const products = [
 
 
 /* =========================================
-   STATE
+   2. APPLICATION STATE
 ========================================= */
 
-let cart = JSON.parse(localStorage.getItem("sm_cart") || "[]");
+let cart =
+    JSON.parse(
+        localStorage.getItem("sm_cart") || "[]"
+    );
 
-let wishlist = JSON.parse(localStorage.getItem("sm_wishlist") || "[]");
 
-let currentProducts = [...products];
+let wishlist =
+    JSON.parse(
+        localStorage.getItem("sm_wishlist") || "[]"
+    );
+
+
+let currentProducts =
+    [...products];
 
 
 /* =========================================
-   SAVE STATE
+   3. SAVE STATE
 ========================================= */
 
 function saveState(){
@@ -1220,111 +2331,157 @@ function saveState(){
     );
 
     updateBadges();
+
 }
 
 
 /* =========================================
-   RENDER PRODUCTS
+   4. RENDER PRODUCTS
 ========================================= */
 
-function renderProducts(list = currentProducts){
+function renderProducts(
+    list = currentProducts
+){
 
     const container =
         document.getElementById("products");
 
+
     if(!list.length){
 
         container.innerHTML = `
-            <div class="empty" style="grid-column:1/-1">
-                <div style="font-size:50px">🔎</div>
-                <h3>কোনো product পাওয়া যায়নি</h3>
-                <p>অন্য কিছু search করে দেখুন।</p>
+
+            <div
+                class="empty"
+                style="grid-column:1/-1"
+            >
+
+                <div
+                    style="font-size:50px"
+                >
+                    🔎
+                </div>
+
+                <h3>
+                    কোনো product পাওয়া যায়নি
+                </h3>
+
+                <p>
+                    অন্য কিছু search করে দেখুন।
+                </p>
+
             </div>
+
         `;
 
         return;
     }
 
-    container.innerHTML = list.map(product => {
 
-        const wished =
-            wishlist.includes(product.id);
+    container.innerHTML =
 
-        return `
+        list.map(product => {
 
-            <div class="product">
+            const wished =
+                wishlist.includes(product.id);
 
-                <div class="discount">
-                    -${product.discount}
+
+            return `
+
+                <div class="product">
+
+                    <div class="discount">
+                        -${product.discount}
+                    </div>
+
+
+                    <div class="product-img">
+                        ${product.icon}
+                    </div>
+
+
+                    <div class="product-body">
+
+                        <div class="product-title">
+                            ${product.title}
+                        </div>
+
+
+                        <div class="rating">
+                            ⭐ ${product.rating}
+                        </div>
+
+
+                        <div>
+
+                            <span class="price">
+                                ৳${product.price.toLocaleString()}
+                            </span>
+
+                            <span class="old-price">
+                                ৳${product.oldPrice.toLocaleString()}
+                            </span>
+
+                        </div>
+
+
+                        <div class="product-actions">
+
+                            <button
+                                class="add-cart"
+                                onclick="addToCart(${product.id})"
+                            >
+                                🛒 Add
+                            </button>
+
+
+                            <button
+                                class="wish"
+                                onclick="toggleWishlist(${product.id})"
+                            >
+                                ${wished ? "❤️" : "♡"}
+                            </button>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <div class="product-img">
-                    ${product.icon}
-                </div>
+            `;
 
-                <div class="product-body">
+        }).join("");
 
-                    <div class="product-title">
-                        ${product.title}
-                    </div>
-
-                    <div class="rating">
-                        ⭐ ${product.rating}
-                    </div>
-
-                    <div>
-
-                        <span class="price">
-                            ৳${product.price.toLocaleString()}
-                        </span>
-
-                        <span class="old-price">
-                            ৳${product.oldPrice.toLocaleString()}
-                        </span>
-
-                    </div>
-
-                    <div class="product-actions">
-
-                        <button
-                            class="add-cart"
-                            onclick="addToCart(${product.id})">
-                            🛒 Add
-                        </button>
-
-                        <button
-                            class="wish"
-                            onclick="toggleWishlist(${product.id})">
-                            ${wished ? "❤️" : "♡"}
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-        `;
-
-    }).join("");
 }
 
 
 /* =========================================
-   CART
+   5. CART
 ========================================= */
 
 function addToCart(id){
 
     const product =
-        products.find(p => p.id === id);
+        products.find(
+            p => p.id === id
+        );
 
-    if(!product) return;
+
+    if(!product){
+
+        return;
+
+    }
+
 
     cart.push(product);
 
     saveState();
 
-    showToast("🛒 Cart-এ product যোগ হয়েছে");
+
+    showToast(
+        "🛒 Cart-এ product যোগ হয়েছে"
+    );
 
 }
 
@@ -1343,69 +2500,108 @@ function removeCart(index){
 function renderCart(){
 
     const container =
-        document.getElementById("cartItems");
+        document.getElementById(
+            "cartItems"
+        );
+
 
     if(!cart.length){
 
         container.innerHTML = `
+
             <div class="empty">
-                <div style="font-size:55px">🛒</div>
-                <h3>Cart খালি</h3>
-                <p>Shopping শুরু করুন।</p>
+
+                <div
+                    style="font-size:55px"
+                >
+                    🛒
+                </div>
+
+                <h3>
+                    Cart খালি
+                </h3>
+
+                <p>
+                    Shopping শুরু করুন।
+                </p>
+
             </div>
+
         `;
 
-        document.getElementById("cartTotal").textContent =
-            "৳0";
+
+        document.getElementById(
+            "cartTotal"
+        ).textContent = "৳0";
+
 
         return;
+
     }
+
 
     let total = 0;
 
+
     container.innerHTML =
-        cart.map((item,index) => {
 
-            total += item.price;
+        cart.map(
+            (item,index) => {
 
-            return `
+                total += item.price;
 
-                <div class="cart-item">
 
-                    <div class="cart-img">
-                        ${item.icon}
-                    </div>
+                return `
 
-                    <div class="cart-info">
+                    <div class="cart-item">
 
-                        <strong>
-                            ${item.title}
-                        </strong>
-
-                        <div style="color:var(--primary);font-weight:700">
-                            ৳${item.price.toLocaleString()}
+                        <div class="cart-img">
+                            ${item.icon}
                         </div>
 
+
+                        <div class="cart-info">
+
+                            <strong>
+                                ${item.title}
+                            </strong>
+
+                            <div
+                                style="
+                                    color:var(--primary);
+                                    font-weight:700;
+                                "
+                            >
+                                ৳${item.price.toLocaleString()}
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            onclick="removeCart(${index})"
+                            style="
+                                border:none;
+                                background:#fee2e2;
+                                color:#dc2626;
+                                padding:7px 10px;
+                                border-radius:7px;
+                            "
+                        >
+                            Remove
+                        </button>
+
                     </div>
 
-                    <button
-                        onclick="removeCart(${index})"
-                        style="
-                            border:none;
-                            background:#fee2e2;
-                            color:#dc2626;
-                            padding:7px 10px;
-                            border-radius:7px;
-                        ">
-                        Remove
-                    </button>
+                `;
 
-                </div>
-            `;
+            }
+        ).join("");
 
-        }).join("");
 
-    document.getElementById("cartTotal").textContent =
+    document.getElementById(
+        "cartTotal"
+    ).textContent =
         "৳" + total.toLocaleString();
 
 }
@@ -1426,38 +2622,53 @@ function checkout(){
 
     if(!cart.length){
 
-        showToast("আগে Cart-এ product যোগ করুন");
+        showToast(
+            "আগে Cart-এ product যোগ করুন"
+        );
 
         return;
+
     }
 
+
     showToast(
-        "Checkout demo — payment/backend পরে connect করা যাবে"
+        "Checkout demo — backend/payment পরে connect করা হবে"
     );
 
 }
 
 
 /* =========================================
-   WISHLIST
+   6. WISHLIST
 ========================================= */
 
 function toggleWishlist(id){
 
-    if(wishlist.includes(id)){
+    if(
+        wishlist.includes(id)
+    ){
 
         wishlist =
-            wishlist.filter(x => x !== id);
+            wishlist.filter(
+                x => x !== id
+            );
 
-        showToast("Wishlist থেকে সরানো হয়েছে");
+
+        showToast(
+            "Wishlist থেকে সরানো হয়েছে"
+        );
 
     }else{
 
         wishlist.push(id);
 
-        showToast("❤️ Wishlist-এ যোগ হয়েছে");
+
+        showToast(
+            "❤️ Wishlist-এ যোগ হয়েছে"
+        );
 
     }
+
 
     saveState();
 
@@ -1469,56 +2680,83 @@ function toggleWishlist(id){
 function openWishlist(){
 
     const container =
-        document.getElementById("wishItems");
+        document.getElementById(
+            "wishItems"
+        );
+
 
     const items =
-        products.filter(p =>
-            wishlist.includes(p.id)
+        products.filter(
+            p => wishlist.includes(p.id)
         );
+
 
     if(!items.length){
 
         container.innerHTML = `
+
             <div class="empty">
-                <div style="font-size:55px">❤️</div>
-                <h3>Wishlist খালি</h3>
+
+                <div
+                    style="font-size:55px"
+                >
+                    ❤️
+                </div>
+
+                <h3>
+                    Wishlist খালি
+                </h3>
+
             </div>
+
         `;
 
     }else{
 
         container.innerHTML =
-            items.map(item => `
 
-                <div class="cart-item">
+            items.map(
+                item => `
 
-                    <div class="cart-img">
-                        ${item.icon}
-                    </div>
+                    <div class="cart-item">
 
-                    <div class="cart-info">
-
-                        <strong>
-                            ${item.title}
-                        </strong>
-
-                        <div style="color:var(--primary)">
-                            ৳${item.price.toLocaleString()}
+                        <div class="cart-img">
+                            ${item.icon}
                         </div>
 
+
+                        <div class="cart-info">
+
+                            <strong>
+                                ${item.title}
+                            </strong>
+
+                            <div
+                                style="
+                                    color:var(--primary);
+                                    font-weight:700;
+                                "
+                            >
+                                ৳${item.price.toLocaleString()}
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            class="add-cart"
+                            onclick="addToCart(${item.id})"
+                        >
+                            Add
+                        </button>
+
                     </div>
 
-                    <button
-                        class="add-cart"
-                        onclick="addToCart(${item.id})">
-                        Add
-                    </button>
-
-                </div>
-
-            `).join("");
+                `
+            ).join("");
 
     }
+
 
     document
         .getElementById("wishModal")
@@ -1528,24 +2766,29 @@ function openWishlist(){
 
 
 /* =========================================
-   SEARCH
+   7. SEARCH
 ========================================= */
 
 function searchProducts(){
 
     const query =
         document
-            .getElementById("searchInput")
+            .getElementById(
+                "searchInput"
+            )
             .value
             .trim()
             .toLowerCase();
+
 
     if(!query){
 
         resetProducts();
 
         return;
+
     }
+
 
     const banglaMap = {
 
@@ -1561,59 +2804,64 @@ function searchProducts(){
 
     };
 
+
     let normalized = query;
 
-    Object.keys(banglaMap).forEach(key => {
 
-        normalized =
-            normalized.replace(
-                new RegExp(key,"gi"),
-                banglaMap[key]
-            );
+    Object.keys(banglaMap)
+        .forEach(key => {
 
-    });
+            normalized =
+                normalized.replace(
+                    new RegExp(
+                        key,
+                        "gi"
+                    ),
+                    banglaMap[key]
+                );
+
+        });
+
 
     const words =
         normalized.split(/\s+/);
 
+
     const results =
-        products.filter(product => {
+        products.filter(
+            product => {
 
-            const text =
-                (
-                    product.title +
-                    " " +
-                    product.category
-                ).toLowerCase();
+                const text =
+                    (
+                        product.title +
+                        " " +
+                        product.category
+                    ).toLowerCase();
 
-            return words.some(word =>
-                text.includes(word)
-            );
 
-        });
+                return words.some(
+                    word =>
+                        text.includes(word)
+                );
 
-    currentProducts = results;
+            }
+        );
 
-    document.getElementById("productHeading").textContent =
+
+    currentProducts =
+        results;
+
+
+    document.getElementById(
+        "productHeading"
+    ).textContent =
         `🔎 Search Results (${results.length})`;
+
 
     renderProducts(results);
 
+
     scrollToProducts();
-
-}
-
-
-function focusSearch(){
-
-    document
-        .getElementById("searchInput")
-        .focus();
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
 
 }
 
@@ -1622,9 +2870,9 @@ document
     .getElementById("searchInput")
     .addEventListener(
         "keydown",
-        function(e){
+        function(event){
 
-            if(e.key === "Enter"){
+            if(event.key === "Enter"){
 
                 searchProducts();
 
@@ -1635,36 +2883,57 @@ document
 
 
 /* =========================================
-   CATEGORY
+   8. CATEGORY FILTER
 ========================================= */
 
 function filterCategory(category){
 
     const results =
         products.filter(
-            p => p.category === category
+            p =>
+                p.category === category
         );
 
-    currentProducts = results;
 
-    document.getElementById("productHeading").textContent =
-        "📂 " + category.toUpperCase();
+    currentProducts =
+        results;
+
+
+    document.getElementById(
+        "productHeading"
+    ).textContent =
+        "📂 " +
+        category.toUpperCase();
+
 
     renderProducts(results);
+
 
     scrollToProducts();
 
 }
 
 
+/* =========================================
+   9. RESET PRODUCTS
+========================================= */
+
 function resetProducts(){
 
-    currentProducts = [...products];
+    currentProducts =
+        [...products];
 
-    document.getElementById("searchInput").value = "";
 
-    document.getElementById("productHeading").textContent =
+    document.getElementById(
+        "searchInput"
+    ).value = "";
+
+
+    document.getElementById(
+        "productHeading"
+    ).textContent =
         "✨ Recommended For You";
+
 
     renderProducts();
 
@@ -1672,7 +2941,7 @@ function resetProducts(){
 
 
 /* =========================================
-   VOICE SEARCH
+   10. VOICE SEARCH
 ========================================= */
 
 function startVoiceSearch(){
@@ -1681,6 +2950,7 @@ function startVoiceSearch(){
         window.SpeechRecognition ||
         window.webkitSpeechRecognition;
 
+
     if(!SpeechRecognition){
 
         showToast(
@@ -1688,41 +2958,60 @@ function startVoiceSearch(){
         );
 
         return;
+
     }
+
 
     const recognition =
         new SpeechRecognition();
 
-    recognition.lang = "bn-BD";
 
-    recognition.interimResults = false;
+    recognition.lang =
+        "bn-BD";
 
-    recognition.onstart = function(){
 
-        showToast("🎙️ বলুন, কী খুঁজছেন?");
+    recognition.interimResults =
+        false;
 
-    };
 
-    recognition.onresult = function(event){
+    recognition.onstart =
+        function(){
 
-        const text =
-            event.results[0][0].transcript;
+            showToast(
+                "🎙️ বলুন, কী খুঁজছেন?"
+            );
 
-        document
-            .getElementById("searchInput")
-            .value = text;
+        };
 
-        searchProducts();
 
-    };
+    recognition.onresult =
+        function(event){
 
-    recognition.onerror = function(){
+            const text =
+                event.results[0][0]
+                    .transcript;
 
-        showToast(
-            "Voice Search ব্যবহার করা যায়নি"
-        );
 
-    };
+            document.getElementById(
+                "searchInput"
+            ).value =
+                text;
+
+
+            searchProducts();
+
+        };
+
+
+    recognition.onerror =
+        function(){
+
+            showToast(
+                "Voice Search ব্যবহার করা যায়নি"
+            );
+
+        };
+
 
     recognition.start();
 
@@ -1730,7 +3019,7 @@ function startVoiceSearch(){
 
 
 /* =========================================
-   AI CHAT
+   11. AI CHAT
 ========================================= */
 
 function toggleChat(){
@@ -1756,50 +3045,77 @@ function handleChatKey(event){
 function sendChat(){
 
     const input =
-        document.getElementById("chatInput");
+        document.getElementById(
+            "chatInput"
+        );
+
 
     const text =
         input.value.trim();
 
-    if(!text) return;
+
+    if(!text){
+
+        return;
+
+    }
+
 
     addChatMessage(
         text,
         "user"
     );
 
+
     input.value = "";
 
-    setTimeout(() => {
 
-        const response =
-            aiDemoResponse(text);
+    setTimeout(
+        function(){
 
-        addChatMessage(
-            response,
-            "bot"
-        );
+            const response =
+                aiDemoResponse(text);
 
-    },500);
+
+            addChatMessage(
+                response,
+                "bot"
+            );
+
+        },
+        500
+    );
 
 }
 
 
-function addChatMessage(text,type){
+function addChatMessage(
+    text,
+    type
+){
 
     const messages =
-        document.getElementById("chatMessages");
+        document.getElementById(
+            "chatMessages"
+        );
+
 
     const div =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
+
 
     div.className =
         "message " + type;
 
+
     div.innerHTML =
         text;
 
+
     messages.appendChild(div);
+
 
     messages.scrollTop =
         messages.scrollHeight;
@@ -1812,21 +3128,29 @@ function aiDemoResponse(text){
     const lower =
         text.toLowerCase();
 
+
     if(
         lower.includes("ব্যাগ") ||
         lower.includes("bag")
     ){
 
         return `
-            👜 আপনার জন্য কয়েকটি bag আছে।
+            👜 আপনার জন্য কয়েকটি
+            bag option আছে।
+
             <br><br>
-            Budget বললে আমি matching
-            option দেখাতে পারি।
+
+            Budget বললে আমি
+            matching option দেখাতে পারি।
+
             <br><br>
-            যেমন: <b>২০০০ টাকার মধ্যে</b>
+
+            যেমন:
+            <b>২০০০ টাকার মধ্যে</b>
         `;
 
     }
+
 
     if(
         lower.includes("ঘড়ি") ||
@@ -1835,14 +3159,17 @@ function aiDemoResponse(text){
     ){
 
         return `
-            ⌚ Smart Watch-এর কয়েকটি option
-            Shopping Mela-তে আছে।
+            ⌚ Smart Watch-এর
+            কয়েকটি option আছে।
+
             <br><br>
-            আপনি চাইলে আমি
-            budget অনুযায়ী filter করতে পারি।
+
+            Budget অনুযায়ী
+            filter করা যাবে।
         `;
 
     }
+
 
     if(
         lower.includes("জুতা") ||
@@ -1851,11 +3178,12 @@ function aiDemoResponse(text){
 
         return `
             👟 Shoes-এর জন্য
-            Running, Casual এবং Sports
-            category দেখতে পারেন।
+            Running, Casual এবং
+            Sports options আছে।
         `;
 
     }
+
 
     if(
         lower.includes("order") ||
@@ -1863,14 +3191,18 @@ function aiDemoResponse(text){
     ){
 
         return `
-            📦 Order tracking demo এখানে আছে।
+            📦 Order tracking demo
+            এখানে আছে।
+
             <br><br>
-            Production version-এ আপনার
+
+            Production version-এ
             authenticated order data
-            থেকে live status দেখানো হবে।
+            থেকে status দেখানো হবে।
         `;
 
     }
+
 
     if(
         lower.includes("২০০০") ||
@@ -1879,30 +3211,39 @@ function aiDemoResponse(text){
 
         return `
             💰 ৳2,000 budget বুঝেছি।
+
             <br><br>
-            আমি budget অনুযায়ী
-            relevant products সাজিয়ে দিতে পারি।
+
+            Budget অনুযায়ী
+            relevant products
+            সাজানো যাবে।
         `;
 
     }
 
+
     return `
         🤖 বুঝেছি।
+
         <br><br>
-        আপনি product-এর <b>নাম</b>,
-        <b>budget</b> অথবা <b>category</b>
-        লিখুন।
+
+        Product-এর <b>নাম</b>,
+        <b>budget</b> অথবা
+        <b>category</b> লিখুন।
+
         <br><br>
-        উদাহরণ:
+
+        যেমন:
         <br>
-        "১৫০০ টাকার মধ্যে একটা ব্যাগ চাই"
+        "১৫০০ টাকার মধ্যে
+        একটা ব্যাগ চাই"
     `;
 
 }
 
 
 /* =========================================
-   ACCOUNT
+   12. ACCOUNT
 ========================================= */
 
 function showAccount(){
@@ -1915,7 +3256,7 @@ function showAccount(){
 
 
 /* =========================================
-   MODAL
+   13. MODAL
 ========================================= */
 
 function closeModal(id){
@@ -1927,84 +3268,119 @@ function closeModal(id){
 }
 
 
-document.querySelectorAll(".modal")
-    .forEach(modal => {
+document
+    .querySelectorAll(".modal")
+    .forEach(
+        modal => {
 
-        modal.addEventListener(
-            "click",
-            function(e){
+            modal.addEventListener(
+                "click",
+                function(event){
 
-                if(e.target === modal){
+                    if(
+                        event.target === modal
+                    ){
 
-                    modal.classList.remove("show");
+                        modal.classList.remove(
+                            "show"
+                        );
+
+                    }
 
                 }
+            );
 
-            }
-        );
-
-    });
+        }
+    );
 
 
 /* =========================================
-   TOAST
+   14. TOAST
 ========================================= */
 
 let toastTimer;
 
+
 function showToast(message){
 
     const toast =
-        document.getElementById("toast");
+        document.getElementById(
+            "toast"
+        );
+
 
     toast.textContent =
         message;
 
-    toast.classList.add("show");
 
-    clearTimeout(toastTimer);
+    toast.classList.add(
+        "show"
+    );
+
+
+    clearTimeout(
+        toastTimer
+    );
+
 
     toastTimer =
-        setTimeout(() => {
+        setTimeout(
+            function(){
 
-            toast.classList.remove("show");
+                toast.classList.remove(
+                    "show"
+                );
 
-        },2500);
+            },
+            2500
+        );
 
 }
 
 
 /* =========================================
-   BADGES
+   15. BADGES
 ========================================= */
 
 function updateBadges(){
 
-    document.getElementById("cartBadge")
-        .textContent = cart.length;
+    document.getElementById(
+        "cartBadge"
+    ).textContent =
+        cart.length;
 
-    document.getElementById("wishBadge")
-        .textContent = wishlist.length;
+
+    document.getElementById(
+        "wishBadge"
+    ).textContent =
+        wishlist.length;
 
 }
 
 
 /* =========================================
-   OFFLINE / ONLINE
+   16. NETWORK STATUS
 ========================================= */
 
 function updateNetworkStatus(){
 
     const bar =
-        document.getElementById("offlineBar");
+        document.getElementById(
+            "offlineBar"
+        );
+
 
     if(navigator.onLine){
 
-        bar.classList.remove("show");
+        bar.classList.remove(
+            "show"
+        );
 
     }else{
 
-        bar.classList.add("show");
+        bar.classList.add(
+            "show"
+        );
 
     }
 
@@ -2017,7 +3393,9 @@ window.addEventListener(
 
         updateNetworkStatus();
 
-        showToast("🟢 Internet connection restored");
+        showToast(
+            "🟢 Internet connection restored"
+        );
 
     }
 );
@@ -2029,23 +3407,44 @@ window.addEventListener(
 
         updateNetworkStatus();
 
-        showToast("🟠 You are offline");
+        showToast(
+            "🟠 You are offline"
+        );
 
     }
 );
 
 
 /* =========================================
-   NAVIGATION
+   17. NAVIGATION
 ========================================= */
 
 function scrollToProducts(){
 
     document
-        .getElementById("productSection")
+        .getElementById(
+            "productSection"
+        )
         .scrollIntoView({
             behavior:"smooth"
         });
+
+}
+
+
+function focusSearch(){
+
+    document
+        .getElementById(
+            "searchInput"
+        )
+        .focus();
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
 
 }
 
@@ -2061,7 +3460,7 @@ function goHome(){
 
 
 /* =========================================
-   SIMPLE DEEP LINK DEMO
+   18. DEEP LINK DEMO
 ========================================= */
 
 function handleDeepLink(){
@@ -2071,24 +3470,47 @@ function handleDeepLink(){
             window.location.search
         );
 
+
     const productId =
-        Number(params.get("product"));
-
-    if(!productId) return;
-
-    const product =
-        products.find(p =>
-            p.id === productId
+        Number(
+            params.get("product")
         );
 
-    if(!product) return;
 
-    currentProducts = [product];
+    if(!productId){
 
-    document.getElementById("productHeading").textContent =
+        return;
+
+    }
+
+
+    const product =
+        products.find(
+            p => p.id === productId
+        );
+
+
+    if(!product){
+
+        return;
+
+    }
+
+
+    currentProducts =
+        [product];
+
+
+    document.getElementById(
+        "productHeading"
+    ).textContent =
         "🔗 Product";
 
-    renderProducts([product]);
+
+    renderProducts(
+        [product]
+    );
+
 
     setTimeout(
         scrollToProducts,
@@ -2099,25 +3521,7 @@ function handleDeepLink(){
 
 
 /* =========================================
-   SERVICE WORKER - DEMO REGISTRATION
-========================================= */
-
-if("serviceWorker" in navigator){
-
-    /*
-       Real PWA-তে এখানে আলাদা sw.js file
-       ব্যবহার করা উচিত।
-
-       Single index.html demo-তে browser
-       security policy অনুযায়ী inline
-       service worker রাখা যায় না।
-    */
-
-}
-
-
-/* =========================================
-   INITIALIZE
+   19. INITIALIZE APP
 ========================================= */
 
 renderProducts();
