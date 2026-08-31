@@ -1,0 +1,29 @@
+```json
+{
+  "name": "Shopping Mela",
+  "short_name": "Shopping Mela",
+  "description": "Shopping Mela - Smart Online Shopping Platform",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f5f6f8",
+  "theme_color": "#ff6b00",
+  "orientation": "portrait-primary",
+  "lang": "bn",
+  "dir": "ltr",
+
+  "icons": [
+    {
+      "src": "./assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
+```
