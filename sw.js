@@ -1,140 +1,100 @@
-```javascript
-const CACHE_NAME = "shopping-mela-v9.1.9";
+const CACHE_NAME = "shopping-mela-v9-1-10";
 
-const CORE_FILES = [
-    "./",
-    "./index.html",
-    "./manifest.json",
-
-    "./assets/icon/192MILONMELA.svg.svg",
-    "./assets/icon/MILKONMELA512.SVG.svg"
+const FILES_TO_CACHE = [
+  "./",
+  "./index.html",
+  "./manifest.json"
 ];
 
 
-/* =========================================
-   INSTALL
-========================================= */
+// INSTALL
+self.addEventListener("install", function (event) {
 
-self.addEventListener("install", event => {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(function (cache) {
+        return cache.addAll(FILES_TO_CACHE);
+      })
+  );
 
-    event.waitUntil(
-
-        caches.open(CACHE_NAME)
-            .then(cache => {
-
-                return cache.addAll(CORE_FILES);
-
-            })
-
-    );
-
-    self.skipWaiting();
+  self.skipWaiting();
 
 });
 
 
-/* =========================================
-   ACTIVATE
-========================================= */
+// ACTIVATE
+self.addEventListener("activate", function (event) {
 
-self.addEventListener("activate", event => {
+  event.waitUntil(
 
-    event.waitUntil(
+    caches.keys().then(function (cacheNames) {
 
-        caches.keys()
-            .then(names => {
+      return Promise.all(
 
-                return Promise.all(
+        cacheNames.map(function (cacheName) {
 
-                    names
-                        .filter(name =>
-                            name.startsWith(
-                                "shopping-mela-"
-                            ) &&
-                            name !== CACHE_NAME
-                        )
-                        .map(name =>
-                            caches.delete(name)
-                        )
+          if (
+            cacheName !== CACHE_NAME &&
+            cacheName.startsWith("shopping-mela-")
+          ) {
+            return caches.delete(cacheName);
+          }
 
-                );
+          return Promise.resolve();
+        })
 
-            })
+      );
 
-    );
+    })
 
-    self.clients.claim();
+  );
+
+  self.clients.claim();
 
 });
 
 
-/* =========================================
-   FETCH
-========================================= */
+// FETCH
+self.addEventListener("fetch", function (event) {
 
-self.addEventListener("fetch", event => {
+  if (event.request.method !== "GET") {
+    return;
+  }
 
-    if (
-        event.request.method !== "GET"
-    ) {
-        return;
-    }
+  event.respondWith(
 
+    fetch(event.request)
+      .then(function (response) {
 
-    event.respondWith(
+        if (
+          response &&
+          response.status === 200
+        ) {
 
-        caches.match(event.request)
-            .then(cached => {
+          const responseClone =
+            response.clone();
 
-                if (cached) {
+          caches.open(CACHE_NAME)
+            .then(function (cache) {
 
-                    return cached;
+              cache.put(
+                event.request,
+                responseClone
+              );
 
-                }
+            });
 
+        }
 
-                return fetch(event.request)
-                    .then(response => {
+        return response;
 
-                        if (
-                            !response ||
-                            response.status !== 200
-                        ) {
+      })
+      .catch(function () {
 
-                            return response;
+        return caches.match(event.request);
 
-                        }
+      })
 
-
-                        const copy =
-                            response.clone();
-
-
-                        caches.open(CACHE_NAME)
-                            .then(cache => {
-
-                                cache.put(
-                                    event.request,
-                                    copy
-                                );
-
-                            });
-
-
-                        return response;
-
-                    })
-                    .catch(() => {
-
-                        return caches.match(
-                            "./index.html"
-                        );
-
-                    });
-
-            })
-
-    );
+  );
 
 });
-```
