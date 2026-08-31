@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html lang="bn">
+
 <head>
+
     <meta charset="UTF-8">
 
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
+    >
+
+    <!-- PWA -->
+    <link
+        rel="manifest"
+        href="./manifest.json"
     >
 
     <meta
@@ -14,11 +22,37 @@
     >
 
     <meta
+        name="mobile-web-app-capable"
+        content="yes"
+    >
+
+    <meta
+        name="apple-mobile-web-app-capable"
+        content="yes"
+    >
+
+    <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="default"
+    >
+
+    <meta
+        name="apple-mobile-web-app-title"
+        content="Shopping Mela"
+    >
+
+    <meta
         name="description"
-        content="Shopping Mela - Modern AI Shopping Platform"
+        content="Shopping Mela - Modern Smart Shopping Platform"
+    >
+
+    <meta
+        name="application-name"
+        content="Shopping Mela"
     >
 
     <title>Shopping Mela | Smart Shopping</title>
+
 
     <style>
 
@@ -32,26 +66,33 @@
             box-sizing:border-box;
         }
 
+
         html{
             scroll-behavior:smooth;
         }
 
+
         body{
+
             font-family:
                 Arial,
                 "Noto Sans Bengali",
                 sans-serif;
 
             background:#f5f6f8;
+
             color:#1f2937;
 
             padding-bottom:80px;
+
         }
+
 
         button,
         input{
             font:inherit;
         }
+
 
         button{
             cursor:pointer;
@@ -59,25 +100,29 @@
 
 
         /* =========================================
-           2. ROOT VARIABLES
+           2. ROOT
         ========================================= */
 
         :root{
 
             --primary:#ff6b00;
+
             --primary-dark:#e85c00;
 
             --dark:#111827;
 
             --text:#1f2937;
+
             --muted:#6b7280;
 
             --bg:#f5f6f8;
+
             --white:#ffffff;
 
             --border:#e5e7eb;
 
             --success:#16a34a;
+
             --danger:#dc2626;
 
             --shadow:
@@ -304,7 +349,7 @@
 
 
         /* =========================================
-           7. MAIN CONTAINER
+           7. MAIN
         ========================================= */
 
         .container{
@@ -887,13 +932,17 @@
         @keyframes slideUp{
 
             from{
+
                 transform:
                     translateY(100%);
+
             }
 
             to{
+
                 transform:
                     translateY(0);
+
             }
 
         }
@@ -1198,7 +1247,7 @@
 
 
         /* =========================================
-           17. EMPTY STATE
+           17. EMPTY
         ========================================= */
 
         .empty{
@@ -1481,6 +1530,7 @@
         }
 
     </style>
+
 </head>
 
 
@@ -1496,7 +1546,9 @@
     <div class="topbar">
 
         <div class="logo">
+
             Shopping <span>Mela</span>
+
         </div>
 
 
@@ -1508,6 +1560,7 @@
                 placeholder="পণ্য খুঁজুন..."
                 autocomplete="off"
             >
+
 
             <button
                 class="search-btn"
@@ -1536,6 +1589,7 @@
                 onclick="openWishlist()"
                 title="Wishlist"
             >
+
                 ❤️
 
                 <span
@@ -1553,6 +1607,7 @@
                 onclick="openCart()"
                 title="Cart"
             >
+
                 🛒
 
                 <span
@@ -1573,8 +1628,10 @@
         class="offline"
         id="offlineBar"
     >
+
         🟠 আপনি Offline আছেন —
         কিছু feature সাময়িকভাবে unavailable।
+
     </div>
 
 </header>
@@ -1598,11 +1655,13 @@
                 আপনার Smart Shopping শুরু করুন 🛍️
             </h1>
 
+
             <p>
                 AI Search, Voice Search,
                 Personalized Recommendation
                 এবং সহজ Shopping Experience।
             </p>
+
 
             <button
                 class="hero-btn"
@@ -1631,6 +1690,7 @@
             <h2>
                 ক্যাটাগরি
             </h2>
+
 
             <button
                 class="view-all"
@@ -1790,6 +1850,7 @@
                     🤖 AI Shopping Assistant
                 </h2>
 
+
                 <p>
                     আপনার budget, পছন্দ ও প্রয়োজন
                     লিখে product খুঁজে নিন।
@@ -1824,6 +1885,7 @@
                 ✨ Recommended For You
             </h2>
 
+
             <button
                 class="view-all"
                 onclick="resetProducts()"
@@ -1846,7 +1908,7 @@
 
 
 <!-- =========================================
-     BOTTOM NAVIGATION
+     BOTTOM NAV
 ========================================= -->
 
 <nav class="bottom-nav">
@@ -1941,6 +2003,7 @@
                 🛒 My Cart
             </h2>
 
+
             <button
                 class="close"
                 onclick="closeModal('cartModal')"
@@ -1959,6 +2022,7 @@
             <span>
                 Total
             </span>
+
 
             <span id="cartTotal">
                 ৳0
@@ -1997,6 +2061,7 @@
                 ❤️ Wishlist
             </h2>
 
+
             <button
                 class="close"
                 onclick="closeModal('wishModal')"
@@ -2032,6 +2097,7 @@
                 👤 My Account
             </h2>
 
+
             <button
                 class="close"
                 onclick="closeModal('accountModal')"
@@ -2048,13 +2114,17 @@
                 👤
             </div>
 
+
             <h3>
                 Shopping Mela Account
             </h3>
 
+
             <p style="margin-top:10px">
+
                 Orders, Rewards, Addresses,
                 Payments এবং Settings এখানে থাকবে।
+
             </p>
 
 
@@ -2090,6 +2160,7 @@
                 🤖 Shopping AI
             </strong>
 
+
             <button
                 style="
                     background:none;
@@ -2121,6 +2192,7 @@
                 <br><br>
 
                 যেমন:
+
                 <br>
 
                 "২০০০ টাকার মধ্যে
@@ -2138,6 +2210,7 @@
                 placeholder="আপনার প্রশ্ন লিখুন..."
                 onkeydown="handleChatKey(event)"
             >
+
 
             <button
                 onclick="sendChat()"
@@ -2325,10 +2398,12 @@ function saveState(){
         JSON.stringify(cart)
     );
 
+
     localStorage.setItem(
         "sm_wishlist",
         JSON.stringify(wishlist)
     );
+
 
     updateBadges();
 
@@ -2344,7 +2419,9 @@ function renderProducts(
 ){
 
     const container =
-        document.getElementById("products");
+        document.getElementById(
+            "products"
+        );
 
 
     if(!list.length){
@@ -2362,9 +2439,11 @@ function renderProducts(
                     🔎
                 </div>
 
+
                 <h3>
                     কোনো product পাওয়া যায়নি
                 </h3>
+
 
                 <p>
                     অন্য কিছু search করে দেখুন।
@@ -2374,7 +2453,9 @@ function renderProducts(
 
         `;
 
+
         return;
+
     }
 
 
@@ -2383,7 +2464,9 @@ function renderProducts(
         list.map(product => {
 
             const wished =
-                wishlist.includes(product.id);
+                wishlist.includes(
+                    product.id
+                );
 
 
             return `
@@ -2417,6 +2500,7 @@ function renderProducts(
                             <span class="price">
                                 ৳${product.price.toLocaleString()}
                             </span>
+
 
                             <span class="old-price">
                                 ৳${product.oldPrice.toLocaleString()}
@@ -2517,9 +2601,11 @@ function renderCart(){
                     🛒
                 </div>
 
+
                 <h3>
                     Cart খালি
                 </h3>
+
 
                 <p>
                     Shopping শুরু করুন।
@@ -2532,7 +2618,8 @@ function renderCart(){
 
         document.getElementById(
             "cartTotal"
-        ).textContent = "৳0";
+        ).textContent =
+            "৳0";
 
 
         return;
@@ -2566,6 +2653,7 @@ function renderCart(){
                                 ${item.title}
                             </strong>
 
+
                             <div
                                 style="
                                     color:var(--primary);
@@ -2596,6 +2684,7 @@ function renderCart(){
                 `;
 
             }
+
         ).join("");
 
 
@@ -2611,6 +2700,7 @@ function openCart(){
 
     renderCart();
 
+
     document
         .getElementById("cartModal")
         .classList.add("show");
@@ -2625,6 +2715,7 @@ function checkout(){
         showToast(
             "আগে Cart-এ product যোগ করুন"
         );
+
 
         return;
 
@@ -2687,7 +2778,10 @@ function openWishlist(){
 
     const items =
         products.filter(
-            p => wishlist.includes(p.id)
+            p =>
+                wishlist.includes(
+                    p.id
+                )
         );
 
 
@@ -2702,6 +2796,7 @@ function openWishlist(){
                 >
                     ❤️
                 </div>
+
 
                 <h3>
                     Wishlist খালি
@@ -2730,6 +2825,7 @@ function openWishlist(){
                             <strong>
                                 ${item.title}
                             </strong>
+
 
                             <div
                                 style="
@@ -2872,7 +2968,9 @@ document
         "keydown",
         function(event){
 
-            if(event.key === "Enter"){
+            if(
+                event.key === "Enter"
+            ){
 
                 searchProducts();
 
@@ -2883,7 +2981,7 @@ document
 
 
 /* =========================================
-   8. CATEGORY FILTER
+   8. CATEGORY
 ========================================= */
 
 function filterCategory(category){
@@ -2915,7 +3013,7 @@ function filterCategory(category){
 
 
 /* =========================================
-   9. RESET PRODUCTS
+   9. RESET
 ========================================= */
 
 function resetProducts(){
@@ -2956,6 +3054,7 @@ function startVoiceSearch(){
         showToast(
             "এই browser-এ Voice Search support নেই"
         );
+
 
         return;
 
@@ -3033,7 +3132,9 @@ function toggleChat(){
 
 function handleChatKey(event){
 
-    if(event.key === "Enter"){
+    if(
+        event.key === "Enter"
+    ){
 
         sendChat();
 
@@ -3142,11 +3243,6 @@ function aiDemoResponse(text){
 
             Budget বললে আমি
             matching option দেখাতে পারি।
-
-            <br><br>
-
-            যেমন:
-            <b>২০০০ টাকার মধ্যে</b>
         `;
 
     }
@@ -3230,13 +3326,6 @@ function aiDemoResponse(text){
         Product-এর <b>নাম</b>,
         <b>budget</b> অথবা
         <b>category</b> লিখুন।
-
-        <br><br>
-
-        যেমন:
-        <br>
-        "১৫০০ টাকার মধ্যে
-        একটা ব্যাগ চাই"
     `;
 
 }
@@ -3370,7 +3459,9 @@ function updateNetworkStatus(){
         );
 
 
-    if(navigator.onLine){
+    if(
+        navigator.onLine
+    ){
 
         bar.classList.remove(
             "show"
@@ -3460,7 +3551,7 @@ function goHome(){
 
 
 /* =========================================
-   18. DEEP LINK DEMO
+   18. DEEP LINK
 ========================================= */
 
 function handleDeepLink(){
@@ -3486,7 +3577,8 @@ function handleDeepLink(){
 
     const product =
         products.find(
-            p => p.id === productId
+            p =>
+                p.id === productId
         );
 
 
@@ -3521,7 +3613,36 @@ function handleDeepLink(){
 
 
 /* =========================================
-   19. INITIALIZE APP
+   19. PWA SERVICE WORKER CHECK
+========================================= */
+
+if(
+    "serviceWorker" in navigator
+){
+
+    window.addEventListener(
+        "load",
+        function(){
+
+            /*
+             * Service Worker আমরা
+             * 9.1.6 ধাপে তৈরি করব।
+             *
+             * এখন registration করা হচ্ছে না।
+             */
+
+            console.log(
+                "Shopping Mela PWA support ready."
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================
+   20. INITIALIZE
 ========================================= */
 
 renderProducts();
@@ -3532,8 +3653,10 @@ updateNetworkStatus();
 
 handleDeepLink();
 
+
 </script>
 
 </body>
+
 </html>
 ```
