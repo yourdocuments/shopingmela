@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Customer Sign Up | Milon Mela</title>
+
+  <meta name="theme-color" content="#ff6b00">
+
+  <style>
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    body{
+      font-family:Arial, Helvetica, sans-serif;
+      min-height:100vh;
+      background:
+        radial-gradient(circle at top left, rgba(255,107,0,.18), transparent 35%),
+        linear-gradient(135deg,#0b0d12,#151922);
+      color:#fff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:25px;
+    }
+
+    .container{
+      width:100%;
+      max-width:520px;
+    }
+
+    .brand{
+      text-align:center;
+      margin-bottom:20px;
+    }
+
+    .brand-logo{
+      width:75px;
+      height:75px;
+      object-fit:contain;
+      margin-bottom:10px;
+    }
+
+    .brand h1{
+      font-size:28px;
+      margin-bottom:5px;
+    }
+
+    .brand p{
+      color:#aeb4c0;
+      font-size:14px;
+    }
+
+    .card{
+      background:rgba(20,23,31,.96);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:22px;
+      padding:28px;
+      box-shadow:0 20px 60px rgba(0,0,0,.4);
+    }
+
+    .card-title{
+      font-size:22px;
+      margin-bottom:6px;
+    }
+
+    .card-subtitle{
+      color:#9ca3af;
+      font-size:14px;
+      margin-bottom:22px;
+      line-height:1.5;
+    }
+
+    .section-title{
+      font-size:15px;
+      font-weight:700;
+      color:#ff8a3d;
+      margin:22px 0 12px;
+      padding-bottom:7px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    .form-group{
+      margin-bottom:15px;
+    }
+
+    label{
+      display:block;
+      font-size:13px;
+      color:#d7dbe2;
+      margin-bottom:7px;
+    }
+
+    .required{
+      color:#ff6b00;
+    }
+
+    input,
+    textarea{
+      width:100%;
+      border:1px solid #303642;
+      background:#0d1016;
+      color:#fff;
+      border-radius:11px;
+      padding:13px 14px;
+      font-size:14px;
+      outline:none;
+      transition:.2s;
+    }
+
+    textarea{
+      min-height:85px;
+      resize:vertical;
+    }
+
+    input:focus,
+    textarea:focus{
+      border-color:#ff6b00;
+      box-shadow:0 0 0 3px rgba(255,107,0,.10);
+    }
+
+    input::placeholder,
+    textarea::placeholder{
+      color:#6f7682;
+    }
+
+    .password-wrap{
+      position:relative;
+    }
+
+    .password-wrap input{
+      padding-right:48px;
+    }
+
+    .toggle-password{
+      position:absolute;
+      right:10px;
+      top:50%;
+      transform:translateY(-50%);
+      border:0;
+      background:transparent;
+      color:#9ca3af;
+      cursor:pointer;
+      font-size:13px;
+      padding:6px;
+    }
+
+    .password-wrap .toggle-password:hover{
+      color:#ff8a3d;
+    }
+
+    .password-hint{
+      font-size:11px;
+      color:#777f8c;
+      margin-top:6px;
+    }
+
+    .terms{
+      display:flex;
+      align-items:flex-start;
+      gap:9px;
+      margin:18px 0;
+      color:#aeb4c0;
+      font-size:12px;
+      line-height:1.5;
+    }
+
+    .terms input{
+      width:auto;
+      margin-top:3px;
+      accent-color:#ff6b00;
+    }
+
+    .terms a{
+      color:#ff8a3d;
+      text-decoration:none;
+    }
+
+    .signup-btn{
+      width:100%;
+      border:0;
+      background:#ff6b00;
+      color:#fff;
+      padding:14px;
+      border-radius:12px;
+      font-size:15px;
+      font-weight:700;
+      cursor:pointer;
+      transition:.2s;
+    }
+
+    .signup-btn:hover{
+      background:#e85f00;
+      transform:translateY(-1px);
+    }
+
+    .signup-btn:disabled{
+      opacity:.6;
+      cursor:not-allowed;
+      transform:none;
+    }
+
+    .message{
+      display:none;
+      padding:12px 14px;
+      border-radius:10px;
+      margin-bottom:15px;
+      font-size:13px;
+      line-height:1.5;
+    }
+
+    .message.error{
+      display:block;
+      background:rgba(220,38,38,.12);
+      border:1px solid rgba(248,113,113,.25);
+      color:#fca5a5;
+    }
+
+    .message.success{
+      display:block;
+      background:rgba(34,197,94,.12);
+      border:1px solid rgba(74,222,128,.25);
+      color:#86efac;
+    }
+
+    .bottom-link{
+      text-align:center;
+      margin-top:20px;
+      color:#8f96a3;
+      font-size:13px;
+    }
+
+    .bottom-link a{
+      color:#ff8a3d;
+      text-decoration:none;
+      font-weight:700;
+    }
+
+    .bottom-link a:hover{
+      text-decoration:underline;
+    }
+
+    .home-link{
+      display:block;
+      text-align:center;
+      margin-top:14px;
+      color:#8f96a3;
+      text-decoration:none;
+      font-size:13px;
+    }
+
+    .home-link:hover{
+      color:#fff;
+    }
+
+    .loading{
+      display:none;
+      text-align:center;
+      margin-top:10px;
+      color:#9ca3af;
+      font-size:12px;
+    }
+
+    .store-preview{
+      background:#0d1016;
+      border:1px dashed #353b46;
+      border-radius:12px;
+      padding:12px;
+      margin-top:10px;
+      color:#8f96a3;
+      font-size:12px;
+      line-height:1.5;
+    }
+
+    .store-preview strong{
+      color:#fff;
+    }
+
+    @media(max-width:600px){
+      body{
+        padding:15px;
+      }
+
+      .card{
+        padding:20px;
+        border-radius:18px;
+      }
+
+      .brand h1{
+        font-size:24px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="brand">
+
+      <img
+        class="brand-logo"
+        src="./assets/icon/MILKONMELA512.SVG.svg"
+        alt="Milon Mela"
+        onerror="this.style.display='none'"
+      >
+
+      <h1>Milon Mela</h1>
+      <p>আপনার নিজের Online Store তৈরি করুন</p>
+
+    </div>
+
+
+    <div class="card">
+
+      <div class="card-title">
+        Customer Sign Up
+      </div>
+
+      <div class="card-subtitle">
+        একটি Customer Account তৈরি করুন এবং আপনার নিজের Shop / Store চালু করুন।
+      </div>
+
+
+      <div id="message" class="message"></div>
+
+
+      <form id="signupForm">
+
+        <!-- CUSTOMER INFORMATION -->
+
+        <div class="section-title">
+          Customer Information
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="fullName">
+            আপনার নাম <span class="required">*</span>
+          </label>
+
+          <input
+            type="text"
+            id="fullName"
+            placeholder="যেমন: Sakhi Jahan"
+            autocomplete="name"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="email">
+            Email Address <span class="required">*</span>
+          </label>
+
+          <input
+            type="email"
+            id="email"
+            placeholder="example@gmail.com"
+            autocomplete="email"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="phone">
+            Mobile Number <span class="required">*</span>
+          </label>
+
+          <input
+            type="tel"
+            id="phone"
+            placeholder="01XXXXXXXXX"
+            autocomplete="tel"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="password">
+            Password <span class="required">*</span>
+          </label>
+
+          <div class="password-wrap">
+
+            <input
+              type="password"
+              id="password"
+              placeholder="কমপক্ষে 6 characters"
+              autocomplete="new-password"
+              minlength="6"
+              required
+            >
+
+            <button
+              type="button"
+              class="toggle-password"
+              data-target="password"
+            >
+              Show
+            </button>
+
+          </div>
+
+          <div class="password-hint">
+            Password কমপক্ষে 6 characters হতে হবে।
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="confirmPassword">
+            Confirm Password <span class="required">*</span>
+          </label>
+
+          <div class="password-wrap">
+
+            <input
+              type="password"
+              id="confirmPassword"
+              placeholder="Password আবার লিখুন"
+              autocomplete="new-password"
+              minlength="6"
+              required
+            >
+
+            <button
+              type="button"
+              class="toggle-password"
+              data-target="confirmPassword"
+            >
+              Show
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- STORE INFORMATION -->
+
+        <div class="section-title">
+          আপনার Shop / Store Information
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="storeName">
+            Shop / Store Name <span class="required">*</span>
+          </label>
+
+          <input
+            type="text"
+            id="storeName"
+            placeholder="যেমন: Sakhi Fashion House"
+            required
+          >
+
+          <div class="store-preview">
+            আপনার Store হবে:
+            <strong id="storePreview">
+              আপনার Shop Name
+            </strong>
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="address">
+            Shop Address <span class="required">*</span>
+          </label>
+
+          <textarea
+            id="address"
+            placeholder="আপনার দোকানের ঠিকানা লিখুন"
+            required
+          ></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="description">
+            Shop Description
+          </label>
+
+          <textarea
+            id="description"
+            placeholder="আপনার Shop সম্পর্কে সংক্ষেপে লিখুন"
+          ></textarea>
+
+        </div>
+
+
+        <div class="terms">
+
+          <input
+            type="checkbox"
+            id="agree"
+            required
+          >
+
+          <label for="agree">
+            আমি Milon Mela-এর
+            <a href="#" onclick="return false;">
+              Terms & Conditions
+            </a>
+            মেনে Customer Account এবং Store তৈরি করতে সম্মত।
+          </label>
+
+        </div>
+
+
+        <button
+          type="submit"
+          class="signup-btn"
+          id="signupBtn"
+        >
+          Create Customer Account
+        </button>
+
+        <div
+          class="loading"
+          id="loadingText"
+        >
+          Account এবং Store তৈরি হচ্ছে...
+        </div>
+
+      </form>
+
+
+      <div class="bottom-link">
+        আগে থেকেই Account আছে?
+        <a href="customer-login.html">
+          Customer Login
+        </a>
+      </div>
+
+      <a
+        href="index.html"
+        class="home-link"
+      >
+        ← Milon Mela Home
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <!-- Firebase -->
+
+  <script type="module">
+
+    import {
+      createUserWithEmailAndPassword
+    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+    import {
+      doc,
+      setDoc,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+    import {
+      auth,
+      db
+    } from "./firebase-config.js";
+
+
+    const signupForm =
+      document.getElementById("signupForm");
+
+    const signupBtn =
+      document.getElementById("signupBtn");
+
+    const loadingText =
+      document.getElementById("loadingText");
+
+    const message =
+      document.getElementById("message");
+
+    const fullName =
+      document.getElementById("fullName");
+
+    const email =
+      document.getElementById("email");
+
+    const phone =
+      document.getElementById("phone");
+
+    const password =
+      document.getElementById("password");
+
+    const confirmPassword =
+      document.getElementById("confirmPassword");
+
+    const storeName =
+      document.getElementById("storeName");
+
+    const address =
+      document.getElementById("address");
+
+    const description =
+      document.getElementById("description");
+
+    const agree =
+      document.getElementById("agree");
+
+    const storePreview =
+      document.getElementById("storePreview");
+
+
+    /* =========================
+       MESSAGE
+    ========================= */
+
+    function showMessage(text, type){
+
+      message.textContent = text;
+
+      message.className =
+        "message " + type;
+
+    }
+
+
+    function clearMessage(){
+
+      message.textContent = "";
+
+      message.className =
+        "message";
+
+    }
+
+
+    /* =========================
+       PASSWORD SHOW / HIDE
+    ========================= */
+
+    document
+      .querySelectorAll(".toggle-password")
+      .forEach(function(button){
+
+        button.addEventListener("click", function(){
+
+          const targetId =
+            button.getAttribute("data-target");
+
+          const input =
+            document.getElementById(targetId);
+
+          if(input.type === "password"){
+
+            input.type = "text";
+
+            button.textContent = "Hide";
+
+          }else{
+
+            input.type = "password";
+
+            button.textContent = "Show";
+
+          }
+
+        });
+
+      });
+
+
+    /* =========================
+       STORE PREVIEW
+    ========================= */
+
+    storeName.addEventListener(
+      "input",
+      function(){
+
+        const value =
+          storeName.value.trim();
+
+        storePreview.textContent =
+          value || "আপনার Shop Name";
+
+      }
+    );
+
+
+    /* =========================
+       FIREBASE ERROR
+    ========================= */
+
+    function firebaseError(error){
+
+      console.error(
+        "Firebase Signup Error:",
+        error
+      );
+
+
+      switch(error.code){
+
+        case "auth/email-already-in-use":
+          return "এই Email দিয়ে ইতিমধ্যে Account তৈরি আছে।";
+
+        case "auth/invalid-email":
+          return "Email Address সঠিক নয়।";
+
+        case "auth/weak-password":
+          return "Password আরও শক্তিশালী দিন।";
+
+        case "auth/network-request-failed":
+          return "Internet connection সমস্যা হয়েছে।";
+
+        case "auth/too-many-requests":
+          return "অনেকবার চেষ্টা করা হয়েছে। কিছুক্ষণ পরে আবার চেষ্টা করুন।";
+
+        default:
+          return "Account তৈরি করা যায়নি। আবার চেষ্টা করুন।";
+
+      }
+
+    }
+
+
+    /* =========================
+       SIGN UP
+    ========================= */
+
+    signupForm.addEventListener(
+      "submit",
+      async function(event){
+
+        event.preventDefault();
+
+        clearMessage();
+
+
+        const nameValue =
+          fullName.value.trim();
+
+        const emailValue =
+          email.value.trim();
+
+        const phoneValue =
+          phone.value.trim();
+
+        const passwordValue =
+          password.value;
+
+        const confirmPasswordValue =
+          confirmPassword.value;
+
+        const storeNameValue =
+          storeName.value.trim();
+
+        const addressValue =
+          address.value.trim();
+
+        const descriptionValue =
+          description.value.trim();
+
+
+        /* VALIDATION */
+
+        if(nameValue.length < 2){
+
+          showMessage(
+            "আপনার নাম সঠিকভাবে লিখুন।",
+            "error"
+          );
+
+          fullName.focus();
+
+          return;
+
+        }
+
+
+        if(passwordValue.length < 6){
+
+          showMessage(
+            "Password কমপক্ষে 6 characters হতে হবে।",
+            "error"
+          );
+
+          password.focus();
+
+          return;
+
+        }
+
+
+        if(passwordValue !== confirmPasswordValue){
+
+          showMessage(
+            "Password এবং Confirm Password মিলছে না।",
+            "error"
+          );
+
+          confirmPassword.focus();
+
+          return;
+
+        }
+
+
+        if(storeNameValue.length < 2){
+
+          showMessage(
+            "Shop / Store Name লিখুন।",
+            "error"
+          );
+
+          storeName.focus();
+
+          return;
+
+        }
+
+
+        if(addressValue.length < 3){
+
+          showMessage(
+            "Shop Address লিখুন।",
+            "error"
+          );
+
+          address.focus();
+
+          return;
+
+        }
+
+
+        if(!agree.checked){
+
+          showMessage(
+            "Terms & Conditions মেনে নেওয়ার জন্য checkbox নির্বাচন করুন।",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        /* BUTTON LOCK */
+
+        signupBtn.disabled = true;
+
+        signupBtn.textContent =
+          "Creating Account...";
+
+        loadingText.style.display =
+          "block";
+
+
+        try{
+
+          /*
+            STEP 1
+            Firebase Authentication
+          */
+
+          const userCredential =
+            await createUserWithEmailAndPassword(
+              auth,
+              emailValue,
+              passwordValue
+            );
+
+
+          const user =
+            userCredential.user;
+
+          const uid =
+            user.uid;
+
+
+          console.log(
+            "Customer Firebase Account Created:",
+            uid
+          );
+
+
+          /*
+            STEP 2
+            Create Customer Profile
+          */
+
+          await setDoc(
+            doc(db, "users", uid),
+            {
+              uid: uid,
+
+              name: nameValue,
+
+              email: emailValue,
+
+              phone: phoneValue,
+
+              role: "customer",
+
+              status: "active",
+
+              createdAt:
+                serverTimestamp(),
+
+              updatedAt:
+                serverTimestamp()
+            }
+          );
+
+
+          console.log(
+            "Customer Profile Created"
+          );
+
+
+          /*
+            STEP 3
+            Create Store
+          */
+
+          const storeId =
+            uid;
+
+
+          await setDoc(
+            doc(db, "stores", storeId),
+            {
+
+              storeId: storeId,
+
+              ownerId: uid,
+
+              storeName: storeNameValue,
+
+              ownerName: nameValue,
+
+              email: emailValue,
+
+              phone: phoneValue,
+
+              address: addressValue,
+
+              description:
+                descriptionValue,
+
+              logo: "",
+
+              status: "pending",
+
+              verified: false,
+
+              createdAt:
+                serverTimestamp(),
+
+              updatedAt:
+                serverTimestamp()
+
+            }
+          );
+
+
+          console.log(
+            "Customer Store Created:",
+            storeId
+          );
+
+
+          /*
+            SUCCESS
+          */
+
+          showMessage(
+            "Account এবং Store সফলভাবে তৈরি হয়েছে। Customer Dashboard-এ নেওয়া হচ্ছে...",
+            "success"
+          );
+
+
+          signupBtn.textContent =
+            "Account Created ✓";
+
+
+          /*
+            Small delay
+            so user can see success
+          */
+
+          setTimeout(
+            function(){
+
+              window.location.replace(
+                "customer-dashboard.html"
+              );
+
+            },
+            1200
+          );
+
+
+        }catch(error){
+
+          console.error(
+            "Customer Signup Error:",
+            error
+          );
+
+
+          showMessage(
+            firebaseError(error),
+            "error"
+          );
+
+
+          signupBtn.disabled =
+            false;
+
+          signupBtn.textContent =
+            "Create Customer Account";
+
+          loadingText.style.display =
+            "none";
+
+        }
+
+      }
+    );
+
+
+    console.log(
+      "======================================"
+    );
+
+    console.log(
+      "Milon Mela Customer Signup Ready"
+    );
+
+    console.log(
+      "Firebase Project: milonmelay"
+    );
+
+    console.log(
+      "======================================");
+
+  </script>
+
+</body>
+</html>
