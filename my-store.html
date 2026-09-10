@@ -1,0 +1,3945 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>My Store | Milon Mela</title>
+
+  <meta
+    name="theme-color"
+    content="#ff6b00"
+  >
+
+  <style>
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    :root{
+      --primary:#ff6b00;
+      --primary-dark:#e85f00;
+
+      --bg:#f5f6f8;
+      --card:#ffffff;
+
+      --text:#171a21;
+      --muted:#6b7280;
+
+      --border:#e5e7eb;
+
+      --sidebar:#11151c;
+      --sidebar-text:#d7dce4;
+
+      --success:#16a34a;
+      --warning:#d97706;
+      --danger:#dc2626;
+
+      --shadow:0 12px 35px rgba(0,0,0,.08);
+    }
+
+
+    body{
+      font-family:
+        Arial,
+        "Noto Sans Bengali",
+        "Noto Sans",
+        sans-serif;
+
+      background:var(--bg);
+      color:var(--text);
+
+      min-height:100vh;
+    }
+
+
+    button,
+    input,
+    textarea{
+      font:inherit;
+    }
+
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+
+    /* =========================
+       AUTH LOADING
+    ========================= */
+
+    #authLoading{
+
+      position:fixed;
+
+      inset:0;
+
+      z-index:99999;
+
+      background:#0b0e14;
+
+      color:#fff;
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:center;
+
+      flex-direction:column;
+
+      text-align:center;
+
+      padding:25px;
+
+    }
+
+
+    .loading-logo{
+
+      width:80px;
+
+      height:80px;
+
+      object-fit:contain;
+
+      margin-bottom:18px;
+
+    }
+
+
+    .spinner{
+
+      width:38px;
+
+      height:38px;
+
+      border:
+
+        4px solid
+
+        rgba(255,255,255,.15);
+
+      border-top-color:
+
+        var(--primary);
+
+      border-radius:50%;
+
+      animation:
+        spin .8s linear infinite;
+
+      margin-bottom:15px;
+
+    }
+
+
+    @keyframes spin{
+
+      to{
+        transform:rotate(360deg);
+      }
+
+    }
+
+
+    #authLoading p{
+
+      color:#9ca3af;
+
+      font-size:13px;
+
+      margin-top:6px;
+
+    }
+
+
+
+    /* =========================
+       APP
+    ========================= */
+
+    .app{
+
+      min-height:100vh;
+
+      display:flex;
+
+    }
+
+
+
+    /* =========================
+       SIDEBAR
+    ========================= */
+
+    .sidebar{
+
+      width:260px;
+
+      min-height:100vh;
+
+      position:fixed;
+
+      left:0;
+
+      top:0;
+
+      bottom:0;
+
+      z-index:100;
+
+      background:var(--sidebar);
+
+      color:#fff;
+
+      display:flex;
+
+      flex-direction:column;
+
+      border-right:
+        1px solid rgba(255,255,255,.06);
+
+    }
+
+
+    .brand{
+
+      padding:22px 20px;
+
+      display:flex;
+
+      align-items:center;
+
+      gap:12px;
+
+      border-bottom:
+        1px solid rgba(255,255,255,.07);
+
+    }
+
+
+    .brand-logo{
+
+      width:48px;
+
+      height:48px;
+
+      object-fit:contain;
+
+    }
+
+
+    .brand-text h1{
+
+      font-size:19px;
+
+      line-height:1.2;
+
+    }
+
+
+    .brand-text span{
+
+      display:block;
+
+      color:#9ca3af;
+
+      font-size:11px;
+
+      margin-top:4px;
+
+    }
+
+
+    .store-mini{
+
+      margin:15px;
+
+      padding:13px;
+
+      background:
+        rgba(255,255,255,.05);
+
+      border:
+        1px solid rgba(255,255,255,.07);
+
+      border-radius:13px;
+
+    }
+
+
+    .store-mini-label{
+
+      color:#8f98a7;
+
+      font-size:10px;
+
+      text-transform:uppercase;
+
+      letter-spacing:.5px;
+
+      margin-bottom:6px;
+
+    }
+
+
+    .store-mini-name{
+
+      font-size:14px;
+
+      font-weight:700;
+
+      overflow:hidden;
+
+      text-overflow:ellipsis;
+
+      white-space:nowrap;
+
+    }
+
+
+    .nav{
+
+      flex:1;
+
+      padding:10px 12px;
+
+      overflow-y:auto;
+
+    }
+
+
+    .nav-title{
+
+      color:#737b89;
+
+      font-size:10px;
+
+      text-transform:uppercase;
+
+      letter-spacing:1px;
+
+      padding:10px 10px 7px;
+
+    }
+
+
+    .nav-item{
+
+      width:100%;
+
+      display:flex;
+
+      align-items:center;
+
+      gap:11px;
+
+      padding:12px;
+
+      border:0;
+
+      border-radius:10px;
+
+      background:transparent;
+
+      color:var(--sidebar-text);
+
+      cursor:pointer;
+
+      text-align:left;
+
+      margin-bottom:4px;
+
+      transition:.2s;
+
+    }
+
+
+    .nav-item:hover{
+
+      background:
+        rgba(255,255,255,.07);
+
+      color:#fff;
+
+    }
+
+
+    .nav-item.active{
+
+      background:var(--primary);
+
+      color:#fff;
+
+    }
+
+
+    .nav-icon{
+
+      width:23px;
+
+      text-align:center;
+
+      font-size:17px;
+
+    }
+
+
+    .nav-text{
+
+      font-size:13px;
+
+      font-weight:600;
+
+    }
+
+
+    .sidebar-bottom{
+
+      padding:15px;
+
+      border-top:
+        1px solid rgba(255,255,255,.07);
+
+    }
+
+
+    .user-mini{
+
+      display:flex;
+
+      align-items:center;
+
+      gap:10px;
+
+      margin-bottom:12px;
+
+    }
+
+
+    .avatar{
+
+      width:38px;
+
+      height:38px;
+
+      border-radius:50%;
+
+      background:var(--primary);
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:center;
+
+      font-weight:700;
+
+      font-size:15px;
+
+      flex-shrink:0;
+
+    }
+
+
+    .user-info{
+
+      min-width:0;
+
+    }
+
+
+    .user-name{
+
+      font-size:13px;
+
+      font-weight:700;
+
+      white-space:nowrap;
+
+      overflow:hidden;
+
+      text-overflow:ellipsis;
+
+    }
+
+
+    .user-email{
+
+      color:#8d95a3;
+
+      font-size:10px;
+
+      margin-top:3px;
+
+      white-space:nowrap;
+
+      overflow:hidden;
+
+      text-overflow:ellipsis;
+
+    }
+
+
+    .logout-btn{
+
+      width:100%;
+
+      border:
+        1px solid rgba(255,255,255,.1);
+
+      background:
+        rgba(255,255,255,.04);
+
+      color:#d5dae2;
+
+      padding:10px;
+
+      border-radius:9px;
+
+      cursor:pointer;
+
+      font-size:12px;
+
+      transition:.2s;
+
+    }
+
+
+    .logout-btn:hover{
+
+      background:
+        rgba(220,38,38,.15);
+
+      color:#fca5a5;
+
+    }
+
+
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    .mobile-header{
+
+      display:none;
+
+      position:fixed;
+
+      top:0;
+
+      left:0;
+
+      right:0;
+
+      height:62px;
+
+      background:#11151c;
+
+      color:#fff;
+
+      z-index:90;
+
+      align-items:center;
+
+      justify-content:space-between;
+
+      padding:0 15px;
+
+      border-bottom:
+        1px solid rgba(255,255,255,.08);
+
+    }
+
+
+    .mobile-brand{
+
+      display:flex;
+
+      align-items:center;
+
+      gap:9px;
+
+    }
+
+
+    .mobile-brand img{
+
+      width:36px;
+
+      height:36px;
+
+      object-fit:contain;
+
+    }
+
+
+    .mobile-brand strong{
+
+      font-size:16px;
+
+    }
+
+
+    .menu-btn{
+
+      width:40px;
+
+      height:40px;
+
+      border:0;
+
+      border-radius:9px;
+
+      background:
+        rgba(255,255,255,.08);
+
+      color:#fff;
+
+      cursor:pointer;
+
+      font-size:20px;
+
+    }
+
+
+    .overlay{
+
+      display:none;
+
+      position:fixed;
+
+      inset:0;
+
+      background:
+        rgba(0,0,0,.5);
+
+      z-index:95;
+
+    }
+
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    .main{
+
+      margin-left:260px;
+
+      width:
+        calc(100% - 260px);
+
+      min-height:100vh;
+
+    }
+
+
+    /* =========================
+       TOPBAR
+    ========================= */
+
+    .topbar{
+
+      height:72px;
+
+      background:var(--card);
+
+      border-bottom:
+        1px solid var(--border);
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:space-between;
+
+      padding:0 28px;
+
+      position:sticky;
+
+      top:0;
+
+      z-index:50;
+
+    }
+
+
+    .page-heading h2{
+
+      font-size:20px;
+
+    }
+
+
+    .page-heading p{
+
+      color:var(--muted);
+
+      font-size:12px;
+
+      margin-top:4px;
+
+    }
+
+
+    .topbar-right{
+
+      display:flex;
+
+      align-items:center;
+
+      gap:10px;
+
+    }
+
+
+    .store-status{
+
+      display:flex;
+
+      align-items:center;
+
+      gap:7px;
+
+      padding:7px 11px;
+
+      border-radius:20px;
+
+      background:#fff7ed;
+
+      color:#c2410c;
+
+      font-size:11px;
+
+      font-weight:700;
+
+    }
+
+
+    .status-dot{
+
+      width:7px;
+
+      height:7px;
+
+      border-radius:50%;
+
+      background:#f59e0b;
+
+    }
+
+
+    .status-dot.approved{
+
+      background:#22c55e;
+
+    }
+
+
+
+    /* =========================
+       CONTENT
+    ========================= */
+
+    .content{
+
+      padding:28px;
+
+      max-width:1150px;
+
+      margin:0 auto;
+
+    }
+
+
+    .page-title{
+
+      margin-bottom:20px;
+
+    }
+
+
+    .page-title h1{
+
+      font-size:24px;
+
+      margin-bottom:5px;
+
+    }
+
+
+    .page-title p{
+
+      color:var(--muted);
+
+      font-size:13px;
+
+      line-height:1.6;
+
+    }
+
+
+
+    /* =========================
+       LAYOUT
+    ========================= */
+
+    .store-grid{
+
+      display:grid;
+
+      grid-template-columns:
+        minmax(0,1.35fr)
+        minmax(280px,.65fr);
+
+      gap:18px;
+
+    }
+
+
+    .card{
+
+      background:var(--card);
+
+      border:
+        1px solid var(--border);
+
+      border-radius:16px;
+
+      box-shadow:var(--shadow);
+
+      overflow:hidden;
+
+    }
+
+
+    .card-header{
+
+      padding:17px 19px;
+
+      border-bottom:
+        1px solid var(--border);
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:space-between;
+
+      gap:10px;
+
+    }
+
+
+    .card-header h3{
+
+      font-size:15px;
+
+    }
+
+
+    .card-header span{
+
+      color:var(--muted);
+
+      font-size:11px;
+
+    }
+
+
+    .card-body{
+
+      padding:20px;
+
+    }
+
+
+
+    /* =========================
+       FORM
+    ========================= */
+
+    .form-group{
+
+      margin-bottom:17px;
+
+    }
+
+
+    label{
+
+      display:block;
+
+      font-size:12px;
+
+      font-weight:700;
+
+      margin-bottom:7px;
+
+    }
+
+
+    .required{
+
+      color:var(--danger);
+
+    }
+
+
+    input,
+    textarea{
+
+      width:100%;
+
+      border:
+        1px solid #d9dde5;
+
+      background:#fff;
+
+      color:var(--text);
+
+      border-radius:10px;
+
+      padding:12px 13px;
+
+      outline:none;
+
+      font-size:13px;
+
+      transition:.2s;
+
+    }
+
+
+    textarea{
+
+      min-height:105px;
+
+      resize:vertical;
+
+      line-height:1.6;
+
+    }
+
+
+    input:focus,
+    textarea:focus{
+
+      border-color:var(--primary);
+
+      box-shadow:
+        0 0 0 3px
+        rgba(255,107,0,.10);
+
+    }
+
+
+    input:disabled{
+
+      background:#f3f4f6;
+
+      color:#6b7280;
+
+      cursor:not-allowed;
+
+    }
+
+
+    .field-help{
+
+      color:#8a919d;
+
+      font-size:10px;
+
+      margin-top:5px;
+
+      line-height:1.5;
+
+    }
+
+
+    .form-actions{
+
+      display:flex;
+
+      align-items:center;
+
+      gap:10px;
+
+      padding-top:5px;
+
+    }
+
+
+    .primary-btn{
+
+      border:0;
+
+      background:var(--primary);
+
+      color:#fff;
+
+      padding:11px 18px;
+
+      border-radius:9px;
+
+      cursor:pointer;
+
+      font-size:12px;
+
+      font-weight:700;
+
+      transition:.2s;
+
+    }
+
+
+    .primary-btn:hover{
+
+      background:var(--primary-dark);
+
+    }
+
+
+    .primary-btn:disabled{
+
+      opacity:.6;
+
+      cursor:not-allowed;
+
+    }
+
+
+    .secondary-btn{
+
+      border:
+        1px solid var(--border);
+
+      background:#fff;
+
+      color:var(--text);
+
+      padding:11px 18px;
+
+      border-radius:9px;
+
+      cursor:pointer;
+
+      font-size:12px;
+
+      font-weight:700;
+
+    }
+
+
+    .secondary-btn:hover{
+
+      background:#f9fafb;
+
+    }
+
+
+
+    /* =========================
+       PREVIEW
+    ========================= */
+
+    .preview{
+
+      text-align:center;
+
+    }
+
+
+    .logo-preview{
+
+      width:120px;
+
+      height:120px;
+
+      border-radius:20px;
+
+      margin:0 auto 15px;
+
+      background:#fff7ed;
+
+      border:
+        1px solid #fed7aa;
+
+      display:flex;
+
+      align-items:center;
+
+      justify-content:center;
+
+      overflow:hidden;
+
+    }
+
+
+    .logo-preview img{
+
+      width:100%;
+
+      height:100%;
+
+      object-fit:cover;
+
+    }
+
+
+    .logo-placeholder{
+
+      font-size:48px;
+
+    }
+
+
+    .preview-store-name{
+
+      font-size:18px;
+
+      font-weight:800;
+
+      margin-bottom:5px;
+
+      word-break:break-word;
+
+    }
+
+
+    .preview-owner{
+
+      color:var(--muted);
+
+      font-size:11px;
+
+    }
+
+
+    .preview-status{
+
+      display:inline-flex;
+
+      align-items:center;
+
+      gap:6px;
+
+      margin-top:13px;
+
+      padding:6px 10px;
+
+      border-radius:20px;
+
+      font-size:10px;
+
+      font-weight:700;
+
+      background:#fff7ed;
+
+      color:#c2410c;
+
+    }
+
+
+    .preview-status.approved{
+
+      background:#f0fdf4;
+
+      color:#15803d;
+
+    }
+
+
+    .preview-status.rejected{
+
+      background:#fef2f2;
+
+      color:#b91c1c;
+
+    }
+
+
+    .preview-description{
+
+      text-align:left;
+
+      margin-top:18px;
+
+      padding-top:17px;
+
+      border-top:
+        1px solid var(--border);
+
+      color:var(--muted);
+
+      font-size:11px;
+
+      line-height:1.7;
+
+    }
+
+
+
+    /* =========================
+       INFO
+    ========================= */
+
+    .info-list{
+
+      display:flex;
+
+      flex-direction:column;
+
+    }
+
+
+    .info-row{
+
+      display:flex;
+
+      justify-content:space-between;
+
+      gap:15px;
+
+      padding:12px 0;
+
+      border-bottom:
+        1px solid var(--border);
+
+    }
+
+
+    .info-row:last-child{
+
+      border-bottom:0;
+
+    }
+
+
+    .info-label{
+
+      color:var(--muted);
+
+      font-size:11px;
+
+    }
+
+
+    .info-value{
+
+      font-size:11px;
+
+      font-weight:700;
+
+      text-align:right;
+
+      max-width:65%;
+
+      word-break:break-word;
+
+    }
+
+
+
+    /* =========================
+       NOTICE
+    ========================= */
+
+    .notice{
+
+      padding:13px 14px;
+
+      border-radius:11px;
+
+      margin-top:17px;
+
+      background:#eff6ff;
+
+      border:
+        1px solid #dbeafe;
+
+      color:#1d4ed8;
+
+      font-size:11px;
+
+      line-height:1.7;
+
+    }
+
+
+    .notice.warning{
+
+      background:#fff7ed;
+
+      border-color:#fed7aa;
+
+      color:#c2410c;
+
+    }
+
+
+    .notice.success{
+
+      background:#f0fdf4;
+
+      border-color:#bbf7d0;
+
+      color:#15803d;
+
+    }
+
+
+
+    /* =========================
+       MESSAGE
+    ========================= */
+
+    .message{
+
+      display:none;
+
+      padding:12px 14px;
+
+      border-radius:10px;
+
+      margin-bottom:17px;
+
+      font-size:12px;
+
+      line-height:1.6;
+
+    }
+
+
+    .message.show{
+
+      display:block;
+
+    }
+
+
+    .message.error{
+
+      background:#fef2f2;
+
+      border:
+        1px solid #fecaca;
+
+      color:#b91c1c;
+
+    }
+
+
+    .message.success{
+
+      background:#f0fdf4;
+
+      border:
+        1px solid #bbf7d0;
+
+      color:#15803d;
+
+    }
+
+
+
+    /* =========================
+       TOAST
+    ========================= */
+
+    #toast{
+
+      position:fixed;
+
+      right:22px;
+
+      bottom:22px;
+
+      z-index:999999;
+
+      max-width:350px;
+
+      background:#171a21;
+
+      color:#fff;
+
+      border-radius:11px;
+
+      padding:13px 16px;
+
+      font-size:12px;
+
+      box-shadow:
+        0 15px 40px rgba(0,0,0,.25);
+
+      transform:
+        translateY(20px);
+
+      opacity:0;
+
+      pointer-events:none;
+
+      transition:.25s;
+
+    }
+
+
+    #toast.show{
+
+      transform:
+        translateY(0);
+
+      opacity:1;
+
+    }
+
+
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media(max-width:950px){
+
+      .store-grid{
+
+        grid-template-columns:1fr;
+
+      }
+
+    }
+
+
+    @media(max-width:800px){
+
+      .sidebar{
+
+        transform:
+          translateX(-100%);
+
+        transition:.25s;
+
+      }
+
+
+      .sidebar.open{
+
+        transform:
+          translateX(0);
+
+      }
+
+
+      .mobile-header{
+
+        display:flex;
+
+      }
+
+
+      .overlay.show{
+
+        display:block;
+
+      }
+
+
+      .main{
+
+        margin-left:0;
+
+        width:100%;
+
+        padding-top:62px;
+
+      }
+
+
+      .topbar{
+
+        height:65px;
+
+        padding:0 18px;
+
+      }
+
+
+      .content{
+
+        padding:18px;
+
+      }
+
+    }
+
+
+    @media(max-width:600px){
+
+      .page-title h1{
+
+        font-size:20px;
+
+      }
+
+
+      .topbar-right{
+
+        display:none;
+
+      }
+
+
+      .card-body{
+
+        padding:16px;
+
+      }
+
+
+      .form-actions{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+      }
+
+
+      .primary-btn,
+      .secondary-btn{
+
+        width:100%;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================
+       AUTH LOADING
+  ========================= -->
+
+  <div id="authLoading">
+
+    <img
+      class="loading-logo"
+      src="./assets/icon/MILKONMELA512.SVG.svg"
+      alt="Milon Mela"
+      onerror="this.style.display='none'"
+    >
+
+    <div class="spinner"></div>
+
+    <strong>
+      Checking Customer Account...
+    </strong>
+
+    <p>
+      আপনার Store access যাচাই করা হচ্ছে।
+    </p>
+
+  </div>
+
+
+
+  <!-- =========================
+       MOBILE HEADER
+  ========================= -->
+
+  <div class="mobile-header">
+
+    <div class="mobile-brand">
+
+      <img
+        src="./assets/icon/MILKONMELA512.SVG.svg"
+        alt="Milon Mela"
+        onerror="this.style.display='none'"
+      >
+
+      <strong>
+        Milon Mela
+      </strong>
+
+    </div>
+
+
+    <button
+      class="menu-btn"
+      id="menuBtn"
+      type="button"
+    >
+      ☰
+    </button>
+
+  </div>
+
+
+  <div
+    class="overlay"
+    id="overlay"
+  ></div>
+
+
+
+  <!-- =========================
+       APP
+  ========================= -->
+
+  <div
+    class="app"
+    id="app"
+    style="display:none;"
+  >
+
+
+    <!-- =========================
+         SIDEBAR
+    ========================= -->
+
+    <aside
+      class="sidebar"
+      id="sidebar"
+    >
+
+
+      <div class="brand">
+
+        <img
+          class="brand-logo"
+          src="./assets/icon/MILKONMELA512.SVG.svg"
+          alt="Milon Mela"
+          onerror="this.style.display='none'"
+        >
+
+
+        <div class="brand-text">
+
+          <h1>
+            Milon Mela
+          </h1>
+
+          <span>
+            Customer Panel
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="store-mini">
+
+        <div class="store-mini-label">
+          MY STORE
+        </div>
+
+        <div
+          class="store-mini-name"
+          id="sidebarStoreName"
+        >
+          Loading...
+        </div>
+
+      </div>
+
+
+      <nav class="nav">
+
+
+        <div class="nav-title">
+          Main
+        </div>
+
+
+        <button
+          class="nav-item"
+          type="button"
+          data-page="customer-dashboard.html"
+        >
+
+          <span class="nav-icon">
+            🏠
+          </span>
+
+          <span class="nav-text">
+            Dashboard
+          </span>
+
+        </button>
+
+
+        <button
+          class="nav-item active"
+          type="button"
+          data-page="my-store.html"
+        >
+
+          <span class="nav-icon">
+            🏪
+          </span>
+
+          <span class="nav-text">
+            My Store
+          </span>
+
+        </button>
+
+
+        <button
+          class="nav-item"
+          type="button"
+          data-page="my-products.html"
+        >
+
+          <span class="nav-icon">
+            📦
+          </span>
+
+          <span class="nav-text">
+            My Products
+          </span>
+
+        </button>
+
+
+        <button
+          class="nav-item"
+          type="button"
+          data-page="add-product.html"
+        >
+
+          <span class="nav-icon">
+            ➕
+          </span>
+
+          <span class="nav-text">
+            Add Product
+          </span>
+
+        </button>
+
+
+        <div class="nav-title">
+          Business
+        </div>
+
+
+        <button
+          class="nav-item"
+          type="button"
+          data-page="customer-orders.html"
+        >
+
+          <span class="nav-icon">
+            🛒
+          </span>
+
+          <span class="nav-text">
+            Orders
+          </span>
+
+        </button>
+
+
+      </nav>
+
+
+      <div class="sidebar-bottom">
+
+
+        <div class="user-mini">
+
+          <div
+            class="avatar"
+            id="userAvatar"
+          >
+            C
+          </div>
+
+
+          <div class="user-info">
+
+            <div
+              class="user-name"
+              id="sidebarUserName"
+            >
+              Customer
+            </div>
+
+
+            <div
+              class="user-email"
+              id="sidebarUserEmail"
+            >
+              Loading...
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <button
+          class="logout-btn"
+          id="logoutBtn"
+          type="button"
+        >
+          🚪 Logout
+        </button>
+
+      </div>
+
+    </aside>
+
+
+
+    <!-- =========================
+         MAIN
+    ========================= -->
+
+    <main class="main">
+
+
+      <header class="topbar">
+
+
+        <div class="page-heading">
+
+          <h2>
+            My Store
+          </h2>
+
+          <p>
+            আপনার দোকানের তথ্য পরিচালনা করুন
+          </p>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+          <div
+            class="store-status"
+            id="topStoreStatus"
+          >
+
+            <span
+              class="status-dot"
+              id="statusDot"
+            ></span>
+
+            <span id="topStatusText">
+              Loading
+            </span>
+
+          </div>
+
+        </div>
+
+      </header>
+
+
+
+      <!-- =========================
+           CONTENT
+      ========================= -->
+
+      <section class="content">
+
+
+        <div class="page-title">
+
+          <h1>
+            🏪 My Store
+          </h1>
+
+          <p>
+            এখানে আপনার Shop / Store-এর
+            নাম, যোগাযোগের তথ্য এবং description
+            update করতে পারবেন।
+          </p>
+
+        </div>
+
+
+        <div
+          id="message"
+          class="message"
+        ></div>
+
+
+
+        <!-- =========================
+             GRID
+        ========================= -->
+
+        <div class="store-grid">
+
+
+          <!-- =========================
+               STORE FORM
+          ========================= -->
+
+          <div class="card">
+
+
+            <div class="card-header">
+
+              <h3>
+                ✏️ Store Information
+              </h3>
+
+              <span>
+                Edit Store
+              </span>
+
+            </div>
+
+
+            <div class="card-body">
+
+
+              <form id="storeForm">
+
+
+                <div class="form-group">
+
+                  <label for="storeNameInput">
+
+                    Shop / Store Name
+                    <span class="required">
+                      *
+                    </span>
+
+                  </label>
+
+
+                  <input
+                    type="text"
+                    id="storeNameInput"
+                    placeholder="আপনার Shop Name"
+                    required
+                  >
+
+                  <div class="field-help">
+                    Marketplace-এ এই নামটি আপনার Store-এর নাম হিসেবে দেখা যাবে।
+                  </div>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                  <label for="phoneInput">
+
+                    Phone Number
+                    <span class="required">
+                      *
+                    </span>
+
+                  </label>
+
+
+                  <input
+                    type="tel"
+                    id="phoneInput"
+                    placeholder="01XXXXXXXXX"
+                    required
+                  >
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                  <label for="addressInput">
+
+                    Shop Address
+                    <span class="required">
+                      *
+                    </span>
+
+                  </label>
+
+
+                  <textarea
+                    id="addressInput"
+                    placeholder="আপনার দোকানের ঠিকানা"
+                    required
+                  ></textarea>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                  <label for="descriptionInput">
+
+                    Store Description
+                  </label>
+
+
+                  <textarea
+                    id="descriptionInput"
+                    placeholder="আপনার Shop সম্পর্কে সংক্ষেপে লিখুন"
+                  ></textarea>
+
+
+                  <div class="field-help">
+                    আপনার দোকানে কী ধরনের Products বা Services পাওয়া যায় তা লিখতে পারেন।
+                  </div>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                  <label for="logoInput">
+
+                    Store Logo URL
+                  </label>
+
+
+                  <input
+                    type="url"
+                    id="logoInput"
+                    placeholder="https://example.com/logo.jpg"
+                  >
+
+
+                  <div class="field-help">
+                    আপাতত Logo-এর image URL ব্যবহার করা হচ্ছে। পরবর্তী ধাপে Firebase Storage দিয়ে সরাসরি Logo Upload করা হবে।
+                  </div>
+
+                </div>
+
+
+
+                <div class="form-actions">
+
+
+                  <button
+                    type="submit"
+                    class="primary-btn"
+                    id="saveBtn"
+                  >
+                    💾 Save Store
+                  </button>
+
+
+                  <button
+                    type="button"
+                    class="secondary-btn"
+                    id="resetBtn"
+                  >
+                    ↩ Reset
+                  </button>
+
+
+                </div>
+
+
+              </form>
+
+
+            </div>
+
+          </div>
+
+
+
+          <!-- =========================
+               PREVIEW
+          ========================= -->
+
+          <div class="card">
+
+
+            <div class="card-header">
+
+              <h3>
+                👀 Store Preview
+              </h3>
+
+              <span>
+                Preview
+              </span>
+
+            </div>
+
+
+            <div class="card-body preview">
+
+
+              <div class="logo-preview">
+
+
+                <img
+                  id="previewLogo"
+                  src=""
+                  alt="Store Logo"
+                  style="display:none;"
+                >
+
+
+                <div
+                  class="logo-placeholder"
+                  id="logoPlaceholder"
+                >
+                  🏪
+                </div>
+
+
+              </div>
+
+
+              <div
+                class="preview-store-name"
+                id="previewStoreName"
+              >
+                Your Store
+              </div>
+
+
+              <div
+                class="preview-owner"
+                id="previewOwner"
+              >
+                Owner: —
+              </div>
+
+
+              <div
+                class="preview-status"
+                id="previewStatus"
+              >
+                ⏳ Pending Approval
+              </div>
+
+
+              <div
+                class="preview-description"
+                id="previewDescription"
+              >
+                আপনার Store description এখানে দেখা যাবে।
+              </div>
+
+
+            </div>
+
+          </div>
+
+
+
+          <!-- =========================
+               STORE DETAILS
+          ========================= -->
+
+          <div class="card">
+
+
+            <div class="card-header">
+
+              <h3>
+                📋 Store Details
+              </h3>
+
+              <span>
+                Account
+              </span>
+
+            </div>
+
+
+            <div class="card-body">
+
+
+              <div class="info-list">
+
+
+                <div class="info-row">
+
+                  <span class="info-label">
+                    Store ID
+                  </span>
+
+                  <span
+                    class="info-value"
+                    id="detailStoreId"
+                  >
+                    —
+                  </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                  <span class="info-label">
+                    Owner ID
+                  </span>
+
+                  <span
+                    class="info-value"
+                    id="detailOwnerId"
+                  >
+                    —
+                  </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                  <span class="info-label">
+                    Owner Name
+                  </span>
+
+                  <span
+                    class="info-value"
+                    id="detailOwnerName"
+                  >
+                    —
+                  </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                  <span class="info-label">
+                    Email
+                  </span>
+
+                  <span
+                    class="info-value"
+                    id="detailEmail"
+                  >
+                    —
+                  </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                  <span class="info-label">
+                    Phone
+                  </span>
+
+                  <span
+                    class="info-value"
+                    id="detailPhone"
+                  >
+                    —
+                  </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                  <span class="info-label">
+                    Status
+                  </span>
+
+                  <span
+                    class="info-value"
+                    id="detailStatus"
+                  >
+                    —
+                  </span>
+
+                </div>
+
+
+                <div class="info-row">
+
+                  <span class="info-label">
+                    Verification
+                  </span>
+
+                  <span
+                    class="info-value"
+                    id="detailVerification"
+                  >
+                    —
+                  </span>
+
+                </div>
+
+
+              </div>
+
+
+              <div
+                class="notice warning"
+                id="approvalNotice"
+              >
+                ⏳ আপনার Store বর্তমানে Admin approval-এর অপেক্ষায় আছে।
+              </div>
+
+
+            </div>
+
+          </div>
+
+
+
+          <!-- =========================
+               SECURITY INFORMATION
+          ========================= -->
+
+          <div class="card">
+
+
+            <div class="card-header">
+
+              <h3>
+                🔐 Store Security
+              </h3>
+
+              <span>
+                Protected
+              </span>
+
+            </div>
+
+
+            <div class="card-body">
+
+
+              <div class="notice success">
+
+                🔐 এই Store আপনার Firebase UID-এর সাথে যুক্ত।
+
+                <br><br>
+
+                অন্য Customer আপনার Store update বা delete করতে পারবে না।
+
+              </div>
+
+
+              <div class="notice">
+
+                💡 Store-এর Owner ID পরিবর্তন করার option দেওয়া হয়নি। এটি security-এর জন্য গুরুত্বপূর্ণ।
+
+              </div>
+
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+
+  <!-- TOAST -->
+
+  <div id="toast"></div>
+
+
+
+  <!-- =========================
+       FIREBASE
+  ========================= -->
+
+  <script type="module">
+
+    "use strict";
+
+
+    /* =========================
+       FIREBASE IMPORTS
+    ========================= */
+
+    import {
+      onAuthStateChanged,
+      signOut
+    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
+
+    import {
+      doc,
+      getDoc,
+      updateDoc,
+      serverTimestamp
+    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+
+    import {
+      auth,
+      db
+    } from "./firebase-config.js";
+
+
+
+    /* =========================
+       DOM
+    ========================= */
+
+    const authLoading =
+      document.getElementById(
+        "authLoading"
+      );
+
+
+    const app =
+      document.getElementById(
+        "app"
+      );
+
+
+    const sidebar =
+      document.getElementById(
+        "sidebar"
+      );
+
+
+    const overlay =
+      document.getElementById(
+        "overlay"
+      );
+
+
+    const menuBtn =
+      document.getElementById(
+        "menuBtn"
+      );
+
+
+    const logoutBtn =
+      document.getElementById(
+        "logoutBtn"
+      );
+
+
+    const storeForm =
+      document.getElementById(
+        "storeForm"
+      );
+
+
+    const saveBtn =
+      document.getElementById(
+        "saveBtn"
+      );
+
+
+    const resetBtn =
+      document.getElementById(
+        "resetBtn"
+      );
+
+
+    const message =
+      document.getElementById(
+        "message"
+      );
+
+
+    const toast =
+      document.getElementById(
+        "toast"
+      );
+
+
+
+    /* =========================
+       FORM ELEMENTS
+    ========================= */
+
+    const storeNameInput =
+      document.getElementById(
+        "storeNameInput"
+      );
+
+
+    const phoneInput =
+      document.getElementById(
+        "phoneInput"
+      );
+
+
+    const addressInput =
+      document.getElementById(
+        "addressInput"
+      );
+
+
+    const descriptionInput =
+      document.getElementById(
+        "descriptionInput"
+      );
+
+
+    const logoInput =
+      document.getElementById(
+        "logoInput"
+      );
+
+
+
+    /* =========================
+       CURRENT DATA
+    ========================= */
+
+    let currentUser =
+      null;
+
+
+    let currentUserData =
+      null;
+
+
+    let currentStore =
+      null;
+
+
+
+    /* =========================
+       TOAST
+    ========================= */
+
+    let toastTimer =
+      null;
+
+
+    function showToast(
+      text
+    ){
+
+      clearTimeout(
+        toastTimer
+      );
+
+
+      toast.textContent =
+        text;
+
+
+      toast.classList.add(
+        "show"
+      );
+
+
+      toastTimer =
+        setTimeout(
+          function(){
+
+            toast.classList.remove(
+              "show"
+            );
+
+          },
+          3000
+        );
+
+    }
+
+
+
+    /* =========================
+       MESSAGE
+    ========================= */
+
+    function showMessage(
+      text,
+      type
+    ){
+
+      message.textContent =
+        text;
+
+
+      message.className =
+        "message show " +
+        type;
+
+    }
+
+
+    function clearMessage(){
+
+      message.textContent =
+        "";
+
+      message.className =
+        "message";
+
+    }
+
+
+
+    /* =========================
+       SAFE TEXT
+    ========================= */
+
+    function safeText(
+      value
+    ){
+
+      if(
+        value === null ||
+        value === undefined ||
+        value === ""
+      ){
+
+        return "—";
+
+      }
+
+
+      return String(
+        value
+      );
+
+    }
+
+
+
+    /* =========================
+       LOAD USER PROFILE
+    ========================= */
+
+    async function loadUserProfile(){
+
+      const userRef =
+        doc(
+          db,
+          "users",
+          currentUser.uid
+        );
+
+
+      const userSnap =
+        await getDoc(
+          userRef
+        );
+
+
+      if(
+        !userSnap.exists()
+      ){
+
+        await signOut(
+          auth
+        );
+
+
+        window.location.replace(
+          "customer-login.html?error=profile"
+        );
+
+
+        return false;
+
+      }
+
+
+      const userData =
+        userSnap.data();
+
+
+      /*
+        SECURITY CHECK
+      */
+
+      if(
+        userData.role !==
+        "customer"
+      ){
+
+        await signOut(
+          auth
+        );
+
+
+        window.location.replace(
+          "customer-login.html?error=role"
+        );
+
+
+        return false;
+
+      }
+
+
+      currentUserData =
+        userData;
+
+
+      updateUserUI(
+        userData
+      );
+
+
+      return true;
+
+    }
+
+
+
+    /* =========================
+       USER UI
+    ========================= */
+
+    function updateUserUI(
+      userData
+    ){
+
+      const name =
+        safeText(
+          userData.name ||
+          "Customer"
+        );
+
+
+      const email =
+        safeText(
+          currentUser.email
+        );
+
+
+      document.getElementById(
+        "sidebarUserName"
+      ).textContent =
+        name;
+
+
+      document.getElementById(
+        "sidebarUserEmail"
+      ).textContent =
+        email;
+
+
+      document.getElementById(
+        "previewOwner"
+      ).textContent =
+        "Owner: " +
+        name;
+
+
+      document.getElementById(
+        "detailOwnerName"
+      ).textContent =
+        name;
+
+
+      document.getElementById(
+        "detailEmail"
+      ).textContent =
+        email;
+
+
+      document.getElementById(
+        "userAvatar"
+      ).textContent =
+        name
+          .charAt(0)
+          .toUpperCase();
+
+    }
+
+
+
+    /* =========================
+       LOAD STORE
+    ========================= */
+
+    async function loadStore(){
+
+      const storeRef =
+        doc(
+          db,
+          "stores",
+          currentUser.uid
+        );
+
+
+      const storeSnap =
+        await getDoc(
+          storeRef
+        );
+
+
+      if(
+        !storeSnap.exists()
+      ){
+
+        showMessage(
+          "আপনার Store পাওয়া যায়নি। প্রথমে Customer Signup সম্পূর্ণ করুন।",
+          "error"
+        );
+
+
+        return false;
+
+      }
+
+
+      const storeData =
+        storeSnap.data();
+
+
+      /*
+        CRITICAL SECURITY CHECK
+      */
+
+      if(
+        storeData.ownerId !==
+        currentUser.uid
+      ){
+
+        console.error(
+          "Store ownership mismatch."
+        );
+
+
+        await signOut(
+          auth
+        );
+
+
+        window.location.replace(
+          "customer-login.html?error=store-owner"
+        );
+
+
+        return false;
+
+      }
+
+
+      currentStore =
+        {
+          id:
+            storeSnap.id,
+
+          ...storeData
+        };
+
+
+      fillForm(
+        currentStore
+      );
+
+
+      renderStore(
+        currentStore
+      );
+
+
+      return true;
+
+    }
+
+
+
+    /* =========================
+       FILL FORM
+    ========================= */
+
+    function fillForm(
+      store
+    ){
+
+      storeNameInput.value =
+        store.storeName ||
+        "";
+
+
+      phoneInput.value =
+        store.phone ||
+        "";
+
+
+      addressInput.value =
+        store.address ||
+        "";
+
+
+      descriptionInput.value =
+        store.description ||
+        "";
+
+
+      logoInput.value =
+        store.logo ||
+        "";
+
+    }
+
+
+
+    /* =========================
+       RENDER STORE
+    ========================= */
+
+    function renderStore(
+      store
+    ){
+
+      const storeName =
+        safeText(
+          store.storeName
+        );
+
+
+      const ownerName =
+        safeText(
+          store.ownerName ||
+          currentUserData?.name
+        );
+
+
+      const status =
+        String(
+          store.status ||
+          "pending"
+        ).toLowerCase();
+
+
+      const verified =
+        store.verified === true;
+
+
+      document.getElementById(
+        "sidebarStoreName"
+      ).textContent =
+        storeName;
+
+
+      document.getElementById(
+        "previewStoreName"
+      ).textContent =
+        storeName;
+
+
+      document.getElementById(
+        "previewOwner"
+      ).textContent =
+        "Owner: " +
+        ownerName;
+
+
+      document.getElementById(
+        "detailStoreId"
+      ).textContent =
+        safeText(
+          store.storeId ||
+          store.id
+        );
+
+
+      document.getElementById(
+        "detailOwnerId"
+      ).textContent =
+        safeText(
+          store.ownerId
+        );
+
+
+      document.getElementById(
+        "detailPhone"
+      ).textContent =
+        safeText(
+          store.phone
+        );
+
+
+      document.getElementById(
+        "detailStatus"
+      ).textContent =
+        status;
+
+
+      document.getElementById(
+        "detailVerification"
+      ).textContent =
+        verified
+          ? "Verified"
+          : "Not Verified";
+
+
+      document.getElementById(
+        "previewDescription"
+      ).textContent =
+        store.description ||
+        "আপনার Store description এখানে দেখা যাবে।";
+
+
+      /*
+        Status
+      */
+
+      const previewStatus =
+        document.getElementById(
+          "previewStatus"
+        );
+
+
+      previewStatus.className =
+        "preview-status";
+
+
+      if(
+        status === "approved"
+      ){
+
+        previewStatus.classList.add(
+          "approved"
+        );
+
+        previewStatus.textContent =
+          "✓ Approved";
+
+      }
+      else if(
+        status === "rejected"
+      ){
+
+        previewStatus.classList.add(
+          "rejected"
+        );
+
+        previewStatus.textContent =
+          "✕ Rejected";
+
+      }
+      else{
+
+        previewStatus.textContent =
+          "⏳ Pending Approval";
+
+      }
+
+
+      /*
+        Top status
+      */
+
+      const topStatusText =
+        document.getElementById(
+          "topStatusText"
+        );
+
+
+      const statusDot =
+        document.getElementById(
+          "statusDot"
+        );
+
+
+      if(
+        status === "approved"
+      ){
+
+        topStatusText.textContent =
+          "Store Approved";
+
+        statusDot.classList.add(
+          "approved"
+        );
+
+      }
+      else if(
+        status === "rejected"
+      ){
+
+        topStatusText.textContent =
+          "Store Rejected";
+
+        statusDot.classList.remove(
+          "approved"
+        );
+
+      }
+      else{
+
+        topStatusText.textContent =
+          "Pending Approval";
+
+        statusDot.classList.remove(
+          "approved"
+        );
+
+      }
+
+
+      /*
+        Approval notice
+      */
+
+      const approvalNotice =
+        document.getElementById(
+          "approvalNotice"
+        );
+
+
+      if(
+        status === "approved"
+      ){
+
+        approvalNotice.className =
+          "notice success";
+
+        approvalNotice.innerHTML =
+          "✓ আপনার Store Admin দ্বারা Approved হয়েছে।";
+
+      }
+      else if(
+        status === "rejected"
+      ){
+
+        approvalNotice.className =
+          "notice warning";
+
+        approvalNotice.innerHTML =
+          "✕ আপনার Store বর্তমানে Rejected। Admin-এর সাথে যোগাযোগ করুন।";
+
+      }
+      else{
+
+        approvalNotice.className =
+          "notice warning";
+
+        approvalNotice.innerHTML =
+          "⏳ আপনার Store বর্তমানে Admin approval-এর অপেক্ষায় আছে।";
+
+      }
+
+
+      /*
+        Logo
+      */
+
+      renderLogo(
+        store.logo
+      );
+
+    }
+
+
+
+    /* =========================
+       LOGO
+    ========================= */
+
+    function renderLogo(
+      logo
+    ){
+
+      const image =
+        document.getElementById(
+          "previewLogo"
+        );
+
+
+      const placeholder =
+        document.getElementById(
+          "logoPlaceholder"
+        );
+
+
+      if(
+        logo &&
+        String(logo).trim() !== ""
+      ){
+
+        image.src =
+          logo;
+
+
+        image.style.display =
+          "block";
+
+
+        placeholder.style.display =
+          "none";
+
+
+        image.onerror =
+          function(){
+
+            image.style.display =
+              "none";
+
+            placeholder.style.display =
+              "flex";
+
+          };
+
+      }
+      else{
+
+        image.src =
+          "";
+
+        image.style.display =
+          "none";
+
+        placeholder.style.display =
+          "flex";
+
+      }
+
+    }
+
+
+
+    /* =========================
+       LIVE PREVIEW
+    ========================= */
+
+    storeNameInput.addEventListener(
+      "input",
+      function(){
+
+        document.getElementById(
+          "previewStoreName"
+        ).textContent =
+          storeNameInput.value.trim() ||
+          "Your Store";
+
+
+        document.getElementById(
+          "sidebarStoreName"
+        ).textContent =
+          storeNameInput.value.trim() ||
+          "Your Store";
+
+      }
+    );
+
+
+    descriptionInput.addEventListener(
+      "input",
+      function(){
+
+        document.getElementById(
+          "previewDescription"
+        ).textContent =
+          descriptionInput.value.trim() ||
+          "আপনার Store description এখানে দেখা যাবে。";
+
+      }
+    );
+
+
+    logoInput.addEventListener(
+      "input",
+      function(){
+
+        renderLogo(
+          logoInput.value.trim()
+        );
+
+      }
+    );
+
+
+
+    /* =========================
+       RESET
+    ========================= */
+
+    resetBtn.addEventListener(
+      "click",
+      function(){
+
+        clearMessage();
+
+
+        if(
+          currentStore
+        ){
+
+          fillForm(
+            currentStore
+          );
+
+
+          renderStore(
+            currentStore
+          );
+
+        }
+
+      }
+    );
+
+
+
+    /* =========================
+       SAVE STORE
+    ========================= */
+
+    storeForm.addEventListener(
+      "submit",
+      async function(event){
+
+        event.preventDefault();
+
+        clearMessage();
+
+
+        if(
+          !currentUser ||
+          !currentStore
+        ){
+
+          showMessage(
+            "Store information পাওয়া যায়নি। Page refresh করুন।",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        /*
+          SECURITY:
+          Verify current store owner
+          before update.
+        */
+
+        if(
+          currentStore.ownerId !==
+          currentUser.uid
+        ){
+
+          showMessage(
+            "এই Store আপনার নয়। Update বন্ধ করা হয়েছে।",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        const newStoreName =
+          storeNameInput.value.trim();
+
+
+        const newPhone =
+          phoneInput.value.trim();
+
+
+        const newAddress =
+          addressInput.value.trim();
+
+
+        const newDescription =
+          descriptionInput.value.trim();
+
+
+        const newLogo =
+          logoInput.value.trim();
+
+
+        if(
+          newStoreName.length < 2
+        ){
+
+          showMessage(
+            "Shop / Store Name সঠিকভাবে লিখুন।",
+            "error"
+          );
+
+          storeNameInput.focus();
+
+          return;
+
+        }
+
+
+        if(
+          newPhone.length < 5
+        ){
+
+          showMessage(
+            "Phone Number সঠিকভাবে লিখুন।",
+            "error"
+          );
+
+          phoneInput.focus();
+
+          return;
+
+        }
+
+
+        if(
+          newAddress.length < 3
+        ){
+
+          showMessage(
+            "Shop Address লিখুন।",
+            "error"
+          );
+
+          addressInput.focus();
+
+          return;
+
+        }
+
+
+        /*
+          Button loading
+        */
+
+        saveBtn.disabled =
+          true;
+
+
+        saveBtn.textContent =
+          "Saving...";
+
+
+        try{
+
+          const storeRef =
+            doc(
+              db,
+              "stores",
+              currentUser.uid
+            );
+
+
+          /*
+            IMPORTANT:
+
+            ownerId is NOT included
+            in update data.
+
+            Therefore Customer cannot
+            change Store ownership.
+          */
+
+          await updateDoc(
+            storeRef,
+            {
+
+              storeName:
+                newStoreName,
+
+              phone:
+                newPhone,
+
+              address:
+                newAddress,
+
+              description:
+                newDescription,
+
+              logo:
+                newLogo,
+
+              updatedAt:
+                serverTimestamp()
+
+            }
+          );
+
+
+          /*
+            Update local state
+          */
+
+          currentStore.storeName =
+            newStoreName;
+
+
+          currentStore.phone =
+            newPhone;
+
+
+          currentStore.address =
+            newAddress;
+
+
+          currentStore.description =
+            newDescription;
+
+
+          currentStore.logo =
+            newLogo;
+
+
+          renderStore(
+            currentStore
+          );
+
+
+          showMessage(
+            "আপনার Store সফলভাবে Update হয়েছে।",
+            "success"
+          );
+
+
+          showToast(
+            "Store Updated ✓"
+          );
+
+
+        }catch(error){
+
+          console.error(
+            "Store Update Error:",
+            error
+          );
+
+
+          if(
+            error.code ===
+            "permission-denied"
+          ){
+
+            showMessage(
+              "Permission denied। আপনি শুধু নিজের Store update করতে পারবেন।",
+              "error"
+            );
+
+          }
+          else if(
+            error.code ===
+            "not-found"
+          ){
+
+            showMessage(
+              "Store পাওয়া যায়নি।",
+              "error"
+            );
+
+          }
+          else{
+
+            showMessage(
+              "Store update করা যায়নি। আবার চেষ্টা করুন।",
+              "error"
+            );
+
+          }
+
+        }
+        finally{
+
+          saveBtn.disabled =
+            false;
+
+
+          saveBtn.textContent =
+            "💾 Save Store";
+
+        }
+
+      }
+    );
+
+
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    document
+      .querySelectorAll(
+        ".nav-item"
+      )
+      .forEach(
+        function(item){
+
+          item.addEventListener(
+            "click",
+            function(){
+
+              const page =
+                item.getAttribute(
+                  "data-page"
+                );
+
+
+              if(
+                page ===
+                "my-store.html"
+              ){
+
+                closeMobileMenu();
+
+                return;
+
+              }
+
+
+              /*
+                Future pages.
+              */
+
+              const futurePages = [
+
+                "my-products.html",
+
+                "add-product.html",
+
+                "customer-orders.html"
+
+              ];
+
+
+              if(
+                futurePages.includes(
+                  page
+                )
+              ){
+
+                showToast(
+                  "এই section পরবর্তী ধাপে তৈরি হবে।"
+                );
+
+                closeMobileMenu();
+
+                return;
+
+              }
+
+
+              window.location.href =
+                page;
+
+            }
+          );
+
+        }
+      );
+
+
+
+    /* =========================
+       MOBILE MENU
+    ========================= */
+
+    function closeMobileMenu(){
+
+      sidebar.classList.remove(
+        "open"
+      );
+
+
+      overlay.classList.remove(
+        "show"
+      );
+
+    }
+
+
+    menuBtn.addEventListener(
+      "click",
+      function(){
+
+        sidebar.classList.toggle(
+          "open"
+        );
+
+
+        overlay.classList.toggle(
+          "show"
+        );
+
+      }
+    );
+
+
+    overlay.addEventListener(
+      "click",
+      closeMobileMenu
+    );
+
+
+
+    /* =========================
+       LOGOUT
+    ========================= */
+
+    logoutBtn.addEventListener(
+      "click",
+      async function(){
+
+        const confirmed =
+          confirm(
+            "আপনি কি Logout করতে চান?"
+          );
+
+
+        if(
+          !confirmed
+        ){
+
+          return;
+
+        }
+
+
+        try{
+
+          await signOut(
+            auth
+          );
+
+
+          window.location.replace(
+            "customer-login.html"
+          );
+
+
+        }catch(error){
+
+          console.error(
+            "Logout Error:",
+            error
+          );
+
+
+          showToast(
+            "Logout করা যায়নি।"
+          );
+
+        }
+
+      }
+    );
+
+
+
+    /* =========================
+       AUTH STATE
+    ========================= */
+
+    onAuthStateChanged(
+      auth,
+      async function(user){
+
+        console.log(
+          "My Store Auth:",
+          user
+            ? user.email
+            : "No User"
+        );
+
+
+        /*
+          Not logged in
+        */
+
+        if(
+          !user
+        ){
+
+          window.location.replace(
+            "customer-login.html"
+          );
+
+          return;
+
+        }
+
+
+        currentUser =
+          user;
+
+
+        try{
+
+          /*
+            STEP 1
+            Verify customer
+          */
+
+          const profileOK =
+            await loadUserProfile();
+
+
+          if(
+            !profileOK
+          ){
+
+            return;
+
+          }
+
+
+          /*
+            STEP 2
+            Load own store
+          */
+
+          const storeOK =
+            await loadStore();
+
+
+          if(
+            !storeOK
+          ){
+
+            /*
+              Keep app visible so
+              error message can show.
+            */
+
+            authLoading.style.display =
+              "none";
+
+            app.style.display =
+              "flex";
+
+            return;
+
+          }
+
+
+          /*
+            Everything verified
+          */
+
+          authLoading.style.display =
+            "none";
+
+
+          app.style.display =
+            "flex";
+
+
+          console.log(
+            "======================================"
+          );
+
+
+          console.log(
+            "Milon Mela My Store Ready"
+          );
+
+
+          console.log(
+            "Customer UID:",
+            currentUser.uid
+          );
+
+
+          console.log(
+            "Store ID:",
+            currentStore.id
+          );
+
+
+          console.log(
+            "Owner ID:",
+            currentStore.ownerId
+          );
+
+
+          console.log(
+            "======================================");
+
+
+        }catch(error){
+
+          console.error(
+            "My Store Initialization Error:",
+            error
+          );
+
+
+          authLoading.style.display =
+            "none";
+
+
+          app.style.display =
+            "flex";
+
+
+          showMessage(
+            "Store page load করতে সমস্যা হয়েছে।",
+            "error"
+          );
+
+        }
+
+      }
+    );
+
+
+    /* =========================
+       ONLINE / OFFLINE
+    ========================= */
+
+    window.addEventListener(
+      "online",
+      function(){
+
+        showToast(
+          "Internet connection restored."
+        );
+
+      }
+    );
+
+
+    window.addEventListener(
+      "offline",
+      function(){
+
+        showToast(
+          "Internet connection নেই।"
+        );
+
+      }
+    );
+
+
+    console.log(
+      "Milon Mela My Store JavaScript Loaded"
+    );
+
+  </script>
+
+</body>
+
+</html>
