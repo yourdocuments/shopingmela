@@ -3,24 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Milon Mela | Admin Login</title>
 
   <style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial,sans-serif;
+    }
 
     body{
       min-height:100vh;
       background:
-        radial-gradient(circle at top left,rgba(255,107,0,.18),transparent 35%),
-        radial-gradient(circle at bottom right,rgba(255,107,0,.12),transparent 35%),
+        radial-gradient(
+          circle at top left,
+          rgba(255,107,0,.18),
+          transparent 35%
+        ),
+        radial-gradient(
+          circle at bottom right,
+          rgba(255,107,0,.12),
+          transparent 35%
+        ),
         #f5f6f8;
+
       display:flex;
       align-items:center;
       justify-content:center;
       padding:20px;
     }
 
-    .login-wrapper{width:100%;max-width:430px}
+    .login-wrapper{
+      width:100%;
+      max-width:430px;
+    }
 
     .login-card{
       background:#fff;
@@ -30,14 +48,28 @@
       border:1px solid rgba(0,0,0,.06);
     }
 
-    .brand{text-align:center;margin-bottom:28px}
-
-    .brand img{
-      width:82px;height:82px;object-fit:contain;margin-bottom:12px
+    .brand{
+      text-align:center;
+      margin-bottom:28px;
     }
 
-    .brand h1{font-size:28px;color:#ff6b00;margin-bottom:6px}
-    .brand p{color:#777;font-size:14px}
+    .brand img{
+      width:82px;
+      height:82px;
+      object-fit:contain;
+      margin-bottom:12px;
+    }
+
+    .brand h1{
+      font-size:28px;
+      color:#ff6b00;
+      margin-bottom:6px;
+    }
+
+    .brand p{
+      color:#777;
+      font-size:14px;
+    }
 
     .admin-badge{
       display:inline-block;
@@ -47,20 +79,24 @@
       padding:7px 14px;
       border-radius:50px;
       font-size:13px;
-      font-weight:bold
+      font-weight:bold;
     }
 
-    .form-group{margin-bottom:18px}
+    .form-group{
+      margin-bottom:18px;
+    }
 
     label{
       display:block;
       font-size:14px;
       font-weight:bold;
       margin-bottom:8px;
-      color:#333
+      color:#333;
     }
 
-    .input-box{position:relative}
+    .input-box{
+      position:relative;
+    }
 
     input{
       width:100%;
@@ -70,13 +106,14 @@
       outline:none;
       font-size:15px;
       background:#fafafa;
-      transition:.2s
+      transition:.2s;
     }
 
     input:focus{
       border-color:#ff6b00;
       background:#fff;
-      box-shadow:0 0 0 3px rgba(255,107,0,.10)
+      box-shadow:
+        0 0 0 3px rgba(255,107,0,.10);
     }
 
     .input-icon{
@@ -86,7 +123,7 @@
       transform:translateY(-50%);
       color:#999;
       font-size:18px;
-      pointer-events:none
+      pointer-events:none;
     }
 
     .password-toggle{
@@ -99,7 +136,7 @@
       cursor:pointer;
       color:#777;
       font-size:16px;
-      padding:5px
+      padding:5px;
     }
 
     .login-btn{
@@ -113,11 +150,19 @@
       font-weight:bold;
       cursor:pointer;
       transition:.2s;
-      margin-top:5px
+      margin-top:5px;
     }
 
-    .login-btn:hover{background:#e85f00;transform:translateY(-1px)}
-    .login-btn:disabled{opacity:.65;cursor:not-allowed;transform:none}
+    .login-btn:hover{
+      background:#e85f00;
+      transform:translateY(-1px);
+    }
+
+    .login-btn:disabled{
+      opacity:.65;
+      cursor:not-allowed;
+      transform:none;
+    }
 
     .message{
       display:none;
@@ -125,21 +170,22 @@
       border-radius:12px;
       margin-bottom:18px;
       font-size:14px;
-      line-height:1.5
+      line-height:1.5;
+      word-break:break-word;
     }
 
     .message.error{
       display:block;
       background:#fff0f0;
       color:#c62828;
-      border:1px solid #ffd1d1
+      border:1px solid #ffd1d1;
     }
 
     .message.success{
       display:block;
       background:#effbf3;
       color:#218838;
-      border:1px solid #ccebd5
+      border:1px solid #ccebd5;
     }
 
     .security-box{
@@ -149,7 +195,7 @@
       background:#f8f9fa;
       color:#666;
       font-size:12px;
-      text-align:center
+      text-align:center;
     }
 
     .bottom-info{
@@ -157,31 +203,33 @@
       margin-top:22px;
       color:#888;
       font-size:12px;
-      line-height:1.6
+      line-height:1.6;
     }
 
     .loading{
       display:inline-flex;
       align-items:center;
       gap:8px;
-      justify-content:center
+      justify-content:center;
     }
 
     .spinner{
-      width:16px;height:16px;
+      width:16px;
+      height:16px;
       border:2px solid rgba(255,255,255,.4);
       border-top-color:#fff;
       border-radius:50%;
-      animation:spin .7s linear infinite
+      animation:spin .7s linear infinite;
     }
 
     .page-spinner{
-      width:30px;height:30px;
+      width:30px;
+      height:30px;
       border:3px solid #eee;
       border-top-color:#ff6b00;
       border-radius:50%;
       animation:spin .7s linear infinite;
-      margin:0 auto 12px
+      margin:0 auto 12px;
     }
 
     .checking{
@@ -191,7 +239,7 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      z-index:10
+      z-index:10;
     }
 
     .checking-box{
@@ -199,58 +247,113 @@
       padding:30px;
       border-radius:18px;
       text-align:center;
-      box-shadow:0 12px 35px rgba(0,0,0,.08)
+      box-shadow:0 12px 35px rgba(0,0,0,.08);
     }
 
-    @keyframes spin{to{transform:rotate(360deg)}}
+    @keyframes spin{
+      to{
+        transform:rotate(360deg);
+      }
+    }
 
     @media(max-width:480px){
-      .login-card{padding:26px 20px;border-radius:20px}
-      .brand h1{font-size:25px}
+
+      .login-card{
+        padding:26px 20px;
+        border-radius:20px;
+      }
+
+      .brand h1{
+        font-size:25px;
+      }
+
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Initial Firebase check -->
+  <!-- Firebase checking screen -->
+
   <div class="checking" id="checkingScreen">
+
     <div class="checking-box">
+
       <div class="page-spinner"></div>
-      <strong>Checking Admin Login...</strong>
+
+      <strong>
+        Checking Admin Login...
+      </strong>
+
       <p style="color:#777;font-size:13px;margin-top:7px">
         Please wait
       </p>
+
     </div>
+
   </div>
 
-  <div class="login-wrapper" id="loginWrapper" style="display:none">
+
+  <!-- Login -->
+
+  <div
+    class="login-wrapper"
+    id="loginWrapper"
+    style="display:none"
+  >
 
     <div class="login-card">
 
+      <!-- Brand -->
+
       <div class="brand">
+
         <img
           src="./assets/icon/192MILONMELA.svg.svg"
           alt="Milon Mela"
           onerror="this.style.display='none'"
         >
 
-        <h1>Milon Mela</h1>
-        <p>Smart Local Marketplace</p>
+        <h1>
+          Milon Mela
+        </h1>
+
+        <p>
+          Smart Local Marketplace
+        </p>
 
         <div class="admin-badge">
           🔐 Admin Panel
         </div>
+
       </div>
 
-      <div id="messageBox" class="message"></div>
 
-      <form id="adminLoginForm" novalidate>
+      <!-- Message -->
+
+      <div
+        id="messageBox"
+        class="message"
+      ></div>
+
+
+      <!-- Login Form -->
+
+      <form
+        id="adminLoginForm"
+        novalidate
+      >
+
+        <!-- Email -->
 
         <div class="form-group">
-          <label for="adminEmail">Admin Email</label>
+
+          <label for="adminEmail">
+            Admin Email
+          </label>
 
           <div class="input-box">
+
             <input
               type="email"
               id="adminEmail"
@@ -258,14 +361,26 @@
               autocomplete="username"
               required
             >
-            <span class="input-icon">✉</span>
+
+            <span class="input-icon">
+              ✉
+            </span>
+
           </div>
+
         </div>
 
+
+        <!-- Password -->
+
         <div class="form-group">
-          <label for="adminPassword">Password</label>
+
+          <label for="adminPassword">
+            Password
+          </label>
 
           <div class="input-box">
+
             <input
               type="password"
               id="adminPassword"
@@ -279,9 +394,16 @@
               class="password-toggle"
               id="togglePassword"
               aria-label="Show password"
-            >👁</button>
+            >
+              👁
+            </button>
+
           </div>
+
         </div>
+
+
+        <!-- Login Button -->
 
         <button
           type="submit"
@@ -293,36 +415,54 @@
 
       </form>
 
+
+      <!-- Security -->
+
       <div class="security-box">
+
         🔒 Secure login powered by Firebase Authentication
+
       </div>
 
+
+      <!-- Bottom -->
+
       <div class="bottom-info">
-        Milon Mela Admin System<br>
+
+        Milon Mela Admin System
+        <br>
+
         Authorized administrators only
+
       </div>
 
     </div>
+
   </div>
 
+
+  <!-- Firebase -->
 
   <script type="module">
 
     /*
-      =========================================================
-      MILON MELA ADMIN LOGIN — FIXED VERSION
-      =========================================================
-
-      This version intentionally keeps the Firebase config
-      inside this page so the login page does not depend on
-      a separate firebase-config.js file loading correctly.
-
-      Dashboard protection still checks users/{UID}.role == "admin".
+    =========================================================
+    MILON MELA ADMIN LOGIN
+    Firebase Authentication + Firestore Admin Role
+    =========================================================
     */
+
+
+    /* =========================================================
+       FIREBASE IMPORT
+    ========================================================= */
 
     import {
       initializeApp
-    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+    }
+    from
+      "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+
 
     import {
       getAuth,
@@ -331,13 +471,18 @@
       browserLocalPersistence,
       onAuthStateChanged,
       signOut
-    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+    }
+    from
+      "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+
 
     import {
       getFirestore,
       doc,
       getDoc
-    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+    }
+    from
+      "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 
 
     /* =========================================================
@@ -345,40 +490,67 @@
     ========================================================= */
 
     const firebaseConfig = {
-      apiKey: "AIzaSyA8Ixnp_UKTQoLQ1PW8vk6Uz5eUplDF8ag",
-      authDomain: "milonmelay.firebaseapp.com",
-      projectId: "milonmelay",
-      storageBucket: "milonmelay.firebasestorage.app",
-      messagingSenderId: "1047973064469",
-      appId: "1:1047973064469:web:8cfa4ad0ec123df8d4431c",
-      measurementId: "G-6N9HYS9GKN"
+
+      apiKey:
+        "AIzaSyA8Ixnp_UKTQoLQ1PW8vk6Uz5eUplDF8ag",
+
+      authDomain:
+        "milonmelay.firebaseapp.com",
+
+      projectId:
+        "milonmelay",
+
+      storageBucket:
+        "milonmelay.firebasestorage.app",
+
+      messagingSenderId:
+        "1047973064469",
+
+      appId:
+        "1:1047973064469:web:8cfa4ad0ec123df8d4431c",
+
+      measurementId:
+        "G-6N9HYS9GKN"
+
     };
+
+
+    /* =========================================================
+       ADMIN UID
+    ========================================================= */
+
+    const EXPECTED_ADMIN_UID =
+      "DAT1HHB08LeuIoBdexCD6EOXUB82";
 
 
     /* =========================================================
        INITIALIZE FIREBASE
     ========================================================= */
 
-    let firebaseApp;
+    let app;
     let auth;
     let db;
 
+
     try {
 
-      firebaseApp =
+      app =
         initializeApp(firebaseConfig);
 
       auth =
-        getAuth(firebaseApp);
+        getAuth(app);
 
       db =
-        getFirestore(firebaseApp);
+        getFirestore(app);
+
 
       console.log(
         "Milon Mela Firebase initialized successfully."
       );
 
-    } catch (error) {
+
+    }
+    catch(error){
 
       console.error(
         "Firebase initialization error:",
@@ -389,16 +561,17 @@
         "checkingScreen"
       ).style.display = "none";
 
+
       document.getElementById(
         "loginWrapper"
       ).style.display = "block";
 
+
       showMessage(
-        "Firebase load হয়নি। Internet এবং Firebase configuration check করুন।",
+        "Firebase initialize হয়নি। Internet এবং Firebase configuration check করুন।",
         "error"
       );
 
-      throw error;
     }
 
 
@@ -411,35 +584,42 @@
         "checkingScreen"
       );
 
+
     const loginWrapper =
       document.getElementById(
         "loginWrapper"
       );
+
 
     const loginForm =
       document.getElementById(
         "adminLoginForm"
       );
 
+
     const emailInput =
       document.getElementById(
         "adminEmail"
       );
+
 
     const passwordInput =
       document.getElementById(
         "adminPassword"
       );
 
+
     const loginButton =
       document.getElementById(
         "loginButton"
       );
 
+
     const messageBox =
       document.getElementById(
         "messageBox"
       );
+
 
     const togglePassword =
       document.getElementById(
@@ -454,7 +634,7 @@
     function showMessage(
       message,
       type
-    ) {
+    ){
 
       messageBox.textContent =
         message;
@@ -465,9 +645,10 @@
     }
 
 
-    function hideMessage() {
+    function hideMessage(){
 
-      messageBox.textContent = "";
+      messageBox.textContent =
+        "";
 
       messageBox.className =
         "message";
@@ -476,10 +657,10 @@
 
 
     /* =========================================================
-       SHOW LOGIN PAGE
+       SHOW LOGIN
     ========================================================= */
 
-    function showLoginPage() {
+    function showLoginPage(){
 
       checkingScreen.style.display =
         "none";
@@ -491,17 +672,17 @@
 
 
     /* =========================================================
-       PASSWORD SHOW / HIDE
+       PASSWORD TOGGLE
     ========================================================= */
 
     togglePassword.addEventListener(
       "click",
-      function() {
+      function(){
 
-        if (
+        if(
           passwordInput.type ===
           "password"
-        ) {
+        ){
 
           passwordInput.type =
             "text";
@@ -514,7 +695,8 @@
             "Hide password"
           );
 
-        } else {
+        }
+        else{
 
           passwordInput.type =
             "password";
@@ -534,145 +716,278 @@
 
 
     /* =========================================================
-       ADMIN ROLE CHECK
+       ADMIN CHECK
     ========================================================= */
 
-    async function isAdmin(user) {
+    async function checkAdmin(
+      user
+    ){
 
-      if (!user) {
-        return false;
+      if(!user){
+
+        return {
+          allowed:false,
+          reason:"no-user"
+        };
+
       }
 
-      try {
 
-        const adminRef =
-          doc(
-            db,
-            "users",
-            user.uid
-          );
+      console.log(
+        "Current Firebase UID:",
+        user.uid
+      );
 
-        const adminSnap =
-          await getDoc(
-            adminRef
-          );
 
-        if (
-          !adminSnap.exists()
-        ) {
+      console.log(
+        "Expected Admin UID:",
+        EXPECTED_ADMIN_UID
+      );
 
-          console.warn(
-            "Admin user document not found."
-          );
 
-          return false;
-        }
+      /*
+      ---------------------------------------------------------
+      IMPORTANT
+      ---------------------------------------------------------
+      The logged-in Firebase account must have this UID.
+      ---------------------------------------------------------
+      */
 
-        const data =
-          adminSnap.data();
+      if(
+        user.uid !==
+        EXPECTED_ADMIN_UID
+      ){
 
-        return (
-          data.role ===
-          "admin"
+        console.warn(
+          "UID mismatch."
         );
 
-      } catch (error) {
+        return {
+          allowed:false,
+          reason:"uid-mismatch"
+        };
 
-        console.error(
-          "Admin role check error:",
-          error
-        );
-
-        throw error;
       }
+
+
+      /* =======================================================
+         FIRESTORE ADMIN DOCUMENT
+      ======================================================= */
+
+      const adminRef =
+        doc(
+          db,
+          "users",
+          user.uid
+        );
+
+
+      const adminSnap =
+        await getDoc(
+          adminRef
+        );
+
+
+      if(
+        !adminSnap.exists()
+      ){
+
+        console.warn(
+          "Admin user document not found."
+        );
+
+        return {
+          allowed:false,
+          reason:"document-not-found"
+        };
+
+      }
+
+
+      const adminData =
+        adminSnap.data();
+
+
+      console.log(
+        "Admin Firestore data:",
+        adminData
+      );
+
+
+      if(
+        adminData.role !==
+        "admin"
+      ){
+
+        console.warn(
+          "Firestore role is not admin."
+        );
+
+        return {
+          allowed:false,
+          reason:"not-admin"
+        };
+
+      }
+
+
+      return {
+        allowed:true,
+        reason:"success"
+      };
+
     }
 
 
     /* =========================================================
-       EXISTING LOGIN CHECK
+       EXISTING LOGIN SESSION
     ========================================================= */
 
-    onAuthStateChanged(
-      auth,
-      async function(user) {
+    if(auth){
 
-        try {
+      setPersistence(
+        auth,
+        browserLocalPersistence
+      )
+      .then(function(){
 
-          if (!user) {
+        onAuthStateChanged(
+          auth,
+          async function(user){
 
-            showLoginPage();
+            try{
 
-            return;
+              if(!user){
+
+                showLoginPage();
+
+                return;
+
+              }
+
+
+              console.log(
+                "Existing Firebase user:",
+                user.email
+              );
+
+
+              const result =
+                await checkAdmin(
+                  user
+                );
+
+
+              if(
+                result.allowed
+              ){
+
+                console.log(
+                  "Existing Admin session confirmed."
+                );
+
+
+                window.location.replace(
+                  "admin-dashboard.html"
+                );
+
+
+                return;
+
+              }
+
+
+              /*
+              --------------------------------------------------
+              Logged in but not allowed
+              --------------------------------------------------
+              */
+
+              await signOut(auth);
+
+              showLoginPage();
+
+
+              if(
+                result.reason ===
+                "uid-mismatch"
+              ){
+
+                showMessage(
+                  "এই Firebase account Admin account নয়। সঠিক Admin Email দিয়ে Login করুন।",
+                  "error"
+                );
+
+              }
+              else if(
+                result.reason ===
+                "document-not-found"
+              ){
+
+                showMessage(
+                  "Firestore users document পাওয়া যায়নি। এই UID-এর document তৈরি করুন এবং role: admin দিন।",
+                  "error"
+                );
+
+              }
+              else{
+
+                showMessage(
+                  "এই account-এর Admin access নেই।",
+                  "error"
+                );
+
+              }
+
+            }
+            catch(error){
+
+              console.error(
+                "Existing session error:",
+                error
+              );
+
+
+              showLoginPage();
+
+
+              showMessage(
+                friendlyError(error),
+                "error"
+              );
+
+            }
+
           }
+        );
 
+      })
+      .catch(function(error){
 
-          /*
-            A Firebase login alone is not enough.
-            Check Firestore admin role.
-          */
+        console.error(
+          "Persistence error:",
+          error
+        );
 
-          const admin =
-            await isAdmin(user);
+        showLoginPage();
 
+        showMessage(
+          friendlyError(error),
+          "error"
+        );
 
-          if (admin) {
+      });
 
-            console.log(
-              "Existing admin session:",
-              user.email
-            );
-
-            window.location.replace(
-              "admin-dashboard.html"
-            );
-
-            return;
-
-          }
-
-
-          /*
-            Logged in but not admin.
-          */
-
-          await signOut(auth);
-
-          showLoginPage();
-
-          showMessage(
-            "এই account-এর Admin access নেই।",
-            "error"
-          );
-
-        }
-
-        catch (error) {
-
-          console.error(
-            "Existing session check error:",
-            error
-          );
-
-          showLoginPage();
-
-          showMessage(
-            friendlyError(error),
-            "error"
-          );
-
-        }
-
-      }
-    );
+    }
 
 
     /* =========================================================
-       LOGIN SUBMIT
+       LOGIN
     ========================================================= */
 
     loginForm.addEventListener(
       "submit",
-      async function(event) {
+      async function(event){
 
         event.preventDefault();
 
@@ -682,11 +997,16 @@
         const email =
           emailInput.value.trim();
 
+
         const password =
           passwordInput.value;
 
 
-        if (!email) {
+        /* =====================================================
+           VALIDATION
+        ===================================================== */
+
+        if(!email){
 
           showMessage(
             "Admin Email দিন।",
@@ -696,10 +1016,11 @@
           emailInput.focus();
 
           return;
+
         }
 
 
-        if (!password) {
+        if(!password){
 
           showMessage(
             "Password দিন।",
@@ -709,11 +1030,17 @@
           passwordInput.focus();
 
           return;
+
         }
 
 
+        /* =====================================================
+           BUTTON LOADING
+        ===================================================== */
+
         loginButton.disabled =
           true;
+
 
         loginButton.innerHTML = `
           <span class="loading">
@@ -723,16 +1050,16 @@
         `;
 
 
-        try {
+        try{
 
           console.log(
             "Starting Firebase Admin Login..."
           );
 
 
-          /*
-            Keep login persistent.
-          */
+          /* ===================================================
+             PERSISTENT LOGIN
+          =================================================== */
 
           await setPersistence(
             auth,
@@ -740,9 +1067,9 @@
           );
 
 
-          /*
-            Firebase Email/Password Login
-          */
+          /* ===================================================
+             FIREBASE LOGIN
+          =================================================== */
 
           const credential =
             await signInWithEmailAndPassword(
@@ -762,34 +1089,89 @@
           );
 
 
-          /*
-            IMPORTANT:
-            Check Firestore admin role
-            before opening dashboard.
-          */
-
-          const admin =
-            await isAdmin(user);
+          console.log(
+            "Logged-in UID:",
+            user.uid
+          );
 
 
-          if (!admin) {
+          /* ===================================================
+             ADMIN CHECK
+          =================================================== */
+
+          const result =
+            await checkAdmin(
+              user
+            );
+
+
+          /* ===================================================
+             ADMIN NOT ALLOWED
+          =================================================== */
+
+          if(
+            !result.allowed
+          ){
 
             await signOut(auth);
 
-            showMessage(
-              "Login হয়েছে, কিন্তু এই account Admin নয়। Firestore users/" +
-              user.uid +
-              " document-এ role: admin দিন।",
-              "error"
-            );
+
+            if(
+              result.reason ===
+              "uid-mismatch"
+            ){
+
+              showMessage(
+                "Login হয়েছে, কিন্তু এই Firebase account-এর UID Admin UID-এর সাথে মিলছে না। Current UID: " +
+                user.uid,
+                "error"
+              );
+
+            }
+            else if(
+              result.reason ===
+              "document-not-found"
+            ){
+
+              showMessage(
+                "Login হয়েছে, কিন্তু Firestore users/" +
+                user.uid +
+                " document পাওয়া যায়নি। সেখানে role: admin দিন।",
+                "error"
+              );
+
+            }
+            else if(
+              result.reason ===
+              "not-admin"
+            ){
+
+              showMessage(
+                "Login হয়েছে, কিন্তু Firestore users/" +
+                user.uid +
+                " document-এর role admin নয়।",
+                "error"
+              );
+
+            }
+            else{
+
+              showMessage(
+                "এই account-এর Admin access নেই।",
+                "error"
+              );
+
+            }
+
 
             return;
+
           }
 
 
-          /*
-            ADMIN LOGIN SUCCESS
-          */
+          /* ===================================================
+             SUCCESS
+          =================================================== */
 
           showMessage(
             "Admin Login successful. Dashboard খুলছে...",
@@ -797,8 +1179,13 @@
           );
 
 
+          console.log(
+            "ADMIN LOGIN SUCCESS"
+          );
+
+
           setTimeout(
-            function() {
+            function(){
 
               window.location.replace(
                 "admin-dashboard.html"
@@ -809,13 +1196,13 @@
           );
 
         }
-
-        catch (error) {
+        catch(error){
 
           console.error(
             "Firebase Admin Login Error:",
             error
           );
+
 
           showMessage(
             friendlyError(error),
@@ -823,11 +1210,11 @@
           );
 
         }
-
-        finally {
+        finally{
 
           loginButton.disabled =
             false;
+
 
           loginButton.textContent =
             "Login to Admin Panel";
@@ -839,14 +1226,16 @@
 
 
     /* =========================================================
-       FRIENDLY FIREBASE ERROR
+       FIREBASE ERROR
     ========================================================= */
 
-    function friendlyError(error) {
+    function friendlyError(
+      error
+    ){
 
-      if (!error) {
+      if(!error){
 
-        return (
+        return(
           "Login করা যায়নি। আবার চেষ্টা করুন।"
         );
 
@@ -863,107 +1252,97 @@
       );
 
 
-      if (
+      if(
         code ===
         "auth/invalid-email"
-      ) {
+      ){
 
-        return (
+        return(
           "সঠিক Admin Email দিন।"
         );
 
       }
 
 
-      if (
+      if(
         code ===
         "auth/invalid-credential" ||
+
         code ===
         "auth/wrong-password" ||
+
         code ===
         "auth/user-not-found"
-      ) {
+      ){
 
-        return (
+        return(
           "Email অথবা Password সঠিক নয়।"
         );
 
       }
 
 
-      if (
+      if(
         code ===
         "auth/user-disabled"
-      ) {
+      ){
 
-        return (
+        return(
           "এই Admin account disabled করা হয়েছে।"
         );
 
       }
 
 
-      if (
+      if(
         code ===
         "auth/too-many-requests"
-      ) {
+      ){
 
-        return (
+        return(
           "অনেকবার চেষ্টা হয়েছে। কিছুক্ষণ পরে আবার চেষ্টা করুন।"
         );
 
       }
 
 
-      if (
+      if(
         code ===
         "auth/network-request-failed"
-      ) {
+      ){
 
-        return (
+        return(
           "Internet connection পরীক্ষা করুন।"
         );
 
       }
 
 
-      if (
+      if(
         code ===
         "auth/operation-not-allowed"
-      ) {
+      ){
 
-        return (
+        return(
           "Firebase Authentication-এর Email/Password provider চালু নেই।"
         );
 
       }
 
 
-      if (
+      if(
         code ===
         "permission-denied"
-      ) {
+      ){
 
-        return (
-          "Firestore permission denied. users/{UID}-এর read permission এবং role check করুন।"
+        return(
+          "Firestore permission denied। Firestore Rules check করুন।"
         );
 
       }
 
 
-      if (
-        code ===
-        "failed-precondition"
-      ) {
-
-        return (
-          "Firebase configuration বা Firestore setup অসম্পূর্ণ।"
-        );
-
-      }
-
-
-      return (
+      return(
         "Login করা যায়নি: " +
         (
           error.message ||
@@ -975,12 +1354,12 @@
 
 
     /* =========================================================
-       GLOBAL ERROR DIAGNOSTIC
+       GLOBAL ERROR LOG
     ========================================================= */
 
     window.addEventListener(
       "error",
-      function(event) {
+      function(event){
 
         console.error(
           "Page error:",
@@ -994,7 +1373,7 @@
 
     window.addEventListener(
       "unhandledrejection",
-      function(event) {
+      function(event){
 
         console.error(
           "Unhandled Promise error:",
@@ -1005,17 +1384,25 @@
     );
 
 
+    /* =========================================================
+       CONSOLE INFO
+    ========================================================= */
+
     console.log(
       "======================================"
     );
 
     console.log(
-      "Milon Mela Admin Login — FIXED"
+      "Milon Mela Admin Login"
     );
 
     console.log(
-      "Firebase Project:",
-      firebaseConfig.projectId
+      "Firebase Project: milonmelay"
+    );
+
+    console.log(
+      "Expected Admin UID:",
+      EXPECTED_ADMIN_UID
     );
 
     console.log(
@@ -1023,7 +1410,7 @@
     );
 
     console.log(
-      "Admin Role Verification: READY"
+      "Firestore Admin Role Verification: READY"
     );
 
     console.log(
