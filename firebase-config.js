@@ -1,38 +1,8 @@
-// ============================================================
-// MILON MELA
-// Firebase Configuration
-// Step: 9.1.22
-// ============================================================
-
-// Firebase Core
-import {
-  initializeApp
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
-
-// Firebase Authentication
-import {
-  getAuth
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
-
-// Cloud Firestore
-import {
-  getFirestore
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
-
-// Firebase Storage
-import {
-  getStorage
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-storage.js";
-
-// Firebase Analytics
-import {
-  getAnalytics
-} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-analytics.js";
-
-
-// ============================================================
-// FIREBASE CONFIGURATION
-// ============================================================
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-app.js";
+import { getAuth } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+import { getFirestore } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+import { getStorage } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-storage.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-analytics.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyA8Ixnp_UKTQoLQ1PW8vk6Uz5eUplDF8ag",
@@ -44,28 +14,14 @@ const firebaseConfig = {
   measurementId: "G-6N9HYS9GKN"
 };
 
-
-// ============================================================
-// INITIALIZE FIREBASE
-// ============================================================
-
 const app = initializeApp(firebaseConfig);
 
-
-// ============================================================
-// INITIALIZE FIREBASE SERVICES
-// ============================================================
-
-// Authentication
 const auth = getAuth(app);
 
-// Firestore Database
 const db = getFirestore(app);
 
-// Firebase Storage
 const storage = getStorage(app);
 
-// Analytics
 let analytics = null;
 
 try {
@@ -77,12 +33,6 @@ try {
   );
 }
 
-
-// ============================================================
-// GLOBAL EXPORT
-// ============================================================
-
-// অন্য JavaScript module থেকে ব্যবহার করার জন্য export
 export {
   app,
   auth,
@@ -91,11 +41,6 @@ export {
   analytics
 };
 
-
-// ============================================================
-// CONNECTION TEST
-// ============================================================
-
 console.log("======================================");
 console.log("Milon Mela Firebase Connected");
 console.log("======================================");
@@ -103,5 +48,8 @@ console.log("Project ID:", firebaseConfig.projectId);
 console.log("Authentication: Ready");
 console.log("Firestore: Ready");
 console.log("Storage: Ready");
-console.log("Analytics:", analytics ? "Ready" : "Not available");
+console.log(
+  "Analytics:",
+  analytics ? "Ready" : "Not available"
+);
 console.log("======================================");
