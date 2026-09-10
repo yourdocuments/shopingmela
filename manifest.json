@@ -1,7 +1,7 @@
 {
-  "name": "Shopping Mela",
-  "short_name": "Shopping Mela",
-  "description": "Shopping Mela - Smart Online Shopping Platform",
+  "name": "Milon Mela",
+  "short_name": "Milon Mela",
+  "description": "Milon Mela - Smart Local Marketplace",
   "id": "./",
   "start_url": "./",
   "scope": "./",
