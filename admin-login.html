@@ -337,7 +337,9 @@
 
     import {
       signInWithEmailAndPassword,
-      onAuthStateChanged
+      onAuthStateChanged,
+      setPersistence,
+      browserLocalPersistence
     } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
     import { auth } from "./firebase-config.js";
@@ -477,6 +479,8 @@
 
 
       try {
+
+        await setPersistence(auth, browserLocalPersistence);
 
         const userCredential =
           await signInWithEmailAndPassword(
