@@ -1,594 +1,591 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Admin Login — Shopping Mela</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
-*{box-sizing:border-box}
+  <title>Milon Mela | Admin Login</title>
 
-body{
-  margin:0;
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  font-family:Arial,"Noto Sans Bengali",sans-serif;
-  background:linear-gradient(135deg,#f5f7fb,#eaf2ff);
-  color:#101828;
-}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
-.login-card{
-  width:100%;
-  max-width:410px;
-  background:#fff;
-  border:1px solid #e4e7ec;
-  border-radius:18px;
-  padding:30px;
-  box-shadow:0 15px 45px rgba(16,24,40,.10);
-}
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(255,107,0,0.18), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(255,107,0,0.12), transparent 35%),
+        #f5f6f8;
 
-.logo{
-  width:58px;
-  height:58px;
-  margin:0 auto 16px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:15px;
-  background:#1877f2;
-  color:#fff;
-  font-size:27px;
-  box-shadow:0 7px 18px rgba(24,119,242,.22);
-}
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
 
-h1{
-  margin:0;
-  text-align:center;
-  font-size:23px;
-}
+    .login-wrapper {
+      width: 100%;
+      max-width: 430px;
+    }
 
-.subtitle{
-  margin:8px 0 24px;
-  text-align:center;
-  color:#667085;
-  font-size:11px;
-  line-height:1.6;
-}
+    .login-card {
+      background: #ffffff;
+      border-radius: 24px;
+      padding: 32px 28px;
+      box-shadow: 0 18px 50px rgba(0,0,0,0.12);
+      border: 1px solid rgba(0,0,0,0.06);
+    }
 
-.admin-badge{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:6px;
-  margin-bottom:20px;
-  color:#1877f2;
-  font-size:9px;
-  font-weight:800;
-}
+    .brand {
+      text-align: center;
+      margin-bottom: 28px;
+    }
 
-.verified{
-  width:15px;
-  height:15px;
-  border-radius:50%;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  background:#1877f2;
-  color:#fff;
-  font-size:9px;
-}
+    .brand img {
+      width: 82px;
+      height: 82px;
+      object-fit: contain;
+      margin-bottom: 12px;
+    }
 
-.form-group{
-  margin-bottom:16px;
-}
+    .brand h1 {
+      font-size: 28px;
+      color: #ff6b00;
+      margin-bottom: 6px;
+    }
 
-label{
-  display:block;
-  margin-bottom:6px;
-  color:#344054;
-  font-size:10px;
-  font-weight:700;
-}
+    .brand p {
+      color: #777;
+      font-size: 14px;
+    }
 
-input{
-  width:100%;
-  padding:12px;
-  border:1px solid #d0d5dd;
-  border-radius:8px;
-  outline:none;
-  font-size:11px;
-}
+    .admin-badge {
+      display: inline-block;
+      margin-top: 12px;
+      background: #fff1e8;
+      color: #ff6b00;
+      padding: 7px 14px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: bold;
+    }
 
-input:focus{
-  border-color:#1877f2;
-  box-shadow:0 0 0 3px rgba(24,119,242,.10);
-}
+    .form-group {
+      margin-bottom: 18px;
+    }
 
-.input-wrap{
-  position:relative;
-}
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #333;
+    }
 
-.input-wrap input{
-  padding-right:42px;
-}
+    .input-box {
+      position: relative;
+    }
 
-.toggle-password{
-  position:absolute;
-  top:50%;
-  right:7px;
-  transform:translateY(-50%);
-  width:31px;
-  height:31px;
-  border:0;
-  background:transparent;
-  cursor:pointer;
-  font-size:15px;
-}
+    .input-box input {
+      width: 100%;
+      padding: 14px 45px 14px 15px;
+      border: 1px solid #ddd;
+      border-radius: 13px;
+      outline: none;
+      font-size: 15px;
+      background: #fafafa;
+      transition: 0.2s;
+    }
 
-.login-btn{
-  width:100%;
-  border:0;
-  border-radius:8px;
-  padding:12px;
-  background:#1877f2;
-  color:#fff;
-  cursor:pointer;
-  font-size:11px;
-  font-weight:800;
-}
+    .input-box input:focus {
+      border-color: #ff6b00;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(255,107,0,0.10);
+    }
 
-.login-btn:hover{
-  background:#1265d1;
-}
+    .input-icon {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #999;
+      font-size: 18px;
+    }
 
-.login-btn:disabled{
-  opacity:.65;
-  cursor:not-allowed;
-}
+    .password-toggle {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      color: #777;
+      font-size: 16px;
+    }
 
-.message{
-  display:none;
-  margin-bottom:15px;
-  padding:11px;
-  border-radius:8px;
-  font-size:10px;
-  line-height:1.5;
-}
+    .login-btn {
+      width: 100%;
+      border: none;
+      border-radius: 13px;
+      padding: 15px;
+      background: #ff6b00;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-top: 5px;
+    }
 
-.message.show{
-  display:block;
-}
+    .login-btn:hover {
+      background: #e85f00;
+      transform: translateY(-1px);
+    }
 
-.message.error{
-  background:#fef3f2;
-  color:#b42318;
-}
+    .login-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
 
-.message.success{
-  background:#ecfdf3;
-  color:#027a48;
-}
+    .message {
+      display: none;
+      padding: 12px 14px;
+      border-radius: 12px;
+      margin-bottom: 18px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
 
-.message.info{
-  background:#eff8ff;
-  color:#175cd3;
-}
+    .message.error {
+      display: block;
+      background: #fff0f0;
+      color: #c62828;
+      border: 1px solid #ffd1d1;
+    }
 
-.security{
-  margin-top:20px;
-  padding-top:18px;
-  border-top:1px solid #eaecf0;
-  text-align:center;
-  color:#98a2b3;
-  font-size:8px;
-  line-height:1.6;
-}
+    .message.success {
+      display: block;
+      background: #effbf3;
+      color: #218838;
+      border: 1px solid #ccebd5;
+    }
 
-.back-site{
-  display:block;
-  margin-top:15px;
-  text-align:center;
-  color:#667085;
-  text-decoration:none;
-  font-size:9px;
-}
+    .bottom-info {
+      text-align: center;
+      margin-top: 22px;
+      color: #888;
+      font-size: 12px;
+      line-height: 1.6;
+    }
 
-.back-site:hover{
-  color:#1877f2;
-}
+    .security-box {
+      margin-top: 20px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      background: #f8f9fa;
+      color: #666;
+      font-size: 12px;
+      text-align: center;
+    }
 
-@media(max-width:480px){
-  .login-card{
-    padding:23px;
-  }
+    .loading {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: center;
+    }
 
-  h1{
-    font-size:20px;
-  }
-}
-</style>
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255,255,255,0.4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .login-card {
+        padding: 26px 20px;
+        border-radius: 20px;
+      }
+
+      .brand h1 {
+        font-size: 25px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="login-card">
+  <div class="login-wrapper">
 
-  <div class="logo">🛍️</div>
+    <div class="login-card">
 
-  <h1>Admin Login</h1>
+      <div class="brand">
 
-  <p class="subtitle">
-    Shopping Mela Admin Dashboard-এ
-    প্রবেশ করতে Login করুন।
-  </p>
-
-  <div class="admin-badge">
-    <span class="verified">✓</span>
-    Verified Admin Access
-  </div>
-
-  <div class="message" id="message"></div>
-
-  <form id="loginForm" autocomplete="on">
-
-    <div class="form-group">
-      <label for="username">Username</label>
-
-      <input
-        type="text"
-        id="username"
-        name="username"
-        placeholder="Admin username"
-        autocomplete="username"
-        required
-      >
-    </div>
-
-    <div class="form-group">
-
-      <label for="password">Password</label>
-
-      <div class="input-wrap">
-
-        <input
-          type="password"
-          id="password"
-          name="password"
-          placeholder="Admin password"
-          autocomplete="current-password"
-          required
+        <img
+          src="./assets/icon/192MILONMELA.svg.svg"
+          alt="Milon Mela"
+          onerror="this.style.display='none';"
         >
+
+        <h1>Milon Mela</h1>
+
+        <p>Smart Local Marketplace</p>
+
+        <div class="admin-badge">
+          🔐 Admin Panel
+        </div>
+
+      </div>
+
+      <div id="messageBox" class="message"></div>
+
+      <form id="adminLoginForm">
+
+        <div class="form-group">
+
+          <label for="adminEmail">
+            Admin Email
+          </label>
+
+          <div class="input-box">
+
+            <input
+              type="email"
+              id="adminEmail"
+              placeholder="admin@example.com"
+              autocomplete="username"
+              required
+            >
+
+            <span class="input-icon">✉</span>
+
+          </div>
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="adminPassword">
+            Password
+          </label>
+
+          <div class="input-box">
+
+            <input
+              type="password"
+              id="adminPassword"
+              placeholder="Enter password"
+              autocomplete="current-password"
+              required
+            >
+
+            <button
+              type="button"
+              class="password-toggle"
+              id="togglePassword"
+              aria-label="Show password"
+            >
+              👁
+            </button>
+
+          </div>
+
+        </div>
 
         <button
-          type="button"
-          class="toggle-password"
-          id="togglePassword"
+          type="submit"
+          class="login-btn"
+          id="loginButton"
         >
-          👁️
+          Login to Admin Panel
         </button>
 
+      </form>
+
+      <div class="security-box">
+        🔒 Secure login powered by Firebase Authentication
+      </div>
+
+      <div class="bottom-info">
+        Milon Mela Admin System<br>
+        Authorized administrators only
       </div>
 
     </div>
 
-    <button
-      type="submit"
-      class="login-btn"
-      id="loginBtn"
-    >
-      🔐 Login to Admin
-    </button>
-
-  </form>
-
-  <div class="security">
-    🔒 আপনার Admin panel protected।
-    <br>
-    শুধুমাত্র authorized administrator
-    access করার জন্য এই login system।
   </div>
 
-  <a href="index.html" class="back-site">
-    ← Back to Shopping Mela
-  </a>
 
-</div>
+  <!-- Firebase Login -->
+  <script type="module">
 
-<script>
-"use strict";
+    import {
+      signInWithEmailAndPassword,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
-/* =========================================
-   ADMIN SESSION SETTINGS
-========================================= */
-
-const SESSION_KEY = "shoppingMelaAdminLoggedIn";
-const LOGIN_TIME_KEY = "shoppingMelaAdminLoginTime";
-
-const ADMIN_USERNAME = "admin";
-const ADMIN_PASSWORD = "admin123";
-
-const SESSION_DURATION = 24 * 60 * 60 * 1000;
-
-/*
- IMPORTANT:
- Dashboard filename is admin-dashboard.html
-*/
-
-const DASHBOARD_PAGE = "admin-dashboard.html";
+    import { auth } from "./firebase-config.js";
 
 
-/* =========================================
-   ELEMENTS
-========================================= */
-
-const loginForm =
-  document.getElementById("loginForm");
-
-const usernameInput =
-  document.getElementById("username");
-
-const passwordInput =
-  document.getElementById("password");
-
-const loginBtn =
-  document.getElementById("loginBtn");
-
-const messageBox =
-  document.getElementById("message");
-
-const togglePassword =
-  document.getElementById("togglePassword");
+    const loginForm = document.getElementById("adminLoginForm");
+    const emailInput = document.getElementById("adminEmail");
+    const passwordInput = document.getElementById("adminPassword");
+    const loginButton = document.getElementById("loginButton");
+    const messageBox = document.getElementById("messageBox");
+    const togglePassword = document.getElementById("togglePassword");
 
 
-/* =========================================
-   MESSAGE
-========================================= */
+    /*
+      ------------------------------------------------
+      MESSAGE
+      ------------------------------------------------
+    */
 
-function showMessage(text,type){
+    function showMessage(message, type) {
 
-  messageBox.textContent = text;
+      messageBox.textContent = message;
 
-  messageBox.className =
-    "message show " + type;
-}
+      messageBox.className = "message " + type;
 
-
-function hideMessage(){
-
-  messageBox.textContent = "";
-
-  messageBox.className = "message";
-}
-
-
-/* =========================================
-   PASSWORD SHOW / HIDE
-========================================= */
-
-togglePassword.addEventListener(
-  "click",
-  function(){
-
-    const isPassword =
-      passwordInput.type === "password";
-
-    passwordInput.type =
-      isPassword ? "text" : "password";
-
-    this.textContent =
-      isPassword ? "🙈" : "👁️";
-
-  }
-);
-
-
-/* =========================================
-   CLEAR INVALID SESSION
-========================================= */
-
-function clearSession(){
-
-  sessionStorage.removeItem(SESSION_KEY);
-
-  sessionStorage.removeItem(LOGIN_TIME_KEY);
-}
-
-
-/* =========================================
-   CHECK EXISTING SESSION
-========================================= */
-
-function checkExistingSession(){
-
-  const logged =
-    sessionStorage.getItem(SESSION_KEY);
-
-  const loginTime =
-    Number(
-      sessionStorage.getItem(
-        LOGIN_TIME_KEY
-      ) || 0
-    );
-
-  if(logged !== "true" || !loginTime){
-    return;
-  }
-
-  const age =
-    Date.now() - loginTime;
-
-  if(age >= SESSION_DURATION){
-
-    clearSession();
-
-    return;
-  }
-
-  showMessage(
-    "আপনি ইতিমধ্যে Login করা আছেন। Dashboard-এ নেওয়া হচ্ছে...",
-    "info"
-  );
-
-  setTimeout(function(){
-
-    window.location.replace(
-      DASHBOARD_PAGE
-    );
-
-  },500);
-}
-
-
-/* =========================================
-   LOGIN
-========================================= */
-
-loginForm.addEventListener(
-  "submit",
-  function(event){
-
-    event.preventDefault();
-
-    hideMessage();
-
-    const username =
-      usernameInput.value.trim();
-
-    const password =
-      passwordInput.value;
-
-    if(!username){
-
-      showMessage(
-        "Username দিন।",
-        "error"
-      );
-
-      usernameInput.focus();
-
-      return;
     }
 
-    if(!password){
 
-      showMessage(
-        "Password দিন।",
-        "error"
-      );
+    function hideMessage() {
 
-      passwordInput.focus();
+      messageBox.textContent = "";
 
-      return;
+      messageBox.className = "message";
+
     }
 
-    loginBtn.disabled = true;
 
-    loginBtn.textContent =
-      "⏳ Checking...";
+    /*
+      ------------------------------------------------
+      PASSWORD SHOW / HIDE
+      ------------------------------------------------
+    */
 
+    togglePassword.addEventListener("click", function () {
 
-    setTimeout(function(){
+      if (passwordInput.type === "password") {
 
-      if(
-        username === ADMIN_USERNAME &&
-        password === ADMIN_PASSWORD
-      ){
+        passwordInput.type = "text";
 
-        /*
-          CLEAR OLD SESSION FIRST
-          THEN CREATE NEW SESSION
-        */
+        togglePassword.textContent = "🙈";
 
-        clearSession();
-
-        sessionStorage.setItem(
-          SESSION_KEY,
-          "true"
+        togglePassword.setAttribute(
+          "aria-label",
+          "Hide password"
         );
 
-        sessionStorage.setItem(
-          LOGIN_TIME_KEY,
-          String(Date.now())
+      } else {
+
+        passwordInput.type = "password";
+
+        togglePassword.textContent = "👁";
+
+        togglePassword.setAttribute(
+          "aria-label",
+          "Show password"
         );
-
-
-        showMessage(
-          "Login successful ✓ Dashboard-এ নেওয়া হচ্ছে...",
-          "success"
-        );
-
-        loginBtn.textContent =
-          "✓ Login Successful";
-
-
-        setTimeout(function(){
-
-          /*
-            IMPORTANT:
-            Go to admin-dashboard.html
-          */
-
-          window.location.replace(
-            DASHBOARD_PAGE
-          );
-
-        },500);
-
-
-      }else{
-
-        showMessage(
-          "Username অথবা Password সঠিক নয়।",
-          "error"
-        );
-
-        loginBtn.disabled = false;
-
-        loginBtn.textContent =
-          "🔐 Login to Admin";
-
-        passwordInput.value = "";
-
-        passwordInput.focus();
 
       }
 
-    },350);
-
-  }
-);
+    });
 
 
-/* =========================================
-   ENTER KEY
-========================================= */
+    /*
+      ------------------------------------------------
+      CHECK EXISTING FIREBASE LOGIN
+      ------------------------------------------------
+    */
 
-usernameInput.addEventListener(
-  "keydown",
-  function(event){
+    onAuthStateChanged(auth, function (user) {
 
-    if(event.key === "Enter"){
+      if (user) {
+
+        console.log(
+          "Firebase Admin already signed in:",
+          user.email
+        );
+
+        /*
+          If admin is already logged in,
+          go directly to dashboard.
+        */
+
+        window.location.href = "admin-dashboard.html";
+
+      }
+
+    });
+
+
+    /*
+      ------------------------------------------------
+      LOGIN
+      ------------------------------------------------
+    */
+
+    loginForm.addEventListener("submit", async function (event) {
 
       event.preventDefault();
 
-      passwordInput.focus();
+      hideMessage();
 
-    }
+      const email = emailInput.value.trim();
 
-  }
-);
+      const password = passwordInput.value;
 
 
-/* =========================================
-   PAGE LOAD
-========================================= */
+      if (!email || !password) {
 
-checkExistingSession();
+        showMessage(
+          "Email এবং Password দুটিই দিন।",
+          "error"
+        );
 
-</script>
+        return;
+
+      }
+
+
+      loginButton.disabled = true;
+
+      loginButton.innerHTML = `
+        <span class="loading">
+          <span class="spinner"></span>
+          Logging in...
+        </span>
+      `;
+
+
+      try {
+
+        const userCredential =
+          await signInWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
+
+
+        const user = userCredential.user;
+
+
+        console.log(
+          "Firebase Admin Login Successful:",
+          user.email
+        );
+
+
+        showMessage(
+          "Login successful. Admin panel খুলছে...",
+          "success"
+        );
+
+
+        /*
+          Small delay so the user can see
+          the success message.
+        */
+
+        setTimeout(function () {
+
+          window.location.href =
+            "admin-dashboard.html";
+
+        }, 700);
+
+
+      } catch (error) {
+
+        console.error(
+          "Firebase Login Error:",
+          error
+        );
+
+
+        let errorMessage =
+          "Login করা যায়নি। Email অথবা Password পরীক্ষা করুন।";
+
+
+        if (error.code === "auth/invalid-email") {
+
+          errorMessage =
+            "সঠিক Admin Email দিন।";
+
+        }
+
+        else if (
+          error.code === "auth/invalid-credential"
+        ) {
+
+          errorMessage =
+            "Email অথবা Password সঠিক নয়।";
+
+        }
+
+        else if (
+          error.code === "auth/user-disabled"
+        ) {
+
+          errorMessage =
+            "এই Admin account disabled করা হয়েছে।";
+
+        }
+
+        else if (
+          error.code === "auth/too-many-requests"
+        ) {
+
+          errorMessage =
+            "অনেকবার চেষ্টা হয়েছে। কিছুক্ষণ পরে আবার চেষ্টা করুন।";
+
+        }
+
+        else if (
+          error.code === "auth/network-request-failed"
+        ) {
+
+          errorMessage =
+            "Internet connection পরীক্ষা করুন।";
+
+        }
+
+
+        showMessage(
+          errorMessage,
+          "error"
+        );
+
+
+        loginButton.disabled = false;
+
+        loginButton.textContent =
+          "Login to Admin Panel";
+
+      }
+
+    });
+
+  </script>
 
 </body>
 </html>
