@@ -1614,7 +1614,13 @@ import {
 
 
 import {
-  auth
+  doc,
+  getDoc
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
+
+import {
+  auth,
+  db
 } from "./firebase-config.js";
 
 
@@ -1664,63 +1670,64 @@ let editingId=null;
    FIREBASE AUTH STATE
 ========================================================= */
 
+async function checkAdminAccess(user){
+
+  if(!user){
+    console.log("No Firebase authentication.");
+    window.location.replace("admin-login.html");
+    return;
+  }
+
+  try{
+    console.log("Checking admin role for:", user.uid);
+
+    const adminDocRef = doc(db, "users", user.uid);
+    const adminDocSnap = await getDoc(adminDocRef);
+
+    if(!adminDocSnap.exists()){
+      console.warn("Admin profile not found.");
+      await signOut(auth);
+      window.location.replace("admin-login.html?error=not-admin");
+      return;
+    }
+
+    const adminData = adminDocSnap.data();
+
+    if(adminData.role !== "admin"){
+      console.warn("User is not an admin.");
+      await signOut(auth);
+      window.location.replace("admin-login.html?error=not-admin");
+      return;
+    }
+
+    console.log("Firebase Admin role verified:", user.email);
+    adminEmailDisplay.textContent = user.email || adminData.email || "Admin";
+    authLoading.style.display = "none";
+    renderAll();
+
+  }catch(error){
+    console.error("Admin role check failed:", error);
+    authLoading.style.display = "flex";
+    authLoading.innerHTML = `
+      <div style="text-align:center;padding:24px;">
+        <div style="font-size:42px;margin-bottom:10px;">⚠️</div>
+        <h3 style="margin:0 0 8px;">Admin Access Check Failed</h3>
+        <p style="margin:0 0 14px;color:#666;">Firebase/Firestore access যাচাই করা যায়নি।</p>
+        <button onclick="location.reload()" style="padding:10px 18px;border:0;border-radius:8px;cursor:pointer;">Retry</button>
+      </div>`;
+  }
+}
+
 setPersistence(auth, browserLocalPersistence)
   .then(function(){
-    onAuthStateChanged(
-      auth,
-      function(user){
-
-    if(user){
-
-      /*
-        Firebase user exists.
-        Dashboard can be opened.
-      */
-
-      console.log(
-        "Firebase Admin authenticated:",
-        user.email
-      );
-
-
-      adminEmailDisplay.textContent =
-        user.email || "Admin";
-
-
-      authLoading.style.display =
-        "none";
-
-
-      renderAll();
-
-    }
-
-    else{
-
-      /*
-        No Firebase login.
-        Direct dashboard access blocked.
-      */
-
-      console.log(
-        "No Firebase authentication."
-      );
-
-
-      window.location.replace(
-        "admin-login.html"
-      );
-
-    }
-
-      }
-    );
+    onAuthStateChanged(auth, function(user){
+      checkAdminAccess(user);
+    });
   })
   .catch(function(error){
     console.error("Firebase persistence error:", error);
     window.location.replace("admin-login.html");
   });
-
 
 /* =========================================================
    LOGOUT
