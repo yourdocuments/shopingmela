@@ -1,20 +1,29 @@
-const CACHE_NAME = "shopping-mela-v9-1-10";
+const CACHE_NAME = "milon-mela-v9-1-17";
 
 const FILES_TO_CACHE = [
   "./",
   "./index.html",
-  "./manifest.json"
+  "./manifest.json",
+  "./assets/icon/192MILONMELA.svg.svg",
+  "./assets/icon/MILKONMELA512.SVG.svg"
 ];
 
 
-// INSTALL
+/* =========================
+   INSTALL
+========================= */
+
 self.addEventListener("install", function (event) {
 
   event.waitUntil(
+
     caches.open(CACHE_NAME)
       .then(function (cache) {
+
         return cache.addAll(FILES_TO_CACHE);
+
       })
+
   );
 
   self.skipWaiting();
@@ -22,30 +31,37 @@ self.addEventListener("install", function (event) {
 });
 
 
-// ACTIVATE
+/* =========================
+   ACTIVATE
+========================= */
+
 self.addEventListener("activate", function (event) {
 
   event.waitUntil(
 
-    caches.keys().then(function (cacheNames) {
+    caches.keys()
+      .then(function (cacheNames) {
 
-      return Promise.all(
+        return Promise.all(
 
-        cacheNames.map(function (cacheName) {
+          cacheNames.map(function (cacheName) {
 
-          if (
-            cacheName !== CACHE_NAME &&
-            cacheName.startsWith("shopping-mela-")
-          ) {
-            return caches.delete(cacheName);
-          }
+            if (
+              cacheName !== CACHE_NAME &&
+              cacheName.startsWith("milon-mela-")
+            ) {
 
-          return Promise.resolve();
-        })
+              return caches.delete(cacheName);
 
-      );
+            }
 
-    })
+            return Promise.resolve();
+
+          })
+
+        );
+
+      })
 
   );
 
@@ -54,7 +70,10 @@ self.addEventListener("activate", function (event) {
 });
 
 
-// FETCH
+/* =========================
+   FETCH
+========================= */
+
 self.addEventListener("fetch", function (event) {
 
   if (event.request.method !== "GET") {
@@ -64,6 +83,7 @@ self.addEventListener("fetch", function (event) {
   event.respondWith(
 
     fetch(event.request)
+
       .then(function (response) {
 
         if (
@@ -89,6 +109,7 @@ self.addEventListener("fetch", function (event) {
         return response;
 
       })
+
       .catch(function () {
 
         return caches.match(event.request);
