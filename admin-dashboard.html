@@ -1607,7 +1607,9 @@ th{
 
 import {
   onAuthStateChanged,
-  signOut
+  signOut,
+  setPersistence,
+  browserLocalPersistence
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 
@@ -1662,9 +1664,11 @@ let editingId=null;
    FIREBASE AUTH STATE
 ========================================================= */
 
-onAuthStateChanged(
-  auth,
-  function(user){
+setPersistence(auth, browserLocalPersistence)
+  .then(function(){
+    onAuthStateChanged(
+      auth,
+      function(user){
 
     if(user){
 
@@ -1709,8 +1713,13 @@ onAuthStateChanged(
 
     }
 
-  }
-);
+      }
+    );
+  })
+  .catch(function(error){
+    console.error("Firebase persistence error:", error);
+    window.location.replace("admin-login.html");
+  });
 
 
 /* =========================================================
